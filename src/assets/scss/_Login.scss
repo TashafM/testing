@@ -1,0 +1,72 @@
+.login {
+  .loginNav {
+    padding-bottom: 10px;
+    .menu-row {
+      padding-top: 50px;
+      .nav-logo {
+        img {
+          width: 200px;
+          cursor: pointer;
+        }
+      }
+
+      .nav-menus {
+        ul {
+          display: flex;
+          list-style-type: none;
+          justify-content: flex-end;
+          width: 100%;
+
+          li {
+            margin-left: 55px;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: 500;
+            color: #898a8d;
+          }
+        }
+      }
+    }
+  }
+
+  .loginNav-left {
+    border-top: 1px solid black;
+    .login-heading {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 900;
+      font-size: 62px;
+      line-height: 70px;
+      padding: 40px 0;
+      text-transform: uppercase;
+      .connections {
+        color: #be212a;
+      }
+    }
+
+    .loginNav-para {
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 40px;
+    }
+  }
+
+  .loginNav-right {
+    text-align: right;
+    .image-box {
+      margin-bottom: 10px;
+      img {
+        width: 280px;
+      }
+    }
+  }
+}
+
+.get-otp-btn {
+  background-color: #be212a;
+  border: none;
+  color: white;
+  padding: 20px 45px;
+  border-radius: 8px;
+  font-size: 30px;
+}
