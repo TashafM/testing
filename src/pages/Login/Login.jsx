@@ -9,7 +9,7 @@ import LoginOtp from "../../components/LoginNav/LoginOtp/LoginOtp";
 
 const Login = () => {
   return (
-    <div className="container login">
+    <div className="login">
       <LoginNav />
       <div className="row">
         <div className="col loginNav-left">

@@ -1,11 +1,18 @@
+html{
+  font-size: 62.5%;
+}
 .login {
+  padding-left: 6.5%;
+  padding-right: 8%;
   .loginNav {
-    padding-bottom: 10px;
+    padding-bottom: 1rem;
     .menu-row {
-      padding-top: 50px;
+      padding-top: 5rem;
+      padding-bottom: 4rem;
       .nav-logo {
         img {
-          width: 200px;
+          max-width: 200px;
+          width: 100%;
           cursor: pointer;
         }
       }
@@ -18,9 +25,9 @@
           width: 100%;
 
           li {
-            margin-left: 55px;
+            margin-left: 5.5rem;
             cursor: pointer;
-            font-size: 24px;
+            font-size: 2.4rem;
             font-weight: 500;
             color: #898a8d;
           }
@@ -35,9 +42,9 @@
       font-family: "Inter";
       font-style: normal;
       font-weight: 900;
-      font-size: 62px;
-      line-height: 70px;
-      padding: 40px 0;
+      font-size: 8.2rem;
+      line-height: 10rem;
+      padding: 4rem 0;
       text-transform: uppercase;
       .connections {
         color: #be212a;
@@ -46,17 +53,21 @@
 
     .loginNav-para {
       font-weight: 400;
-      font-size: 24px;
-      line-height: 40px;
+      font-size: 2.4rem;
+      line-height: 4rem;
+      color: #898A8D;
+      width: 83%;
     }
   }
 
   .loginNav-right {
     text-align: right;
     .image-box {
-      margin-bottom: 10px;
+      margin-bottom: 1rem;
       img {
-        width: 280px;
+        max-width: 380px;
+        width: 100%;
+        margin-bottom: 5%;
       }
     }
   }
@@ -66,7 +77,43 @@
   background-color: #be212a;
   border: none;
   color: white;
-  padding: 20px 45px;
-  border-radius: 8px;
-  font-size: 30px;
+  padding: 2rem 4.5rem;
+  border-radius: .8rem;
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 1.8rem;
+  margin-top: 5.5rem;
+}
+
+.text-login{
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 4rem;
+  margin-top: 4.5rem;
+}
+
+.email-enter-msg{
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 34px;
+  color: #898A8D;
+  margin-top: 40px;
+}
+
+.loginOtp{
+  .email{
+    margin-top: 20px;
+    width: 60% !important;
+    line-height: 2.5 !important;
+    font-size: 2.4rem !important;
+    background: rgba(129, 129, 129, 0.05);
+    border: none;
+  }
+}
+
+
+@media only screen and (max-width: 1705px) {
+  html{
+    font-size: 50%;
+  }
 }

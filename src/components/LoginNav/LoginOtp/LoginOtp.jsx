@@ -3,16 +3,16 @@ import React from "react";
 const LoginOtp = () => {
   return (
     <>
-    <div>
+    <div className="text-login">
         Login
     </div>
-    <div>
+    <div className="email-enter-msg">
         Please enter registered email id to get OTP
     </div>
-      <div class=" mb-3">
+      <div class="loginOtp mb-3">
         <input
           type="email"
-          class="form-control"
+          class="form-control email"
           id="floatingInput"
           placeholder="Enter email id"
         />
