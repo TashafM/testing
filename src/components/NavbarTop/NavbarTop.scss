@@ -1,0 +1,37 @@
+.navbar-top {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background: white;
+
+  .logo{
+    padding-left: 50px;
+
+    img{
+        width: 110px;
+        cursor: pointer;
+    }
+  }
+
+  .search-div {
+    position: relative;
+    input {
+      background: #f0f2f9;
+      border: none;
+      outline: none;
+      color: #899197;
+      font-size: 14px;
+      width: 60%;
+      padding: 15px;
+      border-radius: 8px;
+      padding-left: 6%;
+    }
+    .icon-search {
+      position: absolute;
+      font-size: 24px;
+      top: 10%;
+      left: 3%;
+      color: #899197;
+    }
+  }
+}
