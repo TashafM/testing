@@ -1,9 +1,8 @@
-html{
+html {
   font-size: 62.5%;
 }
 .login {
-  padding-left: 6.5%;
-  padding-right: 8%;
+  padding: 0 6.5%;
   .loginNav {
     padding-bottom: 1rem;
     .menu-row {
@@ -11,8 +10,8 @@ html{
       padding-bottom: 4rem;
       .nav-logo {
         img {
-          max-width: 200px;
-          width: 100%;
+          width: 20rem;
+          // width: 100%;
           cursor: pointer;
         }
       }
@@ -55,7 +54,7 @@ html{
       font-weight: 400;
       font-size: 2.4rem;
       line-height: 4rem;
-      color: #898A8D;
+      color: #898a8d;
       width: 83%;
     }
   }
@@ -63,11 +62,10 @@ html{
   .loginNav-right {
     text-align: right;
     .image-box {
-      margin-bottom: 1rem;
       img {
         max-width: 380px;
         width: 100%;
-        margin-bottom: 5%;
+        margin: 5%;
       }
     }
   }
@@ -78,30 +76,30 @@ html{
   border: none;
   color: white;
   padding: 2rem 4.5rem;
-  border-radius: .8rem;
+  border-radius: 0.8rem;
   font-size: 3rem;
   font-weight: 600;
   line-height: 1.8rem;
   margin-top: 5.5rem;
 }
 
-.text-login{
+.text-login {
   font-size: 3.2rem;
   font-weight: 700;
   line-height: 4rem;
   margin-top: 4.5rem;
 }
 
-.email-enter-msg{
+.email-enter-msg {
   font-weight: 400;
   font-size: 2rem;
   line-height: 34px;
-  color: #898A8D;
+  color: #898a8d;
   margin-top: 40px;
 }
 
-.loginOtp{
-  .email{
+.loginOtp {
+  .email {
     margin-top: 20px;
     width: 60% !important;
     line-height: 2.5 !important;
@@ -111,9 +109,40 @@ html{
   }
 }
 
+.otp-div {
+  display: flex;
+  margin-top: 20px;
+  .otp-input {
+    width: 60px;
+    margin-right: 20px;
+    input {
+      width: 6rem;
+      height: 6rem;
+      font-size: 24px;
+      text-align: center;
+    }
+  }
+}
 
 @media only screen and (max-width: 1705px) {
-  html{
+  html {
     font-size: 50%;
   }
+  .nav-logo {
+    img {
+      width: 10rem !important;
+    }
+  }
+  .loginNav {
+    padding-bottom: 1rem;
+    .menu-row {
+      padding-top: 5rem;
+      padding-bottom: 0 !important;
+    }
+  }
+}
+
+
+.otp-error{
+  font-size: 2rem;
 }

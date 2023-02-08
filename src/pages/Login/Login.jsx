@@ -12,7 +12,7 @@ const Login = () => {
     <div className="login">
       <LoginNav />
       <div className="row">
-        <div className="col loginNav-left">
+        <div className="col-md-7 loginNav-left">
           <div className="login-heading">
             Leveraging All <span className="connections">Connections</span>{" "}
           </div>
@@ -24,7 +24,7 @@ const Login = () => {
           </div>
           <LoginOtp/>
         </div>
-        <div className="col loginNav-right">
+        <div className="col-md-5 loginNav-right">
           <div className="row">
             <div className="col-md-6 image-box">
               <img src={f1} alt="afa" />
