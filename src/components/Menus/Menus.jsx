@@ -1,3 +1,4 @@
+/*eslint-disable */
 import React, { useState } from "react";
 import "./Menus.scss";
 import logo from '../../assets/images/atinks-dashboard.png'
@@ -23,10 +24,11 @@ const Menus = () => {
 
       <div className="menu-list">
         <ul>
-          {menuItems.map((item) => {
+          {menuItems.map((item,id) => {
             return (
               <>
                 <div
+                  key={id}
                   className={`li ${data == item.id ? "active" : ""}`}
                   onClick={() => goto(item)}
                 >

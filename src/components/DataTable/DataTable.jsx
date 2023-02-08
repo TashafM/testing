@@ -1,3 +1,4 @@
+/*eslint-disable */
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import "./DataTable.scss";
@@ -9,26 +10,28 @@ const DataTable = ({ data, columns }) => {
     return <div>Loading...</div>;
   } else
     return (
-      <div>
-        <Table hover>
-          <thead>
-            <tr>
-              {columns.map((col,idx) => (
-                <th key={idx}>{col.title}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((row) => (
-              <tr key={row.id}>
-                {columns.map((col) => (
-                  <td key={col}>{row[col.value]}</td>
+      <>
+        <div className="table-container">
+          <Table hover>
+            <thead className="table-head">
+              <tr>
+                {columns.map((col, idx) => (
+                  <th key={idx}>{col.title}</th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      </div>
+            </thead>
+            <tbody className="scroll-body">
+              {data.map((row) => (
+                <tr key={row.id}>
+                  {columns.map((col,id) => (
+                    <td key={id}>{row[col.value]}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
+      </>
     );
 };
 

@@ -1,3 +1,4 @@
+/*eslint-disable */
 import { faTableColumns, faMagnifyingGlass, faCube, faCubes, faUserTimes, faHandshake, faTrophy, faMessage, faMoneyBills } from '@fortawesome/free-solid-svg-icons'
 
 

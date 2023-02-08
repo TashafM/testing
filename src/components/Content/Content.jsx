@@ -1,3 +1,4 @@
+/*eslint-disable */
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
@@ -18,6 +19,8 @@ const Content = () => {
   const column = [
     {title: 'Index no.' , value:'id'},
     {title: 'First Name', value: 'firstName'},
+    {title: 'Gender', value: 'gender'},
+    {title: 'Password', value: 'password'},
     {title: 'University', value: 'university'}
   ]
 
@@ -36,7 +39,7 @@ const Content = () => {
     <>
       <div className="upper-content">
         <DataTable data={data} columns={column}/>
-        
+        {console.log(data,'000000000000')}
       </div>
     </>
   );
