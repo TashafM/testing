@@ -1,6 +1,35 @@
 .homepage{
     min-height: 100vh;
     background-color: #F0F2F9;
+
+    .row{
+        .menu-list{
+            // min-height: 90vh;
+            // background-attachment: pink;
+
+            .sub-menu-list{
+                margin: 30px;
+                background-color: white;
+                margin-right: 0;
+                height: 90vh;
+                border-radius: 12px;
+                padding: 40px 20px;
+            }
+        }
+        .content-area{
+            // min-height: 90vh;
+            // background-color: lightblue;
+
+            .sub-content-area{
+                margin: 30px;
+                background-color: white;
+                margin-left: 0;
+                height: 90vh;
+                border-radius: 12px;
+                padding: 40px 20px;
+            }
+        }
+    }
 }
 
 @media only screen and (max-width:1200px) {

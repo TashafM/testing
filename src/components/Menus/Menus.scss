@@ -1,0 +1,45 @@
+.menus-col {
+    .menu-img {
+        img {
+            max-width: 120px;
+            width: 100%;
+        }
+    }
+
+    .menu-list {
+        padding-top: 10px;
+
+        ul {
+            padding: 0;
+            list-style-type: none;
+
+            .li {
+                margin: 10px 0px;
+                padding: 15px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+
+                .svg-inline--fa {
+                    font-size: 20px;
+                }
+
+                &:hover {
+                    background-color: #FFF2F2;
+                    border-radius: 5px;
+                    color: #BC2328;
+                }
+
+                .menu-name {
+                    margin-left: 10px;
+                }
+            }
+
+            .active{
+                background-color: #FFF2F2;
+                    border-radius: 5px;
+                    color: #BC2328;
+            }
+        }
+    }
+}
