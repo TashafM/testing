@@ -2,6 +2,7 @@
 
 import React from "react";
 import logo from "../../assets/images/logo.png";
+import './Login.scss'
 
 const LoginNav = () => {
   return (

@@ -124,9 +124,19 @@ html {
   }
 }
 
+
+.otp-error{
+  font-size: 2rem;
+}
+
 @media only screen and (max-width: 1705px) {
-  html {
-    font-size: 50%;
+  // html {
+  //   font-size: 50%;
+  // }
+
+  .login-heading{
+    font-size: 7.6rem !important;
+    line-height: 8rem !important;
   }
   .nav-logo {
     img {
@@ -140,9 +150,19 @@ html {
       padding-bottom: 0 !important;
     }
   }
+
+  .loginNav-para{
+    font-size: 2rem !important;
+    width: 70% !important;
+    line-height: 3.5rem !important;
+  }
+  .nav-menus {
+    ul {
+      li {
+        margin-left: 4rem !important;
+        font-size: 1.4rem !important;
+      }
+    }
+  }
 }
 
-
-.otp-error{
-  font-size: 2rem;
-}

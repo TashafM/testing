@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, InputGroup, FormControl } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import '../Login.scss'
 
 const LoginOtp = () => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
