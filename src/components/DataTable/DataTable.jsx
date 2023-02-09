@@ -7,10 +7,11 @@ import "./DataTable.scss";
 const DataTable = ({ data, columns }) => {
   const members = data;
 
-  const [check, setCheck] = useState(false)
-  const getItem = () => {
-    setCheck(true)
-  }
+  const [check, setCheck] = useState([]);
+  const getItem = (val) => {
+    setCheck(val);
+    // alert(val)
+  };
 
   if (!members) {
     return <div>Loading...</div>;
@@ -35,9 +36,16 @@ const DataTable = ({ data, columns }) => {
                         <td key={id}>
                           {row[col.value] == undefined ? (
                             <>
-                              <ImCheckboxUnchecked
-                                onClick={() => alert(row.id)}
-                              />
+                              {/* <ImCheckboxUnchecked className={`${row.id == check ? 'active': ''}`}
+                                onClick={() => getItem(row.id)}
+                              /> */}
+                              {row.id == check ? (
+                                <ImCheckboxChecked />
+                              ) : (
+                                <ImCheckboxUnchecked
+                                  onClick={() => getItem(row.id)}
+                                />
+                              )}
                             </>
                           ) : (
                             row[col.value]

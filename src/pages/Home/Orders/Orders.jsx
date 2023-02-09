@@ -1,10 +1,12 @@
-import React from 'react'
+import React from 'react';
+import orders from '../../../assets/images/orders.svg'
+import Description from '../Description/Description'
 
 const Orders = () => {
   return (
-    <div>
-      <h1>This is Orders Page</h1>
-    </div>
+    <>
+    <Description icon={orders} title="Orders" count={70}/>
+    </>
   )
 }
 
