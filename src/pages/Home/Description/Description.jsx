@@ -27,13 +27,13 @@ const Description = ({icon, title, count, description }) => {
         </div>
         <div className="col-4 btn-col">
           <div className="buttons-div">
-            <div className="upload-btn">
+            <div className="upload-btn" onClick={()=>alert('Upload button clicked')}>
               <span className="icon-desc">
               <img src={upload} alt="" />
               </span>
               <span>Upload a csv file</span>
             </div>
-            <div className="add-member">
+            <div className="add-member" onClick={()=>alert('Add member button clicked')}>
               <span className="icon-desc">
                 <img src={add} alt="" />
               </span>

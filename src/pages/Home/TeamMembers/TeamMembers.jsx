@@ -11,7 +11,10 @@ import users from "../../../assets/images/users.svg";
 // import TabItems from "../TabItems/TabItems";
 
 const TeamMembers = () => {
+  const [c, setC] = useState('...')
+  const [d, setD] = useState('...')
   const [data, setData] = useState(null);
+  const [data2, setData2] = useState(null)
   const [loading, setLoading] = useState(true);
 
   const column = [
@@ -28,28 +31,68 @@ const TeamMembers = () => {
     { title: "Mac Address", value: "macAddress" },
   ];
 
-  useEffect(() => {
-    const api = "https://dummyjson.com/users";
+  const oldMember = [
+    {title: '', value: 'boxes'},
+    {title: 'Name', value: 'name'},
+    {title: 'Contact', value: 'phone'},
+    {title: 'Username', value: 'username'},
+    {title: 'Website', value: 'website'},
+
+  ]
+  const [selectedTab, setSelectedTab] = useState(1);
+
+ 
     const myapi = async () => {
+      const api = "https://dummyjson.com/users";
       const data = await fetch(api);
       const res = await data.json();
       setData(res.users);
+      setC(res.users.length)
       setLoading(false);
     };
+
+  const selectTab = (val) => {
+    setSelectedTab(val);
+    if(val==2){
+      setLoading(true)
+      tryApi()
+    }else{
+      setLoading(true)
+      myapi()
+    }
+  };
+
+  const tryApi = async () => {
+    const api = 'https://jsonplaceholder.typicode.com/users';
+    // const api = "https://dummyjson.com/users";
+    const data = await fetch(api);
+    const res = await data.json();
+    setData2(res);
+    setD(res.length)
+    setLoading(false)
+  }
+  
+  useEffect(() => {
+    
     myapi();
   }, []);
 
   return (
     <>
       <div className="upper-content">
-        <Description icon={users} title="Team Members" count={200} />
+        <Description icon={users} title="Team Members" count={c} />
         <div className="members-tab">
-          <div className="team-member-1">
+          <div className="team-member-1" onClick={() => selectTab(1)}>
             Current Team Members
-            <div className="indicator"></div></div>
-          <div className="team-member-2">Past Team Members</div>
+            <div className={`${selectedTab == 1 ? 'indicator' : ''}`}></div>
+          </div>
+          <div className="team-member-2" onClick={() => selectTab(2)}>
+            Past Team Members
+            <div className={`${selectedTab == 2 ? 'indicator' : ''}`}></div>
+          </div>
         </div>
-        <DataTable data={data} columns={column} />
+        {selectedTab == 1? <DataTable data={data} columns={column} /> : <DataTable data={data2} columns={oldMember} />}
+        {console.log(selectedTab)}
       </div>
     </>
   );
