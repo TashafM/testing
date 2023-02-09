@@ -7,37 +7,37 @@ const menuItems = [
         id: 1,
         icon: faTableColumns,
         title: "Dashboard",
-        path: '/'
+        path: '/home/dashboard'
     },
     {
         id: 2,
         icon: faCube,
         title: "Orders",
-        path: '#'
+        path: '/home/orders'
     },
     {
         id: 3,
         icon: faUserTimes,
         title: "Team Members",
-        path:'#'
+        path:'/home/team-members'
     },
     {
         id: 4,
         icon: faHandshake,
         title: "Partners",
-        path: '#'
+        path: '/home/partners'
     },
     {
         id: 5,
         icon: faCubes,
         title: "Product Listings",
-        path:'#'
+        path:'/home/product-listings'
     },
     {
         id: 6,
         icon: faTrophy,
         title: "Awards & Honours",
-        path: '#'
+        path: '/home/awards-honours'
     },
     {
         id: 7,

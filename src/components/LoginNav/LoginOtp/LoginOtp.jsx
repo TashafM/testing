@@ -27,7 +27,7 @@ const LoginOtp = () => {
       return false;
     }
     setError("");
-    navigate('/home')
+    navigate('/home/dashboard')
     return true;
   };
 

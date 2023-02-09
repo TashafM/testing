@@ -14,7 +14,7 @@ const DataTable = ({ data, columns }) => {
         <div className="table-container">
           <Table hover>
             <thead className="table-head">
-              <tr>
+              <tr className="tr-head">
                 {columns.map((col, idx) => (
                   <th key={idx}>{col.title}</th>
                 ))}
@@ -22,7 +22,7 @@ const DataTable = ({ data, columns }) => {
             </thead>
             <tbody className="scroll-body">
               {data.map((row) => (
-                <tr key={row.id}>
+                <tr key={row.id} className='tr-body'>
                   {columns.map((col,id) => (
                     <td key={id}>{row[col.value]}</td>
                   ))}

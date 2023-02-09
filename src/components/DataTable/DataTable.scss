@@ -6,6 +6,25 @@
     position: sticky;
     top: 0;
     width: 77%;
-    background: red;
+    background: #f7f7f7;
+  }
+
+  .tr-head,
+  .tr-body {
+    text-align: center;
+  }
+
+  .tr-head {
+    th {
+      font-size: 14px;
+      font-weight: 500;
+      color: #899197;
+      padding: 15px;
+    }
+  }
+  .tr-body{
+    td{
+      padding: 40px;
+    }
   }
 }

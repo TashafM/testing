@@ -1,6 +1,6 @@
 /*eslint-disable */
 import React, { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Link, Outlet, Route, Routes } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import "./Content.scss";
 import { HiBadgeCheck } from "react-icons/hi";
@@ -12,35 +12,9 @@ import DataTable from "../DataTable/DataTable";
 
 const Content = () => {
 
-  const [data, setData] = useState(null)
-  const [loading, setLoading] = useState(true)
-
-  // const column = ["firstName", "lastName"]
-  const column = [
-    {title: 'Index no.' , value:'id'},
-    {title: 'First Name', value: 'firstName'},
-    {title: 'Gender', value: 'gender'},
-    {title: 'Password', value: 'password'},
-    {title: 'University', value: 'university'}
-  ]
-
-  useEffect(()=>{
-    const api = 'https://dummyjson.com/users'
-    const myapi = async () => {
-      const data = await fetch(api)
-      const res = await data.json()
-      setData(res.users);
-      setLoading(false)
-    }
-    myapi()
-  },[])
-
   return (
     <>
-      <div className="upper-content">
-        <DataTable data={data} columns={column}/>
-        {console.log(data,'000000000000')}
-      </div>
+      <Outlet/>
     </>
   );
 };

@@ -1,0 +1,44 @@
+.upper-content{
+    .route-text{
+        font-size: 38px;
+        font-weight: bold;
+        padding: 2%;
+    }
+}
+
+.company-info {
+    display: flex;
+    align-items: center;
+
+    .company-logo {
+        img {
+            max-width: 280px;
+            width: 100%;
+        }
+    }
+
+    .verify-text {
+        u {
+            cursor: pointer;
+            color: blue;
+            margin-left: 2px;
+        }
+    }
+}
+
+.dummy-txt{
+    display: flex;
+    .lorem{
+        width: 70%;
+        padding-left: 2%;
+        font-size: 18px;
+    }
+    .icon-edit{
+        color: #BE2028;
+        cursor: pointer;
+    }
+}
+
+.loading{
+    font-size: 40px;
+}
