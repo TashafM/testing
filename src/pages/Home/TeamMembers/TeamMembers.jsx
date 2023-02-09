@@ -23,6 +23,9 @@ const TeamMembers = () => {
     {title: 'University', value: 'university'},
     {title: 'Domain', value: 'domain'},
     {title: 'Mac Address', value: 'macAddress'},
+    {title: 'University', value: 'university'},
+    {title: 'Domain', value: 'domain'},
+    {title: 'Mac Address', value: 'macAddress'},
   ]
 
   useEffect(()=>{

@@ -54,6 +54,7 @@
       line-height: 40px;
       color: #898a8d;
       width: 83%;
+      letter-spacing: 0.6px;
     }
   }
 
@@ -75,10 +76,10 @@
   color: white;
   padding: 20px 45px;
   border-radius: 8px;
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 600;
   line-height: 18px;
-  margin-top: 55px;
+  margin-top: 3%;
 }
 
 .text-login {
@@ -135,12 +136,12 @@
   // }
 
   .login-heading{
-    font-size: 76px !important;
+    font-size: 60px !important;
     line-height: 80px !important;
   }
   .nav-logo {
     img {
-      width: 100px !important;
+      width: 150px !important;
     }
   }
   .loginNav {
@@ -151,10 +152,29 @@
     }
   }
 
+  .email-enter-msg{
+    font-size: 15px;
+  }
+
+  .text-login{
+    font-size: 24px;
+  }
+
+  .loginOtp {
+    .email {
+      line-height: none;
+      font-size: 18px !important;
+    }
+  }
+
   .loginNav-para{
-    font-size: 20px !important;
+    font-size: 18px !important;
     width: 70% !important;
     line-height: 35px !important;
+  }
+
+  .get-otp-btn{
+    line-height: 13px !important;
   }
   .nav-menus {
     ul {

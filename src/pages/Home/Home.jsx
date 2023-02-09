@@ -1,11 +1,10 @@
 /* eslint-disable*/
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import "./Home.scss";
 import Login from "../Login/Login";
 import NavbarTop from "../../components/NavbarTop/NavbarTop";
 import Menus from "../../components/Menus/Menus";
-import Content from "../../components/Content/Content";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -24,7 +23,7 @@ const Home = () => {
         </div>
         <div className="col-md-10 content-area">
           <div className="sub-content-area">
-            <Content/>
+            <Outlet/>
           </div>
         </div>
       </div>
