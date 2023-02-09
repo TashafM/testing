@@ -1,3 +1,4 @@
+/*eslint-disable */
 import React from "react";
 import upload from "../../../assets/images/upload.svg";
 import add from "../../../assets/images/add.svg";
