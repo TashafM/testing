@@ -16,7 +16,8 @@ const TeamMembers = () => {
   const [loading, setLoading] = useState(true)
 
   const column = [
-    {title: 'Index no.' , value:'id'},
+    // {title: 'Index no.' , value:'id'},
+    {title: '', value: 'boxes'},
     {title: 'First Name', value: 'firstName'},
     {title: 'Gender', value: 'gender'},
     {title: 'Password', value: 'password'},
@@ -43,7 +44,6 @@ const TeamMembers = () => {
     <>
       <div className="upper-content">
         <DataTable data={data} columns={column}/>
-        {console.log(data)}
       </div>
     </>
   );
