@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import "./Menus.scss";
 import logo from '../../assets/images/atinks-dashboard.png'
 import menuItems from "./menu.js";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import NeedHelp from "../NeedHelp/NeedHelp";
+
 import { useNavigate } from "react-router-dom";
 
 const Menus = () => {
@@ -32,7 +32,8 @@ const Menus = () => {
                   className={`li ${data == item.id ? "active" : ""}`}
                   onClick={() => goto(item)}
                 >
-                  <FontAwesomeIcon icon={item.icon} className="icn" />
+                  {/* <FontAwesomeIcon icon={item.icon} className="icn" /> */}
+                  <span className="icn"><img src={item.icon} alt="" /></span>
                   <span className="menu-name">{item.title}</span>
                 </div>
               </>

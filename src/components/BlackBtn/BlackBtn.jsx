@@ -5,10 +5,10 @@ import "./BlackBtn.scss";
 const BlackBtn = () => {
   return (
     <div className="custom-btn">
-      <span>
+      <span className="cart-icon">
         <AiOutlineShoppingCart />
       </span>
-      <span>Checkout</span>
+      <span className="check-out">Checkout</span>
     </div>
   );
 };

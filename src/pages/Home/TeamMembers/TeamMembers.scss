@@ -1,4 +1,5 @@
 .upper-content {
+  position: relative;
   .route-text {
     font-size: 38px;
     font-weight: bold;
@@ -9,6 +10,7 @@
     display: flex;
     padding-bottom: 2%;
     margin-left: 1%;
+    margin-right: 2%;
 
     .team-member-1 {
       display: flex;
@@ -72,4 +74,88 @@
   border: 2px solid #be2028;
   margin-top: 5%;
   width: 110%;
+}
+
+.tabs-change {
+  display: flex;
+
+  .tab1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+  }
+  .tab2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 5%;
+    cursor: pointer;
+  }
+}
+
+.search-filter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  .search-div {
+    position: relative;
+    margin-right: 5%;
+    input {
+      background: #f0f2f9;
+      border: none;
+      outline: none;
+      color: #899197;
+      font-size: 14px;
+      width: 100%;
+      padding: 15px;
+      border-radius: 8px;
+      padding-left: 20%;
+    }
+    .icon-search {
+      position: absolute;
+      font-size: 24px;
+      top: 10%;
+      left: 5%;
+      color: #899197;
+    }
+  }
+
+  .filter-btn {
+    display: flex;
+    align-items: center;
+    // background: red;
+    border: 1.4px solid #e4e4e4;
+    width: 18%;
+    padding: 12px 10px;
+    justify-content: space-around;
+    border-radius: 6px;
+    cursor: pointer;
+
+    img {
+      color: #899197;
+    }
+
+    .filter-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: #899197;
+    }
+  }
+}
+
+.scroll-buttons {
+  /* text-align: right; */
+  position: absolute;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 20%;
+  bottom: -32px;
+  justify-content: space-evenly;
+  width: 13%;
+  
+  img{
+    cursor: pointer;
+  }
 }

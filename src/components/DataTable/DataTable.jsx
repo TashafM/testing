@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { ImCheckboxUnchecked, ImCheckboxChecked } from "react-icons/im";
 import { Table } from "react-bootstrap";
 import "./DataTable.scss";
+import previous from "../../assets/images/previous.svg";
+import next from "../../assets/images/next.svg";
 
 const DataTable = ({ data, columns }) => {
   const members = data;
@@ -48,7 +50,12 @@ const DataTable = ({ data, columns }) => {
                               )}
                             </>
                           ) : (
-                            row[col.value]
+                            <>
+                              {row[col.value].length <= 14
+                                ? row[col.value]
+                                : row[col.value].slice(0, 7) + "..."}
+                              {/* {console.log(row[col.value].slice(0,7)+"...",'tashaff')} */}
+                            </>
                           )}
                         </td>
                       </>
