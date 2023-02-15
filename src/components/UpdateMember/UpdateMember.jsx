@@ -1,8 +1,8 @@
 /*eslint-disable */
 
 import React, { useEffect, useState } from "react";
-import add from "../../assets/images/add.svg";
-import "./AddMember.scss";
+import edit from "../../assets/images/edit.svg";
+import "./UpdateMember.scss";
 import {
   Button,
   Form,
@@ -16,7 +16,7 @@ import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePickerComp from "../DatePickerComp/DatePickerComp";
 
-const AddMember = ({ api, getDataFunc }) => {
+const UpdateMember = ({ api, getDataFunc, editData }) => {
   const [show, setShow] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [probationDate, setProbationDate] = useState(null);
@@ -38,6 +38,7 @@ const AddMember = ({ api, getDataFunc }) => {
   });
 
   function handleInputChange(event) {
+    console.log(event.target.value)
     const { name, value } = event.target;
     setFormValues((prevInputs) => ({ ...prevInputs, [name]: value }));
   }
@@ -60,16 +61,15 @@ const AddMember = ({ api, getDataFunc }) => {
         getDataFunc();
       });
     handleClose();
-    // console.log(formValues);
+    console.log(formValues);
   }
 
   return (
     <>
       <div className="add-member" onClick={handleShow}>
         <span className="icon-desc">
-          <img src={add} alt="" />
+          <img src={edit} alt="" />
         </span>
-        <span>Add Team Member</span>
       </div>
       <Offcanvas
         show={show}
@@ -91,6 +91,7 @@ const AddMember = ({ api, getDataFunc }) => {
               <FormGroup className="input-div">
                 <Form.Label>First Name *</Form.Label>
                 <Form.Control
+                  value={formValues.firstName}
                   type="text"
                   name="firstName"
                   onChange={handleInputChange}
@@ -100,6 +101,7 @@ const AddMember = ({ api, getDataFunc }) => {
               <FormGroup className="input-div">
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
+                  // value={}
                   type="text"
                   name="lastName"
                   onChange={handleInputChange}
@@ -108,6 +110,7 @@ const AddMember = ({ api, getDataFunc }) => {
               <FormGroup className="input-div">
                 <Form.Label>Username *</Form.Label>
                 <Form.Control
+                  // value={}
                   type="text"
                   name="username"
                   onChange={handleInputChange}
@@ -117,6 +120,7 @@ const AddMember = ({ api, getDataFunc }) => {
               <FormGroup className="input-div">
                 <Form.Label>Email ID *</Form.Label>
                 <Form.Control
+                  // value={}
                   type="email"
                   name="email"
                   onChange={handleInputChange}
@@ -126,6 +130,7 @@ const AddMember = ({ api, getDataFunc }) => {
               <FormGroup className="input-div">
                 <Form.Label>Phone No *</Form.Label>
                 <Form.Control
+                  // value={}
                   type="text"
                   name="phone"
                   onChange={handleInputChange}
@@ -135,6 +140,7 @@ const AddMember = ({ api, getDataFunc }) => {
               <FormGroup className="input-div">
                 <Form.Label>Department</Form.Label>
                 <Form.Control
+                  // value={}
                   type="text"
                   name="department"
                   onChange={handleInputChange}
@@ -143,6 +149,7 @@ const AddMember = ({ api, getDataFunc }) => {
               <FormGroup className="input-div">
                 <Form.Label>Designation</Form.Label>
                 <Form.Control
+                  // value={}
                   type="text"
                   name="designation"
                   onChange={handleInputChange}
@@ -151,6 +158,7 @@ const AddMember = ({ api, getDataFunc }) => {
               <FormGroup className="input-div">
                 <Form.Label>Employee Code *</Form.Label>
                 <Form.Control
+                  // value={}
                   type="text"
                   name="emp_code"
                   onChange={handleInputChange}
@@ -160,6 +168,7 @@ const AddMember = ({ api, getDataFunc }) => {
               <FormGroup className="input-div">
                 <Form.Label>Location</Form.Label>
                 <Form.Control
+                  // value={}
                   type="text"
                   name="location"
                   onChange={handleInputChange}
@@ -189,4 +198,4 @@ const AddMember = ({ api, getDataFunc }) => {
   );
 };
 
-export default AddMember;
+export default UpdateMember;

@@ -1,0 +1,74 @@
+.teamMember-add {
+  width: 35%;
+  .content {
+    padding: 35px;
+    overflow: auto;
+    position: relative;
+
+    .react-datepicker__input-container {
+      input {
+        width: 95%;
+        background: #f7f7f7;
+        border: none;
+        outline: none;
+        padding: 15px;
+        font-size: 20px;
+        font-weight: 500;
+      }
+    }
+    
+
+    .input-div {
+      margin-bottom: 20px;
+
+      .form-label {
+        font-size: 18px;
+        font-weight: 500;
+        color: black;
+      }
+
+      input {
+        background: #f7f7f7;
+        border: none;
+        outline: none;
+        padding: 15px;
+        font-size: 20px;
+        font-weight: 500;
+      }
+    }
+
+    .offcanvas-header {
+      align-items: baseline !important;
+    }
+    .team-member-add {
+      font-size: 32px;
+      font-weight: 600;
+      color: black;
+      line-height: 40px;
+      margin-bottom: 20px;
+    }
+
+    .sub-title-team {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 25px;
+      color: #899197;
+    }
+  }
+}
+
+.offcanvas.show {
+  width: 35%;
+}
+
+.save-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  background-color: #be212a;
+  border: none;
+}
+

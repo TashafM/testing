@@ -1,5 +1,5 @@
 /*eslint-disable */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, Outlet, Route, Routes } from "react-router-dom";
 import "./TeamMembers.scss";
 import { HiBadgeCheck } from "react-icons/hi";
@@ -21,6 +21,7 @@ import FilterBtn from "./FilterBtn/FilterBtn";
 import ScrollBtn from "../../../components/ScrollBtn/ScrollBtn";
 import axios from "axios";
 import AddMember from "../../../components/AddMember/AddMember";
+import { Button } from "react-bootstrap";
 
 // import TabItems from "../TabItems/TabItems";
 
@@ -33,39 +34,55 @@ const TeamMembers = () => {
   const currMemberApi = `https://63ebc23432a08117239190d4.mockapi.io/elred`;
   //   const currUserApi =
   //     "https://hub.dummyapis.com/employee?noofRecords=10&idStarts=1001";
-  const pastUserApi = "https://jsonplaceholder.typicode.com/users";
+  const pastMemberApi = "https://63ecd449be929df00cb3017e.mockapi.io/pastUser";
 
   const getCurrMembers = () => {
     setLoading(true);
     axios.get(currMemberApi).then((response) => {
       setCurrMemberData(response.data);
-      console.log(response.data);
+    });
+    setLoading(false);
+  };
+
+  const getPastMembers = () => {
+    setLoading(true);
+    axios.get(pastMemberApi).then((response) => {
+      setPastMemberData(response.data);
     });
     setLoading(false);
   };
 
   useEffect(() => {
     getCurrMembers();
-    // pastMembers();
+    getPastMembers();
   }, []);
 
   const colPastUsers = [{ title: "First Name", value: "name" }];
   const colCurrentMembers = [
-    { title: "First Name", value: "name" },
+    { title: "First Name", value: "firstName" },
     { title: "Email", value: "email" },
-    { title: "Website", value: "website" },
+    { title: "Username", value: "username" },
+    { title: "Contact", value: "phone" },
+    { title: "Employee Code", value: "emp_code" },
+  ];
+  const colPastMembers = [
+    { title: "First Name", value: "firstName" },
+    { title: "Email", value: "email" },
+    { title: "Username", value: "username" },
+    { title: "Contact", value: "phone" },
+    { title: "Employee Code", value: "emp_code" },
   ];
 
   const [selectedTab, setSelectedTab] = useState(1);
 
-  const selectTab = (val) => {
-    setSelectedTab(val);
-    if (val == 2) {
-      setLoading(true);
-    } else {
-      setLoading(true);
-    }
-  };
+  // const selectTab = (val) => {
+  //   setSelectedTab(val);
+  //   if (val == 2) {
+  //     setLoading(true);
+  //   } else {
+  //     setLoading(true);
+  //   }
+  // };
 
   const handleCheckboxChange = (id) => {
     let newSelectedIds = [...selectedIds];
@@ -85,11 +102,13 @@ const TeamMembers = () => {
       try {
         await Promise.all(
           selectedIds.map((itemId) => {
-            return axios.delete(`${currMemberApi}/${itemId}`);
+            return axios.delete(
+              `${selectedTab == 1 ? currMemberApi : pastMemberApi}/${itemId}`
+            );
           })
         );
         setSelectedIds([]);
-        getCurrMembers();
+        selectedTab == 1 ? getCurrMembers() : getPastMembers();
         console.log(selectedIds, "successs");
         // ... handle success
       } catch (error) {
@@ -106,15 +125,17 @@ const TeamMembers = () => {
           icon={users}
           title="Team Members"
           count={10}
+          api={selectedTab == 1 ? currMemberApi : pastMemberApi}
+          getDataFunc={selectedTab == 1 ? getCurrMembers : getPastMembers}
           // onUserAdded={handleUserAdded}
         />
         <div className="members-tab">
           <div className="col tabs-change">
-            <div className="tab1" onClick={() => selectTab(1)}>
+            <div className="tab1" onClick={() => setSelectedTab(1)}>
               Current Team Members
               <div className={`${selectedTab == 1 ? "indicator" : ""}`}></div>
             </div>
-            <div className="tab2">
+            <div className="tab2" onClick={() => setSelectedTab(2)}>
               Past Team Members
               <div className={`${selectedTab == 2 ? "indicator" : ""}`}></div>
             </div>
@@ -140,19 +161,16 @@ const TeamMembers = () => {
           <DataTable
             columns={colCurrentMembers}
             data={currMemberData}
-            setData={setCurrMemberData}
-            api={currMemberApi}
-            // del={handleDelete}
-            // setPage={setPage}
-            // page={page}
             handleCheckboxChange={handleCheckboxChange}
-            getDataFunc={getCurrMembers}
             selectedIds={selectedIds}
-            setSelectedIds={setSelectedIds}
-            deleteSelectedItems={deleteSelectedItems}
           />
         ) : (
-          <DataTable columns={oldMember} data={data2} />
+          <DataTable
+            columns={colPastMembers}
+            data={pastMemberData}
+            handleCheckboxChange={handleCheckboxChange}
+            selectedIds={selectedIds}
+          />
         )}
         <ScrollBtn />
       </div>

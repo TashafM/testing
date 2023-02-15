@@ -1,28 +1,23 @@
 /*eslint-disable */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Table } from "react-bootstrap";
 import "./DataTable.scss";
 import previous from "../../assets/images/previous.svg";
 import next from "../../assets/images/next.svg";
 import Util from "../UtilityFunctions/UtilityFunctions";
-import axios from "axios";
+import edit from "../../assets/images/edit.svg";
+import UpdateMember from "../UpdateMember/UpdateMember";
 
-const DataTable = ({
-  columns,
-  data,
-  handleSelect,
-  deleteSelectedItems,
-  selected,
-  setSelected,
-  getDataFunc,
-  api,
-  selectedIds,
-  setSelectedIds,
-  handleCheckboxChange,
-}) => {
+const DataTable = ({ columns, data, selectedIds, handleCheckboxChange }) => {
+  const myRef = useRef(null);
+
+  const setToLocal = (values) => {
+    console.log(values )
+  };
+
   return (
     <>
-      <div className="table-container">
+      <div className="table-container" ref={myRef}>
         <Table hover>
           <thead className="table-head">
             <tr className="tr-head">
@@ -30,6 +25,7 @@ const DataTable = ({
               {columns.map((col, idx) => (
                 <th key={idx}>{col.title}</th>
               ))}
+              <th></th>
             </tr>
           </thead>
           <tbody className="scroll-body">
@@ -54,17 +50,16 @@ const DataTable = ({
                       </td>
                     </>
                   ))}
-                  {/* <td>
-                    <button onClick={()=>deleteHandler(row.id)}>delete</button>
-                  </td> */}
+                  <td>
+                    <span className="editBtn" onClick={() => setToLocal(row)}>
+                      {/* <img src={edit} alt="" onClick={()=>setClick(true)}/> */}
+                      <UpdateMember />
+                    </span>
+                  </td>
                 </tr>
               </>
             ))}
           </tbody>
-          <div className="navigator">
-            <button>Previous</button>
-            <button>Next</button>
-          </div>
         </Table>
       </div>
     </>

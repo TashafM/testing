@@ -1,14 +1,11 @@
 /*eslint-disable */
 import React from "react";
 import upload from "../../../assets/images/upload.svg";
-import add from "../../../assets/images/add.svg";
-import { AiOutlineCloudUpload } from "react-icons/ai";
-import {GrAddCircle} from 'react-icons/gr'
+
 import "./Description.scss";
 import AddMember from "../../../components/AddMember/AddMember";
 
-const Description = ({icon, title, count, onUserAdded, currentMembers }) => {
-  
+const Description = ({ icon, title, count, onUserAdded, api, getDataFunc }) => {
   return (
     <>
       <div className="row row-desc">
@@ -29,13 +26,20 @@ const Description = ({icon, title, count, onUserAdded, currentMembers }) => {
         </div>
         <div className="col-4 btn-col">
           <div className="buttons-div">
-            <div className="upload-btn" onClick={()=>alert('Upload button clicked')}>
+            <div
+              className="upload-btn"
+              onClick={() => alert("Upload button clicked")}
+            >
               <span className="icon-desc">
-              <img src={upload} alt="" />
+                <img src={upload} alt="" />
               </span>
               <span>Upload a csv file</span>
             </div>
-            <AddMember currentMembers={currentMembers} onUserAdded={onUserAdded}/>
+            <AddMember
+              onUserAdded={onUserAdded}
+              api={api}
+              getDataFunc={getDataFunc}
+            />
 
             {/* <div className="add-member" onClick={()=>alert('Add member button clicked')}>
               <span className="icon-desc">
