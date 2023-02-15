@@ -1,0 +1,66 @@
+.info-container {
+
+    .card-head {
+        margin-bottom: 44px;
+    }
+
+    .card-cont {
+        background: #FFFFFF;
+        border: 1px solid #DADADA;
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 30px;
+        height: 233px;
+    }
+
+    .cont-title {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 26px;
+        line-height: 31px;
+        padding-left: 10px;
+        color: #000000;
+    }
+
+    .wrapper-title {
+        display: flex;
+        justify-content: space-between;
+        flex-grow: 1;
+    }
+
+    .email-cont {
+        margin-bottom: 44px;
+    }
+
+    .email {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 30px;
+        /* identical to box height, or 150% */
+        margin-left: 10px;
+        letter-spacing: 0.04em;
+
+        color: #000000;
+    }
+
+    .phone {
+        margin-left: 15px;
+    }
+
+    .margin-text {
+        margin: 0
+    }
+}
+
+.drawer-title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #899197;
+}

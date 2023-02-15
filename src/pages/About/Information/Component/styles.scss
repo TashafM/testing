@@ -1,0 +1,65 @@
+.drawer-title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #899197;
+    margin-bottom: 40px;
+
+}
+
+.input-wrapper {
+    margin-bottom: 40px;
+}
+
+.card-slots-container {
+    display: flex;
+    background: #FFFFFF;
+    border: 1px solid #DADADA;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 15px;
+
+    .card-day {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        color: #000000;
+    }
+
+    .title-active {
+        margin-right: 25px;
+    }
+
+}
+
+.card-statement-cont {
+    border: 1px solid #DADADA;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 33px;
+
+    .statement-head {
+        padding-bottom: 16px;
+    }
+
+    .icon-delete {
+        padding-right: 10px;
+    }
+
+    .statement-title {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 29px;
+        color: #000000;
+    }
+}
+
+.container-text-area {
+    margin-bottom: 20px;
+}

@@ -16,50 +16,50 @@ const menuItems = [
     {
         id: 1,
         icon: dashboard,
-        title: "Dashboard",
-        path: '/home/dashboard'
+        title: 'Dashboard',
+        path: '/home/dashboard',
     },
     {
         id: 2,
         icon: order,
-        title: "Orders",
-        path: '/home/orders'
+        title: 'Orders',
+        path: '/home/orders',
     },
     {
         id: 3,
         icon: teammembers,
-        title: "Team Members",
-        path:'/home/team-members'
+        title: 'Team Members',
+        path: '/home/team-members',
     },
     {
         id: 4,
         icon: partners,
-        title: "Partners",
-        path: '/home/partners'
+        title: 'Partners',
+        path: '/home/partners',
     },
     {
         id: 5,
         icon: products,
-        title: "Product Listings",
-        path:'/home/product-listings'
+        title: 'Product Listings',
+        path: '/home/product-listings',
     },
     {
         id: 6,
         icon: awards,
-        title: "Awards & Honours",
-        path: '/home/awards-honours'
+        title: 'Awards & Honours',
+        path: '/home/awards-honours',
     },
     {
         id: 7,
         icon: about,
-        title: "About Us",
-        path: '#'
+        title: 'About Us',
+        path: '/home/about',
     },
     {
         id: 8,
         icon: payment,
-        title: "Payment Info",
-        path: '#'
+        title: 'Payment Info',
+        path: '#',
     },
 ]
 
