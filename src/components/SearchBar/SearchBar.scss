@@ -1,0 +1,22 @@
+.search-div {
+    position: relative;
+    margin-right: 5%;
+    input {
+      background: #f0f2f9;
+      border: none;
+      outline: none;
+      color: #899197;
+      font-size: 14px;
+      width: 100%;
+      padding: 15px;
+      border-radius: 8px;
+      padding-left: 20%;
+    }
+    .icon-search {
+      position: absolute;
+      font-size: 24px;
+      top: 10%;
+      left: 5%;
+      color: #899197;
+    }
+  }

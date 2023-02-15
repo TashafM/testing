@@ -1,0 +1,15 @@
+.scroll-buttons {
+    /* text-align: right; */
+    position: absolute;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    right: 20%;
+    bottom: -32px;
+    justify-content: space-evenly;
+    width: 13%;
+  
+    img {
+      cursor: pointer;
+    }
+  }

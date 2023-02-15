@@ -7,14 +7,14 @@
   &::-webkit-scrollbar {
     width: 0.2em;
     height: 0.2em;
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
   }
   &::-webkit-scrollbar-thumb {
     background-color: #000000;
   }
   &::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: #F5F5F5;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #f5f5f5;
   }
 
   thead {
@@ -37,11 +37,19 @@
       padding: 15px;
     }
   }
-  .tr-body{
-    td{
+  .tr-body {
+    td {
       padding: 30px 20px;
       font-size: 18px;
       font-weight: 500;
+
+      input[type='checkbox'] {
+        background-color: red;
+      }
     }
   }
+}
+
+.navigator{
+  display: flex;
 }

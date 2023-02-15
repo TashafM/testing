@@ -5,8 +5,10 @@ import add from "../../../assets/images/add.svg";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import {GrAddCircle} from 'react-icons/gr'
 import "./Description.scss";
+import AddMember from "../../../components/AddMember/AddMember";
 
-const Description = ({icon, title, count, description }) => {
+const Description = ({icon, title, count, onUserAdded, currentMembers }) => {
+  
   return (
     <>
       <div className="row row-desc">
@@ -33,12 +35,14 @@ const Description = ({icon, title, count, description }) => {
               </span>
               <span>Upload a csv file</span>
             </div>
-            <div className="add-member" onClick={()=>alert('Add member button clicked')}>
+            <AddMember currentMembers={currentMembers} onUserAdded={onUserAdded}/>
+
+            {/* <div className="add-member" onClick={()=>alert('Add member button clicked')}>
               <span className="icon-desc">
                 <img src={add} alt="" />
               </span>
               <span>Add Team Member</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

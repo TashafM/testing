@@ -11,74 +11,93 @@ import filter from "../../../assets/images/filter.svg";
 import downArrow from "../../../assets/images/downArrow.svg";
 import previous from "../../../assets/images/previous.svg";
 import next from "../../../assets/images/next.svg";
+import deleteBtn from "../../../assets/images/delete.svg";
 
 import * as BS from "react-icons/bs";
+import MembersTab from "../../../components/MembersTab/MembersTab";
+import DeleteButton from "../../../components/DeleteButton/DeleteButton";
+import SearchBar from "../../../components/SearchBar/SearchBar";
+import FilterBtn from "./FilterBtn/FilterBtn";
+import ScrollBtn from "../../../components/ScrollBtn/ScrollBtn";
+import axios from "axios";
+import AddMember from "../../../components/AddMember/AddMember";
 
 // import TabItems from "../TabItems/TabItems";
 
 const TeamMembers = () => {
-  const [c, setC] = useState("...");
-  const [d, setD] = useState("...");
-  const [data, setData] = useState(null);
-  const [data2, setData2] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [currMemberData, setCurrMemberData] = useState([]);
+  const [pastMemberData, setPastMemberData] = useState(null);
+  const [selectedIds, setSelectedIds] = useState([]);
 
-  const column = [
-    // {title: 'Index no.' , value:'id'},
-    { title: "", value: "boxes" },
-    { title: "First Name", value: "firstName" },
-    { title: "Gender", value: "gender" },
-    { title: "Password", value: "password" },
-    { title: "University", value: "university" },
-    { title: "Domain", value: "domain" },
-    { title: "Mac Address", value: "macAddress" },
-    { title: "University", value: "university" },
-    { title: "Domain", value: "domain" },
-    { title: "Mac Address", value: "macAddress" },
-  ];
+  const currMemberApi = `https://63ebc23432a08117239190d4.mockapi.io/elred`;
+  //   const currUserApi =
+  //     "https://hub.dummyapis.com/employee?noofRecords=10&idStarts=1001";
+  const pastUserApi = "https://jsonplaceholder.typicode.com/users";
 
-  const oldMember = [
-    { title: "", value: "boxes" },
-    { title: "Name", value: "name" },
-    { title: "Contact", value: "phone" },
-    { title: "Username", value: "username" },
-    { title: "Website", value: "website" },
-  ];
-  const [selectedTab, setSelectedTab] = useState(1);
-
-  const myapi = async () => {
-    const api = "https://dummyjson.com/users";
-    const data = await fetch(api);
-    const res = await data.json();
-    setData(res.users);
-    setC(res.users.length);
+  const getCurrMembers = () => {
+    setLoading(true);
+    axios.get(currMemberApi).then((response) => {
+      setCurrMemberData(response.data);
+      console.log(response.data);
+    });
     setLoading(false);
   };
+
+  useEffect(() => {
+    getCurrMembers();
+    // pastMembers();
+  }, []);
+
+  const colPastUsers = [{ title: "First Name", value: "name" }];
+  const colCurrentMembers = [
+    { title: "First Name", value: "name" },
+    { title: "Email", value: "email" },
+    { title: "Website", value: "website" },
+  ];
+
+  const [selectedTab, setSelectedTab] = useState(1);
 
   const selectTab = (val) => {
     setSelectedTab(val);
     if (val == 2) {
       setLoading(true);
-      tryApi();
     } else {
       setLoading(true);
-      myapi();
     }
   };
 
-  const tryApi = async () => {
-    const api = "https://jsonplaceholder.typicode.com/users";
-    // const api = "https://dummyjson.com/users";
-    const data = await fetch(api);
-    const res = await data.json();
-    setData2(res);
-    setD(res.length);
-    setLoading(false);
+  const handleCheckboxChange = (id) => {
+    let newSelectedIds = [...selectedIds];
+    if (newSelectedIds.includes(id)) {
+      newSelectedIds = newSelectedIds.filter((i) => i !== id);
+    } else {
+      newSelectedIds.push(id);
+    }
+    setSelectedIds(newSelectedIds);
   };
 
-  useEffect(() => {
-    myapi();
-  }, []);
+  async function deleteSelectedItems() {
+    const confirm = window.confirm(
+      `Are you sure you want to delete ${selectedIds.length} users?`
+    );
+    if (confirm) {
+      try {
+        await Promise.all(
+          selectedIds.map((itemId) => {
+            return axios.delete(`${currMemberApi}/${itemId}`);
+          })
+        );
+        setSelectedIds([]);
+        getCurrMembers();
+        console.log(selectedIds, "successs");
+        // ... handle success
+      } catch (error) {
+        // ... handle error
+        console.log(error, "erorrrrrrr");
+      }
+    }
+  }
 
   return (
     <>
@@ -86,7 +105,8 @@ const TeamMembers = () => {
         <Description
           icon={users}
           title="Team Members"
-          count={selectedTab == 1 ? c : d}
+          count={10}
+          // onUserAdded={handleUserAdded}
         />
         <div className="members-tab">
           <div className="col tabs-change">
@@ -94,43 +114,47 @@ const TeamMembers = () => {
               Current Team Members
               <div className={`${selectedTab == 1 ? "indicator" : ""}`}></div>
             </div>
-            <div className="tab2" onClick={() => selectTab(2)}>
+            <div className="tab2">
               Past Team Members
               <div className={`${selectedTab == 2 ? "indicator" : ""}`}></div>
             </div>
           </div>
           <div className="col search-filter">
-            <div className="search-div">
+            <DeleteButton
+              selectedIds={selectedIds}
+              deleteSelectedItems={deleteSelectedItems}
+            />
+
+            {/* <div className="search-div">
               <span className="icon-search">
                 <BS.BsSearch />
               </span>
               <input type="text" placeholder="Search..."></input>
-            </div>
-            <div className="filter-btn">
-              <span>
-                <img src={filter} alt="" />
-              </span>
-              <span className="filter-text">Filter</span>
-              <span>
-                <img src={downArrow} alt="" />
-              </span>
-            </div>
+            </div> */}
+            <SearchBar />
+            <FilterBtn />
           </div>
         </div>
-        {selectedTab == 1 ? (
-          <DataTable data={data} columns={column} />
-        ) : (
-          <DataTable data={data2} columns={oldMember} />
-        )}
 
-        <div className="scroll-buttons">
-          <span>
-            <img src={previous} alt="" />
-          </span>
-          <span>
-            <img src={next} alt="" />
-          </span>
-        </div>
+        {selectedTab == 1 ? (
+          <DataTable
+            columns={colCurrentMembers}
+            data={currMemberData}
+            setData={setCurrMemberData}
+            api={currMemberApi}
+            // del={handleDelete}
+            // setPage={setPage}
+            // page={page}
+            handleCheckboxChange={handleCheckboxChange}
+            getDataFunc={getCurrMembers}
+            selectedIds={selectedIds}
+            setSelectedIds={setSelectedIds}
+            deleteSelectedItems={deleteSelectedItems}
+          />
+        ) : (
+          <DataTable columns={oldMember} data={data2} />
+        )}
+        <ScrollBtn />
       </div>
     </>
   );
