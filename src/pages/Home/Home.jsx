@@ -22,9 +22,10 @@ const Home = () => {
           </div>
         </div>
         <div className="col-md-10 content-area">
-          <div className="sub-content-area">
+          {/* <div className="sub-content-area">
             <Outlet/>
-          </div>
+          </div> */}
+          <Outlet/>
         </div>
       </div>
     </div>

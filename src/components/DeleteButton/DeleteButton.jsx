@@ -1,14 +1,34 @@
 import React from "react";
-import deleteBtn from '../../assets/images/delete.svg'
-import './DeleteButton.scss'
+import deleteBtn from "../../assets/images/delete.svg";
+import Util from "../UtilityFunctions/UtilityFunctions";
+import "./DeleteButton.scss";
 
-const DeleteButton = ({selectedIds, deleteSelectedItems}) => {
-
-
+const DeleteButton = ({
+  selectedIds,
+  data,
+  apiTo,
+  apiFrom,
+  func1,
+  func2,
+  setSelectedIds,
+}) => {
   return (
     <>
       <div className="buttons">
-        <span className="del-button" onClick={deleteSelectedItems} disabled={selectedIds.length === 0}>
+        <span
+          className="del-button"
+          onClick={() =>
+            Util.deleteSelectedItems(
+              selectedIds,
+              data,
+              apiTo,
+              apiFrom,
+              func1,
+              func2,
+              setSelectedIds
+            )
+          }
+        >
           <span>
             <img src={deleteBtn} alt="" />
           </span>

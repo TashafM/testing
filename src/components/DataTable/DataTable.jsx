@@ -5,15 +5,28 @@ import "./DataTable.scss";
 import previous from "../../assets/images/previous.svg";
 import next from "../../assets/images/next.svg";
 import Util from "../UtilityFunctions/UtilityFunctions";
-import edit from "../../assets/images/edit.svg";
+import deleteBtn from "../../assets/images/deleteBtn.svg";
+import restoreBtn from "../../assets/images/restoreBtn.svg";
+
 import UpdateMember from "../UpdateMember/UpdateMember";
+import ReactTooltip from "react-tooltip";
 
-const DataTable = ({ columns, data, selectedIds, handleCheckboxChange }) => {
+const DataTable = ({
+  columns,
+  datum,
+  selectedIds,
+  setSelectedIds,
+  handleCheckboxChange,
+  api,
+  api2,
+  getDataFunc,
+  getDataFunc2,
+  delActive,
+  resActive,
+  singleOperation,
+}) => {
   const myRef = useRef(null);
-
-  const setToLocal = (values) => {
-    console.log(values )
-  };
+  const data = datum.sort((a, b) => b.id - a.id);
 
   return (
     <>
@@ -25,7 +38,7 @@ const DataTable = ({ columns, data, selectedIds, handleCheckboxChange }) => {
               {columns.map((col, idx) => (
                 <th key={idx}>{col.title}</th>
               ))}
-              <th></th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody className="scroll-body">
@@ -36,7 +49,14 @@ const DataTable = ({ columns, data, selectedIds, handleCheckboxChange }) => {
                     <input
                       type="checkbox"
                       checked={selectedIds.includes(row.id)}
-                      onChange={() => handleCheckboxChange(row.id)}
+                      // onChange={() => handleCheckboxChange(row.id)}
+                      onChange={() =>
+                        Util.handleCheckboxChange(
+                          selectedIds,
+                          row.id,
+                          setSelectedIds
+                        )
+                      }
                     />
                   </td>
                   {columns.map((col, id) => (
@@ -50,11 +70,50 @@ const DataTable = ({ columns, data, selectedIds, handleCheckboxChange }) => {
                       </td>
                     </>
                   ))}
-                  <td>
-                    <span className="editBtn" onClick={() => setToLocal(row)}>
-                      {/* <img src={edit} alt="" onClick={()=>setClick(true)}/> */}
-                      <UpdateMember />
+                  <td className="action-div">
+                    <span className="editBtn">
+                      <UpdateMember
+                        editData={row}
+                        api={api}
+                        getDataFunc={getDataFunc}
+                      />
                     </span>
+                    {resActive && (
+                      <span className="icon-desc">
+                        <img
+                          src={restoreBtn}
+                          alt=""
+                          onClick={() =>
+                            Util.restoreSingle(
+                              row,
+                              api,
+                              api2,
+                              getDataFunc,
+                              getDataFunc2,
+                              setSelectedIds
+                            )
+                          }
+                        />
+                      </span>
+                    )}
+                    {delActive && (
+                      <span className="icon-desc">
+                        <img
+                          src={deleteBtn}
+                          alt=""
+                          onClick={() =>
+                            Util.deleteSingle(
+                              row,
+                              api,
+                              api2,
+                              getDataFunc,
+                              getDataFunc2,
+                              setSelectedIds
+                            )
+                          }
+                        />
+                      </span>
+                    )}
                   </td>
                 </tr>
               </>

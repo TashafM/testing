@@ -13,7 +13,7 @@
     }
   }
 
-  .search-div {
+  .search-div-top {
     position: relative;
     input {
       background: #f0f2f9;
@@ -41,6 +41,9 @@
     margin-left: -3%;
     .user-profile {
       padding-left: 60px;
+      padding-left: 60px;
+      display: flex;
+      align-items: center;
       img {
         width: 42px;
         height: 42px;

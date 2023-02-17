@@ -14,7 +14,7 @@ const NavbarTop = () => {
           <img src={atinks} alt="" />
         </span>
       </div>
-      <div className="col-md-7 search-div">
+      <div className="col-md-7 search-div-top">
         <span className="icon-search">
           <BS.BsSearch />
         </span>

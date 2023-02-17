@@ -1,0 +1,20 @@
+.buttons {
+    .rating-button {
+      display: flex;
+      align-items: center;
+      padding: 12px 15px;
+      border-radius: 6px;
+      margin-right: 20px;
+      // border: 1px solid;
+      background-color: #DEF0FF;
+      cursor: pointer;
+
+      .name{
+        margin-left: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 17px;
+        color: #4793F4;
+      }
+    }
+  }

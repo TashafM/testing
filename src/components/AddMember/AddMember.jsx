@@ -165,18 +165,18 @@ const AddMember = ({ api, getDataFunc }) => {
                   onChange={handleInputChange}
                 />
               </FormGroup>
-              {/* <DatePickerComp
+              <DatePickerComp
                 heading="Start Date *"
                 setSelectedDate={setSelectedDate}
                 selectedDate={selectedDate}
-                required
+                // required
               />
               <DatePickerComp
                 heading="Probation Date *"
                 setSelectedDate={setProbationDate}
                 selectedDate={probationDate}
-                required
-              /> */}
+                // required
+              />
 
               <Button variant="primary" type="submit" className="save-btn">
                 Save

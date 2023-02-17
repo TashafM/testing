@@ -23,22 +23,20 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  //   const header = {}
 
   const [formValues, setFormValues] = useState({
-    firstName: "",
-    lastName: "",
-    username: "",
-    email: "",
-    phone: "",
-    department: "",
-    designation: "",
-    emp_code: "",
-    location: "",
+    firstName: editData.firstName,
+    lastName: editData.lastName,
+    username: editData.username,
+    email: editData.email,
+    phone: editData.phone,
+    department: editData.department,
+    designation: editData.designation,
+    emp_code: editData.emp_code,
+    location: editData.location,
   });
 
   function handleInputChange(event) {
-    console.log(event.target.value)
     const { name, value } = event.target;
     setFormValues((prevInputs) => ({ ...prevInputs, [name]: value }));
   }
@@ -46,7 +44,7 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
   function handleSubmit(event) {
     event.preventDefault();
     axios
-      .post(api, {
+      .put(`${api}/${editData.id}`, {
         firstName: formValues.firstName,
         lastName: formValues.lastName,
         username: formValues.username,
@@ -59,16 +57,16 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
       })
       .then((res) => {
         getDataFunc();
-      });
+      })
+      .catch((err) => console.error(err));
     handleClose();
-    console.log(formValues);
   }
 
   return (
     <>
-      <div className="add-member" onClick={handleShow}>
+      <div className="add-member" >
         <span className="icon-desc">
-          <img src={edit} alt="" />
+          <img src={edit} alt="" onClick={handleShow}/>
         </span>
       </div>
       <Offcanvas
@@ -80,9 +78,9 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
         <div className="content">
           <Offcanvas.Header closeButton>
             <Offcanvas.Title>
-              <div className="team-member-add">Add A Team Member</div>
+              <div className="team-member-add">Edit A Team Member</div>
               <div className="sub-title-team">
-                Fill in the information below to get it reflected in the table
+                Edit in the information below to get it reflected in the table
               </div>
             </Offcanvas.Title>
           </Offcanvas.Header>
@@ -101,7 +99,7 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
               <FormGroup className="input-div">
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
-                  // value={}
+                  value={formValues.lastName}
                   type="text"
                   name="lastName"
                   onChange={handleInputChange}
@@ -110,7 +108,7 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
               <FormGroup className="input-div">
                 <Form.Label>Username *</Form.Label>
                 <Form.Control
-                  // value={}
+                  value={formValues.username}
                   type="text"
                   name="username"
                   onChange={handleInputChange}
@@ -120,7 +118,7 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
               <FormGroup className="input-div">
                 <Form.Label>Email ID *</Form.Label>
                 <Form.Control
-                  // value={}
+                  value={formValues.email}
                   type="email"
                   name="email"
                   onChange={handleInputChange}
@@ -130,7 +128,7 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
               <FormGroup className="input-div">
                 <Form.Label>Phone No *</Form.Label>
                 <Form.Control
-                  // value={}
+                  value={formValues.phone}
                   type="text"
                   name="phone"
                   onChange={handleInputChange}
@@ -140,7 +138,7 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
               <FormGroup className="input-div">
                 <Form.Label>Department</Form.Label>
                 <Form.Control
-                  // value={}
+                  value={formValues.department}
                   type="text"
                   name="department"
                   onChange={handleInputChange}
@@ -149,7 +147,7 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
               <FormGroup className="input-div">
                 <Form.Label>Designation</Form.Label>
                 <Form.Control
-                  // value={}
+                  value={formValues.designation}
                   type="text"
                   name="designation"
                   onChange={handleInputChange}
@@ -158,7 +156,7 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
               <FormGroup className="input-div">
                 <Form.Label>Employee Code *</Form.Label>
                 <Form.Control
-                  // value={}
+                  value={formValues.emp_code}
                   type="text"
                   name="emp_code"
                   onChange={handleInputChange}
@@ -168,7 +166,7 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
               <FormGroup className="input-div">
                 <Form.Label>Location</Form.Label>
                 <Form.Control
-                  // value={}
+                  value={formValues.location}
                   type="text"
                   name="location"
                   onChange={handleInputChange}

@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, FormGroup } from "react-bootstrap";
-import ReactDatePicker from "react-datepicker";
+import   ReactDatePicker  from "react-datepicker";
+import 'react-datepicker/dist/react-datepicker.css'
 
 const DatePickerComp = ({heading, selectedDate, setSelectedDate, required}) => {
   return (
@@ -13,7 +14,9 @@ const DatePickerComp = ({heading, selectedDate, setSelectedDate, required}) => {
         dateFormat="dd/MM/yyyy"
         placeholderText="DD/MM/YYYY"
         required={required ? true : false}
+        // minDate={new Date()}
       />
+     
     </FormGroup>
   );
 };

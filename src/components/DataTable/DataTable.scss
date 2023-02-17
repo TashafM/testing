@@ -57,3 +57,14 @@
 .navigator{
   display: flex;
 }
+
+.action-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .icon-desc{
+    margin-right: 20px;
+    cursor: pointer;
+  }
+}
