@@ -6,14 +6,15 @@ class Util {
   }
 
   // This function is used for selecting value with checkbox
-  static handleCheckboxChange(selectedIds, id, setSelectedIds) {
+  static handleCheckboxChange(selectedIds, user, setSelectedIds, setRatingUser) {
     let newSelectedIds = [...selectedIds];
-    if (newSelectedIds.includes(id)) {
-      newSelectedIds = newSelectedIds.filter((i) => i !== id);
+    if (newSelectedIds.includes(user.id)) {
+      newSelectedIds = newSelectedIds.filter((i) => i !== user.id);
     } else {
-      newSelectedIds.push(id);
+      newSelectedIds.push(user.id);
     }
     setSelectedIds(newSelectedIds);
+    setRatingUser(user)
   }
 
   // This function is used to delete single user data from an api and send it to past members
@@ -170,6 +171,34 @@ class Util {
     }
     setSelectedIds([]);
   };
+
+  static activeRatings = (api, id, getDataFunc, setClicked) => {
+    
+    axios
+      .put(`${api}/${id}`, { rating: true })
+      .then((response) => {
+        getDataFunc();
+        setClicked(true)
+        // console.log("successs rating to true");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  static deactiveRatings = (api,id,getDataFunc) => {
+    console.log('deactivated')
+    axios
+      .put(`${api}/${id}`, { rating: false })
+      .then((response) => {
+        getDataFunc();
+        // console.log("successs rating to false");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
 }
 
 export default Util;

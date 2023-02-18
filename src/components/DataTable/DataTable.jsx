@@ -7,23 +7,26 @@ import next from "../../assets/images/next.svg";
 import Util from "../UtilityFunctions/UtilityFunctions";
 import deleteBtn from "../../assets/images/deleteBtn.svg";
 import restoreBtn from "../../assets/images/restoreBtn.svg";
+import rDisable from "../../assets/images/rDisable.svg";
+import rEnable from "../../assets/images/rEnable.svg";
 
 import UpdateMember from "../UpdateMember/UpdateMember";
-import ReactTooltip from "react-tooltip";
+import axios from "axios";
 
 const DataTable = ({
   columns,
   datum,
   selectedIds,
   setSelectedIds,
-  handleCheckboxChange,
   api,
   api2,
   getDataFunc,
   getDataFunc2,
   delActive,
   resActive,
-  singleOperation,
+  ratings,
+  setRatingUser,
+  ratingUser,
 }) => {
   const myRef = useRef(null);
   const data = datum.sort((a, b) => b.id - a.id);
@@ -38,7 +41,7 @@ const DataTable = ({
               {columns.map((col, idx) => (
                 <th key={idx}>{col.title}</th>
               ))}
-              <th>Actions</th>
+              <th className="fixed-column">Actions</th>
             </tr>
           </thead>
           <tbody className="scroll-body">
@@ -49,12 +52,12 @@ const DataTable = ({
                     <input
                       type="checkbox"
                       checked={selectedIds.includes(row.id)}
-                      // onChange={() => handleCheckboxChange(row.id)}
                       onChange={() =>
                         Util.handleCheckboxChange(
                           selectedIds,
-                          row.id,
-                          setSelectedIds
+                          row,
+                          setSelectedIds,
+                          setRatingUser,
                         )
                       }
                     />
@@ -67,10 +70,21 @@ const DataTable = ({
                             ? row[col.value]
                             : row[col.value].slice(0, 10) + "..."}
                         </>
+                        <></>
                       </td>
                     </>
                   ))}
-                  <td className="action-div">
+                  <td className="action-div fixed-column">
+                    {ratings &&
+                      (row.rating ? (
+                        <span className="icon-desc">
+                          <img src={rEnable} onClick={()=>Util.deactiveRatings(api,row.id,getDataFunc)}/>
+                        </span>
+                      ) : (
+                        <span className="icon-desc">
+                          <img src={rDisable} onClick={() => Util.activeRatings(api,row.id,getDataFunc)}/>
+                        </span>
+                      ))}
                     <span className="editBtn">
                       <UpdateMember
                         editData={row}
@@ -82,7 +96,6 @@ const DataTable = ({
                       <span className="icon-desc">
                         <img
                           src={restoreBtn}
-                          alt=""
                           onClick={() =>
                             Util.restoreSingle(
                               row,
@@ -100,7 +113,6 @@ const DataTable = ({
                       <span className="icon-desc">
                         <img
                           src={deleteBtn}
-                          alt=""
                           onClick={() =>
                             Util.deleteSingle(
                               row,

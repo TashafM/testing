@@ -22,6 +22,7 @@
     top: 0;
     width: 77%;
     background: #f7f7f7;
+    z-index: 1;
   }
 
   .tr-head,
@@ -35,6 +36,8 @@
       font-weight: 500;
       color: #899197;
       padding: 15px;
+      background-color: #f7f7f7;
+      z-index: 1;
     }
   }
   .tr-body {
@@ -42,29 +45,37 @@
       padding: 30px 20px;
       font-size: 18px;
       font-weight: 500;
+      background-color: white;
 
-      input[type='checkbox'] {
+      input[type="checkbox"] {
         background-color: red;
       }
     }
 
-    .editBtn{
+    .editBtn {
       cursor: pointer;
     }
   }
 }
 
-.navigator{
+.navigator {
   display: flex;
 }
 
-.action-div{
+.action-div {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  .icon-desc{
+  .icon-desc {
     margin-right: 20px;
     cursor: pointer;
   }
+}
+
+.fixed-column {
+  position: sticky;
+  right: 0;
+  background-color: #ff1313;
+  box-shadow: -5px 0px 5px -5px rgb(0 0 0 / 20%) !important;
 }

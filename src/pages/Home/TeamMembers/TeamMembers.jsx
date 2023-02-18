@@ -18,6 +18,7 @@ const TeamMembers = () => {
   const [pastMemberData, setPastMemberData] = useState(null);
   const [selectedIds, setSelectedIds] = useState([]);
   const [selectedTab, setSelectedTab] = useState(1);
+  const [ratingUser, setRatingUser] = useState([])
 
   const currMemberApi = `https://63ebc23432a08117239190d4.mockapi.io/elred`;
   const pastMemberApi = "https://63ecd449be929df00cb3017e.mockapi.io/pastUser";
@@ -41,9 +42,14 @@ const TeamMembers = () => {
 
   const setTab = (value) => {
     setSelectedTab(value);
-    setSelectedIds([])
-  }
+    setSelectedIds([]);
+  };
   const colCurrentMembers = [
+    { title: "First Name", value: "firstName" },
+    { title: "Email", value: "email" },
+    { title: "Username", value: "username" },
+    { title: "Contact", value: "phone" },
+    { title: "Employee Code", value: "emp_code" },
     { title: "First Name", value: "firstName" },
     { title: "Email", value: "email" },
     { title: "Username", value: "username" },
@@ -88,7 +94,7 @@ const TeamMembers = () => {
                   />
                 ) : (
                   <>
-                    <RatingBtn />
+                    <RatingBtn selectedIds={selectedIds} ratingUser={ratingUser} api={currMemberApi} getDataFunc={getCurrMembers}/>
                     <DeleteButton
                       selectedIds={selectedIds}
                       data={currMemberData}
@@ -117,7 +123,10 @@ const TeamMembers = () => {
           getDataFunc2={selectedTab == 1 ? getPastMembers : getCurrMembers}
           delActive={selectedTab == 1 ? true : false}
           resActive={selectedTab != 1 ? true : false}
+          ratings={selectedTab == 1 ? true : false}
           setSelectedIds={setSelectedIds}
+          setRatingUser={setRatingUser}
+          ratingUser={ratingUser}
         />
 
         <ScrollBtn />
