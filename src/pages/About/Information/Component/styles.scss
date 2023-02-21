@@ -49,7 +49,7 @@
     .icon-delete {
         padding-right: 10px;
     }
-
+            
     .statement-title {
         font-family: 'Inter';
         font-style: normal;
@@ -60,6 +60,60 @@
     }
 }
 
+   .icon-social {
+       height: 35px;
+       width: 35px;
+   }
+
+   .title-social {
+       font-family: 'Inter';
+       font-style: normal;
+       font-weight: 400;
+       font-size: 12px;
+       line-height: 20px;
+       /* or 167% */
+
+       text-align: center;
+       margin-top: 8px;
+       color: #000000;
+       text-align: center;
+   }
+
+   .cont-card-cont {
+       background: #FFFFFF;
+       border: 1px solid #DADADA;
+       border-radius: 12px;
+       padding: 24px;
+       margin-bottom: 30px;
+       height: 233px;
+   }
+
+   .cont-email-cont {
+       margin-bottom: 44px;
+   }
+
+   .cont-email {
+       font-family: 'Inter';
+       font-style: normal;
+       font-weight: 400;
+       font-size: 20px;
+       line-height: 30px;
+       /* identical to box height, or 150% */
+       margin-left: 10px;
+       letter-spacing: 0.04em;
+
+       color: #000000;
+   }
+
+   .cont-wrapper-title {
+       display: flex;
+       justify-content: space-between;
+       flex-grow: 1;
+   }
+
+   .cont-phone {
+       margin-left: 15px;
+   }
 .container-text-area {
     margin-bottom: 20px;
 }

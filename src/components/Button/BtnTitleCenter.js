@@ -1,10 +1,10 @@
 import React from 'react'
 import './Button.scss'
 
-function BtnTitleCenter({title, onClick = () => {}}) {
+function BtnTitleCenter({title, onClick = () => {},type}) {
     return (
         <div>
-            <button className='btn-title-center' onClick={onClick}>
+            <button type={type} className='btn-title-center' onClick={onClick}>
                 {title}
             </button>
         </div>

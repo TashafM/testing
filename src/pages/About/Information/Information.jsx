@@ -13,6 +13,7 @@ import business from '../../../assets/images/business.png'
 import './Information.scss'
 import CardHead from './Component/CardHead'
 import {useContextProvider} from '../../../context'
+import {socialMedia} from '../data/data'
 
 function Information() {
     return (
@@ -55,6 +56,25 @@ function Information() {
                 <Col className='card-wrapper' xs={4}>
                     <div className='card-cont'>
                         <CardHead title='Social Media & Links' icon={links} />
+
+                        <div className='d-flex justify-content-around'>
+                            {socialMedia.map((item) => {
+                                return (
+                                    <div
+                                        className='d-flex flex-column justify-content-center'
+                                        key={item.title}>
+                                        <img
+                                            className='icon-social'
+                                            src={item.icon}
+                                            alt={`${item.title} icon`}
+                                        />
+                                        <p className='title-social'>
+                                            {item.title}
+                                        </p>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </div>
                 </Col>
                 <Col className='card-wrapper' xs={4}>

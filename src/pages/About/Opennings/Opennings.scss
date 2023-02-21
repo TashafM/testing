@@ -1,0 +1,29 @@
+.card-jobs {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #dadada;
+  padding: 12px;
+  margin-bottom: 28px;
+
+  .title-jobs {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    font-family: "Avenir Next LT Pro";
+    margin-top: 10px;
+    color: #313030;
+    margin-bottom: 10px;
+  }
+  .location {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    /* identical to box height */
+
+    /* elred-text/t3 */
+
+    color: #848484;
+  }
+}
