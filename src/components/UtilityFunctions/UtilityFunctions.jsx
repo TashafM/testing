@@ -6,7 +6,12 @@ class Util {
   }
 
   // This function is used for selecting value with checkbox
-  static handleCheckboxChange(selectedIds, user, setSelectedIds, setRatingUser) {
+  static handleCheckboxChange(
+    selectedIds,
+    user,
+    setSelectedIds,
+    setRatingUser
+  ) {
     let newSelectedIds = [...selectedIds];
     if (newSelectedIds.includes(user.id)) {
       newSelectedIds = newSelectedIds.filter((i) => i !== user.id);
@@ -14,7 +19,7 @@ class Util {
       newSelectedIds.push(user.id);
     }
     setSelectedIds(newSelectedIds);
-    setRatingUser(user)
+    setRatingUser(user);
   }
 
   // This function is used to delete single user data from an api and send it to past members
@@ -27,7 +32,7 @@ class Util {
     setSelectedIds
   ) => {
     const confirm = window.confirm(
-      `Are you sure you want to delete ${user.firstName}?`
+      `Are you sure you want to delete ${user.firstName || user.name}?`
     );
     if (confirm) {
       axios
@@ -94,7 +99,6 @@ class Util {
     setSelectedIds([]);
   };
 
-
   // This function is use to restore the value on a click of single user
   static restoreSingle = (
     user,
@@ -105,7 +109,7 @@ class Util {
     setSelectedIds
   ) => {
     const confirm = window.confirm(
-      `Are you sure you want to restore ${user.firstName}?`
+      `Are you sure you want to restore ${user.firstName || user.name}?`
     );
     if (confirm) {
       axios
@@ -128,7 +132,6 @@ class Util {
         });
     }
   };
-
 
   // This function is used to restore multiple past members/deleted members to current table
   static restorePastMembers = (
@@ -173,12 +176,11 @@ class Util {
   };
 
   static activeRatings = (api, id, getDataFunc, setClicked) => {
-    
     axios
       .put(`${api}/${id}`, { rating: true })
       .then((response) => {
         getDataFunc();
-        setClicked(true)
+        setClicked(true);
         // console.log("successs rating to true");
       })
       .catch((error) => {
@@ -186,8 +188,8 @@ class Util {
       });
   };
 
-  static deactiveRatings = (api,id,getDataFunc) => {
-    console.log('deactivated')
+  static deactiveRatings = (api, id, getDataFunc) => {
+    console.log("deactivated");
     axios
       .put(`${api}/${id}`, { rating: false })
       .then((response) => {
@@ -199,6 +201,11 @@ class Util {
       });
   };
 
+  static handleChange = (event,setData) => {
+    console.log(event.target.value);
+    const { name, value } = event.target;
+    setData((prevInputs) => ({ ...prevInputs, [name]: value }));
+  };
 }
 
 export default Util;

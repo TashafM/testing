@@ -21,6 +21,7 @@ const TeamMembers = () => {
   const [ratingUser, setRatingUser] = useState([])
 
   const currMemberApi = `https://63ebc23432a08117239190d4.mockapi.io/elred`;
+  // const currMemberApi =`https://63f368a0864fb1d60015fd5e.mockapi.io/new`
   const pastMemberApi = "https://63ecd449be929df00cb3017e.mockapi.io/pastUser";
 
   const getCurrMembers = () => {
@@ -74,6 +75,7 @@ const TeamMembers = () => {
           count={currMemberData.length}
           api={selectedTab == 1 ? currMemberApi : pastMemberApi}
           getDataFunc={selectedTab == 1 ? getCurrMembers : getPastMembers}
+          addMember='addMember'
         />
         <div className="members-tab">
           <Tabs setTab={setTab} selectedTab={selectedTab} />
@@ -94,7 +96,7 @@ const TeamMembers = () => {
                   />
                 ) : (
                   <>
-                    <RatingBtn selectedIds={selectedIds} ratingUser={ratingUser} api={currMemberApi} getDataFunc={getCurrMembers}/>
+                    {/* <RatingBtn selectedIds={selectedIds} ratingUser={ratingUser} api={currMemberApi} getDataFunc={getCurrMembers}/> */}
                     <DeleteButton
                       selectedIds={selectedIds}
                       data={currMemberData}

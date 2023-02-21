@@ -57,7 +57,7 @@ const DataTable = ({
                           selectedIds,
                           row,
                           setSelectedIds,
-                          setRatingUser,
+                          setRatingUser
                         )
                       }
                     />
@@ -66,9 +66,18 @@ const DataTable = ({
                     <>
                       <td key={id}>
                         <>
-                          {row[col.value].length <= 10
+                          {row[col.value] == "" ? (
+                            "--"
+                          ) : (
+                            <>
+                              {row[col.value].length <= 10
+                                ? row[col.value]
+                                : row[col.value].slice(0, 10) + "..."}
+                            </>
+                          )}
+                          {/* {row[col.value].length <= 10
                             ? row[col.value]
-                            : row[col.value].slice(0, 10) + "..."}
+                            : row[col.value].slice(0, 10) + "..."} */}
                         </>
                         <></>
                       </td>
@@ -78,11 +87,21 @@ const DataTable = ({
                     {ratings &&
                       (row.rating ? (
                         <span className="icon-desc">
-                          <img src={rEnable} onClick={()=>Util.deactiveRatings(api,row.id,getDataFunc)}/>
+                          <img
+                            src={rEnable}
+                            onClick={() =>
+                              Util.deactiveRatings(api, row.id, getDataFunc)
+                            }
+                          />
                         </span>
                       ) : (
                         <span className="icon-desc">
-                          <img src={rDisable} onClick={() => Util.activeRatings(api,row.id,getDataFunc)}/>
+                          <img
+                            src={rDisable}
+                            onClick={() =>
+                              Util.activeRatings(api, row.id, getDataFunc)
+                            }
+                          />
                         </span>
                       ))}
                     <span className="editBtn">

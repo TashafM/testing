@@ -20,9 +20,15 @@
         display: flex;
         align-items: center;
 
-        .svg-inline--fa {
-          font-size: 20px;
+        .icn {
+          i {
+            color: #bababa;
+          }
         }
+
+        // .svg-inline--fa {
+        //   font-size: 20px;
+        // }
 
         &:hover {
           background-color: #fff2f2;
@@ -42,17 +48,16 @@
         background-color: #fff2f2;
         border-radius: 5px;
 
-        .menu-name{
-            color: black;
+        .menu-name {
+          color:  #be212a;
         }
 
+        .icn {
+          i {
+            color: #be212a;
+          }
+        }
       }
     }
-  }
-}
-
-.active-icn {
-  img {
-    color: #be212a;
   }
 }

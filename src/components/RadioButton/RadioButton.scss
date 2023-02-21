@@ -1,0 +1,36 @@
+.radio-div{
+    margin-bottom: 20px;
+}
+
+.label {
+  font-size: 18px;
+  font-weight: 500;
+  color: #000;
+  margin-bottom: 0.5rem;
+}
+
+.division {
+  display: flex !important;
+  .input-group {
+    align-items: baseline !important;
+    .input-group-text {
+      background: transparent !important;
+      border: none !important;
+
+      .form-check-input:checked {
+        background-color: #be212a;
+        border-color: #be212a;
+      }
+      .form-check-input {
+        border: 2px solid rgba(0, 0, 0, 0.25);
+      }
+    }
+
+    .form-label {
+      font-size: 18px;
+      font-weight: 500;
+      color: #000;
+      margin-bottom: 0.5rem;
+    }
+  }
+}

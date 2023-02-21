@@ -15,49 +15,49 @@ import about from '../../assets/images/about.svg'
 const menuItems = [
     {
         id: 1,
-        icon: dashboard,
+        icon: 'dashboard',
         title: "Dashboard",
         path: '/home/dashboard'
     },
     {
         id: 2,
-        icon: order,
+        icon: 'order',
         title: "Orders",
         path: '/home/orders'
     },
     {
         id: 3,
-        icon: teammembers,
+        icon: 'teammembers',
         title: "Team Members",
         path:'/home/team-members'
     },
     {
         id: 4,
-        icon: partners,
+        icon: 'partners',
         title: "Partners",
         path: '/home/partners'
     },
     {
         id: 5,
-        icon: products,
+        icon: 'products',
         title: "Product Listings",
         path:'/home/product-listings'
     },
     {
         id: 6,
-        icon: awards,
+        icon: 'awards',
         title: "Awards & Honours",
         path: '/home/awards-honours'
     },
     {
         id: 7,
-        icon: about,
+        icon: 'about',
         title: "About Us",
         path: '#'
     },
     {
         id: 8,
-        icon: payment,
+        icon: 'payment',
         title: "Payment Info",
         path: '#'
     },

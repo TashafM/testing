@@ -1,5 +1,5 @@
 /*eslint-disable */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Menus.scss";
 import logo from '../../assets/images/atinks-dashboard.png'
 import menuItems from "./menu.js";
@@ -9,12 +9,16 @@ import { useNavigate } from "react-router-dom";
 
 const Menus = () => {
   const navigate = useNavigate();
-  const [data, setData] = useState(1);
+  const [data, setData] = useState(localStorage.getItem('data') || null);
 
   const goto = (url) => {
     setData(url.id);
     navigate(`${url.path}`);
   };
+
+  useEffect(()=>{
+    localStorage.setItem('data',data)
+  },[data])
 
   return (
     <div className="menus-col">
@@ -32,8 +36,9 @@ const Menus = () => {
                   className={`li ${data == item.id ? "active" : ""}`}
                   onClick={() => goto(item)}
                 >
-                  {/* <FontAwesomeIcon icon={item.icon} className="icn" /> */}
-                  <span className="icn"><img src={item.icon} alt="" /></span>
+                  <span className="icn">
+                    <i className={`icon-${item.icon}`}></i>
+                  </span>
                   <span className="menu-name">{item.title}</span>
                 </div>
               </>

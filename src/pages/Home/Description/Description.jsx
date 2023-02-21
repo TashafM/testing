@@ -1,11 +1,13 @@
 /*eslint-disable */
 import React from "react";
 import upload from "../../../assets/images/upload.svg";
-
 import "./Description.scss";
 import AddMember from "../../../components/AddMember/AddMember";
+import AddPartners from "../Partners/AddPartners/AddPartners";
 
-const Description = ({ icon, title, count, onUserAdded, api, getDataFunc }) => {
+const Description = ({
+  icon, title, count, onUserAdded, api, getDataFunc, addMember, addPartners,
+}) => {
   return (
     <>
       <div className="row row-desc">
@@ -18,7 +20,6 @@ const Description = ({ icon, title, count, onUserAdded, api, getDataFunc }) => {
             <div className="count">{`(${count})`}</div>
           </div>
           <div className="description">
-            {/* {description} */}
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud.
@@ -35,18 +36,16 @@ const Description = ({ icon, title, count, onUserAdded, api, getDataFunc }) => {
               </span>
               <span>Upload a csv file</span>
             </div>
-            <AddMember
-              onUserAdded={onUserAdded}
-              api={api}
-              getDataFunc={getDataFunc}
-            />
-
-            {/* <div className="add-member" onClick={()=>alert('Add member button clicked')}>
-              <span className="icon-desc">
-                <img src={add} alt="" />
-              </span>
-              <span>Add Team Member</span>
-            </div> */}
+            {addMember && (
+              <AddMember
+                onUserAdded={onUserAdded}
+                api={api}
+                getDataFunc={getDataFunc}
+              />
+            )}
+            {addPartners && (
+                <AddPartners api={api} getDataFunc={getDataFunc}/>
+            )}
           </div>
         </div>
       </div>
