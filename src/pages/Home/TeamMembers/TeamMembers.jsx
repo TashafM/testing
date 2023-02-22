@@ -18,15 +18,17 @@ const TeamMembers = () => {
   const [pastMemberData, setPastMemberData] = useState(null);
   const [selectedIds, setSelectedIds] = useState([]);
   const [selectedTab, setSelectedTab] = useState(1);
-  const [ratingUser, setRatingUser] = useState([])
+  const [ratingUser, setRatingUser] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const currMemberApi = `https://63ebc23432a08117239190d4.mockapi.io/elred`;
-  // const currMemberApi =`https://63f368a0864fb1d60015fd5e.mockapi.io/new`
   const pastMemberApi = "https://63ecd449be929df00cb3017e.mockapi.io/pastUser";
 
   const getCurrMembers = () => {
+    setIsLoading(true);
     axios.get(currMemberApi).then((response) => {
       setCurrMemberData(response.data);
+      setIsLoading(false);
     });
   };
 
@@ -75,7 +77,7 @@ const TeamMembers = () => {
           count={currMemberData.length}
           api={selectedTab == 1 ? currMemberApi : pastMemberApi}
           getDataFunc={selectedTab == 1 ? getCurrMembers : getPastMembers}
-          addMember='addMember'
+          addMember="addMember"
         />
         <div className="members-tab">
           <Tabs setTab={setTab} selectedTab={selectedTab} />
@@ -96,7 +98,6 @@ const TeamMembers = () => {
                   />
                 ) : (
                   <>
-                    {/* <RatingBtn selectedIds={selectedIds} ratingUser={ratingUser} api={currMemberApi} getDataFunc={getCurrMembers}/> */}
                     <DeleteButton
                       selectedIds={selectedIds}
                       data={currMemberData}
@@ -114,24 +115,28 @@ const TeamMembers = () => {
             <FilterBtn />
           </div>
         </div>
+        <hr style={{marginTop:'-2%'}}/>
 
-        <DataTable
-          columns={selectedTab == 1 ? colCurrentMembers : colPastMembers}
-          datum={selectedTab == 1 ? currMemberData : pastMemberData}
-          selectedIds={selectedIds}
-          api={selectedTab == 1 ? currMemberApi : pastMemberApi}
-          api2={selectedTab == 1 ? pastMemberApi : currMemberApi}
-          getDataFunc={selectedTab == 1 ? getCurrMembers : getPastMembers}
-          getDataFunc2={selectedTab == 1 ? getPastMembers : getCurrMembers}
-          delActive={selectedTab == 1 ? true : false}
-          resActive={selectedTab != 1 ? true : false}
-          ratings={selectedTab == 1 ? true : false}
-          setSelectedIds={setSelectedIds}
-          setRatingUser={setRatingUser}
-          ratingUser={ratingUser}
-        />
-
-        <ScrollBtn />
+        {isLoading ? (
+          "Loading..."
+        ) : (
+          <DataTable
+            columns={selectedTab == 1 ? colCurrentMembers : colPastMembers}
+            datum={selectedTab == 1 ? currMemberData : pastMemberData}
+            selectedIds={selectedIds}
+            api={selectedTab == 1 ? currMemberApi : pastMemberApi}
+            api2={selectedTab == 1 ? pastMemberApi : currMemberApi}
+            getDataFunc={selectedTab == 1 ? getCurrMembers : getPastMembers}
+            getDataFunc2={selectedTab == 1 ? getPastMembers : getCurrMembers}
+            delActive={selectedTab == 1 ? true : false}
+            resActive={selectedTab != 1 ? true : false}
+            ratings={selectedTab == 1 ? true : false}
+            setSelectedIds={setSelectedIds}
+            setRatingUser={setRatingUser}
+            ratingUser={ratingUser}
+            teamMembers={"teamMembers"}
+          />
+        )}
       </div>
     </>
   );

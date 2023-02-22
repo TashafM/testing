@@ -206,6 +206,11 @@ class Util {
     const { name, value } = event.target;
     setData((prevInputs) => ({ ...prevInputs, [name]: value }));
   };
+
+  static test = () => {
+    console.log('clicked')
+  };
+
 }
 
 export default Util;

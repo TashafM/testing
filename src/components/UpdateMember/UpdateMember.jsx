@@ -24,37 +24,50 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [formValues, setFormValues] = useState({
-    firstName: editData.firstName,
-    lastName: editData.lastName,
-    username: editData.username,
-    email: editData.email,
-    phone: editData.phone,
-    department: editData.department,
-    designation: editData.designation,
-    emp_code: editData.emp_code,
-    location: editData.location,
-  });
+  // const [formValues, setFormValues] = useState({
+  //   firstName: editData.firstName,
+  //   lastName: editData.lastName,
+  //   username: editData.username,
+  //   email: editData.email,
+  //   phone: editData.phone,
+  //   department: editData.department,
+  //   designation: editData.designation,
+  //   emp_code: editData.emp_code,
+  //   location: editData.location,
+  // });
 
   function handleInputChange(event) {
     const { name, value } = event.target;
     setFormValues((prevInputs) => ({ ...prevInputs, [name]: value }));
   }
 
+  // function handleSubmit(event) {
+  //   event.preventDefault();
+  //   axios
+  //     .put(`${api}/${editData.id}`, {
+  //       firstName: formValues.firstName,
+  //       lastName: formValues.lastName,
+  //       username: formValues.username,
+  //       email: formValues.email,
+  //       phone: formValues.phone,
+  //       department: formValues.department,
+  //       designation: formValues.designation,
+  //       emp_code: formValues.emp_code,
+  //       location: formValues.location,
+  //     })
+  //     .then((res) => {
+  //       getDataFunc();
+  //     })
+  //     .catch((err) => console.error(err));
+  //   handleClose();
+  // }
+
+  const [formValues, setFormValues] = useState(editData);
+
   function handleSubmit(event) {
     event.preventDefault();
     axios
-      .put(`${api}/${editData.id}`, {
-        firstName: formValues.firstName,
-        lastName: formValues.lastName,
-        username: formValues.username,
-        email: formValues.email,
-        phone: formValues.phone,
-        department: formValues.department,
-        designation: formValues.designation,
-        emp_code: formValues.emp_code,
-        location: formValues.location,
-      })
+      .put(`${api}/${editData.id}`, formValues)
       .then((res) => {
         getDataFunc();
       })
@@ -64,9 +77,9 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
 
   return (
     <>
-      <div className="add-member" >
+      <div className="add-member">
         <span className="icon-desc">
-          <img src={edit} alt="" onClick={handleShow}/>
+          <img src={edit} alt="" onClick={handleShow} />
         </span>
       </div>
       <Offcanvas

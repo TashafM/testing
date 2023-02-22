@@ -19,6 +19,7 @@
     padding-bottom: 2%;
     margin-left: 1%;
     margin-right: 2%;
+    align-items: baseline;
 
     .team-member-1 {
       display: flex;
@@ -80,7 +81,7 @@
 
 .indicator {
   border: 2px solid #be2028;
-  margin-top: 5%;
+  margin-top: 12%;
   width: 110%;
 }
 
@@ -173,18 +174,17 @@
   }
 }
 
-.scroll-buttons {
-  /* text-align: right; */
-  position: absolute;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  right: 20%;
-  bottom: -32px;
-  justify-content: space-evenly;
-  width: 13%;
+// .scroll-buttons {
+//   position: absolute;
+//   position: absolute;
+//   display: flex;
+//   align-items: center;
+//   right: 20%;
+//   bottom: -32px;
+//   justify-content: space-evenly;
+//   width: 13%;
 
-  img {
-    cursor: pointer;
-  }
-}
+//   img {
+//     cursor: pointer;
+//   }
+// }

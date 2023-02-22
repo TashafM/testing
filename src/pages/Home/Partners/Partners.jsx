@@ -18,10 +18,11 @@ const Partners = () => {
   const [pastMemberData, setPastMemberData] = useState(null);
   const [selectedIds, setSelectedIds] = useState([]);
   const [selectedTab, setSelectedTab] = useState(1);
-  const [ratingUser, setRatingUser] = useState([])
+  const [ratingUser, setRatingUser] = useState([]);
 
   const currPartnersApi = `https://63f3154dfe3b595e2eda1b4e.mockapi.io/partners`;
-  const pastPartnerApi = "https://63f317d9864fb1d6000f18ee.mockapi.io/pastpartners";
+  const pastPartnerApi =
+    "https://63f317d9864fb1d6000f18ee.mockapi.io/pastpartners";
 
   const getCurrPartners = () => {
     axios.get(currPartnersApi).then((response) => {
@@ -79,7 +80,7 @@ const Partners = () => {
           count={currPartnerData.length}
           api={selectedTab == 1 ? currPartnersApi : pastPartnerApi}
           getDataFunc={selectedTab == 1 ? getCurrPartners : getPastPartners}
-          addPartners='addPartners'
+          addPartners="addPartners"
         />
         <div className="members-tab">
           <Tabs setTab={setTab} selectedTab={selectedTab} />
@@ -118,6 +119,7 @@ const Partners = () => {
             <FilterBtn />
           </div>
         </div>
+        <hr style={{ marginTop: "-2%" }} />
 
         <DataTable
           columns={selectedTab == 1 ? colCurrentPartners : colPastPartners}
@@ -133,13 +135,13 @@ const Partners = () => {
           setSelectedIds={setSelectedIds}
           setRatingUser={setRatingUser}
           ratingUser={ratingUser}
+          partners={"partners"}
         />
 
-        <ScrollBtn />
+        {/* <ScrollBtn /> */}
       </div>
     </>
   );
 };
 
 export default Partners;
-

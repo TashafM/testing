@@ -1,29 +1,26 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Offcanvas } from "react-bootstrap";
-import InputField from "../../../../../components/InputField/InputField";
-import RadioButton from "../../../../../components/RadioButton/RadioButton";
-import "./Screen1.scss";
-import add from '../../../../../assets/images/add.svg'
-import Util from "../../../../../components/UtilityFunctions/UtilityFunctions";
-
-const Screen1 = ({api, getDataFunc}) => {
+import edit from "../../../../assets/images/edit.svg";
+import InputField from "../../../../components/InputField/InputField";
+import RadioButton from "../../../../components/RadioButton/RadioButton";
+const UpdatePartners = ({ api, getDataFunc, editData }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const [formData, setFormData] = useState({
-    name: "",
-    telephone1: "",
-    telephone2: "",
-    mobile: "",
-    email: "",
-    website: "",
-    partnerType: "",
-    pan: "",
-    gstin: "",
-    arn: "",
+    name: editData.name,
+    telephone1: editData.telephone1,
+    telephone2: editData.telephone2,
+    mobile: editData.mobile,
+    email: editData.email,
+    website: editData.website,
+    partnerType: editData.partnerType,
+    pan: editData.pan,
+    gstin: editData.gstin,
+    arn: editData.arn,
   });
 
   function handleInputChange(event) {
@@ -34,31 +31,52 @@ const Screen1 = ({api, getDataFunc}) => {
     }));
   }
 
-  const submitData = (e) => {
-    e.preventDefault();
+  // const submitData = (e) => {
+  //   e.preventDefault();
+  //   axios
+  //     .post(api, formData)
+  //     .then((res) => {
+  //       getDataFunc()
+  //     });
+  //     handleClose()
+  // };
+
+  function submitData(event) {
+    event.preventDefault();
     axios
-      .post(api, formData)
+      .put(`${api}/${editData.id}`, {
+        name: formData.name,
+        telephone1: formData.telephone1,
+        telephone2: formData.telephone2,
+        mobile: formData.mobile,
+        email: formData.email,
+        website: formData.website,
+        partnerType: formData.partnerType,
+        pan: formData.pan,
+        gstin: formData.gstin,
+        arn: formData.arn,
+      })
       .then((res) => {
-        getDataFunc()
-      });
-      handleClose()
-  };
+        getDataFunc();
+      })
+      .catch((err) => console.error(err));
+    handleClose();
+  }
 
   return (
     // <Form onSubmit={addPartnersFunc}>
     <>
       <div className="add-member" onClick={handleShow}>
         <span className="icon-desc">
-          <img src={add} alt="" />
+          <img src={edit} alt="" />
         </span>
-        <span>Add A Partner</span>
       </div>
 
       <Offcanvas show={show} onHide={handleClose} placement="end">
         <div className="content-div">
           <Offcanvas.Header closeButton>
             <Offcanvas.Title>
-              <div className="title">Add A Partner</div>
+              <div className="title">Edit A Partner</div>
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
@@ -153,4 +171,4 @@ const Screen1 = ({api, getDataFunc}) => {
   );
 };
 
-export default Screen1;
+export default UpdatePartners;

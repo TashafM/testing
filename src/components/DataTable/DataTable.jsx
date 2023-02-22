@@ -1,6 +1,6 @@
 /*eslint-disable */
 import React, { useEffect, useRef, useState } from "react";
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import "./DataTable.scss";
 import previous from "../../assets/images/previous.svg";
 import next from "../../assets/images/next.svg";
@@ -12,6 +12,8 @@ import rEnable from "../../assets/images/rEnable.svg";
 
 import UpdateMember from "../UpdateMember/UpdateMember";
 import axios from "axios";
+import UpdatePartners from "../../pages/Home/Partners/UpdatePartners/UpdatePartners";
+import ScrollBtn from "../ScrollBtn/ScrollBtn";
 
 const DataTable = ({
   columns,
@@ -27,12 +29,29 @@ const DataTable = ({
   ratings,
   setRatingUser,
   ratingUser,
+  teamMembers,
+  partners,
 }) => {
   const myRef = useRef(null);
+  const [scrollX, setScrollX] = useState(0);
   const data = datum.sort((a, b) => b.id - a.id);
 
+  const handleScrollLeft = () => {
+    const table = myRef.current;
+    table.scrollLeft -= 100
+    setScrollX(table.scrollLeft)
+    console.log('left')
+  }
+
+  const handleScrollRight = () => {
+    const table = myRef.current;
+    table.scrollLeft += 100
+    setScrollX(table.scrollLeft)
+    console.log('right')
+  }
+
   return (
-    <>
+    <div className="dataTable">
       <div className="table-container" ref={myRef}>
         <Table hover>
           <thead className="table-head">
@@ -75,9 +94,6 @@ const DataTable = ({
                                 : row[col.value].slice(0, 10) + "..."}
                             </>
                           )}
-                          {/* {row[col.value].length <= 10
-                            ? row[col.value]
-                            : row[col.value].slice(0, 10) + "..."} */}
                         </>
                         <></>
                       </td>
@@ -105,11 +121,20 @@ const DataTable = ({
                         </span>
                       ))}
                     <span className="editBtn">
-                      <UpdateMember
-                        editData={row}
-                        api={api}
-                        getDataFunc={getDataFunc}
-                      />
+                      {teamMembers && (
+                        <UpdateMember
+                          editData={row}
+                          api={api}
+                          getDataFunc={getDataFunc}
+                        />
+                      )}
+                      {partners && (
+                        <UpdatePartners
+                          editData={row}
+                          api={api}
+                          getDataFunc={getDataFunc}
+                        />
+                      )}
                     </span>
                     {resActive && (
                       <span className="icon-desc">
@@ -152,7 +177,8 @@ const DataTable = ({
           </tbody>
         </Table>
       </div>
-    </>
+      <ScrollBtn myRef={myRef} setScrollX={setScrollX}/>
+    </div>
   );
 };
 

@@ -5,6 +5,7 @@ import "./Home.scss";
 import Login from "../Login/Login";
 import NavbarTop from "../../components/NavbarTop/NavbarTop";
 import Menus from "../../components/Menus/Menus";
+import NeedHelp from "../../components/NeedHelp/NeedHelp";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const Home = () => {
         <div className="col-md-2 menu-list">
           <div className="sub-menu-list">
             <Menus/>
+            <NeedHelp/>
           </div>
         </div>
         <div className="col-md-10 content-area">

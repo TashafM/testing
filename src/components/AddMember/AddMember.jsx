@@ -25,30 +25,10 @@ const AddMember = ({ api, getDataFunc }) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  //   const header = {}
-
-  // const [formValues, setFormValues] = useState({
-  //   firstName: "",
-  //   lastName: "",
-  //   username: "",
-  //   email: "",
-  //   phone: "",
-  //   department: "",
-  //   designation: "",
-  //   emp_code: "",
-  //   location: "",
-  // });
-
+  
   const [formValues, setFormValues] = useState([]);
 
-  // function handleInputChange(event) {
-  //   console.log(event.target.value)
-  //   const { name, value } = event.target;
-  //   setFormValues((prevInputs) => ({ ...prevInputs, [name]: value }));
-  // }
-
   function handleSubmit(event) {
-    console.log("tasfhfaf");
     event.preventDefault();
     axios.post(api, formValues).then((res) => {
       getDataFunc();
@@ -96,7 +76,7 @@ const AddMember = ({ api, getDataFunc }) => {
                 <Form.Control
                   type="text"
                   name="lastName"
-                  // onChange={handleInputChange}
+                  onChange={() => Util.handleChange(event, setFormValues)}
                 />
               </FormGroup>
               <FormGroup className="input-div">
@@ -104,7 +84,7 @@ const AddMember = ({ api, getDataFunc }) => {
                 <Form.Control
                   type="text"
                   name="username"
-                  // onChange={handleInputChange}
+                  onChange={() => Util.handleChange(event, setFormValues)}
                   // required
                 />
               </FormGroup>
@@ -113,7 +93,7 @@ const AddMember = ({ api, getDataFunc }) => {
                 <Form.Control
                   type="email"
                   name="email"
-                  // onChange={handleInputChange}
+                  onChange={() => Util.handleChange(event, setFormValues)}
                   // required
                 />
               </FormGroup>
@@ -122,7 +102,7 @@ const AddMember = ({ api, getDataFunc }) => {
                 <Form.Control
                   type="text"
                   name="phone"
-                  // onChange={handleInputChange}
+                  onChange={() => Util.handleChange(event, setFormValues)}
                   // required
                 />
               </FormGroup>
@@ -131,7 +111,7 @@ const AddMember = ({ api, getDataFunc }) => {
                 <Form.Control
                   type="text"
                   name="department"
-                  // onChange={handleInputChange}
+                  onChange={() => Util.handleChange(event, setFormValues)}
                 />
               </FormGroup>
               <FormGroup className="input-div">
@@ -139,7 +119,7 @@ const AddMember = ({ api, getDataFunc }) => {
                 <Form.Control
                   type="text"
                   name="designation"
-                  // onChange={handleInputChange}
+                  onChange={() => Util.handleChange(event, setFormValues)}
                 />
               </FormGroup>
               <FormGroup className="input-div">
@@ -147,7 +127,7 @@ const AddMember = ({ api, getDataFunc }) => {
                 <Form.Control
                   type="text"
                   name="emp_code"
-                  // onChange={handleInputChange}
+                  onChange={() => Util.handleChange(event, setFormValues)}
                   // required
                 />
               </FormGroup>
@@ -156,7 +136,7 @@ const AddMember = ({ api, getDataFunc }) => {
                 <Form.Control
                   type="text"
                   name="location"
-                  // onChange={handleInputChange}
+                  onChange={() => Util.handleChange(event, setFormValues)}
                 />
               </FormGroup>
               <DatePickerComp
