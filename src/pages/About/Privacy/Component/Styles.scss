@@ -1,0 +1,56 @@
+.privacy-title {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 23px;
+  line-height: 28px;
+  margin-bottom: 35px;
+  color: #000000;
+}
+
+.privacy-title {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+
+  color: #000000;
+}
+
+.privacy-desc {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: #898a8d;
+}
+
+.table-of-content {
+  border: 1px solid #dadada;
+  padding: 16px;
+
+  .title {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 21px;
+    color: #000000;
+    padding-bottom: 30px;
+  }
+
+  .content {
+    margin-bottom: 24px;
+
+    a {
+      text-decoration: none;
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 19px;
+      color: #898a8d;
+    }
+  }
+}

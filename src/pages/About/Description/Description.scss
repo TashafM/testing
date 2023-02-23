@@ -1,0 +1,78 @@
+.about-wrapper {
+
+    padding-inline: 50px;
+
+    .title {
+        font-family: Inter;
+        font-weight: 600;
+        font-size: 32px;
+    }
+
+    .row-cont {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .comp-logo {
+        height: 90px;
+        width: 90px;
+    }
+
+    .comp-title {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 31px;
+        line-height: 38px;
+        color: #000000;
+        margin-bottom: 10px;
+    }
+
+    .comp-subtitle {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 23px;
+        line-height: 28px;
+        /* identical to box height */
+        color: rgba(0, 0, 0, 0.5);
+    }
+
+    .title-cont {
+        padding-left: 20px;
+    }
+
+    .verified-icon {
+        height: 26px;
+        width: 26px;
+        margin-right: 11px;
+        margin-left: 41px;
+    }
+
+    .verified-title {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        text-decoration-line: underline;
+        color: #4793F4;
+    }
+
+    .discription-cont {
+        display: flex;
+        padding-bottom: 59px;
+        margin-top: 20px;
+    }
+
+    .comp-discription {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 36px;
+        color: rgba(0, 0, 0, 0.6);
+        max-width: 60%;
+    }
+
+
+}
