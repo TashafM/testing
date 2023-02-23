@@ -22,6 +22,8 @@ import Login from "../pages/Login/Login";
 import Applications from "../pages/About/Jobs/Component/Applications";
 import JobDescriptions from "../pages/About/Jobs/Component/JobDescriptions";
 import CreateJobs from "../pages/About/Jobs/CreateJobs";
+import PartnerAbout from "../pages/Home/Partners/PartnerDetails/PartnerAbout/PartnerAbout";
+import PartnerAddress from "../pages/Home/Partners/PartnerDetails/PartnerAddress/PartnerAddress";
 // import About from "../pages/About/";
 // import Contact from "./Contact";
 
@@ -31,7 +33,13 @@ const Routing = () => (
       <Route path="/home/" element={<Home />}>
         <Route path="team-members" element={<TeamMembers />} />
         <Route path="dashboard" element={<Dashboard />} />
-        <Route path="partners/:id/" element={<PartnerDetails />} />
+        <Route path="partners/detail/" element={<PartnerDetails />}>
+          <Route path="about" element={<PartnerAbout />} />
+          <Route path="address" element={<PartnerAddress />} />
+          <Route path="payment-details" element={<div>Payment details</div>} />
+          <Route path="catalog" element={<div>Catalog</div>} />
+          <Route path="past-orders" element={<div>Past Orders</div>} />
+        </Route>
         <Route path="partners" element={<Partners />} />
         <Route path="orders" element={<Orders />} />
         <Route path="product-listings" element={<ProductListings />} />

@@ -1,0 +1,30 @@
+.partner-about{
+    overflow-y: auto;
+    .title{
+        font-size: 26px;
+        font-weight: 500;
+        line-height: 32px;
+    }
+
+   
+    .item-div{
+        // margin-right: 25px;
+        .item-title{
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 30px;
+            color: #878787;
+        }
+    
+        .item-desc{
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 30px;
+        }
+       }
+   
+}
+
+.row-inside{
+    margin-right: 0 !important;
+}

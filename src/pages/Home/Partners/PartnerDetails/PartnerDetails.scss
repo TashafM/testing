@@ -44,7 +44,7 @@
 
 .partner-tabs-div {
   display: flex;
-  margin-top: 45px;
+  margin: 42px 0;
   border-bottom: 1.4px solid #e4e4e4;
   .partner-tab {
     margin-right: 60px;
@@ -58,4 +58,15 @@
       border-bottom: 2px solid #be212a;
     }
   }
+}
+
+.outlet-div{
+  overflow: auto;
+  height: 600px;
+}
+
+@media only screen and (max-width: 1600px){
+.outlet-div{
+  height: 300px !important;
+}
 }

@@ -223,3 +223,36 @@ export const socialMedia = [
     icon: website,
   },
 ];
+
+export const PartnerTabs = [
+  {
+    id: 1,
+    title: "About",
+    index: 1,
+    link: "#"
+  },
+  {
+    id: 2,
+    title: "Address Details",
+    index: 2,
+    link: "#"
+  },
+  {
+    id: 3,
+    title: "Payment Details",
+    index: 3,
+    link: "#"
+  },
+  {
+    id: 4,
+    title: "Catalog",
+    index: 4,
+    link: "#"
+  },
+  {
+    id: 5,
+    title: "Past Orders",
+    index: 5,
+    link: "#"
+  },
+]
