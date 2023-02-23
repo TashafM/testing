@@ -14,6 +14,7 @@ import UpdateMember from "../UpdateMember/UpdateMember";
 import axios from "axios";
 import UpdatePartners from "../../pages/Home/Partners/UpdatePartners/UpdatePartners";
 import ScrollBtn from "../ScrollBtn/ScrollBtn";
+import { useNavigate } from "react-router-dom";
 
 const DataTable = ({
   columns,
@@ -35,20 +36,11 @@ const DataTable = ({
   const myRef = useRef(null);
   const [scrollX, setScrollX] = useState(0);
   const data = datum.sort((a, b) => b.id - a.id);
+  const navigate = useNavigate();
 
-  const handleScrollLeft = () => {
-    const table = myRef.current;
-    table.scrollLeft -= 100
-    setScrollX(table.scrollLeft)
-    console.log('left')
-  }
-
-  const handleScrollRight = () => {
-    const table = myRef.current;
-    table.scrollLeft += 100
-    setScrollX(table.scrollLeft)
-    console.log('right')
-  }
+  const gotoNew = (val) => {
+    navigate(`/home/partners/${val.id}`, { state: { data: val } });
+  };
 
   return (
     <div className="dataTable">
@@ -66,7 +58,11 @@ const DataTable = ({
           <tbody className="scroll-body">
             {data.map((row, id) => (
               <>
-                <tr key={row.id} className="tr-body">
+                <tr
+                  key={row.id}
+                  className="tr-body"
+                  onClick={() => gotoNew(row)}
+                >
                   <td>
                     <input
                       type="checkbox"
@@ -105,18 +101,20 @@ const DataTable = ({
                         <span className="icon-desc">
                           <img
                             src={rEnable}
-                            onClick={() =>
-                              Util.deactiveRatings(api, row.id, getDataFunc)
-                            }
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              Util.deactiveRatings(api, row.id, getDataFunc);
+                            }}
                           />
                         </span>
                       ) : (
                         <span className="icon-desc">
                           <img
                             src={rDisable}
-                            onClick={() =>
-                              Util.activeRatings(api, row.id, getDataFunc)
-                            }
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              Util.activeRatings(api, row.id, getDataFunc);
+                            }}
                           />
                         </span>
                       ))}
@@ -177,7 +175,7 @@ const DataTable = ({
           </tbody>
         </Table>
       </div>
-      <ScrollBtn myRef={myRef} setScrollX={setScrollX}/>
+      <ScrollBtn myRef={myRef} setScrollX={setScrollX} />
     </div>
   );
 };

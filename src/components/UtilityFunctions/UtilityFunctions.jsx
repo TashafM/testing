@@ -189,7 +189,6 @@ class Util {
   };
 
   static deactiveRatings = (api, id, getDataFunc) => {
-    console.log("deactivated");
     axios
       .put(`${api}/${id}`, { rating: false })
       .then((response) => {
@@ -201,16 +200,15 @@ class Util {
       });
   };
 
-  static handleChange = (event,setData) => {
+  static handleChange = (event, setData) => {
     console.log(event.target.value);
     const { name, value } = event.target;
     setData((prevInputs) => ({ ...prevInputs, [name]: value }));
   };
 
   static test = () => {
-    console.log('clicked')
+    console.log("clicked");
   };
-
 }
 
 export default Util;
