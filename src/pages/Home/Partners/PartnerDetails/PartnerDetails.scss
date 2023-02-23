@@ -62,11 +62,17 @@
 
 .outlet-div{
   overflow: auto;
-  height: 600px;
+  height: 500px;
 }
 
-@media only screen and (max-width: 1600px){
+@media only screen and (max-width: 1550px){
 .outlet-div{
   height: 300px !important;
 }
 }
+
+@media only screen and (max-width: 1200px){
+  .outlet-div{
+    height: 250px !important;
+  }
+  }
