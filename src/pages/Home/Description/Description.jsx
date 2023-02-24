@@ -4,9 +4,19 @@ import upload from "../../../assets/images/upload.svg";
 import "./Description.scss";
 import AddMember from "../../../components/AddMember/AddMember";
 import AddPartners from "../Partners/AddPartners/AddPartners";
+import SearchBar from "../../../components/SearchBar/SearchBar";
+import FilterBtn from "../../../components/FilterButton/FilterButton";
 
 const Description = ({
-  icon, title, count, onUserAdded, api, getDataFunc, addMember, addPartners,
+  icon,
+  title,
+  count,
+  onUserAdded,
+  api,
+  getDataFunc,
+  addMember,
+  addPartners,
+  noButtons,
 }) => {
   return (
     <>
@@ -25,29 +35,39 @@ const Description = ({
             ad minim veniam, quis nostrud.
           </div>
         </div>
-        <div className="col-4 btn-col">
-          <div className="buttons-div">
-            <div
-              className="upload-btn"
-              onClick={() => alert("Upload button clicked")}
-            >
-              <span className="icon-desc">
-                <img src={upload} alt="" />
-              </span>
-              <span>Upload a csv file</span>
+        {noButtons ? (
+          <>
+            <div className="col-4 no-btn-col">
+              <div>
+                <SearchBar />
+              </div>
+              <div>
+                <FilterBtn />
+              </div>
             </div>
-            {addMember && (
-              <AddMember
-                onUserAdded={onUserAdded}
-                api={api}
-                getDataFunc={getDataFunc}
-              />
-            )}
-            {addPartners && (
-                <AddPartners api={api} getDataFunc={getDataFunc}/>
-            )}
+          </>
+        ) : (
+          <div className="col-4 btn-col">
+            <div className="buttons-div">
+              <div className="upload-btn">
+                <span className="icon-desc">
+                  <img src={upload} alt="" />
+                </span>
+                <span>Upload a csv file</span>
+              </div>
+              {addMember && (
+                <AddMember
+                  onUserAdded={onUserAdded}
+                  api={api}
+                  getDataFunc={getDataFunc}
+                />
+              )}
+              {addPartners && (
+                <AddPartners api={api} getDataFunc={getDataFunc} />
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

@@ -174,3 +174,61 @@ export const partnerPaymentHouseBank = [
         value: 'name',
     }, 
 ]
+
+export const pastOrderData = [
+    {
+        id: 1,
+        orders: 'Chrome, Cobalt, Hexa, Chrome, Cobalt...',
+        date: '20/09/2021',
+        payment: 'Paid',
+        status: 'Delivered',
+        amount: '$1600',
+        invoice: 'Invoice_001_12_06'
+    },
+    {
+        id: 2,
+        orders: 'Chrome, Cobalt, Hexa, Chrome, Cobalt...',
+        date: '20/09/2021',
+        payment: 'Paid',
+        status: 'Delivered',
+        amount: '$1600',
+        invoice: 'Invoice_001_12_06'
+    },
+    {
+        id: 31,
+        orders: 'Chrome, Cobalt, Hexa, Chrome, Cobalt...',
+        date: '20/09/2021',
+        payment: 'Paid',
+        status: 'Delivered',
+        amount: '$1600',
+        invoice: 'Invoice_001_12_06'
+    },
+    {
+        id: 4,
+        orders: 'Chrome, Cobalt, Hexa, Chrome, Cobalt...',
+        date: '20/09/2021',
+        payment: 'Paid',
+        status: 'Delivered',
+        amount: '$1600',
+        invoice: 'Invoice_001_12_06'
+    },
+    {
+        id: 5,
+        orders: 'Chrome, Cobalt, Hexa, Chrome, Cobalt...',
+        date: '20/09/2021',
+        payment: 'Paid',
+        status: 'Delivered',
+        amount: '$1600',
+        invoice: 'Invoice_001_12_06',
+    },
+]
+
+export const pastOrderColumn = [
+    {title: 'Orders', value: 'orders'},
+    {title: 'Date', value: 'date'},
+    {title: 'Payment', value: 'payment'},
+    {title: 'Status', value: 'status'},
+    {title: 'Amount', value: 'amount'},
+    {title: 'Invoice', value: 'invoice'},
+
+]

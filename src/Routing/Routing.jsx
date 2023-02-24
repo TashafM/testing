@@ -26,6 +26,7 @@ import PartnerAbout from "../pages/Home/Partners/PartnerDetails/PartnerAbout/Par
 import PartnerAddress from "../pages/Home/Partners/PartnerDetails/PartnerAddress/PartnerAddress";
 import PartnerPaymentDetails from "../pages/Home/Partners/PartnerDetails/PartnerPaymentDetails/PartnerPaymentDetails";
 import PartnerCatalog from "../pages/Home/Partners/PartnerDetails/PartnerCatalog/PartnerCatalog";
+import PastOrder from "../pages/Home/Partners/PartnerDetails/PastOrder/PastOrder";
 // import About from "../pages/About/";
 // import Contact from "./Contact";
 
@@ -40,7 +41,7 @@ const Routing = () => (
           <Route path="address" element={<PartnerAddress />} />
           <Route path="payment-details" element={<PartnerPaymentDetails />} />
           <Route path="catalog" element={<PartnerCatalog />} />
-          <Route path="past-orders" element={<div>Past Orders</div>} />
+          <Route path="past-orders" element={<PastOrder/>} />
         </Route>
         <Route path="partners" element={<Partners />} />
         <Route path="orders" element={<Orders />} />
