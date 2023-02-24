@@ -48,10 +48,10 @@
         font-size: 18px;
         font-weight: 500;
         background-color: white;
+        min-width: 200px;
+        width: 100%;
+        cursor: pointer;
 
-        input[type="checkbox"] {
-          background-color: red;
-        }
       }
 
       .editBtn {

@@ -38,8 +38,8 @@ const Routing = () => (
         <Route path="partners/detail/" element={<PartnerDetails />}>
           <Route path="about" element={<PartnerAbout />} />
           <Route path="address" element={<PartnerAddress />} />
-          <Route path="payment-details" element={<PartnerPaymentDetails/>} />
-          <Route path="catalog" element={<PartnerCatalog/>} />
+          <Route path="payment-details" element={<PartnerPaymentDetails />} />
+          <Route path="catalog" element={<PartnerCatalog />} />
           <Route path="past-orders" element={<div>Past Orders</div>} />
         </Route>
         <Route path="partners" element={<Partners />} />

@@ -63,6 +63,15 @@
 .outlet-div{
   overflow: auto;
   height: 500px;
+
+  // &::-webkit-scrollbar {
+  //   width: 5px;
+  // }
+  
+  // /* Thins the horizontal scrollbar */
+  // ::-webkit-scrollbar-horizontal {
+  //   height: 5px;
+  // }
 }
 
 @media only screen and (max-width: 1550px){
