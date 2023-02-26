@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import UnderLineTabs from "../../../components/Tabs/UnderLineTabs";
 import tag from "../../../assets/images/tag.svg";
@@ -6,13 +6,20 @@ import deleteIcon from "../../../assets/images/delete.png";
 import { CreateJobsTabs } from "../data/data";
 import "./CreateJobs.scss";
 import edit from "../../../assets/images/edit-icon.png";
+import ModalComponent from "../../../components/Modal";
+import EditFAQ from "./Component/EditJobs";
 
 function CreateJobs() {
+  const [showModal, setShowModal] = useState("");
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
   return (
     <div>
       <div className="d-flex justify-content-between align-items-center mb-5">
         <div className="d-flex justify-content-between align-items-center">
-          <div className="tag-icon w-100 h-100  d-flex justify-content-between align-items-center">
+          <div className="tag-icon w-100 h-100">
             <img className="tag-icon-img " src={tag} alt="" />
           </div>
 
@@ -25,7 +32,7 @@ function CreateJobs() {
         <div className=" d-flex justify-content-around ">
           <div
             className="upload-btn-job job-btn me-5"
-            onClick={() => alert("edit post button clicked")}
+            onClick={() => handleOpenModal()}
           >
             <span className="me-3 ">
               <img className="job-btn-icon" src={edit} alt="" />
@@ -43,7 +50,15 @@ function CreateJobs() {
           </div>
         </div>
       </div>
-
+      {showModal && (
+        <ModalComponent
+          title="Posted on : 20/01/2023"
+          show={showModal}
+          close={() => setShowModal(false)}
+        >
+          <EditFAQ close={() => setShowModal(false)} />
+        </ModalComponent>
+      )}
       <UnderLineTabs tabs={CreateJobsTabs} />
       <Outlet />
     </div>

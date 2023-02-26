@@ -1,119 +1,117 @@
 .drawer-title {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    color: #899197;
-    margin-bottom: 40px;
-
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: #899197;
+  margin-bottom: 40px;
 }
 
 .input-wrapper {
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 .card-slots-container {
-    display: flex;
-    background: #FFFFFF;
-    border: 1px solid #DADADA;
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 15px;
+  display: flex;
+  background: #ffffff;
+  border: 1px solid #dadada;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 15px;
 
-    .card-day {
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 18px;
-        line-height: 22px;
-        color: #000000;
-    }
+  .card-day {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+  }
 
-    .title-active {
-        margin-right: 25px;
-    }
-
+  .title-active {
+    margin-right: 25px;
+  }
 }
 
 .card-statement-cont {
-    border: 1px solid #DADADA;
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 33px;
+  border: 1px solid #dadada;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 33px;
 
-    .statement-head {
-        padding-bottom: 16px;
-    }
+  .statement-head {
+    padding-bottom: 16px;
+  }
 
-    .icon-delete {
-        padding-right: 10px;
-    }
-            
-    .statement-title {
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 20px;
-        line-height: 29px;
-        color: #000000;
-    }
+  .icon-delete {
+    padding-right: 10px;
+  }
+
+  .statement-title {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 29px;
+    color: #000000;
+  }
 }
 
-   .icon-social {
-       height: 35px;
-       width: 35px;
-   }
+.icon-social {
+  height: 35px;
+  width: 35px;
+}
 
-   .title-social {
-       font-family: 'Inter';
-       font-style: normal;
-       font-weight: 400;
-       font-size: 12px;
-       line-height: 20px;
-       /* or 167% */
+.title-social {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  /* or 167% */
 
-       text-align: center;
-       margin-top: 8px;
-       color: #000000;
-       text-align: center;
-   }
+  text-align: center;
+  margin-top: 8px;
+  color: #000000;
+  text-align: center;
+}
 
-   .cont-card-cont {
-       background: #FFFFFF;
-       border: 1px solid #DADADA;
-       border-radius: 12px;
-       padding: 24px;
-       margin-bottom: 30px;
-       height: 233px;
-   }
+.cont-card-cont {
+  background: #ffffff;
+  border: 1px solid #dadada;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 30px;
+  height: 233px;
+}
 
-   .cont-email-cont {
-       margin-bottom: 44px;
-   }
+.cont-email-cont {
+  margin-bottom: 44px;
+}
 
-   .cont-email {
-       font-family: 'Inter';
-       font-style: normal;
-       font-weight: 400;
-       font-size: 20px;
-       line-height: 30px;
-       /* identical to box height, or 150% */
-       margin-left: 10px;
-       letter-spacing: 0.04em;
+.cont-email {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  /* identical to box height, or 150% */
+  margin-left: 10px;
+  letter-spacing: 0.04em;
 
-       color: #000000;
-   }
+  color: #000000;
+}
 
-   .cont-wrapper-title {
-       display: flex;
-       justify-content: space-between;
-       flex-grow: 1;
-   }
+.cont-wrapper-title {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+}
 
-   .cont-phone {
-       margin-left: 15px;
-   }
+.cont-phone {
+  margin-left: 15px;
+}
 .container-text-area {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
