@@ -11,9 +11,10 @@ const PlainTable = ({
 //   const data = datum.sort((a, b) => b.id - a.id);  -----------> for sorting we can use this
   const navigate = useNavigate();
 
-//   const gotoNew = (val) => {
-//     navigate(`/home/partners/detail/about`, { state: { data: val } });
-//   };
+  const orderDetails = () => {
+    // navigate(`/home/order/details`, { state: { data: val } });
+    navigate(`/home/order/details`);
+  };
 
   const dummy = (a) => console.log(a);
 
@@ -34,6 +35,7 @@ const PlainTable = ({
                 <tr
                   key={row.id}
                   className="tr-body"
+                  onClick={orderDetails}
                 >
                   {columns.map((col, id) => (
                     <>

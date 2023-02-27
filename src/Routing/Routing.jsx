@@ -27,6 +27,7 @@ import PartnerAddress from "../pages/Home/Partners/PartnerDetails/PartnerAddress
 import PartnerPaymentDetails from "../pages/Home/Partners/PartnerDetails/PartnerPaymentDetails/PartnerPaymentDetails";
 import PartnerCatalog from "../pages/Home/Partners/PartnerDetails/PartnerCatalog/PartnerCatalog";
 import PastOrder from "../pages/Home/Partners/PartnerDetails/PastOrder/PastOrder";
+import OrderDetails from "../pages/Home/Orders/components/OrderDetails/OrderDetails";
 // import About from "../pages/About/";
 // import Contact from "./Contact";
 
@@ -44,7 +45,8 @@ const Routing = () => (
           <Route path="past-orders" element={<PastOrder/>} />
         </Route>
         <Route path="partners" element={<Partners />} />
-        <Route path="orders" element={<Orders />} />
+        <Route path="orders" element={<Orders />}/>
+        <Route path='order/details' element={<OrderDetails/>}/> 
         <Route path="product-listings" element={<ProductListings />} />
         <Route path="awards-honours" element={<AwardsHonours />} />
         <Route path="about" element={<About />}>
