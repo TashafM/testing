@@ -7,11 +7,11 @@ import users from "../../../assets/images/users.svg";
 import DeleteButton from "../../../components/DeleteButton/DeleteButton";
 import SearchBar from "../../../components/SearchBar/SearchBar";
 import FilterBtn from "./FilterBtn/FilterBtn";
-import ScrollBtn from "../../../components/ScrollBtn/ScrollBtn";
 import axios from "axios";
 import RatingBtn from "../../../components/RatingBtn/RatingBtn";
 import RestoreBtn from "../../../components/RestoreBtn/RestoreBtn";
 import Tabs from "./Tabs/Tabs";
+import { colCurrentMembers, colPastMembers } from "./data/data";
 
 const TeamMembers = () => {
   const [currMemberData, setCurrMemberData] = useState([]);
@@ -20,7 +20,6 @@ const TeamMembers = () => {
   const [selectedTab, setSelectedTab] = useState(1);
   const [ratingUser, setRatingUser] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
   const currMemberApi = `https://63ebc23432a08117239190d4.mockapi.io/elred`;
   const pastMemberApi = "https://63ecd449be929df00cb3017e.mockapi.io/pastUser";
 
@@ -47,26 +46,6 @@ const TeamMembers = () => {
     setSelectedTab(value);
     setSelectedIds([]);
   };
-  const colCurrentMembers = [
-    { title: "First Name", value: "firstName" },
-    { title: "Email", value: "email" },
-    { title: "Username", value: "username" },
-    { title: "Contact", value: "phone" },
-    { title: "Employee Code", value: "emp_code" },
-    { title: "First Name", value: "firstName" },
-    { title: "Email", value: "email" },
-    { title: "Username", value: "username" },
-    { title: "Contact", value: "phone" },
-    { title: "Employee Code", value: "emp_code" },
-  ];
-
-  const colPastMembers = [
-    { title: "First Name", value: "firstName" },
-    { title: "Email", value: "email" },
-    { title: "Username", value: "username" },
-    { title: "Contact", value: "phone" },
-    { title: "Employee Code", value: "emp_code" },
-  ];
 
   return (
     <>

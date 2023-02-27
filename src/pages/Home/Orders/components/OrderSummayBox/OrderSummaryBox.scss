@@ -1,0 +1,57 @@
+.order-summary-box {
+  border: 1px solid #a2a2a2;
+  border-radius: 6px;
+  margin: 0 3%;
+  padding: 2%;
+  display: flex;
+
+  .title-text {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    margin-bottom: 10px;
+  }
+
+  .summary-text {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .order-summary {
+    width: 100%;
+    // background-color: yellow;
+    margin-left: 10%;
+
+    .items-total,
+    .taxes {
+      display: flex;
+      justify-content: space-between;
+
+      .summary-heading,
+      .summary-amount {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+        color: rgba(0, 0, 0, 0.5);
+        margin-bottom: 10px;
+      }
+    }
+
+    .horizontal-line{
+        margin: 10px 0 !important;
+    }
+
+    .amount-total {
+      display: flex;
+      justify-content: space-between;
+
+      .total-title, .total-amount{
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+      }
+    }
+  }
+}

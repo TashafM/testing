@@ -65,7 +65,7 @@ const DataTable = ({
                   className="tr-body"
                   // onClick={() => (partners ? gotoNew(row) : null)}
                 >
-                  <td>
+                  <td className="checkbox-div">
                     <input
                       type="checkbox"
                       checked={selectedIds.includes(row.id)}
