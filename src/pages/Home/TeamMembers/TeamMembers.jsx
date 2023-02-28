@@ -47,6 +47,10 @@ const TeamMembers = () => {
     setSelectedIds([]);
   };
 
+  const gotoFunction = (val) => {
+    
+  }
+
   return (
     <>
       <div className="upper-content">
@@ -96,7 +100,8 @@ const TeamMembers = () => {
         </div>
         <hr style={{marginTop:'-2%'}}/>
 
-        {isLoading ? (
+
+        {/* {isLoading ? (
           "Loading..."
         ) : (
           <DataTable
@@ -115,7 +120,7 @@ const TeamMembers = () => {
             ratingUser={ratingUser}
             teamMembers={"teamMembers"}
           />
-        )}
+        )} */}
       </div>
     </>
   );

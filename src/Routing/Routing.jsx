@@ -35,7 +35,10 @@ const Routing = () => (
   <BrowserRouter>
     <Routes>
       <Route path="/home/" element={<Home />}>
-        <Route path="team-members" element={<TeamMembers />} />
+        <Route path="team-members" element={<TeamMembers />}>
+          <Route path="current-members" element={<div>Current Members Here</div>}/>
+          <Route path="past-members" element={<div>Past Members Here</div>}/>
+        </Route>
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="partners/detail/" element={<PartnerDetails />}>
           <Route path="about" element={<PartnerAbout />} />

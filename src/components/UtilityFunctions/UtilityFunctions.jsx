@@ -6,7 +6,7 @@ class Util {
   }
 
   // This function is used for selecting value with checkbox
-  static handleCheckboxChange(
+  handleCheckboxChange(
     selectedIds,
     user,
     setSelectedIds,
@@ -23,7 +23,7 @@ class Util {
   }
 
   // This function is used to delete single user data from an api and send it to past members
-  static deleteSingle = (
+  deleteSingle = (
     user,
     api,
     api2,
@@ -57,7 +57,7 @@ class Util {
   };
 
   // This function is used to delete multiple checkbox values and sent it to past members api
-  static deleteSelectedItems = (
+  deleteSelectedItems = (
     selectedIds,
     data,
     apiTo,
@@ -100,7 +100,7 @@ class Util {
   };
 
   // This function is use to restore the value on a click of single user
-  static restoreSingle = (
+  restoreSingle = (
     user,
     api,
     api2,
@@ -134,7 +134,7 @@ class Util {
   };
 
   // This function is used to restore multiple past members/deleted members to current table
-  static restorePastMembers = (
+  restorePastMembers = (
     selectedIds,
     data,
     apiTo,
@@ -175,7 +175,7 @@ class Util {
     setSelectedIds([]);
   };
 
-  static activeRatings = (api, id, getDataFunc, setClicked) => {
+  activeRatings = (api, id, getDataFunc, setClicked) => {
     axios
       .put(`${api}/${id}`, { rating: true })
       .then((response) => {
@@ -188,7 +188,7 @@ class Util {
       });
   };
 
-  static deactiveRatings = (api, id, getDataFunc) => {
+  deactiveRatings = (api, id, getDataFunc) => {
     axios
       .put(`${api}/${id}`, { rating: false })
       .then((response) => {
@@ -209,6 +209,10 @@ class Util {
   static test = () => {
     console.log("clicked");
   };
+
+  hello = () => {
+    console.log('Print Hello')
+  }
 }
 
 export default Util;

@@ -23,13 +23,13 @@ const OrderDetails = () => {
             <div className="order-date">
               Order Received on <span>{data.date}</span>
             </div>
-            <div className="company-name">
-              {data.name}
-            </div>
+            <div className="company-name">{data.name}</div>
           </div>
           <div className="search-filter-div">
             <SearchBar />
-            <FilterBtn />
+            <div>
+              <FilterBtn />
+            </div>
           </div>
         </div>
         <OrderDetailsBox icon={bill} icon2={truck} />
@@ -38,7 +38,7 @@ const OrderDetails = () => {
       </Row>
       <div className="table-div-order-details">
         {/* <PlainTable columns={orderTableColumn} datum={orderTableData} /> */}
-        <OrderTable/>
+        <OrderTable />
       </div>
     </div>
   );

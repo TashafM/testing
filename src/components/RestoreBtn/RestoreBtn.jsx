@@ -12,12 +12,13 @@ const RestoreBtn = ({
   func2,
   setSelectedIds,
 }) => {
+  const myUtil = new Util()
   return (
     <>
       <div
         className="buttons"
         onClick={() =>
-          Util.restorePastMembers(
+          myUtil.restorePastMembers(
             selectedIds,
             data,
             apiTo,

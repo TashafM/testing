@@ -43,15 +43,6 @@ const PlainTable = ({
                         key={id}
                       >
                         <>
-                          {/* {row[col.value] == "" ? (
-                            "--"
-                          ) : (
-                            <>
-                              {row[col.value].length <= 10
-                                ? row[col.value]
-                                : row[col.value].slice(0, 10) + "..."}
-                            </>
-                          )} */}
                           {row[col.value]}
                         </>
                       </td>

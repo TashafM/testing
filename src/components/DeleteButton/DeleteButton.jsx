@@ -12,13 +12,15 @@ const DeleteButton = ({
   func2,
   setSelectedIds,
 }) => {
+
+  const myUtil = new Util()
   return (
     <>
       <div className="buttons">
         <span
           className="del-button"
           onClick={() =>
-            Util.deleteSelectedItems(
+            myUtil.deleteSelectedItems(
               selectedIds,
               data,
               apiTo,

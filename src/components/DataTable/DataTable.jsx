@@ -42,7 +42,7 @@ const DataTable = ({
     navigate(`/home/partners/detail/about`, { state: { data: val } });
   };
 
-  const dummy = (a) => console.log(a)
+  const myUtil = new Util();
 
   return (
     <div className="dataTable">
@@ -50,7 +50,20 @@ const DataTable = ({
         <Table hover>
           <thead className="table-head">
             <tr className="tr-head">
-              <th></th>
+              <th>
+                <input
+                  type="checkbox"
+                  // checked={selectedIds.includes(row.id)}
+                  onChange={(e) =>
+                    myUtil.handleCheckboxChange(
+                      selectedIds,
+                      row,
+                      setSelectedIds,
+                      setRatingUser
+                    )                    
+                  }
+                />
+              </th>
               {columns.map((col, idx) => (
                 <th key={idx}>{col.title}</th>
               ))}
@@ -69,8 +82,8 @@ const DataTable = ({
                     <input
                       type="checkbox"
                       checked={selectedIds.includes(row.id)}
-                      onChange={(e) => 
-                        Util.handleCheckboxChange(
+                      onChange={(e) =>
+                        myUtil.handleCheckboxChange(
                           selectedIds,
                           row,
                           setSelectedIds,
@@ -81,7 +94,10 @@ const DataTable = ({
                   </td>
                   {columns.map((col, id) => (
                     <>
-                      <td key={id} onClick={()=> partners ? gotoNew(row) : null}>
+                      <td
+                        key={id}
+                        onClick={() => (partners ? gotoNew(row) : null)}
+                      >
                         <>
                           {row[col.value] == "" ? (
                             "--"
@@ -105,7 +121,7 @@ const DataTable = ({
                             src={rEnable}
                             onClick={(e) => {
                               e.stopPropagation();
-                              Util.deactiveRatings(api, row.id, getDataFunc);
+                              myUtil.deactiveRatings(api, row.id, getDataFunc);
                             }}
                           />
                         </span>
@@ -115,7 +131,7 @@ const DataTable = ({
                             src={rDisable}
                             onClick={(e) => {
                               e.stopPropagation();
-                              Util.activeRatings(api, row.id, getDataFunc);
+                              myUtil.activeRatings(api, row.id, getDataFunc);
                             }}
                           />
                         </span>
@@ -141,7 +157,7 @@ const DataTable = ({
                         <img
                           src={restoreBtn}
                           onClick={() =>
-                            Util.restoreSingle(
+                            myUtil.restoreSingle(
                               row,
                               api,
                               api2,
@@ -158,7 +174,7 @@ const DataTable = ({
                         <img
                           src={deleteBtn}
                           onClick={() =>
-                            Util.deleteSingle(
+                            myUtil.deleteSingle(
                               row,
                               api,
                               api2,
@@ -166,6 +182,7 @@ const DataTable = ({
                               getDataFunc2,
                               setSelectedIds
                             )
+                            // myUtil.hello()
                           }
                         />
                       </span>
