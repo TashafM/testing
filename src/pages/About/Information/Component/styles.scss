@@ -28,6 +28,9 @@
     line-height: 22px;
     color: #000000;
   }
+  .cardspace{
+    margin-left: 10px;
+  }
 
   .title-active {
     margin-right: 25px;
@@ -75,6 +78,18 @@
   margin-top: 8px;
   color: #000000;
   text-align: center;
+}
+
+.title-other-Info {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  /* or 167% */
+
+  margin-top: 8px;
+  color: #000000;
 }
 
 .cont-card-cont {

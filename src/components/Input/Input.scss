@@ -111,3 +111,16 @@ input:checked + .slider:before {
 .editor-wrapper {
   box-sizing: border-box;
 }
+
+.badges-container {
+  padding: 6px 14px;
+  color: #fff;
+  background: #456eff;
+  border-radius: 14px;
+  margin-right: 10px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+}

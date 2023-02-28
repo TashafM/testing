@@ -140,7 +140,7 @@ export const AboutTabs = [
     id: 1,
     title: "Info",
     index: 1,
-    link: "/home/about/info",
+    link: "/home/about",
   },
   {
     id: 2,
@@ -185,7 +185,7 @@ export const CreateJobsTabs = [
     id: 1,
     title: "Applications",
     index: 1,
-    link: "/home/about/create-jobs/applications",
+    link: "/home/about/create-jobs",
   },
   {
     id: 2,
