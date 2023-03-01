@@ -11,17 +11,25 @@ import axios from "axios";
 import RatingBtn from "../../../components/RatingBtn/RatingBtn";
 import RestoreBtn from "../../../components/RestoreBtn/RestoreBtn";
 import Tabs from "./Tabs/Tabs";
-import { colCurrentMembers, colPastMembers } from "./data/data";
+import { colCurrentMembers, colPastMembers, teamMembersTab } from "./data/data";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import UnderLineTabs from "../../../components/Tabs/UnderLineTabs";
+import CurrentMembers from "./CurrentMembers/CurrentMembers";
+import RestoreDeleteBtn from "./RestoreDeleteBtn/RestoreDeleteBtn";
+import PastMembers from "./PastMembers/PastMembers";
 
 const TeamMembers = () => {
   const [currMemberData, setCurrMemberData] = useState([]);
   const [pastMemberData, setPastMemberData] = useState(null);
   const [selectedIds, setSelectedIds] = useState([]);
-  const [selectedTab, setSelectedTab] = useState(1);
-  const [ratingUser, setRatingUser] = useState([]);
+  // const [selectedTab, setSelectedTab] = useState(1);
+  // const [ratingUser, setRatingUser] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const currMemberApi = `https://63ebc23432a08117239190d4.mockapi.io/elred`;
   const pastMemberApi = "https://63ecd449be929df00cb3017e.mockapi.io/pastUser";
+
+  const currentMember = "/home/team-members/current-members";
+  const pastMember = "/home/team-members/past-members";
 
   const getCurrMembers = () => {
     setIsLoading(true);
@@ -37,19 +45,18 @@ const TeamMembers = () => {
     });
   };
 
+  const location = useLocation();
+
   useEffect(() => {
     getCurrMembers();
     getPastMembers();
   }, []);
 
-  const setTab = (value) => {
-    setSelectedTab(value);
+  useEffect(() => {
     setSelectedIds([]);
-  };
-
-  const gotoFunction = (val) => {
-    
-  }
+    getCurrMembers();
+    getPastMembers();
+  }, [location]);
 
   return (
     <>
@@ -58,48 +65,49 @@ const TeamMembers = () => {
           icon={users}
           title="Team Members"
           count={currMemberData.length}
-          api={selectedTab == 1 ? currMemberApi : pastMemberApi}
-          getDataFunc={selectedTab == 1 ? getCurrMembers : getPastMembers}
+          api={ location.pathname == currentMember ? currMemberApi : pastMemberApi }
+          getDataFunc={ location.pathname == currentMember ? getCurrMembers : getPastMembers }
           addMember="addMember"
         />
         <div className="members-tab">
-          <Tabs setTab={setTab} selectedTab={selectedTab} />
-          <div className="col search-filter">
-            {selectedIds.length == 0 ? (
-              ""
-            ) : (
-              <>
-                {selectedTab == 2 ? (
-                  <RestoreBtn
-                    selectedIds={selectedIds}
-                    data={pastMemberData}
-                    apiTo={pastMemberApi}
-                    apiFrom={currMemberApi}
-                    func1={getCurrMembers}
-                    func2={getPastMembers}
-                    setSelectedIds={setSelectedIds}
-                  />
-                ) : (
-                  <>
-                    <DeleteButton
-                      selectedIds={selectedIds}
-                      data={currMemberData}
-                      apiTo={currMemberApi}
-                      apiFrom={pastMemberApi}
-                      func1={getCurrMembers}
-                      func2={getPastMembers}
-                      setSelectedIds={setSelectedIds}
-                    />
-                  </>
-                )}
-              </>
-            )}
-            <SearchBar />
-            <FilterBtn />
-          </div>
+          <RestoreDeleteBtn
+            selectedIds={selectedIds}
+            pastMemberData={pastMemberData}
+            pastMemberApi={pastMemberApi}
+            currMemberApi={currMemberApi}
+            getCurrMembers={getCurrMembers}
+            getPastMembers={getPastMembers}
+            setSelectedIds={setSelectedIds}
+            currMemberData={currMemberData}
+          />
         </div>
-        <hr style={{marginTop:'-2%'}}/>
+        <hr style={{ marginTop: "-2%" }} />
 
+        <div>
+          {location.pathname == currentMember && (
+            <CurrentMembers
+              selectedIds={selectedIds}
+              setSelectedIds={setSelectedIds}
+              currMemberData={currMemberData}
+              currMemberApi={currMemberApi}
+              pastMemberApi={pastMemberApi}
+              getCurrMembers={getCurrMembers}
+              getPastMembers={getPastMembers}
+            />
+          )}
+          {location.pathname == pastMember && (
+            <PastMembers
+              selectedIds={selectedIds}
+              setSelectedIds={setSelectedIds}
+              pastMemberData={pastMemberData}
+              pastMemberApi={pastMemberApi}
+              currMemberApi={currMemberApi}
+              getPastMembers={getPastMembers}
+              getCurrMembers={getCurrMembers}
+            />
+          )}
+          {/* {console.log(currMemberData,'========')} */}
+        </div>
 
         {/* {isLoading ? (
           "Loading..."

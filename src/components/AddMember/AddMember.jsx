@@ -27,11 +27,13 @@ const AddMember = ({ api, getDataFunc }) => {
   const handleShow = () => setShow(true);
   
   const [formValues, setFormValues] = useState([]);
+  const myUtil = new Util()
 
   function handleSubmit(event) {
     event.preventDefault();
     axios.post(api, formValues).then((res) => {
       getDataFunc();
+      myUtil.hello()
     });
     handleClose();
   }

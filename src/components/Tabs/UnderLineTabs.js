@@ -3,7 +3,7 @@ import {NavItem} from 'react-bootstrap'
 import {useLocation, useNavigate} from 'react-router-dom'
 import './Tabs.scss'
 
-function UnderLineTabs({tabs}) {
+function  UnderLineTabs({tabs}) {
     const navigate = useNavigate()
     const location = useLocation()
     return (

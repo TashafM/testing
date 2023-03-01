@@ -19,7 +19,8 @@ class Util {
       newSelectedIds.push(user.id);
     }
     setSelectedIds(newSelectedIds);
-    setRatingUser(user);
+    // setRatingUser(user);
+    console.log('hhhhhhhhhhh')
   }
 
   // This function is used to delete single user data from an api and send it to past members
@@ -139,8 +140,8 @@ class Util {
     data,
     apiTo,
     apiFrom,
-    func1,
-    func2,
+    getDataFunc,
+    getDataFunc2,
     setSelectedIds
   ) => {
     const confirm = window.confirm(
@@ -159,8 +160,8 @@ class Util {
               .post(apiFrom, user)
               .then((response) => {
                 // Handle success
-                func1();
-                func2();
+                getDataFunc();
+                getDataFunc2();
                 setSelectedIds([]);
               })
               .catch((error) => {
@@ -213,6 +214,8 @@ class Util {
   hello = () => {
     console.log('Print Hello')
   }
+
+
 }
 
 export default Util;

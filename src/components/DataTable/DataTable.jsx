@@ -36,6 +36,7 @@ const DataTable = ({
   const myRef = useRef(null);
   const [scrollX, setScrollX] = useState(0);
   const data = datum.sort((a, b) => b.id - a.id);
+  // const data = datum;
   const navigate = useNavigate();
 
   const gotoNew = (val) => {
@@ -60,7 +61,7 @@ const DataTable = ({
                       row,
                       setSelectedIds,
                       setRatingUser
-                    )                    
+                    )
                   }
                 />
               </th>
@@ -173,15 +174,16 @@ const DataTable = ({
                       <span className="icon-desc">
                         <img
                           src={deleteBtn}
-                          onClick={() =>
-                            myUtil.deleteSingle(
-                              row,
-                              api,
-                              api2,
-                              getDataFunc,
-                              getDataFunc2,
-                              setSelectedIds
-                            )
+                          onClick={
+                            () =>
+                              myUtil.deleteSingle(
+                                row,
+                                api,
+                                api2,
+                                getDataFunc,
+                                getDataFunc2,
+                                setSelectedIds
+                              )
                             // myUtil.hello()
                           }
                         />

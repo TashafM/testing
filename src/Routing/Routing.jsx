@@ -28,6 +28,8 @@ import PartnerPaymentDetails from "../pages/Home/Partners/PartnerDetails/Partner
 import PartnerCatalog from "../pages/Home/Partners/PartnerDetails/PartnerCatalog/PartnerCatalog";
 import PastOrder from "../pages/Home/Partners/PartnerDetails/PastOrder/PastOrder";
 import OrderDetails from "../pages/Home/Orders/components/OrderDetails/OrderDetails";
+import CurrentMembers from "../pages/Home/TeamMembers/CurrentMembers/CurrentMembers";
+import PastMembers from "../pages/Home/TeamMembers/PastMembers/PastMembers";
 // import About from "../pages/About/";
 // import Contact from "./Contact";
 
@@ -36,8 +38,9 @@ const Routing = () => (
     <Routes>
       <Route path="/home/" element={<Home />}>
         <Route path="team-members" element={<TeamMembers />}>
-          <Route path="current-members" element={<div>Current Members Here</div>}/>
-          <Route path="past-members" element={<div>Past Members Here</div>}/>
+          <Route index element={<CurrentMembers/>}></Route>
+          <Route path="current-members" element={<CurrentMembers/>}/>
+          <Route path="past-members" element={<PastMembers/>}/>
         </Route>
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="partners/detail/" element={<PartnerDetails />}>

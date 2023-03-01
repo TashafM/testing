@@ -18,3 +18,18 @@ export const colPastMembers = [
     { title: "Contact", value: "phone" },
     { title: "Employee Code", value: "emp_code" },
   ];
+
+export const teamMembersTab = [
+    {
+        id: 1,
+        title: 'Current Team Members',
+        index: 1,
+        link: '/home/team-members/current-members',
+    },
+    {
+        id: 2,
+        title: 'Past Team Members',
+        index: 2,
+        link: '/home/team-members/past-members',
+    }
+]
