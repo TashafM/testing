@@ -29,13 +29,13 @@ const menuItems = [
         id: 3,
         icon: teammembers,
         title: 'Team Members',
-        path: '/home/team-members',
+        path: '/home/team-members/current-members',
     },
     {
         id: 4,
         icon: partners,
         title: 'Partners',
-        path: '/home/partners',
+        path: '/home/partners/current-partners',
     },
     {
         id: 5,

@@ -1,23 +1,39 @@
 import React from "react";
-import { Form, FormGroup } from "react-bootstrap";
-import   ReactDatePicker  from "react-datepicker";
-import 'react-datepicker/dist/react-datepicker.css'
+import { Form, FormGroup, InputGroup } from "react-bootstrap";
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import './DatePickerComp.scss'
 
-const DatePickerComp = ({heading, selectedDate, setSelectedDate, required}) => {
+const DatePickerComp = ({
+  heading
+}) => {
   return (
-    <FormGroup>
-      <Form.Label>{heading}</Form.Label>
-      <ReactDatePicker
-        className="date"
-        selected={selectedDate}
-        onChange={(date) => setSelectedDate(date)}
-        dateFormat="dd/MM/yyyy"
-        placeholderText="DD/MM/YYYY"
-        required={required ? true : false}
-        // minDate={new Date()}
-      />
-     
-    </FormGroup>
+    <div className="date-picker-comp">
+      <Form.Label className="date-heading">{heading}</Form.Label>
+      <InputGroup className="date-main">
+        <Form.Control
+          className="date-input day"
+          type="text"
+          placeholder="DD"
+          maxLength={2}
+          required
+        />
+        <Form.Control
+          className="date-input"
+          type="text"
+          placeholder="MM"
+          maxLength={2}
+          required
+        />
+        <Form.Control
+          type="text"
+          placeholder="YYYY"
+          maxLength={4}
+          className="date-input year"
+          required
+        />
+      </InputGroup>
+    </div>
   );
 };
 

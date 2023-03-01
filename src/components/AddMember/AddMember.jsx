@@ -10,6 +10,7 @@ import {
   Label,
   Input,
   Offcanvas,
+  InputGroup,
 } from "react-bootstrap";
 import axios from "axios";
 import ReactDatePicker from "react-datepicker";
@@ -25,15 +26,15 @@ const AddMember = ({ api, getDataFunc }) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
+
   const [formValues, setFormValues] = useState([]);
-  const myUtil = new Util()
+  const myUtil = new Util();
 
   function handleSubmit(event) {
     event.preventDefault();
     axios.post(api, formValues).then((res) => {
       getDataFunc();
-      myUtil.hello()
+      myUtil.hello();
     });
     handleClose();
   }
@@ -141,19 +142,10 @@ const AddMember = ({ api, getDataFunc }) => {
                   onChange={() => Util.handleChange(event, setFormValues)}
                 />
               </FormGroup>
-              <DatePickerComp
-                heading="Start Date *"
-                setSelectedDate={setSelectedDate}
-                selectedDate={selectedDate}
-                // required
-              />
-              <DatePickerComp
-                heading="Probation Date *"
-                setSelectedDate={setProbationDate}
-                selectedDate={probationDate}
-                // required
-              />
-
+              <div className="d-flex justify-content-between">
+                <DatePickerComp heading={"Start Date *"} />
+                <DatePickerComp heading={"Probation Date *"} />
+              </div>
               <Button variant="primary" type="submit" className="save-btn">
                 Save
               </Button>

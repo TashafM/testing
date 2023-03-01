@@ -16,7 +16,6 @@
         font-weight: 500;
       }
     }
-    
 
     .input-div {
       margin-bottom: 20px;
@@ -72,3 +71,40 @@
   border: none;
 }
 
+.date-main {
+  // width: 50%;
+  // background-color: yellow;
+  margin-bottom: 60px;
+  .date-input.form-control{
+    margin-right: 10px !important;
+    border-radius: 8px !important;
+    height: 60px;
+    max-width: 60px;
+    background-color: #F7F7F7;
+    border: none;
+  }
+  .date-input.form-control.year{
+    margin-right: 10px !important;
+    border-radius: 8px !important;
+    height: 60px;
+    max-width: 95px;
+  }
+  // input{
+  //   font-size: 14px !important;
+  //   font-weight: 500;
+  // }
+  input{
+    text-align: center;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000;
+  }
+  input::placeholder{
+    text-align: center;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #899197;
+  }
+}
