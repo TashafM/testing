@@ -30,6 +30,8 @@ import PastOrder from "../pages/Home/Partners/PartnerDetails/PastOrder/PastOrder
 import OrderDetails from "../pages/Home/Orders/components/OrderDetails/OrderDetails";
 import CurrentMembers from "../pages/Home/TeamMembers/CurrentMembers/CurrentMembers";
 import PastMembers from "../pages/Home/TeamMembers/PastMembers/PastMembers";
+import CurrentPartners from "../pages/Home/Partners/CurrentPartners/CurrentPartners";
+import PastPartners from "../pages/Home/Partners/PastPartners/PastPartners";
 // import About from "../pages/About/";
 // import Contact from "./Contact";
 
@@ -50,7 +52,10 @@ const Routing = () => (
           <Route path="catalog" element={<PartnerCatalog />} />
           <Route path="past-orders" element={<PastOrder/>} />
         </Route>
-        <Route path="partners" element={<Partners />} />
+        <Route path="partners" element={<Partners />}>
+          <Route path="current-partners" element={<CurrentPartners/>}/>
+          <Route path="past-partners" element={<PastPartners/>}/>
+        </Route>
         <Route path="orders" element={<Orders />}/>
         <Route path='order/details' element={<OrderDetails/>}/> 
         <Route path="product-listings" element={<ProductListings />} />

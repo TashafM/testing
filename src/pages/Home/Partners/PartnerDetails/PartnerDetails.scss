@@ -24,6 +24,7 @@
 
   .title-main {
     display: flex;
+    margin-bottom: 45px;
     // background-color: red;
 
     .title-content {
@@ -72,6 +73,10 @@
   // ::-webkit-scrollbar-horizontal {
   //   height: 5px;
   // }
+}
+
+.mb-45{
+  margin-bottom: 45px;
 }
 
 .outlet-div::-webkit-scrollbar {

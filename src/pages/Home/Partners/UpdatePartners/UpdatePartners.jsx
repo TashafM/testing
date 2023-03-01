@@ -31,16 +31,6 @@ const UpdatePartners = ({ api, getDataFunc, editData }) => {
     }));
   }
 
-  // const submitData = (e) => {
-  //   e.preventDefault();
-  //   axios
-  //     .post(api, formData)
-  //     .then((res) => {
-  //       getDataFunc()
-  //     });
-  //     handleClose()
-  // };
-
   function submitData(event) {
     event.preventDefault();
     axios

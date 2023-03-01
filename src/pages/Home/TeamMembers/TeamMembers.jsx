@@ -22,8 +22,6 @@ const TeamMembers = () => {
   const [currMemberData, setCurrMemberData] = useState([]);
   const [pastMemberData, setPastMemberData] = useState(null);
   const [selectedIds, setSelectedIds] = useState([]);
-  // const [selectedTab, setSelectedTab] = useState(1);
-  // const [ratingUser, setRatingUser] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const currMemberApi = `https://63ebc23432a08117239190d4.mockapi.io/elred`;
   const pastMemberApi = "https://63ecd449be929df00cb3017e.mockapi.io/pastUser";
@@ -46,11 +44,6 @@ const TeamMembers = () => {
   };
 
   const location = useLocation();
-
-  useEffect(() => {
-    getCurrMembers();
-    getPastMembers();
-  }, []);
 
   useEffect(() => {
     setSelectedIds([]);
@@ -82,7 +75,6 @@ const TeamMembers = () => {
           />
         </div>
         <hr style={{ marginTop: "-2%" }} />
-
         <div>
           {location.pathname == currentMember && (
             <CurrentMembers
@@ -106,29 +98,7 @@ const TeamMembers = () => {
               getCurrMembers={getCurrMembers}
             />
           )}
-          {/* {console.log(currMemberData,'========')} */}
         </div>
-
-        {/* {isLoading ? (
-          "Loading..."
-        ) : (
-          <DataTable
-            columns={selectedTab == 1 ? colCurrentMembers : colPastMembers}
-            datum={selectedTab == 1 ? currMemberData : pastMemberData}
-            selectedIds={selectedIds}
-            api={selectedTab == 1 ? currMemberApi : pastMemberApi}
-            api2={selectedTab == 1 ? pastMemberApi : currMemberApi}
-            getDataFunc={selectedTab == 1 ? getCurrMembers : getPastMembers}
-            getDataFunc2={selectedTab == 1 ? getPastMembers : getCurrMembers}
-            delActive={selectedTab == 1 ? true : false}
-            resActive={selectedTab != 1 ? true : false}
-            ratings={selectedTab == 1 ? true : false}
-            setSelectedIds={setSelectedIds}
-            setRatingUser={setRatingUser}
-            ratingUser={ratingUser}
-            teamMembers={"teamMembers"}
-          />
-        )} */}
       </div>
     </>
   );

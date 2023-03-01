@@ -7,7 +7,6 @@ import "./PartnerDetails.scss";
 
 const PartnerDetails = () => {
   const state = useLocation().state.data;
-  console.log(useLocation());
   const [selectedTab, setSelectedTab] = useState();
   const navigate = useNavigate();
   const select = (tab) => {

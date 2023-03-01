@@ -33,3 +33,19 @@ export const teamMembersTab = [
         link: '/home/team-members/past-members',
     }
 ]
+
+
+export const partnersTab = [
+    {
+        id: 1,
+        title: 'Current Partners',
+        index: 1,
+        link: '/home/partners/current-partners',
+    },
+    {
+        id: 2,
+        title: 'Past Partners',
+        index: 2,
+        link: '/home/partners/past-partners',
+    }
+]
