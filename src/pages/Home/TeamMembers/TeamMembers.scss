@@ -1,8 +1,8 @@
 .upper-content {
   position: relative;
   background: white;
-  padding: 40px 20px;
-  height: 90vh;
+  padding: 40px;
+  height: 85vh;
   margin: 30px;
   margin-left: 30px 10px;
   border-radius: 12px;
@@ -17,8 +17,8 @@
   .members-tab {
     display: flex;
     padding-bottom: 2%;
-    margin-left: 1%;
-    margin-right: 2%;
+    // margin-left: 1%;
+    // margin-right: 2%;
     align-items: baseline;
 
     .team-member-1 {
@@ -188,3 +188,11 @@
 //     cursor: pointer;
 //   }
 // }
+
+
+@media only screen and (max-width: 1600px){
+  .upper-content{
+    margin-left: 5%;
+  }
+}
+

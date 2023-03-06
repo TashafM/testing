@@ -16,21 +16,21 @@ const DatePickerComp = ({
           type="text"
           placeholder="DD"
           maxLength={2}
-          required
+          // required
         />
         <Form.Control
           className="date-input"
           type="text"
           placeholder="MM"
           maxLength={2}
-          required
+          // required
         />
         <Form.Control
           type="text"
           placeholder="YYYY"
           maxLength={4}
           className="date-input year"
-          required
+          // required
         />
       </InputGroup>
     </div>

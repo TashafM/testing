@@ -3,7 +3,7 @@
 .plainTable {
     position: relative;
     .table-container {
-      height: 600px;
+      height: 60vh;
       overflow: auto;
       position: relative;
       margin-right: 2%;
@@ -87,7 +87,15 @@
   
   
   @media only screen and (max-width: 1600px){
-    .table-container{
-      height: 330px !important;
+    // .table-container{
+    //   height: 330px !important;
+    // }
+  }
+
+  @media(max-height: 864px){
+    .dataTable{
+      .table-container{
+        height: 50vh !important;
+      }
     }
   }

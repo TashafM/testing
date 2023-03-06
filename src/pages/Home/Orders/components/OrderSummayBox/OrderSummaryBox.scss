@@ -55,3 +55,24 @@
     }
   }
 }
+
+
+@media only screen and (max-width: 1600px){
+ .order-summary-box{
+  .box-one{
+    width: 100%;
+  }
+ }
+}
+
+@media only screen and (max-width: 1440px){
+  .order-summary-box{
+   .title-text{
+    font-size: 16px;
+   }
+   .summary-text{
+    font-size: 13px;
+    line-height: 20px;
+   }
+  }
+ }

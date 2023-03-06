@@ -19,15 +19,15 @@ const Home = () => {
       <div className="row">
         <div className="col-md-2 menu-list">
           <div className="sub-menu-list">
-            <Menus/>
-            <NeedHelp/>
+            <Menus />
+            <NeedHelp />
           </div>
         </div>
         <div className="col-md-10 content-area">
           {/* <div className="sub-content-area">
             <Outlet/>
           </div> */}
-          <Outlet/>
+          <Outlet />
         </div>
       </div>
     </div>

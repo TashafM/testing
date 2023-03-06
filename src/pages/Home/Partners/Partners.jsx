@@ -11,7 +11,7 @@ import PastPartners from "./PastPartners/PastPartners";
 
 const Partners = () => {
   const [currPartnerData, setCurrPartnerData] = useState([]);
-  const [pastMemberData, setPastMemberData] = useState(null);
+  const [pastMemberData, setPastMemberData] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
   const [selectedTab, setSelectedTab] = useState(1);
   const [ratingUser, setRatingUser] = useState([]);

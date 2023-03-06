@@ -51,7 +51,7 @@ const DataTable = ({
         <Table hover>
           <thead className="table-head">
             <tr className="tr-head">
-              <th>
+              <th className="checkbox-div">
                 <input
                   type="checkbox"
                   // checked={selectedIds.includes(row.id)}

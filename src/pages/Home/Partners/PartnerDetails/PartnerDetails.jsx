@@ -6,37 +6,16 @@ import UpperPart from "./components/UpperPart/UpperPart";
 import "./PartnerDetails.scss";
 
 const PartnerDetails = () => {
-  const state = useLocation().state.data;
+  const location = useLocation()
+  const state = location.state.data;
   const [selectedTab, setSelectedTab] = useState();
-  const navigate = useNavigate();
-  const select = (tab) => {
-    setSelectedTab(tab);
-    if (tab == 1) {
-      navigate(`/home/partners/detail/about`, { state: { data: state } });
-    }
-    if (tab == 2) {
-      navigate(`/home/partners/detail/address`, { state: { data: state } });
-    }
-    if (tab == 3) {
-      navigate(`/home/partners/detail/payment-details`, {
-        state: { data: state },
-      });
-    }
-    if (tab == 4) {
-      navigate(`/home/partners/detail/catalog`, { state: { data: state } });
-    }
-    if (tab == 5) {
-      navigate(`/home/partners/detail/past-orders`, { state: { data: state } });
-    }
-  };
-
-  useEffect(() => {});
+  
 
   return (
     <>
       <div className="partner-content">
         <UpperPart data={state} />
-        <PartnerTabs select={select} selectedTab={selectedTab} />
+        <PartnerTabs selectedTab={selectedTab} state={state}/>
         <div className="outlet-div">
           <Outlet />
         </div>

@@ -5,7 +5,7 @@ import "./OrderSummaryBox.scss";
 const OrderSummaryBox = () => {
   return (
     <Col className="order-summary-box">
-      <div>
+      <div className="box-one">
         <div className="title-text">Other Information :</div>
         <div className="summary-text">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat,

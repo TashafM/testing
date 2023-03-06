@@ -1,10 +1,10 @@
 .dataTable {
   position: relative;
   .table-container {
-    height: 500px;
+    height: 55vh;
     overflow: auto;
     position: relative;
-    margin-right: 2%;
+    // margin-right: 2%;
 
     &::-webkit-scrollbar {
       width: 0.2em;
@@ -41,6 +41,8 @@
         background-color: #f7f7f7;
         z-index: 1;
       }
+      
+      
     }
     .tr-body {
       td {
@@ -48,11 +50,15 @@
         font-size: 18px;
         font-weight: 500;
         background-color: white;
-        min-width: 170px !important;
+        // min-width: 170px !important;
+        min-width: 165px !important;
         width: 100% !important;
         cursor: pointer;
-
       }
+     td.checkbox-div{
+      min-width: 20px !important;
+      width: 100% !important;
+     }
 
       .editBtn {
         cursor: pointer;
@@ -85,7 +91,17 @@
 
 
 @media only screen and (max-width: 1600px){
-  .table-container{
-    height: 330px !important;
+  .dataTable{
+    .table-container{
+      height: 55vh !important;
+    }
+  }
+}
+
+@media(max-height: 864px){
+  .dataTable{
+    .table-container{
+      height: 45vh !important;
+    }
   }
 }

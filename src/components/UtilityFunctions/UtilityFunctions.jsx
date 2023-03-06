@@ -207,9 +207,7 @@ class Util {
     setData((prevInputs) => ({ ...prevInputs, [name]: value }));
   };
 
-  static test = () => {
-    console.log("clicked");
-  };
+
 
   hello = () => {
     console.log('Print Hello')

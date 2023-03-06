@@ -20,7 +20,7 @@ import PastMembers from "./PastMembers/PastMembers";
 
 const TeamMembers = () => {
   const [currMemberData, setCurrMemberData] = useState([]);
-  const [pastMemberData, setPastMemberData] = useState(null);
+  const [pastMemberData, setPastMemberData] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const currMemberApi = `https://63ebc23432a08117239190d4.mockapi.io/elred`;

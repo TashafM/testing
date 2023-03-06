@@ -2,7 +2,7 @@
   position: relative;
   background: white;
   padding: 50px;
-  height: 90vh;
+  height: 85vh;
   margin: 30px;
   border-radius: 12px;
   margin-left: 0;
@@ -93,9 +93,13 @@
   background-color: #F5F5F5;
 }
 
-@media only screen and (max-width: 1550px){
+@media only screen and (max-width: 1600px){
 .outlet-div{
-  height: 300px !important;
+  height: 45vh !important;
+}
+
+.partner-content{
+  margin-left: 5%;
 }
 }
 
@@ -103,4 +107,10 @@
   .outlet-div{
     height: 250px !important;
   }
+  }
+
+  @media(max-height: 864px){
+    .outlet-div{
+      height: 40vh !important;
+    }
   }

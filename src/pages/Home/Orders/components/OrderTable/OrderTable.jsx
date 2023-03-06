@@ -23,15 +23,15 @@ const OrderTable = ({ columns, datum }) => {
               {/* {columns.map((col, idx) => (
                 <th key={idx}>{col.title}</th>
               ))} */}
-              <td>#</td>
-              <td>Catalog</td>
-              <td>Free Text</td>
-              <td>Item Description</td>
-              <td>Qty in litres</td>
-              <td>Open Inv. Qty</td>
-              <td>Unit Price per litre</td>
-              <td>Tax Code</td>
-              <td>Tax Amount (LC)</td>
+              <td className="id-number">#</td>
+              <td className="catalog">Catalog</td>
+              <td className="name">Free Text</td>
+              <td className="item-desc">Item Description</td>
+              <td className="qty">Qty in litres</td>
+              <td className="qty2">Open Inv. Qty</td>
+              <td className="unit-price">Unit Price per litre</td>
+              <td className="tax-code">Tax Code</td>
+              <td className="tax-amount">Tax Amount (LC)</td>
             </tr>
           </thead>
           <tbody className="scroll-body">
@@ -39,7 +39,7 @@ const OrderTable = ({ columns, datum }) => {
               <tr className="tr-body">
                 <td>{row.id}</td>
                 <td>{row.catalog}</td>
-                <td>
+                <td className="div-img">
                   <img src={atink} />
                   <span className="orderTable-name">{row.name}</span>
                 </td>

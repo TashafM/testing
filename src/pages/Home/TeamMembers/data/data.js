@@ -17,6 +17,12 @@ export const colPastMembers = [
     { title: "Username", value: "username" },
     { title: "Contact", value: "phone" },
     { title: "Employee Code", value: "emp_code" },
+    { title: "Email", value: "email" },
+    { title: "Username", value: "username" },
+    { title: "Contact", value: "phone" },
+    { title: "Email", value: "email" },
+    { title: "Username", value: "username" },
+    { title: "Contact", value: "phone" },
   ];
 
 export const teamMembersTab = [

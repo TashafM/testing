@@ -1,13 +1,13 @@
 /*eslint-disable */
-import { faTableColumns, faMagnifyingGlass, faCube, faCubes, faUserTimes, faHandshake, faTrophy, faMessage, faMoneyBills } from '@fortawesome/free-solid-svg-icons'
-import order from '../../assets/images/order.svg'
-import partners from '../../assets/images/partners.svg'
-import products from '../../assets/images/products.svg'
-import teammembers from '../../assets/images/teammembers.svg'
-import dashboard from '../../assets/images/dashboard.svg'
-import awards from '../../assets/images/awards.svg'
-import payment from '../../assets/images/payment.svg'
-import about from '../../assets/images/about.svg'
+// import { faTableColumns, faMagnifyingGlass, faCube, faCubes, faUserTimes, faHandshake, faTrophy, faMessage, faMoneyBills } from '@fortawesome/free-solid-svg-icons'
+// import order from '../../assets/images/order.svg'
+// import partners from '../../assets/images/partners.svg'
+// import products from '../../assets/images/products.svg'
+// import teammembers from '../../assets/images/teammembers.svg'
+// import dashboard from '../../assets/images/dashboard.svg'
+// import awards from '../../assets/images/awards.svg'
+// import payment from '../../assets/images/payment.svg'
+// import about from '../../assets/images/about.svg'
 
 
 
@@ -15,49 +15,49 @@ import about from '../../assets/images/about.svg'
 const menuItems = [
     {
         id: 1,
-        icon: dashboard,
+        icon: 'dashboard',
         title: 'Dashboard',
         path: '/home/dashboard',
     },
     {
         id: 2,
-        icon: order,
+        icon: 'order',
         title: 'Orders',
         path: '/home/orders',
     },
     {
         id: 3,
-        icon: teammembers,
+        icon: 'teammembers',
         title: 'Team Members',
         path: '/home/team-members/current-members',
     },
     {
         id: 4,
-        icon: partners,
+        icon: 'partners',
         title: 'Partners',
         path: '/home/partners/current-partners',
     },
     {
         id: 5,
-        icon: products,
+        icon: 'products',
         title: 'Product Listings',
         path: '/home/product-listings',
     },
     {
         id: 6,
-        icon: awards,
+        icon: 'awards',
         title: 'Awards & Honours',
         path: '/home/awards-honours',
     },
     {
         id: 7,
-        icon: about,
+        icon: 'about',
         title: 'About Us',
         path: '/home/about',
     },
     {
         id: 8,
-        icon: payment,
+        icon: 'payment',
         title: 'Payment Info',
         path: '#',
     },

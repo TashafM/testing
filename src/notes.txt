@@ -1,0 +1,28 @@
+SCREEN SIZES -
+
+Main --> 1920 x 1080
+MacBook 16 inch --> 1728 x 1117
+MacBook 14 inch --> 1512 x 982 (1600px)
+Size 1 --> 1536 x 864 (1600px)
+Size 2 --> 1440 x 900
+Size 3 --> 1366 x 768
+Size 4 --> 1280 x 720
+
+Max-size 1600px:--
+Left Menu:
+.sub-menu-list {
+    padding : 20px;
+}
+.icn && .menu-name{
+    font-size : 14px
+}
+.border-div{
+    padding: 0;
+
+    .title{
+        margin-bottom: 10px;
+    }
+    .desc{
+        margin-bottom: 15px;
+    }
+}
