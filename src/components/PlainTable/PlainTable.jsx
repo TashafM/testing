@@ -2,18 +2,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import './PlainTable.scss'
+import "./PlainTable.scss";
 
-const PlainTable = ({
-  columns,
-  datum,
-}) => {
-//   const data = datum.sort((a, b) => b.id - a.id);  -----------> for sorting we can use this
+const PlainTable = ({ columns, datum }) => {
+  //   const data = datum.sort((a, b) => b.id - a.id);  -----------> for sorting we can use this
   const navigate = useNavigate();
 
   const orderDetails = (item) => {
     // navigate(`/home/order/details`, { state: { data: val } });
-    navigate(`/home/order/details`,{state: {data: item}});
+    navigate(`/home/order/details`, { state: { data: item } });
   };
 
   const dummy = (a) => console.log(a);
@@ -35,16 +32,15 @@ const PlainTable = ({
                 <tr
                   key={row.id}
                   className="tr-body"
-                  onClick={()=>orderDetails(row)}
+                  onClick={() => orderDetails(row)}
                 >
                   {columns.map((col, id) => (
                     <>
-                      <td
-                        key={id}
-                      >
-                        <>
+                      <td key={id}>
+                        <div className={col.value}>
                           {row[col.value]}
-                        </>
+                          {(console.log(col, "tashaf mahmood"))}
+                        </div>
                       </td>
                     </>
                   ))}
@@ -60,5 +56,3 @@ const PlainTable = ({
 };
 
 export default PlainTable;
-
-

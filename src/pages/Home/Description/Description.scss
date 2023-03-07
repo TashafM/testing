@@ -75,13 +75,18 @@
 
 .no-btn-col{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-end;
 }
 
 
-// @media only screen and (max-width: 1512px){
-
-// }
+@media only screen and (max-width: 1300px){
+  .menu-info{
+    .description{
+      font-size: 12px !important;
+      line-height: 20px !important;
+    }
+  }
+}
 
 @media only screen and (max-width: 1600px){
   .btn-col{
