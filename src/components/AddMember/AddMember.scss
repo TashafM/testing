@@ -75,15 +75,15 @@
   // width: 50%;
   // background-color: yellow;
   margin-bottom: 60px;
-  .date-input.form-control{
+  .date-input.form-control {
     margin-right: 10px !important;
     border-radius: 8px !important;
     height: 60px;
     max-width: 60px;
-    background-color: #F7F7F7;
+    background-color: #f7f7f7;
     border: none;
   }
-  .date-input.form-control.year{
+  .date-input.form-control.year {
     margin-right: 10px !important;
     border-radius: 8px !important;
     height: 60px;
@@ -93,18 +93,69 @@
   //   font-size: 14px !important;
   //   font-weight: 500;
   // }
-  input{
+  input {
     text-align: center;
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
     color: #000;
   }
-  input::placeholder{
+  input::placeholder {
     text-align: center;
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
     color: #899197;
+  }
+}
+
+@media only screen and (max-width: 1600px) {
+  .team-member-add {
+    font-size: 30px !important;
+    // font-weight: 600;
+    color: black;
+    line-height: 36px !important;
+    margin-bottom: 15px !important;
+  }
+
+  .sub-title-team {
+    font-size: 18px !important;
+    // font-weight: 400;
+    line-height: 22px !important;
+    // color: #899197;
+  }
+
+  .date-main {
+    input,
+    input::placeholder {
+      font-size: 16px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1360px) {
+  .teamMember-add{
+    font-size: 28px !important;
+    line-height: 32px !important;
+    margin-bottom: 12px !important;
+
+    .input-div {
+      margin-bottom: 15px !important;
+      .form-label {
+        font-size: 16px !important;
+      }
+    }
+  }
+
+  .sub-title-team {
+    font-size: 16px !important;
+    line-height: 22px !important;
+  }
+
+  .date-main {
+    input,
+    input::placeholder {
+      font-size: 14px;
+    }
   }
 }

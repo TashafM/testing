@@ -45,3 +45,19 @@
    }
   }
   
+
+  
+@media only screen and (max-width: 1600px){
+  .screen1-heading{
+    font-size: 34px !important;
+  }
+  .content-div{
+    .offcanvas-header{
+      .title{
+        font-size: 30px !important;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+}
