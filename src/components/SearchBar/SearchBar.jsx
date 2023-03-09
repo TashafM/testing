@@ -1,17 +1,8 @@
 import React from "react";
 import "./SearchBar.scss";
 import * as BS from "react-icons/bs";
-import filter from "../../assets/images/filter.svg";
-import downArrow from "../../assets/images/downArrow.svg";
 
-const SearchBar = ({searchData}) => {
-  // const [searchTerm, setSearchTerm] = useState("");
-  // const handleSearch = (event) => {
-  //   setSearchTerm(event.target.value);
-  // };
-  // const filteredItems = items.filter((item) =>
-  //   item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  // );
+const SearchBar = ({ handleSearch }) => {
   return (
     <>
       <div className="search-div">
@@ -21,7 +12,7 @@ const SearchBar = ({searchData}) => {
         <input
           type="text"
           placeholder="Search..."
-          // onChange={handleSearch}
+          onChange={handleSearch}
         ></input>
       </div>
     </>

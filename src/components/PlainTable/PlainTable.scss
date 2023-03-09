@@ -30,6 +30,7 @@
     .tr-head,
     .tr-body {
       text-align: center;
+      vertical-align: middle;
     }
 
     .tr-head {
@@ -56,14 +57,13 @@
           min-width: 200px;
         }
 
-        .person{
+        .person {
           min-width: 150px;
         }
 
-        .quantity{
+        .quantity {
           min-width: 100px;
         }
-        
       }
 
       .editBtn {
@@ -96,9 +96,35 @@
 }
 
 @media only screen and (max-width: 1600px) {
-  // .table-container{
-  //   height: 330px !important;
-  // }
+  .plainTable {
+    .table-container {
+      .tr-body {
+        td {
+          padding: 30px 20px !important;
+          font-size: 16px;
+          .name {
+            min-width: 200px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .plainTable {
+    .table-container {
+      .tr-body {
+        td {
+          padding: 30px 20px !important;
+          font-size: 14px;
+          .name {
+            min-width: 200px;
+          }
+        }
+      }
+    }
+  }
 }
 
 @media (max-height: 864px) {

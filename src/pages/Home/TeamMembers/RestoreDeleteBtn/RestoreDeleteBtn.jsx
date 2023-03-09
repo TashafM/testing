@@ -16,7 +16,7 @@ const RestoreDeleteBtn = ({
   getPastMembers,
   setSelectedIds,
   currMemberData,
-  searchData,
+  handleSearch,
 }) => {
   const location = useLocation();
   return (
@@ -53,7 +53,7 @@ const RestoreDeleteBtn = ({
           </>
         )}
 
-        <SearchBar searchData={searchData}/>
+        <SearchBar handleSearch={handleSearch} />
         <FilterBtn />
       </div>
     </>

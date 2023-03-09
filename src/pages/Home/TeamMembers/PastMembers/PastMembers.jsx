@@ -10,6 +10,7 @@ const PastMembers = ({
   currMemberApi,
   getPastMembers,
   getCurrentMembers,
+  filteredItems,
 }) => {
 
   return (
@@ -17,6 +18,7 @@ const PastMembers = ({
       <DataTable
         columns={colPastMembers}
         datum={pastMemberData}
+        // datum={filteredItems}
         selectedIds={selectedIds}
         api={pastMemberApi}
         api2={currMemberApi}

@@ -194,6 +194,19 @@
   .upper-content{
     margin-left: 5%;
     padding: 30px 40px;
+
+    .search-filter{
+      .search-div{
+        input{
+          padding: 12px;
+          padding-left: 20%;
+        }
+      }
+
+      .filter-btn{
+        padding: 9px;
+      }
+    }
   }
 }
 

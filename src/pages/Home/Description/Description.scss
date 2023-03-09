@@ -1,5 +1,5 @@
 .row-desc {
-  padding-bottom: 2%;
+  padding-bottom: 1%;
   .menu-info {
     .description {
       font-size: 16px;
@@ -79,11 +79,19 @@
 }
 
 
-@media only screen and (max-width: 1300px){
+@media only screen and (max-width: 1440px){
   .menu-info{
     .description{
       font-size: 12px !important;
       line-height: 20px !important;
+    }
+    .new-div{
+      img{
+        width: 36px;
+      }
+      .title{
+        font-size: 26px !important;
+      }
     }
   }
 }
@@ -107,6 +115,15 @@
     .description{
       font-size: 14px !important;
       line-height: 24px !important;
+    }
+
+    .new-div{
+      img{
+        width: 40px;
+      }
+      .title{
+        font-size: 28px !important;
+      }
     }
   }
 }

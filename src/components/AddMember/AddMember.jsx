@@ -100,6 +100,8 @@ const AddMember = ({ api, getDataFunc }) => {
                   // required
                 />
               </FormGroup>
+              <span>This email will reflect on your employee’s card.</span>
+
               <FormGroup className="input-div">
                 <Form.Label>Personal Phone No *</Form.Label>
                 <Form.Control

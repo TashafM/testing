@@ -19,6 +19,8 @@ import RestoreDeleteBtn from "./RestoreDeleteBtn/RestoreDeleteBtn";
 import PastMembers from "./PastMembers/PastMembers";
 
 const TeamMembers = () => {
+  const location = useLocation();
+
   const [currMemberData, setCurrMemberData] = useState([]);
   const [pastMemberData, setPastMemberData] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
@@ -28,11 +30,34 @@ const TeamMembers = () => {
 
   const currentMember = "/home/team-members/current-members";
   const pastMember = "/home/team-members/past-members";
+  // Try
+  const [searchTerm, setSearchTerm] = useState("");
+  const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+
+    const filteredItems = items.filter((item) =>
+      Object.values(item)
+        .join(" ")
+        .toLowerCase()
+        .includes(event.target.value.toLowerCase())
+    );
+    setFilteredItems(filteredItems);
+  };
+  // Try
 
   const getCurrMembers = () => {
     setIsLoading(true);
     axios.get(currMemberApi).then((response) => {
       setCurrMemberData(response.data);
+      // {
+      //   location.pathname == currentMember && setItems(response.data);
+      //   setFilteredItems(response.data);
+      // }
+      setItems(response.data)
+      setFilteredItems(response.data)
       setIsLoading(false);
     });
   };
@@ -40,10 +65,13 @@ const TeamMembers = () => {
   const getPastMembers = () => {
     axios.get(pastMemberApi).then((response) => {
       setPastMemberData(response.data);
+      // {
+      //   location.pathname == pastMember && setItems(response.data);
+      //   setFilteredItems(response.data);
+      // }
+
     });
   };
-
-  const location = useLocation();
 
   useEffect(() => {
     setSelectedIds([]);
@@ -76,11 +104,7 @@ const TeamMembers = () => {
             getPastMembers={getPastMembers}
             setSelectedIds={setSelectedIds}
             currMemberData={currMemberData}
-            searchData={
-              location.pathname == currentMember
-                ? currMemberData
-                : pastMemberData
-            }
+            handleSearch={handleSearch}
           />
         </div>
         <hr style={{ marginTop: "-2%" }} />
@@ -94,6 +118,7 @@ const TeamMembers = () => {
               pastMemberApi={pastMemberApi}
               getCurrMembers={getCurrMembers}
               getPastMembers={getPastMembers}
+              filteredItems={filteredItems}
             />
           )}
           {location.pathname == pastMember && (
@@ -105,6 +130,7 @@ const TeamMembers = () => {
               currMemberApi={currMemberApi}
               getPastMembers={getPastMembers}
               getCurrMembers={getCurrMembers}
+              filteredItems={filteredItems}
             />
           )}
         </div>
