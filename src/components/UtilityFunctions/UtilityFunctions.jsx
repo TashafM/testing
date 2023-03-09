@@ -6,12 +6,7 @@ class Util {
   }
 
   // This function is used for selecting value with checkbox
-  handleCheckboxChange(
-    selectedIds,
-    user,
-    setSelectedIds,
-    setRatingUser
-  ) {
+  handleCheckboxChange(selectedIds, user, setSelectedIds, setRatingUser) {
     let newSelectedIds = [...selectedIds];
     if (newSelectedIds.includes(user.id)) {
       newSelectedIds = newSelectedIds.filter((i) => i !== user.id);
@@ -20,7 +15,7 @@ class Util {
     }
     setSelectedIds(newSelectedIds);
     // setRatingUser(user);
-    console.log('hhhhhhhhhhh')
+    console.log("hhhhhhhhhhh");
   }
 
   // This function is used to delete single user data from an api and send it to past members
@@ -201,19 +196,27 @@ class Util {
       });
   };
 
+  static handleSearch = (event, setSearchTerm, items, setFilteredItems) => {
+    console.log(event.target,'event')
+    setSearchTerm(event.target.value);
+
+    const filteredItems = items.filter((item) =>
+      Object.values(item)
+        .join(" ")
+        .toLowerCase()
+        .includes(event.target.value.toLowerCase())
+    );
+    setFilteredItems(filteredItems);
+  };
+
   static handleChange = (event, setData) => {
-    console.log(event.target.value);
     const { name, value } = event.target;
     setData((prevInputs) => ({ ...prevInputs, [name]: value }));
   };
 
-
-
   hello = () => {
-    console.log('Print Hello')
-  }
-
-
+    console.log("Print Hello");
+  };
 }
 
 export default Util;

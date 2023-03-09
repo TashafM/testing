@@ -30,6 +30,7 @@
     .tr-head,
     .tr-body {
       text-align: center;
+      vertical-align: middle;
     }
 
     .tr-head {
@@ -94,14 +95,51 @@
   .dataTable{
     .table-container{
       height: 55vh !important;
+
+      .tr-body{
+        td{
+          font-size: 16px;
+          padding: 20px;
+        }
+      }
     }
   }
 }
 
+@media only screen and (max-width: 1440px){
+  .dataTable{
+    .table-container{
+      .tr-body{
+        td{
+          font-size: 14px;
+          padding: 15px;
+        }
+      }
+    }
+
+    .action-div{
+      .icon-desc{
+        img{
+          width: 32px;
+        }
+      }
+    }
+  }
+}
+
+
 @media(max-height: 864px){
   .dataTable{
     .table-container{
-      height: 45vh !important;
+      // height: 55vh !important;
+    }
+  }
+}
+
+@media(max-height: 760px){
+  .dataTable{
+    .table-container{
+      height: 50vh !important;
     }
   }
 }

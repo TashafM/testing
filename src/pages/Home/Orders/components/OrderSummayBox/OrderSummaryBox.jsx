@@ -9,8 +9,7 @@ const OrderSummaryBox = () => {
         <div className="title-text">Other Information :</div>
         <div className="summary-text">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat,
-          architecto sapiente esse repellat ea quae dolor? Suscipit adipisci
-          odio harum?
+          architecto sapiente esse repellat ea quae dolor?
         </div>
       </div>
       <div className="order-summary">

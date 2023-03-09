@@ -48,16 +48,22 @@
       height: 250px;
       justify-content: space-around;
 
-      img{
+      img {
         max-width: 240px;
         width: 100%;
       }
 
-      .txt{
+      .txt {
         font-size: 18px;
         font-weight: 500;
         color: black;
       }
     }
+  }
+}
+
+@media only screen and (max-width: 1600px) {
+  .dashboard-container {
+    margin-left: 5%;
   }
 }

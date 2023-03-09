@@ -139,10 +139,18 @@
     line-height: 32px !important;
     margin-bottom: 12px !important;
 
+    .content{
+      padding: 25px !important;
+    }
+
     .input-div {
       margin-bottom: 15px !important;
       .form-label {
         font-size: 16px !important;
+      }
+
+      input{
+        padding: 10px !important;
       }
     }
   }

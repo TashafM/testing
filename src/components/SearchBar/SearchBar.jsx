@@ -1,17 +1,19 @@
 import React from "react";
-import './SearchBar.scss'
+import "./SearchBar.scss";
 import * as BS from "react-icons/bs";
-import filter from '../../assets/images/filter.svg';
-import downArrow from '../../assets/images/downArrow.svg'
 
-const SearchBar = () => {
+const SearchBar = ({ handleSearch }) => {
   return (
     <>
       <div className="search-div">
         <span className="icon-search">
           <BS.BsSearch />
         </span>
-        <input type="text" placeholder="Search..."></input>
+        <input
+          type="text"
+          placeholder="Search..."
+          onChange={handleSearch}
+        ></input>
       </div>
     </>
   );
