@@ -16,10 +16,9 @@ const RestoreDeleteBtn = ({
   getPastMembers,
   setSelectedIds,
   currMemberData,
+  searchData,
 }) => {
-
-  const location = useLocation()
-  // console.log(location)
+  const location = useLocation();
   return (
     <>
       <UnderLineTabs tabs={teamMembersTab} />
@@ -28,7 +27,7 @@ const RestoreDeleteBtn = ({
           ""
         ) : (
           <>
-            {location.pathname == '/home/team-members/past-members' ? (
+            {location.pathname == "/home/team-members/past-members" ? (
               <RestoreBtn
                 selectedIds={selectedIds}
                 data={pastMemberData}
@@ -53,7 +52,8 @@ const RestoreDeleteBtn = ({
             )}
           </>
         )}
-        <SearchBar />
+
+        <SearchBar searchData={searchData}/>
         <FilterBtn />
       </div>
     </>

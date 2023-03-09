@@ -83,25 +83,25 @@ const AddMember = ({ api, getDataFunc }) => {
                 />
               </FormGroup>
               <FormGroup className="input-div">
-                <Form.Label>Username *</Form.Label>
+                <Form.Label>Personal Email ID *</Form.Label>
                 <Form.Control
                   type="text"
-                  name="username"
+                  name="personalemail"
                   onChange={() => Util.handleChange(event, setFormValues)}
                   // required
                 />
               </FormGroup>
               <FormGroup className="input-div">
-                <Form.Label>Email ID *</Form.Label>
+                <Form.Label>Display Email ID *</Form.Label>
                 <Form.Control
                   type="email"
-                  name="email"
+                  name="displayemail"
                   onChange={() => Util.handleChange(event, setFormValues)}
                   // required
                 />
               </FormGroup>
               <FormGroup className="input-div">
-                <Form.Label>Phone No *</Form.Label>
+                <Form.Label>Personal Phone No *</Form.Label>
                 <Form.Control
                   type="text"
                   name="phone"
@@ -110,7 +110,15 @@ const AddMember = ({ api, getDataFunc }) => {
                 />
               </FormGroup>
               <FormGroup className="input-div">
-                <Form.Label>Department</Form.Label>
+                <Form.Label>Display Phone No *</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="displayPhone"
+                  onChange={() => Util.handleChange(event, setFormValues)}
+                />
+              </FormGroup>
+              <FormGroup className="input-div">
+                <Form.Label>Department *</Form.Label>
                 <Form.Control
                   type="text"
                   name="department"
@@ -118,7 +126,7 @@ const AddMember = ({ api, getDataFunc }) => {
                 />
               </FormGroup>
               <FormGroup className="input-div">
-                <Form.Label>Designation</Form.Label>
+                <Form.Label>Designation *</Form.Label>
                 <Form.Control
                   type="text"
                   name="designation"

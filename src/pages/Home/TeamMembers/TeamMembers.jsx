@@ -58,8 +58,12 @@ const TeamMembers = () => {
           icon={users}
           title="Team Members"
           count={currMemberData.length}
-          api={ location.pathname == currentMember ? currMemberApi : pastMemberApi }
-          getDataFunc={ location.pathname == currentMember ? getCurrMembers : getPastMembers }
+          api={
+            location.pathname == currentMember ? currMemberApi : pastMemberApi
+          }
+          getDataFunc={
+            location.pathname == currentMember ? getCurrMembers : getPastMembers
+          }
           addMember="addMember"
         />
         <div className="members-tab">
@@ -72,6 +76,11 @@ const TeamMembers = () => {
             getPastMembers={getPastMembers}
             setSelectedIds={setSelectedIds}
             currMemberData={currMemberData}
+            searchData={
+              location.pathname == currentMember
+                ? currMemberData
+                : pastMemberData
+            }
           />
         </div>
         <hr style={{ marginTop: "-2%" }} />

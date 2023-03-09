@@ -16,3 +16,11 @@
     font-weight: 500;
   }
 }
+
+@media only screen and (max-width: 1360px) {
+  .input-div-comp{
+    input{
+      padding: 10px !important;
+    }
+  }
+  }
