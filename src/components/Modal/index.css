@@ -1,0 +1,15 @@
+.rdw-editor-toolbar {
+}
+.modal-content {
+  padding: 16px;
+}
+.rdw-editor-main {
+  overflow: hidden;
+}
+.notranslate .public-DraftEditor-content {
+  width: 97% !important;
+}
+.modalbody {
+  height: 550px;
+  overflow: auto;
+}

@@ -4,11 +4,13 @@ import edit from '../../../../assets/images/edit-icon.png'
 import BtnIconOnly from '../../../../components/Button/BtnIconOnly'
 import {useContextProvider} from '../../../../context'
 
-function CardHead({icon, title, onClick}) {
+function CardHead({icon, title, onClick,changemargin}) {
     const {setOpenDrawer} = useContextProvider()
 
+    let cssclasseschange = changemargin ? 'card-otherinfo-head': 'card-head'
+
     return (
-        <div className='d-flex card-head'>
+        <div className={`d-flex ${cssclasseschange}`}>
             <img src={icon} alt='contact-icon' />
             <div className='wrapper-title'>
                 <span className='cont-title'>{title}</span>

@@ -19,3 +19,25 @@
     border: none;
 
 }
+
+
+.btnsmall {
+    // box-sizing: border-box;
+
+/* Auto layout */
+
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 7px 10px;
+gap: 10px;
+
+// position: absolute;
+width: 90%;
+height: 40px;
+border:none;
+color: #FFFFFF;
+background: #BE212A;
+border-radius: 6px;
+}

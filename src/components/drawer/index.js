@@ -14,11 +14,13 @@ import EditAbout from "../../pages/About/Information/Component/EditAbout";
 import EditSocialMedia from "../../pages/About/Information/Component/EditSocialMedia";
 import EditContacts from "../../pages/About/Information/Component/EditContacts";
 import EditContactsList from "../../pages/About/Information/Component/EditContactList";
-
 import EditAddress from "../../pages/About/Information/Component/EditAddress";
 import EditOperations from "../../pages/About/Information/Component/EditOperations";
 import EditStatement from "../../pages/About/Information/Component/EditStatement";
-import EditPost from "../../pages/About/Jobs/Component/EditPost";
+import EditOtherInfo from "../../pages/About/Information/Component/EditOtherInfo";
+import BtnIconOnly from "../Button/BtnIconOnly";
+import edit from "../../assets/images/edit-icon.png";
+import OtherInfoDetails from "../../pages/About/Information/Component/OtherInfoDetails";
 
 export default function RightDrawer() {
   const { openDrawer, setOpenDrawer } = useContextProvider();
@@ -56,6 +58,17 @@ export default function RightDrawer() {
                     <img src={back} alt="back icon" />
                   </ListItemIcon>
                   <ListItemText className="title" primary={openDrawer.type} />
+                  {openDrawer.type === "Other Info" && (
+                    <BtnIconOnly
+                      icon={edit}
+                      onClick={() => {
+                        setOpenDrawer({
+                          open: true,
+                          type: "Other Info Edit",
+                        });
+                      }}
+                    />
+                  )}
                 </ListItemButton>
               </ListItem>
             </List>
@@ -73,8 +86,10 @@ export default function RightDrawer() {
                 <EditOperations />
               ) : openDrawer.type === "Statement" ? (
                 <EditStatement />
-              ) : openDrawer.type === "Edit Post" ? (
-                <EditPost />
+              ) : openDrawer.type === "Other Info" ? (
+                <EditOtherInfo type={openDrawer.type} />
+              ) : openDrawer.type === "Other Info Edit" ? (
+                <OtherInfoDetails />
               ) : (
                 <div>other cont</div>
               )}
