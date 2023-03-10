@@ -86,21 +86,23 @@ const AddMember = ({ api, getDataFunc }) => {
                 <Form.Label>Personal Email ID *</Form.Label>
                 <Form.Control
                   type="text"
-                  name="personalemail"
+                  name="personalEmail"
                   onChange={() => Util.handleChange(event, setFormValues)}
-                  // required
+                  required
                 />
               </FormGroup>
               <FormGroup className="input-div">
                 <Form.Label>Display Email ID *</Form.Label>
                 <Form.Control
                   type="email"
-                  name="displayemail"
+                  name="displayEmail"
                   onChange={() => Util.handleChange(event, setFormValues)}
-                  // required
+                  required
                 />
               </FormGroup>
-              <span>This email will reflect on your employee’s card.</span>
+              <div className="info-text">
+                This email will reflect on your employee’s card.
+              </div>
 
               <FormGroup className="input-div">
                 <Form.Label>Personal Phone No *</Form.Label>
@@ -108,7 +110,7 @@ const AddMember = ({ api, getDataFunc }) => {
                   type="text"
                   name="phone"
                   onChange={() => Util.handleChange(event, setFormValues)}
-                  // required
+                  required
                 />
               </FormGroup>
               <FormGroup className="input-div">
@@ -117,14 +119,20 @@ const AddMember = ({ api, getDataFunc }) => {
                   type="text"
                   name="displayPhone"
                   onChange={() => Util.handleChange(event, setFormValues)}
+                  required
                 />
               </FormGroup>
+              <div className="info-text">
+                This phone number will reflect on your employee’s card.{" "}
+              </div>
+
               <FormGroup className="input-div">
                 <Form.Label>Department *</Form.Label>
                 <Form.Control
                   type="text"
                   name="department"
                   onChange={() => Util.handleChange(event, setFormValues)}
+                  required
                 />
               </FormGroup>
               <FormGroup className="input-div">
@@ -133,6 +141,7 @@ const AddMember = ({ api, getDataFunc }) => {
                   type="text"
                   name="designation"
                   onChange={() => Util.handleChange(event, setFormValues)}
+                  required
                 />
               </FormGroup>
               <FormGroup className="input-div">
@@ -141,7 +150,7 @@ const AddMember = ({ api, getDataFunc }) => {
                   type="text"
                   name="emp_code"
                   onChange={() => Util.handleChange(event, setFormValues)}
-                  // required
+                  required
                 />
               </FormGroup>
               <FormGroup className="input-div">

@@ -1,12 +1,8 @@
 /*eslint-disable */
 import React, { useEffect, useRef, useState } from "react";
 import "./TeamMembers.scss";
-import DataTable from "../../../components/DataTable/DataTable";
 import Description from "../Description/Description";
 import users from "../../../assets/images/users.svg";
-import DeleteButton from "../../../components/DeleteButton/DeleteButton";
-import SearchBar from "../../../components/SearchBar/SearchBar";
-import FilterBtn from "./FilterBtn/FilterBtn";
 import axios from "axios";
 import RatingBtn from "../../../components/RatingBtn/RatingBtn";
 import RestoreBtn from "../../../components/RestoreBtn/RestoreBtn";
@@ -25,8 +21,8 @@ const TeamMembers = () => {
   const [pastMemberData, setPastMemberData] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const currMemberApi = `https://63ebc23432a08117239190d4.mockapi.io/elred`;
-  const pastMemberApi = "https://63ecd449be929df00cb3017e.mockapi.io/pastUser";
+  const currMemberApi = `https://63f368a0864fb1d60015fd5e.mockapi.io/new`;
+  const pastMemberApi = "https://63ecd449be929df00cb3017e.mockapi.io/pastmembers";
 
   const currentMember = "/home/team-members/current-members";
   const pastMember = "/home/team-members/past-members";

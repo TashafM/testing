@@ -5,6 +5,14 @@
     overflow: auto;
     position: relative;
 
+    .info-text{
+      color: #888888;
+      font-size: 14px;
+      font-weight: 400;
+      margin-top: -15px;
+      margin-bottom: 20px;
+    }
+
     .react-datepicker__input-container {
       input {
         width: 95%;
