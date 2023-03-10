@@ -16,8 +16,8 @@ const CurrentMembers = ({
     <div>
       <DataTable
         columns={colCurrentMembers}
-        datum={currMemberData}
-        // datum={filteredItems}
+        // datum={currMemberData}
+        datum={filteredItems}
         selectedIds={selectedIds}
         api={currMemberApi}
         api2={pastMemberApi}

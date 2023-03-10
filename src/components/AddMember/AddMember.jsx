@@ -102,7 +102,7 @@ const AddMember = ({ api, getDataFunc }) => {
               </FormGroup>
               <div className="info-text">
                 This email will reflect on your employee’s card.
-              </div>
+              </div>                  
 
               <FormGroup className="input-div">
                 <Form.Label>Personal Phone No *</Form.Label>

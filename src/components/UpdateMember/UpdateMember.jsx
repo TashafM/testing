@@ -119,46 +119,61 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
                 />
               </FormGroup>
               <FormGroup className="input-div">
-                <Form.Label>Username *</Form.Label>
+                <Form.Label>Personal Email ID *</Form.Label>
                 <Form.Control
-                  value={formValues.username}
+                  value={formValues.personalEmail}
                   type="text"
-                  name="username"
+                  name="personalEmail"
                   onChange={handleInputChange}
                   required
                 />
               </FormGroup>
               <FormGroup className="input-div">
-                <Form.Label>Email ID *</Form.Label>
+                <Form.Label>Display Email ID *</Form.Label>
                 <Form.Control
-                  value={formValues.email}
-                  type="email"
-                  name="email"
+                  value={formValues.displayEmail}
+                  type="text"
+                  name="displayEmail"
                   onChange={handleInputChange}
                   required
                 />
               </FormGroup>
+              <div className="info-text">
+                This email will reflect on your employee’s card.
+              </div>
               <FormGroup className="input-div">
-                <Form.Label>Phone No *</Form.Label>
+                <Form.Label>Personal Phone No *</Form.Label>
                 <Form.Control
                   value={formValues.phone}
                   type="text"
                   name="phone"
                   onChange={handleInputChange}
-                  required
                 />
               </FormGroup>
               <FormGroup className="input-div">
-                <Form.Label>Department</Form.Label>
+                <Form.Label>Display Phone No *</Form.Label>
+                <Form.Control
+                  value={formValues.displayPhone}
+                  type="text"
+                  name="displayPhone"
+                  onChange={handleInputChange}
+                />
+              </FormGroup>
+              <div className="info-text">
+                This phone number will reflect on your employee’s card.{" "}
+              </div>
+              <FormGroup className="input-div">
+                <Form.Label>Department *</Form.Label>
                 <Form.Control
                   value={formValues.department}
                   type="text"
                   name="department"
                   onChange={handleInputChange}
+                  required
                 />
               </FormGroup>
               <FormGroup className="input-div">
-                <Form.Label>Designation</Form.Label>
+                <Form.Label>Designation *</Form.Label>
                 <Form.Control
                   value={formValues.designation}
                   type="text"
@@ -166,6 +181,7 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
                   onChange={handleInputChange}
                 />
               </FormGroup>
+              
               <FormGroup className="input-div">
                 <Form.Label>Employee Code *</Form.Label>
                 <Form.Control
@@ -173,7 +189,6 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
                   type="text"
                   name="emp_code"
                   onChange={handleInputChange}
-                  required
                 />
               </FormGroup>
               <FormGroup className="input-div">

@@ -31,6 +31,10 @@ const TeamMembers = () => {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
 
+  const [searchTerm2, setSearchTerm2] = useState("");
+  const [items2, setItems2] = useState([]);
+  const [filteredItems2, setFilteredItems2] = useState([]);
+
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
 
@@ -41,6 +45,18 @@ const TeamMembers = () => {
         .includes(event.target.value.toLowerCase())
     );
     setFilteredItems(filteredItems);
+  };
+
+  const handleSearch2 = (event) => {
+    setSearchTerm2(event.target.value);
+
+    const filteredItems2 = items2.filter((item) =>
+      Object.values(item)
+        .join(" ")
+        .toLowerCase()
+        .includes(event.target.value.toLowerCase())
+    );
+    setFilteredItems2(filteredItems2);
   };
   // Try
 
@@ -61,6 +77,8 @@ const TeamMembers = () => {
   const getPastMembers = () => {
     axios.get(pastMemberApi).then((response) => {
       setPastMemberData(response.data);
+      setItems2(response.data)
+      setFilteredItems2(response.data)
       // {
       //   location.pathname == pastMember && setItems(response.data);
       //   setFilteredItems(response.data);
@@ -101,6 +119,7 @@ const TeamMembers = () => {
             setSelectedIds={setSelectedIds}
             currMemberData={currMemberData}
             handleSearch={handleSearch}
+            handleSearch2={handleSearch2}
           />
         </div>
         <hr style={{ marginTop: "-2%" }} />
@@ -126,7 +145,7 @@ const TeamMembers = () => {
               currMemberApi={currMemberApi}
               getPastMembers={getPastMembers}
               getCurrMembers={getCurrMembers}
-              filteredItems={filteredItems}
+              filteredItems2={filteredItems2}
             />
           )}
         </div>
