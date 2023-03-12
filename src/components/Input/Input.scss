@@ -22,6 +22,7 @@
   font-weight: 500;
   font-size: 18px;
   color: #000000;
+  margin-bottom: 8px;
 }
 
 .input-container {
@@ -123,4 +124,45 @@ input:checked + .slider:before {
   font-weight: 500;
   font-size: 18px;
   line-height: 22px;
+}
+
+//phone number
+input.PhoneInputInput {
+  background: #f7f7f7;
+  border-radius: 6px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  color: #899197;
+  width: 100%;
+  border: none;
+  padding: 16px;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+div.PhoneInputCountry {
+  background: #f7f7f7;
+  border-radius: 6px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  padding-inline: 16px;
+  color: #000000;
+}
+
+.time-only-input {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  background: #f7f7f7;
+  border-radius: 6px;
+  color: #000000;
+  padding: 12px;
 }
