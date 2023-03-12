@@ -12,9 +12,7 @@ import business from "../../../assets/images/business.png";
 
 import "./Information.scss";
 import CardHead from "./Component/CardHead";
-import { useContextProvider } from "../../../context";
 import { socialMedia } from "../data/data";
-import { Badge } from "react-bootstrap";
 import Badges from "../../../components/Input/Badges";
 
 function Information() {

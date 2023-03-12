@@ -3,9 +3,9 @@ import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import TextInput from "../../../../components/Input/TextInput";
 import "./styles.scss";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import PhoneNumber from "../../../../components/Input/PhoneNumber";
 import TextArea from "../../../../components/Input/TextArea";
+import schema from "../../../../helper/validation/schema";
 
 function EditContacts() {
   const formRef = useRef();
@@ -14,11 +14,6 @@ function EditContacts() {
     console.log("values", values);
   };
 
-  const validate = Yup.object({
-    email: Yup.string().required("email is requird"),
-    title: Yup.string().required("title is required"),
-    contactNumber: Yup.number().required("contact number is required"),
-  });
   return (
     <div>
       <p className="drawer-title">
@@ -33,7 +28,7 @@ function EditContacts() {
         }}
         innerRef={formRef}
         onSubmit={submitHandler}
-        validationSchema={validate}
+        validationSchema={schema.contacts}
         render={({ handleSubmit, errors, values, setFieldValue, touched }) => (
           <Form className="">
             <div className="input-wrapper">

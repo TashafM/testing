@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import TextInput from "../../../../components/Input/TextInput";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import schema from "../../../../helper/validation/schema";
 
 function EditAddress() {
   const formRef = useRef();
@@ -11,14 +11,6 @@ function EditAddress() {
     console.log("values", values);
   };
 
-  const validate = Yup.object({
-    officeName: Yup.string().required("office name is required"),
-    locality: Yup.string().required("location is rquire"),
-    nearestLandmark: Yup.string().required("nearest landmark is required"),
-    town: Yup.string().required("town is  required"),
-    city: Yup.string().required("city is required"),
-    pincode: Yup.string().required("pincode is required"),
-  });
   return (
     <div>
       <Formik
@@ -26,7 +18,6 @@ function EditAddress() {
           fullname: "",
           officeName: "",
           locality: "",
-          nearestLandmark: "",
           town: "",
           city: "",
           pincode: "",
@@ -35,7 +26,7 @@ function EditAddress() {
         }}
         innerRef={formRef}
         onSubmit={submitHandler}
-        validationSchema={validate}
+        validationSchema={schema.address}
         render={({ handleSubmit, errors, values, setFieldValue, touched }) => (
           <Form className="">
             {console.log(errors)}
@@ -70,7 +61,7 @@ function EditAddress() {
                 error={touched.locality && errors.locality}
               />
             </div>
-            <div className="input-wrapper">
+            {/* <div className="input-wrapper">
               <TextInput
                 name="nearestLandmark"
                 value={values.nearestLandmark}
@@ -81,7 +72,7 @@ function EditAddress() {
                 label={"Nearest Landmark*"}
                 error={touched.nearestLandmark && errors.nearestLandmark}
               />
-            </div>
+            </div> */}
             <div className="input-wrapper">
               <TextInput
                 name="town"

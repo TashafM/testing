@@ -21,6 +21,7 @@ import EditOtherInfo from "../../pages/About/Information/Component/EditOtherInfo
 import BtnIconOnly from "../Button/BtnIconOnly";
 import edit from "../../assets/images/edit-icon.png";
 import OtherInfoDetails from "../../pages/About/Information/Component/OtherInfoDetails";
+import AddBrand from "../../pages/About/Brand/Component/AddBrand";
 
 export default function RightDrawer() {
   const { openDrawer, setOpenDrawer } = useContextProvider();
@@ -90,6 +91,8 @@ export default function RightDrawer() {
                 <EditOtherInfo type={openDrawer.type} />
               ) : openDrawer.type === "Other Info Edit" ? (
                 <OtherInfoDetails />
+              ) : openDrawer.type === "Add Brands" ? (
+                <AddBrand />
               ) : (
                 <div>other cont</div>
               )}
