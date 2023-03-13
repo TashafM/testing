@@ -6,6 +6,8 @@ import Login from "../Login/Login";
 import NavbarTop from "../../components/NavbarTop/NavbarTop";
 import Menus from "../../components/Menus/Menus";
 import NeedHelp from "../../components/NeedHelp/NeedHelp";
+import TabMenus from "../../components/TabMenus/TabMenus";
+import MobileNotSupported from "../../components/MobileNotSupported/MobileNotSupported";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -14,23 +16,31 @@ const Home = () => {
     navigate("/");
   };
   return (
-    <div className="homepage">
-      <NavbarTop />
-      <div className="row">
-        <div className="col-md-2 menu-list">
-          <div className="sub-menu-list">
-            <Menus />
-            <NeedHelp />
-          </div>
+    <>
+      <div className="homepage">
+        <NavbarTop />
+        <div className="tablet-menu">
+          <TabMenus />
         </div>
-        <div className="col-md-10 content-area">
-          {/* <div className="sub-content-area">
+        <div className="row">
+          <div className="col-xl-2 menu-list">
+            <div className="sub-menu-list">
+              <Menus />
+              <NeedHelp />
+            </div>
+          </div>
+          <div className="col-xl-10 col-lg-12 content-area">
+            {/* <div className="sub-content-area">
             <Outlet/>
           </div> */}
-          <Outlet />
+            <Outlet />
+          </div>
         </div>
       </div>
-    </div>
+      <div className="mobile-not-supported">
+        <MobileNotSupported />
+      </div>
+    </>
   );
 };
 

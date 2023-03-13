@@ -145,3 +145,25 @@
     }
   }
 }
+
+
+@media only screen and (max-width: 992px){
+  .menu-info{
+    .description{
+      font-size: 12px !important;
+      line-height: 18px !important;
+    }
+
+    .new-div{
+      img{
+        width: 26px;
+      }
+      .title{
+        font-size: 20px !important;
+      }
+      .count{
+        font-size: 14px !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+.tabMenus {
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  display: flex;
+  overflow-x: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tabs {
+    padding: 15px 10px;
+    background: #fff2f2;
+    margin-right: 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    width: 100%;
+    min-width: 155px;
+    text-align: center;
+    color: #BE212A;
+    cursor: pointer;
+  }
+}

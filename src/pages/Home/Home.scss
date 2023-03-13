@@ -3,6 +3,11 @@
   background-color: #f0f2f9;
   overflow-x: hidden;
 
+  .tablet-menu{
+    display: none;
+  }
+
+
   .row {
     .menu-list {
       // min-height: 90vh;
@@ -37,6 +42,10 @@
       }
     }
   }
+}
+
+.mobile-not-supported{
+  display: none;
 }
 
 @media only screen and (max-width: 1600px) {
@@ -74,3 +83,24 @@
     }
   }
 }
+
+
+@media only screen and (max-width: 992px){
+  .sub-menu-list{
+    display: none !important;
+  }
+  .tablet-menu{
+    display: block !important;
+  }
+}
+
+@media only screen and (max-width: 600px){
+  .homepage{
+    display: none;
+  }
+
+  .mobile-not-supported{
+    display: block;
+  }
+}
+
