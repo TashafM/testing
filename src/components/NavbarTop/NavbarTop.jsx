@@ -9,7 +9,7 @@ import user from '../../assets/images/user.jpg'
 const NavbarTop = () => {
   return (
     <div className="row navbar-top">
-      <div className="col-md-2">
+      <div className="col-md-2 col-sm-4">
         <span className="logo">
           <img src={atinks} alt="" />
         </span>

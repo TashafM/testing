@@ -21,7 +21,7 @@ const Description = ({
   return (
     <>
       <div className="row row-desc">
-        <div className="col-8 col-xl-7 menu-info">
+        <div className="col-6 col-xl-7 menu-info">
           <div className="new-div">
             <div>
               <img src={icon} alt="" />
@@ -37,7 +37,7 @@ const Description = ({
         </div>
         {noButtons ? (
           <>
-            <div className="col-4 col-xl-5 no-btn-col">
+            <div className="col-6 col-xl-5 no-btn-col">
               <div>
                 <SearchBar />
               </div>
@@ -47,7 +47,7 @@ const Description = ({
             </div>
           </>
         ) : (
-          <div className="col-4  col-xl-5 btn-col">
+          <div className="col-6  col-xl-5 btn-col">
             <div className="buttons-div">
               <div className="upload-btn">
                 <span className="icon-desc">

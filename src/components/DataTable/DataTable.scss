@@ -42,8 +42,6 @@
         background-color: #f7f7f7;
         z-index: 1;
       }
-      
-      
     }
     .tr-body {
       td {
@@ -56,10 +54,10 @@
         width: 100% !important;
         cursor: pointer;
       }
-     td.checkbox-div{
-      min-width: 20px !important;
-      width: 100% !important;
-     }
+      td.checkbox-div {
+        min-width: 20px !important;
+        width: 100% !important;
+      }
 
       .editBtn {
         cursor: pointer;
@@ -90,14 +88,13 @@
   }
 }
 
-
-@media only screen and (max-width: 1600px){
-  .dataTable{
-    .table-container{
+@media only screen and (max-width: 1600px) {
+  .dataTable {
+    .table-container {
       height: 52vh !important;
 
-      .tr-body{
-        td{
+      .tr-body {
+        td {
           font-size: 16px;
           padding: 20px;
         }
@@ -106,20 +103,21 @@
   }
 }
 
-@media only screen and (max-width: 1440px){
-  .dataTable{
-    .table-container{
-      .tr-body{
-        td{
+@media only screen and (max-width: 1440px) {
+  .dataTable {
+    .table-container {
+      
+      .tr-body {
+        td {
           font-size: 14px;
           padding: 15px;
         }
       }
     }
 
-    .action-div{
-      .icon-desc{
-        img{
+    .action-div {
+      .icon-desc {
+        img {
           width: 32px;
         }
       }
@@ -127,19 +125,40 @@
   }
 }
 
-
-@media(max-height: 864px){
-  .dataTable{
-    .table-container{
+@media (max-height: 864px) {
+  .dataTable {
+    .table-container {
       // height: 55vh !important;
     }
   }
 }
 
-@media(max-height: 760px){
-  .dataTable{
-    .table-container{
+@media (max-height: 760px) {
+  .dataTable {
+    .table-container {
       height: 50vh !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .dataTable {
+    .table-container {
+      .tr-head{
+        th{
+          font-size: 12px !important;
+        }
+      }
+      .tr-body {
+        td {
+          font-size: 12px !important;
+          padding: 12px !important;
+          min-width: 120px !important;
+        }
+      }
+    }
+    .fixed-column {
+      position: static !important;
     }
   }
 }

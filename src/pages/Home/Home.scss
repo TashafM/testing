@@ -7,6 +7,10 @@
     display: none;
   }
 
+  .forTablets{
+    display: none;
+  }
+
 
   .row {
     .menu-list {
@@ -89,8 +93,12 @@
   .sub-menu-list{
     display: none !important;
   }
-  .tablet-menu{
+  .tablet-menu, .forTablets{
     display: block !important;
+  }
+
+  .forDesktop{
+    display: none !important;
   }
 }
 

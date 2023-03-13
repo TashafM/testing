@@ -8,6 +8,7 @@ import Menus from "../../components/Menus/Menus";
 import NeedHelp from "../../components/NeedHelp/NeedHelp";
 import TabMenus from "../../components/TabMenus/TabMenus";
 import MobileNotSupported from "../../components/MobileNotSupported/MobileNotSupported";
+import TabletNavbar from "../../components/TabletNavbar/TabletNavbar";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -18,7 +19,12 @@ const Home = () => {
   return (
     <>
       <div className="homepage">
-        <NavbarTop />
+        <div className="forDesktop">
+          <NavbarTop />
+        </div>
+        <div className="forTablets">
+          <TabletNavbar />
+        </div>
         <div className="tablet-menu">
           <TabMenus />
         </div>

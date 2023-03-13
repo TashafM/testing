@@ -17,7 +17,7 @@ const RestoreDeleteBtn = ({
   setSelectedIds,
   currMemberData,
   handleSearch,
-  handleSearch2
+  handleSearch2,
 }) => {
   const location = useLocation();
   const currentPath = "/home/team-members/current-members";
@@ -26,7 +26,7 @@ const RestoreDeleteBtn = ({
   return (
     <>
       <UnderLineTabs tabs={teamMembersTab} />
-      <div className="col search-filter">
+      <div className="col search-filter onlyDesktop">
         {selectedIds.length == 0 ? (
           ""
         ) : (
@@ -57,15 +57,15 @@ const RestoreDeleteBtn = ({
           </>
         )}
 
-        {
-          location.pathname === currentPath &&
-          <SearchBar handleSearch={handleSearch} />
-        }
-        {
-          location.pathname === pastPath &&
-          <SearchBar handleSearch={handleSearch2} />
-        }
-        <FilterBtn />
+        {/* <div> */}
+          {location.pathname === currentPath && (
+            <SearchBar handleSearch={handleSearch} />
+          )}
+          {location.pathname === pastPath && (
+            <SearchBar handleSearch={handleSearch2} />
+          )}
+          <FilterBtn />
+        {/* </div> */}
       </div>
     </>
   );

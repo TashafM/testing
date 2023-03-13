@@ -1,0 +1,35 @@
+.tabletNavbar {
+  background-color: white;
+  padding: 20px 30px;
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5px;
+  .company-logo {
+    img {
+      max-width: 100px;
+      width: 100%;
+    }
+  }
+
+  .right-items {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .search-img{
+        cursor: pointer;
+    }
+    .cart-img {
+      margin-left: 25px;
+      cursor: pointer;
+    }
+    .user-img {
+      margin-left: 25px;
+      img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
+  }
+}

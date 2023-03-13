@@ -123,6 +123,8 @@ const TeamMembers = () => {
           />
         </div>
         <hr style={{ marginTop: "-2%" }} />
+        {/* <div>tashaf mahmoo</div> */}
+
         <div>
           {location.pathname == currentMember && (
             <CurrentMembers
