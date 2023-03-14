@@ -8,6 +8,8 @@ import { Outlet, useLocation } from "react-router-dom";
 import RestoreDeleteBtn from "./RestoreDeleteBtn/RestoreDeleteBtn";
 import CurrentPartners from "./CurrentPartners/CurrentPartners";
 import PastPartners from "./PastPartners/PastPartners";
+import UnderLineTabs from "../../../components/Tabs/UnderLineTabs";
+import { partnersTab } from "../TeamMembers/data/data";
 
 const Partners = () => {
   const [currPartnerData, setCurrPartnerData] = useState([]);
@@ -53,7 +55,7 @@ const Partners = () => {
           getDataFunc={selectedTab == 1 ? getCurrPartners : getPastPartners}
           addPartners="addPartners"
         />
-        <div className="members-tab">
+        {/* <div className="members-tab">
           <RestoreDeleteBtn
             selectedIds={selectedIds}
             pastMemberData={pastMemberData}
@@ -65,7 +67,24 @@ const Partners = () => {
             currPartnerData={currPartnerData}
           />
         </div>
-        <hr style={{ marginTop: "-2%" }} />
+        <hr style={{ marginTop: "-2%" }} /> */}
+        <div className="desktop-search tablet-search">
+          <div className="members-tab">
+            <UnderLineTabs tabs={partnersTab} />
+          </div>
+          {/* <hr style={{ marginTop: "-2%" }} /> */}
+          <RestoreDeleteBtn
+            selectedIds={selectedIds}
+            pastMemberData={pastMemberData}
+            pastPartnerApi={pastPartnerApi}
+            currPartnersApi={currPartnersApi}
+            getCurrPartners={getCurrPartners}
+            getPastPartners={getPastPartners}
+            setSelectedIds={setSelectedIds}
+            currPartnerData={currPartnerData}
+          />
+        </div>
+        <hr style={{ marginTop: "-2%" }} className="onlyDesktop" />
 
         <div>
           {location.pathname == currentPartners && (

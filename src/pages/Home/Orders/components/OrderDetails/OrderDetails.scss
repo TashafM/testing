@@ -1,35 +1,45 @@
-.order-details-div {
-  display: flex;
-  justify-content: space-between;
-  // padding: 0 40px;
-  margin-bottom: 40px;
+.upper-content{
+  .order-details-div {
+    display: flex;
+    justify-content: space-between;
+    // padding: 0 40px;
+    margin-bottom: 40px;
+  
+    .search-filter-div {
+      display: flex;
+    }
+  
+    .order-company {
+      .order-date {
+        margin-bottom: 15px;
+        color: #9f9f9f;
+        font-weight: 500;
+  
+        span {
+          color: black;
+        }
+      }
+      .company-name {
+        font-size: 26px;
+        font-weight: 600;
+        line-height: 32px;
+      }
+    }
+  }
+  
+  .table-div-order-details {
+    margin-top: 40px;
+    // margin-left: 30px;
+    // height: 300px;
+  }
 
-  .search-filter-div {
+  .ordering-boxes{
     display: flex;
   }
 
-  .order-company {
-    .order-date {
-      margin-bottom: 15px;
-      color: #9f9f9f;
-      font-weight: 500;
-
-      span {
-        color: black;
-      }
-    }
-    .company-name {
-      font-size: 26px;
-      font-weight: 600;
-      line-height: 32px;
-    }
-  }
-}
-
-.table-div-order-details {
-  margin-top: 40px;
-  // margin-left: 30px;
-  // height: 300px;
+  // .tablet-view{
+  //   display: none;
+  // }
 }
 
 @media only screen and (max-width: 1600px) {
@@ -63,3 +73,22 @@
   }
 }
 
+
+@media only screen and (max-width: 780px){
+  .upper-content{
+    .ordering-boxes{
+      display: block;
+      .order-details-box{
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 730px){
+  .upper-content{
+    .table-div-order-details{
+      margin-top: 15px;
+    }
+  }
+}

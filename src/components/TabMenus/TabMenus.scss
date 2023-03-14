@@ -21,4 +21,18 @@
     color: #BE212A;
     cursor: pointer;
   }
+
+  .active-tab{
+    padding: 15px 10px;
+    background: #BE212A;
+    margin-right: 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    width: 100%;
+    min-width: 155px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+  }
 }

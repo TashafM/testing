@@ -157,9 +157,18 @@
         }
       }
     }
-    .fixed-column {
-      position: static !important;
-      box-shadow: none !important;
+    // .fixed-column {
+    //   position: static !important;
+    //   box-shadow: none !important;
+    // }
+  }
+}
+
+
+@media (min-height: 1100px) {
+  .dataTable {
+    .table-container {
+      height: 60vh !important;
     }
   }
 }

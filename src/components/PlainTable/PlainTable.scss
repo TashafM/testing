@@ -140,3 +140,35 @@
     }
   }
 }
+
+
+@media only screen and (max-width: 992px) {
+  .plainTable {
+    .table-container {
+      .tr-head{
+        th{
+          font-size: 12px !important;
+        }
+      }
+      .tr-body {
+        td {
+          font-size: 12px !important;
+          padding: 20px 0px !important;
+          min-width: 120px !important;
+        }
+      }
+    }
+    // .fixed-column {
+    //   position: static !important;
+    //   box-shadow: none !important;
+    // }
+  }
+}
+
+@media (min-height: 900px) {
+  .plainTable {
+    .table-container {
+      height: 65vh !important;
+    }
+  }
+}

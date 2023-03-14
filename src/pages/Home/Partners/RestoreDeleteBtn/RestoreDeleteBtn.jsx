@@ -22,8 +22,8 @@ const RestoreDeleteBtn = ({
   // console.log(location)
   return (
     <>
-      <UnderLineTabs tabs={partnersTab} />
-      <div className="col search-filter onlyDesktop">
+      {/* <UnderLineTabs tabs={partnersTab} /> */}
+      <div className="col search-filter">
         {selectedIds.length == 0 ? (
           ""
         ) : (

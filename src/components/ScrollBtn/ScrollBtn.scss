@@ -14,3 +14,30 @@
       cursor: pointer;
     }
   }
+
+  @media only screen and (max-width: 1600px) {
+    .scroll-buttons{
+      img{
+        width: 50px !important;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1440px) {
+    .scroll-buttons{
+      img{
+        width: 46px !important;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 992px) {
+    .scroll-buttons{
+      bottom: -3% !important;
+      width: 18% !important;
+      right: 15% !important;
+      img{
+        width: 40px !important;
+      }
+    }
+  }

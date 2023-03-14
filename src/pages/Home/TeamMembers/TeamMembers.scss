@@ -8,6 +8,11 @@
   border-radius: 12px;
   margin-left: 0;
   // overflow: auto;
+
+  .desktop-search {
+    display: flex;
+    align-items: baseline;
+  }
   .route-text {
     font-size: 38px;
     font-weight: bold;
@@ -217,12 +222,28 @@
     border-radius: 0 !important;
     padding: 20px !important;
 
-    .onlyDesktop {
+    .onlyDesktop, .desktop-search {
       display: none;
+    }
+
+    .tablet-search{
+      display: block;
+    }
+
+    .search-filter{
+      justify-content: space-between;
+      margin-bottom: 20px;
+
+      .search-div{
+        input{
+          width: 200%;
+        }
+      }
     }
 
     .members-tab {
       margin-top: 25px !important;
+      padding-bottom: 20px !important;
     }
   }
 }

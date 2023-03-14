@@ -32,8 +32,10 @@ const OrderDetails = () => {
             </div>
           </div>
         </div>
+        {/* <div className="ordering-boxes tablet-view"> */}
         <OrderDetailsBox icon={bill} icon2={truck} />
         <OrderSummaryBox />
+        {/* </div> */}
         {/* <OrderDetailsBox /> */}
       </Row>
       <div className="table-div-order-details">

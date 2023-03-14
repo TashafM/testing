@@ -22,7 +22,8 @@ const TeamMembers = () => {
   const [selectedIds, setSelectedIds] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const currMemberApi = `https://63f368a0864fb1d60015fd5e.mockapi.io/new`;
-  const pastMemberApi = "https://63ecd449be929df00cb3017e.mockapi.io/pastmembers";
+  const pastMemberApi =
+    "https://63ecd449be929df00cb3017e.mockapi.io/pastmembers";
 
   const currentMember = "/home/team-members/current-members";
   const pastMember = "/home/team-members/past-members";
@@ -68,8 +69,8 @@ const TeamMembers = () => {
       //   location.pathname == currentMember && setItems(response.data);
       //   setFilteredItems(response.data);
       // }
-      setItems(response.data)
-      setFilteredItems(response.data)
+      setItems(response.data);
+      setFilteredItems(response.data);
       setIsLoading(false);
     });
   };
@@ -77,13 +78,12 @@ const TeamMembers = () => {
   const getPastMembers = () => {
     axios.get(pastMemberApi).then((response) => {
       setPastMemberData(response.data);
-      setItems2(response.data)
-      setFilteredItems2(response.data)
+      setItems2(response.data);
+      setFilteredItems2(response.data);
       // {
       //   location.pathname == pastMember && setItems(response.data);
       //   setFilteredItems(response.data);
       // }
-
     });
   };
 
@@ -108,7 +108,11 @@ const TeamMembers = () => {
           }
           addMember="addMember"
         />
-        <div className="members-tab">
+        <div className="desktop-search tablet-search">
+          <div className="members-tab">
+            <UnderLineTabs tabs={teamMembersTab} />
+          </div>
+          {/* <hr style={{ marginTop: "-2%" }} /> */}
           <RestoreDeleteBtn
             selectedIds={selectedIds}
             pastMemberData={pastMemberData}
@@ -121,8 +125,10 @@ const TeamMembers = () => {
             handleSearch={handleSearch}
             handleSearch2={handleSearch2}
           />
+          
         </div>
-        <hr style={{ marginTop: "-2%" }} />
+        <hr style={{ marginTop: "-2%" }} className='onlyDesktop'/>
+
         {/* <div>tashaf mahmoo</div> */}
 
         <div>
