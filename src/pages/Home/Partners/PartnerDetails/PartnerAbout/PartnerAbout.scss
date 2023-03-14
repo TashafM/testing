@@ -27,6 +27,10 @@
 
 .row-inside{
     margin-right: 0 !important;
+
+    .item-div{
+        margin: 20px 1% 20px 0px !important;
+    }
 }
 
 .hr-partner{
@@ -34,3 +38,12 @@
     // color: #E4E4E4 !important;
     border: 1px solid #bbbbbb;
 }
+
+@media only screen and (max-width: 992px){
+    .row-inside{
+        .item-div{
+            // margin-top: 20px !important;
+            margin-right: 0 !important;
+        }
+    }
+  }

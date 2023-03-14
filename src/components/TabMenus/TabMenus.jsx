@@ -13,7 +13,7 @@ const TabMenus = () => {
     <div className="tabMenus">
       {menuItems.map((item) => (
         <div
-          className={item.path == location.pathname ? "active-tab" : "tabs"}
+          className={item.path === location.pathname || location.pathname.includes(item.path)? "active-tab" : "tabs"}
           onClick={() => openPage(item.path)}
         >
           {item.title}

@@ -35,12 +35,6 @@ const UpperPart = ({data}) => {
           </div>
           <div>Bharat</div>
         </div>
-        <div className="title-content">
-          <div>
-            <img src={office} alt="" />
-          </div>
-          <div>Company</div>
-        </div>
       </div>
     </>
   );

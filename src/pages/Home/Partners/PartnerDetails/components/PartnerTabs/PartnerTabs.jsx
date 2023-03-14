@@ -5,7 +5,6 @@ import { partnerTabs } from "../data";
 const PartnerTabs = ({ select, selectedTab, state }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location, "lo");
 
   return (
     <div className="col tabs-change mb-45">

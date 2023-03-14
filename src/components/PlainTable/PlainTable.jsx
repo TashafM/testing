@@ -39,7 +39,6 @@ const PlainTable = ({ columns, datum }) => {
                       <td key={id}>
                         <div className={col.value}>
                           {row[col.value]}
-                          {(console.log(col, "tashaf mahmood"))}
                         </div>
                       </td>
                     </>

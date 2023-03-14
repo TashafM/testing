@@ -9,9 +9,11 @@ const PartnersTable = ({staticData, data, title}) => {
         <Row className="row-inside">
           {staticData.map((item, val) => (
             <Col
-              md={2}
-              className="item-div"
-              style={{ margin: "20px 0", marginRight: "1%" }}
+              lg={2}
+              className="item-div "
+              // style={{ margin: "20px 0", marginRight: "1%" }}
+              md={3}
+              sm={4}
             >
               <div className="item-title">{item.name}</div>
               <div className="item-desc">{data[item.value]}</div>

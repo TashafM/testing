@@ -247,22 +247,22 @@ export const partnerTabs = [
         index: 2,
         link: '/home/partners/detail/address'
     },
+    // {
+    //     id: 3,
+    //     title: 'Payment Details',
+    //     index: 3,
+    //     link: '/home/partners/detail/payment-details'
+    // },
     {
         id: 3,
-        title: 'Payment Details',
-        index: 3,
-        link: '/home/partners/detail/payment-details'
-    },
-    {
-        id: 4,
         title: 'Catalog',
-        index: 4,
+        index: 3,
         link: '/home/partners/detail/catalog'
     },
     {
-        id: 5,
+        id: 4,
         title: 'Past Order',
-        index: 5,
+        index: 4,
         link: '/home/partners/detail/past-orders'
     },
 ]

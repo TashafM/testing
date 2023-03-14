@@ -156,6 +156,21 @@
         }
         margin-bottom: 5px;
       }
+
+      .order-summary{
+        .title-text{
+          margin: 0;
+        }
+
+        .taxes{
+          .summary-heading{
+            margin-bottom: 0;
+          }
+          .summary-amount{
+            margin-bottom: 0;
+          }
+        }
+      }
     }
   }
  }

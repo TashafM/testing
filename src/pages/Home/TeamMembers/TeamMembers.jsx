@@ -8,7 +8,7 @@ import RatingBtn from "../../../components/RatingBtn/RatingBtn";
 import RestoreBtn from "../../../components/RestoreBtn/RestoreBtn";
 import Tabs from "./Tabs/Tabs";
 import { colCurrentMembers, colPastMembers, teamMembersTab } from "./data/data";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useMatch, useNavigate,  } from "react-router-dom";
 import UnderLineTabs from "../../../components/Tabs/UnderLineTabs";
 import CurrentMembers from "./CurrentMembers/CurrentMembers";
 import RestoreDeleteBtn from "./RestoreDeleteBtn/RestoreDeleteBtn";
@@ -87,6 +87,7 @@ const TeamMembers = () => {
     });
   };
 
+  
   useEffect(() => {
     setSelectedIds([]);
     getCurrMembers();

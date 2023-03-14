@@ -114,3 +114,17 @@
       height: 40vh !important;
     }
   }
+
+  @media only screen and (max-width: 1199px){
+    .partner-content{
+      margin: 0;
+      margin-top: 10px;
+      border-radius: 0 !important;
+    }
+  }
+
+  @media screen and (max-width:1199px) and (min-height:900px) {
+    .outlet-div{
+      height: 50vh !important;
+    }
+  }
