@@ -95,6 +95,7 @@ export const partnerAddressTransportation = [
         id:3,
         name: 'Any specific transportation recommended',
         value: 'name',
+        check: 'transport'
     }
 ]
 

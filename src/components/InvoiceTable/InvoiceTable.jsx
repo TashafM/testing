@@ -9,8 +9,6 @@ const InvoiceTable = ({ columns, datum }) => {
   //   const data = datum.sort((a, b) => b.id - a.id);  -----------> for sorting we can use this
   const navigate = useNavigate();
 
-  const dummy = (a) => console.log(a);
-
   return (
     <div className="invoice-table">
       <div className="table-container">
@@ -20,7 +18,7 @@ const InvoiceTable = ({ columns, datum }) => {
               {/* {columns.map((col, idx) => (
                 <th key={idx}>{col.title}</th>
               ))} */}
-              <td>Orders</td>
+              <td className="orders">Orders</td>
               <td>Date</td>
               <td>Payment</td>
               <td>Status</td>
@@ -31,7 +29,7 @@ const InvoiceTable = ({ columns, datum }) => {
           <tbody className="scroll-body">
             {datum.map((row, id) => (
               <tr className="tr-body">
-                <td>{row.orders}</td>
+                <td className="orders">{row.orders}</td>
                 <td>{row.date}</td>
                 <td>{row.payment}</td>
                 <td>{row.status}</td>

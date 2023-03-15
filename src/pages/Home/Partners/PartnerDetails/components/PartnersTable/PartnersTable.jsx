@@ -1,24 +1,37 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 
-const PartnersTable = ({staticData, data, title}) => {
+const PartnersTable = ({ staticData, data, title }) => {
   return (
     <>
       <div className="title">{title}:</div>
       <div>
         <Row className="row-inside">
-          {staticData.map((item, val) => (
-            <Col
-              lg={2}
-              className="item-div "
-              // style={{ margin: "20px 0", marginRight: "1%" }}
-              md={3}
-              sm={4}
-            >
-              <div className="item-title">{item.name}</div>
-              <div className="item-desc">{data[item.value]}</div>
-            </Col>
-          ))}
+          {staticData.map((item, val) =>
+            item.check ? (
+              <Col
+                lg={6}
+                className="item-div "
+                md={6}
+                sm={6}
+              >
+                <div className="item-title">{item.name}</div>
+                <div className="item-desc">{data[item.value]}</div>
+                {console.log('first one')}
+              </Col>
+            ) : (
+              <Col
+                lg={2}
+                className="item-div "
+                md={3}
+                sm={4}
+              >
+                <div className="item-title">{item.name}</div>
+                <div className="item-desc">{data[item.value]}</div>
+                {console.log('second one')}
+              </Col>
+            )
+          )}
         </Row>
       </div>
     </>
