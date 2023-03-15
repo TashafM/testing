@@ -118,7 +118,7 @@ const Screen1 = ({api, getDataFunc}) => {
                 handleOptionChange={handleInputChange}
               />
 
-              <hr style={{ margin: "60px 0" }} />
+              <hr className='horizontal-line'/>
 
               <div className="sub-headings">Tax Information</div>
               <InputField

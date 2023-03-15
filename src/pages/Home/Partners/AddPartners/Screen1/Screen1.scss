@@ -44,6 +44,10 @@
   }
 }
 
+.horizontal-line{
+  margin: 60px 0;
+}
+
 @media only screen and (max-width: 1600px) {
   .screen1-heading {
     font-size: 34px !important;
@@ -67,4 +71,31 @@
   .screen1-heading{
     margin-bottom: 25px !important;
   }
+}
+
+@media only screen and (max-width: 1199px) {
+
+  .screen1-heading{
+    font-size: 30px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .sub-headings{
+    font-size: 16px !important;
+    margin-bottom: 20px !important;
+  }
+  .content-div{
+    padding: 25px !important;
+
+    .offcanvas-header{
+      .title{
+        font-size: 24px !important;
+      }
+    }
+  }
+
+  .horizontal-line{
+    margin: 20px 0;
+  }
+
 }

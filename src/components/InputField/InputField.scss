@@ -24,3 +24,15 @@
     }
   }
   }
+
+
+  @media only screen and (max-width: 1199px) {
+    .input-div-comp{
+      .form-label{
+        font-size: 14px;
+      }
+      input{
+        font-size: 14px;
+      }
+    }
+  }

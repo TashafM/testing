@@ -34,3 +34,18 @@
     }
   }
 }
+
+
+@media only screen and (max-width: 1199px) {
+  .label{
+    font-size: 14px;
+  }
+
+  .division{
+    .input-group{
+      .form-label{
+        font-size: 14px;
+      }
+    }
+  }
+}
