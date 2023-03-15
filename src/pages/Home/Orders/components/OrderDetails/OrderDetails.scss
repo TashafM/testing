@@ -74,6 +74,15 @@
 }
 
 
+@media only screen and (max-width: 1199px) {
+  .upper-content{
+    .table-div-order-details{
+      margin-top: 25px;
+    }
+  }
+}
+
+
 @media only screen and (max-width: 780px){
   .upper-content{
     .ordering-boxes{
@@ -89,6 +98,14 @@
   .upper-content{
     .table-div-order-details{
       margin-top: 15px;
+    }
+  }
+}
+
+@media only screen and (max-height: 840px){
+  .upper-content{
+    .table-div-order-details{
+      margin-top: 10px;
     }
   }
 }

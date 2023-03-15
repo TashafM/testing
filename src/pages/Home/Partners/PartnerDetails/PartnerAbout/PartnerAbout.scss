@@ -39,6 +39,24 @@
     border: 1px solid #bbbbbb;
 }
 
+
+@media only screen and (max-width: 1199px){
+    .partner-about{
+        .title{
+            font-size: 16px;
+        }
+
+        .item-div{
+            .item-title{
+                font-size: 14px;
+            }
+            .item-desc{
+                font-size: 14px;
+            }
+        }
+    }
+  }
+
 @media only screen and (max-width: 992px){
     .row-inside{
         .item-div{

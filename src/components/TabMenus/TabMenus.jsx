@@ -11,15 +11,16 @@ const TabMenus = () => {
   };
   return (
     <div className="tabMenus">
-      {menuItems.map((item) => (
+      {menuItems.map((item,id) => (
         <>
           <div
             className={
-              item.path === location.pathname
+              item.path.slice(0,10) === location.pathname.slice(0,10)
                 ? "active-tab"
                 : "tabs"
             }
             onClick={() => openPage(item.path)}
+            key={id}
           >
             {item.title}
           </div>

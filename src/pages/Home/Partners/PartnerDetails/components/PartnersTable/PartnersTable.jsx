@@ -17,7 +17,6 @@ const PartnersTable = ({ staticData, data, title }) => {
               >
                 <div className="item-title">{item.name}</div>
                 <div className="item-desc">{data[item.value]}</div>
-                {console.log('first one')}
               </Col>
             ) : (
               <Col
@@ -28,7 +27,6 @@ const PartnersTable = ({ staticData, data, title }) => {
               >
                 <div className="item-title">{item.name}</div>
                 <div className="item-desc">{data[item.value]}</div>
-                {console.log('second one')}
               </Col>
             )
           )}

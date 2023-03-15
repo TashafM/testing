@@ -35,6 +35,10 @@
       }
   
       .tr-head {
+
+        td{
+          padding: 20px;
+        }
         th {
           font-size: 14px;
           font-weight: 500;
@@ -64,6 +68,9 @@
         }
         td.tax-amount{
           min-width: 200px;
+        }
+        td.tax-code{
+          min-width: 120px;
         }
         
       }
@@ -149,6 +156,11 @@
       .table-container{
         height: 45vh;
 
+        .tr-head{
+          td{
+            padding: 18px;
+          }
+        }
         .tr-body{
           td{
             font-size: 16px;
@@ -163,6 +175,23 @@
     .orderTable{
       .table-container{
         height: 45vh;
+
+        .tr-head{
+          td{
+            font-size: 14px ;
+            padding: 15px !important;
+            // color: red;
+          }
+        }
+      }
+    }
+  }
+
+  
+  @media only screen and (max-width: 1199px) and (min-height: 1000px){
+    .orderTable{
+      .table-container{
+        height: 53vh;
 
         .tr-body{
           td{

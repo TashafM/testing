@@ -20,3 +20,12 @@
       color: #899197;
     }
   }
+
+  @media only screen and (max-width: 1199px){
+    .search-div{
+      input{
+        padding: 10px;
+        padding-left: 20%;
+      }
+    }
+  }
