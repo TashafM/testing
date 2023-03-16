@@ -120,7 +120,7 @@
 @media only screen and (max-width: 1600px) {
 
   .offcanvas.show{
-    width: 40% !important;
+    // width: 40% !important;
   }
 
   .teamMember-add{
@@ -163,46 +163,46 @@
   }
 }
 
-@media only screen and (max-width: 1360px) {
-  .teamMember-add {
-    font-size: 28px !important;
-    line-height: 32px !important;
-    margin-bottom: 12px !important;
+// @media only screen and (max-width: 1360px) {
+//   .teamMember-add {
+//     font-size: 28px !important;
+//     line-height: 32px !important;
+//     margin-bottom: 12px !important;
 
-    .content {
-      padding: 25px !important;
-    }
+//     .content {
+//       padding: 25px !important;
+//     }
 
-    .input-div {
-      margin-bottom: 5px !important;
-      .form-label {
-        font-size: 16px !important;
-      }
+//     .input-div {
+//       margin-bottom: 5px !important;
+//       .form-label {
+//         font-size: 16px !important;
+//       }
 
-      input {
-        padding: 10px !important;
-      }
-    }
-  }
+//       input {
+//         padding: 10px !important;
+//       }
+//     }
+//   }
 
-  .sub-title-team {
-    font-size: 16px !important;
-    line-height: 22px !important;
-  }
+//   .sub-title-team {
+//     font-size: 16px !important;
+//     line-height: 22px !important;
+//   }
 
-  .date-main {
-    input,
-    input::placeholder {
-      font-size: 14px;
-    }
-  }
-}
+//   .date-main {
+//     input,
+//     input::placeholder {
+//       font-size: 14px;
+//     }
+//   }
+// }
 
-@media only screen and (max-width: 1199px) {
+@media only screen and (max-width: 1440px) {
 
 
   .offcanvas.show {
-    width: 45% !important;
+    width: 40% !important;
   }
 
   .offcanvas-body{
@@ -231,7 +231,7 @@
 
       .info-text{
         margin-bottom: 5px !important;
-        margin-top: -10px !important;
+        margin-top: -15px !important;
         font-size: 12px;
       }
     }
@@ -244,6 +244,10 @@
     }
     .date-input.form-control.year{
       height: 50px;
+    }
+
+    input, input::placeholder{
+      font-size: 12px !important;
     }
   }
 }
