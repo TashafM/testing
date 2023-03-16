@@ -75,13 +75,14 @@
     justify-content: center;
 
     .icon-desc {
-      margin-right: 20px;
+      margin-right: 10px;
       cursor: pointer;
     }
   }
 
   .fixed-column {
     position: sticky;
+    // position: -webkit-sticky; /* for safari */
     right: 0;
     background-color: #ff1313;
     box-shadow: -5px 0px 20px -5px rgb(0 0 0 / 20%) !important;
@@ -98,6 +99,12 @@
           font-size: 16px;
           padding: 20px;
         }
+      }
+    }
+
+    .action-div{
+      .icon-desc{
+        margin-right: 10px !important;
       }
     }
   }

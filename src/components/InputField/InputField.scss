@@ -17,22 +17,23 @@
   }
 }
 
-@media only screen and (max-width: 1360px) {
-  .input-div-comp{
-    input{
-      padding: 10px !important;
-    }
-  }
-  }
+// @media only screen and (max-width: 1360px) {
+//   .input-div-comp{
+//     input{
+//       padding: 10px !important;
+//     }
+//   }
+//   }
 
 
-  @media only screen and (max-width: 1199px) {
+  @media only screen and (max-width: 1600px) {
     .input-div-comp{
       .form-label{
-        font-size: 14px;
+        font-size: 12px;
+        margin: 0;
       }
       input{
-        font-size: 14px;
+        font-size: 12px;
       }
     }
   }
