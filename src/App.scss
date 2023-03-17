@@ -19,6 +19,11 @@ body::-webkit-scrollbar-track {
   font-size: 18px !important;
 }
 
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #899197;
+}
+
 // SCREEN SIZE
 // first : 1920x1080
 // macbook 16 : 1728x1117

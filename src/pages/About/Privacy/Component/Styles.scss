@@ -1,16 +1,6 @@
 .privacy-title {
   font-family: "Inter";
   font-style: normal;
-  font-weight: 600;
-  font-size: 23px;
-  line-height: 28px;
-  margin-bottom: 35px;
-  color: #000000;
-}
-
-.privacy-title {
-  font-family: "Inter";
-  font-style: normal;
   font-weight: 500;
   font-size: 20px;
 
@@ -35,7 +25,6 @@
     font-style: normal;
     font-weight: 500;
     font-size: 17px;
-    line-height: 21px;
     color: #000000;
     padding-bottom: 30px;
   }
@@ -53,4 +42,23 @@
       color: #898a8d;
     }
   }
+}
+
+@media only screen and (max-width: 1600px) {
+  .table-of-content {
+    .title {
+      font-size: 18px;
+    }
+  }
+
+  .privacy-tit {
+    font-size: 18px;
+  }
+
+  .privacy-desc {
+    font-size: 16;
+  }
+}
+
+@media only screen and (max-width: 1600px) {
 }

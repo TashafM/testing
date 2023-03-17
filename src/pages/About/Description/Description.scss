@@ -1,78 +1,161 @@
 .about-wrapper {
+  //   padding-inline: 50px;
+  .description-wrapper {
+    padding-bottom: 2%;
+  }
 
-    padding-inline: 50px;
+  .title {
+    font-family: Inter;
+    font-weight: 600;
+    font-size: 32px;
+  }
 
+  .row-cont {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .comp-logo {
+    height: 90px;
+    width: 90px;
+  }
+
+  .comp-title {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    // line-height: 38px;
+    color: #000000;
+    margin-bottom: 10px;
+  }
+
+  .comp-subtitle {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 23px;
+    // line-height: 28px;
+    /* identical to box height */
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .title-cont {
+    padding-left: 20px;
+  }
+
+  .verified-icon {
+    height: 26px;
+    width: 26px;
+    margin-right: 11px;
+    margin-left: 41px;
+  }
+
+  .verified-title {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration-line: underline;
+    color: #4793f4;
+  }
+
+  .discription-cont {
+    display: flex;
+    margin-top: 1%;
+  }
+
+  .comp-discription {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    // line-height: 36px;
+    color: rgba(0, 0, 0, 0.6);
+    max-width: 85%;
+  }
+}
+
+@media only screen and (max-width: 1750px) {
+  .about-wrapper {
+  }
+}
+
+@media only screen and (max-width: 1600px) {
+  .about-wrapper {
     .title {
-        font-family: Inter;
-        font-weight: 600;
-        font-size: 32px;
+      font-size: 28px !important;
     }
 
-    .row-cont {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .comp-logo {
-        height: 90px;
-        width: 90px;
+    .description {
+      font-size: 14px !important;
+      line-height: 24px !important;
     }
 
     .comp-title {
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 31px;
-        line-height: 38px;
-        color: #000000;
-        margin-bottom: 10px;
+      font-size: 25px !important;
     }
 
     .comp-subtitle {
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 23px;
-        line-height: 28px;
-        /* identical to box height */
-        color: rgba(0, 0, 0, 0.5);
+      font-size: 20px;
     }
 
-    .title-cont {
-        padding-left: 20px;
+    .comp-logo {
+      height: 70px;
+      width: 70px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .about-wrapper {
+    .title {
+      font-size: 26px !important;
     }
 
-    .verified-icon {
-        height: 26px;
-        width: 26px;
-        margin-right: 11px;
-        margin-left: 41px;
+    .description {
+      font-size: 12px !important;
+      line-height: 20px !important;
     }
 
-    .verified-title {
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 16px;
-        text-decoration-line: underline;
-        color: #4793F4;
+    .comp-title {
+      font-size: 23px !important;
     }
 
-    .discription-cont {
-        display: flex;
-        padding-bottom: 59px;
-        margin-top: 20px;
+    .comp-subtitle {
+      font-size: 18px;
     }
 
-    .comp-discription {
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 20px;
-        line-height: 36px;
-        color: rgba(0, 0, 0, 0.6);
-        max-width: 60%;
+    .comp-logo {
+      height: 65px;
+      width: 65px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  .about-wrapper {
+    // padding: 20px;
+    .title {
+      font-size: 20px !important;
     }
 
+    .description {
+      font-size: 14px !important;
+      line-height: 24px !important;
+    }
 
+    .comp-title {
+      font-size: 17px !important;
+    }
+
+    .comp-subtitle {
+      font-size: 12px;
+    }
+
+    .comp-logo {
+      height: 50px;
+      width: 50px;
+    }
+  }
 }

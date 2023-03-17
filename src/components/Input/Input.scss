@@ -1,6 +1,6 @@
 .text-area-cont {
   width: 100%;
-  padding: 16px;
+  padding: 15px;
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
@@ -32,10 +32,10 @@
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
-  color: #899197;
+  color: #212529;
   width: 100%;
   border: none;
-  padding: 16px;
+  padding: 15px;
 }
 
 .input-container:focus-visible {
@@ -46,8 +46,8 @@
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  width: 52px;
+  height: 26px;
 }
 
 .switch input {
@@ -71,8 +71,8 @@
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
+  height: 18px;
+  width: 18px;
   left: 4px;
   bottom: 4px;
   background-color: white;
@@ -89,9 +89,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  -webkit-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  transform: translateX(18px);
 }
 
 /* Rounded sliders */
@@ -114,7 +114,7 @@ input:checked + .slider:before {
 }
 
 .badges-container {
-  padding: 6px 14px;
+  padding: 3px 12px;
   color: #fff;
   background: #456eff;
   border-radius: 14px;
@@ -134,10 +134,10 @@ input.PhoneInputInput {
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
-  color: #899197;
+  color: #212529;
   width: 100%;
   border: none;
-  padding: 16px;
+  padding: 15px;
 
   &:focus-visible {
     outline: none;
@@ -151,8 +151,7 @@ div.PhoneInputCountry {
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
-  line-height: 24px;
-  padding-inline: 16px;
+  padding-inline: 15px;
   color: #000000;
 }
 
@@ -160,11 +159,11 @@ div.PhoneInputCountry {
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
   background: #f7f7f7;
   border-radius: 6px;
   color: #000000;
-  padding: 12px;
+  padding: 8px;
 }
 
 .input-file-container {
@@ -177,4 +176,42 @@ div.PhoneInputCountry {
   display: block;
   margin-right: auto;
   margin-left: auto;
+}
+
+@media only screen and (max-width: 1199px) {
+  .badges-container {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 1600px) {
+  .badges-container {
+    font-size: 16px;
+  }
+
+  .input-lable {
+    font-size: 16px;
+  }
+
+  .input-container {
+    font-size: 16px;
+  }
+
+  .text-area-cont {
+    font-size: 16px;
+  }
+
+  .div.PhoneInputCountry {
+    font-size: 16px !important;
+  }
+
+  input.PhoneInputInput {
+    font-size: 16px !important;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .badges-container {
+    font-size: 14px;
+  }
 }

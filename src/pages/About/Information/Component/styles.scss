@@ -30,15 +30,14 @@
   background: #ffffff;
   border: 1px solid #dadada;
   border-radius: 12px;
-  padding: 16px;
+  padding: 10px;
   margin-bottom: 15px;
 
   .card-day {
     font-family: "Inter";
     font-style: normal;
     font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 16px;
     color: #000000;
   }
   .cardspace {
@@ -53,11 +52,11 @@
 .card-statement-cont {
   border: 1px solid #dadada;
   border-radius: 12px;
-  padding: 24px;
+  padding: 12px;
   margin-bottom: 33px;
 
   .statement-head {
-    padding-bottom: 16px;
+    padding-bottom: 8px;
   }
 
   .icon-delete {
@@ -100,7 +99,9 @@
   font-size: 12px;
   line-height: 20px;
   /* or 167% */
-
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   margin-top: 8px;
   color: #000000;
 }
@@ -142,4 +143,19 @@
 }
 .container-text-area {
   margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 1600px) {
+  .card-slots-container {
+  }
+
+  .statement-title {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 1600px) {
+  .statement-title {
+    font-size: 14px;
+  }
 }

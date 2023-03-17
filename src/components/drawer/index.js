@@ -47,7 +47,7 @@ export default function RightDrawer() {
             setOpenDrawer({ ...openDrawer, open: true });
           }}
         >
-          <Box style={{ width: "665px" }} role="presentation">
+          <Box style={{ width: "536px" }} role="presentation">
             <List>
               <ListItem disablePadding>
                 <ListItemButton>

@@ -1,36 +1,36 @@
 .tabs-change {
-    display: flex;
-    border-bottom: 1.4px solid #E4E4E4;
+  display: flex;
+  border-bottom: 1.4px solid #e4e4e4;
+  margin-bottom: 2%;
 
-    .tab {
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 18px;
-        color: #000000;
-        padding-inline: 16px;
-        padding-bottom: 16px;
-    }
+  .tab {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    color: #000000;
+    padding-inline: 16px;
+    padding-bottom: 16px;
+  }
 
-    .tab-cont {
-        cursor: pointer;
-        text-align: center;
-    }
+  .tab-cont {
+    cursor: pointer;
+    text-align: center;
+  }
 
+  .tab-indicator {
+    border-bottom: 2px solid #be2028;
+  }
 
-    .tab-indicator {
-        border-bottom: 2px solid #be2028;
-    }
-
-    .title-indicator {
-        color: #929292
-    }
+  .title-indicator {
+    color: #929292;
+  }
 }
 
-@media only screen and (max-width: 1600px){
-    .tabs-change{
-        .tab{
-            font-size: 16px !important;
-        }
+@media only screen and (max-width: 1600px) {
+  .tabs-change {
+    .tab {
+      font-size: 16px !important;
     }
   }
+}

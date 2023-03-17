@@ -44,5 +44,16 @@
   font-size: 20px;
   line-height: 24px;
   color: #899197;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 1600px) {
+  .drawer-title {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+}
+@media only screen and (max-width: 1199px) {
 }

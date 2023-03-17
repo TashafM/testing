@@ -1,18 +1,28 @@
 .form-container {
-    padding: 1rem;
+  padding: 1rem;
 }
 
-.title span{
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 600;
-font-size: 32px;
-line-height: 39px;
-/* identical to box height */
-color: #000000;
+.title span {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 39px;
+  /* identical to box height */
+  color: #000000;
 }
 
-.side-container{
-    margin: 40px;
-    
+.side-container {
+  margin: 10px 40px 40px 40px;
+}
+
+@media only screen and (max-width: 1600px) {
+  .title span {
+    font-size: 25px;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+}
+@media only screen and (max-width: 1199px) {
 }

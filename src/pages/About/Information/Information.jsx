@@ -19,7 +19,7 @@ function Information() {
   return (
     <Container fluid>
       <Row className="info-container">
-        <Col className="card-wrapper" xs={4}>
+        <Col className="card-wrapper" md={6} xl={4}>
           <div className="card-cont">
             <CardHead title="Contact" icon={contact} />
             <div className="d-flex email-cont">
@@ -32,7 +32,7 @@ function Information() {
             </div>
           </div>
         </Col>
-        <Col className="card-wrapper" xs={4}>
+        <Col className="card-wrapper" md={6} xl={4}>
           <div className="card-cont">
             <CardHead title="Address" icon={location} />
             <div>
@@ -43,7 +43,7 @@ function Information() {
             </div>
           </div>
         </Col>
-        <Col className="card-wrapper" style={{ marginRight: 0 }} xs={4}>
+        <Col className="card-wrapper" style={{ marginRight: 0 }} md={6} xl={4}>
           <div className="card-cont">
             <CardHead title="Hours of operations" icon={business} />
             <div>
@@ -53,7 +53,7 @@ function Information() {
             </div>
           </div>
         </Col>
-        <Col className="card-wrapper" xs={4}>
+        <Col className="card-wrapper" md={6} xl={4}>
           <div className="card-cont">
             <CardHead title="Social Media & Links" icon={links} />
 
@@ -76,7 +76,7 @@ function Information() {
             </div>
           </div>
         </Col>
-        <Col className="card-wrapper" xs={4}>
+        <Col className="card-wrapper" md={6} xl={4}>
           <div className="card-cont">
             <CardHead title="Statement" icon={quote} />
             <div>
@@ -84,8 +84,7 @@ function Information() {
             </div>
           </div>
         </Col>
-
-        <Col className="card-wrapper" xs={4}>
+        <Col className="card-wrapper" md={6} xl={4}>
           <div className="card-cont">
             <CardHead
               title="Other Info"
