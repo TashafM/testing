@@ -1,24 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import UnderLineTabs from "../../components/Tabs/UnderLineTabs";
+import instance from "../../helper/axios";
 import { Helper } from "../../helper/helper";
+import { useResponse } from "../../hooks/useResponse";
 import "./About.scss";
 import { AboutTabs } from "./data/data";
 import Description from "./Description/Description";
 
 function About() {
-  const [selectedTab, selectTab] = useState(1);
+  const {
+    data: aboutData,
+    loading,
+    error,
+  } = useResponse("/portalViewCompanyAboutUsInfo");
 
-  const obj = new Helper();
+  if (loading) {
+    return <div>loading</div>;
+  }
 
-  obj.sayHello();
+  if (error.error) {
+    return <div>{error.message}</div>;
+  }
+
   return (
     <div className="upper-content">
       <div className="about-wrapper">
         <Description />
         <UnderLineTabs tabs={AboutTabs} />
         <div className="tabs-container-section">
-          <Outlet />
+          <Outlet context={[aboutData]} />
         </div>
       </div>
     </div>
