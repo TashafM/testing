@@ -16,6 +16,8 @@ const CurrentMembers = ({
   filteredItems,
 }) => {
 
+  console.log(currMemberData,'------------')
+
   return (
     <div>
       <DataTable

@@ -3,20 +3,24 @@ import React, { useEffect, useRef, useState } from "react";
 import "./TeamMembers.scss";
 import Description from "../Description/Description";
 import users from "../../../assets/images/users.svg";
-import axios from "axios";
+// import axios from "axios";
+import axios from "../../../helper/axios";
 import RatingBtn from "../../../components/RatingBtn/RatingBtn";
 import RestoreBtn from "../../../components/RestoreBtn/RestoreBtn";
 import Tabs from "./Tabs/Tabs";
 import { colCurrentMembers, colPastMembers, teamMembersTab } from "./data/data";
-import { Outlet, useLocation, useMatch, useNavigate,  } from "react-router-dom";
+import { Outlet, useLocation, useMatch, useNavigate } from "react-router-dom";
 import UnderLineTabs from "../../../components/Tabs/UnderLineTabs";
 import CurrentMembers from "./CurrentMembers/CurrentMembers";
 import RestoreDeleteBtn from "./RestoreDeleteBtn/RestoreDeleteBtn";
 import PastMembers from "./PastMembers/PastMembers";
+import { API } from "../../../helper/API";
 
 const TeamMembers = () => {
   const location = useLocation();
-
+  //-----------------
+  const [currentData, setCurrentData] = useState([]);
+  //--------------
   const [currMemberData, setCurrMemberData] = useState([]);
   const [pastMemberData, setPastMemberData] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
@@ -69,7 +73,7 @@ const TeamMembers = () => {
       //   location.pathname == currentMember && setItems(response.data);
       //   setFilteredItems(response.data);
       // }
-      setItems(response.data);   
+      setItems(response.data);
       setFilteredItems(response.data);
       setIsLoading(false);
     });
@@ -87,11 +91,35 @@ const TeamMembers = () => {
     });
   };
 
-  
+  // const getCurrMembers = () => {
+  //   const userCode = localStorage.getItem("usercode");
+  //   const accessToken = localStorage.getItem("accessToken");
+
+  //   axios
+  //     .post(
+  //       API.VIEW_CURRENT_TEAM_MEMBERS,
+  //       { companyUserCode: userCode },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       setCurrMemberData(res.data.result);
+  //       setItems(res.data);
+  //       setFilteredItems(res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching current team members:", error);
+  //     });
+  // };
+
   useEffect(() => {
     setSelectedIds([]);
     getCurrMembers();
     getPastMembers();
+    // current();
   }, [location]);
 
   return (
@@ -109,6 +137,7 @@ const TeamMembers = () => {
           }
           addMember="addMember"
         />
+        {console.log(currentData, "current dAta")}
         <div className="desktop-search tablet-search">
           <div className="members-tab">
             <UnderLineTabs tabs={teamMembersTab} />
@@ -126,9 +155,8 @@ const TeamMembers = () => {
             handleSearch={handleSearch}
             handleSearch2={handleSearch2}
           />
-          
         </div>
-        <hr style={{ marginTop: "-2%" }} className='onlyDesktop'/>
+        <hr style={{ marginTop: "-2%" }} className="onlyDesktop" />
 
         {/* <div>tashaf mahmoo</div> */}
 

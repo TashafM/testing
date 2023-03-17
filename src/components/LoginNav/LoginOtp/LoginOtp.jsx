@@ -56,6 +56,9 @@ const LoginOtp = () => {
       })
       .then((res) => {
         if (res.status == 200) {
+          localStorage.setItem('usercode', res.data.userCode);
+          localStorage.setItem('accessToken', res.data.result[0].accessToken);
+          localStorage.setItem('username', res.data.userName);
           navigate("/home/dashboard");
         }
       });
@@ -102,7 +105,7 @@ const LoginOtp = () => {
       <button className="get-otp-btn" onClick={getOtp}>
         {reqOtp ? (
           <>
-            <span onClick={validateOtp}>Login</span>
+            <span onClick={(event) => {event.stopPropagation(); validateOtp();}}>Login</span>
           </>
         ) : (
           "Get OTP"

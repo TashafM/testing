@@ -2,8 +2,12 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import './Dashboard.scss';
 import progress from '../../../assets/images/progress.png'
+import { useLocation } from "react-router-dom";
 
 const Dashboard = () => {
+
+  const location = useLocation()
+  console.log(location,'location console')
   return (
     <div className="dashboard-container">
       <Row>
