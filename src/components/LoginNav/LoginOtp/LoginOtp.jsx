@@ -1,23 +1,45 @@
 import React, { useState } from "react";
 import { Form, InputGroup, FormControl } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import '../Login.scss'
+import "../Login.scss";
+import axios from "axios";
+import { API } from "../../../helper/API";
 
 const LoginOtp = () => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [error, setError] = useState("");
   const [reqOtp, setReqOtp] = useState(false);
+  const [email, setEmail] = useState("");
+  const [userCode, setUserCode] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const emailData = {
+    email: email,
+  };
 
   const handleChange = (index, event) => {
     const newOtp = [...otp];
-    newOtp[index] = event.target.value.slice(0,1);
-    setOtp(newOtp)
+    newOtp[index] = event.target.value.slice(0, 1);
+    setOtp(newOtp);
   };
 
+  // const getOtp = () => {
+  //   setReqOtp(true);
+  // };
+
   const getOtp = () => {
-    setReqOtp(true);
+    axios.post(API.LOGIN_API, emailData).then((res) => {
+      if (res.status == 200) {
+        setReqOtp(true);
+        setUserCode(res.data.result[0].userCode);
+      }
+      // console.log(res.data.result[0].userCode,'jjjjjjj')
+    });
   };
 
   const validateOtp = () => {
@@ -26,9 +48,21 @@ const LoginOtp = () => {
       setError("OTP must have 6 characters");
       return false;
     }
-    setError("");
-    navigate('/home/dashboard')
-    return true;
+
+    axios
+      .post(API.VERIFY_OTP, {
+        userCode: userCode,
+        otp: otpValue,
+      })
+      .then((res) => {
+        if (res.status == 200) {
+          localStorage.setItem('usercode', res.data.userCode);
+          localStorage.setItem('accessToken', res.data.result[0].accessToken);
+          localStorage.setItem('username', res.data.userName);
+          navigate("/home/dashboard");
+        }
+      });
+    
   };
 
   return (
@@ -62,6 +96,8 @@ const LoginOtp = () => {
             class="form-control email"
             id="floatingInput"
             placeholder="Enter email id"
+            // value={email}
+            onChange={handleEmail}
           />
         </div>
       )}
@@ -69,7 +105,7 @@ const LoginOtp = () => {
       <button className="get-otp-btn" onClick={getOtp}>
         {reqOtp ? (
           <>
-            <span onClick={validateOtp}>Login</span>
+            <span onClick={(event) => {event.stopPropagation(); validateOtp();}}>Login</span>
           </>
         ) : (
           "Get OTP"

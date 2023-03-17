@@ -35,8 +35,9 @@ const DataTable = ({
 }) => {
   const myRef = useRef(null);
   const [scrollX, setScrollX] = useState(0);
-  const data = datum.sort((a, b) => b.id - a.id);
-  // const data = datum;
+  // const data = datum.sort((a, b) => b.id - a.id);
+
+  const data = datum;
   const navigate = useNavigate();
 
   const gotoNew = (val) => {
@@ -112,6 +113,11 @@ const DataTable = ({
                         </>
                         <></>
                       </td>
+                      {/* <td key={`${row.id}-${col.value}`}>
+                        {col.value
+                          .split(".")
+                          .reduce((obj, key) => obj[key], row)}
+                      </td> */}
                     </>
                   ))}
                   <td className="action-div fixed-column">
