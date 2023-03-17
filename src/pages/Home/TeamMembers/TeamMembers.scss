@@ -113,6 +113,10 @@
   align-items: center;
   justify-content: flex-end;
 
+  .col-separate{
+    display: flex;
+  }
+
   .buttons {
     .del-button {
       display: flex;

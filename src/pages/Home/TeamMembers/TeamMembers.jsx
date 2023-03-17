@@ -69,7 +69,7 @@ const TeamMembers = () => {
       //   location.pathname == currentMember && setItems(response.data);
       //   setFilteredItems(response.data);
       // }
-      setItems(response.data);
+      setItems(response.data);   
       setFilteredItems(response.data);
       setIsLoading(false);
     });

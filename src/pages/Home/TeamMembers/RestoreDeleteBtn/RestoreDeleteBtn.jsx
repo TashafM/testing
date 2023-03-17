@@ -27,6 +27,7 @@ const RestoreDeleteBtn = ({
     <>
       {/* <UnderLineTabs tabs={teamMembersTab} /> */}
       <div className="col search-filter ">
+      <div className="col-separate">
         {selectedIds.length == 0 ? (
           ""
         ) : (
@@ -64,6 +65,7 @@ const RestoreDeleteBtn = ({
           {location.pathname === pastPath && (
             <SearchBar handleSearch={handleSearch2} />
           )}
+          </div>
           <FilterBtn />
         {/* </div> */}
       </div>
