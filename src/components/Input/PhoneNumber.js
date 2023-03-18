@@ -3,7 +3,7 @@ import PhoneInput from "react-phone-number-input";
 import { Fragment, useState } from "react";
 
 function PhoneNumber({
-  // value = "",
+  value = "",
   onChange = () => {},
   label = "",
   placeholder = "",
@@ -12,7 +12,7 @@ function PhoneNumber({
 }) {
   // `value` will be the parsed phone number in E.164 format.
   // Example: "+12133734253".
-  const [value, setValue] = useState();
+  // const [value, setValue] = useState();
   return (
     <Fragment>
       {label ? <p className="input-lable">{label}</p> : null}
@@ -20,7 +20,7 @@ function PhoneNumber({
         value={value}
         defaultCountry="IN"
         placeholder={placeholder}
-        onChange={setValue}
+        onChange={onChange}
         name={name}
         containerClass=""
         inputClass="input-container"

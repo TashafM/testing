@@ -1,65 +1,63 @@
-.info-container {
-  .card-head {
-    margin-bottom: 12px;
-  }
-  .card-otherinfo-head {
-    margin-bottom: 10px;
-  }
+.card-head {
+  margin-bottom: 12px;
+}
+.card-otherinfo-head {
+  margin-bottom: 10px;
+}
 
-  .card-cont {
-    background: #ffffff;
-    border: 1px solid #dadada;
-    border-radius: 12px;
-    padding: 12px;
-    margin-bottom: 30px;
-    max-height: 200px;
-  }
+.card-cont {
+  background: #ffffff;
+  border: 1px solid #dadada;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 30px;
+  max-height: 200px;
+}
 
-  .card-img {
-    height: 25px;
-    width: 25px;
-  }
+.card-img {
+  height: 25px;
+  width: 25px;
+}
 
-  .cont-title {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 22px;
-    // line-height: 31px;
-    padding-left: 10px;
-    color: #000000;
-  }
+.cont-title {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  // line-height: 31px;
+  padding-left: 10px;
+  color: #000000;
+}
 
-  .wrapper-title {
-    display: flex;
-    justify-content: space-between;
-    flex-grow: 1;
-  }
+.wrapper-title {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+}
 
-  .email-cont {
-    margin-bottom: 12px;
-  }
+.email-cont {
+  margin-bottom: 12px;
+}
 
-  .email {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 30px;
-    /* identical to box height, or 150% */
-    margin-left: 10px;
-    letter-spacing: 0.04em;
+.email {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  /* identical to box height, or 150% */
+  margin-left: 10px;
+  letter-spacing: 0.04em;
 
-    color: #000000;
-  }
+  color: #000000;
+}
 
-  .phone {
-    margin-left: 15px;
-  }
+.phone {
+  margin-left: 15px;
+}
 
-  .margin-text {
-    margin: 0;
-  }
+.margin-text {
+  margin: 0;
 }
 
 .drawer-title {
@@ -72,34 +70,32 @@
   color: #899197;
 }
 
-@media only screen and (max-width: 1199px) {
-  .info-container {
-    .cont-title {
-      font-size: 16px;
-    }
+.default-height {
+  height: 150px;
+}
 
-    .email {
-      font-size: 14px;
-    }
+@media only screen and (max-width: 1199px) {
+  .cont-title {
+    font-size: 16px;
+  }
+
+  .email {
+    font-size: 14px;
   }
 }
 
 @media only screen and (max-width: 1600px) {
-  .info-container {
-    .cont-title {
-      font-size: 20px;
-    }
+  .cont-title {
+    font-size: 20px;
+  }
 
-    .email {
-      font-size: 16px;
-    }
+  .email {
+    font-size: 16px;
   }
 }
 
 @media only screen and (max-width: 1440px) {
-  .info-container {
-    .cont-title {
-      font-size: 18px;
-    }
+  .cont-title {
+    font-size: 18px;
   }
 }

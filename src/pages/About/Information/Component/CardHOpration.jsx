@@ -3,7 +3,7 @@ import { Col } from "react-bootstrap";
 import CardHead from "./CardHead";
 import business from "../../../../assets/images/business.png";
 
-function CardHOpration() {
+function CardHOpration({ hoursOfOperation }) {
   return (
     <Col className="card-wrapper" style={{ marginRight: 0 }} md={6} xl={4}>
       <div className="card-cont">

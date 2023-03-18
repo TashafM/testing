@@ -4,6 +4,28 @@
   font-weight: 600;
   font-size: 23px;
   line-height: 28px;
-  margin-bottom: 35px;
+  margin-bottom: 12px;
   color: #000000;
+}
+
+.edit-term-container {
+  margin-top: 40px;
+}
+
+@media only screen and (max-width: 1199px) {
+  .faq-title {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 1600px) {
+  .faq-title {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .faq-title {
+    font-size: 18px;
+  }
 }

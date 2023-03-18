@@ -1,24 +1,18 @@
-import React from 'react'
-import CardHead from './CardHead'
-import contact from '../../../../assets/images/contact.png'
-import email from '../../../../assets/images/email.png'
-import phone from '../../../../assets/images/phone.png'
-import './styles.scss'
+import React, { Fragment } from "react";
+import "./styles.scss";
+import { useContextProvider } from "../../../../context";
+import CardContacts from "./CardContacts";
 
 function EditContactList() {
-    return (
-        <div className='card-cont'>
-            <CardHead title='Contact' icon={contact} />
-            <div className='d-flex cont-email-cont'>
-                <img src={email} alt='email-icon' />
-                <span className='cont-email'>demo@elred.com</span>
-            </div>
-            <div className='d-flex '>
-                <img src={phone} alt='cont-phone-icon' />
-                <span className='cont-email cont-phone'>876465366567</span>
-            </div>
-        </div>
-    )
+  const { openDrawer } = useContextProvider();
+
+  return (
+    <Fragment className="card-cont">
+      {openDrawer.data.map((item) => {
+        return <CardContacts key={item._id} contactUs={[{ ...item }]} />;
+      })}
+    </Fragment>
+  );
 }
 
-export default EditContactList
+export default EditContactList;

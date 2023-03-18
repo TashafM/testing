@@ -17,7 +17,7 @@ instance.interceptors.request.use((config) => {
     //set default and body header
 
     config.headers.Authorization = `Bearer ${token}`;
-    config.data = { companyUserCode: userId };
+    config.data = { companyUserCode: userId, ...config.data };
   }
 
   return config;

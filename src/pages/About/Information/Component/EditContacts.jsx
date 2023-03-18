@@ -6,14 +6,32 @@ import { Formik, Form } from "formik";
 import PhoneNumber from "../../../../components/Input/PhoneNumber";
 import TextArea from "../../../../components/Input/TextArea";
 import schema from "../../../../helper/validation/schema";
+import { useAsyncResponse } from "../../../../hooks/useAsyncResponse";
 
 function EditContacts() {
   const formRef = useRef();
 
   const submitHandler = async (values, action) => {
     console.log("values", values);
+
+    const body = {
+      ...values,
+      address: {
+        city: "Banglore",
+        state: "Karnataka",
+        latitude: "1293.123",
+        longitude: "12.345678",
+        country: "India",
+        fullAddress: "asdas",
+      },
+    };
+
+    postData(body);
   };
 
+  const [postData, { loading }] = useAsyncResponse(
+    "/portalPostCompanyContactUsDetails"
+  );
   return (
     <div>
       <p className="drawer-title">
@@ -23,7 +41,7 @@ function EditContacts() {
         initialValues={{
           email: "",
           title: "",
-          contactNumber: "",
+          contact: "",
           address: "",
         }}
         innerRef={formRef}
@@ -53,10 +71,10 @@ function EditContacts() {
             </div>
             <div className="input-wrapper">
               <PhoneNumber
-                name="contactNumber"
-                value={values.contactNumber}
-                onChange={(e) => setFieldValue("contactNumber", e.target.value)}
-                error={touched.contactNumber && errors.contactNumber}
+                name="contact"
+                value={values.contact}
+                onChange={(e) => setFieldValue("contact", e)}
+                error={touched.contact && errors.contact}
                 label="Contact Number"
                 placeholder="eg. 8511591740"
               />
@@ -67,14 +85,17 @@ function EditContacts() {
                 label="Address"
                 name="address"
                 value={values.address}
-                onChange={(e) => setFieldValue("address", e.target.value)}
+                onChange={(e) => {
+                  console.log(e);
+                  setFieldValue("address", e.target.value);
+                }}
                 error={touched.address && errors.address}
                 placeholder="eg. Floor Number, building, area, nearest landmark, 
                 city, pin code."
               />
             </div>
 
-            <BtnTitleCenter type="submit" title={"SAVE"} />
+            <BtnTitleCenter disabled={loading} type="submit" title={"SAVE"} />
           </Form>
         )}
       />

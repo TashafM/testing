@@ -4,7 +4,7 @@ import Badges from "../../../../components/Input/Badges";
 import CardHead from "./CardHead";
 import quote from "../../../../assets/images/quote.png";
 
-function CardOtherInfo() {
+function CardOtherInfo({ otherInfo }) {
   return (
     <Col className="card-wrapper" md={6} xl={4}>
       <div className="card-cont">

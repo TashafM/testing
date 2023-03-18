@@ -4,7 +4,7 @@ import edit from "../../../../assets/images/edit-icon.png";
 import BtnIconOnly from "../../../../components/Button/BtnIconOnly";
 import { useContextProvider } from "../../../../context";
 
-function CardHead({ icon, title, onClick, changemargin }) {
+function CardHead({ icon, title, onClick, changemargin, action }) {
   const { setOpenDrawer } = useContextProvider();
 
   let cssclasseschange = changemargin ? "card-otherinfo-head" : "card-head";

@@ -14,7 +14,7 @@ const schema = {
   contacts: Yup.object({
     email: Yup.string().required("email is requird"),
     title: Yup.string().required("title is required"),
-    contactNumber: Yup.number().required("contact number is required"),
+    // contact: Yup.number().required("contact number is required"),
   }),
 
   createBrand: {

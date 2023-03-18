@@ -4,7 +4,7 @@ import links from "../../../../assets/images/links.png";
 import { socialMedia } from "../../data/data";
 import CardHead from "./CardHead";
 
-function CardSocial() {
+function CardSocial({ socialMediaDetails }) {
   return (
     <Col className="card-wrapper" md={6} xl={4}>
       <div className="card-cont">

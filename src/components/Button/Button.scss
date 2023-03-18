@@ -45,8 +45,23 @@
   border-radius: 6px;
 }
 
+.btn-icon-title {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  border: none;
+  background-color: #fff;
+  margin-left: 10px;
+}
+
 @media only screen and (max-width: 1600px) {
   .btn-title-center {
     font-size: 20px;
+  }
+
+  .btn-icon-title {
+    font-size: 16px;
   }
 }

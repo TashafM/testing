@@ -3,7 +3,7 @@ import { Col } from "react-bootstrap";
 import quote from "../../../../assets/images/quote.png";
 import CardHead from "./CardHead";
 
-function CardCompStatement() {
+function CardCompStatement({ companyStatement }) {
   return (
     <Col className="card-wrapper" md={6} xl={4}>
       <div className="card-cont">

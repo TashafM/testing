@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import UnderLineTabs from "../../components/Tabs/UnderLineTabs";
-import instance from "../../helper/axios";
-import { Helper } from "../../helper/helper";
 import { useResponse } from "../../hooks/useResponse";
 import "./About.scss";
 import { AboutTabs } from "./data/data";
