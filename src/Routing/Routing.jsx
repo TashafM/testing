@@ -32,6 +32,7 @@ import CurrentMembers from "../pages/Home/TeamMembers/CurrentMembers/CurrentMemb
 import PastMembers from "../pages/Home/TeamMembers/PastMembers/PastMembers";
 import CurrentPartners from "../pages/Home/Partners/CurrentPartners/CurrentPartners";
 import PastPartners from "../pages/Home/Partners/PastPartners/PastPartners";
+import Dummy from "../pages/Home/Dummy/Dummy";
 // import About from "../pages/About/";
 // import Contact from "./Contact";
 
@@ -44,6 +45,7 @@ const Routing = () => (
           <Route path="past-members" element={<PastMembers/>}/>
         </Route>
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path='dummy' element={<Dummy/>}/>
         <Route path="partners/detail/" element={<PartnerDetails />}>
           <Route path="about" element={<PartnerAbout />} />
           <Route path="address" element={<PartnerAddress />} />
