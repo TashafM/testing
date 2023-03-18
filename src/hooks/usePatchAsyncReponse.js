@@ -1,19 +1,18 @@
 import { useState, useCallback } from "react";
 import instance from "../helper/axios";
 
-export const useAsyncResponse = (url) => {
+export const usePatchAsyncReponse = (url) => {
   const [data, setData] = useState({});
   const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const postData = useCallback(
+  const patchData = useCallback(
     (body) => {
       setLoading(true);
 
       console.log(body);
       instance
-        .post(url, body)
-        // .patch(url, { params: { body } })
+        .patch(url, body)
         .then((res) => {
           if (res.success) {
             setData(res.result);
@@ -31,5 +30,5 @@ export const useAsyncResponse = (url) => {
     [url]
   );
 
-  return [postData, { data, error, loading }];
+  return [patchData, { data, error, loading }];
 };

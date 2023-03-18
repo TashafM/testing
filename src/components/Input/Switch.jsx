@@ -1,21 +1,15 @@
-import React, {useState} from 'react'
+import React from "react";
 
-function Switch() {
-    const [first, setfirst] = useState(false)
-    return (
-        <div>
-            <label class='switch'>
-                <input
-                    type='checkbox'
-                    checked={first}
-                    onChange={() => {
-                        setfirst(!first)
-                    }}
-                />
-                <span class='slider round'></span>
-            </label>
-        </div>
-    )
+function Switch({ value = false, onChange = () => {} }) {
+  // const [first, setfirst] = useState(false)
+  return (
+    <div>
+      <label class="switch">
+        <input type="checkbox" checked={value} onChange={onChange} />
+        <span class="slider round"></span>
+      </label>
+    </div>
+  );
 }
 
-export default Switch
+export default Switch;

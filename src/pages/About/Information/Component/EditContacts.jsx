@@ -6,31 +6,53 @@ import { Formik, Form } from "formik";
 import PhoneNumber from "../../../../components/Input/PhoneNumber";
 import TextArea from "../../../../components/Input/TextArea";
 import schema from "../../../../helper/validation/schema";
-import { useAsyncResponse } from "../../../../hooks/useAsyncResponse";
+import { usePostAsyncResponse } from "../../../../hooks/usePostAsyncResponse";
+import { useContextProvider } from "../../../../context";
+import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
 
 function EditContacts() {
   const formRef = useRef();
+  const { openDrawer } = useContextProvider();
+
+  const data = openDrawer.data;
 
   const submitHandler = async (values, action) => {
     console.log("values", values);
 
-    const body = {
-      ...values,
-      address: {
-        city: "Banglore",
-        state: "Karnataka",
-        latitude: "1293.123",
-        longitude: "12.345678",
-        country: "India",
-        fullAddress: "asdas",
-      },
-    };
+    if (openDrawer.type === "Edit Contact") {
+      const contactUsId = data._id;
+      delete values.address;
+      delete values._id;
 
-    postData(body);
+      const body = {
+        ...data,
+        ...values,
+        contactUsId,
+      };
+      pathcData(body);
+    } else {
+      const body = {
+        ...values,
+        address: {
+          city: "Banglore",
+          state: "Karnataka",
+          latitude: "1293.123",
+          longitude: "12.345678",
+          country: "India",
+          fullAddress: "asdas",
+        },
+      };
+
+      postData(body);
+    }
   };
 
-  const [postData, { loading }] = useAsyncResponse(
+  const [postData, { loading }] = usePostAsyncResponse(
     "/portalPostCompanyContactUsDetails"
+  );
+
+  const [pathcData, { loading: editLoading }] = usePatchAsyncReponse(
+    "/portalPatchCompanyContactUsDetails"
   );
   return (
     <div>
@@ -39,9 +61,9 @@ function EditContacts() {
       </p>
       <Formik
         initialValues={{
-          email: "",
-          title: "",
-          contact: "",
+          email: data.email,
+          title: data.title,
+          contact: data.contact,
           address: "",
         }}
         innerRef={formRef}

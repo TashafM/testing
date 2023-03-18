@@ -1,15 +1,47 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "./styles.scss";
 import { useContextProvider } from "../../../../context";
 import CardContacts from "./CardContacts";
+import chat from "../../../../assets/images/chat-icon.png";
+import Switch from "../../../../components/Input/Switch";
 
 function EditContactList() {
   const { openDrawer } = useContextProvider();
+  const [data, setData] = useState(openDrawer.data ?? []);
+  useEffect(() => {
+    setData(openDrawer.data ?? []);
+  }, [openDrawer]);
+
+  const onEnableChat = (index) => {
+    const arr = [...data];
+    arr[index].enableChat = !arr[index].enableChat;
+    setData([...arr]);
+  };
 
   return (
-    <Fragment className="card-cont">
-      {openDrawer.data.map((item) => {
-        return <CardContacts key={item._id} contactUs={[{ ...item }]} />;
+    <Fragment>
+      {data.map((item, index) => {
+        return (
+          <CardContacts
+            key={item._id}
+            type={"Edit Contact"}
+            title={item?.title ?? ""}
+            contactUs={{ ...item }}
+          >
+            <div className="d-flex justify-content-between chat-container">
+              <div className="d-flex">
+                <img className="card-img" src={chat} alt="chat-icon" />
+                <p className="email mb-0">Enable Chat</p>
+              </div>
+              <Switch
+                value={item.enableChat}
+                onChange={() => {
+                  onEnableChat(index);
+                }}
+              />
+            </div>
+          </CardContacts>
+        );
       })}
     </Fragment>
   );

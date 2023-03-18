@@ -3,8 +3,9 @@ import "../Information.scss";
 import edit from "../../../../assets/images/edit-icon.png";
 import BtnIconOnly from "../../../../components/Button/BtnIconOnly";
 import { useContextProvider } from "../../../../context";
+import { type } from "@testing-library/user-event/dist/type";
 
-function CardHead({ icon, title, onClick, changemargin, action }) {
+function CardHead({ icon, title, changemargin, type, data }) {
   const { setOpenDrawer } = useContextProvider();
 
   let cssclasseschange = changemargin ? "card-otherinfo-head" : "card-head";
@@ -21,7 +22,8 @@ function CardHead({ icon, title, onClick, changemargin, action }) {
           onClick={() => {
             setOpenDrawer({
               open: true,
-              type: title,
+              type: type,
+              data: { ...data },
             });
           }}
         />
