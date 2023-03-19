@@ -4,7 +4,7 @@ import "./Button.scss";
 function BtnTitleCenter({
   title,
   onClick = () => {},
-  type,
+  type = "submit",
   smallbutton,
   disabled = false,
 }) {

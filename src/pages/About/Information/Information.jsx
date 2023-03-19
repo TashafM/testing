@@ -72,7 +72,16 @@ function Information() {
           }}
         />
 
-        <CardCompStatement companyStatement={data[0]?.companyStatement ?? ""} />
+        <CardCompStatement
+          companyStatement={data[0]?.companyStatement ?? ""}
+          onClick={() => {
+            setOpenDrawer({
+              type: "Statement",
+              open: true,
+              data: data[0]?.companyStatement ?? [],
+            });
+          }}
+        />
         <CardOtherInfo otherInfo={data[0]?.otherInfo} />
       </Row>
     </Container>
