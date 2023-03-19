@@ -4,21 +4,55 @@ import TextInput from "../../../../components/Input/TextInput";
 import "./styles.scss";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import { useContextProvider } from "../../../../context";
+import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
 
 function EditSocialMedia() {
   const formRef = useRef();
 
+  const { openDrawer } = useContextProvider();
+
+  const data = openDrawer?.data ?? [];
+
+  const [patchData, { loading }] = usePatchAsyncReponse(
+    "/portalPatchCompanySocialMediaLinks"
+  );
+
   const submitHandler = async (values, action) => {
     console.log("values", values);
+    const socialMediaLinks = [];
+
+    Object.keys(values).map((key) => {
+      if (values[key]) {
+        socialMediaLinks.push({ type: key, socialMediaLink: values[key] });
+      }
+    });
+    const body = {
+      socialMediaLinks,
+    };
+
+    patchData(body);
   };
 
-  const validate = Yup.object({
-    instagram: Yup.string().required("requird"),
-    facebook: Yup.string().required("required"),
-    twitter: Yup.string().required("required"),
-    website: Yup.string().required("required"),
+  // const validate = Yup.object({
+  //   instagram: Yup.string().required("requird"),
+  //   facebook: Yup.string().required("required"),
+  //   twitter: Yup.string().required("required"),
+  //   website: Yup.string().required("required"),
+  // });
+  let initialValues = {
+    instagram: "",
+    facebook: "",
+    twitter: "",
+    website: "",
+  };
+
+  data.map((item) => {
+    console.log(item);
+    initialValues[item.type] = item.socialMediaLink;
   });
 
+  console.log({ initialValues, data });
   return (
     <div>
       <p className="drawer-title">
@@ -26,15 +60,9 @@ function EditSocialMedia() {
         company
       </p>
       <Formik
-        initialValues={{
-          instagram: "",
-          facebook: "",
-          twitter: "",
-          website: "",
-        }}
+        initialValues={initialValues}
         innerRef={formRef}
         onSubmit={submitHandler}
-        validationSchema={validate}
         render={({ handleSubmit, errors, values, setFieldValue, touched }) => (
           <Form className="">
             <div className="input-wrapper">

@@ -25,16 +25,16 @@ function Information() {
     <Container fluid>
       <Row className="info-container">
         <Col className="card-wrapper" md={6} xl={4}>
-          {data[0].contactUs.length ? (
+          {data[0]?.contactUs?.length ? (
             <CardContacts
               type={"Contact"}
-              contactUs={data[0].contactUs[0]}
+              contactUs={data[0]?.contactUs[0]}
               title="Contact"
               onClick={() => {
                 setOpenDrawer({
                   type: "Contact",
                   open: true,
-                  data: [...data[0].contactUs],
+                  data: [...data[0]?.contactUs],
                 });
               }}
             />
@@ -54,17 +54,26 @@ function Information() {
             setOpenDrawer({
               type: "Address",
               open: true,
-              data: data[0].registeredAddress,
+              data: data[0]?.registeredAddress,
             });
           }}
-          registeredAddress={data[0].registeredAddress}
+          registeredAddress={data[0]?.registeredAddress ?? {}}
         />
 
         <CardHOpration hoursOfOperation={data[0].hoursOfOperation} />
-        <CardSocial socialMediaDetails={data[0].socialMediaDetails} />
+        <CardSocial
+          socialMediaDetails={data[0].socialMediaDetails ?? []}
+          onClick={() => {
+            setOpenDrawer({
+              type: "Social Media & Links",
+              open: true,
+              data: data[0]?.socialMediaDetails ?? [],
+            });
+          }}
+        />
 
-        <CardCompStatement companyStatement={data[0].companyStatement} />
-        <CardOtherInfo otherInfo={data[0].otherInfo} />
+        <CardCompStatement companyStatement={data[0]?.companyStatement ?? ""} />
+        <CardOtherInfo otherInfo={data[0]?.otherInfo} />
       </Row>
     </Container>
   );

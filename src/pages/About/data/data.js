@@ -205,54 +205,42 @@ export const timeSlotData = [
   { day: "Sunday", active: true },
 ];
 
-export const socialMedia = [
-  {
-    title: "Facebook",
-    icon: facebook,
-  },
-  {
-    title: "Instagram",
-    icon: instagram,
-  },
-  {
-    title: "Twitter",
-    icon: twitter,
-  },
-  {
-    title: "Website",
-    icon: website,
-  },
-];
+export const socialMedia = {
+  instagram: instagram,
+  twitter: twitter,
+  Website: website,
+  facebook: facebook,
+};
 
 export const PartnerTabs = [
   {
     id: 1,
     title: "About",
     index: 1,
-    link: "#"
+    link: "#",
   },
   {
     id: 2,
     title: "Address Details",
     index: 2,
-    link: "#"
+    link: "#",
   },
   {
     id: 3,
     title: "Payment Details",
     index: 3,
-    link: "#"
+    link: "#",
   },
   {
     id: 4,
     title: "Catalog",
     index: 4,
-    link: "#"
+    link: "#",
   },
   {
     id: 5,
     title: "Past Orders",
     index: 5,
-    link: "#"
+    link: "#",
   },
-]
+];
