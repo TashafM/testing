@@ -49,7 +49,16 @@ function Information() {
             </div>
           )}
         </Col>
-        <CardAddress registeredAddress={data[0].registeredAddress} />
+        <CardAddress
+          onClick={() => {
+            setOpenDrawer({
+              type: "Address",
+              open: true,
+              data: data[0].registeredAddress,
+            });
+          }}
+          registeredAddress={data[0].registeredAddress}
+        />
 
         <CardHOpration hoursOfOperation={data[0].hoursOfOperation} />
         <CardSocial socialMediaDetails={data[0].socialMediaDetails} />

@@ -3,27 +3,57 @@ import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import TextInput from "../../../../components/Input/TextInput";
 import { Formik, Form } from "formik";
 import schema from "../../../../helper/validation/schema";
+import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
+import { useContextProvider } from "../../../../context";
 
 function EditAddress() {
   const formRef = useRef();
+  const { openDrawer } = useContextProvider();
 
-  const submitHandler = async (values, action) => {
+  console.log(openDrawer);
+
+  const submitHandler = async (values) => {
     console.log("values", values);
+
+    delete values.googlePlace;
+    const body = {
+      ...values,
+      address: {
+        city: "",
+        state: "",
+        country: "",
+        latitude: "",
+        longitude: "",
+        fullAddress: "",
+      },
+    };
+
+    patchData(body);
   };
+
+  const [patchData] = usePatchAsyncReponse(
+    "/portalPatchCompanyRegisteredAddress"
+  );
+
+  const data = openDrawer.data;
+  const initialValues = {
+    fullName: data?.fullName ?? "",
+    floorNumber: data?.floorNumber ?? "",
+    block: data?.block ?? "",
+    street: data?.street ?? "",
+    city: data?.city ?? "",
+    state: data?.state ?? "",
+    zipCode: data?.zipCode ?? "",
+    googlePlace: "",
+    country: data.country ?? "",
+  };
+
+  console.log(initialValues);
 
   return (
     <div>
       <Formik
-        initialValues={{
-          fullname: "",
-          officeName: "",
-          locality: "",
-          town: "",
-          city: "",
-          pincode: "",
-          googlePlace: "",
-          country: "",
-        }}
+        initialValues={{ ...initialValues }}
         innerRef={formRef}
         onSubmit={submitHandler}
         validationSchema={schema.address}
@@ -32,55 +62,43 @@ function EditAddress() {
             {console.log(errors)}
             <div className="input-wrapper">
               <TextInput
-                name="fullname"
-                value={values.fullname}
-                onChange={(e) => setFieldValue("fullname", e.target.value)}
+                name="fullName"
+                value={values.fullName}
+                onChange={(e) => setFieldValue("fullName", e.target.value)}
                 placeholder="Enter your full name"
                 label={"Full Name*"}
-                error={touched.fullname && errors.fullname}
+                error={touched.fullName && errors.fullName}
               />
             </div>
             <div className="input-wrapper">
               <TextInput
                 name="officeName"
-                value={values.officeName}
-                onChange={(e) => setFieldValue("officeName", e.target.value)}
+                value={values.floorNumber}
+                onChange={(e) => setFieldValue("floorNumber", e.target.value)}
                 placeholder="Enter your Floor Number / Block no / Office Name"
                 label={"Floor Number / Block no / Office Name*"}
-                error={touched.officeName && errors.officeName}
+                error={touched.floorNumber && errors.floorNumber}
               />
             </div>
 
             <div className="input-wrapper">
               <TextInput
-                name="locality"
-                value={values.locality}
-                onChange={(e) => setFieldValue("locality", e.target.value)}
-                placeholder="Enter your Area / Locality"
-                label={"Area / Locality*"}
-                error={touched.locality && errors.locality}
+                name="block"
+                value={values.block}
+                onChange={(e) => setFieldValue("block", e.target.value)}
+                placeholder="Enter your Area / block"
+                label={"Area / block*"}
+                error={touched.block && errors.block}
               />
             </div>
-            {/* <div className="input-wrapper">
-              <TextInput
-                name="nearestLandmark"
-                value={values.nearestLandmark}
-                onChange={(e) =>
-                  setFieldValue("nearestLandmark", e.target.value)
-                }
-                placeholder="Enter your Nearest Landmark"
-                label={"Nearest Landmark*"}
-                error={touched.nearestLandmark && errors.nearestLandmark}
-              />
-            </div> */}
             <div className="input-wrapper">
               <TextInput
-                name="town"
-                value={values.town}
-                onChange={(e) => setFieldValue("town", e.target.value)}
-                placeholder="Enter your Town / City"
+                name="street"
+                value={values.street}
+                onChange={(e) => setFieldValue("street", e.target.value)}
+                placeholder="Enter your street / City"
                 label={"Block (optional)"}
-                error={touched.town && errors.town}
+                error={touched.street && errors.street}
               />
             </div>
             <div className="input-wrapper">
@@ -95,20 +113,30 @@ function EditAddress() {
             </div>
             <div className="input-wrapper">
               <TextInput
-                name="Country"
+                name="state"
+                value={values.state}
+                onChange={(e) => setFieldValue("state", e.target.value)}
+                error={touched.state && errors.state}
+                placeholder="Enter your state"
+                label={"State*"}
+              />
+            </div>
+            <div className="input-wrapper">
+              <TextInput
+                name="country"
                 value={values.country}
-                onChange={(e) => setFieldValue("Country", e.target.value)}
+                onChange={(e) => setFieldValue("country", e.target.value)}
                 error={touched.country && errors.country}
-                placeholder="Enter your Country"
+                placeholder="Enter your country"
                 label={"Country*"}
               />
             </div>
             <div className="input-wrapper">
               <TextInput
-                name="pincode"
-                value={values.pincode}
-                onChange={(e) => setFieldValue("pincode", e.target.value)}
-                error={touched.pincode && errors.pincode}
+                name="zipCode"
+                value={values.zipCode}
+                onChange={(e) => setFieldValue("zipCode", e.target.value)}
+                error={touched.zipCode && errors.zipCode}
                 placeholder="Enter your Zip Code*"
                 label={"Zip Code*"}
               />
