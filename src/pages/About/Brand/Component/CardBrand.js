@@ -19,9 +19,9 @@ function CardBrand({ title, logo, location }) {
         />
       </div>
       <div className="d-flex flex-column align-items-center justify-content-center">
-        <img src={logo} alt={"brand-logo"} />
+        <img className="brand-image" src={logo} alt={"brand-logo"} />
         <p className="title-brand">{title}</p>
-        <p>{location}</p>
+        <p className="m-0">{location}</p>
       </div>
     </div>
   );

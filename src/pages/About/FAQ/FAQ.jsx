@@ -10,7 +10,7 @@ import { useResponse } from "../../../hooks/useResponse";
 
 function FAQ() {
   const [showModal, setShowModal] = useState("");
-  const { data, loading, error } = useResponse();
+  // const { data, loading, error } = useResponse();
 
   const HandleOpenModal = () => {
     setShowModal(true);

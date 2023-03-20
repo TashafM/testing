@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 function Opennings() {
   const navigate = useNavigate();
   const createJobsHandler = () => {
-    navigate("/home/about/create-jobs/applications");
+    // navigate("/home/about/create-jobs");
   };
   return (
     <div className="container-fluid">
