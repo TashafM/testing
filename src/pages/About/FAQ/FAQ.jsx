@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import "./FAQ.scss";
 import { faqData } from "../data/data";
 import Collapsible from "../../../components/Collapsible/Collapsible";
@@ -6,16 +6,18 @@ import BtnIconOnly from "../../../components/Button/BtnIconOnly";
 import ModalComponent from "../../../components/Modal";
 import EditFAQ from "./Component/EditFAQ";
 import { Button } from "react-bootstrap";
+import { useResponse } from "../../../hooks/useResponse";
 
 function FAQ() {
   const [showModal, setShowModal] = useState("");
+  // const { data, loading, error } = useResponse();
 
   const HandleOpenModal = () => {
     setShowModal(true);
   };
 
   return (
-    <div>
+    <Fragment>
       <div className="d-flex faq-title">
         Frequently Asked Questions <BtnIconOnly onClick={HandleOpenModal} />{" "}
       </div>
@@ -38,7 +40,7 @@ function FAQ() {
           <EditFAQ close={() => setShowModal(false)} />
         </ModalComponent>
       )}
-    </div>
+    </Fragment>
   );
 }
 

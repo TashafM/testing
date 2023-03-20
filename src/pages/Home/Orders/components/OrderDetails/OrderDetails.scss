@@ -1,20 +1,21 @@
-.upper-content{
+.upper-content {
+  overflow-y: scroll;
   .order-details-div {
     display: flex;
     justify-content: space-between;
     // padding: 0 40px;
     margin-bottom: 40px;
-  
+
     .search-filter-div {
       display: flex;
     }
-  
+
     .order-company {
       .order-date {
         margin-bottom: 15px;
         color: #9f9f9f;
         font-weight: 500;
-  
+
         span {
           color: black;
         }
@@ -26,14 +27,14 @@
       }
     }
   }
-  
+
   .table-div-order-details {
     margin-top: 40px;
     // margin-left: 30px;
     // height: 300px;
   }
 
-  .ordering-boxes{
+  .ordering-boxes {
     display: flex;
   }
 
@@ -45,8 +46,8 @@
 @media only screen and (max-width: 1600px) {
   .order-details-div {
     margin-bottom: 20px !important;
-    .order-company{
-      .company-name{
+    .order-company {
+      .company-name {
         font-size: 22px;
         line-height: 28px;
       }
@@ -58,14 +59,13 @@
   }
 }
 
-
 @media only screen and (max-width: 1440px) {
   .order-details-div {
     .order-company {
       .company-name {
         font-size: 18px !important;
       }
-      .order-date{
+      .order-date {
         margin-bottom: 5px;
         font-size: 14px;
       }
@@ -73,38 +73,36 @@
   }
 }
 
-
 @media only screen and (max-width: 1199px) {
-  .upper-content{
-    .table-div-order-details{
+  .upper-content {
+    .table-div-order-details {
       margin-top: 25px;
     }
   }
 }
 
-
-@media only screen and (max-width: 780px){
-  .upper-content{
-    .ordering-boxes{
+@media only screen and (max-width: 780px) {
+  .upper-content {
+    .ordering-boxes {
       display: block;
-      .order-details-box{
+      .order-details-box {
         margin-bottom: 10px;
       }
     }
   }
 }
 
-@media only screen and (max-width: 730px){
-  .upper-content{
-    .table-div-order-details{
+@media only screen and (max-width: 730px) {
+  .upper-content {
+    .table-div-order-details {
       margin-top: 15px;
     }
   }
 }
 
-@media only screen and (max-height: 840px){
-  .upper-content{
-    .table-div-order-details{
+@media only screen and (max-height: 840px) {
+  .upper-content {
+    .table-div-order-details {
       margin-top: 10px;
     }
   }

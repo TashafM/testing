@@ -5,6 +5,30 @@
   margin-bottom: 10px;
 }
 
+.about-sectio {
+  height: calc(100vh - 170px);
+  min-height: 350px;
+}
+.about-sectio::-webkit-scrollbar {
+  width: 0.2em;
+  background-color: #f5f5f5;
+  /* Track */
+}
+
+.about-sectio::-webkit-scrollbar {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.about-sectio::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.about-sectio::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 .card-cont {
   background: #ffffff;
   border: 1px solid #dadada;

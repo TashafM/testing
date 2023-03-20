@@ -22,7 +22,7 @@ export const useResponse = (url) => {
         setLoading(false);
       })
       .catch((err) => {
-        setError({ error: true, message: "somethun" });
+        setError({ error: true, message: "something went wrong" });
         setLoading(false);
       });
   }, [url]);

@@ -21,7 +21,7 @@ function About() {
   }
 
   return (
-    <div className="upper-content">
+    <div className="upper-content about-sectio">
       <div className="about-wrapper">
         <Description />
         <UnderLineTabs tabs={AboutTabs} />
