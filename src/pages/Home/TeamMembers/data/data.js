@@ -1,4 +1,4 @@
-export const colCurrentMembers = [
+export const colCurrentMembers99 = [
   { title: "First Name", value: "firstName" },
   // { title: "Last Name", value: "lastName" },
   { title: "Personal Email", value: "personalEmail" },
@@ -11,7 +11,7 @@ export const colCurrentMembers = [
   // { title: "Location", value: "location" },
 ];
 
-export const colCurrentMembers11 = [
+export const colCurrentMembers = [
   { title: "First Name", value: "displayFirstName" },
   { title: "Last Name", value: "displayLastName" },
   { title: "Personal Email", value: "displayEmail" },

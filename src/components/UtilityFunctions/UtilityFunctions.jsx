@@ -8,10 +8,10 @@ class Util {
   // This function is used for selecting value with checkbox
   handleCheckboxChange(selectedIds, user, setSelectedIds, setRatingUser) {
     let newSelectedIds = [...selectedIds];
-    if (newSelectedIds.includes(user.id)) {
-      newSelectedIds = newSelectedIds.filter((i) => i !== user.id);
+    if (newSelectedIds.includes(user.teamMemberId)) {
+      newSelectedIds = newSelectedIds.filter((i) => i !== user.teamMemberId);
     } else {
-      newSelectedIds.push(user.id);
+      newSelectedIds.push(user.teamMemberId);
     }
     setSelectedIds(newSelectedIds);
     // setRatingUser(user);
@@ -27,8 +27,9 @@ class Util {
     getDataFunc2,
     setSelectedIds
   ) => {
+    console.log(user.teamMemberId,'from del')
     const confirm = window.confirm(
-      `Are you sure you want to delete ${user.firstName || user.name}?`
+      `Are you sure you want to delete ${user.firstName || user.name || user.displayFirstName}?`
     );
     if (confirm) {
       axios

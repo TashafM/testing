@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Form, InputGroup, FormControl } from "react-bootstrap";
+import { Form, InputGroup, FormControl, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../Login.scss";
 import axios from "axios";
 import { API } from "../../../helper/API";
+import { toast, ToastContainer } from "react-toastify";
 
 const LoginOtp = () => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
@@ -33,13 +34,23 @@ const LoginOtp = () => {
   // };
 
   const getOtp = () => {
-    axios.post(API.LOGIN_API, emailData).then((res) => {
-      if (res.status == 200) {
-        setReqOtp(true);
-        setUserCode(res.data.result[0].userCode);
-      }
-      // console.log(res.data.result[0].userCode,'jjjjjjj')
-    });
+    axios
+      .post(API.LOGIN_API, emailData)
+      .then((res) => {
+        console.log(res, "00000000000");
+        if (res.status == 200) {
+          setReqOtp(true);
+          setUserCode(res.data.result[0].userCode);
+          toast.success("OTP sent to your email address!");
+        }
+        // console.log(res.data.result[0].userCode,'jjjjjjj')
+      })
+      .catch((err) => {
+        if (err.response.status !== 200) {
+          toast.error("Email id is not registered with us!");
+        }
+        console.log(err.response.status, "erorro");
+      });
   };
 
   const validateOtp = () => {
@@ -56,17 +67,22 @@ const LoginOtp = () => {
       })
       .then((res) => {
         if (res.status == 200) {
-          localStorage.setItem('usercode', res.data.userCode);
-          localStorage.setItem('accessToken', res.data.result[0].accessToken);
-          localStorage.setItem('username', res.data.userName);
+          localStorage.setItem("usercode", res.data.userCode);
+          localStorage.setItem("accessToken", res.data.result[0].accessToken);
+          localStorage.setItem("username", res.data.userName);
           navigate("/home/dashboard");
         }
       });
-    
   };
 
+  const tashaf = () => {
+    toast.success("clicked");
+    console.log("cliiiiii");
+  };
   return (
     <>
+      <ToastContainer position="top-center"/>
+
       <div className="text-login">Login</div>
       <div className="email-enter-msg">
         Please enter registered email id to get OTP
@@ -105,7 +121,14 @@ const LoginOtp = () => {
       <button className="get-otp-btn" onClick={getOtp}>
         {reqOtp ? (
           <>
-            <span onClick={(event) => {event.stopPropagation(); validateOtp();}}>Login</span>
+            <span
+              onClick={(event) => {
+                event.stopPropagation();
+                validateOtp();
+              }}
+            >
+              Login
+            </span>
           </>
         ) : (
           "Get OTP"
