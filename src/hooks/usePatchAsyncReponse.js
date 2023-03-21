@@ -10,7 +10,7 @@ export const usePatchAsyncReponse = (url) => {
     (body) => {
       setLoading(true);
 
-      console.log(body);
+      console.log({ body });
       instance
         .patch(url, body)
         .then((res) => {
@@ -23,7 +23,7 @@ export const usePatchAsyncReponse = (url) => {
           setLoading(false);
         })
         .catch((err) => {
-          setError({ error: true, message: err.response.message });
+          setError({ error: true, message: err?.response?.message ?? "" });
           setLoading(false);
         });
     },

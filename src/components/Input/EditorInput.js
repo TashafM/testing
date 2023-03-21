@@ -6,7 +6,9 @@ function EditorInput({ editorState, setEditorState }) {
     <Editor
       className="editor-container"
       editorState={editorState}
-      onEditorStateChange={setEditorState}
+      onEditorStateChange={(editorstate) => {
+        console.log(editorstate);
+      }}
       editorClassName="editor-container"
       wrapperClassName="editor-wrapper"
     />

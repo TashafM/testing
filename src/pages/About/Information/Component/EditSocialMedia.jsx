@@ -3,7 +3,6 @@ import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import TextInput from "../../../../components/Input/TextInput";
 import "./styles.scss";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import { useContextProvider } from "../../../../context";
 import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
 
@@ -31,15 +30,11 @@ function EditSocialMedia() {
       socialMediaLinks,
     };
 
+    console.log({ body });
+
     patchData(body);
   };
 
-  // const validate = Yup.object({
-  //   instagram: Yup.string().required("requird"),
-  //   facebook: Yup.string().required("required"),
-  //   twitter: Yup.string().required("required"),
-  //   website: Yup.string().required("required"),
-  // });
   let initialValues = {
     instagram: "",
     facebook: "",

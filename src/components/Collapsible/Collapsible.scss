@@ -1,41 +1,72 @@
-.collapse-container {
+.collapsible-container {
   .collapse-container {
     border: none;
     border-radius: 0px;
-
-    .collapse-title button {
-      font-family: "Inter";
-      font-style: normal;
-      font-weight: 500;
-      font-size: 18px;
-      color: #000000;
-      padding-bottom: 12px;
-      background-color: #fff;
-      box-shadow: none;
-      border-bottom-width: 2px solid #fefefe;
-    }
-
     .collapse-desc {
-      font-family: "Inter";
-      font-style: normal;
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 34px;
-      padding: 10px 0 20px 0;
-      color: rgba(0, 0, 0, 0.7);
     }
   }
+
   .accordion-button {
     // padding-bottom: 0px;
     padding: 0px;
   }
 }
 
+.accordion-body {
+  padding: 0px;
+}
+
+.collapsible-container .collapse-container .collapse-desc {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.7);
+  padding-bottom: 20px;
+}
+
+.collapsible-container .collapse-container .collapse-title button {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px !important;
+
+  color: #000000;
+  padding-bottom: 16px;
+  background-color: #fff;
+  box-shadow: none;
+  border-bottom-width: 2px solid #fefefe;
+}
+
 @media only screen and (max-width: 1199px) {
+  .collapsible-container {
+    .collapse-container {
+      font-size: 14px !important;
+    }
+
+    .collapse-desc {
+      font-size: 12px !important;
+    }
+  }
 }
 
 @media only screen and (max-width: 1600px) {
+  collapsible-container .collapse-container .collapse-title button {
+    font-size: 16px;
+  }
 }
 
 @media only screen and (max-width: 1440px) {
+  collapsible-container .collapse-container .collapse-title button {
+    font-size: 14px;
+  }
+  .collapsible-container {
+    .collapse-container {
+      font-size: 16px !important;
+    }
+
+    .collapse-desc {
+      font-size: 14px !important;
+    }
+  }
 }

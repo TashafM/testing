@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import "./index.css";
 import { Modal } from "react-bootstrap";
 import cross from "../../assets/images/cross.png";
+import BtnTitleCenter from "../Button/BtnTitleCenter";
 
 function ModalComponent({ show, close, title, children }) {
   return (
@@ -14,22 +15,7 @@ function ModalComponent({ show, close, title, children }) {
         centered
         className="modal-content-container"
       >
-        <Modal.Body className="modalbody">
-          <div className="d-flex justify-content-between mb-4">
-            <div>
-              <p>{title}</p>
-            </div>
-            <div>
-              <img
-                src={cross}
-                alt="image"
-                onClick={() => close()}
-                className="crossCloseButton"
-              />
-            </div>
-          </div>
-          {children}
-        </Modal.Body>
+        <Modal.Body className="modalbody">{children}</Modal.Body>
       </Modal>
     </div>
   );

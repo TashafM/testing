@@ -178,6 +178,25 @@ div.PhoneInputCountry {
   margin-left: auto;
 }
 
+.rdw-block-wrapper,
+.rdw-fontsize-wrapper,
+.rdw-fontfamily-wrapper,
+.rdw-list-wrapper,
+.rdw-text-align-wrapper,
+.rdw-colorpicker-wrapper,
+.rdw-link-wrapper,
+.rdw-embedded-wrapper,
+.rdw-emoji-wrapper,
+.rdw-image-wrapper,
+.rdw-remove-wrapper,
+.rdw-history-wrapper {
+  display: none !important;
+}
+
+.DraftEditor-editorContainer {
+  height: 150px;
+}
+
 @media only screen and (max-width: 1199px) {
   .badges-container {
     font-size: 12px;

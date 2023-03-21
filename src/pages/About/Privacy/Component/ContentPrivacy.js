@@ -14,7 +14,7 @@ function ContentPrivacy({ data }) {
                   {". "}
                   {item.title}
                 </p>
-                <p className="privacy-desc">{item.description}</p>
+                <p className="privacy-desc">{item.content}</p>
               </div>
             );
           })}

@@ -24,7 +24,10 @@ export const usePostAsyncResponse = (url) => {
           setLoading(false);
         })
         .catch((err) => {
-          setError({ error: true, message: err.response.message });
+          setError({
+            error: true,
+            message: err?.response?.message ?? "something went wrong",
+          });
           setLoading(false);
         });
     },

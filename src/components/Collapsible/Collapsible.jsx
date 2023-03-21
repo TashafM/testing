@@ -4,7 +4,7 @@ import "./Collapsible.scss";
 
 function Collapsible({ title, description, eventKey, defaultActiveKey = "0" }) {
   return (
-    <div className="collapse-container">
+    <div className="collapsible-container">
       <Accordion defaultActiveKey={defaultActiveKey}>
         <Accordion.Item className="collapse-container" eventKey={eventKey}>
           <Accordion.Header className="collapse-title">

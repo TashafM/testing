@@ -13,6 +13,7 @@ export const useResponse = (url) => {
     instance
       .post(url)
       .then((res) => {
+        console.log({ res });
         if (res.success) {
           setData(res.result);
           setError({ error: false, message: "" });
