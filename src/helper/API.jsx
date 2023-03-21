@@ -4,8 +4,9 @@ export const API = {
     LOGIN_API : 'https://dev.elred.io/portalVerifyCompanyEmail',
     VERIFY_OTP : 'https://dev.elred.io/portalVerifyCompanyOtp',
     // TEAM MEMBERS API
-    VIEW_CURRENT_TEAM_MEMBERS : 'portalViewCompanyCurrentTeamMembers?start=1&offset=10',
-    VIEW_PAST_TEAM_MEMBERS: 'https://dev.elred.io/portalViewCompanyPastTeamMembers?start=1&offset=10',
+    // VIEW_CURRENT_TEAM_MEMBERS : 'portalViewCompanyCurrentTeamMembers?start=1&offset=10',
+    VIEW_CURRENT_TEAM_MEMBERS : 'portalViewCompanyCurrentTeamMembers?',
+    VIEW_PAST_TEAM_MEMBERS: 'portalViewCompanyPastTeamMembers?',
     EDIT_TEAM_MEMBERS_RATINGS: 'https://dev.elred.io/portalEditCompanyTeamMembersRatings',
     DELETE_TEAM_MEMBERS: 'https://dev.elred.io/portalDeleteCompanyTeamMember',
     RESTORE_TEAM_MEMBERS: 'https://dev.elred.io/portalRestoreCompanyTeamMember',

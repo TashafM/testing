@@ -35,9 +35,9 @@ const DataTable = ({
 }) => {
   const myRef = useRef(null);
   const [scrollX, setScrollX] = useState(0);
-  // const data = datum.sort((a, b) => b.id - a.id);
+  const data = datum.sort((a, b) => b.id - a.id);
 
-  const data = datum;
+  // const data = datum;
   const navigate = useNavigate();
 
   const gotoNew = (val) => {
@@ -75,15 +75,16 @@ const DataTable = ({
           <tbody className="scroll-body">
             {data.map((row, id) => (
               <>
+              {/* {console.log(row.teamMemberId,'---------')} */}
                 <tr
-                  key={row.id}
+                  key={row.teamMemberId}
                   className="tr-body"
-                  // onClick={() => (partners ? gotoNew(row) : null)}
+                  onClick={() => (partners ? gotoNew(row) : null)}
                 >
                   <td className="checkbox-div">
                     <input
                       type="checkbox"
-                      checked={selectedIds.includes(row.id)}
+                      checked={selectedIds.includes(row.teamMemberId)}
                       onChange={(e) =>
                         myUtil.handleCheckboxChange(
                           selectedIds,
@@ -96,7 +97,7 @@ const DataTable = ({
                   </td>
                   {columns.map((col, id) => (
                     <>
-                      <td
+                      {/* <td
                         key={id}
                         onClick={() => (partners ? gotoNew(row) : null)}
                       >
@@ -111,13 +112,16 @@ const DataTable = ({
                             </>
                           )}
                         </>
-                        <></>
-                      </td>
-                      {/* <td key={`${row.id}-${col.value}`}>
-                        {col.value
-                          .split(".")
-                          .reduce((obj, key) => obj[key], row)}
                       </td> */}
+                      <td key={id}>
+                        {col.value.includes(".")
+                          ? col.value
+                              .split(".")
+                              .reduce((obj, key) => obj[key], row)
+                          : Array.isArray(row[col.value])
+                          ? row[col.value].map((el) => el.value).join(", ")
+                          : row[col.value]}
+                      </td>
                     </>
                   ))}
                   <td className="action-div fixed-column">
