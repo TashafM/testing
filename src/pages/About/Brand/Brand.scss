@@ -29,16 +29,20 @@
 .brand-image {
   height: 55px;
   width: 55px;
+  border-radius: 50%;
+  border: 1px solid #dadada;
 }
 
 .add-brand-container {
   margin-top: 20px;
-  position: absolute;
-  bottom: 20px;
   width: 50%;
-  left: 50%;
-  right: 50%;
-  transform: translate(-50%, -50%);
+
+  // position: absolute;
+  // bottom: 20px;
+  // width: 50%;
+  // left: 50%;
+  // right: 50%;
+  // transform: translate(-50%, -50%);
 }
 
 .drawer-title {

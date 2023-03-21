@@ -10,28 +10,24 @@ function CardOtherInfo({ otherInfo }) {
       <div className="card-cont">
         <CardHead title="Other Info" icon={quote} changemargin={"csschange"} />
         <div className="row mb-2">
-          <div className="col-md-6 col-sm-12 title-other-Info">
-            Our Sales reach is atx
-          </div>
-          <div className="col-md-6 col-sm-12 title-other-Info d-flex">
+          <div className="col-6 title-other-Info">Our Sales reach is atx</div>
+          <div className="col-6 title-other-Info d-flex">
             {["India", "Goa"].map((item) => {
               return <Badges value={item} />;
             })}
           </div>
         </div>
         <div className="row ">
-          <div className="col-md-6 col-sm-12 title-other-Info ">
-            Our Services & support?
-          </div>
-          <div className="col-md-6 col-sm-12 title-other-Info">
+          <div className="col-6 title-other-Info ">Our Services & support?</div>
+          <div className="col-6 title-other-Info">
             Ink Change over, Color profiling and Other Ink related issues
           </div>
         </div>
         <div className="row mb-2">
-          <div className="col-md-6 col-sm-12 title-other-Info">
+          <div className="col-6 title-other-Info">
             We are interested to purchase
           </div>
-          <div className="col-md-6 col-sm-12 title-other-Info d-flex">
+          <div className="col-6 title-other-Info d-flex">
             {["Printing", "Pages"].map((item) => {
               return <Badges value={item} />;
             })}

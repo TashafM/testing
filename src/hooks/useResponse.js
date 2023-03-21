@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import instance from "../helper/axios";
 
 export const useResponse = (url) => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
   const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
 

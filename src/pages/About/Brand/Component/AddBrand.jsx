@@ -1,15 +1,34 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import File from "../../../../components/Input/File";
 import TextInput from "../../../../components/Input/TextInput";
 import { Formik, Form } from "formik";
 import schema from "../../../../helper/validation/schema";
 import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
+import usePostBrand from "../hooks/usePostBrand";
 
 function AddBrand() {
   const formRef = useRef();
+  const [file, setFile] = useState([]);
+
+  const { data, loading, postData } = usePostBrand("/portalEditCompayBrands");
 
   const submitHandler = async (values, action) => {
     console.log("values", values);
+    const formData = new FormData();
+    // { brandId:"",  brandLogoURL:<file>,  brandName:"", brandLocation:{city:"", state:"", country:"", latitude:"", longitude:""}, username:"", email:"" }
+    formData.append("brandName", values.brandName);
+    formData.append("username", values.username);
+    formData.append("email", values.email);
+    formData.append("brandLogoURL", file);
+    formData.append("brandId", "");
+    formData.append("brandLocation[state]", "");
+    formData.append("brandLocation[city]", "");
+    formData.append("companyUserCode", "64134ed79a2fde15a4f93691");
+    formData.append("brandLocation[latitude]", "");
+    formData.append("brandLocation[longitude]", "");
+    formData.append("brandLocation[country]", "");
+
+    postData(formData);
   };
 
   return (
@@ -28,12 +47,14 @@ function AddBrand() {
         }}
         innerRef={formRef}
         onSubmit={submitHandler}
-        validationSchema={schema.createBrand}
+        // validationSchema={schema.createBrand}
         render={({ handleSubmit, errors, values, setFieldValue, touched }) => (
           <Form className="">
             <File
-              value={values.file}
-              onChange={() => {}}
+              value={file}
+              onChange={(e) => {
+                setFile(e.target.value);
+              }}
               label="Add Image"
               error={touched.file && errors.file}
             />
@@ -41,14 +62,17 @@ function AddBrand() {
               <TextInput
                 name="brandName"
                 value={values.brandName}
-                onChange={(e) => setFieldValue("brandName", e.target.value)}
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setFieldValue("brandName", e.target.value);
+                }}
                 error={touched.brandName && errors.brandName}
                 label="Brand Name"
               />
             </div>
             <div className="input-wrapper">
               <TextInput
-                name="Location"
+                name="location"
                 value={values.location}
                 onChange={(e) => setFieldValue("location", e.target.value)}
                 error={touched.location && errors.location}

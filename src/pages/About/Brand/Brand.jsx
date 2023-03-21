@@ -4,35 +4,44 @@ import CardBrand from "./Component/CardBrand";
 import BtnTitleCenter from "../../../components/Button/BtnTitleCenter";
 import "./Brand.scss";
 import { useContextProvider } from "../../../context";
+import { useResponse } from "../../../hooks/useResponse";
 
 function Brand() {
   const { setOpenDrawer } = useContextProvider();
+  const { data, loading } = useResponse("/portalViewCompanyBrands");
+
+  if (loading) {
+    return <div>loading...</div>;
+  }
 
   return (
     <div className="container-fluid">
       <div className="row">
-        {brandData.map((item) => {
+        {data.map((item, index) => {
           return (
             <div className="col-3">
               <CardBrand
-                title={item.title}
-                logo={item.logo}
+                item={item}
+                // title={item.title}
+                // logo={item.logo}
                 location={item.location}
               />
             </div>
           );
         })}
       </div>
-      <div className="add-brand-container text-center">
-        <BtnTitleCenter
-          title="Add Brands"
-          onClick={() =>
-            setOpenDrawer({
-              type: "Add Brands",
-              open: true,
-            })
-          }
-        />
+      <div className="d-flex justify-content-center">
+        <div className="add-brand-container text-center">
+          <BtnTitleCenter
+            title="Add Brands"
+            onClick={() =>
+              setOpenDrawer({
+                type: "Add Brands",
+                open: true,
+              })
+            }
+          />
+        </div>
       </div>
     </div>
   );
