@@ -14,7 +14,6 @@ function CardHOpration({ hoursOfOperation, onClick }) {
       </Col>
     );
   }
-  localStorage.setItem("usercode", "64134ed79a2fde15a4f93691");
 
   return (
     <Col
