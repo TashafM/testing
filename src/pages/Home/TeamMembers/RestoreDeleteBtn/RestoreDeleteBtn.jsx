@@ -6,10 +6,9 @@ import UnderLineTabs from "../../../../components/Tabs/UnderLineTabs";
 import FilterBtn from "../FilterBtn/FilterBtn";
 import { teamMembersTab } from "../data/data";
 import { useLocation } from "react-router-dom";
-import rDisable from '../../../../assets/images/rDisable.svg'
-import rEnable from '../../../../assets/images/rEnable.svg'
-import './RestoreDeleteBtn.scss'
-
+import rDisable from "../../../../assets/images/rDisable.svg";
+import rEnable from "../../../../assets/images/rEnable.svg";
+import "./RestoreDeleteBtn.scss";
 
 const RestoreDeleteBtn = ({
   selectedIds,
@@ -30,56 +29,56 @@ const RestoreDeleteBtn = ({
   return (
     <>
       {/* <UnderLineTabs tabs={teamMembersTab} /> */}
-      
+
       <div className="col search-filter ">
-      <div className="ratings-div">
-        <span className="rating-icon">
-          <img src={rDisable} alt="" />
-        </span>
-        <span className="rating-icon">
-          <img src={rEnable} alt="" />
-        </span>
-      </div>
-      <div className="col-separate">
-        {selectedIds.length == 0 ? (
-          ""
-        ) : (
-          <>
-            {location.pathname == pastPath ? (
-              <RestoreBtn
-                selectedIds={selectedIds}
-                data={pastMemberData}
-                apiTo={pastMemberApi}
-                apiFrom={currMemberApi}
-                func1={getCurrMembers}
-                func2={getPastMembers}
-                setSelectedIds={setSelectedIds}
-              />
-            ) : (
-              <>
-                <DeleteButton
+        <div className="col-separate">
+          {selectedIds.length == 0 ? (
+            ""
+          ) : (
+            <>
+              {location.pathname == pastPath ? (
+                <RestoreBtn
                   selectedIds={selectedIds}
-                  data={currMemberData}
-                  apiTo={currMemberApi}
-                  apiFrom={pastMemberApi}
+                  data={pastMemberData}
+                  apiTo={pastMemberApi}
+                  apiFrom={currMemberApi}
                   func1={getCurrMembers}
                   func2={getPastMembers}
                   setSelectedIds={setSelectedIds}
                 />
-              </>
-            )}
-          </>
-        )}
+              ) : (
+                <>
+                  <div className="ratings-div">
+                    <span className="rating-icon">
+                      <img src={rDisable} alt="" />
+                    </span>
+                    <span className="rating-icon">
+                      <img src={rEnable} alt="" />
+                    </span>
+                  </div>
+                  <DeleteButton
+                    selectedIds={selectedIds}
+                    data={currMemberData}
+                    apiTo={currMemberApi}
+                    apiFrom={pastMemberApi}
+                    func1={getCurrMembers}
+                    func2={getPastMembers}
+                    setSelectedIds={setSelectedIds}
+                  />
+                </>
+              )}
+            </>
+          )}
 
-        {/* <div> */}
+          {/* <div> */}
           {location.pathname === currentPath && (
             <SearchBar handleSearch={handleSearch} />
           )}
           {location.pathname === pastPath && (
             <SearchBar handleSearch={handleSearch2} />
           )}
-          </div>
-          <FilterBtn />
+        </div>
+        <FilterBtn />
         {/* </div> */}
       </div>
     </>
