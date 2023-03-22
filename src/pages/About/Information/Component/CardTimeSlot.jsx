@@ -3,13 +3,36 @@ import { Badge } from "react-bootstrap";
 import Switch from "../../../../components/Input/Switch";
 import TimeInput from "../../../../components/Input/TimeInput";
 
-function CardTimeSlot({ title, active }) {
+function CardTimeSlot({ title, active, onChange, index }) {
   const [time, setTime] = useState("09:30");
   const [endTime, setEndTime] = useState("05:30");
+
+  const onTimeChange = (e) => {
+    let timeSplit = e.target.value.split(":");
+    let hours = "";
+    let minutes = "";
+    let meridian = "";
+    hours = timeSplit[0];
+    minutes = timeSplit[1];
+    if (hours > 12) {
+      meridian = "PM";
+      hours -= 12;
+    } else if (hours < 12) {
+      meridian = "AM";
+      if (hours === 0) {
+        hours = 12;
+      }
+    } else {
+      meridian = "PM";
+    }
+
+    console.log(meridian, minutes, hours);
+  };
+
   return (
     <div className="card-slots-container align-items-center justify-content-between">
       <div className="d-flex align-items-center">
-        <Switch />
+        <Switch value={active} onChange={onChange} />
         <span className="card-day cardspace">{title}</span>
       </div>
 
@@ -17,6 +40,7 @@ function CardTimeSlot({ title, active }) {
         <TimeInput
           value={time}
           onChange={(e) => {
+            onTimeChange(e);
             console.log(e.target.value);
             setTime(e.target.value);
           }}

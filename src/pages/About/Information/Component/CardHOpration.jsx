@@ -2,10 +2,28 @@ import React from "react";
 import { Col } from "react-bootstrap";
 import CardHead from "./CardHead";
 import business from "../../../../assets/images/business.png";
+import BtnTitleIcon from "../../../../components/Button/BtnTitleIcon";
 
-function CardHOpration({ hoursOfOperation }) {
+function CardHOpration({ hoursOfOperation, onClick }) {
+  if (!hoursOfOperation || !hoursOfOperation?.hoursOfOperationObject?.length) {
+    return (
+      <Col className="card-wrapper" md={6} xl={4}>
+        <div className="card-cont default-height d-flex align-items-center justify-content-center">
+          <BtnTitleIcon title="Add social links" onClick={onClick} />
+        </div>
+      </Col>
+    );
+  }
+  localStorage.setItem("usercode", "64134ed79a2fde15a4f93691");
+
   return (
-    <Col className="card-wrapper" style={{ marginRight: 0 }} md={6} xl={4}>
+    <Col
+      className="card-wrapper"
+      style={{ marginRight: 0 }}
+      md={6}
+      xl={4}
+      onClick={onClick}
+    >
       <div className="card-cont">
         <CardHead
           type="Hours of operations"

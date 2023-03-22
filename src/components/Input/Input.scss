@@ -197,6 +197,10 @@ div.PhoneInputCountry {
   height: 150px;
 }
 
+input[type="time"]::-webkit-calendar-picker-indicator {
+  background: none;
+}
+
 .files-dropzone {
   background: #f7f7f7;
   border: 1px dashed #899197;

@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import File from "../../../../components/Input/File";
 import TextInput from "../../../../components/Input/TextInput";
 import { Formik, Form } from "formik";
-import schema from "../../../../helper/validation/schema";
 import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import usePostBrand from "../hooks/usePostBrand";
 import { useContextProvider } from "../../../../context";
@@ -13,16 +12,14 @@ function AddBrand() {
   const [file, setFile] = useState([]);
   const { openDrawer } = useContextProvider();
 
-  const { data, loading, postData } = usePostBrand("/portalAddCompanyBrands");
-  const { loading: editLoading, postData: editBrnad } = useEditBrandPatch(
-    "/portalEditCompanyBrands"
-  );
+  const { postData } = usePostBrand("/portalAddCompanyBrands");
+  const { postData: editBrnad } = useEditBrandPatch("/portalEditCompanyBrands");
 
   useEffect(() => {
     if (openDrawer.type === "Edit Brands") {
       setFile([{ name: openDrawer.data.brandLogoURL }]);
     }
-  }, []);
+  }, [openDrawer?.data?.brandLogoURL, openDrawer.type]);
 
   const submitHandler = async (values, action) => {
     console.log("values", values);
