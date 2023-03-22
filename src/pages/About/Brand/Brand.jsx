@@ -24,6 +24,7 @@ function Brand() {
                 item={item}
                 // title={item.title}
                 // logo={item.logo}
+                data={item}
                 location={item.location}
               />
             </div>
@@ -38,6 +39,7 @@ function Brand() {
               setOpenDrawer({
                 type: "Add Brands",
                 open: true,
+                data: {},
               })
             }
           />

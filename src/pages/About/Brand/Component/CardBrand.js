@@ -14,6 +14,7 @@ function CardBrand({ title, item, location }) {
             setOpenDrawer({
               type: "Edit Brands",
               open: true,
+              data: item,
             });
           }}
         />

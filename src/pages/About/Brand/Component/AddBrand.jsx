@@ -1,29 +1,40 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import File from "../../../../components/Input/File";
 import TextInput from "../../../../components/Input/TextInput";
 import { Formik, Form } from "formik";
 import schema from "../../../../helper/validation/schema";
 import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import usePostBrand from "../hooks/usePostBrand";
+import { useContextProvider } from "../../../../context";
+import useEditBrandPatch from "../hooks/useEditBrandPatch";
 
 function AddBrand() {
   const formRef = useRef();
   const [file, setFile] = useState([]);
+  const { openDrawer } = useContextProvider();
 
-  const { data, loading, postData } = usePostBrand("/portalEditCompayBrands");
+  const { data, loading, postData } = usePostBrand("/portalAddCompanyBrands");
+  const { loading: editLoading, postData: editBrnad } = useEditBrandPatch(
+    "/portalEditCompayBrands"
+  );
+
+  useEffect(() => {
+    if (openDrawer.type === "Edit Brands") {
+      setFile([{ name: openDrawer.data.brandLogoURL }]);
+    }
+  }, []);
 
   const submitHandler = async (values, action) => {
     console.log("values", values);
     const formData = new FormData();
     // { brandId:"",  brandLogoURL:<file>,  brandName:"", brandLocation:{city:"", state:"", country:"", latitude:"", longitude:""}, username:"", email:"" }
-    console.log(file);
+    console.log({ file });
     const userId = localStorage.getItem("usercode");
 
     formData.append("brandName", values.brandName);
 
     formData.append("username", values.username);
     formData.append("email", values.email);
-    formData.append("brandLogoURL", file);
     formData.append("brandLocation[state]", "");
     formData.append("brandLocation[city]", "");
     formData.append("companyUserCode", userId);
@@ -40,10 +51,39 @@ function AddBrand() {
     formData.append("brandLocation[latitude]", "");
     formData.append("brandLocation[longitude]", "");
     formData.append("brandLocation[country]", "");
+    if (openDrawer.type === "Edit Brands") {
+      // { brandId:"",  brandLogoURL:<file>,  brandName:"", brandLocation:{city:"", state:"", country:"", latitude:"", longitude:""}, username:"", email:"" }
+      if (file.length && file[0]?.size) {
+        formData.append("brandLogoURL", file[0]);
+      } else {
+        formData.append("brandLogoURL", "");
+      }
 
-    postData(formData);
+      formData.append("brandId", openDrawer.data.brandId);
+
+      editBrnad(formData);
+    } else {
+      formData.append("brandLogoURL", file[0]);
+      postData(formData);
+    }
+
+    action.reset();
   };
 
+  const handleChange = (files) => {
+    console.log(files);
+    setFile(files);
+  };
+
+  const initialValues = {
+    file: "",
+    brandName: openDrawer?.data?.brandName ?? "",
+    location: "",
+    username: openDrawer?.data?.brandName ?? "",
+    email: openDrawer?.data?.email ?? "",
+  };
+
+  console.log({ initialValues });
   return (
     <div>
       <p className="drawer-title">
@@ -51,26 +91,20 @@ function AddBrand() {
         to purchase
       </p>
       <Formik
-        initialValues={{
-          file: "",
-          brandName: "",
-          location: "",
-          username: "",
-          email: "",
-        }}
+        initialValues={initialValues}
         innerRef={formRef}
         onSubmit={submitHandler}
         // validationSchema={schema.createBrand}
         render={({ handleSubmit, errors, values, setFieldValue, touched }) => (
           <Form className="">
-            <File
-              value={file}
-              onChange={(e) => {
-                setFile(e.target.value);
-              }}
-              label="Add Image"
-              error={touched.file && errors.file}
-            />
+            <div className="input-wrapper">
+              <File
+                file={file}
+                onChange={handleChange}
+                label="Add Image"
+                // error={touched.file && errors.file}
+              />
+            </div>
             <div className="input-wrapper">
               <TextInput
                 name="brandName"

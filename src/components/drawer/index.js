@@ -39,9 +39,14 @@ export default function RightDrawer() {
       <React.Fragment>
         <SwipeableDrawer
           anchor={"right"}
+          variant="persistent"
           open={openDrawer.open}
+          // ModalProps={{
+          //   keepMounted: false,
+          // }}
+          disableBackdropTransition={true}
           onClose={() => {
-            setOpenDrawer({ ...openDrawer, open: false });
+            setOpenDrawer({ ...openDrawer, open: false, type: "" });
           }}
           onOpen={() => {
             setOpenDrawer({ ...openDrawer, open: true });
@@ -94,7 +99,8 @@ export default function RightDrawer() {
                 <EditOtherInfo type={openDrawer.type} />
               ) : openDrawer.type === "Other Info Edit" ? (
                 <OtherInfoDetails />
-              ) : openDrawer.type === "Add Brands" ? (
+              ) : openDrawer.type === "Add Brands" ||
+                openDrawer.type === "Edit Brands" ? (
                 <AddBrand />
               ) : (
                 <div>other cont</div>
