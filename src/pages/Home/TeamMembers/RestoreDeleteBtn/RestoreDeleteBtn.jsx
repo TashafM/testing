@@ -6,6 +6,10 @@ import UnderLineTabs from "../../../../components/Tabs/UnderLineTabs";
 import FilterBtn from "../FilterBtn/FilterBtn";
 import { teamMembersTab } from "../data/data";
 import { useLocation } from "react-router-dom";
+import rDisable from '../../../../assets/images/rDisable.svg'
+import rEnable from '../../../../assets/images/rEnable.svg'
+import './RestoreDeleteBtn.scss'
+
 
 const RestoreDeleteBtn = ({
   selectedIds,
@@ -26,7 +30,16 @@ const RestoreDeleteBtn = ({
   return (
     <>
       {/* <UnderLineTabs tabs={teamMembersTab} /> */}
+      
       <div className="col search-filter ">
+      <div className="ratings-div">
+        <span className="rating-icon">
+          <img src={rDisable} alt="" />
+        </span>
+        <span className="rating-icon">
+          <img src={rEnable} alt="" />
+        </span>
+      </div>
       <div className="col-separate">
         {selectedIds.length == 0 ? (
           ""
