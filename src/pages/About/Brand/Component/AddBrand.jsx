@@ -15,7 +15,7 @@ function AddBrand() {
 
   const { data, loading, postData } = usePostBrand("/portalAddCompanyBrands");
   const { loading: editLoading, postData: editBrnad } = useEditBrandPatch(
-    "/portalEditCompayBrands"
+    "/portalEditCompanyBrands"
   );
 
   useEffect(() => {
@@ -37,7 +37,6 @@ function AddBrand() {
     formData.append("email", values.email);
     formData.append("brandLocation[state]", "");
     formData.append("brandLocation[city]", "");
-    formData.append("companyUserCode", userId);
     // formData.append(
     //   "brandLocation",
     //   JSON.stringify({
@@ -55,14 +54,14 @@ function AddBrand() {
       // { brandId:"",  brandLogoURL:<file>,  brandName:"", brandLocation:{city:"", state:"", country:"", latitude:"", longitude:""}, username:"", email:"" }
       if (file.length && file[0]?.size) {
         formData.append("brandLogoURL", file[0]);
-      } else {
-        formData.append("brandLogoURL", "");
       }
 
       formData.append("brandId", openDrawer.data.brandId);
 
       editBrnad(formData);
     } else {
+      formData.append("companyUserCode", userId);
+
       formData.append("brandLogoURL", file[0]);
       postData(formData);
     }
