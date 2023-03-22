@@ -220,12 +220,12 @@ const TeamMembers = () => {
 
         <div>
           {location.pathname == currentMember && (
-            <InfiniteScroll
-              dataLength={data.length}
-              next={handleLoadMore}
-              hasMore={hasMore}
-              // loader={<h4>Loading...</h4>}
-            >
+            // <InfiniteScroll
+            //   dataLength={data.length}
+            //   next={handleLoadMore}
+            //   hasMore={hasMore}
+            //   loader={<h4>Loading...</h4>}
+            // >
               <CurrentMembers
                 selectedIds={selectedIds}
                 setSelectedIds={setSelectedIds}
@@ -236,16 +236,19 @@ const TeamMembers = () => {
                 getCurrMembers={getCurrMembers}
                 getPastMembers={getPastMembers}
                 filteredItems={filteredItems}
+                dataLength={data.length}
+                next={handleLoadMore}
+                hasMore={hasMore}
               />
-            </InfiniteScroll>
+            // </InfiniteScroll>
           )}
           {location.pathname == pastMember && (
-            <InfiniteScroll
-              dataLength={pastData.length}
-              next={pastHandleLoadMore}
-              hasMore={pastHasMore}
-              // loader={<h4>Loading...</h4>}
-            >
+            // <InfiniteScroll
+            //   dataLength={pastData.length}
+            //   next={pastHandleLoadMore}
+            //   hasMore={pastHasMore}
+            //   loader={<h4>Loading...</h4>}
+            // >
               <PastMembers
                 selectedIds={selectedIds}
                 setSelectedIds={setSelectedIds}
@@ -256,8 +259,11 @@ const TeamMembers = () => {
                 getPastMembers={getPastMembers}
                 getCurrMembers={getCurrMembers}
                 filteredItems2={filteredItems2}
+                dataLength={pastData.length}
+                next={pastHandleLoadMore}
+                hasMore={pastHasMore}
               />
-            </InfiniteScroll>
+            // </InfiniteScroll>
           )}
         </div>
       </div>

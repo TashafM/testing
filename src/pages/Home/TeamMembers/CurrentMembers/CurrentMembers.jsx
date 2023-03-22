@@ -14,6 +14,9 @@ const CurrentMembers = ({
   getCurrMembers,
   getPastMembers,
   filteredItems,
+  dataLength,
+  next,
+  hasMore,
 }) => {
 
   console.log(currMemberData,'------------')
@@ -33,6 +36,9 @@ const CurrentMembers = ({
         teamMembers={true}
         ratings={true}
         delActive={true}
+        dataLength={dataLength}
+        next={next}
+        hasMore={hasMore}
       />
     </div>
   );

@@ -11,6 +11,9 @@ const PastMembers = ({
   getPastMembers,
   getCurrentMembers,
   filteredItems2,
+  dataLength,
+  next,
+  hasMore,
 }) => {
   return (
     <div>
@@ -26,6 +29,9 @@ const PastMembers = ({
         setSelectedIds={setSelectedIds}
         teamMembers={true}
         resActive={true}
+        dataLength={dataLength}
+        next={next}
+        hasMore={hasMore}
       />
     </div>
   );
