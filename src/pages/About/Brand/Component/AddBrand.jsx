@@ -16,14 +16,27 @@ function AddBrand() {
     console.log("values", values);
     const formData = new FormData();
     // { brandId:"",  brandLogoURL:<file>,  brandName:"", brandLocation:{city:"", state:"", country:"", latitude:"", longitude:""}, username:"", email:"" }
+    console.log(file);
+    const userId = localStorage.getItem("usercode");
+
     formData.append("brandName", values.brandName);
+
     formData.append("username", values.username);
     formData.append("email", values.email);
     formData.append("brandLogoURL", file);
-    formData.append("brandId", "");
     formData.append("brandLocation[state]", "");
     formData.append("brandLocation[city]", "");
-    formData.append("companyUserCode", "64134ed79a2fde15a4f93691");
+    formData.append("companyUserCode", userId);
+    // formData.append(
+    //   "brandLocation",
+    //   JSON.stringify({
+    //     city: "",
+    //     state: "",
+    //     country: "",
+    //     latitude: "1222",
+    //     longitude: "1235",
+    //   })
+    // );
     formData.append("brandLocation[latitude]", "");
     formData.append("brandLocation[longitude]", "");
     formData.append("brandLocation[country]", "");

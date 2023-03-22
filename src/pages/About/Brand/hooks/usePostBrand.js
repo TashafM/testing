@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import instance from "../../../../helper/axios";
+import { axiosInstance } from "../../../../helper/axios";
 
 function usePostBrand(url) {
   const [data, setData] = useState([]);
@@ -9,7 +9,7 @@ function usePostBrand(url) {
   const postData = useCallback(
     (body) => {
       setLoading(true);
-      instance
+      axiosInstance
         .post(url, body)
         .then((res) => {
           console.log({ res });

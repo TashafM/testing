@@ -5,6 +5,7 @@ const instance = axios.create({
   // timeout: 5000, // milliseconds
   headers: {
     "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
   },
 });
 
@@ -36,4 +37,37 @@ instance.interceptors.response.use(
   }
 );
 
-export default instance;
+const axiosInstance = axios.create({
+  baseURL: "https://dev.elred.io/",
+  // timeout: 5000, // milliseconds
+  headers: {
+    // "Content-Type": "multipart/form-data",
+  },
+});
+
+//intercept request
+axiosInstance.interceptors.request.use((config) => {
+  const token = localStorage.getItem("accessToken");
+  console.log(config);
+  if (token) {
+    //set default and body header
+
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
+
+//intercep response
+axiosInstance.interceptors.response.use(
+  (response) => {
+    //restun response
+    return response.data;
+  },
+  function (error) {
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
+    return Promise.reject(error);
+  }
+);
+export { instance as default, axiosInstance };
