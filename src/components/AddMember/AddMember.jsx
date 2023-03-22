@@ -17,12 +17,36 @@ import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePickerComp from "../DatePickerComp/DatePickerComp";
 import Util from "../UtilityFunctions/UtilityFunctions";
+import Multiselect from "multiselect-react-dropdown";
 
 const AddMember = ({ api, getDataFunc }) => {
   const [show, setShow] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [probationDate, setProbationDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(["", "", ""]);
+  const [probationDate, setProbationDate] = useState(["", "", ""]);
   const [loading, setLoading] = useState(false);
+  const [showRating, setShowRating] = useState(false);
+  const [designation, setDesignation] = useState([]);
+  const [selectedDesignations, setSelectedDesignations] = useState([]);
+
+  useEffect(() => {
+    const getDesignations = () => {
+      const accessToken = localStorage.getItem("accessToken");
+      axios
+        .get("https://dev.elred.io/getDesignations", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((res) => setDesignation(res.data.result));
+        // .then((res) => console.log(res.data.result, "qwertyu"));
+    };
+
+    getDesignations();
+  }, [show]);
+
+  const handleSelect = (selectedList, selectedItem) => {
+    setSelectedDesignations(selectedList);
+  };
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -30,13 +54,64 @@ const AddMember = ({ api, getDataFunc }) => {
   const [formValues, setFormValues] = useState([]);
   const myUtil = new Util();
 
+  //----------------------
+  const probDate = (index, value) => {
+    setProbationDate((prevValues) => {
+      const newValues = [...prevValues];
+      newValues[index] = value;
+      return newValues;
+    });
+  };
+  const dateInput = (index, value) => {
+    setSelectedDate((prevValues) => {
+      const newValues = [...prevValues];
+      newValues[index] = value;
+      return newValues;
+    });
+  };
+  const rawStartDate = selectedDate.join("/");
+  // const [day, month, year] = rawStartDate.split('/');
+  // const startDate = `${day.padStart(2, '0')}/${month.padStart(2, '0')}/${year}`;
+
+  const rawEndDate = probationDate.join("/");
+
+  const startDate = formatDate(rawStartDate);
+  const endDate = formatDate(rawEndDate);
+
+  function formatDate(dateStr) {
+    const [day, month, year] = dateStr.split("/");
+    const formattedDateStr = `${day.padStart(2, "0")}/${month.padStart(
+      2,
+      "0"
+    )}/${year}`;
+    return formattedDateStr;
+  }
+
+  // const dateSubmit = (event) => {
+  //   event.preventDefault();
+  //   console.log(formattedValue,'date')
+  //   console.log(newDate, 'end Date')
+  // }
+  //-------------------
+
   function handleSubmit(event) {
     event.preventDefault();
-    axios.post(api, formValues).then((res) => {
-      getDataFunc();
-      myUtil.hello();
-    });
+    const data = {
+      ...formValues,
+      showRating,
+      startDate,
+      endDate,
+      selectedDesignations,
+    };
+    // axios.post(api, formValues).then((res) => {
+    //   getDataFunc();
+    //   myUtil.hello();
+    // });
+    console.log(data, "77777777777777777");
     handleClose();
+    setSelectedDate(["", "", ""]);
+    setProbationDate(["", "", ""]);
+    setShowRating(false);
   }
 
   return (
@@ -162,9 +237,34 @@ const AddMember = ({ api, getDataFunc }) => {
                 />
               </FormGroup>
               <div className="d-flex justify-content-between">
-                <DatePickerComp heading={"Start Date *"} />
-                <DatePickerComp heading={"Probation Date *"} />
+                <DatePickerComp
+                  heading={"Start Date *"}
+                  dateInput={dateInput}
+                  selectedDate={selectedDate}
+                />
+                <DatePickerComp
+                  heading={"Probation Date *"}
+                  dateInput={probDate}
+                  selectedDate={probationDate}
+                />
               </div>
+
+              <div>
+                <input
+                  type="checkbox"
+                  checked={showRating}
+                  onChange={() => setShowRating(!showRating)}
+                />
+                Show ratings on the employee’s card
+              </div>
+
+              <Multiselect
+                options={designation}
+                selectedValues={selectedDesignations}
+                onSelect={handleSelect}
+                displayValue="value"
+              />
+
               <Button variant="primary" type="submit" className="save-btn">
                 Save
               </Button>

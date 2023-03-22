@@ -15,6 +15,7 @@ import axios from "axios";
 import UpdatePartners from "../../pages/Home/Partners/UpdatePartners/UpdatePartners";
 import ScrollBtn from "../ScrollBtn/ScrollBtn";
 import { useNavigate } from "react-router-dom";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const DataTable = ({
   columns,
@@ -32,6 +33,9 @@ const DataTable = ({
   ratingUser,
   teamMembers,
   partners,
+  dataLength,
+  next,
+  hasMore,
 }) => {
   const myRef = useRef(null);
   const [scrollX, setScrollX] = useState(0);
@@ -48,56 +52,62 @@ const DataTable = ({
 
   return (
     <div className="dataTable">
-      <div className="table-container" ref={myRef}>
-        <Table hover>
-          <thead className="table-head">
-            <tr className="tr-head">
-              <th className="checkbox-div">
-                <input
-                  type="checkbox"
-                  // checked={selectedIds.includes(row.id)}
-                  onChange={(e) =>
-                    myUtil.handleCheckboxChange(
-                      selectedIds,
-                      row,
-                      setSelectedIds,
-                      setRatingUser
-                    )
-                  }
-                />
-              </th>
-              {columns.map((col, idx) => (
-                <th key={idx}>{col.title}</th>
-              ))}
-              <th className="fixed-column">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="scroll-body">
-            {data.map((row, id) => (
-              <>
-              {/* {console.log(row.teamMemberId,'---------')} */}
-                <tr
-                  key={row.teamMemberId}
-                  className="tr-body"
-                  onClick={() => (partners ? gotoNew(row) : null)}
-                >
-                  <td className="checkbox-div">
-                    <input
-                      type="checkbox"
-                      checked={selectedIds.includes(row.teamMemberId)}
-                      onChange={(e) =>
-                        myUtil.handleCheckboxChange(
-                          selectedIds,
-                          row,
-                          setSelectedIds,
-                          setRatingUser
-                        )
-                      }
-                    />
-                  </td>
-                  {columns.map((col, id) => (
-                    <>
-                      {/* <td
+      <InfiniteScroll
+        dataLength={dataLength}
+        next={next}
+        hasMore={hasMore}
+        // loader={<h4>Loading...</h4>}
+      >
+        <div className="table-container" ref={myRef}>
+          <Table hover>
+            <thead className="table-head">
+              <tr className="tr-head">
+                <th className="checkbox-div">
+                  <input
+                    type="checkbox"
+                    // checked={selectedIds.includes(row.id)}
+                    onChange={(e) =>
+                      myUtil.handleCheckboxChange(
+                        selectedIds,
+                        row,
+                        setSelectedIds,
+                        setRatingUser
+                      )
+                    }
+                  />
+                </th>
+                {columns.map((col, idx) => (
+                  <th key={idx}>{col.title}</th>
+                ))}
+                <th className="fixed-column">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="scroll-body">
+              {data.map((row, id) => (
+                <>
+                  {/* {console.log(row.teamMemberId,'---------')} */}
+                  <tr
+                    key={row.teamMemberId}
+                    className="tr-body"
+                    onClick={() => (partners ? gotoNew(row) : null)}
+                  >
+                    <td className="checkbox-div">
+                      <input
+                        type="checkbox"
+                        checked={selectedIds.includes(row.teamMemberId)}
+                        onChange={(e) =>
+                          myUtil.handleCheckboxChange(
+                            selectedIds,
+                            row,
+                            setSelectedIds,
+                            setRatingUser
+                          )
+                        }
+                      />
+                    </td>
+                    {columns.map((col, id) => (
+                      <>
+                        {/* <td
                         key={id}
                         onClick={() => (partners ? gotoNew(row) : null)}
                       >
@@ -113,80 +123,78 @@ const DataTable = ({
                           )}
                         </>
                       </td> */}
-                      <td key={id}>
-                        {col.value.includes(".")
+                        <td key={id}>
+                          {/* {col.value.includes(".")
                           ? col.value
                               .split(".")
                               .reduce((obj, key) => obj[key], row)
                           : Array.isArray(row[col.value])
                           ? row[col.value].map((el) => el.value).join(", ")
-                          : row[col.value]}
-                      </td>
-                    </>
-                  ))}
-                  <td className="action-div fixed-column">
-                    {ratings &&
-                      (row.rating ? (
-                        <span className="icon-desc">
-                          <img
-                            src={rEnable}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              myUtil.deactiveRatings(api, row.id, getDataFunc);
-                            }}
+                          : row[col.value]} */}
+                          {col.value.includes(".") ? (
+                            col.value
+                              .split(".")
+                              .reduce((obj, key) => obj[key], row)
+                          ) : Array.isArray(row[col.value]) ? (
+                            <>
+                              {row[col.value][0].value}{" "}
+                              <span>{row[col.value].length}</span>
+                            </>
+                          ) : (
+                            row[col.value]
+                          )}
+                        </td>
+                      </>
+                    ))}
+                    <td className="action-div fixed-column">
+                      {ratings &&
+                        (row.rating ? (
+                          <span className="icon-desc">
+                            <img
+                              src={rEnable}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                myUtil.deactiveRatings(
+                                  api,
+                                  row.id,
+                                  getDataFunc
+                                );
+                              }}
+                            />
+                          </span>
+                        ) : (
+                          <span className="icon-desc">
+                            <img
+                              src={rDisable}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                myUtil.activeRatings(api, row.id, getDataFunc);
+                              }}
+                            />
+                          </span>
+                        ))}
+                      <span className="editBtn">
+                        {teamMembers && (
+                          <UpdateMember
+                            editData={row}
+                            api={api}
+                            getDataFunc={getDataFunc}
                           />
-                        </span>
-                      ) : (
-                        <span className="icon-desc">
-                          <img
-                            src={rDisable}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              myUtil.activeRatings(api, row.id, getDataFunc);
-                            }}
+                        )}
+                        {partners && (
+                          <UpdatePartners
+                            editData={row}
+                            api={api}
+                            getDataFunc={getDataFunc}
                           />
-                        </span>
-                      ))}
-                    <span className="editBtn">
-                      {teamMembers && (
-                        <UpdateMember
-                          editData={row}
-                          api={api}
-                          getDataFunc={getDataFunc}
-                        />
-                      )}
-                      {partners && (
-                        <UpdatePartners
-                          editData={row}
-                          api={api}
-                          getDataFunc={getDataFunc}
-                        />
-                      )}
-                    </span>
-                    {resActive && (
-                      <span className="icon-desc">
-                        <img
-                          src={restoreBtn}
-                          onClick={() =>
-                            myUtil.restoreSingle(
-                              row,
-                              api,
-                              api2,
-                              getDataFunc,
-                              getDataFunc2,
-                              setSelectedIds
-                            )
-                          }
-                        />
+                        )}
                       </span>
-                    )}
-                    {delActive && (
-                      <span className="icon-desc">
-                        <img
-                          src={deleteBtn}
-                          onClick={
-                            () =>
-                              myUtil.deleteSingle(
+                      {resActive && (
+                        <span className="icon-desc">
+                          <img
+                            src={restoreBtn}
+                            onClick={() =>
+                              myUtil.restoreSingle(
                                 row,
                                 api,
                                 api2,
@@ -194,18 +202,37 @@ const DataTable = ({
                                 getDataFunc2,
                                 setSelectedIds
                               )
-                            // myUtil.hello()
-                          }
-                        />
-                      </span>
-                    )}
-                  </td>
-                </tr>
-              </>
-            ))}
-          </tbody>
-        </Table>
-      </div>
+                            }
+                          />
+                        </span>
+                      )}
+                      {delActive && (
+                        <span className="icon-desc">
+                          <img
+                            src={deleteBtn}
+                            onClick={
+                              () =>
+                                myUtil.deleteSingle(
+                                  row,
+                                  api,
+                                  api2,
+                                  getDataFunc,
+                                  getDataFunc2,
+                                  setSelectedIds
+                                )
+                              // myUtil.hello()
+                            }
+                          />
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                </>
+              ))}
+            </tbody>
+          </Table>
+        </div>
+      </InfiniteScroll>
       <ScrollBtn myRef={myRef} setScrollX={setScrollX} />
     </div>
   );
