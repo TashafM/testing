@@ -36,11 +36,12 @@ const DataTable = ({
   dataLength,
   next,
   hasMore,
+  restoreApi,
 }) => {
   const myRef = useRef(null);
   const [scrollX, setScrollX] = useState(0);
   const data = datum.sort((a, b) => b.id - a.id);
-
+  const companyUserCode = localStorage.getItem("usercode");
   // const data = datum;
   const navigate = useNavigate();
 
@@ -89,7 +90,7 @@ const DataTable = ({
                   <tr
                     key={row.teamMemberId}
                     className="tr-body"
-                    onClick={() => (partners ? gotoNew(row) : null)}
+                    // onClick={() => (partners ? gotoNew(row) : null)}
                   >
                     <td className="checkbox-div">
                       <input
@@ -148,17 +149,18 @@ const DataTable = ({
                     ))}
                     <td className="action-div fixed-column">
                       {ratings &&
-                        (row.rating ? (
+                        (row.showRatings ? (
                           <span className="icon-desc">
                             <img
                               src={rEnable}
                               onClick={(e) => {
                                 e.stopPropagation();
-                                myUtil.deactiveRatings(
-                                  api,
-                                  row.id,
-                                  getDataFunc
-                                );
+                                // myUtil.deactiveRatings(
+                                //   api,
+                                //   row.id,
+                                //   getDataFunc
+                                // );
+                                myUtil.deactiveRatings(row, getDataFunc);
                               }}
                             />
                           </span>
@@ -168,7 +170,8 @@ const DataTable = ({
                               src={rDisable}
                               onClick={(e) => {
                                 e.stopPropagation();
-                                myUtil.activeRatings(api, row.id, getDataFunc);
+                                // myUtil.activeRatings(api, row.id, getDataFunc);
+                                myUtil.activeRatings(row, getDataFunc);
                               }}
                             />
                           </span>
@@ -196,11 +199,12 @@ const DataTable = ({
                             onClick={() =>
                               myUtil.restoreSingle(
                                 row,
-                                api,
-                                api2,
-                                getDataFunc,
-                                getDataFunc2,
-                                setSelectedIds
+                                restoreApi
+                                // api,
+                                // api2,
+                                // getDataFunc,
+                                // getDataFunc2,
+                                // setSelectedIds
                               )
                             }
                           />
@@ -210,17 +214,20 @@ const DataTable = ({
                         <span className="icon-desc">
                           <img
                             src={deleteBtn}
+                            // onClick={
+                            //   () =>
+                            //     myUtil.deleteSingle(
+                            //       row,
+                            //       api,
+                            //       api2,
+                            //       getDataFunc,
+                            //       getDataFunc2,
+                            //       setSelectedIds
+                            //     )
+                            // }
                             onClick={
                               () =>
-                                myUtil.deleteSingle(
-                                  row,
-                                  api,
-                                  api2,
-                                  getDataFunc,
-                                  getDataFunc2,
-                                  setSelectedIds
-                                )
-                              // myUtil.hello()
+                                myUtil.teamMemberSingleDelete(row)
                             }
                           />
                         </span>

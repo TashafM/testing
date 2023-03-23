@@ -1,6 +1,8 @@
 import React from "react";
 import DataTable from "../../../../components/DataTable/DataTable";
+import { API } from "../../../../helper/API";
 import { colPastMembers } from "../data/data";
+
 
 const PastMembers = ({
   selectedIds,
@@ -23,6 +25,7 @@ const PastMembers = ({
         // datum={filteredItems2}
         selectedIds={selectedIds}
         api={pastMemberApi}
+        restoreApi={API.RESTORE_TEAM_MEMBERS}
         api2={currMemberApi}
         getDataFunc={getPastMembers}
         getDataFunc2={getCurrentMembers}

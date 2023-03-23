@@ -23,6 +23,17 @@ export const colCurrentMembers = [
 ];
 
 export const colPastMembers = [
+  { title: "First Name", value: "displayFirstName" },
+  { title: "Last Name", value: "displayLastName" },
+  { title: "Personal Email", value: "displayEmail" },
+  { title: "Phone No", value: "displayPhone" },
+  { title: "Department", value: "department" },
+  { title: "Designation", value: "designation" },
+  { title: "Employee Code", value: "employeeCode" },
+  { title: "Location", value: "displayLocation.city" },
+];
+
+export const colPastMembers2= [
   { title: "First Name", value: "firstName" },
   // { title: "Last Name", value: "lastName" },
   { title: "Personal Email", value: "personalEmail" },
