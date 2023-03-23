@@ -22,30 +22,66 @@ import Multiselect from "multiselect-react-dropdown";
 const AddMember = ({ api, getDataFunc }) => {
   const [show, setShow] = useState(false);
   const [selectedDate, setSelectedDate] = useState(["", "", ""]);
-  const [probationDate, setProbationDate] = useState(["", "", ""]);
+  const [proDate, setproDate] = useState(["", "", ""]);
   const [loading, setLoading] = useState(false);
-  const [showRating, setShowRating] = useState(false);
+  const [showRatings, setshowRatings] = useState(false);
+  const [designationList, setDesignationList] = useState([]);
   const [designation, setDesignation] = useState([]);
-  const [selectedDesignations, setSelectedDesignations] = useState([]);
+  const [departmentList, setDepartmentList] = useState([]);
+  const [department, setDepartment] = useState([]);
+
+  //------------location-------------------------
+  const [displayLocation, setDisplayLocation] = useState({
+    city: "",
+    state: "",
+    country: "",
+    latitude: "",
+    longitude: "",
+  });
+
+  const handleChangeLocation = (event) => {
+    setDisplayLocation({
+      ...displayLocation,
+      [event.target.name]: event.target.value,
+    });
+  };
+  //---------------------------------------
+
+  const getDesignations = () => {
+    const accessToken = localStorage.getItem("accessToken");
+    axios
+      .get("https://dev.elred.io/getDesignations", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => setDesignationList(res.data.result));
+    // .then((res) => console.log(res.data.result, "qwertyu"));
+  };
+
+  const getDepartment = () => {
+    const accessToken = localStorage.getItem("accessToken");
+    axios
+      .get("https://dev.elred.io/getDepartments", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => setDepartmentList(res.data.result));
+    // .then((res) => console.log(res.data.result, "qwertyu"));
+  };
 
   useEffect(() => {
-    const getDesignations = () => {
-      const accessToken = localStorage.getItem("accessToken");
-      axios
-        .get("https://dev.elred.io/getDesignations", {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
-        .then((res) => setDesignation(res.data.result));
-        // .then((res) => console.log(res.data.result, "qwertyu"));
-    };
-
     getDesignations();
+    getDepartment();
   }, [show]);
 
   const handleSelect = (selectedList, selectedItem) => {
-    setSelectedDesignations(selectedList);
+    setDesignation(selectedList);
+  };
+
+  const depSelect = (selectedList, selectedItem) => {
+    setDepartment(selectedList);
   };
 
   const handleClose = () => setShow(false);
@@ -56,7 +92,7 @@ const AddMember = ({ api, getDataFunc }) => {
 
   //----------------------
   const probDate = (index, value) => {
-    setProbationDate((prevValues) => {
+    setproDate((prevValues) => {
       const newValues = [...prevValues];
       newValues[index] = value;
       return newValues;
@@ -73,10 +109,10 @@ const AddMember = ({ api, getDataFunc }) => {
   // const [day, month, year] = rawStartDate.split('/');
   // const startDate = `${day.padStart(2, '0')}/${month.padStart(2, '0')}/${year}`;
 
-  const rawEndDate = probationDate.join("/");
+  const rawEndDate = proDate.join("/");
 
   const startDate = formatDate(rawStartDate);
-  const endDate = formatDate(rawEndDate);
+  const probationDate = formatDate(rawEndDate);
 
   function formatDate(dateStr) {
     const [day, month, year] = dateStr.split("/");
@@ -96,22 +132,49 @@ const AddMember = ({ api, getDataFunc }) => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const data = {
-      ...formValues,
-      showRating,
-      startDate,
-      endDate,
-      selectedDesignations,
-    };
+    const companyUserCode = localStorage.getItem("usercode");
+    const accessToken = localStorage.getItem("accessToken");
+    // const data = {
+    //   ...formValues,
+    //   showRatings,
+    //   startDate,
+    //   probationDate,
+    //   designation,
+    //   department,
+    //   companyUserCode,
+    //   displayLocation,
+    // };
     // axios.post(api, formValues).then((res) => {
     //   getDataFunc();
     //   myUtil.hello();
     // });
-    console.log(data, "77777777777777777");
+    axios.post(
+      "https://dev.elred.io/portalAddCompanyTeamMember",
+      // API.VIEW_CURRENT_TEAM_MEMBERS + `start=${page}&offset=10`,
+      
+        {...formValues,
+        showRatings: showRatings.toString(),
+        startDate,
+        probationDate,
+        designation,
+        department,
+        companyUserCode,
+        displayLocation,}
+      ,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    ).then((res)=>console.log(res,'successfully'))
+    .catch((err)=>console.log(err,'error'))
+    console.log(showRatings,'showRatings')
     handleClose();
     setSelectedDate(["", "", ""]);
-    setProbationDate(["", "", ""]);
-    setShowRating(false);
+    setproDate(["", "", ""]);
+    setshowRatings(false);
+    setDepartment([]);
+    setDesignation([]);
   }
 
   return (
@@ -143,7 +206,7 @@ const AddMember = ({ api, getDataFunc }) => {
                 <Form.Label>First Name *</Form.Label>
                 <Form.Control
                   type="text"
-                  name="firstName"
+                  name="displayFirstName"
                   // onChange={handleInputChange}
                   onChange={() => Util.handleChange(event, setFormValues)}
                   required
@@ -153,7 +216,7 @@ const AddMember = ({ api, getDataFunc }) => {
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
                   type="text"
-                  name="lastName"
+                  name="displayLastName"
                   onChange={() => Util.handleChange(event, setFormValues)}
                 />
               </FormGroup>
@@ -161,7 +224,7 @@ const AddMember = ({ api, getDataFunc }) => {
                 <Form.Label>Personal Email ID *</Form.Label>
                 <Form.Control
                   type="text"
-                  name="personalEmail"
+                  name="email"
                   onChange={() => Util.handleChange(event, setFormValues)}
                   required
                 />
@@ -201,7 +264,7 @@ const AddMember = ({ api, getDataFunc }) => {
                 This phone number will reflect on your employee’s card.{" "}
               </div>
 
-              <FormGroup className="input-div">
+              {/* <FormGroup className="input-div">
                 <Form.Label>Department *</Form.Label>
                 <Form.Control
                   type="text"
@@ -209,33 +272,94 @@ const AddMember = ({ api, getDataFunc }) => {
                   onChange={() => Util.handleChange(event, setFormValues)}
                   required
                 />
-              </FormGroup>
-              <FormGroup className="input-div">
-                <Form.Label>Designation *</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="designation"
-                  onChange={() => Util.handleChange(event, setFormValues)}
-                  required
-                />
-              </FormGroup>
+              </FormGroup> */}
+              {/* <FormGroup className="input-div"> */}
+              <Form.Label>Designation *</Form.Label>
+              <Multiselect
+                options={designationList}
+                selectedValues={designation}
+                onSelect={handleSelect}
+                displayValue="value"
+              />
+              {/* </FormGroup> */}
+              <Form.Label>Department *</Form.Label>
+              <Multiselect
+                options={departmentList}
+                selectedValues={department}
+                onSelect={depSelect}
+                displayValue="value"
+              />
+
               <FormGroup className="input-div">
                 <Form.Label>Employee Code *</Form.Label>
                 <Form.Control
                   type="text"
-                  name="emp_code"
+                  name="employeeCode"
                   onChange={() => Util.handleChange(event, setFormValues)}
                   required
                 />
               </FormGroup>
-              <FormGroup className="input-div">
+              {/* <FormGroup className="input-div">
                 <Form.Label>Location</Form.Label>
                 <Form.Control
                   type="text"
                   name="location"
                   onChange={() => Util.handleChange(event, setFormValues)}
                 />
+              </FormGroup> */}
+
+              <div>Location</div>
+              <FormGroup className="input-div">
+                <Form.Label>City *</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="city"
+                  onChange={handleChangeLocation}
+                  value={displayLocation.city}
+                  required
+                />
               </FormGroup>
+              <FormGroup className="input-div">
+                <Form.Label>State *</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="state"
+                  onChange={handleChangeLocation}
+                  value={displayLocation.state}
+                  required
+                />
+              </FormGroup>
+              <FormGroup className="input-div">
+                <Form.Label>Country *</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="country"
+                  onChange={handleChangeLocation}
+                  value={displayLocation.country}
+                  required
+                />
+              </FormGroup>
+              <FormGroup className="input-div">
+                <Form.Label>Latitude *</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="latitude"
+                  onChange={handleChangeLocation}
+                  value={displayLocation.latitude}
+                  required
+                />
+              </FormGroup>
+              <FormGroup className="input-div">
+                <Form.Label>Longitude *</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="longitude"
+                  onChange={handleChangeLocation}
+                  value={displayLocation.longitude}
+                  required
+                />
+              </FormGroup>
+
               <div className="d-flex justify-content-between">
                 <DatePickerComp
                   heading={"Start Date *"}
@@ -245,25 +369,25 @@ const AddMember = ({ api, getDataFunc }) => {
                 <DatePickerComp
                   heading={"Probation Date *"}
                   dateInput={probDate}
-                  selectedDate={probationDate}
+                  selectedDate={proDate}
                 />
               </div>
 
               <div>
                 <input
                   type="checkbox"
-                  checked={showRating}
-                  onChange={() => setShowRating(!showRating)}
+                  checked={showRatings}
+                  onChange={() => setshowRatings(!showRatings)}
                 />
                 Show ratings on the employee’s card
               </div>
 
-              <Multiselect
+              {/* <Multiselect
                 options={designation}
                 selectedValues={selectedDesignations}
                 onSelect={handleSelect}
                 displayValue="value"
-              />
+              /> */}
 
               <Button variant="primary" type="submit" className="save-btn">
                 Save

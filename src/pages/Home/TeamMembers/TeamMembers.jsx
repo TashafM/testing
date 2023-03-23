@@ -182,6 +182,7 @@ const TeamMembers = () => {
   return (
     <>
       <div className="upper-content">
+        {console.log(data,'000000000')}
         <Description
           icon={users}
           title="Team Members"
