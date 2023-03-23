@@ -60,7 +60,17 @@ function Information() {
           registeredAddress={data[0]?.registeredAddress ?? {}}
         />
 
-        <CardHOpration hoursOfOperation={data[0].hoursOfOperation} />
+        <CardHOpration
+          hoursOfOperation={data[0].hoursOfOperation}
+          onClick={() => {
+            setOpenDrawer({
+              type: "Hours of operations",
+              title: "Hours of operations",
+              open: true,
+              data: data[0]?.hoursOfOperation ?? [],
+            });
+          }}
+        />
         <CardSocial
           socialMediaDetails={data[0].socialMediaDetails ?? []}
           onClick={() => {

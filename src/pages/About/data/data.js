@@ -196,13 +196,48 @@ export const CreateJobsTabs = [
 ];
 
 export const timeSlotData = [
-  { day: "Monday", active: true },
-  { day: "Tuesday", active: true },
-  { day: "Wednesday", active: true },
-  { day: "Thursday", active: true },
-  { day: "Friday", active: true },
-  { day: "Saturday", active: true },
-  { day: "Sunday", active: true },
+  {
+    day: "monday",
+    startTime: "09:00 am",
+    endTime: "05:00 pm",
+    active: true,
+  },
+  {
+    day: "tuesday",
+    startTime: "09:00 am",
+    endTime: "05:00 pm",
+    active: false,
+  },
+  {
+    day: "wednesday",
+    startTime: "09:00 am",
+    endTime: "05:00 pm",
+    active: true,
+  },
+  {
+    day: "thursday",
+    startTime: "09:00 am",
+    endTime: "05:00 pm",
+    active: true,
+  },
+  {
+    day: "friday",
+    startTime: "09:00 am",
+    endTime: "05:00 pm",
+    active: true,
+  },
+  {
+    day: "saturday",
+    startTime: "09:00 am",
+    endTime: "07:00 pm",
+    active: false,
+  },
+  {
+    day: "sunday",
+    startTime: "09:00 am",
+    endTime: "07:00 pm",
+    active: false,
+  },
 ];
 
 export const socialMedia = {

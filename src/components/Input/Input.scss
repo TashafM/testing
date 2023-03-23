@@ -197,6 +197,23 @@ div.PhoneInputCountry {
   height: 150px;
 }
 
+input[type="time"]::-webkit-calendar-picker-indicator {
+  background: none;
+}
+
+.files-dropzone {
+  background: #f7f7f7;
+  border: 1px dashed #899197;
+  border-radius: 15px;
+  padding: 25px 15px;
+}
+
+.file-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 66%;
+}
 @media only screen and (max-width: 1199px) {
   .badges-container {
     font-size: 12px;
