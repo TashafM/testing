@@ -68,10 +68,9 @@ const UpdateFields = ({ editData }) => {
   const dateParts = getDateParts(editValue.startDate);
   const probationDateParts = getDateParts(editValue.probationDate);
   const [date, setDate] = useState(dateParts);
-  const [pdate,setPdate] = useState(probationDateParts);
+  const [pdate, setPdate] = useState(probationDateParts);
   const [startDate, setStartDate] = useState(date);
-  const [probationDate, setProbationDate] = useState(pdate)
-
+  const [probationDate, setProbationDate] = useState(pdate);
 
   function formatDate(dateStr) {
     const [day, month, year] = dateStr.split("/");
@@ -89,16 +88,16 @@ const UpdateFields = ({ editData }) => {
   };
 
   const dateInput2 = (index, value) => {
-    const updatedDate = [...date];
+    const updatedDate = [...pdate];
     updatedDate[index] = value;
-    setDate(updatedDate);
+    setPdate(updatedDate);
   };
 
-  const abc = date.join('/');
-  const xyz = formatDate(abc)
+  const abc = date.join("/");
+  const xyz = formatDate(abc);
 
-  const rawP = pdate.join('/');
-  const probation = formatDate(rawP)
+  const rawP = pdate.join("/");
+  const probation = formatDate(rawP);
 
   //   const dateInput = (index, value) => {
   //     const updatedDate = [...date];
@@ -126,16 +125,34 @@ const UpdateFields = ({ editData }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(editValue, "jjjjjjjjjj");
-    // console.log(date.join("/"), "0000000000000");
-    editValue.startDate = xyz;
-    setStartDate(editValue.startDate)
+    // console.log(editValue, "jjjjjjjjjj");
+    // editValue.startDate = xyz;
+    // setStartDate(editValue.startDate)
 
-    editValue.probationDate = probation;
-    setProbationDate(editValue.probationDate)
+    // editValue.probationDate = probation;
+    // setProbationDate(editValue.probationDate)
 
-    console.log(editValue,'tashaf')
+    // console.log(editValue,'tashaf')
 
+    //-----------------------------------------
+    const accessToken = localStorage.getItem("accessToken");
+
+    const { email, phone, teamMemberUserCode, teamMemberStatus, ...abcd  } = editValue;
+    axios
+      .patch(
+        "https://dev.elred.io/portalEditCompanyTeamMemberDetails",
+        {
+          ...abcd
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((res) =>
+        console.log(res, "--------------------------------------yyyy")
+      );
   };
 
   useEffect(() => {
@@ -309,7 +326,7 @@ const UpdateFields = ({ editData }) => {
         {/* {console.log(date)} */}
         <DatePickerComp
           heading={"Probation Date *"}
-            dateInput={dateInput2}
+          dateInput={dateInput2}
           selectedDate={pdate}
         />
       </div>
