@@ -68,14 +68,10 @@ const UpdateFields = ({ editData }) => {
   const dateParts = getDateParts(editValue.startDate);
   const probationDateParts = getDateParts(editValue.probationDate);
   const [date, setDate] = useState(dateParts);
+  const [pdate,setPdate] = useState(probationDateParts);
   const [startDate, setStartDate] = useState(date);
+  const [probationDate, setProbationDate] = useState(pdate)
 
-  function formatDateString(dateString) {
-    const [month, day, year] = dateString.split("/");
-    const paddedMonth = month.padStart(2, "0");
-    const paddedDay = day.padStart(2, "0");
-    return `${paddedMonth}/${paddedDay}/${year}`;
-  }
 
   function formatDate(dateStr) {
     const [day, month, year] = dateStr.split("/");
@@ -92,9 +88,17 @@ const UpdateFields = ({ editData }) => {
     setDate(updatedDate);
   };
 
+  const dateInput2 = (index, value) => {
+    const updatedDate = [...date];
+    updatedDate[index] = value;
+    setDate(updatedDate);
+  };
+
   const abc = date.join('/');
   const xyz = formatDate(abc)
 
+  const rawP = pdate.join('/');
+  const probation = formatDate(rawP)
 
   //   const dateInput = (index, value) => {
   //     const updatedDate = [...date];
@@ -126,7 +130,12 @@ const UpdateFields = ({ editData }) => {
     // console.log(date.join("/"), "0000000000000");
     editValue.startDate = xyz;
     setStartDate(editValue.startDate)
+
+    editValue.probationDate = probation;
+    setProbationDate(editValue.probationDate)
+
     console.log(editValue,'tashaf')
+
   };
 
   useEffect(() => {
@@ -300,8 +309,8 @@ const UpdateFields = ({ editData }) => {
         {/* {console.log(date)} */}
         <DatePickerComp
           heading={"Probation Date *"}
-          //   dateInput={probDate}
-          selectedDate={probationDateParts}
+            dateInput={dateInput2}
+          selectedDate={pdate}
         />
       </div>
 
