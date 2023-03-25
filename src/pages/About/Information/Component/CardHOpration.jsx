@@ -9,7 +9,7 @@ function CardHOpration({ hoursOfOperation, onClick }) {
     return (
       <Col className="card-wrapper" md={6} xl={4}>
         <div className="card-cont default-height d-flex align-items-center justify-content-center">
-          <BtnTitleIcon title="Add social links" onClick={onClick} />
+          <BtnTitleIcon title="Add hours of operations" onClick={onClick} />
         </div>
       </Col>
     );
@@ -29,7 +29,7 @@ function CardHOpration({ hoursOfOperation, onClick }) {
           title="Hours of operations"
           icon={business}
         />
-        <div className="d-flex">
+        <div className="d-flex flex-column">
           {hoursOfOperation?.hoursOfOperationString.map((item) => {
             return (
               <span key={item} className="email margin-text">

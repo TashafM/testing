@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import TextArea from "../../../../components/Input/TextArea";
-import CardStatement from "./CardStatement";
 import { usePostAsyncResponse } from "../../../../hooks/usePostAsyncResponse";
 import "./styles.scss";
-import { useContextProvider } from "../../../../context";
 import { Offcanvas } from "react-bootstrap";
 
 function EditStatement({ show, handleClose, data, onUpdate, completeData }) {
@@ -36,7 +34,7 @@ function EditStatement({ show, handleClose, data, onUpdate, completeData }) {
       <div className="content">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>
-            <div className="team-member-add">Add A Team Member</div>
+            <div className="team-member-add">Statement</div>
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>

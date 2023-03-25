@@ -3,7 +3,6 @@ import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import TextInput from "../../../../components/Input/TextInput";
 import "./styles.scss";
 import { Formik, Form } from "formik";
-import { useContextProvider } from "../../../../context";
 import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
 import { Offcanvas } from "react-bootstrap";
 
@@ -66,7 +65,7 @@ function EditSocialMedia({ show, handleClose, data, onUpdate, completeData }) {
       <div className="content">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>
-            <div className="team-member-add">Add A Team Member</div>
+            <div className="team-member-add">Social Media & Links</div>
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>

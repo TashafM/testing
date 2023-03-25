@@ -1,29 +1,27 @@
 import React, { useEffect, useState } from "react";
 import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import Checkbox from "../../../../components/Input/Checkbox";
-import { useContextProvider } from "../../../../context";
 import { timeSlotData } from "../../data/data.js";
 import CardTimeSlot from "./CardTimeSlot";
 import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
+import { Offcanvas } from "react-bootstrap";
 
-function EditOperations() {
-  const { openDrawer } = useContextProvider();
-
-  const [postData, { data, loading }] = usePatchAsyncReponse(
+function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
+  const [postData, { loading }] = usePatchAsyncReponse(
     "/portalPatchHoursOfOperation"
   );
 
   useEffect(() => {
     if (
-      openDrawer.data &&
-      openDrawer?.data?.hoursOfOperationObject &&
-      openDrawer?.data?.hoursOfOperationObject.length
+      data &&
+      data?.hoursOfOperationObject &&
+      data?.hoursOfOperationObject.length
     ) {
-      setOperationData(openDrawer.data?.hoursOfOperationObject);
+      setOperationData(data?.hoursOfOperationObject);
     } else {
       setOperationData(timeSlotData ?? []);
     }
-  }, [openDrawer.data]);
+  }, [data]);
 
   const [operationData, setOperationData] = useState([]);
 
@@ -32,7 +30,13 @@ function EditOperations() {
       hoursOfOperation: [...operationData],
     };
 
-    postData(body);
+    postData(body, (res) => {
+      const arr = JSON.parse(JSON.stringify(completeData));
+      arr[0].hoursOfOperation = res[0];
+      console.log({ arr });
+      onUpdate(arr);
+      handleClose();
+    });
   };
 
   const onChangeHandler = (index) => {
@@ -42,29 +46,53 @@ function EditOperations() {
     setOperationData([...obj]);
   };
   return (
-    <div>
-      <p className="drawer-title">Please provide the hours of operations</p>
-      <div>
-        <div className="d-flex">
-          <Checkbox />
-          <span className="apply-all-checked">Apply same timings to all</span>
-        </div>
+    <Offcanvas
+      show={show}
+      onHide={handleClose}
+      placement="end"
+      className="teamMember-add"
+    >
+      <div className="content">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>
+            <div className="team-member-add">Hours of operations</div>
+          </Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <div>
+            <p className="drawer-title">
+              Please provide the hours of operations
+            </p>
+            <div>
+              <div className="d-flex">
+                <Checkbox />
+                <span className="apply-all-checked">
+                  Apply same timings to all
+                </span>
+              </div>
 
-        {operationData.map((item, index) => {
-          console.log(item);
-          return (
-            <CardTimeSlot
-              title={item.day}
-              active={item.active}
-              onChange={onChangeHandler}
-              index={index}
+              {operationData.map((item, index) => {
+                console.log(item);
+                return (
+                  <CardTimeSlot
+                    title={item.day}
+                    active={item.active}
+                    onChange={onChangeHandler}
+                    index={index}
+                  />
+                );
+              })}
+            </div>
+
+            <BtnTitleCenter
+              title={"SAVE"}
+              onClick={sendHOO}
+              loading={loading}
             />
-          );
-        })}
+          </div>
+        </Offcanvas.Body>
       </div>
-
-      <BtnTitleCenter title={"SAVE"} onClick={sendHOO} />
-    </div>
+    </Offcanvas>
   );
 }
 

@@ -56,7 +56,7 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
       <div className="content">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>
-            <div className="team-member-add">Add A Team Member</div>
+            <div className="team-member-add">Add Address</div>
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>

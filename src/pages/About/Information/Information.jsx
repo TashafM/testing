@@ -16,6 +16,7 @@ import EditAddress from "./Component/EditAddress";
 import { useState } from "react";
 import EditSocialMedia from "./Component/EditSocialMedia";
 import EditStatement from "./Component/EditStatement";
+import EditOperations from "./Component/EditOperations";
 
 function Information() {
   const [data, setData] = useOutletContext();
@@ -23,7 +24,7 @@ function Information() {
   const [openAddress, setopenAddress] = useState(false);
   const [openSocial, setOpenSocial] = useState(false);
   const [openStatement, setOpenStatement] = useState(false);
-
+  const [openOperation, setOpenOperation] = useState(false);
   if (!data.length) {
     return <div>Company not availvable</div>;
   }
@@ -80,12 +81,25 @@ function Information() {
         <CardHOpration
           hoursOfOperation={data[0].hoursOfOperation}
           onClick={() => {
-            setOpenDrawer({
-              type: "Hours of operations",
-              title: "Hours of operations",
-              open: true,
-              data: data[0]?.hoursOfOperation ?? [],
-            });
+            setOpenOperation(true);
+            // setOpenDrawer({
+            //   type: "Hours of operations",
+            //   title: "Hours of operations",
+            //   open: true,
+            //   data: data[0]?.hoursOfOperation ?? [],
+            // });
+          }}
+        />
+
+        <EditOperations
+          show={openOperation}
+          handleClose={() => {
+            setOpenOperation(false);
+          }}
+          data={data[0]?.hoursOfOperation ?? {}}
+          completeData={data}
+          onUpdate={(data) => {
+            setData(data);
           }}
         />
         <CardSocial
