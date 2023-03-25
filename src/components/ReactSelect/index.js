@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import Select from "react-select";
 import "./styles.scss";
+
 const ReactSelector = (props) => {
-  const { options } = props;
-  const [fruits, setFruits] = useState(null);
-  const [states, setStates] = useState(null);
+  const { options, getOptionLabel, getOptionValue, value, onChange } = props;
 
   return (
     <div>
       <Select
-        defaultValue={[options[2], options[3]]}
         isMulti
+        value={value}
         name="colors"
+        onChange={onChange}
+        getOptionLabel={getOptionLabel}
+        getOptionValue={getOptionValue}
         options={options}
         className="basic-multi-select select-container "
         classNamePrefix="select"
