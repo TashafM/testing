@@ -21,7 +21,7 @@ export const usePatchAsyncReponse = (url) => {
             setError({ error: true, message: res.message });
           }
           setLoading(false);
-          onUpdate(res.result[0]);
+          onUpdate(res.result);
         })
         .catch((err) => {
           setError({ error: true, message: err?.response?.message ?? "" });

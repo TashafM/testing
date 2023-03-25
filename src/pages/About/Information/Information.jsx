@@ -14,11 +14,15 @@ import BtnTitleIcon from "../../../components/Button/BtnTitleIcon";
 import { useContextProvider } from "../../../context";
 import EditAddress from "./Component/EditAddress";
 import { useState } from "react";
+import EditSocialMedia from "./Component/EditSocialMedia";
+import EditStatement from "./Component/EditStatement";
 
 function Information() {
   const [data, setData] = useOutletContext();
   const { setOpenDrawer } = useContextProvider();
   const [openAddress, setopenAddress] = useState(false);
+  const [openSocial, setOpenSocial] = useState(false);
+  const [openStatement, setOpenStatement] = useState(false);
 
   if (!data.length) {
     return <div>Company not availvable</div>;
@@ -87,22 +91,50 @@ function Information() {
         <CardSocial
           socialMediaDetails={data[0].socialMediaDetails ?? []}
           onClick={() => {
-            setOpenDrawer({
-              type: "Social Media & Links",
-              open: true,
-              data: data[0]?.socialMediaDetails ?? [],
-            });
+            alert(22);
+            setOpenSocial(true);
+            // setOpenDrawer({
+            //   type: "Social Media & Links",
+            //   open: true,
+            //   data: data[0]?.socialMediaDetails ?? [],
+            //   completeData: data,
+            // });
+          }}
+        />
+
+        <EditSocialMedia
+          show={openSocial}
+          handleClose={() => {
+            setOpenSocial(false);
+          }}
+          data={data[0]?.socialMediaDetails ?? []}
+          completeData={data}
+          onUpdate={(data) => {
+            setData(data);
           }}
         />
 
         <CardCompStatement
           companyStatement={data[0]?.companyStatement ?? ""}
           onClick={() => {
-            setOpenDrawer({
-              type: "Statement",
-              open: true,
-              data: data[0]?.companyStatement ?? [],
-            });
+            setOpenStatement(true);
+            // setOpenDrawer({
+            //   type: "Statement",
+            //   open: true,
+            //   data: data[0]?.companyStatement ?? [],
+            // });
+          }}
+        />
+
+        <EditStatement
+          show={openStatement}
+          handleClose={() => {
+            setOpenStatement(false);
+          }}
+          data={data[0]?.companyStatement ?? []}
+          completeData={data}
+          onUpdate={(data) => {
+            setData(data);
           }}
         />
         <CardOtherInfo otherInfo={data[0]?.otherInfo} />

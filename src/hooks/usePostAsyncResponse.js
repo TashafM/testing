@@ -22,7 +22,7 @@ export const usePostAsyncResponse = (url) => {
             setError({ error: true, message: res.message });
           }
           alert(2);
-          onUpdate(res.result[0]);
+          onUpdate(res.result);
           setLoading(false);
         })
         .catch((err) => {

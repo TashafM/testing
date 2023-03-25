@@ -5,10 +5,10 @@ import CardStatement from "./CardStatement";
 import { usePostAsyncResponse } from "../../../../hooks/usePostAsyncResponse";
 import "./styles.scss";
 import { useContextProvider } from "../../../../context";
+import { Offcanvas } from "react-bootstrap";
 
-function EditStatement({ companyStatement }) {
-  const { openDrawer } = useContextProvider();
-  const [statement, setStatement] = useState(openDrawer.data ?? "");
+function EditStatement({ show, handleClose, data, onUpdate, completeData }) {
+  const [statement, setStatement] = useState(data ?? "");
   const [postData, { loading }] = usePostAsyncResponse(
     "/portalPostCompanyStatement"
   );
@@ -17,26 +17,52 @@ function EditStatement({ companyStatement }) {
     const body = {
       companyStatement: statement,
     };
-    console.log({ body });
 
-    postData(body);
+    postData(body, (res) => {
+      const arr = JSON.parse(JSON.stringify(completeData));
+      arr[0].companyStatement = res[0].companyStatement;
+      console.log({ arr });
+      onUpdate(arr);
+      handleClose();
+    });
   };
   return (
-    <div>
-      <p className="drawer-title">
-        Write down the Statement of the Company to convey your vision to your
-        Potential Customer
-      </p>
+    <Offcanvas
+      show={show}
+      onHide={handleClose}
+      placement="end"
+      className="teamMember-add"
+    >
+      <div className="content">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>
+            <div className="team-member-add">Add A Team Member</div>
+          </Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <div>
+            <p className="drawer-title">
+              Write down the Statement of the Company to convey your vision to
+              your Potential Customer
+            </p>
 
-      <TextArea
-        value={statement}
-        onChange={(e) => {
-          console.log(e.target.value);
-          setStatement(e.target.value);
-        }}
-      />
-      <BtnTitleCenter title="Save" type="button" onClick={onSaveStatement} />
-    </div>
+            <TextArea
+              value={statement}
+              onChange={(e) => {
+                console.log(e.target.value);
+                setStatement(e.target.value);
+              }}
+            />
+            <BtnTitleCenter
+              title="Save"
+              type="button"
+              loading={loading}
+              onClick={onSaveStatement}
+            />
+          </div>
+        </Offcanvas.Body>
+      </div>
+    </Offcanvas>
   );
 }
 

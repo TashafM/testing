@@ -24,7 +24,7 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
     };
     patchData(body, (res) => {
       const arr = JSON.parse(JSON.stringify(completeData));
-      arr[0].registeredAddress = { ...res };
+      arr[0].registeredAddress = { ...res[0] };
       onUpdate(arr);
       handleClose();
     });
