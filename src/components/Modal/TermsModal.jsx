@@ -7,7 +7,7 @@ import TextInput from "../Input/TextInput";
 import TextArea from "../Input/TextArea";
 import BtnTitleIcon from "../Button/BtnTitleIcon";
 
-function ModalComponent({
+function TermsModal({
   data = [],
   emptydata,
   show,
@@ -60,20 +60,17 @@ function ModalComponent({
               <div key={`privacy-item-${index}`} style={{}}>
                 <TextInput
                   placeholder={"privacy title"}
-                  value={type === "FAQ" ? item.question : item.title}
-                  onChange={(e) => {
-                    const key = type === "FAQ" ? "question" : "title";
-                    onChanContent(e.target.value, index, key);
-                  }}
+                  value={item.question}
+                  onChange={(e) =>
+                    onChanContent(e.target.value, index, "question")
+                  }
                 />
 
                 <TextArea
-                  value={type === "FAQ" ? item.answer : item.content}
-                  onChange={(e) => {
-                    const key = type === "FAQ" ? "answer" : "content";
-
-                    onChanContent(e.target.value, index, key);
-                  }}
+                  value={item.answer}
+                  onChange={(e) =>
+                    onChanContent(e.target.value, index, "answer")
+                  }
                 />
               </div>
             );
@@ -95,4 +92,4 @@ function ModalComponent({
   );
 }
 
-export default ModalComponent;
+export default TermsModal;

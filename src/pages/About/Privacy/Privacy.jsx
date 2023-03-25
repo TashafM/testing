@@ -20,7 +20,7 @@ function Privacy() {
   useEffect(() => {
     const arr = [];
     data?.map((ele) => {
-      arr.push({ question: ele?.title, answer: ele?.content });
+      arr.push({ title: ele?.title, content: ele?.content });
     });
     // console.log("sbjk",arr)
     setPrivacy(arr);

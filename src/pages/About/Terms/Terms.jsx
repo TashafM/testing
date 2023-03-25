@@ -22,7 +22,7 @@ function Terms() {
   useEffect(() => {
     const arr = [];
     data?.map((ele) => {
-      arr.push({ question: ele?.title, answer: ele?.content });
+      arr.push({ title: ele?.title, content: ele?.content });
     });
     console.log("sbjk", arr);
     setTermCondition(arr);
@@ -35,16 +35,15 @@ function Terms() {
   const editSaveCallback = (data) => {
     console.log("shdj", data);
     const arr = [];
-    data?.map((ele) => {
-      arr.push({ title: ele?.question, content: ele?.answer });
-    });
+
     const body = {
-      termsConditions: arr,
+      termsConditions: data,
     };
 
-    postData(body);
-    setShowModal(false);
-    setTermCondition(data);
+    postData(body, () => {
+      setShowModal(false);
+      setTermCondition(data);
+    });
   };
   console.log("nskj", termCondition);
 

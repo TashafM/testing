@@ -10,7 +10,7 @@ import { Modal } from "react-bootstrap";
 import { usePostAsyncResponse } from "../../../../hooks/usePostAsyncResponse";
 // import BtnTitleCenter from "../Button/BtnTitleCenter";
 
-function EditPrivacy({ data = [], show, close ,editSaveCallback}) {
+function EditPrivacy({ data = [], show, close, editSaveCallback }) {
   const [privacyData, setPrivacyData] = useState(data ?? []);
   const empty = { title: "", content: "" };
 
@@ -29,10 +29,10 @@ function EditPrivacy({ data = [], show, close ,editSaveCallback}) {
       privacyPolicy: [...privacyData],
     };
 
-    postData(body);
-    close()
-    editSaveCallback([...privacyData])
-
+    postData(body, () => {
+      close();
+      editSaveCallback([...privacyData]);
+    });
   };
 
   // console.log("jfhkj",privacyData)

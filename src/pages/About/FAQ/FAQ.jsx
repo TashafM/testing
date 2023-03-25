@@ -37,9 +37,10 @@ function FAQ() {
       faqs: arr,
     };
 
-    postData(body);
-    setShowModal(false);
-    setFAQ(data);
+    postData(body, () => {
+      setShowModal(false);
+      setFAQ(data);
+    });
   };
 
   if (loading) {
