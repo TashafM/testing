@@ -19,10 +19,10 @@ function EditContacts() {
   const submitHandler = async (values, action) => {
     console.log("values", values);
 
-    if (openDrawer.type === "Edit Contact") {
+    if (openDrawer.title === "Edit Contact") {
       const contactUsId = data._id;
       delete values.address;
-      delete values._id;
+      delete data._id;
 
       const body = {
         ...data,
@@ -117,7 +117,11 @@ function EditContacts() {
               />
             </div>
 
-            <BtnTitleCenter disabled={loading} type="submit" title={"SAVE"} />
+            <BtnTitleCenter
+              loading={loading || editLoading}
+              type="submit"
+              title={"SAVE"}
+            />
           </Form>
         )}
       />

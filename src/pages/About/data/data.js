@@ -243,7 +243,7 @@ export const timeSlotData = [
 export const socialMedia = {
   instagram: instagram,
   twitter: twitter,
-  Website: website,
+  website: website,
   facebook: facebook,
 };
 

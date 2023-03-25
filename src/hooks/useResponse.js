@@ -35,6 +35,7 @@ export const useResponse = (url) => {
   return {
     data,
     error,
+    setData,
     loading,
     getData,
   };

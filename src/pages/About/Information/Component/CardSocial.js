@@ -19,7 +19,7 @@ function CardSocial({ socialMediaDetails, onClick }) {
   return (
     <Col className="card-wrapper" onClick={onClick} md={6} xl={4}>
       <div className="card-cont">
-        <CardHead title="Social Media & Links" icon={links} />
+        <CardHead onClick={onClick} title="Social Media & Links" icon={links} />
 
         <div className="d-flex justify-content-around">
           {socialMediaDetails.map((item) => {

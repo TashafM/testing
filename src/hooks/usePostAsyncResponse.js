@@ -7,7 +7,7 @@ export const usePostAsyncResponse = (url) => {
   const [loading, setLoading] = useState(false);
 
   const postData = useCallback(
-    (body) => {
+    (body, onUpdate = () => {}) => {
       setLoading(true);
 
       console.log(body);
@@ -21,6 +21,8 @@ export const usePostAsyncResponse = (url) => {
           } else {
             setError({ error: true, message: res.message });
           }
+          alert(2);
+          onUpdate(res.result);
           setLoading(false);
         })
         .catch((err) => {
@@ -28,6 +30,8 @@ export const usePostAsyncResponse = (url) => {
             error: true,
             message: err?.response?.message ?? "something went wrong",
           });
+
+          alert(2);
           setLoading(false);
         });
     },

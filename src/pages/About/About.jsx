@@ -8,6 +8,7 @@ import Description from "./Description/Description";
 function About() {
   const {
     data: aboutData,
+    setData,
     loading,
     error,
   } = useResponse("/portalViewCompanyAboutUsInfo");
@@ -26,7 +27,7 @@ function About() {
         <Description />
         <UnderLineTabs tabs={AboutTabs} />
         <div className="tabs-container-section">
-          <Outlet context={[aboutData]} />
+          <Outlet context={[aboutData, setData]} />
         </div>
       </div>
     </div>

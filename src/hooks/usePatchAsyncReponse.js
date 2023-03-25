@@ -7,7 +7,7 @@ export const usePatchAsyncReponse = (url) => {
   const [loading, setLoading] = useState(false);
 
   const patchData = useCallback(
-    (body) => {
+    (body, onUpdate = () => {}) => {
       setLoading(true);
 
       console.log({ body });
@@ -21,6 +21,7 @@ export const usePatchAsyncReponse = (url) => {
             setError({ error: true, message: res.message });
           }
           setLoading(false);
+          onUpdate(res.result);
         })
         .catch((err) => {
           setError({ error: true, message: err?.response?.message ?? "" });
