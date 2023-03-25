@@ -5,7 +5,7 @@ import BtnIconOnly from "../../../../components/Button/BtnIconOnly";
 import { useContextProvider } from "../../../../context";
 import { type } from "@testing-library/user-event/dist/type";
 
-function CardHead({ icon, title, changemargin, type, data }) {
+function CardHead({ icon, title, changemargin, type, data, onClick }) {
   const { setOpenDrawer } = useContextProvider();
 
   let cssclasseschange = changemargin ? "card-otherinfo-head" : "card-head";
@@ -20,11 +20,15 @@ function CardHead({ icon, title, changemargin, type, data }) {
         <BtnIconOnly
           icon={edit}
           onClick={() => {
-            setOpenDrawer({
-              open: true,
-              type: type,
-              data: { ...data },
-            });
+            if (onClick) {
+              onClick();
+            } else {
+              setOpenDrawer({
+                open: true,
+                type: type,
+                data: { ...data },
+              });
+            }
           }}
         />
       </div>

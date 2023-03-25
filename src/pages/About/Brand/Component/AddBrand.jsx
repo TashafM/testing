@@ -6,26 +6,27 @@ import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import usePostBrand from "../hooks/usePostBrand";
 import { useContextProvider } from "../../../../context";
 import useEditBrandPatch from "../hooks/useEditBrandPatch";
+import { Offcanvas } from "react-bootstrap";
 
-function AddBrand() {
+function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
   const formRef = useRef();
   const [file, setFile] = useState([]);
-  const { openDrawer } = useContextProvider();
+  // const { openDrawer } = useContextProvider();
 
-  const { postData } = usePostBrand("/portalAddCompanyBrands");
-  const { postData: editBrnad } = useEditBrandPatch("/portalEditCompanyBrands");
+  const { postData, loading } = usePostBrand("/portalAddCompanyBrands");
+  const { postData: editBrnad, loading: editLoading } = useEditBrandPatch(
+    "/portalEditCompanyBrands"
+  );
 
   useEffect(() => {
-    if (openDrawer.type === "Edit Brands") {
-      setFile([{ name: openDrawer.data.brandLogoURL }]);
+    if (show.type === "Edit") {
+      setFile([{ name: data.brandLogoURL }]);
     }
-  }, [openDrawer?.data?.brandLogoURL, openDrawer.type]);
+  }, [data?.brandLogoURL, data, show.type]);
 
   const submitHandler = async (values, action) => {
     console.log("values", values);
     const formData = new FormData();
-    // { brandId:"",  brandLogoURL:<file>,  brandName:"", brandLocation:{city:"", state:"", country:"", latitude:"", longitude:""}, username:"", email:"" }
-    console.log({ file });
     const userId = localStorage.getItem("usercode");
 
     formData.append("brandName", values.brandName);
@@ -34,33 +35,29 @@ function AddBrand() {
     formData.append("email", values.email);
     formData.append("brandLocation[state]", "");
     formData.append("brandLocation[city]", "");
-    // formData.append(
-    //   "brandLocation",
-    //   JSON.stringify({
-    //     city: "",
-    //     state: "",
-    //     country: "",
-    //     latitude: "1222",
-    //     longitude: "1235",
-    //   })
-    // );
     formData.append("brandLocation[latitude]", "");
     formData.append("brandLocation[longitude]", "");
     formData.append("brandLocation[country]", "");
-    if (openDrawer.type === "Edit Brands") {
-      // { brandId:"",  brandLogoURL:<file>,  brandName:"", brandLocation:{city:"", state:"", country:"", latitude:"", longitude:""}, username:"", email:"" }
-      if (file.length && file[0]?.size) {
+    if (show.type === "Edit") {
+      if (file.length && file[0]?.name !== data.brandLogoURL) {
+        alert(222);
         formData.append("brandLogoURL", file[0]);
       }
 
-      formData.append("brandId", openDrawer.data.brandId);
+      formData.append("brandId", data.brandId);
 
-      editBrnad(formData);
+      editBrnad(formData, (res) => {
+        onUpdate(res);
+        handleClose();
+      });
     } else {
       formData.append("companyUserCode", userId);
 
       formData.append("brandLogoURL", file[0]);
-      postData(formData);
+      postData(formData, (res) => {
+        onUpdate(res);
+        handleClose();
+      });
     }
 
     action.reset();
@@ -73,81 +70,111 @@ function AddBrand() {
 
   const initialValues = {
     file: "",
-    brandName: openDrawer?.data?.brandName ?? "",
+    brandName: data?.brandName ?? "",
     location: "",
-    username: openDrawer?.data?.brandName ?? "",
-    email: openDrawer?.data?.email ?? "",
+    username: data?.brandName ?? "",
+    email: data?.email ?? "",
   };
 
   console.log({ initialValues });
   return (
-    <div>
-      <p className="drawer-title">
-        Write down the company’s sales reach, services & support and interested
-        to purchase
-      </p>
-      <Formik
-        initialValues={initialValues}
-        innerRef={formRef}
-        onSubmit={submitHandler}
-        // validationSchema={schema.createBrand}
-        render={({ handleSubmit, errors, values, setFieldValue, touched }) => (
-          <Form className="">
-            <div className="input-wrapper">
-              <File
-                file={file}
-                onChange={handleChange}
-                label="Add Image"
-                // error={touched.file && errors.file}
-              />
-            </div>
-            <div className="input-wrapper">
-              <TextInput
-                name="brandName"
-                value={values.brandName}
-                onChange={(e) => {
-                  console.log(e.target.value);
-                  setFieldValue("brandName", e.target.value);
-                }}
-                error={touched.brandName && errors.brandName}
-                label="Brand Name"
-              />
-            </div>
-            <div className="input-wrapper">
-              <TextInput
-                name="location"
-                value={values.location}
-                onChange={(e) => setFieldValue("location", e.target.value)}
-                error={touched.location && errors.location}
-                // placeholder="eg. Sales Team"
-                label="Location"
-              />
-            </div>
-            <div className="input-wrapper">
-              <TextInput
-                name="username"
-                value={values.username}
-                onChange={(e) => setFieldValue("username", e.target.value)}
-                error={touched.username && errors.username}
-                // placeholder="eg. Sales Team"
-                label="Username"
-              />
-            </div>
-            <div className="input-wrapper">
-              <TextInput
-                name="email"
-                value={values.email}
-                onChange={(e) => setFieldValue("email", e.target.value)}
-                error={touched.email && errors.email}
-                label="Email ID"
-              />
-            </div>
+    <Offcanvas
+      show={show.open}
+      onHide={handleClose}
+      placement="end"
+      className="teamMember-add"
+    >
+      <div className="content">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>
+            <div className="team-member-add">{show.type} Brands</div>
+          </Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <div>
+            <p className="drawer-title">
+              Write down the company’s sales reach, services & support and
+              interested to purchase
+            </p>
+            <Formik
+              initialValues={initialValues}
+              innerRef={formRef}
+              onSubmit={submitHandler}
+              // validationSchema={schema.createBrand}
+              render={({
+                handleSubmit,
+                errors,
+                values,
+                setFieldValue,
+                touched,
+              }) => (
+                <Form className="">
+                  <div className="input-wrapper">
+                    <File
+                      file={file}
+                      onChange={handleChange}
+                      label="Add Image"
+                      // error={touched.file && errors.file}
+                    />
+                  </div>
+                  <div className="input-wrapper">
+                    <TextInput
+                      name="brandName"
+                      value={values.brandName}
+                      onChange={(e) => {
+                        console.log(e.target.value);
+                        setFieldValue("brandName", e.target.value);
+                      }}
+                      error={touched.brandName && errors.brandName}
+                      label="Brand Name"
+                    />
+                  </div>
+                  <div className="input-wrapper">
+                    <TextInput
+                      name="location"
+                      value={values.location}
+                      onChange={(e) =>
+                        setFieldValue("location", e.target.value)
+                      }
+                      error={touched.location && errors.location}
+                      // placeholder="eg. Sales Team"
+                      label="Location"
+                    />
+                  </div>
+                  <div className="input-wrapper">
+                    <TextInput
+                      name="username"
+                      value={values.username}
+                      onChange={(e) =>
+                        setFieldValue("username", e.target.value)
+                      }
+                      error={touched.username && errors.username}
+                      // placeholder="eg. Sales Team"
+                      label="Username"
+                    />
+                  </div>
+                  <div className="input-wrapper">
+                    <TextInput
+                      name="email"
+                      value={values.email}
+                      onChange={(e) => setFieldValue("email", e.target.value)}
+                      error={touched.email && errors.email}
+                      label="Email ID"
+                    />
+                  </div>
 
-            <BtnTitleCenter type="submit" title={"Send request"} />
-          </Form>
-        )}
-      />
-    </div>
+                  <BtnTitleCenter
+                    type="submit"
+                    title={"Send request"}
+                    loading={loading | editLoading}
+                  />
+                </Form>
+              )}
+            />
+          </div>
+        </Offcanvas.Body>
+      </div>
+    </Offcanvas>
   );
 }
 

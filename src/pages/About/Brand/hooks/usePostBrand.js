@@ -7,7 +7,7 @@ function usePostBrand(url) {
   const [loading, setLoading] = useState(false);
 
   const postData = useCallback(
-    (body) => {
+    (body, onUpdate) => {
       setLoading(true);
       axiosInstance
         .post(url, body)
@@ -19,6 +19,7 @@ function usePostBrand(url) {
           } else {
             setError({ error: true, message: res.message });
           }
+          onUpdate(res.result[0]);
           setLoading(false);
         })
         .catch((err) => {

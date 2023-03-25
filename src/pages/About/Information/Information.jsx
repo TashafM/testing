@@ -17,6 +17,7 @@ import { useState } from "react";
 import EditSocialMedia from "./Component/EditSocialMedia";
 import EditStatement from "./Component/EditStatement";
 import EditOperations from "./Component/EditOperations";
+import EditOtherInfo from "./Component/EditOtherInfo";
 
 function Information() {
   const [data, setData] = useOutletContext();
@@ -25,6 +26,8 @@ function Information() {
   const [openSocial, setOpenSocial] = useState(false);
   const [openStatement, setOpenStatement] = useState(false);
   const [openOperation, setOpenOperation] = useState(false);
+  const [openotherInfor, setOpenOtherInfor] = useState(false);
+
   if (!data.length) {
     return <div>Company not availvable</div>;
   }
@@ -151,7 +154,24 @@ function Information() {
             setData(data);
           }}
         />
-        <CardOtherInfo otherInfo={data[0]?.otherInfo} />
+        <CardOtherInfo
+          otherInfo={data[0]?.otherInfo}
+          onClick={() => {
+            setOpenOtherInfor(true);
+          }}
+        />
+
+        <EditOtherInfo
+          show={openotherInfor}
+          handleClose={() => {
+            setOpenOtherInfor(false);
+          }}
+          data={data[0]?.otherInfo ?? []}
+          completeData={data}
+          onUpdate={(res) => {
+            setData(res);
+          }}
+        />
       </Row>
     </Container>
   );
