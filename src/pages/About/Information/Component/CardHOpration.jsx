@@ -29,10 +29,14 @@ function CardHOpration({ hoursOfOperation, onClick }) {
           title="Hours of operations"
           icon={business}
         />
-        <div>
-          <span className="email margin-text">
-            Monday To Friday - 09:00 Am to 06: 00 Pm
-          </span>
+        <div className="d-flex">
+          {hoursOfOperation?.hoursOfOperationString.map((item) => {
+            return (
+              <span key={item} className="email margin-text">
+                {item}
+              </span>
+            );
+          })}
         </div>
       </div>
     </Col>

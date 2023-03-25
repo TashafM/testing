@@ -1,3 +1,4 @@
+import { CircularProgress } from "@mui/material";
 import React from "react";
 import "./Button.scss";
 
@@ -7,6 +8,7 @@ function BtnTitleCenter({
   type = "submit",
   smallbutton,
   disabled = false,
+  loading = false,
 }) {
   let newstyle = smallbutton ? "btnsmall" : "btn-title-center";
 
@@ -18,7 +20,11 @@ function BtnTitleCenter({
         className={newstyle}
         onClick={onClick}
       >
-        {title}
+        {loading ? (
+          <CircularProgress color="inherit" size={20} />
+        ) : (
+          <>{title}</>
+        )}
       </button>
     </div>
   );

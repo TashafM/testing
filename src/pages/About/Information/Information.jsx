@@ -12,10 +12,13 @@ import CardOtherInfo from "./Component/CardOtherInfo";
 import { Col } from "react-bootstrap";
 import BtnTitleIcon from "../../../components/Button/BtnTitleIcon";
 import { useContextProvider } from "../../../context";
+import EditAddress from "./Component/EditAddress";
+import { useState } from "react";
 
 function Information() {
-  const [data] = useOutletContext();
+  const [data, setData] = useOutletContext();
   const { setOpenDrawer } = useContextProvider();
+  const [openAddress, setopenAddress] = useState(false);
 
   if (!data.length) {
     return <div>Company not availvable</div>;
@@ -43,7 +46,10 @@ function Information() {
               <BtnTitleIcon
                 title="Add Contacts"
                 onClick={() => {
-                  setOpenDrawer({ open: true, type: "Add Contacts" });
+                  setOpenDrawer({
+                    open: true,
+                    type: "Add Contacts",
+                  });
                 }}
               />
             </div>
@@ -51,13 +57,20 @@ function Information() {
         </Col>
         <CardAddress
           onClick={() => {
-            setOpenDrawer({
-              type: "Address",
-              open: true,
-              data: data[0]?.registeredAddress,
-            });
+            setopenAddress(true);
           }}
           registeredAddress={data[0]?.registeredAddress ?? {}}
+        />
+        <EditAddress
+          show={openAddress}
+          handleClose={() => {
+            setopenAddress(false);
+          }}
+          data={data[0]?.registeredAddress ?? {}}
+          completeData={data}
+          onUpdate={(data) => {
+            setData(data);
+          }}
         />
 
         <CardHOpration

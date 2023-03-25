@@ -35,7 +35,12 @@ function EditOperations() {
     postData(body);
   };
 
-  const onChangeHandler = (index) => {};
+  const onChangeHandler = (index) => {
+    const obj = [...operationData];
+    obj[index].active = !obj[index].active;
+
+    setOperationData([...obj]);
+  };
   return (
     <div>
       <p className="drawer-title">Please provide the hours of operations</p>

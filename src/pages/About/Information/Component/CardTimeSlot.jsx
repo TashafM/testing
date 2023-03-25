@@ -32,7 +32,7 @@ function CardTimeSlot({ title, active, onChange, index }) {
   return (
     <div className="card-slots-container align-items-center justify-content-between">
       <div className="d-flex align-items-center">
-        <Switch value={active} onChange={onChange} />
+        <Switch value={active} onChange={() => onChange(index)} />
         <span className="card-day cardspace">{title}</span>
       </div>
 

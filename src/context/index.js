@@ -9,6 +9,7 @@ function ContextProvider({ children }) {
     data: {},
     callBack: () => {},
   });
+
   const [showNav, setShowNav] = useState(false);
   return (
     <Context.Provider

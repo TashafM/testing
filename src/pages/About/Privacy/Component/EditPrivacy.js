@@ -64,7 +64,7 @@ function EditPrivacy({ data = [], show, close }) {
               />
 
               <TextArea
-                value={item.contet}
+                value={item.content}
                 onChange={(e) =>
                   onChanContent(e.target.value, index, "content")
                 }
