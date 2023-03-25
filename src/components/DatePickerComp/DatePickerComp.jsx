@@ -4,7 +4,7 @@ import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./DatePickerComp.scss";
 
-const DatePickerComp = ({ heading, dateInput, selectedDate}) => {
+const DatePickerComp = ({ heading, dateInput, selectedDate }) => {
   return (
     <div className="date-picker-comp">
       <Form.Label className="date-heading">{heading}</Form.Label>
@@ -15,8 +15,10 @@ const DatePickerComp = ({ heading, dateInput, selectedDate}) => {
           placeholder="DD"
           maxLength={2}
           value={selectedDate[0]}
-          onChange={(e) => dateInput(0, e.target.value)}
-        
+          onChange={(e) => {
+            dateInput(0, e.target.value);
+          }}
+
           // required
         />
         <Form.Control
@@ -27,14 +29,12 @@ const DatePickerComp = ({ heading, dateInput, selectedDate}) => {
           value={selectedDate[1]}
           onChange={(e) => dateInput(1, e.target.value)}
           // required
-   
         />
         <Form.Control
           type="text"
           placeholder="YYYY"
           maxLength={4}
           className="date-input year"
-
           value={selectedDate[2]}
           onChange={(e) => dateInput(2, e.target.value)}
           // required

@@ -223,7 +223,7 @@ const AddMember = ({ api, getDataFunc }) => {
               <FormGroup className="input-div">
                 <Form.Label>Personal Email ID *</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="email"
                   name="email"
                   onChange={() => Util.handleChange(event, setFormValues)}
                   required

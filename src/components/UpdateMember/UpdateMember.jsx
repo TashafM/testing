@@ -15,6 +15,7 @@ import axios from "axios";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePickerComp from "../DatePickerComp/DatePickerComp";
+import UpdateFields from "./UpdateFields/UpdateFields";
 
 const UpdateMember = ({ api, getDataFunc, editData }) => {
   const [show, setShow] = useState(false);
@@ -98,7 +99,7 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
-            <Form onSubmit={handleSubmit}>
+            {/* <Form onSubmit={handleSubmit}>
               <FormGroup className="input-div">
                 <Form.Label>First Name *</Form.Label>
                 <Form.Control
@@ -200,7 +201,7 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
                   onChange={handleInputChange}
                 />
               </FormGroup>
-              {/* <DatePickerComp
+              <DatePickerComp
                 heading="Start Date *"
                 setSelectedDate={setSelectedDate}
                 selectedDate={selectedDate}
@@ -211,12 +212,13 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
                 setSelectedDate={setProbationDate}
                 selectedDate={probationDate}
                 required
-              /> */}
+              />
 
               <Button variant="primary" type="submit" className="save-btn">
                 Save
               </Button>
-            </Form>
+            </Form> */}
+            <UpdateFields editData={editData}/>
           </Offcanvas.Body>
         </div>
       </Offcanvas>

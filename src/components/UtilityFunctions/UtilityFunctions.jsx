@@ -18,7 +18,7 @@ class Util {
     }
     setSelectedIds(newSelectedIds);
     // setRatingUser(user);
-    console.log("hhhhhhhhhhh");
+    console.log(selectedIds, "selected ids");
   }
 
   // This function is used to delete single user data from an api and send it to past members
@@ -85,6 +85,49 @@ class Util {
   //-------------------------------------------------------------------------------------------
 
   // This function is used to delete multiple checkbox values and sent it to past members api
+  // deleteSelectedItems = (
+  //   selectedIds,
+  //   data,
+  //   apiTo,
+  //   apiFrom,
+  //   func1,
+  //   func2,
+  //   setSelectedIds
+  // ) => {
+  //   const confirm = window.confirm(
+  //     `Are you sure you want to delete ${selectedIds.length} users?`
+  //   );
+
+  //   if (confirm) {
+  //     const filteredUsers = data.filter((user) =>
+  //       selectedIds.includes(user.id)
+  //     );
+  //     filteredUsers.forEach((user) => {
+  //       // Delete the user from the first API
+  //       axios
+  //         .delete(`${apiTo}/${user.id}`)
+  //         .then((response) => {
+  //           axios
+  //             .post(apiFrom, user)
+  //             .then((response) => {
+  //               // Handle success
+  //               func1();
+  //               func2();
+  //               setSelectedIds([]);
+  //             })
+  //             .catch((error) => {
+  //               // Handle error
+  //             });
+  //         })
+  //         .catch((error) => {
+  //           console.error(error);
+  //         });
+  //     });
+  //   }
+  //   setSelectedIds([]);
+  // };
+
+  //-------------------------- DELETE MULTIPLE ITEMS -------------------
   deleteSelectedItems = (
     selectedIds,
     data,
@@ -97,35 +140,56 @@ class Util {
     const confirm = window.confirm(
       `Are you sure you want to delete ${selectedIds.length} users?`
     );
-
-    if (confirm) {
-      const filteredUsers = data.filter((user) =>
-        selectedIds.includes(user.id)
-      );
-      filteredUsers.forEach((user) => {
-        // Delete the user from the first API
-        axios
-          .delete(`${apiTo}/${user.id}`)
-          .then((response) => {
-            axios
-              .post(apiFrom, user)
-              .then((response) => {
-                // Handle success
-                func1();
-                func2();
-                setSelectedIds([]);
-              })
-              .catch((error) => {
-                // Handle error
-              });
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      });
+    if(confirm){
+      const companyUserCode = localStorage.getItem("usercode");
+      const accessToken = localStorage.getItem("accessToken");
+      axios
+          .post(
+            API.DELETE_TEAM_MEMBERS,
+            { companyUserCode: companyUserCode, teamMemberIds: selectedIds },
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              },
+            }
+          )
+          .then((res) => setSelectedIds([]));
     }
-    setSelectedIds([]);
+    return false;
+    
+    
+    // console.log(selectedIds,'selecter ids')
+
+  //   if (confirm) {
+  //     const filteredUsers = data.filter((user) =>
+  //       selectedIds.includes(user.id)
+  //     );
+  //     filteredUsers.forEach((user) => {
+  //       // Delete the user from the first API
+  //       axios
+  //         .delete(`${apiTo}/${user.id}`)
+  //         .then((response) => {
+  //           axios
+  //             .post(apiFrom, user)
+  //             .then((response) => {
+  //               // Handle success
+  //               func1();
+  //               func2();
+  //               setSelectedIds([]);
+  //             })
+  //             .catch((error) => {
+  //               // Handle error
+  //             });
+  //         })
+  //         .catch((error) => {
+  //           console.error(error);
+  //         });
+  //     });
+  //   }
+  //   setSelectedIds([]);
+  // };
   };
+  //-----------------------------------------------------------------
 
   // This function is use to restore the value on a click of single user
   // restoreSingle = (
@@ -161,23 +225,22 @@ class Util {
   //   }
   // };
 
-
-  restoreSingle = (user,api) => {
-    const {teamMemberId} = user
-    const accessToken = localStorage.getItem("accessToken")
-    const companyUserCode = localStorage.getItem('usercode')
+  restoreSingle = (user, api) => {
+    const { teamMemberId } = user;
+    const accessToken = localStorage.getItem("accessToken");
+    const companyUserCode = localStorage.getItem("usercode");
     axios
-        .post(
-          api,
-          { companyUserCode: companyUserCode, teamMemberIds: [teamMemberId]},
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        )
-        .then((res) => console.log(res,'result'));
-  }
+      .post(
+        api,
+        { companyUserCode: companyUserCode, teamMemberIds: [teamMemberId] },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((res) => console.log(res, "result"));
+  };
 
   // This function is used to restore multiple past members/deleted members to current table
   restorePastMembers = (
@@ -246,45 +309,50 @@ class Util {
   //     });
   // };
 
-
   // ----------------- Team member real Ratings API---------------------
 
   activeRatings = (user, getDataFunc) => {
-    console.log(user,'active ratings')
+    console.log(user, "active ratings");
     const { teamMemberId, companyUserCode } = user;
     const accessToken = localStorage.getItem("accessToken");
     axios
-        .post(
-          API.EDIT_TEAM_MEMBERS_RATINGS,
-          { companyUserCode: companyUserCode, teamMemberIds: [teamMemberId], enableRatings: true },
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        )
-        .then((res) => getDataFunc());
+      .post(
+        API.EDIT_TEAM_MEMBERS_RATINGS,
+        {
+          companyUserCode: companyUserCode,
+          teamMemberIds: [teamMemberId],
+          enableRatings: true,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((res) => getDataFunc());
   };
 
   deactiveRatings = (user, getDataFunc) => {
-    console.log(user,'active ratings')
+    console.log(user, "active ratings");
     const { teamMemberId, companyUserCode } = user;
     const accessToken = localStorage.getItem("accessToken");
     axios
-        .post(
-          API.EDIT_TEAM_MEMBERS_RATINGS,
-          { companyUserCode: companyUserCode, teamMemberIds: [teamMemberId], enableRatings: false },
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        )
-        .then((res) => getDataFunc());
+      .post(
+        API.EDIT_TEAM_MEMBERS_RATINGS,
+        {
+          companyUserCode: companyUserCode,
+          teamMemberIds: [teamMemberId],
+          enableRatings: false,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((res) => getDataFunc());
   };
   // ---------------------------------------------------------------
-
- 
 
   static handleSearch = (event, setSearchTerm, items, setFilteredItems) => {
     console.log(event.target, "event");
