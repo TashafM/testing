@@ -225,10 +225,11 @@ const DataTable = ({
                             //       setSelectedIds
                             //     )
                             // }
-                            onClick={
-                              () =>
-                                myUtil.teamMemberSingleDelete(row)
-                            }
+                            onClick={() => {
+                              myUtil.teamMemberSingleDelete(row, () => {
+                                console.log("api success");
+                              });
+                            }}
                           />
                         </span>
                       )}
