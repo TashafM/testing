@@ -59,7 +59,7 @@ class Util {
   // };
 
   // ------------------ DELETE SINGLE FROM TEAM MEMBER REAL API ------------------------------
-  teamMemberSingleDelete = (user) => {
+  teamMemberSingleDelete = (user, onUpdate) => {
     const { teamMemberId, displayFirstName } = user;
     const companyUserCode = localStorage.getItem("usercode");
     const accessToken = localStorage.getItem("accessToken");
@@ -78,7 +78,10 @@ class Util {
             },
           }
         )
-        .then((res) => console.log(res, "response"));
+        .then((res) => {
+          console.log(res, "response");
+          onUpdate(res);
+        });
     }
     return false;
   };
@@ -140,54 +143,53 @@ class Util {
     const confirm = window.confirm(
       `Are you sure you want to delete ${selectedIds.length} users?`
     );
-    if(confirm){
+    if (confirm) {
       const companyUserCode = localStorage.getItem("usercode");
       const accessToken = localStorage.getItem("accessToken");
       axios
-          .post(
-            API.DELETE_TEAM_MEMBERS,
-            { companyUserCode: companyUserCode, teamMemberIds: selectedIds },
-            {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-              },
-            }
-          )
-          .then((res) => setSelectedIds([]));
+        .post(
+          API.DELETE_TEAM_MEMBERS,
+          { companyUserCode: companyUserCode, teamMemberIds: selectedIds },
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        )
+        .then((res) => setSelectedIds([]));
     }
     return false;
-    
-    
+
     // console.log(selectedIds,'selecter ids')
 
-  //   if (confirm) {
-  //     const filteredUsers = data.filter((user) =>
-  //       selectedIds.includes(user.id)
-  //     );
-  //     filteredUsers.forEach((user) => {
-  //       // Delete the user from the first API
-  //       axios
-  //         .delete(`${apiTo}/${user.id}`)
-  //         .then((response) => {
-  //           axios
-  //             .post(apiFrom, user)
-  //             .then((response) => {
-  //               // Handle success
-  //               func1();
-  //               func2();
-  //               setSelectedIds([]);
-  //             })
-  //             .catch((error) => {
-  //               // Handle error
-  //             });
-  //         })
-  //         .catch((error) => {
-  //           console.error(error);
-  //         });
-  //     });
-  //   }
-  //   setSelectedIds([]);
-  // };
+    //   if (confirm) {
+    //     const filteredUsers = data.filter((user) =>
+    //       selectedIds.includes(user.id)
+    //     );
+    //     filteredUsers.forEach((user) => {
+    //       // Delete the user from the first API
+    //       axios
+    //         .delete(`${apiTo}/${user.id}`)
+    //         .then((response) => {
+    //           axios
+    //             .post(apiFrom, user)
+    //             .then((response) => {
+    //               // Handle success
+    //               func1();
+    //               func2();
+    //               setSelectedIds([]);
+    //             })
+    //             .catch((error) => {
+    //               // Handle error
+    //             });
+    //         })
+    //         .catch((error) => {
+    //           console.error(error);
+    //         });
+    //     });
+    //   }
+    //   setSelectedIds([]);
+    // };
   };
   //-----------------------------------------------------------------
 

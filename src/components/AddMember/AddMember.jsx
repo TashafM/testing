@@ -19,7 +19,7 @@ import DatePickerComp from "../DatePickerComp/DatePickerComp";
 import Util from "../UtilityFunctions/UtilityFunctions";
 import Multiselect from "multiselect-react-dropdown";
 
-const AddMember = ({ api, getDataFunc }) => {
+const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
   const [show, setShow] = useState(false);
   const [selectedDate, setSelectedDate] = useState(["", "", ""]);
   const [proDate, setproDate] = useState(["", "", ""]);
@@ -148,27 +148,33 @@ const AddMember = ({ api, getDataFunc }) => {
     //   getDataFunc();
     //   myUtil.hello();
     // });
-    axios.post(
-      "https://dev.elred.io/portalAddCompanyTeamMember",
-      // API.VIEW_CURRENT_TEAM_MEMBERS + `start=${page}&offset=10`,
-      
-        {...formValues,
-        showRatings: showRatings.toString(),
-        startDate,
-        probationDate,
-        designation,
-        department,
-        companyUserCode,
-        displayLocation,}
-      ,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
+    axios
+      .post(
+        "https://dev.elred.io/portalAddCompanyTeamMember",
+        // API.VIEW_CURRENT_TEAM_MEMBERS + `start=${page}&offset=10`,
+
+        {
+          ...formValues,
+          showRatings: showRatings.toString(),
+          startDate,
+          probationDate,
+          designation,
+          department,
+          companyUserCode,
+          displayLocation,
         },
-      }
-    ).then((res)=>console.log(res,'successfully'))
-    .catch((err)=>console.log(err,'error'))
-    console.log(showRatings,'showRatings')
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res, "successfully");
+        getCurrMembers(1);
+      })
+      .catch((err) => console.log(err, "error"));
+    console.log(showRatings, "showRatings");
     handleClose();
     setSelectedDate(["", "", ""]);
     setproDate(["", "", ""]);

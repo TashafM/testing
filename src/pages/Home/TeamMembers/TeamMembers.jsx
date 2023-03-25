@@ -85,13 +85,16 @@ const TeamMembers = () => {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
 
-  const getCurrMembers = () => {
+  const getCurrMembers = (p) => {
     const accessToken = localStorage.getItem("accessToken");
     const userCode = localStorage.getItem("usercode");
+
+    const start = p ? p : page;
+
     axios
       .post(
         // `https://dev.elred.io/portalViewCompanyCurrentTeamMembers?start=${page}&offset=10`,
-        API.VIEW_CURRENT_TEAM_MEMBERS + `start=${page}&offset=10`,
+        API.VIEW_CURRENT_TEAM_MEMBERS + `start=${start}&offset=10`,
         { companyUserCode: userCode },
         {
           headers: {
@@ -100,8 +103,13 @@ const TeamMembers = () => {
         }
       )
       .then((res) => {
-        setData((prevItems) => [...prevItems, ...res.result]);
-        setPage((prevPage) => prevPage + 10);
+        if (start === 1) {
+          setData([...res.result]);
+        } else {
+          setData((prevItems) => [...prevItems, ...res.result]);
+        }
+
+        setPage((prevPage) => start + 10);
       });
     // .then((res) => console.log(res.result,'save'));
     // console.log(res,'00000000000')
@@ -182,7 +190,7 @@ const TeamMembers = () => {
   return (
     <>
       <div className="upper-content">
-        {console.log(data,'000000000')}
+        {console.log(data, "000000000")}
         <Description
           icon={users}
           title="Team Members"
@@ -193,6 +201,7 @@ const TeamMembers = () => {
           getDataFunc={
             location.pathname == currentMember ? getCurrMembers : getPastMembers
           }
+          getCurrMembers={getCurrMembers}
           addMember="addMember"
         />
         {/* {console.log(currentData, "current dAta")} */}
@@ -227,20 +236,20 @@ const TeamMembers = () => {
             //   hasMore={hasMore}
             //   loader={<h4>Loading...</h4>}
             // >
-              <CurrentMembers
-                selectedIds={selectedIds}
-                setSelectedIds={setSelectedIds}
-                currMemberData={data}
-                // currMemberData={currMemberData}
-                currMemberApi={currMemberApi}
-                pastMemberApi={pastMemberApi}
-                getCurrMembers={getCurrMembers}
-                getPastMembers={getPastMembers}
-                filteredItems={filteredItems}
-                dataLength={data.length}
-                next={handleLoadMore}
-                hasMore={hasMore}
-              />
+            <CurrentMembers
+              selectedIds={selectedIds}
+              setSelectedIds={setSelectedIds}
+              currMemberData={data}
+              // currMemberData={currMemberData}
+              currMemberApi={currMemberApi}
+              pastMemberApi={pastMemberApi}
+              getCurrMembers={getCurrMembers}
+              getPastMembers={getPastMembers}
+              filteredItems={filteredItems}
+              dataLength={data.length}
+              next={handleLoadMore}
+              hasMore={hasMore}
+            />
             // </InfiniteScroll>
           )}
           {location.pathname == pastMember && (
@@ -250,20 +259,20 @@ const TeamMembers = () => {
             //   hasMore={pastHasMore}
             //   loader={<h4>Loading...</h4>}
             // >
-              <PastMembers
-                selectedIds={selectedIds}
-                setSelectedIds={setSelectedIds}
-                pastMemberData={pastData}
-                // pastMemberData={pastMemberData}
-                pastMemberApi={pastMemberApi}
-                currMemberApi={currMemberApi}
-                getPastMembers={getPastMembers}
-                getCurrMembers={getCurrMembers}
-                filteredItems2={filteredItems2}
-                dataLength={pastData.length}
-                next={pastHandleLoadMore}
-                hasMore={pastHasMore}
-              />
+            <PastMembers
+              selectedIds={selectedIds}
+              setSelectedIds={setSelectedIds}
+              pastMemberData={pastData}
+              // pastMemberData={pastMemberData}
+              pastMemberApi={pastMemberApi}
+              currMemberApi={currMemberApi}
+              getPastMembers={getPastMembers}
+              getCurrMembers={getCurrMembers}
+              filteredItems2={filteredItems2}
+              dataLength={pastData.length}
+              next={pastHandleLoadMore}
+              hasMore={pastHasMore}
+            />
             // </InfiniteScroll>
           )}
         </div>

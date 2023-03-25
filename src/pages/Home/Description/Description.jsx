@@ -16,6 +16,7 @@ const Description = ({
   getDataFunc,
   addMember,
   addPartners,
+  getCurrMembers,
   noButtons,
 }) => {
   return (
@@ -59,6 +60,7 @@ const Description = ({
                 <AddMember
                   onUserAdded={onUserAdded}
                   api={api}
+                  getCurrMembers={getCurrMembers}
                   getDataFunc={getDataFunc}
                 />
               )}
