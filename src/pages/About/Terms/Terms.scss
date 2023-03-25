@@ -12,6 +12,28 @@
   margin-top: 40px;
 }
 
+.rdw-editor-toolbar {
+}
+.modal-content {
+  /* padding: 8px; */
+}
+.rdw-editor-main {
+  overflow: hidden;
+}
+.notranslate .public-DraftEditor-content {
+  width: 97% !important;
+}
+.modalbody {
+  height: 550px;
+  overflow: auto;
+}
+
+.crossCloseButton {
+  height: 20px;
+  width: 25px;
+  padding-left: 10px;
+}
+
 @media only screen and (max-width: 1199px) {
   .terms-title {
     font-size: 14px;

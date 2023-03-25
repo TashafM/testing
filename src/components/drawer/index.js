@@ -84,7 +84,7 @@ export default function RightDrawer() {
                 <EditAbout />
               ) : openDrawer.type === "Social Media & Links" ? (
                 <EditSocialMedia />
-              ) : openDrawer.type === "Contact" ? (
+              ) : openDrawer.type === "Contacts" ? (
                 <EditContactsList />
               ) : openDrawer.type === "Edit Contact" ||
                 openDrawer.type === "Add Contact" ? (

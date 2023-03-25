@@ -40,7 +40,7 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
     formData.append("brandLocation[country]", "");
     if (show.type === "Edit") {
       if (file.length && file[0]?.name !== data.brandLogoURL) {
-        alert(222);
+        // alert(222);
         formData.append("brandLogoURL", file[0]);
       }
 

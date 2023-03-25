@@ -14,11 +14,19 @@ function About() {
   } = useResponse("/portalViewCompanyAboutUsInfo");
 
   if (loading) {
-    return <div>loading</div>;
+    return (
+      <div className="upper-content about-sectio">
+        <div>loading</div>
+      </div>
+    );
   }
 
   if (error.error) {
-    return <div>{error.message}</div>;
+    return (
+      <div className="upper-content about-sectio">
+        <div>{error.message}</div>{" "}
+      </div>
+    );
   }
 
   return (

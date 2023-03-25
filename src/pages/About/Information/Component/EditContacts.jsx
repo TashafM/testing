@@ -12,7 +12,7 @@ import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
 
 function EditContacts() {
   const formRef = useRef();
-  const { openDrawer } = useContextProvider();
+  const { openDrawer, setOpenDrawer } = useContextProvider();
 
   const data = openDrawer.data;
 
@@ -29,7 +29,12 @@ function EditContacts() {
         ...values,
         contactUsId,
       };
-      pathcData(body);
+      pathcData(body, () => {
+        setOpenDrawer({
+          open: false,
+          type: "",
+        });
+      });
     } else {
       const body = {
         ...values,
@@ -43,7 +48,12 @@ function EditContacts() {
         },
       };
 
-      postData(body);
+      postData(body, () => {
+        setOpenDrawer({
+          open: false,
+          type: "",
+        });
+      });
     }
   };
 
