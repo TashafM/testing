@@ -7,7 +7,7 @@ function useEditBrandPatch(url) {
   const [loading, setLoading] = useState(false);
 
   const postData = useCallback(
-    (body) => {
+    (body, onUpdate) => {
       setLoading(true);
       axiosInstance
         .patch(url, body)
@@ -19,6 +19,7 @@ function useEditBrandPatch(url) {
           } else {
             setError({ error: true, message: res.message });
           }
+          onUpdate(res.result[0]);
           setLoading(false);
         })
         .catch((err) => {

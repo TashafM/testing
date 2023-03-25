@@ -1,7 +1,6 @@
 import React from "react";
 import { Col } from "react-bootstrap";
 import links from "../../../../assets/images/links.png";
-import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import BtnTitleIcon from "../../../../components/Button/BtnTitleIcon";
 import { socialMedia } from "../../data/data";
 import CardHead from "./CardHead";

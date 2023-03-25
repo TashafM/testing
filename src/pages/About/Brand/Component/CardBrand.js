@@ -1,23 +1,14 @@
 import React from "react";
 import BtnIconOnly from "../../../../components/Button/BtnIconOnly";
 import "../Brand.scss";
-import { useContextProvider } from "../../../../context";
 
-function CardBrand({ title, item, location }) {
-  const { setOpenDrawer } = useContextProvider();
+function CardBrand({ title, item, location, onClick }) {
+  // const { setOpenDrawer } = useContextProvider();
 
   return (
     <div className="card-brand">
       <div className="text-end">
-        <BtnIconOnly
-          onClick={() => {
-            setOpenDrawer({
-              type: "Edit Brands",
-              open: true,
-              data: item,
-            });
-          }}
-        />
+        <BtnIconOnly onClick={onClick} />
       </div>
       <div className="d-flex flex-column align-items-center justify-content-center">
         <img
