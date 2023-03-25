@@ -127,7 +127,7 @@ const TeamMembers = () => {
     axios
       .post(
         // `https://dev.elred.io/portalViewCompanyCurrentTeamMembers?start=${page}&offset=10`,
-        API.VIEW_PAST_TEAM_MEMBERS + `start=${page}&offset=10`,
+        API.VIEW_PAST_TEAM_MEMBERS + `start=${pastPage}&offset=10`,
         { companyUserCode: userCode },
         {
           headers: {
@@ -181,9 +181,14 @@ const TeamMembers = () => {
   // };
 
   useEffect(() => {
+    if(location.pathname==currentMember){
+      getCurrMembers()
+    }else{
+      getPastMembers()
+    }
     setSelectedIds([]);
-    getCurrMembers();
-    getPastMembers();
+    // getCurrMembers();
+    // getPastMembers();
     // current();
   }, [location]);
 

@@ -171,7 +171,7 @@ const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
       )
       .then((res) => {
         console.log(res, "successfully");
-        getCurrMembers(1);
+        getCurrMembers(1)
       })
       .catch((err) => console.log(err, "error"));
     console.log(showRatings, "showRatings");

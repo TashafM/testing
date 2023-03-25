@@ -26,7 +26,7 @@ const DeleteButton = ({
               apiTo,
               apiFrom,
               func1,
-              func2,
+              // func2,
               setSelectedIds
             )
           }

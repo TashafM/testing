@@ -62,7 +62,7 @@ const RestoreDeleteBtn = ({
                     apiTo={currMemberApi}
                     apiFrom={pastMemberApi}
                     func1={getCurrMembers}
-                    func2={getPastMembers}
+                    // func2={getPastMembers}
                     setSelectedIds={setSelectedIds}
                   />
                 </>

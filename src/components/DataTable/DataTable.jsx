@@ -226,9 +226,7 @@ const DataTable = ({
                             //     )
                             // }
                             onClick={() => {
-                              myUtil.teamMemberSingleDelete(row, () => {
-                                console.log("api success");
-                              });
+                              myUtil.teamMemberSingleDelete(row,getDataFunc);
                             }}
                           />
                         </span>

@@ -19,8 +19,6 @@ const CurrentMembers = ({
   hasMore,
 }) => {
 
-  console.log(currMemberData,'------------')
-
   return (
     <div>
       <DataTable
@@ -31,7 +29,7 @@ const CurrentMembers = ({
         api={currMemberApi}
         api2={pastMemberApi}
         getDataFunc={getCurrMembers}
-        getDataFunc2={getPastMembers}
+        // getDataFunc2={getPastMembers}
         setSelectedIds={setSelectedIds}
         teamMembers={true}
         ratings={true}

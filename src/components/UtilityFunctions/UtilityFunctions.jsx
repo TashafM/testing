@@ -59,7 +59,7 @@ class Util {
   // };
 
   // ------------------ DELETE SINGLE FROM TEAM MEMBER REAL API ------------------------------
-  teamMemberSingleDelete = (user, onUpdate) => {
+  teamMemberSingleDelete = (user, getDataFunc) => {
     const { teamMemberId, displayFirstName } = user;
     const companyUserCode = localStorage.getItem("usercode");
     const accessToken = localStorage.getItem("accessToken");
@@ -80,7 +80,8 @@ class Util {
         )
         .then((res) => {
           console.log(res, "response");
-          onUpdate(res);
+          getDataFunc(1)
+          // onUpdate(res);
         });
     }
     return false;
@@ -156,7 +157,10 @@ class Util {
             },
           }
         )
-        .then((res) => setSelectedIds([]));
+        .then((res) => {
+          func1(1)
+          setSelectedIds([])
+        });
     }
     return false;
 
