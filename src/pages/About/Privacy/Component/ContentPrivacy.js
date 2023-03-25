@@ -2,6 +2,7 @@ import React from "react";
 import "./Styles.scss";
 
 function ContentPrivacy({ data }) {
+  console.log("dsh",data)
   return (
     <div className="container-fluid">
       <div className="row">
@@ -12,9 +13,9 @@ function ContentPrivacy({ data }) {
                 <p className="privacy-title">
                   {index + 1}
                   {". "}
-                  {item.title}
+                  {item.question}
                 </p>
-                <p className="privacy-desc">{item.content}</p>
+                <p className="privacy-desc">{item.answer}</p>
               </div>
             );
           })}
@@ -24,8 +25,8 @@ function ContentPrivacy({ data }) {
             <div className="title">Table of Contents:</div>
             {data.map((item, index) => {
               return (
-                <div className="content" key={item.title}>
-                  <a href="#">{item.title}</a>
+                <div className="content" key={index}>
+                  <a href="#">{item.question}</a>
                 </div>
               );
             })}

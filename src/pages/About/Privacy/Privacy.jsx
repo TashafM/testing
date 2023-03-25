@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import BtnIconOnly from "../../../components/Button/BtnIconOnly";
 import BtnTitleIcon from "../../../components/Button/BtnTitleIcon";
@@ -10,17 +10,33 @@ import EditPrivacy from "./Component/EditPrivacy";
 import "./Privacy.scss";
 
 function Privacy() {
+  const [privacy, setPrivacy] = useState([]);
   const [showModal, setShowModal] = useState("");
 
   const { data, loading } = useResponse("/portalViewCompanyPrivacyPolicy");
 
   console.log({ data });
 
-  if (loading) {
-    <div>loading ...</div>;
-  }
+  useEffect(() => {
+    const arr = [];
+    data?.map((ele) => {
+      arr.push({ question: ele?.title, answer: ele?.content });
+    });
+    // console.log("sbjk",arr)
+    setPrivacy(arr);
+  }, [data]);
 
-  if (!data.length) {
+  const editSaveCallback = (data) => {
+    console.log("shdj", data);
+    setPrivacy(data);
+  };
+
+  if (loading) {
+    return <div>loading ...</div>;
+  }
+  console.log("jhsgjh", privacy);
+
+  if (!privacy.length) {
     return (
       <div className="default-height d-flex align-items-center justify-content-center">
         <BtnTitleIcon
@@ -34,7 +50,8 @@ function Privacy() {
             title="Privacy Policy"
             show={showModal}
             close={() => setShowModal(false)}
-            data={data}
+            data={privacy}
+            editSaveCallback={editSaveCallback}
           />
         )}
       </div>
@@ -51,13 +68,14 @@ function Privacy() {
           }}
         />
       </div>
-      <ContentPrivacy data={data} />
+      <ContentPrivacy data={privacy} />
       {showModal && (
         <EditPrivacy
           title="Privacy Policy"
           show={showModal}
           close={() => setShowModal(false)}
-          data={data}
+          data={privacy}
+          editSaveCallback={editSaveCallback}
         />
       )}
     </div>

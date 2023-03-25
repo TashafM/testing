@@ -21,7 +21,7 @@ export const usePostAsyncResponse = (url) => {
           } else {
             setError({ error: true, message: res.message });
           }
-          alert(2);
+          // alert(2);
           onUpdate(res.result);
           setLoading(false);
         })
@@ -31,7 +31,7 @@ export const usePostAsyncResponse = (url) => {
             message: err?.response?.message ?? "something went wrong",
           });
 
-          alert(2);
+          // alert(2);
           setLoading(false);
         });
     },

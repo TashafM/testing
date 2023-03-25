@@ -43,7 +43,7 @@ function Information() {
               title="Contact"
               onClick={() => {
                 setOpenDrawer({
-                  type: "Contact",
+                  type: "Contacts",
                   open: true,
                   data: [...data[0]?.contactUs],
                 });
@@ -56,7 +56,8 @@ function Information() {
                 onClick={() => {
                   setOpenDrawer({
                     open: true,
-                    type: "Add Contacts",
+                    type: "Add Contact",
+                    data: {},
                   });
                 }}
               />
@@ -108,7 +109,6 @@ function Information() {
         <CardSocial
           socialMediaDetails={data[0].socialMediaDetails ?? []}
           onClick={() => {
-            alert(22);
             setOpenSocial(true);
             // setOpenDrawer({
             //   type: "Social Media & Links",

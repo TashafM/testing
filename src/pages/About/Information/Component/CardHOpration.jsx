@@ -16,15 +16,10 @@ function CardHOpration({ hoursOfOperation, onClick }) {
   }
 
   return (
-    <Col
-      className="card-wrapper"
-      style={{ marginRight: 0 }}
-      md={6}
-      xl={4}
-      onClick={onClick}
-    >
-      <div className="card-cont">
+    <Col className="card-wrapper" style={{ marginRight: 0 }} md={6} xl={4}>
+      <div className="card-cont" onClick={onClick}>
         <CardHead
+          onClick={onClick}
           type="Hours of operations"
           title="Hours of operations"
           icon={business}

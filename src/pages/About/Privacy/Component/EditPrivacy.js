@@ -10,7 +10,7 @@ import { Modal } from "react-bootstrap";
 import { usePostAsyncResponse } from "../../../../hooks/usePostAsyncResponse";
 // import BtnTitleCenter from "../Button/BtnTitleCenter";
 
-function EditPrivacy({ data = [], show, close }) {
+function EditPrivacy({ data = [], show, close ,editSaveCallback}) {
   const [privacyData, setPrivacyData] = useState(data ?? []);
   const empty = { title: "", content: "" };
 
@@ -30,8 +30,12 @@ function EditPrivacy({ data = [], show, close }) {
     };
 
     postData(body);
+    close()
+    editSaveCallback([...privacyData])
+
   };
 
+  // console.log("jfhkj",privacyData)
   return (
     <Modal
       size="lg"
