@@ -6,8 +6,10 @@ import chat from "../../../../assets/images/chat-icon.png";
 import Switch from "../../../../components/Input/Switch";
 
 function EditContactList() {
-  const { openDrawer } = useContextProvider();
+  const { openDrawer, setOpenDrawer } = useContextProvider();
   const [data, setData] = useState(openDrawer.data ?? []);
+
+  console.log({ openDrawer });
   useEffect(() => {
     setData(openDrawer.data ?? []);
   }, [openDrawer]);
@@ -27,6 +29,14 @@ function EditContactList() {
             type={"Edit Contact"}
             title={item?.title ?? ""}
             contactUs={{ ...item }}
+            onClick={() => {
+              setOpenDrawer({
+                ...openDrawer,
+                type: "Edit Contact",
+                data: { ...item },
+                index: index,
+              });
+            }}
           >
             <div className="d-flex justify-content-between chat-container">
               <div className="d-flex">

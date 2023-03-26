@@ -17,9 +17,9 @@ function EditContacts() {
   const data = openDrawer.data;
 
   const submitHandler = async (values, action) => {
-    console.log("values", values);
+    console.log("values", openDrawer.type);
 
-    if (openDrawer.title === "Edit Contact") {
+    if (openDrawer.type === "Edit Contact") {
       const contactUsId = data._id;
       delete values.address;
       delete data._id;
@@ -29,7 +29,17 @@ function EditContacts() {
         ...values,
         contactUsId,
       };
-      pathcData(body, () => {
+
+      pathcData(body, (res) => {
+        console.log({ res });
+        try {
+          const d = JSON.parse(JSON.stringify(openDrawer.completeData));
+          d[0].contactUs[openDrawer.index] = { ...res[0] };
+          openDrawer.callback(d);
+        } catch (error) {
+          console.log(error);
+        }
+
         setOpenDrawer({
           open: false,
           type: "",
@@ -48,7 +58,13 @@ function EditContacts() {
         },
       };
 
-      postData(body, () => {
+      postData(body, (res) => {
+        console.log({ res });
+        const d = JSON.parse(JSON.stringify(openDrawer.completeData));
+        d[0].contactUs.push(res[0]);
+
+        console.log({ d });
+        openDrawer.callback(d);
         setOpenDrawer({
           open: false,
           type: "",

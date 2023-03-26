@@ -28,6 +28,9 @@ function Information() {
   const [openOperation, setOpenOperation] = useState(false);
   const [openotherInfor, setOpenOtherInfor] = useState(false);
 
+  const onUpdate = (cache) => {
+    setData(cache);
+  };
   if (!data.length) {
     return <div>Company not availvable</div>;
   }
@@ -46,6 +49,8 @@ function Information() {
                   type: "Contacts",
                   open: true,
                   data: [...data[0]?.contactUs],
+                  callback: onUpdate,
+                  completeData: data,
                 });
               }}
             />
@@ -58,6 +63,8 @@ function Information() {
                     open: true,
                     type: "Add Contact",
                     data: {},
+                    callback: onUpdate,
+                    completeData: data,
                   });
                 }}
               />
