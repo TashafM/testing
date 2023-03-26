@@ -121,13 +121,15 @@ const TeamMembers = () => {
   //----------------------END CURRENT MEMBER API-----------------
 
   //------------------ PAST MEMBER API ----------------------
-  const getPastMembers = () => {
+  const getPastMembers = (p) => {
     const accessToken = localStorage.getItem("accessToken");
     const userCode = localStorage.getItem("usercode");
+    const start = p ? p : pastPage;
+
     axios
       .post(
         // `https://dev.elred.io/portalViewCompanyCurrentTeamMembers?start=${page}&offset=10`,
-        API.VIEW_PAST_TEAM_MEMBERS + `start=${pastPage}&offset=10`,
+        API.VIEW_PAST_TEAM_MEMBERS + `start=${start}&offset=10`,
         { companyUserCode: userCode },
         {
           headers: {
@@ -136,8 +138,12 @@ const TeamMembers = () => {
         }
       )
       .then((res) => {
-        setPastData((prevItems) => [...prevItems, ...res.result]);
-        setPastPage((prevPage) => prevPage + 10);
+        if (start === 1) {
+          setPastData([...res.result]);
+       }else{
+          setPastData((prevItems) => [...prevItems, ...res.result]);
+        }
+        setPastPage((prevPage) => start + 10);
       });
     // .then((res) => console.log(res.result,'save'));
     // console.log(res,'00000000000')
@@ -181,10 +187,10 @@ const TeamMembers = () => {
   // };
 
   useEffect(() => {
-    if(location.pathname==currentMember){
-      getCurrMembers()
-    }else{
-      getPastMembers()
+    if (location.pathname == currentMember) {
+      getCurrMembers();
+    } else {
+      getPastMembers();
     }
     setSelectedIds([]);
     // getCurrMembers();

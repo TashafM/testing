@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import rDisable from "../../../../assets/images/rDisable.svg";
 import rEnable from "../../../../assets/images/rEnable.svg";
 import "./RestoreDeleteBtn.scss";
+import { API } from "../../../../helper/API";
 
 const RestoreDeleteBtn = ({
   selectedIds,
@@ -39,11 +40,12 @@ const RestoreDeleteBtn = ({
               {location.pathname == pastPath ? (
                 <RestoreBtn
                   selectedIds={selectedIds}
+                  api={API.RESTORE_TEAM_MEMBERS}
                   data={pastMemberData}
                   apiTo={pastMemberApi}
                   apiFrom={currMemberApi}
-                  func1={getCurrMembers}
-                  func2={getPastMembers}
+                  // func1={getCurrMembers}
+                  func={getPastMembers}
                   setSelectedIds={setSelectedIds}
                 />
               ) : (

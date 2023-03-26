@@ -199,7 +199,8 @@ const DataTable = ({
                             onClick={() =>
                               myUtil.restoreSingle(
                                 row,
-                                restoreApi
+                                restoreApi,
+                                getDataFunc
                                 // api,
                                 // api2,
                                 // getDataFunc,

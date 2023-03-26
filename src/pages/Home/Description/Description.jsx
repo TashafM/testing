@@ -58,7 +58,8 @@ const Description = ({
               </div>
               {addMember && (
                 <AddMember
-                  onUserAdded={onUserAdded}
+                  onUser
+                  Added={onUserAdded}
                   api={api}
                   getCurrMembers={getCurrMembers}
                   getDataFunc={getDataFunc}
