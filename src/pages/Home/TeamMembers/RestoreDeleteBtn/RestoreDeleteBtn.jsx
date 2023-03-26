@@ -10,6 +10,7 @@ import rDisable from "../../../../assets/images/rDisable.svg";
 import rEnable from "../../../../assets/images/rEnable.svg";
 import "./RestoreDeleteBtn.scss";
 import { API } from "../../../../helper/API";
+import Util from "../../../../components/UtilityFunctions/UtilityFunctions";
 
 const RestoreDeleteBtn = ({
   selectedIds,
@@ -26,6 +27,8 @@ const RestoreDeleteBtn = ({
   const location = useLocation();
   const currentPath = "/home/team-members/current-members";
   const pastPath = "/home/team-members/past-members";
+
+  const global = new Util();
 
   return (
     <>
@@ -52,10 +55,26 @@ const RestoreDeleteBtn = ({
                 <>
                   <div className="ratings-div">
                     <span className="rating-icon">
-                      <img src={rDisable} alt="" />
+                      <img
+                        src={rDisable}
+                        alt=""
+                        onClick={()=>global.multipleRatingsDisable(
+                          selectedIds,
+                          setSelectedIds,
+                          getCurrMembers
+                        )}
+                      />
                     </span>
                     <span className="rating-icon">
-                      <img src={rEnable} alt="" />
+                      <img
+                        src={rEnable}
+                        alt=""
+                        onClick={()=>global.multipleRatingsEnable(
+                          selectedIds,
+                          setSelectedIds,
+                          getCurrMembers
+                        )}
+                      />
                     </span>
                   </div>
                   <DeleteButton

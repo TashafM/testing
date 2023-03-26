@@ -5,7 +5,7 @@ import { Button, Form, FormGroup } from "react-bootstrap";
 import DatePickerComp from "../../DatePickerComp/DatePickerComp";
 import Util from "../../UtilityFunctions/UtilityFunctions";
 
-const UpdateFields = ({ editData }) => {
+const UpdateFields = ({ editData, handleClose }) => {
   const [editValue, setEditValue] = useState(editData);
   const [designationList, setDesignationList] = useState([]);
   const [departmentList, setDepartmentList] = useState([]);
@@ -151,7 +151,7 @@ const UpdateFields = ({ editData }) => {
         }
       )
       .then((res) =>
-        console.log(res, "--------------------------------------yyyy")
+        handleClose()
       );
   };
 

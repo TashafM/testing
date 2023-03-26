@@ -5,20 +5,21 @@ import logo from "../../assets/images/atinks-dashboard.png";
 import menuItems from "./menu.js";
 // import NeedHelp from "../NeedHelp/NeedHelp";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Menus = () => {
   const navigate = useNavigate();
-  const [data, setData] = useState(localStorage.getItem("data") || null);
+  const location = useLocation()
+  // const [data, setData] = useState(localStorage.getItem("data") || null);
 
   const goto = (url) => {
-    setData(url.id);
+    // setData(url.id);
     navigate(`${url.path}`);
   };
 
-  useEffect(() => {
-    localStorage.setItem("data", data);
-  }, [data]);
+  // useEffect(() => {
+  //   localStorage.setItem("data", data);
+  // }, [data]);
 
   return (
     <div className="menus-col">
@@ -34,7 +35,7 @@ const Menus = () => {
                 <>
                   <div
                     key={id}
-                    className={`li ${data == item.id ? "active" : ""}`}
+                    className={`li ${location.pathname == item.path ? "active" : ""}`}
                     onClick={() => goto(item)}
                   >
                     <span className="icn">

@@ -18,7 +18,7 @@ class Util {
     }
     setSelectedIds(newSelectedIds);
     // setRatingUser(user);
-    console.log(selectedIds, "selected ids");
+    console.log(selectedIds, "tashaf ids");
   }
 
   // This function is used to delete single user data from an api and send it to past members
@@ -149,7 +149,7 @@ class Util {
       axios
         .post(
           API.DELETE_TEAM_MEMBERS,
-          { companyUserCode: companyUserCode, teamMemberIds: selectedIds },
+          { companyUserCode: companyUserCode, teamMemberIds: selectedIds},
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -309,6 +309,50 @@ class Util {
   // };
 
   // ----------------- Team member real Ratings API---------------------
+
+  multipleRatingsDisable = (selectedIds, setSelectedIds, getCurrMembers) => {
+    const userCode = localStorage.getItem("usercode");
+    const accessToken = localStorage.getItem("accessToken");
+    axios
+      .post(
+        API.EDIT_TEAM_MEMBERS_RATINGS,
+        {
+          companyUserCode: userCode,
+          teamMemberIds: selectedIds,
+          enableRatings: false,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((res) => getCurrMembers(1));
+    setSelectedIds("");
+  };
+
+  multipleRatingsEnable = (selectedIds, setSelectedIds, getCurrMembers) => {
+    const userCode = localStorage.getItem("usercode");
+    const accessToken = localStorage.getItem("accessToken");
+    axios
+      .post(
+        API.EDIT_TEAM_MEMBERS_RATINGS,
+        {
+          companyUserCode: userCode,
+          teamMemberIds: selectedIds,
+          enableRatings: true,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        getCurrMembers(1);
+        setSelectedIds("");
+      });
+  };
 
   activeRatings = (user, getDataFunc) => {
     console.log(user, "active ratings");

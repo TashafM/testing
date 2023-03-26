@@ -9,6 +9,8 @@ function PhoneNumber({
   placeholder = "",
   error = "",
   name = "",
+  length='',
+  required,
 }) {
   // `value` will be the parsed phone number in E.164 format.
   // Example: "+12133734253".
@@ -21,6 +23,7 @@ function PhoneNumber({
         defaultCountry="IN"
         placeholder={placeholder}
         onChange={onChange}
+        minLength={length}
         name={name}
         containerClass=""
         inputClass="input-container"
@@ -30,6 +33,7 @@ function PhoneNumber({
         inputStyle={{
           background: "lightblue",
         }}
+        required
       />
     </Fragment>
   );

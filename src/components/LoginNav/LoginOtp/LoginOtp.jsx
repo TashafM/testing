@@ -109,7 +109,7 @@ const LoginOtp = () => {
         <div className="loginOtp mb-3">
           <input
             type="email"
-            class="form-control email"
+            className="form-control email"
             id="floatingInput"
             placeholder="Enter email id"
             // value={email}

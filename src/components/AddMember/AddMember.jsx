@@ -18,6 +18,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import DatePickerComp from "../DatePickerComp/DatePickerComp";
 import Util from "../UtilityFunctions/UtilityFunctions";
 import Multiselect from "multiselect-react-dropdown";
+import PhoneNumber from "../Input/PhoneNumber";
 
 const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
   const [show, setShow] = useState(false);
@@ -123,31 +124,24 @@ const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
     return formattedDateStr;
   }
 
-  // const dateSubmit = (event) => {
-  //   event.preventDefault();
-  //   console.log(formattedValue,'date')
-  //   console.log(newDate, 'end Date')
+  const [phone, setPhone] = useState();
+  const [displayPhone, setDisplayPhone] = useState();
+
+  const handleNumber1 = (e) => {
+    setPhone(e);
+  };
+  const handleNumber2 = (e) => {
+    setDisplayPhone(e);
+  };
+  // const phone = (e) => {
+  //   e.preventDefault()
+  //   console.log(num1, num2)
   // }
-  //-------------------
 
   function handleSubmit(event) {
     event.preventDefault();
     const companyUserCode = localStorage.getItem("usercode");
     const accessToken = localStorage.getItem("accessToken");
-    // const data = {
-    //   ...formValues,
-    //   showRatings,
-    //   startDate,
-    //   probationDate,
-    //   designation,
-    //   department,
-    //   companyUserCode,
-    //   displayLocation,
-    // };
-    // axios.post(api, formValues).then((res) => {
-    //   getDataFunc();
-    //   myUtil.hello();
-    // });
     axios
       .post(
         "https://dev.elred.io/portalAddCompanyTeamMember",
@@ -155,6 +149,8 @@ const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
 
         {
           ...formValues,
+          phone: phone,
+          displayPhone: displayPhone,
           showRatings: showRatings.toString(),
           startDate,
           probationDate,
@@ -171,16 +167,17 @@ const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
       )
       .then((res) => {
         console.log(res, "successfully");
-        getCurrMembers(1)
+        getCurrMembers(1);
       })
       .catch((err) => console.log(err, "error"));
-    console.log(showRatings, "showRatings");
     handleClose();
     setSelectedDate(["", "", ""]);
     setproDate(["", "", ""]);
     setshowRatings(false);
     setDepartment([]);
     setDesignation([]);
+    setPhone(''),
+    setDisplayPhone('')
   }
 
   return (
@@ -248,7 +245,7 @@ const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
                 This email will reflect on your employee’s card.
               </div>
 
-              <FormGroup className="input-div">
+              {/* <FormGroup className="input-div">
                 <Form.Label>Personal Phone No *</Form.Label>
                 <Form.Control
                   type="text"
@@ -256,30 +253,25 @@ const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
                   onChange={() => Util.handleChange(event, setFormValues)}
                   required
                 />
-              </FormGroup>
-              <FormGroup className="input-div">
-                <Form.Label>Display Phone No *</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="displayPhone"
-                  onChange={() => Util.handleChange(event, setFormValues)}
-                  required
-                />
-              </FormGroup>
-              <div className="info-text">
+              </FormGroup> */}
+              <PhoneNumber
+                label="Personal Phone No *"
+                placeholder={"Enter Mobile No."}
+                onChange={handleNumber1}
+                value={phone}
+                required={true}
+              />
+              <PhoneNumber
+                label="Display Phone No *"
+                placeholder={"Enter Mobile No."}
+                onChange={handleNumber2}
+                value={displayPhone}
+                required={true}
+              />
+              <div className="info-text-2">
                 This phone number will reflect on your employee’s card.{" "}
               </div>
 
-              {/* <FormGroup className="input-div">
-                <Form.Label>Department *</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="department"
-                  onChange={() => Util.handleChange(event, setFormValues)}
-                  required
-                />
-              </FormGroup> */}
-              {/* <FormGroup className="input-div"> */}
               <Form.Label>Designation *</Form.Label>
               <Multiselect
                 options={designationList}
@@ -287,7 +279,6 @@ const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
                 onSelect={handleSelect}
                 displayValue="value"
               />
-              {/* </FormGroup> */}
               <Form.Label>Department *</Form.Label>
               <Multiselect
                 options={departmentList}
@@ -305,14 +296,6 @@ const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
                   required
                 />
               </FormGroup>
-              {/* <FormGroup className="input-div">
-                <Form.Label>Location</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="location"
-                  onChange={() => Util.handleChange(event, setFormValues)}
-                />
-              </FormGroup> */}
 
               <div>Location</div>
               <FormGroup className="input-div">
@@ -387,13 +370,6 @@ const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
                 />
                 Show ratings on the employee’s card
               </div>
-
-              {/* <Multiselect
-                options={designation}
-                selectedValues={selectedDesignations}
-                onSelect={handleSelect}
-                displayValue="value"
-              /> */}
 
               <Button variant="primary" type="submit" className="save-btn">
                 Save
