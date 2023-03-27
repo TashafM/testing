@@ -31,7 +31,7 @@ function Brand() {
                 item={item}
                 onClick={() => {
                   setIndex(index);
-                  alert(333);
+                  // alert(333);
                   setTimeout(() => {
                     setShowBrand({
                       open: true,
