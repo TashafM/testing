@@ -17,7 +17,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import DatePickerComp from "../DatePickerComp/DatePickerComp";
 import UpdateFields from "./UpdateFields/UpdateFields";
 
-const UpdateMember = ({ api, getDataFunc, editData }) => {
+const UpdateMember = ({ api, getDataFunc, editData, isCurrent }) => {
   const [show, setShow] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [probationDate, setProbationDate] = useState(null);
@@ -80,7 +80,7 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
     <>
       <div className="add-member">
         <span className="icon-desc">
-          <img src={edit} alt="" onClick={handleShow} />
+          <img src={edit} alt="" onClick={isCurrent ? handleShow : null} />
         </span>
       </div>
       <Offcanvas
@@ -218,7 +218,7 @@ const UpdateMember = ({ api, getDataFunc, editData }) => {
                 Save
               </Button>
             </Form> */}
-            <UpdateFields editData={editData}/>
+            <UpdateFields editData={editData} handleClose={handleClose}/>
           </Offcanvas.Body>
         </div>
       </Offcanvas>

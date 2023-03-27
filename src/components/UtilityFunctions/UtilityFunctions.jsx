@@ -18,7 +18,7 @@ class Util {
     }
     setSelectedIds(newSelectedIds);
     // setRatingUser(user);
-    console.log(selectedIds, "selected ids");
+    console.log(selectedIds, "tashaf ids");
   }
 
   // This function is used to delete single user data from an api and send it to past members
@@ -59,7 +59,7 @@ class Util {
   // };
 
   // ------------------ DELETE SINGLE FROM TEAM MEMBER REAL API ------------------------------
-  teamMemberSingleDelete = (user, onUpdate) => {
+  teamMemberSingleDelete = (user, getDataFunc) => {
     const { teamMemberId, displayFirstName } = user;
     const companyUserCode = localStorage.getItem("usercode");
     const accessToken = localStorage.getItem("accessToken");
@@ -79,8 +79,8 @@ class Util {
           }
         )
         .then((res) => {
-          console.log(res, "response");
-          onUpdate(res);
+          getDataFunc(1);
+          // onUpdate(res);
         });
     }
     return false;
@@ -149,14 +149,17 @@ class Util {
       axios
         .post(
           API.DELETE_TEAM_MEMBERS,
-          { companyUserCode: companyUserCode, teamMemberIds: selectedIds },
+          { companyUserCode: companyUserCode, teamMemberIds: selectedIds},
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
             },
           }
         )
-        .then((res) => setSelectedIds([]));
+        .then((res) => {
+          func1(1);
+          setSelectedIds([]);
+        });
     }
     return false;
 
@@ -227,7 +230,7 @@ class Util {
   //   }
   // };
 
-  restoreSingle = (user, api) => {
+  restoreSingle = (user, api, getDataFunc) => {
     const { teamMemberId } = user;
     const accessToken = localStorage.getItem("accessToken");
     const companyUserCode = localStorage.getItem("usercode");
@@ -241,49 +244,43 @@ class Util {
           },
         }
       )
-      .then((res) => console.log(res, "result"));
+      .then((res) => {
+        getDataFunc(1);
+      });
   };
 
   // This function is used to restore multiple past members/deleted members to current table
   restorePastMembers = (
     selectedIds,
-    data,
-    apiTo,
-    apiFrom,
-    getDataFunc,
-    getDataFunc2,
+    api,
+    // data,
+    // apiTo,
+    // apiFrom,
+    // getDataFunc,
+    func,
     setSelectedIds
   ) => {
     const confirm = window.confirm(
       `Are you sure you want to restore ${selectedIds.length} users?`
     );
     if (confirm) {
-      const filteredUsers = data.filter((user) =>
-        selectedIds.includes(user.id)
-      );
-      filteredUsers.forEach((user) => {
-        // Delete the user from the first API
-        axios
-          .delete(`${apiTo}/${user.id}`)
-          .then((response) => {
-            axios
-              .post(apiFrom, user)
-              .then((response) => {
-                // Handle success
-                getDataFunc();
-                getDataFunc2();
-                setSelectedIds([]);
-              })
-              .catch((error) => {
-                // Handle error
-              });
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      });
+      const accessToken = localStorage.getItem("accessToken");
+      const companyUserCode = localStorage.getItem("usercode");
+      axios
+        .post(
+          api,
+          { companyUserCode: companyUserCode, teamMemberIds: selectedIds },
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        )
+        .then((res) => {
+          func(1);
+          setSelectedIds([]);
+        });
     }
-    setSelectedIds([]);
   };
 
   // activeRatings = (api, id, getDataFunc, setClicked) => {
@@ -312,6 +309,50 @@ class Util {
   // };
 
   // ----------------- Team member real Ratings API---------------------
+
+  multipleRatingsDisable = (selectedIds, setSelectedIds, getCurrMembers) => {
+    const userCode = localStorage.getItem("usercode");
+    const accessToken = localStorage.getItem("accessToken");
+    axios
+      .post(
+        API.EDIT_TEAM_MEMBERS_RATINGS,
+        {
+          companyUserCode: userCode,
+          teamMemberIds: selectedIds,
+          enableRatings: false,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((res) => getCurrMembers(1));
+    setSelectedIds("");
+  };
+
+  multipleRatingsEnable = (selectedIds, setSelectedIds, getCurrMembers) => {
+    const userCode = localStorage.getItem("usercode");
+    const accessToken = localStorage.getItem("accessToken");
+    axios
+      .post(
+        API.EDIT_TEAM_MEMBERS_RATINGS,
+        {
+          companyUserCode: userCode,
+          teamMemberIds: selectedIds,
+          enableRatings: true,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        getCurrMembers(1);
+        setSelectedIds("");
+      });
+  };
 
   activeRatings = (user, getDataFunc) => {
     console.log(user, "active ratings");

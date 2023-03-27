@@ -45,6 +45,15 @@ const DataTable = ({
   // const data = datum;
   const navigate = useNavigate();
 
+  // Function to handle "select all" checkbox
+  const handleSelectAll = (e) => {
+    if (e.target.checked) {
+      setSelectedIds(data.map((row) => row.teamMemberId));
+    } else {
+      setSelectedIds([]);
+    }
+  };
+
   const gotoNew = (val) => {
     navigate(`/home/partners/detail/about`, { state: { data: val } });
   };
@@ -66,15 +75,8 @@ const DataTable = ({
                 <th className="checkbox-div">
                   <input
                     type="checkbox"
-                    // checked={selectedIds.includes(row.id)}
-                    onChange={(e) =>
-                      myUtil.handleCheckboxChange(
-                        selectedIds,
-                        row,
-                        setSelectedIds,
-                        setRatingUser
-                      )
-                    }
+                    checked={selectedIds.length === data.length}
+                    onChange={handleSelectAll}
                   />
                 </th>
                 {columns.map((col, idx) => (
@@ -108,30 +110,8 @@ const DataTable = ({
                     </td>
                     {columns.map((col, id) => (
                       <>
-                        {/* <td
-                        key={id}
-                        onClick={() => (partners ? gotoNew(row) : null)}
-                      >
-                        <>
-                          {row[col.value] == "" ? (
-                            "--"
-                          ) : (
-                            <>
-                              {row[col.value].length <= 10
-                                ? row[col.value]
-                                : row[col.value].slice(0, 10) + "..."}
-                            </>
-                          )}
-                        </>
-                      </td> */}
+                        
                         <td key={id}>
-                          {/* {col.value.includes(".")
-                          ? col.value
-                              .split(".")
-                              .reduce((obj, key) => obj[key], row)
-                          : Array.isArray(row[col.value])
-                          ? row[col.value].map((el) => el.value).join(", ")
-                          : row[col.value]} */}
                           {col.value.includes(".") ? (
                             col.value
                               .split(".")
@@ -155,11 +135,6 @@ const DataTable = ({
                               src={rEnable}
                               onClick={(e) => {
                                 e.stopPropagation();
-                                // myUtil.deactiveRatings(
-                                //   api,
-                                //   row.id,
-                                //   getDataFunc
-                                // );
                                 myUtil.deactiveRatings(row, getDataFunc);
                               }}
                             />
@@ -170,7 +145,6 @@ const DataTable = ({
                               src={rDisable}
                               onClick={(e) => {
                                 e.stopPropagation();
-                                // myUtil.activeRatings(api, row.id, getDataFunc);
                                 myUtil.activeRatings(row, getDataFunc);
                               }}
                             />
@@ -182,6 +156,7 @@ const DataTable = ({
                             editData={row}
                             api={api}
                             getDataFunc={getDataFunc}
+                            isCurrent={ratings}
                           />
                         )}
                         {partners && (
@@ -199,12 +174,9 @@ const DataTable = ({
                             onClick={() =>
                               myUtil.restoreSingle(
                                 row,
-                                restoreApi
-                                // api,
-                                // api2,
-                                // getDataFunc,
-                                // getDataFunc2,
-                                // setSelectedIds
+                                restoreApi,
+                                getDataFunc
+                                
                               )
                             }
                           />
@@ -214,21 +186,8 @@ const DataTable = ({
                         <span className="icon-desc">
                           <img
                             src={deleteBtn}
-                            // onClick={
-                            //   () =>
-                            //     myUtil.deleteSingle(
-                            //       row,
-                            //       api,
-                            //       api2,
-                            //       getDataFunc,
-                            //       getDataFunc2,
-                            //       setSelectedIds
-                            //     )
-                            // }
                             onClick={() => {
-                              myUtil.teamMemberSingleDelete(row, () => {
-                                console.log("api success");
-                              });
+                              myUtil.teamMemberSingleDelete(row, getDataFunc);
                             }}
                           />
                         </span>

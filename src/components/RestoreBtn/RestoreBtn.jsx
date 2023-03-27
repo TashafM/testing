@@ -9,8 +9,9 @@ const RestoreBtn = ({
   apiTo,
   apiFrom,
   func1,
-  func2,
+  func,
   setSelectedIds,
+  api,
 }) => {
   const myUtil = new Util()
   return (
@@ -20,12 +21,14 @@ const RestoreBtn = ({
         onClick={() =>
           myUtil.restorePastMembers(
             selectedIds,
-            data,
-            apiTo,
-            apiFrom,
-            func1,
-            func2,
-            setSelectedIds
+            // data,
+            // apiTo,
+            // apiFrom,
+            // func1,
+            api,
+            func,
+            setSelectedIds,
+           
           )
         }
       >

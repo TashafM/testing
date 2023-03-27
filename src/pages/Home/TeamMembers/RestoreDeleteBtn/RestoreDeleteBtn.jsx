@@ -9,6 +9,8 @@ import { useLocation } from "react-router-dom";
 import rDisable from "../../../../assets/images/rDisable.svg";
 import rEnable from "../../../../assets/images/rEnable.svg";
 import "./RestoreDeleteBtn.scss";
+import { API } from "../../../../helper/API";
+import Util from "../../../../components/UtilityFunctions/UtilityFunctions";
 
 const RestoreDeleteBtn = ({
   selectedIds,
@@ -26,6 +28,8 @@ const RestoreDeleteBtn = ({
   const currentPath = "/home/team-members/current-members";
   const pastPath = "/home/team-members/past-members";
 
+  const global = new Util();
+
   return (
     <>
       {/* <UnderLineTabs tabs={teamMembersTab} /> */}
@@ -39,21 +43,38 @@ const RestoreDeleteBtn = ({
               {location.pathname == pastPath ? (
                 <RestoreBtn
                   selectedIds={selectedIds}
+                  api={API.RESTORE_TEAM_MEMBERS}
                   data={pastMemberData}
                   apiTo={pastMemberApi}
                   apiFrom={currMemberApi}
-                  func1={getCurrMembers}
-                  func2={getPastMembers}
+                  // func1={getCurrMembers}
+                  func={getPastMembers}
                   setSelectedIds={setSelectedIds}
                 />
               ) : (
                 <>
                   <div className="ratings-div">
                     <span className="rating-icon">
-                      <img src={rDisable} alt="" />
+                      <img
+                        src={rDisable}
+                        alt=""
+                        onClick={()=>global.multipleRatingsDisable(
+                          selectedIds,
+                          setSelectedIds,
+                          getCurrMembers
+                        )}
+                      />
                     </span>
                     <span className="rating-icon">
-                      <img src={rEnable} alt="" />
+                      <img
+                        src={rEnable}
+                        alt=""
+                        onClick={()=>global.multipleRatingsEnable(
+                          selectedIds,
+                          setSelectedIds,
+                          getCurrMembers
+                        )}
+                      />
                     </span>
                   </div>
                   <DeleteButton
@@ -62,7 +83,7 @@ const RestoreDeleteBtn = ({
                     apiTo={currMemberApi}
                     apiFrom={pastMemberApi}
                     func1={getCurrMembers}
-                    func2={getPastMembers}
+                    // func2={getPastMembers}
                     setSelectedIds={setSelectedIds}
                   />
                 </>
