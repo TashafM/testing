@@ -8,12 +8,13 @@ import "./styles.scss";
 
 function CardContacts({ contactUs, onClick, type, title, children }) {
   return (
-    <div className="card-cont" onClick={onClick}>
+    <div className="card-cont">
       <CardHead
         title={title}
         type={type}
         action="Edit Contacts"
         icon={contact}
+        onClick={onClick}
         data={contactUs}
       />
       <div className="d-flex email-cont">
