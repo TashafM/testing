@@ -6,7 +6,7 @@ import CardHead from "./CardHead";
 import "../Information.scss";
 import "./styles.scss";
 
-function CardContacts({ contactUs, onClick, type, title, children }) {
+function CardContacts({ contactUs, length, onClick, type, title, children }) {
   return (
     <div className="card-cont">
       <CardHead
@@ -19,7 +19,14 @@ function CardContacts({ contactUs, onClick, type, title, children }) {
       />
       <div className="d-flex email-cont">
         <img className="" height={25} src={email} alt="email-icon" />
-        <span className="email">{contactUs?.email ?? ""}</span>
+        <div className="d-flex justify-content-between align-items-center flex-grow-1">
+          <span className="email">{contactUs?.email ?? ""}</span>
+          {length > 1 ? (
+            <div className="d-flex contacts-count align-items-center justify-content-center">
+              <span className="email count-text-color m-0">+{length - 1}</span>
+            </div>
+          ) : null}
+        </div>
       </div>
       <div className="d-flex">
         <img height={25} src={phone} alt="phone-icon" />
