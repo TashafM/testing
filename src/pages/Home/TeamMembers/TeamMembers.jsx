@@ -16,8 +16,11 @@ import RestoreDeleteBtn from "./RestoreDeleteBtn/RestoreDeleteBtn";
 import PastMembers from "./PastMembers/PastMembers";
 import { API } from "../../../helper/API";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useContext } from "react";
+import { Button } from "react-bootstrap";
 
-const TeamMembers = () => {
+const TeamMembers = (props) => {
+
   const location = useLocation();
   //-----------------
   // const [currentData, setCurrentData] = useState([]);
@@ -25,7 +28,6 @@ const TeamMembers = () => {
   const [currMemberData, setCurrMemberData] = useState([]);
   const [pastMemberData, setPastMemberData] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const currMemberApi = `https://63f368a0864fb1d60015fd5e.mockapi.io/new`;
   const pastMemberApi =
     "https://63ecd449be929df00cb3017e.mockapi.io/pastmembers";
@@ -285,6 +287,7 @@ const TeamMembers = () => {
             />
             // </InfiniteScroll>
           )}
+
         </div>
       </div>
     </>

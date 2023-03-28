@@ -1,6 +1,6 @@
 /*eslint-disable */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import add from "../../assets/images/add.svg";
 import "./AddMember.scss";
 import {
@@ -19,12 +19,14 @@ import DatePickerComp from "../DatePickerComp/DatePickerComp";
 import Util from "../UtilityFunctions/UtilityFunctions";
 import Multiselect from "multiselect-react-dropdown";
 import PhoneNumber from "../Input/PhoneNumber";
+import { GlobalContext } from "../../App";
 
 const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
+  const { loading, setLoading, setMsg, msg } = useContext(GlobalContext);
   const [show, setShow] = useState(false);
   const [selectedDate, setSelectedDate] = useState(["", "", ""]);
   const [proDate, setproDate] = useState(["", "", ""]);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [showRatings, setshowRatings] = useState(false);
   const [designationList, setDesignationList] = useState([]);
   const [designation, setDesignation] = useState([]);
@@ -106,6 +108,10 @@ const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
       return newValues;
     });
   };
+
+  /* VALIDATION AND FUNCTION FOR DATE */
+
+  /*--------------------------------------------- */
   const rawStartDate = selectedDate.join("/");
   // const [day, month, year] = rawStartDate.split('/');
   // const startDate = `${day.padStart(2, '0')}/${month.padStart(2, '0')}/${year}`;
@@ -124,21 +130,25 @@ const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
     return formattedDateStr;
   }
 
-  const [phone, setPhone] = useState();
-  const [displayPhone, setDisplayPhone] = useState();
+  const [phone, setPhone] = useState("");
+  const [displayPhone, setDisplayPhone] = useState("");
 
-  const handleNumber1 = (e) => {
-    setPhone(e);
+  const handlePhoneInputChange = (e) => {
+    const regex = /^[0-9+\-()]*$/; // Regex pattern to match allowed characters
+    const input = e.target.value; // Get input value
+    if (regex.test(input)) {
+      // Validate input against regex
+      if (e.target.name === "phone") {
+        setPhone(input); // Set input as phone state
+      } else if (e.target.name === "displayPhone") {
+        setDisplayPhone(input); // Set input as displayPhone state
+      }
+    }
   };
-  const handleNumber2 = (e) => {
-    setDisplayPhone(e);
-  };
-  // const phone = (e) => {
-  //   e.preventDefault()
-  //   console.log(num1, num2)
-  // }
 
   function handleSubmit(event) {
+    setLoading(true);
+    setMsg("Adding a team member...")
     event.preventDefault();
     const companyUserCode = localStorage.getItem("usercode");
     const accessToken = localStorage.getItem("accessToken");
@@ -167,17 +177,19 @@ const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
       )
       .then((res) => {
         console.log(res, "successfully");
-        getCurrMembers(1);
+        getCurrMembers(1).then((res) => setLoading(false));
       })
-      .catch((err) => console.log(err, "error"));
+      .catch((err) => {
+        console.log(err, "error");
+        setLoading(false);
+      });
     handleClose();
     setSelectedDate(["", "", ""]);
     setproDate(["", "", ""]);
     setshowRatings(false);
     setDepartment([]);
     setDesignation([]);
-    setPhone(''),
-    setDisplayPhone('')
+    setPhone(""), setDisplayPhone("");
   }
 
   return (
@@ -245,30 +257,29 @@ const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
                 This email will reflect on your employee’s card.
               </div>
 
-              {/* <FormGroup className="input-div">
+              <FormGroup className="input-div">
                 <Form.Label>Personal Phone No *</Form.Label>
                 <Form.Control
                   type="text"
                   name="phone"
-                  onChange={() => Util.handleChange(event, setFormValues)}
+                  onChange={handlePhoneInputChange}
+                  value={phone}
                   required
                 />
-              </FormGroup> */}
-              <PhoneNumber
-                label="Personal Phone No *"
-                placeholder={"Enter Mobile No."}
-                onChange={handleNumber1}
-                value={phone}
-                required={true}
-              />
-              <PhoneNumber
-                label="Display Phone No *"
-                placeholder={"Enter Mobile No."}
-                onChange={handleNumber2}
-                value={displayPhone}
-                required={true}
-              />
-              <div className="info-text-2">
+              </FormGroup>
+
+              <FormGroup className="input-div">
+                <Form.Label>Display Phone No *</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="displayPhone"
+                  onChange={handlePhoneInputChange}
+                  value={displayPhone}
+                  required
+                />
+              </FormGroup>
+
+              <div className="info-text">
                 This phone number will reflect on your employee’s card.{" "}
               </div>
 

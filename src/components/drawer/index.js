@@ -22,8 +22,15 @@ import BtnIconOnly from "../Button/BtnIconOnly";
 import edit from "../../assets/images/edit-icon.png";
 import OtherInfoDetails from "../../pages/About/Information/Component/OtherInfoDetails";
 import AddBrand from "../../pages/About/Brand/Component/AddBrand";
+import { useContext } from "react";
+import { GlobalContext } from "../../App";
+import { useState } from "react";
 
 export default function RightDrawer() {
+  const { loading, setLoading, setMsg, msg, alert, setAlert } =
+    useContext(GlobalContext);
+  // const [showDiv, setShowDiv] = useState(false);
+
   const { openDrawer, setOpenDrawer } = useContextProvider();
 
   console.log(openDrawer);
@@ -35,80 +42,92 @@ export default function RightDrawer() {
   };
 
   return (
-    <div>
-      <React.Fragment>
-        <SwipeableDrawer
-          anchor={"right"}
-          // variant="persistent"
-          open={openDrawer.open}
-          // ModalProps={{
-          //   keepMounted: false,
-          // }}
-          // disableBackdropTransition={true}
-          onClose={() => {
-            setOpenDrawer({ ...openDrawer, open: false, type: "" });
-          }}
-          onOpen={() => {
-            setOpenDrawer({ ...openDrawer, open: true });
-          }}
-        >
-          <Box style={{ width: "536px" }} role="presentation">
-            <List>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon
-                    onClick={() => {
-                      toggleDrawer();
-                    }}
-                  >
-                    <img src={back} alt="back icon" />
-                  </ListItemIcon>
-                  <ListItemText className="title" primary={openDrawer.type} />
-                  {openDrawer.type === "Other Info" && (
-                    <BtnIconOnly
-                      icon={edit}
+    <div className={loading ? "overlay-div" : ""}>
+      {loading ? (
+        <div className="msg-div">
+          <span className="spinner"></span>
+          <span>{msg}</span>
+        </div>
+      ) : (
+        <React.Fragment>
+          <SwipeableDrawer
+            anchor={"right"}
+            // variant="persistent"
+            open={openDrawer.open}
+            // ModalProps={{
+            //   keepMounted: false,
+            // }}
+            // disableBackdropTransition={true}
+            onClose={() => {
+              setOpenDrawer({ ...openDrawer, open: false, type: "" });
+            }}
+            onOpen={() => {
+              setOpenDrawer({ ...openDrawer, open: true });
+            }}
+          >
+            <Box style={{ width: "536px" }} role="presentation">
+              <List>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon
                       onClick={() => {
-                        setOpenDrawer({
-                          open: true,
-                          type: "Other Info Edit",
-                        });
+                        toggleDrawer();
                       }}
-                    />
-                  )}
-                </ListItemButton>
-              </ListItem>
-            </List>
-            <Divider />
-            <div className="side-container">
-              {openDrawer.type === "Edit" ? (
-                <EditAbout />
-              ) : openDrawer.type === "Social Media & Links" ? (
-                <EditSocialMedia />
-              ) : openDrawer.type === "Contacts" ? (
-                <EditContactsList />
-              ) : openDrawer.type === "Edit Contact" ||
-                openDrawer.type === "Add Contact" ? (
-                <EditContacts />
-              ) : openDrawer.type === "Address" ? (
-                <EditAddress />
-              ) : openDrawer.type === "Hours of operations" ? (
-                <EditOperations />
-              ) : openDrawer.type === "Statement" ? (
-                <EditStatement />
-              ) : openDrawer.type === "Other Info" ? (
-                <EditOtherInfo type={openDrawer.type} />
-              ) : openDrawer.type === "Other Info Edit" ? (
-                <OtherInfoDetails />
-              ) : openDrawer.type === "Add Brands" ||
-                openDrawer.type === "Edit Brands" ? (
-                <AddBrand />
-              ) : (
-                <div>other cont</div>
-              )}
-            </div>
-          </Box>
-        </SwipeableDrawer>
-      </React.Fragment>
+                    >
+                      <img src={back} alt="back icon" />
+                    </ListItemIcon>
+                    <ListItemText className="title" primary={openDrawer.type} />
+                    {openDrawer.type === "Other Info" && (
+                      <BtnIconOnly
+                        icon={edit}
+                        onClick={() => {
+                          setOpenDrawer({
+                            open: true,
+                            type: "Other Info Edit",
+                          });
+                        }}
+                      />
+                    )}
+                  </ListItemButton>
+                </ListItem>
+              </List>
+              <Divider />
+              <div className="side-container">
+                {openDrawer.type === "Edit" ? (
+                  <EditAbout />
+                ) : openDrawer.type === "Social Media & Links" ? (
+                  <EditSocialMedia />
+                ) : openDrawer.type === "Contacts" ? (
+                  <EditContactsList />
+                ) : openDrawer.type === "Edit Contact" ||
+                  openDrawer.type === "Add Contact" ? (
+                  <EditContacts />
+                ) : openDrawer.type === "Address" ? (
+                  <EditAddress />
+                ) : openDrawer.type === "Hours of operations" ? (
+                  <EditOperations />
+                ) : openDrawer.type === "Statement" ? (
+                  <EditStatement />
+                ) : openDrawer.type === "Other Info" ? (
+                  <EditOtherInfo type={openDrawer.type} />
+                ) : openDrawer.type === "Other Info Edit" ? (
+                  <OtherInfoDetails />
+                ) : openDrawer.type === "Add Brands" ||
+                  openDrawer.type === "Edit Brands" ? (
+                  <AddBrand />
+                ) : (
+                  <div>other cont</div>
+                )}
+              </div>
+            </Box>
+          </SwipeableDrawer>
+          {/* {alert && (
+            <span className="tashaf">
+              You have successfully added a new team member{" "}
+            </span>
+          )} */}
+        </React.Fragment>
+      )}
     </div>
   );
 }

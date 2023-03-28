@@ -64,6 +64,42 @@
       }
     }
   }
+ 
+
+  //************************************************************
+  /* Hide the default checkbox */
+  input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: none;
+  }
+
+  /* Create a custom checkbox icon */
+  input[type="checkbox"]::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #e4e4e4;
+    border-radius: 3px;
+    background-color: white;
+  }
+
+  /* Style the custom checkbox icon when it is checked */
+  input[type="checkbox"]:checked::before {
+    content: "\2714"; /* Unicode checkmark symbol */
+    text-align: center;
+    font-size: 13px;
+    line-height: 15px;
+    background-color: #e72d38;
+    border-radius: 3px;
+    border: none;
+    color: white;
+  }
+
+  //************************************************************
 
   .navigator {
     display: flex;
@@ -84,7 +120,7 @@
     position: sticky;
     // position: -webkit-sticky; /* for safari */
     right: 0;
-    background-color: #ff1313;
+    background-color: #be212a;
     box-shadow: -5px 0px 20px -5px rgb(0 0 0 / 20%) !important;
   }
 }
@@ -102,8 +138,8 @@
       }
     }
 
-    .action-div{
-      .icon-desc{
+    .action-div {
+      .icon-desc {
         margin-right: 10px !important;
       }
     }
@@ -113,7 +149,6 @@
 @media only screen and (max-width: 1440px) {
   .dataTable {
     .table-container {
-      
       .tr-body {
         td {
           font-size: 14px;
@@ -151,8 +186,8 @@
 @media only screen and (max-width: 992px) {
   .dataTable {
     .table-container {
-      .tr-head{
-        th{
+      .tr-head {
+        th {
           font-size: 12px !important;
         }
       }
@@ -170,7 +205,6 @@
     // }
   }
 }
-
 
 @media (min-height: 1100px) {
   .dataTable {

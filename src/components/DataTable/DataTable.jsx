@@ -16,6 +16,8 @@ import UpdatePartners from "../../pages/Home/Partners/UpdatePartners/UpdatePartn
 import ScrollBtn from "../ScrollBtn/ScrollBtn";
 import { useNavigate } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { GlobalContext } from "../../App";
+import { useContext } from "react";
 
 const DataTable = ({
   columns,
@@ -38,6 +40,8 @@ const DataTable = ({
   hasMore,
   restoreApi,
 }) => {
+  const { loading, setLoading, setMsg, msg, setAlert } =
+    useContext(GlobalContext);
   const myRef = useRef(null);
   const [scrollX, setScrollX] = useState(0);
   const data = datum.sort((a, b) => b.id - a.id);
@@ -110,7 +114,6 @@ const DataTable = ({
                     </td>
                     {columns.map((col, id) => (
                       <>
-                        
                         <td key={id}>
                           {col.value.includes(".") ? (
                             col.value
@@ -135,7 +138,12 @@ const DataTable = ({
                               src={rEnable}
                               onClick={(e) => {
                                 e.stopPropagation();
-                                myUtil.deactiveRatings(row, getDataFunc);
+                                myUtil.deactiveRatings(
+                                  row,
+                                  getDataFunc,
+                                  setLoading,
+                                  setMsg
+                                );
                               }}
                             />
                           </span>
@@ -145,7 +153,12 @@ const DataTable = ({
                               src={rDisable}
                               onClick={(e) => {
                                 e.stopPropagation();
-                                myUtil.activeRatings(row, getDataFunc);
+                                myUtil.activeRatings(
+                                  row,
+                                  getDataFunc,
+                                  setLoading,
+                                  setMsg
+                                );
                               }}
                             />
                           </span>
@@ -172,12 +185,7 @@ const DataTable = ({
                           <img
                             src={restoreBtn}
                             onClick={() =>
-                              myUtil.restoreSingle(
-                                row,
-                                restoreApi,
-                                getDataFunc
-                                
-                              )
+                              myUtil.restoreSingle(row, restoreApi, getDataFunc, setLoading, setMsg)
                             }
                           />
                         </span>
@@ -187,7 +195,13 @@ const DataTable = ({
                           <img
                             src={deleteBtn}
                             onClick={() => {
-                              myUtil.teamMemberSingleDelete(row, getDataFunc);
+                              myUtil.teamMemberSingleDelete(
+                                row,
+                                getDataFunc,
+                                setLoading,
+                                setMsg,
+                                setAlert
+                              );
                             }}
                           />
                         </span>

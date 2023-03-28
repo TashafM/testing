@@ -33,32 +33,34 @@ import PastMembers from "../pages/Home/TeamMembers/PastMembers/PastMembers";
 import CurrentPartners from "../pages/Home/Partners/CurrentPartners/CurrentPartners";
 import PastPartners from "../pages/Home/Partners/PastPartners/PastPartners";
 import Dummy from "../pages/Home/Dummy/Dummy";
+import SelectPage from "../pages/Login/SelectPage/SelectPage";
 // import About from "../pages/About/";
 // import Contact from "./Contact";
 
 const Routing = () => (
   <BrowserRouter>
     <Routes>
+      <Route path="/select-account-type" element={<SelectPage />} />
       <Route path="/home/" element={<Home />}>
         <Route path="team-members" element={<TeamMembers />}>
-          <Route path="current-members" element={<CurrentMembers/>}/>
-          <Route path="past-members" element={<PastMembers/>}/>
+          <Route path="current-members" element={<CurrentMembers />} />
+          <Route path="past-members" element={<PastMembers />} />
         </Route>
         <Route path="dashboard" element={<Dashboard />} />
-        <Route path='dummy' element={<Dummy/>}/>
+        <Route path="dummy" element={<Dummy />} />
         <Route path="partners/detail/" element={<PartnerDetails />}>
           <Route path="about" element={<PartnerAbout />} />
           <Route path="address" element={<PartnerAddress />} />
           <Route path="payment-details" element={<PartnerPaymentDetails />} />
           <Route path="catalog" element={<PartnerCatalog />} />
-          <Route path="past-orders" element={<PastOrder/>} />
+          <Route path="past-orders" element={<PastOrder />} />
         </Route>
         <Route path="partners" element={<Partners />}>
-          <Route path="current-partners" element={<CurrentPartners/>}/>
-          <Route path="past-partners" element={<PastPartners/>}/>
+          <Route path="current-partners" element={<CurrentPartners />} />
+          <Route path="past-partners" element={<PastPartners />} />
         </Route>
-        <Route path="orders" element={<Orders />}/>
-        <Route path='order/details' element={<OrderDetails/>}/> 
+        <Route path="orders" element={<Orders />} />
+        <Route path="order/details" element={<OrderDetails />} />
         <Route path="product-listings" element={<ProductListings />} />
         <Route path="awards-honours" element={<AwardsHonours />} />
         <Route path="about" element={<About />}>

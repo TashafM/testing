@@ -1,7 +1,9 @@
 import axios from "axios";
 import Multiselect from "multiselect-react-dropdown";
 import React, { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Button, Form, FormGroup } from "react-bootstrap";
+import { GlobalContext } from "../../../App";
 import DatePickerComp from "../../DatePickerComp/DatePickerComp";
 import Util from "../../UtilityFunctions/UtilityFunctions";
 
@@ -9,6 +11,7 @@ const UpdateFields = ({ editData, handleClose }) => {
   const [editValue, setEditValue] = useState(editData);
   const [designationList, setDesignationList] = useState([]);
   const [departmentList, setDepartmentList] = useState([]);
+  const { loading, setLoading, msg, setMsg } = useContext(GlobalContext);
 
   const getDesignations = () => {
     const accessToken = localStorage.getItem("accessToken");
@@ -125,24 +128,17 @@ const UpdateFields = ({ editData, handleClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(editValue, "jjjjjjjjjj");
-    // editValue.startDate = xyz;
-    // setStartDate(editValue.startDate)
-
-    // editValue.probationDate = probation;
-    // setProbationDate(editValue.probationDate)
-
-    // console.log(editValue,'tashaf')
-
-    //-----------------------------------------
+    setLoading(true);
+    setMsg("Updating the current team member");
     const accessToken = localStorage.getItem("accessToken");
 
-    const { email, phone, teamMemberUserCode, teamMemberStatus, ...abcd  } = editValue;
+    const { email, phone, teamMemberUserCode, teamMemberStatus, ...abcd } =
+      editValue;
     axios
       .patch(
         "https://dev.elred.io/portalEditCompanyTeamMemberDetails",
         {
-          ...abcd
+          ...abcd,
         },
         {
           headers: {
@@ -150,9 +146,9 @@ const UpdateFields = ({ editData, handleClose }) => {
           },
         }
       )
-      .then((res) =>
-        handleClose()
-      );
+      .then((res) => setLoading(false))
+      .catch((err) => setLoading(false));
+    handleClose();
   };
 
   useEffect(() => {

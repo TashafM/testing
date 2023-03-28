@@ -1,14 +1,14 @@
 /* eslint-disable*/
 import React from "react";
 import LoginNav from "../../components/LoginNav/LoginNav";
-import f1 from "../../assets/images/frame_1.png";
-import f2 from "../../assets/images/frame_2.png";
-import f3 from "../../assets/images/frame_3.png";
-import f4 from "../../assets/images/frame_4.png";
 import LoginOtp from "../../components/LoginNav/LoginOtp/LoginOtp";
+import MobileNotSupported from "../../components/MobileNotSupported/MobileNotSupported";
+import LoginImages from "./LoginImages/LoginImages";
+import './Login.scss'
 
 const Login = () => {
   return (
+    <>
     <div className="login">
       <LoginNav />
       <div className="row">
@@ -24,24 +24,13 @@ const Login = () => {
           </div>
           <LoginOtp/>
         </div>
-        <div className="col-md-5 loginNav-right">
-          <div className="row">
-            <div className="col-md-6 image-box">
-              <img src={f1} alt="afa" />
-            </div>
-            <div className="col-md-6 image-box">
-              <img src={f2} alt="afa" />
-            </div>
-            <div className="col-md-6 image-box">
-              <img src={f3} alt="afa" />
-            </div>
-            <div className="col-md-6 image-box">
-              <img src={f4} alt="afa" />
-            </div>
-          </div>
-        </div>
+        <LoginImages/>
       </div>
     </div>
+    <div className="login-mobile-not-supported">
+      <MobileNotSupported/>
+    </div>
+    </>
   );
 };
 
