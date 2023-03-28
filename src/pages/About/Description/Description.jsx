@@ -10,7 +10,7 @@ function Description() {
   const { openDrawer, setOpenDrawer } = useContextProvider();
   return (
     <div className="description-wrapper">
-      <p className="title mb-0">About Us</p>
+      <p className="title">About Us</p>
       <div className=" row-cont">
         <img className="comp-logo" src={circularLogo} alt="company logo" />
         <div className="title-cont">

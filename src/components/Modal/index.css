@@ -13,9 +13,13 @@
   height: 550px;
   overflow: auto;
 }
+.modal-title {
+  font-size: 18px;
+  font-weight: 600;
+}
 
 .crossCloseButton {
-  height: 20px;
-  width: 25px;
+  height: 22px;
+  width: 30px;
   padding-left: 10px;
 }

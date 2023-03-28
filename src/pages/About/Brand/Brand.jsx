@@ -46,7 +46,7 @@ function Brand() {
       <div className="row">
         {data.map((item, index) => {
           return (
-            <div className="col-3">
+            <div className="col-4 col-lg-3 ">
               <CardBrand
                 index={index}
                 onDelete={onDeleteBrand}

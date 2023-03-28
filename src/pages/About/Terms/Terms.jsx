@@ -68,6 +68,7 @@ function Terms() {
             data={termCondition}
             editSaveCallback={editSaveCallback}
             type={"Term & Condition"}
+            btntitle="Add more topics"
             emptyadta={{ title: "", content: "" }}
           >
             {/* <EditFAQ close={() => setShowModal(false)} /> */}
@@ -90,6 +91,7 @@ function Terms() {
           data={termCondition}
           editSaveCallback={editSaveCallback}
           type={"Term & Condition"}
+          btntitle="Add more topics"
           emptyadta={{ title: "", content: "" }}
         >
           {/* <EditTerm close={() => setShowModal(false)} /> */}
