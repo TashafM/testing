@@ -1,9 +1,9 @@
 import { API } from "../../helper/API";
 import axios from "../../helper/axios";
-
 // import axios from "axios";
 
 class Util {
+  
   static handleMultiDelete(val) {
     console.log(val);
   }
@@ -67,6 +67,7 @@ class Util {
     const confirm = window.confirm(
       `Are you sure you want to delete ${displayFirstName}?`
     );
+
     if (confirm) {
       axios
         .post(
@@ -395,6 +396,10 @@ class Util {
       )
       .then((res) => getDataFunc());
   };
+
+  overlay  = () => {
+    
+  }
   // ---------------------------------------------------------------
 
   static handleSearch = (event, setSearchTerm, items, setFilteredItems) => {

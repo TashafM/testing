@@ -1,0 +1,129 @@
+.logo-select-page {
+  img {
+    width: 150px;
+    margin-top: 35px;
+    margin-left: 100px;
+  }
+}
+
+.absolute-div-selectpage {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  .selectpage-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    .account-div {
+      font-size: 25px;
+      font-weight: 500;
+      color: #000;
+      width: 30%;
+      text-align: center;
+      border-bottom: 1px solid #a6a6a6;
+      padding-bottom: 25px;
+    }
+    .account-types {
+      width: 30%;
+      border-bottom: 1px solid #a6a6a6;
+      .individual-account {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 30px 0;
+
+        .items-div {
+          display: flex;
+          align-items: center;
+
+          .logo-div {
+            padding: 10px;
+            border: 1px solid #eaeaea;
+            border-radius: 50%;
+
+            img {
+              width: 26px;
+            }
+          }
+          .account-title {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 22px;
+            margin-left: 20px;
+            margin-right: 40px;
+            color: #000;
+          }
+        }
+
+        .view-btn {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          .name {
+            color: #a6a6a6;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+          }
+        }
+      }
+    }
+
+    .footer-text {
+      margin-top: 30px;
+      width: 25%;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 400;
+      color: #3d3d3d;
+      line-height: 22px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1600px) {
+  .absolute-div-selectpage {
+    .selectpage-center {
+      .account-div {
+        font-size: 22px;
+        width: 30%;
+      }
+      .account-types {
+        width: 30%;
+        .individual-account {
+          margin: 25px 0;
+
+          .items-div {
+            .logo-div {
+              padding: 7px;
+              img {
+                width: 22px;
+              }
+            }
+            .account-title {
+              font-size: 14px;
+              line-height: 20px;
+            }
+          }
+
+          .view-btn {
+            .name {
+              font-size: 14px;
+              line-height: 18px;
+            }
+          }
+        }
+      }
+
+      .footer-text {
+        margin-top: 20px;
+        width: 25%;
+        font-size: 12px;
+        line-height: 18px;
+      }
+    }
+  }
+}
