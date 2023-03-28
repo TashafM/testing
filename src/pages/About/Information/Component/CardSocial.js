@@ -20,7 +20,7 @@ function CardSocial({ socialMediaDetails, onClick }) {
       <div className="card-cont" onClick={onClick}>
         <CardHead onClick={onClick} title="Social Media & Links" icon={links} />
 
-        <div className="d-flex justify-content-around flex-wrap">
+        <div className="d-flex justify-content-around flex-wrap mt-3">
           {socialMediaDetails.map((item, index) => {
             if (index < 4) {
               return (

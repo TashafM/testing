@@ -21,7 +21,7 @@ function CardContacts({ contactUs, onClick, type, title, children }) {
         <span className="email">{contactUs?.email ?? ""}</span>
       </div>
       <div className="d-flex">
-        <img src={phone} alt="phone-icon" />
+        <img height={25} src={phone} alt="phone-icon" />
         <span className="email phone">{contactUs?.contact ?? ""}</span>
       </div>
       {children}
