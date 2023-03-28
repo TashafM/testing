@@ -1,4 +1,6 @@
 import React from "react";
+import { useContext } from "react";
+import { GlobalContext } from "../../App";
 import restore from "../../assets/images/restore.svg";
 import Util from "../UtilityFunctions/UtilityFunctions";
 import "./RestoreBtn.scss";
@@ -14,6 +16,7 @@ const RestoreBtn = ({
   api,
 }) => {
   const myUtil = new Util()
+  const {setLoading, setMsg} = useContext(GlobalContext)
   return (
     <>
       <div
@@ -28,6 +31,8 @@ const RestoreBtn = ({
             api,
             func,
             setSelectedIds,
+            setLoading,
+            setMsg,
            
           )
         }

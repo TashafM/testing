@@ -13,10 +13,22 @@ export const GlobalContext = createContext();
 
 function App() {
   const [loading, setLoading] = useState(false);
-  const [msg, setMsg] = useState('')
+  const [msg, setMsg] = useState("");
+  // const [alert, setAlert] = useState(false);
+  
+
   return (
     <ContextProvider>
-      <GlobalContext.Provider value={{ loading, setLoading, msg, setMsg }}>
+      <GlobalContext.Provider
+        value={{
+          loading,
+          setLoading,
+          msg,
+          setMsg,
+          // alert,
+          // setAlert,
+        }}
+      >
         <RightDrawer />
         <Routing />
       </GlobalContext.Provider>

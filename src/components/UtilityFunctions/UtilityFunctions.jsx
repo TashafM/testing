@@ -3,7 +3,6 @@ import axios from "../../helper/axios";
 // import axios from "axios";
 
 class Util {
-  
   static handleMultiDelete(val) {
     console.log(val);
   }
@@ -59,7 +58,15 @@ class Util {
   // };
 
   // ------------------ DELETE SINGLE FROM TEAM MEMBER REAL API ------------------------------
-  teamMemberSingleDelete = (user, getDataFunc) => {
+  teamMemberSingleDelete = (
+    user,
+    getDataFunc,
+    setLoading,
+    setMsg,
+    setAlert
+  ) => {
+    setLoading(true);
+    setMsg(`Deleting ${user.displayFirstName} from current team members`);
     const { teamMemberId, displayFirstName } = user;
     const companyUserCode = localStorage.getItem("usercode");
     const accessToken = localStorage.getItem("accessToken");
@@ -80,8 +87,13 @@ class Util {
           }
         )
         .then((res) => {
-          getDataFunc(1);
+          getDataFunc(1).then((res) => {
+            setLoading(false);
+          });
           // onUpdate(res);
+        })
+        .catch((err) => {
+          setLoading(false);
         });
     }
     return false;
@@ -150,7 +162,7 @@ class Util {
       axios
         .post(
           API.DELETE_TEAM_MEMBERS,
-          { companyUserCode: companyUserCode, teamMemberIds: selectedIds},
+          { companyUserCode: companyUserCode, teamMemberIds: selectedIds },
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -231,7 +243,9 @@ class Util {
   //   }
   // };
 
-  restoreSingle = (user, api, getDataFunc) => {
+  restoreSingle = (user, api, getDataFunc, setLoading, setMsg) => {
+    setLoading(true);
+    setMsg(`Restoring ${user.displayFirstName} `)
     const { teamMemberId } = user;
     const accessToken = localStorage.getItem("accessToken");
     const companyUserCode = localStorage.getItem("usercode");
@@ -247,20 +261,23 @@ class Util {
       )
       .then((res) => {
         getDataFunc(1);
-      });
+        setLoading(false)
+      })
+      .catch((err) => {
+        setLoading(false)
+      })
   };
 
   // This function is used to restore multiple past members/deleted members to current table
   restorePastMembers = (
     selectedIds,
     api,
-    // data,
-    // apiTo,
-    // apiFrom,
-    // getDataFunc,
     func,
-    setSelectedIds
+    setSelectedIds,
+    setLoading, setMsg
   ) => {
+    setLoading(true);
+    setMsg(`Restoring ${selectedIds.length} past team members`)
     const confirm = window.confirm(
       `Are you sure you want to restore ${selectedIds.length} users?`
     );
@@ -279,8 +296,13 @@ class Util {
         )
         .then((res) => {
           func(1);
+          setLoading(false)
           setSelectedIds([]);
-        });
+        })
+        .catch((err) => {
+          setLoading(false)
+          setSelectedIds([]);
+        })
     }
   };
 
@@ -311,7 +333,15 @@ class Util {
 
   // ----------------- Team member real Ratings API---------------------
 
-  multipleRatingsDisable = (selectedIds, setSelectedIds, getCurrMembers) => {
+  multipleRatingsDisable = (
+    selectedIds,
+    setSelectedIds,
+    getCurrMembers,
+    setMsg,
+    setLoading
+  ) => {
+    setLoading(true);
+    setMsg(`Disabling ratings for ${selectedIds.length} team members`)
     const userCode = localStorage.getItem("usercode");
     const accessToken = localStorage.getItem("accessToken");
     axios
@@ -328,11 +358,25 @@ class Util {
           },
         }
       )
-      .then((res) => getCurrMembers(1));
+      .then((res) => {
+        getCurrMembers(1);
+        setLoading(false)
+      })
+      .catch((error) => {
+        setLoading(false)
+      })
     setSelectedIds("");
   };
 
-  multipleRatingsEnable = (selectedIds, setSelectedIds, getCurrMembers) => {
+  multipleRatingsEnable = (
+    selectedIds,
+    setSelectedIds,
+    getCurrMembers,
+    setMsg,
+    setLoading
+  ) => {
+    setLoading(true);
+    setMsg(`Enabling ratings for ${selectedIds.length} team members`)
     const userCode = localStorage.getItem("usercode");
     const accessToken = localStorage.getItem("accessToken");
     axios
@@ -351,12 +395,18 @@ class Util {
       )
       .then((res) => {
         getCurrMembers(1);
-        setSelectedIds("");
-      });
+        setLoading(false)
+      })
+      .catch((error) => {
+        setLoading(false)
+      })
+      setSelectedIds('')
   };
 
-  activeRatings = (user, getDataFunc) => {
-    console.log(user, "active ratings");
+  activeRatings = (user, getDataFunc, setLoading, setMsg) => {
+    setLoading(true);
+    setMsg(`Activating rating for ${user.displayFirstName}`);
+
     const { teamMemberId, companyUserCode } = user;
     const accessToken = localStorage.getItem("accessToken");
     axios
@@ -373,11 +423,19 @@ class Util {
           },
         }
       )
-      .then((res) => getDataFunc());
+      .then((res) => {
+        getDataFunc(1);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+      });
   };
 
-  deactiveRatings = (user, getDataFunc) => {
-    console.log(user, "active ratings");
+  deactiveRatings = (user, getDataFunc, setLoading, setMsg) => {
+    setLoading(true);
+    setMsg(`Deactivating rating for ${user.displayFirstName}`);
+
     const { teamMemberId, companyUserCode } = user;
     const accessToken = localStorage.getItem("accessToken");
     axios
@@ -394,12 +452,16 @@ class Util {
           },
         }
       )
-      .then((res) => getDataFunc());
+      .then((res) => {
+        getDataFunc(1);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+      });
   };
 
-  overlay  = () => {
-    
-  }
+  overlay = () => {};
   // ---------------------------------------------------------------
 
   static handleSearch = (event, setSearchTerm, items, setFilteredItems) => {

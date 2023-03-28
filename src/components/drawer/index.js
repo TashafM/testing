@@ -24,9 +24,12 @@ import OtherInfoDetails from "../../pages/About/Information/Component/OtherInfoD
 import AddBrand from "../../pages/About/Brand/Component/AddBrand";
 import { useContext } from "react";
 import { GlobalContext } from "../../App";
+import { useState } from "react";
 
 export default function RightDrawer() {
-  const { loading, setLoading, setMsg, msg } = useContext(GlobalContext);
+  const { loading, setLoading, setMsg, msg, alert, setAlert } = useContext(GlobalContext);
+  // const [showDiv, setShowDiv] = useState(false);
+  
 
   const { openDrawer, setOpenDrawer } = useContextProvider();
 
@@ -118,6 +121,11 @@ export default function RightDrawer() {
               </div>
             </Box>
           </SwipeableDrawer>
+          {/* {alert && (
+            <span className="tashaf">
+              You have successfully added a new team member{" "}
+            </span>
+          )} */}
         </React.Fragment>
       )}
     </div>

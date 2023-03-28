@@ -11,6 +11,8 @@ import rEnable from "../../../../assets/images/rEnable.svg";
 import "./RestoreDeleteBtn.scss";
 import { API } from "../../../../helper/API";
 import Util from "../../../../components/UtilityFunctions/UtilityFunctions";
+import { useContext } from "react";
+import { GlobalContext } from "../../../../App";
 
 const RestoreDeleteBtn = ({
   selectedIds,
@@ -25,6 +27,7 @@ const RestoreDeleteBtn = ({
   handleSearch2,
 }) => {
   const location = useLocation();
+  const {setMsg, setLoading} = useContext(GlobalContext)
   const currentPath = "/home/team-members/current-members";
   const pastPath = "/home/team-members/past-members";
 
@@ -61,7 +64,9 @@ const RestoreDeleteBtn = ({
                         onClick={()=>global.multipleRatingsDisable(
                           selectedIds,
                           setSelectedIds,
-                          getCurrMembers
+                          getCurrMembers,
+                          setMsg,
+                          setLoading,
                         )}
                       />
                     </span>
@@ -72,7 +77,9 @@ const RestoreDeleteBtn = ({
                         onClick={()=>global.multipleRatingsEnable(
                           selectedIds,
                           setSelectedIds,
-                          getCurrMembers
+                          getCurrMembers,
+                          setMsg,
+                          setLoading,
                         )}
                       />
                     </span>

@@ -16,12 +16,14 @@ import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePickerComp from "../DatePickerComp/DatePickerComp";
 import UpdateFields from "./UpdateFields/UpdateFields";
+import { GlobalContext } from "../../App";
+import { useContext } from "react";
 
 const UpdateMember = ({ api, getDataFunc, editData, isCurrent }) => {
   const [show, setShow] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [probationDate, setProbationDate] = useState(null);
-
+  const { loading, setLoading, msg, setMsg } = useContext(GlobalContext);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -66,13 +68,19 @@ const UpdateMember = ({ api, getDataFunc, editData, isCurrent }) => {
   const [formValues, setFormValues] = useState(editData);
 
   function handleSubmit(event) {
+    setLoading(true)
+    setMsg('Updating current team member')
     event.preventDefault();
     axios
       .put(`${api}/${editData.id}`, formValues)
       .then((res) => {
         getDataFunc();
+        setLoading(false)
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err)
+        setLoading(false)
+      });
     handleClose();
   }
 
@@ -218,7 +226,7 @@ const UpdateMember = ({ api, getDataFunc, editData, isCurrent }) => {
                 Save
               </Button>
             </Form> */}
-            <UpdateFields editData={editData} handleClose={handleClose}/>
+            <UpdateFields editData={editData} handleClose={handleClose} />
           </Offcanvas.Body>
         </div>
       </Offcanvas>
