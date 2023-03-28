@@ -148,12 +148,12 @@ export const AboutTabs = [
     index: 2,
     link: "/home/about/FAQ",
   },
-  {
-    id: 3,
-    title: "Complaints and feedback",
-    index: 3,
-    link: "/home/about/complaints-and-feedback",
-  },
+  // {
+  //   id: 3,
+  //   title: "Complaints and feedback",
+  //   index: 3,
+  //   link: "/home/about/complaints-and-feedback",
+  // },
   {
     id: 4,
     title: "Privacy Policy",
@@ -172,12 +172,12 @@ export const AboutTabs = [
     index: 6,
     link: "/home/about/our-brands",
   },
-  {
-    id: 7,
-    title: "Job Openings",
-    index: 7,
-    link: "/home/about/job-openings",
-  },
+  // {
+  //   id: 7,
+  //   title: "Job Openings",
+  //   index: 7,
+  //   link: "/home/about/job-openings",
+  // },
 ];
 
 export const CreateJobsTabs = [

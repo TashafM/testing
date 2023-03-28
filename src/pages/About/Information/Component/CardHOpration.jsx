@@ -17,7 +17,7 @@ function CardHOpration({ hoursOfOperation, onClick }) {
 
   return (
     <Col className="card-wrapper" style={{ marginRight: 0 }} md={6} xl={4}>
-      <div className="card-cont" onClick={onClick}>
+      <div className="card-cont">
         <CardHead
           onClick={onClick}
           type="Hours of operations"

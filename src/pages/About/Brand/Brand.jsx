@@ -7,6 +7,8 @@ import { useContextProvider } from "../../../context";
 import { useResponse } from "../../../hooks/useResponse";
 import AddBrand from "./Component/AddBrand";
 import { setIn } from "formik";
+import { usePostAsyncResponse } from "../../../hooks/usePostAsyncResponse";
+import { toast } from "react-toastify";
 
 function Brand() {
   const { setOpenDrawer } = useContextProvider();
@@ -15,7 +17,25 @@ function Brand() {
     open: false,
     type: "Add",
   });
+
+  const [deleteData, { loading: deleteLoading }] = usePostAsyncResponse(
+    "/portalDeleteCompanyBrands"
+  );
   const [index, setIndex] = useState(-1);
+
+  const onDeleteBrand = (item, index) => {
+    const body = {
+      brandId: item.brandId,
+    };
+
+    deleteData(body, () => {
+      const arr = JSON.parse(JSON.stringify(data));
+      arr.splice(index, 1);
+      toast.success("brand deleted successfully!!");
+      setData([...arr]);
+    });
+    console.log({ body });
+  };
 
   if (loading) {
     return <div>loading...</div>;
@@ -28,6 +48,8 @@ function Brand() {
           return (
             <div className="col-3">
               <CardBrand
+                index={index}
+                onDelete={onDeleteBrand}
                 item={item}
                 onClick={() => {
                   setIndex(index);

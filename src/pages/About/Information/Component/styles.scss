@@ -9,7 +9,7 @@
 }
 
 .input-wrapper {
-  margin-bottom: 20px;
+  margin-bottom: 38px;
 }
 
 .apply-all-checked {
@@ -31,6 +31,7 @@
   border: 1px solid #dadada;
   border-radius: 12px;
   padding: 10px;
+  height: 80px;
   margin-bottom: 15px;
 
   .card-day {
@@ -152,9 +153,6 @@
 }
 
 @media only screen and (max-width: 1600px) {
-  .card-slots-container {
-  }
-
   .statement-title {
     font-size: 16px;
   }
