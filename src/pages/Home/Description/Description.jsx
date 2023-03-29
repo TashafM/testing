@@ -18,6 +18,8 @@ const Description = ({
   addPartners,
   getCurrMembers,
   noButtons,
+  data,
+  setData,
 }) => {
   return (
     <>
@@ -63,6 +65,8 @@ const Description = ({
                   api={api}
                   getCurrMembers={getCurrMembers}
                   getDataFunc={getDataFunc}
+                  data={data}
+                  setData={setData}
                 />
               )}
               {addPartners && (

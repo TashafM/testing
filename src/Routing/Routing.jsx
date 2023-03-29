@@ -34,6 +34,7 @@ import CurrentPartners from "../pages/Home/Partners/CurrentPartners/CurrentPartn
 import PastPartners from "../pages/Home/Partners/PastPartners/PastPartners";
 import Dummy from "../pages/Home/Dummy/Dummy";
 import SelectPage from "../pages/Login/SelectPage/SelectPage";
+import Dealers from "../pages/Dealers/Dealers";
 // import About from "../pages/About/";
 // import Contact from "./Contact";
 
@@ -78,6 +79,7 @@ const Routing = () => (
         </Route>
       </Route>
       <Route path="/" element={<Login />} />
+      <Route path="/dealers" element={<Dealers/>}/>
     </Routes>
   </BrowserRouter>
 );

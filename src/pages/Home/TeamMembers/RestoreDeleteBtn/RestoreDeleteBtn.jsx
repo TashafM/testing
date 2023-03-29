@@ -25,6 +25,7 @@ const RestoreDeleteBtn = ({
   currMemberData,
   handleSearch,
   handleSearch2,
+  setData,
 }) => {
   const location = useLocation();
   const {setMsg, setLoading} = useContext(GlobalContext)
@@ -64,9 +65,10 @@ const RestoreDeleteBtn = ({
                         onClick={()=>global.multipleRatingsDisable(
                           selectedIds,
                           setSelectedIds,
-                          getCurrMembers,
                           setMsg,
                           setLoading,
+                          currMemberData,
+                          setData,
                         )}
                       />
                     </span>
@@ -77,9 +79,10 @@ const RestoreDeleteBtn = ({
                         onClick={()=>global.multipleRatingsEnable(
                           selectedIds,
                           setSelectedIds,
-                          getCurrMembers,
                           setMsg,
                           setLoading,
+                          currMemberData,
+                          setData,
                         )}
                       />
                     </span>

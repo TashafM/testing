@@ -39,12 +39,16 @@ const DataTable = ({
   next,
   hasMore,
   restoreApi,
+  setData,
+  setPastData,
+  pastData,
 }) => {
   const { loading, setLoading, setMsg, msg, setAlert } =
     useContext(GlobalContext);
   const myRef = useRef(null);
   const [scrollX, setScrollX] = useState(0);
-  const data = datum.sort((a, b) => b.id - a.id);
+  // const data = datum.sort((a, b) => b.id - a.id);
+  const data = datum
   const companyUserCode = localStorage.getItem("usercode");
   // const data = datum;
   const navigate = useNavigate();
@@ -140,9 +144,10 @@ const DataTable = ({
                                 e.stopPropagation();
                                 myUtil.deactiveRatings(
                                   row,
-                                  getDataFunc,
                                   setLoading,
-                                  setMsg
+                                  setMsg,
+                                  datum,
+                                  setData,
                                 );
                               }}
                             />
@@ -155,9 +160,10 @@ const DataTable = ({
                                 e.stopPropagation();
                                 myUtil.activeRatings(
                                   row,
-                                  getDataFunc,
                                   setLoading,
-                                  setMsg
+                                  setMsg,
+                                  datum,
+                                  setData,
                                 );
                               }}
                             />
@@ -200,7 +206,10 @@ const DataTable = ({
                                 getDataFunc,
                                 setLoading,
                                 setMsg,
-                                setAlert
+                                setPastData,
+                                datum,
+                                setData,
+                                pastData
                               );
                             }}
                           />
@@ -210,6 +219,7 @@ const DataTable = ({
                   </tr>
                 </>
               ))}
+              {console.log(datum,'datatatat')}
             </tbody>
           </Table>
         </div>

@@ -14,9 +14,12 @@ const CurrentMembers = ({
   getCurrMembers,
   getPastMembers,
   filteredItems,
+  setData,
   dataLength,
   next,
   hasMore,
+  setPastData,
+  pastData,
 }) => {
 
   return (
@@ -24,6 +27,7 @@ const CurrentMembers = ({
       <DataTable
         columns={colCurrentMembers}
         datum={currMemberData}
+        setData={setData}
         // datum={filteredItems}
         selectedIds={selectedIds}
         api={currMemberApi}
@@ -37,6 +41,8 @@ const CurrentMembers = ({
         dataLength={dataLength}
         next={next}
         hasMore={hasMore}
+        setPastData={setPastData}
+        pastData={pastData}
       />
     </div>
   );

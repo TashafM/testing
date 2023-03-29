@@ -21,7 +21,8 @@ import Multiselect from "multiselect-react-dropdown";
 import PhoneNumber from "../Input/PhoneNumber";
 import { GlobalContext } from "../../App";
 
-const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
+const AddMember = ({ api, getDataFunc, getCurrMembers, data, setData }) => {
+  console.log(data,'ADD MEMBER')
   const { loading, setLoading, setMsg, msg } = useContext(GlobalContext);
   const [show, setShow] = useState(false);
   const [selectedDate, setSelectedDate] = useState(["", "", ""]);
@@ -152,23 +153,23 @@ const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
     event.preventDefault();
     const companyUserCode = localStorage.getItem("usercode");
     const accessToken = localStorage.getItem("accessToken");
+    const newData = {
+      ...formValues,
+      phone: phone,
+      displayPhone: displayPhone,
+      showRatings: showRatings.toString(),
+      startDate,
+      probationDate,
+      designation,
+      department,
+      companyUserCode,
+      displayLocation,
+    };
     axios
       .post(
         "https://dev.elred.io/portalAddCompanyTeamMember",
         // API.VIEW_CURRENT_TEAM_MEMBERS + `start=${page}&offset=10`,
-
-        {
-          ...formValues,
-          phone: phone,
-          displayPhone: displayPhone,
-          showRatings: showRatings.toString(),
-          startDate,
-          probationDate,
-          designation,
-          department,
-          companyUserCode,
-          displayLocation,
-        },
+        newData,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -176,8 +177,8 @@ const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
         }
       )
       .then((res) => {
-        console.log(res, "successfully");
-        getCurrMembers(1).then((res) => setLoading(false));
+        setData(prevData => [newData, ...prevData]); // add updated data to state
+        setLoading(false)
       })
       .catch((err) => {
         console.log(err, "error");

@@ -63,7 +63,10 @@ class Util {
     getDataFunc,
     setLoading,
     setMsg,
-    setAlert
+    setPastData,
+    datum,
+    setData,
+    pastData,
   ) => {
     setLoading(true);
     setMsg(`Deleting ${user.displayFirstName} from current team members`);
@@ -87,10 +90,18 @@ class Util {
           }
         )
         .then((res) => {
-          getDataFunc(1).then((res) => {
-            setLoading(false);
-          });
+          // getDataFunc(1).then((res) => {
+          //   setLoading(false);
+          // });
           // onUpdate(res);
+          const updatedData = datum.filter(
+            (u) => u.teamMemberId !== user.teamMemberId
+          ); // filter out the deleted user
+          setData(updatedData); // update the state with the updated data
+          setPastData((prevData) => [user, ...prevData]); // add updated data to state
+          // setPastData([user, ...pastData]); // add updated data to state
+
+          setLoading(false);
         })
         .catch((err) => {
           setLoading(false);
@@ -339,9 +350,10 @@ class Util {
   multipleRatingsDisable = (
     selectedIds,
     setSelectedIds,
-    getCurrMembers,
     setMsg,
-    setLoading
+    setLoading,
+    currMemberData,
+    setData
   ) => {
     setLoading(true);
     setMsg(`Disabling ratings for ${selectedIds.length} team members`);
@@ -362,7 +374,14 @@ class Util {
         }
       )
       .then((res) => {
-        getCurrMembers(1);
+        const updatedData = currMemberData.map((user) => {
+          if (selectedIds.includes(user.teamMemberId)) {
+            return { ...user, showRatings: false };
+          } else {
+            return user;
+          }
+        });
+        setData(updatedData);
         setLoading(false);
       })
       .catch((error) => {
@@ -371,12 +390,28 @@ class Util {
     setSelectedIds("");
   };
 
+  //--------------------------------------------------
+  // tashaf = (selectedIds, currMemberData, setData) => {
+  //   console.log(selectedIds, currMemberData, setData,'rrrrrrrrrrrrr')
+
+  //   const updatedData = currMemberData.map(user=>{
+  //     if(selectedIds.includes(user.teamMemberId)){
+  //       return {...user, showRatings: true};
+  //     }else{
+  //       return user;
+  //     }
+  //   })
+  //   setData(updatedData)
+  // }
+
+  //----------------------------------------------------
   multipleRatingsEnable = (
     selectedIds,
     setSelectedIds,
-    getCurrMembers,
     setMsg,
-    setLoading
+    setLoading,
+    currMemberData,
+    setData
   ) => {
     setLoading(true);
     setMsg(`Enabling ratings for ${selectedIds.length} team members`);
@@ -397,7 +432,15 @@ class Util {
         }
       )
       .then((res) => {
-        getCurrMembers(1);
+        // getCurrMembers(1);
+        const updatedData = currMemberData.map((user) => {
+          if (selectedIds.includes(user.teamMemberId)) {
+            return { ...user, showRatings: true };
+          } else {
+            return user;
+          }
+        });
+        setData(updatedData);
         setLoading(false);
       })
       .catch((error) => {
@@ -406,7 +449,7 @@ class Util {
     setSelectedIds("");
   };
 
-  activeRatings = (user, getDataFunc, setLoading, setMsg) => {
+  activeRatings = (user, setLoading, setMsg, datum, setData) => {
     setLoading(true);
     setMsg(`Activating rating for ${user.displayFirstName}`);
 
@@ -427,7 +470,13 @@ class Util {
         }
       )
       .then((res) => {
-        getDataFunc(1);
+        const updatedData = datum.map((itm) => {
+          if (itm.teamMemberId == user.teamMemberId) {
+            return { ...itm, showRatings: true };
+          }
+          return itm;
+        });
+        setData(updatedData);
         setLoading(false);
       })
       .catch((error) => {
@@ -435,9 +484,9 @@ class Util {
       });
   };
 
-  deactiveRatings = (user, getDataFunc, setLoading, setMsg) => {
+  deactiveRatings = (user, setLoading, setMsg, datum, setData) => {
     setLoading(true);
-    setMsg(`Deactivating rating for ${user.displayFirstName}`);
+    setMsg(`Activating rating for ${user.displayFirstName}`);
 
     const { teamMemberId, companyUserCode } = user;
     const accessToken = localStorage.getItem("accessToken");
@@ -447,7 +496,7 @@ class Util {
         {
           companyUserCode: companyUserCode,
           teamMemberIds: [teamMemberId],
-          enableRatings: false,
+          enableRatings: true,
         },
         {
           headers: {
@@ -456,7 +505,13 @@ class Util {
         }
       )
       .then((res) => {
-        getDataFunc(1);
+        const updatedData = datum.map((itm) => {
+          if (itm.teamMemberId == user.teamMemberId) {
+            return { ...itm, showRatings: false };
+          }
+          return itm;
+        });
+        setData(updatedData);
         setLoading(false);
       })
       .catch((error) => {
@@ -464,7 +519,35 @@ class Util {
       });
   };
 
-  overlay = () => {};
+  // deactiveRatings = (user, getDataFunc, setLoading, setMsg) => {
+  //   setLoading(true);
+  //   setMsg(`Deactivating rating for ${user.displayFirstName}`);
+
+  //   const { teamMemberId, companyUserCode } = user;
+  //   const accessToken = localStorage.getItem("accessToken");
+  //   axios
+  //     .post(
+  //       API.EDIT_TEAM_MEMBERS_RATINGS,
+  //       {
+  //         companyUserCode: companyUserCode,
+  //         teamMemberIds: [teamMemberId],
+  //         enableRatings: false,
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       getDataFunc(1);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       setLoading(false);
+  //     });
+  // };
+
   // ---------------------------------------------------------------
 
   static handleSearch = (event, setSearchTerm, items, setFilteredItems) => {

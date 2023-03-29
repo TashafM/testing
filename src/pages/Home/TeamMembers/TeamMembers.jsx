@@ -20,7 +20,6 @@ import { useContext } from "react";
 import { Button } from "react-bootstrap";
 
 const TeamMembers = (props) => {
-
   const location = useLocation();
   //-----------------
   // const [currentData, setCurrentData] = useState([]);
@@ -119,7 +118,6 @@ const TeamMembers = (props) => {
   const handleLoadMore = () => {
     getCurrMembers();
     // getCurrMembers(page+10); // this change is done
-
   };
 
   //----------------------END CURRENT MEMBER API-----------------
@@ -142,11 +140,13 @@ const TeamMembers = (props) => {
         }
       )
       .then((res) => {
-        if (start === 1) {
-          setPastData([...res.result]);
-       }else{
-          setPastData((prevItems) => [...prevItems, ...res.result]);
-        }
+        console.log(res, "getpastmember");
+          if (start === 1) {
+            setPastData([...res.result]);
+         }else{
+            setPastData((prevItems) => [...prevItems,...res.result]);
+          }
+        // setPastData(res.result);
         setPastPage((prevPage) => start + 10);
       });
     // .then((res) => console.log(res.result,'save'));
@@ -191,16 +191,13 @@ const TeamMembers = (props) => {
   // };
 
   useEffect(() => {
-    if (location.pathname == currentMember) {
-      getCurrMembers();
-    } else {
-      getPastMembers();
-    }
+    getCurrMembers();
+    getPastMembers();
     setSelectedIds([]);
     // getCurrMembers();
     // getPastMembers();
     // current();
-  }, [location]);
+  }, []);
 
   return (
     <>
@@ -217,6 +214,8 @@ const TeamMembers = (props) => {
           }
           getCurrMembers={getCurrMembers}
           addMember="addMember"
+          data={data}
+          setData={setData}
         />
         {/* {console.log(currentData, "current dAta")} */}
         <div className="desktop-search tablet-search">
@@ -233,11 +232,11 @@ const TeamMembers = (props) => {
             setSelectedIds={setSelectedIds}
             // currMemberData={currMemberData}
             currMemberData={data}
+            setData={setData}
             handleSearch={handleSearch}
             handleSearch2={handleSearch2}
           />
         </div>
-
 
         <div>
           {location.pathname == currentMember && (
@@ -251,6 +250,8 @@ const TeamMembers = (props) => {
               selectedIds={selectedIds}
               setSelectedIds={setSelectedIds}
               currMemberData={data}
+              setData={setData}
+              setPastData={setPastData}
               // currMemberData={currMemberData}
               currMemberApi={currMemberApi}
               pastMemberApi={pastMemberApi}
@@ -260,6 +261,7 @@ const TeamMembers = (props) => {
               dataLength={data.length}
               next={handleLoadMore}
               hasMore={hasMore}
+              pastData={pastData}
             />
             // </InfiniteScroll>
           )}
@@ -286,7 +288,6 @@ const TeamMembers = (props) => {
             />
             // </InfiniteScroll>
           )}
-
         </div>
       </div>
     </>
