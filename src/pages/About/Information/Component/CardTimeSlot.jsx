@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Badge } from "react-bootstrap";
 import Switch from "../../../../components/Input/Switch";
 import TimeInput from "../../../../components/Input/TimeInput";
 
@@ -49,6 +48,7 @@ function CardTimeSlot({ title, active, onChange, index }) {
         <span>To</span>
         <TimeInput
           value={endTime}
+          disabled={active}
           onChange={(e) => {
             console.log(e.target.value);
             setEndTime(e.target.value);

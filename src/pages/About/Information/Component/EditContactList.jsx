@@ -15,7 +15,7 @@ function EditContactList() {
   const { openDrawer, setOpenDrawer } = useContextProvider();
   const [data, setData] = useState(openDrawer.data ?? []);
 
-  const [deleteData, { loading }] = usePostAsyncResponse(
+  const [deleteData] = usePostAsyncResponse(
     "/portalDeleteCompanyContactUsDetails"
   );
 
