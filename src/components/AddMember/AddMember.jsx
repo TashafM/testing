@@ -148,7 +148,7 @@ const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
 
   function handleSubmit(event) {
     setLoading(true);
-    setMsg("Adding a team member...")
+    setMsg("Adding a team member...");
     event.preventDefault();
     const companyUserCode = localStorage.getItem("usercode");
     const accessToken = localStorage.getItem("accessToken");
@@ -283,19 +283,21 @@ const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
                 This phone number will reflect on your employee’s card.{" "}
               </div>
 
-              <Form.Label>Designation *</Form.Label>
+              <Form.Label className="dd-dropdown">Designation *</Form.Label>
               <Multiselect
                 options={designationList}
                 selectedValues={designation}
                 onSelect={handleSelect}
                 displayValue="value"
+                className="multiselect-input"
               />
-              <Form.Label>Department *</Form.Label>
+              <Form.Label className="dd-dropdown">Department *</Form.Label>
               <Multiselect
                 options={departmentList}
                 selectedValues={department}
                 onSelect={depSelect}
                 displayValue="value"
+                className="multiselect-input"
               />
 
               <FormGroup className="input-div">
@@ -379,7 +381,7 @@ const AddMember = ({ api, getDataFunc, getCurrMembers }) => {
                   checked={showRatings}
                   onChange={() => setshowRatings(!showRatings)}
                 />
-                Show ratings on the employee’s card
+                <span className="show-ratings-title">Show ratings on the employee’s card</span>
               </div>
 
               <Button variant="primary" type="submit" className="save-btn">

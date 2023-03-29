@@ -25,6 +25,7 @@ import AddBrand from "../../pages/About/Brand/Component/AddBrand";
 import { useContext } from "react";
 import { GlobalContext } from "../../App";
 import { useState } from "react";
+import { Alert } from "react-bootstrap";
 
 export default function RightDrawer() {
   const { loading, setLoading, setMsg, msg, alert, setAlert } =
@@ -121,11 +122,6 @@ export default function RightDrawer() {
               </div>
             </Box>
           </SwipeableDrawer>
-          {/* {alert && (
-            <span className="tashaf">
-              You have successfully added a new team member{" "}
-            </span>
-          )} */}
         </React.Fragment>
       )}
     </div>

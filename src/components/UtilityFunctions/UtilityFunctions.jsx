@@ -146,13 +146,14 @@ class Util {
   //-------------------------- DELETE MULTIPLE ITEMS -------------------
   deleteSelectedItems = (
     selectedIds,
-    data,
-    apiTo,
-    apiFrom,
     func1,
-    func2,
-    setSelectedIds
+    setSelectedIds,
+    setLoading,
+    setMsg
   ) => {
+    setLoading(true);
+    setMsg(`Deleting ${selectedIds.length} team members`);
+
     const confirm = window.confirm(
       `Are you sure you want to delete ${selectedIds.length} users?`
     );
@@ -170,6 +171,7 @@ class Util {
           }
         )
         .then((res) => {
+          setLoading(false);
           func1(1);
           setSelectedIds([]);
         });
@@ -245,7 +247,7 @@ class Util {
 
   restoreSingle = (user, api, getDataFunc, setLoading, setMsg) => {
     setLoading(true);
-    setMsg(`Restoring ${user.displayFirstName} `)
+    setMsg(`Restoring ${user.displayFirstName} `);
     const { teamMemberId } = user;
     const accessToken = localStorage.getItem("accessToken");
     const companyUserCode = localStorage.getItem("usercode");
@@ -261,11 +263,11 @@ class Util {
       )
       .then((res) => {
         getDataFunc(1);
-        setLoading(false)
+        setLoading(false);
       })
       .catch((err) => {
-        setLoading(false)
-      })
+        setLoading(false);
+      });
   };
 
   // This function is used to restore multiple past members/deleted members to current table
@@ -274,10 +276,11 @@ class Util {
     api,
     func,
     setSelectedIds,
-    setLoading, setMsg
+    setLoading,
+    setMsg
   ) => {
     setLoading(true);
-    setMsg(`Restoring ${selectedIds.length} past team members`)
+    setMsg(`Restoring ${selectedIds.length} past team members`);
     const confirm = window.confirm(
       `Are you sure you want to restore ${selectedIds.length} users?`
     );
@@ -296,13 +299,13 @@ class Util {
         )
         .then((res) => {
           func(1);
-          setLoading(false)
+          setLoading(false);
           setSelectedIds([]);
         })
         .catch((err) => {
-          setLoading(false)
+          setLoading(false);
           setSelectedIds([]);
-        })
+        });
     }
   };
 
@@ -341,7 +344,7 @@ class Util {
     setLoading
   ) => {
     setLoading(true);
-    setMsg(`Disabling ratings for ${selectedIds.length} team members`)
+    setMsg(`Disabling ratings for ${selectedIds.length} team members`);
     const userCode = localStorage.getItem("usercode");
     const accessToken = localStorage.getItem("accessToken");
     axios
@@ -360,11 +363,11 @@ class Util {
       )
       .then((res) => {
         getCurrMembers(1);
-        setLoading(false)
+        setLoading(false);
       })
       .catch((error) => {
-        setLoading(false)
-      })
+        setLoading(false);
+      });
     setSelectedIds("");
   };
 
@@ -376,7 +379,7 @@ class Util {
     setLoading
   ) => {
     setLoading(true);
-    setMsg(`Enabling ratings for ${selectedIds.length} team members`)
+    setMsg(`Enabling ratings for ${selectedIds.length} team members`);
     const userCode = localStorage.getItem("usercode");
     const accessToken = localStorage.getItem("accessToken");
     axios
@@ -395,12 +398,12 @@ class Util {
       )
       .then((res) => {
         getCurrMembers(1);
-        setLoading(false)
+        setLoading(false);
       })
       .catch((error) => {
-        setLoading(false)
-      })
-      setSelectedIds('')
+        setLoading(false);
+      });
+    setSelectedIds("");
   };
 
   activeRatings = (user, getDataFunc, setLoading, setMsg) => {

@@ -64,10 +64,30 @@
   }
 }
 
+.show-ratings-title{
+  font-size: 18px;
+  font-weight: 500;
+  margin-left: 20px;
+}
+
 .offcanvas.show {
   width: 35% !important;
 }
 
+.dd-dropdown{
+  font-size: 18px;
+  font-weight: 500;
+  color: #000;
+}
+.multiselect-input{
+  margin-bottom: 20px;
+
+  .searchWrapper{
+    background-color: #f7f7f7;
+    padding: 15px;
+    border: none !important;
+  }
+}
 .save-btn {
   width: 100%;
   margin-top: 10px;
@@ -77,6 +97,10 @@
   color: white;
   background-color: #be212a;
   border: none;
+
+  &:hover{
+    background-color: #be212a;
+  }
 }
 
 .date-main {
@@ -121,6 +145,16 @@
 
   .offcanvas.show{
     // width: 40% !important;
+  }
+
+  .show-ratings-title{
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 20px;
+  }
+
+  .dd-dropdown{
+    font-size: 14px;
   }
 
   .teamMember-add{
@@ -203,6 +237,17 @@
 
   .offcanvas.show {
     width: 40% !important;
+  }
+
+  .show-ratings-title{
+    font-size: 12px;
+    font-weight: 500;
+    margin-left: 20px;
+  }
+
+  .dd-dropdown{
+    font-size: 12px;
+    margin-bottom: 0;
   }
 
   .offcanvas-body{

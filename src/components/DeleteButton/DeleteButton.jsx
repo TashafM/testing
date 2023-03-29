@@ -2,6 +2,8 @@ import React from "react";
 import deleteBtn from "../../assets/images/delete.svg";
 import Util from "../UtilityFunctions/UtilityFunctions";
 import "./DeleteButton.scss";
+import { GlobalContext } from "../../App";
+import { useContext } from "react";
 
 const DeleteButton = ({
   selectedIds,
@@ -12,6 +14,7 @@ const DeleteButton = ({
   func2,
   setSelectedIds,
 }) => {
+  const {setLoading, setMsg} = useContext(GlobalContext)
 
   const myUtil = new Util()
   return (
@@ -22,12 +25,10 @@ const DeleteButton = ({
           onClick={() =>
             myUtil.deleteSelectedItems(
               selectedIds,
-              data,
-              apiTo,
-              apiFrom,
               func1,
-              // func2,
-              setSelectedIds
+              setSelectedIds,
+              setLoading,
+              setMsg
             )
           }
         >

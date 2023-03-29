@@ -139,7 +139,8 @@
   }
   .search-div {
     position: relative;
-    margin-right: 5%;
+
+    // margin-right: 5%;
     input {
       background: #f0f2f9;
       border: none;
@@ -240,7 +241,7 @@
 
       .search-div{
         input{
-          width: 200%;
+          width: 130%;
         }
       }
     }

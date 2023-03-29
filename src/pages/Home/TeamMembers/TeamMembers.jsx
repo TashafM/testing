@@ -118,6 +118,8 @@ const TeamMembers = (props) => {
   };
   const handleLoadMore = () => {
     getCurrMembers();
+    // getCurrMembers(page+10); // this change is done
+
   };
 
   //----------------------END CURRENT MEMBER API-----------------
@@ -221,7 +223,6 @@ const TeamMembers = (props) => {
           <div className="members-tab">
             <UnderLineTabs tabs={teamMembersTab} />
           </div>
-          {/* <hr style={{ marginTop: "-2%" }} /> */}
           <RestoreDeleteBtn
             selectedIds={selectedIds}
             pastMemberData={pastMemberData}
@@ -236,9 +237,7 @@ const TeamMembers = (props) => {
             handleSearch2={handleSearch2}
           />
         </div>
-        <hr style={{ marginTop: "-2%" }} className="onlyDesktop" />
 
-        {/* <div>tashaf mahmoo</div> */}
 
         <div>
           {location.pathname == currentMember && (
