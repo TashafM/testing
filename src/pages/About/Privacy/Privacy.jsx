@@ -60,7 +60,7 @@ function Privacy() {
 
   return (
     <div>
-      <div className="d-flex privacy-title">
+      <div className="d-flex privacy-title privacy-title-botton">
         Your Privacy Matters{" "}
         <BtnIconOnly
           onClick={() => {

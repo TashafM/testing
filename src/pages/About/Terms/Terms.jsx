@@ -80,7 +80,7 @@ function Terms() {
 
   return (
     <div>
-      <div className="d-flex terms-title">
+      <div className="d-flex terms-title terms-titel-container">
         Terms & Conditions <BtnIconOnly onClick={HandleOpenModal} />
       </div>
       {showModal && (

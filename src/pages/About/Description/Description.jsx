@@ -11,14 +11,24 @@ function Description() {
   return (
     <div className="description-wrapper">
       <p className="title">About Us</p>
-      <div className=" row-cont">
+      <div className=" row-cont align-items-center">
         <img className="comp-logo" src={circularLogo} alt="company logo" />
         <div className="title-cont">
           <p className="comp-title mb-0">A. T. links</p>
           <p className="comp-subtitle  mb-0">Digital lnks</p>
         </div>
-        <img className="verified-icon" src={verified} alt="verified icon" />
-        <a className="title-cont">Verify Company</a>
+        <img
+          className="verified-icon"
+          src={verified}
+          alt="verified icon"
+          style={{ marginTop: "-27px" }}
+        />
+        <a
+          className="title-cont"
+          style={{ color: "#4793F4", fontWeight: "500", marginTop: "-27px" }}
+        >
+          Verify Company
+        </a>
       </div>
       <div className="discription-cont">
         <p className="comp-discription mb-0">

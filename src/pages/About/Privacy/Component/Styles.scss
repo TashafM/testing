@@ -1,13 +1,30 @@
+.text-input-privacy .input-container {
+  font-weight: 500;
+  color: #313030;
+}
+
+.btn-add-more > div button {
+  color: #be212a;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+}
 .privacy-title {
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
   line-height: 28px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   text-transform: capitalize;
 
   color: #000000;
+}
+
+.privacy-title-botton {
+  margin-bottom: 24px;
 }
 
 .privacy-desc {

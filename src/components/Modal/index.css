@@ -23,3 +23,8 @@
   width: 30px;
   padding-left: 10px;
 }
+.text-input-faq .input-container {
+  font-weight: 500 !important ;
+
+  color: #313030;
+}

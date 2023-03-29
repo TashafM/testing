@@ -46,19 +46,23 @@ function ModalComponent({
         <Modal.Body className="modalbody">
           <div className="d-flex justify-content-between  pb-3">
             <p className="modal-title">{type}</p>
-            <div className="d-flex justify-content-center align-items-center mr-3">
+            <div className="d-flex justify-content-center align-items-center me-2">
               <BtnTitleCenter onClick={onSaveData} title="Save" />
               <img
                 src={cross}
                 alt="icon-cross"
                 onClick={() => close()}
-                className="crossCloseButton"
+                className="crossCloseButton ms-5"
               />
             </div>
           </div>
           {Data.map((item, index) => {
             return (
-              <div key={`privacy-item-${index}`} style={{}}>
+              <div
+                key={`privacy-item-${index}`}
+                style={{}}
+                className="text-input-faq"
+              >
                 <TextInput
                   placeholder={"privacy title"}
                   value={type === "FAQ" ? item.question : item.title}
@@ -80,9 +84,9 @@ function ModalComponent({
             );
           })}
 
-          <div className="default-height d-flex align-items-center justify-content-center">
+          <div className="default-height d-flex align-items-center justify-content-center btn-add-more">
             <BtnTitleIcon
-              title={btntitle}
+              title="Create more FAQ"
               onClick={() => {
                 const arr = [...Data];
                 arr.push({ ...empty });

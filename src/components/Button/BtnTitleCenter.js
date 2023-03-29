@@ -9,8 +9,9 @@ function BtnTitleCenter({
   smallbutton,
   disabled = false,
   loading = false,
+  className = "",
 }) {
-  let newstyle = smallbutton ? "btnsmall" : "btn-title-center";
+  let newstyle = (smallbutton ? "btnsmall " : "btn-title-center ") + className;
 
   return (
     <div>

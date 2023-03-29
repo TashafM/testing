@@ -19,6 +19,19 @@
   color: #be212a !important;
 }
 
+.stm-container {
+  overflow: hidden;
+  height: 150px;
+
+  p {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
 .contacts-count {
   background-color: #fff2f2;
   // padding: 8px;
@@ -117,6 +130,12 @@
   text-align: center;
 }
 
+.btn-bg-trasparent {
+  color: #be212a;
+  background-color: #fff;
+  font-size: 20px;
+}
+
 .title-other-Info {
   font-family: "Inter";
   font-style: normal;
@@ -127,7 +146,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  margin-top: 8px;
+  margin-bottom: 16px;
   color: #000000;
 }
 

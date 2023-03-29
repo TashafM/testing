@@ -14,7 +14,7 @@ function CardOtherInfo({ otherInfo, onClick }) {
           icon={quote}
           changemargin={"csschange"}
         />
-        <div className="row mb-2">
+        <div className="row ">
           <div className="col-6 title-other-Info">Our Sales reach is at</div>
           <div className="col-6 title-other-Info d-flex">
             {otherInfo?.salesReachAt &&

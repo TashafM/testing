@@ -1,12 +1,19 @@
 import React from "react";
+import TimePicker from "react-time-picker";
 
-function TimeInput({ value, onChange }) {
+function TimeInput({ value, onChange, disabled }) {
+  // const [value, onChange] = useState('10:00');
+
   return (
-    <input
-      className=" input-container time-only-input"
-      type="time"
+    <TimePicker
+      clearIcon={false}
+      clockIcon={false}
+      disableClock={true}
+      onChange={(e, ampm) => onChange(e, ampm)}
       value={value}
-      onChange={onChange}
+      format="hh:mm aa"
+      amPmAriaLabel="Select am/pm"
+      disabled={disabled}
     />
   );
 }
