@@ -33,15 +33,27 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
     postData(body, (res) => {
       const arr = JSON.parse(JSON.stringify(completeData));
       arr[0].hoursOfOperation = res[0];
-      console.log({ arr });
       onUpdate(arr);
       handleClose();
     });
   };
 
+  const onApplySameTimeToAll = () => {
+    // operationData.map
+  };
+
   const onChangeHandler = (index) => {
     const obj = [...operationData];
     obj[index].active = !obj[index].active;
+
+    setOperationData([...obj]);
+  };
+
+  const onTimeChange = (e, index, key) => {
+    const obj = [...operationData];
+    obj[index][key] = e;
+
+    console.log({ e });
 
     setOperationData([...obj]);
   };
@@ -72,13 +84,28 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
               </div>
 
               {operationData.map((item, index) => {
-                console.log(item);
+                console.log({ item });
+
+                function convert12to24(hour12, amPm) {
+                  let hour24 = parseInt(hour12, 10);
+
+                  if (amPm === "am" && hour24 === 12) {
+                    hour24 = 0;
+                  } else if (amPm === "pm" && hour24 < 12) {
+                    hour24 += 12;
+                  }
+
+                  return hour24;
+                }
                 return (
                   <CardTimeSlot
                     title={item.day}
                     active={item.active}
                     onChange={onChangeHandler}
+                    startTime={item.startTime}
+                    endTime={item.endTime}
                     index={index}
+                    onTimeChange={onTimeChange}
                   />
                 );
               })}

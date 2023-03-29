@@ -10,6 +10,9 @@ import edit from "../../../../assets/images/edit-icon.png";
 import delet from "../../../../assets/images/delete.svg";
 import { usePostAsyncResponse } from "../../../../hooks/usePostAsyncResponse";
 import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
+import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
+import { Toast } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 function EditContactList() {
   const { openDrawer, setOpenDrawer } = useContextProvider();
@@ -17,6 +20,9 @@ function EditContactList() {
 
   const [deleteData] = usePostAsyncResponse(
     "/portalDeleteCompanyContactUsDetails"
+  );
+  const [pathcData, { loading: editLoading }] = usePatchAsyncReponse(
+    "/portalPatchCompanyContactUsDetails"
   );
 
   useEffect(() => {
@@ -43,10 +49,39 @@ function EditContactList() {
     });
   };
 
+  const onPostEnableChat = (arr) => {
+    const contactUsId = arr._id;
+    delete arr._id;
+
+    const body = {
+      ...arr,
+      contactUsId,
+    };
+
+    pathcData(body, (res) => {
+      try {
+        const d = JSON.parse(JSON.stringify(openDrawer.completeData));
+        d[0].contactUs[openDrawer.index] = { ...res[0] };
+        openDrawer.callback(d);
+      } catch (error) {
+        console.log(error);
+      }
+
+      toast.success("chat enabled!!");
+
+      setOpenDrawer({
+        open: false,
+        type: "",
+      });
+    });
+  };
+
   const onEnableChat = (index) => {
     const arr = [...data];
     arr[index].enableChat = !arr[index].enableChat;
     setData([...arr]);
+
+    onPostEnableChat(arr[index]);
   };
 
   return (
@@ -54,6 +89,7 @@ function EditContactList() {
       <div className="btn-add-container">
         <BtnTitleCenter
           title="Add"
+          className="btn-bg-trasparent"
           onClick={() => {
             setOpenDrawer({
               ...openDrawer,
