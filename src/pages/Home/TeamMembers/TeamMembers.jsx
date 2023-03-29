@@ -117,7 +117,9 @@ const TeamMembers = (props) => {
     // console.log(res,'00000000000')
   };
   const handleLoadMore = () => {
-    getCurrMembers();
+    // getCurrMembers();
+    getCurrMembers(page+10); // this change is done
+
   };
 
   //----------------------END CURRENT MEMBER API-----------------

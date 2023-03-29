@@ -25,11 +25,12 @@ import AddBrand from "../../pages/About/Brand/Component/AddBrand";
 import { useContext } from "react";
 import { GlobalContext } from "../../App";
 import { useState } from "react";
+import { Alert } from "react-bootstrap";
 
 export default function RightDrawer() {
-  const { loading, setLoading, setMsg, msg, alert, setAlert } = useContext(GlobalContext);
+  const { loading, setLoading, setMsg, msg, alert, setAlert } =
+    useContext(GlobalContext);
   // const [showDiv, setShowDiv] = useState(false);
-  
 
   const { openDrawer, setOpenDrawer } = useContextProvider();
 
@@ -126,6 +127,11 @@ export default function RightDrawer() {
               You have successfully added a new team member{" "}
             </span>
           )} */}
+          <div className="tttt">
+            <Alert variant="success" dismissible>
+              This is a danger alert with a close button!
+            </Alert>
+          </div>
         </React.Fragment>
       )}
     </div>
