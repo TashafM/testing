@@ -107,16 +107,7 @@ function EditContacts() {
                 label="Title"
               />
             </div>
-            <div className="input-wrapper">
-              <TextInput
-                name="email"
-                value={values.email}
-                onChange={(e) => setFieldValue("email", e.target.value)}
-                error={touched.email && errors.email}
-                label="Email ID"
-                placeholder="eg. salesteam@br.in"
-              />
-            </div>
+
             <div className="input-wrapper">
               <PhoneNumber
                 name="contact"
@@ -125,6 +116,16 @@ function EditContacts() {
                 error={touched.contact && errors.contact}
                 label="Contact Number"
                 placeholder="eg. 8511591740"
+              />
+            </div>
+            <div className="input-wrapper">
+              <TextInput
+                name="email"
+                value={values.email}
+                onChange={(e) => setFieldValue("email", e.target.value)}
+                error={touched.email && errors.email}
+                label="Email ID"
+                placeholder="eg. salesteam@br.in"
               />
             </div>
 

@@ -25,7 +25,11 @@ function CardOtherInfo({ otherInfo, onClick }) {
         </div>
         <div className="row ">
           <div className="col-6 title-other-Info ">Our Services & support?</div>
-          <div className="col-6 title-other-Info">{otherInfo?.details}</div>
+          {otherInfo?.servicesAndSupport?.provided === "yes" ? (
+            <div className="col-6 title-other-Info">
+              {otherInfo?.servicesAndSupport?.details}
+            </div>
+          ) : null}
         </div>
         <div className="row mb-2">
           <div className="col-6 title-other-Info">

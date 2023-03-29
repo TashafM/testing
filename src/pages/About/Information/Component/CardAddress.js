@@ -19,7 +19,7 @@ function CardAddress({ registeredAddress, onClick }) {
   console.log(prepareAddressString(registeredAddress));
   return (
     <Col className="card-wrapper" md={6} xl={4}>
-      <div className="card-cont" onClick={onClick}>
+      <div className="card-cont">
         <CardHead
           title="Address"
           type={"Address"}

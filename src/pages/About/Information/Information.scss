@@ -1,5 +1,5 @@
 .card-head {
-  margin-bottom: 12px;
+  margin-bottom: 20px;
 }
 .card-otherinfo-head {
   margin-bottom: 10px;
@@ -38,6 +38,13 @@
   height: 180px;
 }
 
+.contact-us-container {
+  background: #ffffff;
+  border: 1px solid #dadada;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 30px;
+}
 .card-img {
   height: 25px;
   width: 25px;
@@ -59,8 +66,13 @@
   flex-grow: 1;
 }
 
+.contact-us-title {
+  padding: 0;
+  padding-bottom: 12px;
+}
+
 .email-cont {
-  margin-bottom: 12px;
+  margin-bottom: 20px;
 }
 
 .email {
@@ -100,11 +112,7 @@
 
 @media only screen and (max-width: 1199px) {
   .cont-title {
-    font-size: 16px;
-  }
-
-  .card-cont {
-    // height: 250px;
+    font-size: 14px;
   }
 
   .email {
@@ -118,7 +126,7 @@
   }
 
   .email {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 

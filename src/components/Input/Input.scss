@@ -122,8 +122,8 @@ input:checked + .slider:before {
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 10px;
+  // line-height: 22px;
 }
 
 //phone number
@@ -197,6 +197,12 @@ div.PhoneInputCountry {
   height: 150px;
 }
 
+.preview-icon {
+  height: 50px;
+  width: 50px;
+  border-radius: 5px;
+}
+
 input[type="time"]::-webkit-calendar-picker-indicator {
   background: none;
 }
@@ -205,7 +211,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   background: #f7f7f7;
   border: 1px dashed #899197;
   border-radius: 15px;
-  padding: 25px 15px;
+  padding: 20px 15px;
 }
 
 .file-name {
@@ -213,18 +219,13 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 66%;
+  margin-top: 16px;
+  margin-bottom: 0;
 }
 @media only screen and (max-width: 1199px) {
-  .badges-container {
-    font-size: 12px;
-  }
 }
 
 @media only screen and (max-width: 1600px) {
-  .badges-container {
-    font-size: 14px;
-  }
-
   .input-lable {
     font-size: 14px;
     margin-top: 15px;
@@ -248,7 +249,4 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 @media only screen and (max-width: 1440px) {
-  .badges-container {
-    font-size: 14px;
-  }
 }

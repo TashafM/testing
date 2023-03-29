@@ -53,12 +53,12 @@ export default function RightDrawer() {
         <React.Fragment>
           <SwipeableDrawer
             anchor={"right"}
-            variant="persistent"
+            // variant="persistent"
             open={openDrawer.open}
             // ModalProps={{
             //   keepMounted: false,
             // }}
-            disableBackdropTransition={true}
+            // disableBackdropTransition={true}
             onClose={() => {
               setOpenDrawer({ ...openDrawer, open: false, type: "" });
             }}

@@ -42,7 +42,8 @@ function Information() {
           {data[0]?.contactUs?.length ? (
             <CardContacts
               type={"Contact"}
-              contactUs={data[0]?.contactUs[0]}
+              contactUs={data[0]?.contactUs[0] ?? {}}
+              length={data[0]?.contactUs?.length ?? 0}
               title="Contact"
               onClick={() => {
                 setOpenDrawer({

@@ -1,7 +1,5 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import TextInput from "../../../../components/Input/TextInput";
-import EditorInput from "../../../../components/Input/EditorInput";
-import { faqData } from "../../data/data";
 import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import BtnTitleIcon from "../../../../components/Button/BtnTitleIcon";
 import TextArea from "../../../../components/Input/TextArea";
@@ -47,7 +45,7 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
     >
       <Modal.Body className="modalbody">
         <div className="d-flex justify-content-between  pb-3">
-          <p>Privacy Policy</p>
+          <p className="modal-title">Privacy Policy</p>
           <div className="d-flex justify-content-center align-items-center">
             <BtnTitleCenter onClick={onSaveData} title="Save" />
             <img

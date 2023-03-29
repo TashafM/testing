@@ -1,8 +1,10 @@
 import React from "react";
 import BtnIconOnly from "../../../../components/Button/BtnIconOnly";
+import deleteBtn from "../../../../assets/images/delete.svg";
+
 import "../Brand.scss";
 
-function CardBrand({ title, item, location, onClick }) {
+function CardBrand({ title, item, location, onClick, onDelete, index }) {
   // const { setOpenDrawer } = useContextProvider();
 
   return (
@@ -18,6 +20,9 @@ function CardBrand({ title, item, location, onClick }) {
         />
         <p className="title-brand">{item.brandName}</p>
         <p className="m-0">{location}</p>
+      </div>
+      <div className="text-end">
+        <BtnIconOnly icon={deleteBtn} onClick={() => onDelete(item, index)} />
       </div>
     </div>
   );

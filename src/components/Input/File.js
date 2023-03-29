@@ -7,6 +7,8 @@ const FileDropzone = ({ file, onChange, label }) => {
     console.log("error code " + error.code + ": " + error.message);
   };
 
+  console.log({ file });
+
   return (
     <div className="files">
       {label ? <p className="input-lable">{label}</p> : null}
@@ -23,7 +25,15 @@ const FileDropzone = ({ file, onChange, label }) => {
         clickable
       >
         <div className="d-flex flex-column align-items-center">
-          <img src={icon} alt="file-drop-img" />
+          {file.length && file[0].name ? (
+            <img
+              src={file[0].name}
+              className="preview-icon"
+              alt="file-drop-img"
+            />
+          ) : (
+            <img src={icon} alt="file-drop-img" />
+          )}
           <p className="file-name">
             {file.length ? file[0].name : "Choose picture from your gallery"}
           </p>

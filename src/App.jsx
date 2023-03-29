@@ -1,4 +1,5 @@
 /* eslint-disable*/
+import { toast, ToastContainer } from "react-toastify";
 import { useState } from "react";
 import { createContext } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -15,7 +16,6 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
   // const [alert, setAlert] = useState(false);
-  
 
   return (
     <ContextProvider>
@@ -29,6 +29,7 @@ function App() {
           // setAlert,
         }}
       >
+        <ToastContainer position="top-center" />
         <RightDrawer />
         <Routing />
       </GlobalContext.Provider>

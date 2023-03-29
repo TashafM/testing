@@ -64,6 +64,7 @@ function FAQ() {
             data={getFAQ}
             editSaveCallback={editSaveCallback}
             type={"FAQ"}
+            btnTitle="Create more FAQ"
             emptyadta={{ question: "", answer: "" }}
           >
             <EditFAQ close={() => setShowModal(false)} />
@@ -96,6 +97,7 @@ function FAQ() {
           data={getFAQ}
           editSaveCallback={editSaveCallback}
           type={"FAQ"}
+          btnTitle="Create more FAQ"
           emptyadta={{ question: "", answer: "" }}
         >
           <EditFAQ close={() => setShowModal(false)} />

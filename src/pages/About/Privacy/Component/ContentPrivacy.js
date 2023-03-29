@@ -6,7 +6,7 @@ function ContentPrivacy({ data }) {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-10 col-lg-9 col-md-12 p-0">
+        <div className="col-10 col-lg-9 col-md-12 col-sm-12 p-0">
           {data.map((item, index) => {
             return (
               <div>
@@ -20,7 +20,7 @@ function ContentPrivacy({ data }) {
             );
           })}
         </div>
-        <div className="col-2 col-lg-3 col-md-0 p-0 ">
+        <div className="col-2 col-lg-3 col-md-0 col-sm-0 p-0 ">
           <div className="table-of-content">
             <div className="title">Table of Contents:</div>
             {data.map((item, index) => {

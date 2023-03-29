@@ -8,8 +8,32 @@
   margin-bottom: 40px;
 }
 
+.btn-add-container {
+  width: 70px;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+
+.count-text-color {
+  color: #be212a !important;
+}
+
+.contacts-count {
+  background-color: #fff2f2;
+  // padding: 8px;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  color: #be212a !important;
+}
+
 .input-wrapper {
-  margin-bottom: 20px;
+  margin-bottom: 38px;
+}
+
+.check-container {
+  margin-right: 25px;
 }
 
 .apply-all-checked {
@@ -31,6 +55,7 @@
   border: 1px solid #dadada;
   border-radius: 12px;
   padding: 10px;
+  height: 80px;
   margin-bottom: 15px;
 
   .card-day {
@@ -152,9 +177,6 @@
 }
 
 @media only screen and (max-width: 1600px) {
-  .card-slots-container {
-  }
-
   .statement-title {
     font-size: 16px;
   }
