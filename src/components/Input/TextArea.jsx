@@ -24,7 +24,9 @@ function TextArea({
       >
         {value}
       </textarea>
-      <p style={{ color: "red" }}>{error}</p>
+      <p className="mb-5" style={{ color: "red" }}>
+        {error}
+      </p>
     </>
   );
 }

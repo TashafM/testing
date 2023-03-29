@@ -7,13 +7,14 @@ function Collapsible({ title, description, eventKey, defaultActiveKey = "0" }) {
     <div className="collapsible-container">
       <Accordion defaultActiveKey={defaultActiveKey}>
         <Accordion.Item className="collapse-container" eventKey={eventKey}>
-          <Accordion.Header className="collapse-title">
+          <Accordion.Header className="collapse-title mb-2">
             {title}
           </Accordion.Header>
-          <Accordion.Body className="collapse-desc">
+          <Accordion.Body className="collapse-desc pb-4">
             {description}
           </Accordion.Body>
         </Accordion.Item>
+        <hr style={{ color: "#e4e4e4" }} />
       </Accordion>
     </div>
   );

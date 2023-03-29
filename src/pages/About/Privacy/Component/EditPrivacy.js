@@ -46,19 +46,23 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
       <Modal.Body className="modalbody">
         <div className="d-flex justify-content-between  pb-3">
           <p className="modal-title">Privacy Policy</p>
-          <div className="d-flex justify-content-center align-items-center">
+          <div className="d-flex justify-content-center align-items-center me-2">
             <BtnTitleCenter onClick={onSaveData} title="Save" />
             <img
               src={cross}
               alt="icon-cross"
               onClick={() => close()}
-              className="crossCloseButton"
+              className="crossCloseButton ms-5"
             />
           </div>
         </div>
         {privacyData.map((item, index) => {
           return (
-            <div key={`privacy-item-${index}`} style={{}}>
+            <div
+              key={`privacy-item-${index}`}
+              style={{}}
+              className="text-input-privacy"
+            >
               <TextInput
                 placeholder={"privacy title"}
                 value={item.title}
@@ -75,7 +79,7 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
           );
         })}
 
-        <div className="default-height d-flex align-items-center justify-content-center">
+        <div className="default-height d-flex align-items-center justify-content-center btn-add-more">
           <BtnTitleIcon
             title="Add more topics"
             onClick={() => {
