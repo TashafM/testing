@@ -122,16 +122,6 @@ export default function RightDrawer() {
               </div>
             </Box>
           </SwipeableDrawer>
-          {/* {alert && (
-            <span className="tashaf">
-              You have successfully added a new team member{" "}
-            </span>
-          )} */}
-          <div className="tttt">
-            <Alert variant="success" dismissible>
-              This is a danger alert with a close button!
-            </Alert>
-          </div>
         </React.Fragment>
       )}
     </div>
