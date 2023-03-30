@@ -11,6 +11,7 @@ import Brand from "../pages/About/Brand/Brand";
 
 import AwardsHonours from "../pages/Home/AwardsHonours/AwardsHonours";
 import Dashboard from "../pages/Home/Dashboard/Dashboard";
+import DealerDashboard from "../pages/Dealers/SubPages/Dashboard/DealerDashboard";
 
 import Home from "../pages/Home/Home";
 import Orders from "../pages/Home/Orders/Orders";
@@ -35,6 +36,10 @@ import PastPartners from "../pages/Home/Partners/PastPartners/PastPartners";
 import Dummy from "../pages/Home/Dummy/Dummy";
 import SelectPage from "../pages/Login/SelectPage/SelectPage";
 import Dealers from "../pages/Dealers/Dealers";
+import AllProducts from "../pages/Dealers/SubPages/AllProducts/AllProducts";
+import DealerOrders from "../pages/Dealers/SubPages/Orders/DealerOrders";
+import Favorites from "../pages/Dealers/SubPages/Favorites/Favorites";
+import NewArrival from "../pages/Dealers/SubPages/NewArrival/NewArrival";
 // import About from "../pages/About/";
 // import Contact from "./Contact";
 
@@ -79,7 +84,13 @@ const Routing = () => (
         </Route>
       </Route>
       <Route path="/" element={<Login />} />
-      <Route path="/dealers" element={<Dealers/>}/>
+      <Route path="dealers" element={<Dealers />}>
+        <Route path="dashboard" element={<DealerDashboard/>} />
+        <Route path="all-products" element={<AllProducts/>} />
+        <Route path="orders" element={<DealerOrders/>} />
+        <Route path="favorites" element={<Favorites/>} />
+        <Route path="new-arrival" element={<NewArrival/>} />
+      </Route>
     </Routes>
   </BrowserRouter>
 );

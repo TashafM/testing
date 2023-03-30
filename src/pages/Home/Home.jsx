@@ -12,6 +12,7 @@ import TabletNavbar from "../../components/TabletNavbar/TabletNavbar";
 import { Button } from "react-bootstrap";
 import { GlobalContext } from "../../App";
 import { useContext } from "react";
+import menuItems from "../../components/Menus/menu";
 
 
 const Home = () => {
@@ -33,7 +34,7 @@ const Home = () => {
           <div className="row">
             <div className="col-xl-2 menu-list">
               <div className="sub-menu-list">
-                <Menus name="tashaf mahmood"/>
+                <Menus tabs={menuItems}/>
                 {/* <Button onClick={()=>{
                   setA(true)
                   console.log(a,'aaaaaaaaaa')

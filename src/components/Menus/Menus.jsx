@@ -2,13 +2,11 @@
 import React, { useEffect, useState } from "react";
 import "./Menus.scss";
 import logo from "../../assets/images/atinks-dashboard.png";
-import menuItems from "./menu.js";
 // import NeedHelp from "../NeedHelp/NeedHelp";
 
 import { useLocation, useNavigate } from "react-router-dom";
 
-const Menus = (props) => {
-  console.log(props,'djljljl')
+const Menus = ({tabs}) => {
   const navigate = useNavigate();
   const location = useLocation()
   // const [data, setData] = useState(localStorage.getItem("data") || null);
@@ -31,7 +29,7 @@ const Menus = (props) => {
       <div style={{overflow:'auto'}}>
         <div className="menu-list">
           <ul>
-            {menuItems.map((item, id) => {
+            {tabs.map((item, id) => {
               return (
                 <>
                   <div
