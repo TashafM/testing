@@ -1,12 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./NavbarTop.scss";
 import * as BS from "react-icons/bs";
 import atinks from "../../assets/images/atinks.png";
 import BlackBtn from "../BlackBtn/BlackBtn";
 import {BsChevronDown} from 'react-icons/bs'
 import user from '../../assets/images/user.jpg'
+import LogoutPopup from "../LogoutPopup/LogoutPopup";
 
 const NavbarTop = () => {
+  const [showPopup, setShowPopup] = useState(false)
   return (
     <div className="row navbar-top">
       <div className="col-md-2 col-sm-4">
@@ -27,7 +29,8 @@ const NavbarTop = () => {
         <div className="user-profile">
           <img src={user} alt="" />
           <span className="username">Username</span>
-          <span className="btn-dropdown"><BsChevronDown/></span>
+          <span className="btn-dropdown" onClick={()=>setShowPopup(!showPopup)}><BsChevronDown/></span>
+          {showPopup && <LogoutPopup/>}
         </div>
       </div>
     </div>
