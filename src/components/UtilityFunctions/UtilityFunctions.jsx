@@ -66,13 +66,10 @@ class Util {
     setPastData,
     datum,
     setData,
-    pastData,
+    pastData
   ) => {
-    console.log(setPastData,
-      datum,
-      setData,)
-    setLoading(true);
-    setMsg(`Deleting ${user.displayFirstName} from current team members`);
+    console.log(setPastData, datum, setData);
+
     const { teamMemberId, displayFirstName } = user;
     const companyUserCode = localStorage.getItem("usercode");
     const accessToken = localStorage.getItem("accessToken");
@@ -82,6 +79,8 @@ class Util {
     );
 
     if (confirm) {
+      setLoading(true);
+      setMsg(`Deleting ${user.displayFirstName} from current team members`);
       axios
         .post(
           API.DELETE_TEAM_MEMBERS,
@@ -164,15 +163,14 @@ class Util {
     pastData,
     setPastData
   ) => {
-    setLoading(true);
-    setMsg(`Deleting ${selectedIds.length} team members`);
-
     const confirm = window.confirm(
       `Are you sure you want to delete ${selectedIds.length} users?`
     );
     if (confirm) {
       const companyUserCode = localStorage.getItem("usercode");
       const accessToken = localStorage.getItem("accessToken");
+      setLoading(true);
+      setMsg(`Deleting ${selectedIds.length} team members`);
       axios
         .post(
           API.DELETE_TEAM_MEMBERS,
@@ -184,13 +182,20 @@ class Util {
           }
         )
         .then((res) => {
-        const updatedData = data.filter((user) => !selectedIds.includes(user.teamMemberId)); // filter out the deleted users
-        setData(updatedData); // update the state with the updated data
-        setPastData((prevData) => [...selectedIds.map(id => data.find(user => user.teamMemberId === id)), ...prevData]); // add deleted users to past data state
+          const updatedData = data.filter(
+            (user) => !selectedIds.includes(user.teamMemberId)
+          ); // filter out the deleted users
+          setData(updatedData); // update the state with the updated data
+          setPastData((prevData) => [
+            ...selectedIds.map((id) =>
+              data.find((user) => user.teamMemberId === id)
+            ),
+            ...prevData,
+          ]); // add deleted users to past data state
 
-        setLoading(false);
-        setMsg(`Successfully deleted ${selectedIds.length} team member(s)`);
-        setSelectedIds('')
+          setLoading(false);
+          setMsg(`Successfully deleted ${selectedIds.length} team member(s)`);
+          setSelectedIds("");
         });
     }
     return false;
@@ -262,10 +267,17 @@ class Util {
   //   }
   // };
 
-  restoreSingle = (user, api, getDataFunc, setLoading, setMsg, setPastData,
+  restoreSingle = (
+    user,
+    api,
+    getDataFunc,
+    setLoading,
+    setMsg,
+    setPastData,
     datum,
     setData,
-    pastData) => {
+    pastData
+  ) => {
     setLoading(true);
     setMsg(`Restoring ${user.displayFirstName} `);
     const { teamMemberId } = user;
@@ -329,13 +341,20 @@ class Util {
           }
         )
         .then((res) => {
-        const updatedData = data.filter((user) => !selectedIds.includes(user.teamMemberId)); // filter out the restored users
-        setData(updatedData); // update the state with the updated data
-        setPastData((prevData) => [...selectedIds.map(id => data.find(user => user.teamMemberId === id)), ...prevData]); 
+          const updatedData = data.filter(
+            (user) => !selectedIds.includes(user.teamMemberId)
+          ); // filter out the restored users
+          setData(updatedData); // update the state with the updated data
+          setPastData((prevData) => [
+            ...selectedIds.map((id) =>
+              data.find((user) => user.teamMemberId === id)
+            ),
+            ...prevData,
+          ]);
 
-        setLoading(false);
-        setMsg(`Successfully deleted ${selectedIds.length} team member(s)`);
-        setSelectedIds('')
+          setLoading(false);
+          setMsg(`Successfully deleted ${selectedIds.length} team member(s)`);
+          setSelectedIds("");
         })
         .catch((err) => {
           setLoading(false);

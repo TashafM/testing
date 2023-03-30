@@ -4,8 +4,8 @@ import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./DatePickerComp.scss";
 
-const DatePickerComp = ({heading}) => {
-  const [date, setDate] = useState(['', '', '']);
+const DatePickerComp = ({heading, date, setDate}) => {
+  // const [date, setDate] = useState(['', '', '']);
 
   const validate = (value, min, max) => parseInt(value, 10) >= min && parseInt(value, 10) <= max;
 

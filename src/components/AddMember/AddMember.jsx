@@ -26,8 +26,7 @@ import AddMemberDate from "../AddMemberDate/AddMemberDate";
 const AddMember = ({ api, getDataFunc, getCurrMembers, data, setData }) => {
   const { loading, setLoading, setMsg, msg } = useContext(GlobalContext);
   const [show, setShow] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(["", "", ""]);
-  const [proDate, setproDate] = useState(["", "", ""]);
+  
   // const [loading, setLoading] = useState(false);
   const [showRatings, setshowRatings] = useState(false);
   const [designationList, setDesignationList] = useState([]);
@@ -127,15 +126,15 @@ const AddMember = ({ api, getDataFunc, getCurrMembers, data, setData }) => {
   };
 
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  // const [selectedDate, setSelectedDate] = useState(["", "", ""]);
-  // const [newDate, setNewDate] = useState(["","",""])
-
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
-  const handleProbDate = (date) => {
-    setproDate(date);
-  };
+  
+  const [selectedDate, setSelectedDate] = useState(["", "", ""]);
+  const [proDate, setproDate] = useState(["", "", ""]);
+  // const handleDateChange = (date) => {
+  //   setSelectedDate(date);
+  // };
+  // const handleProbDate = (date) => {
+  //   setproDate(date);
+  // };
   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   /*--------------------------------------------- */
   const rawStartDate = selectedDate.join("/");
@@ -173,6 +172,7 @@ const AddMember = ({ api, getDataFunc, getCurrMembers, data, setData }) => {
   };
 
   function handleSubmit(event) {
+    console.log(selectedDate, proDate)
     setLoading(true);
     setMsg("Adding a team member...");
     event.preventDefault();
@@ -394,19 +394,17 @@ const AddMember = ({ api, getDataFunc, getCurrMembers, data, setData }) => {
               <div className="d-flex justify-content-between">
                 <DatePickerComp
                   heading={"Start Date *"}
-                  selectedDate={selectedDate}
-                  handleDateChange={handleDateChange}
+                  date={selectedDate}
+                  setDate={setSelectedDate}
+                  // handleDateChange={handleDateChange}
                 />
                 <DatePickerComp
                   heading={"Probation Date *"}
-                  selectedDate={probDate}
-                  handleDateChange={handleProbDate}
+                  date={proDate}
+                  setDate={setproDate}
+                  // handleDateChange={handleProbDate}
                 />
               </div>
-
-              {/* <AddMemberDate /> */}
-              {/* <AddMemberDate selectedDate={selectedDate} handleDateChange={handleDateChange} />
-              <AddMemberDate selectedDate={newDate} handleDateChange={handleNewDateChange} /> */}
 
 
 
