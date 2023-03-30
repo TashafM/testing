@@ -20,9 +20,10 @@ import Util from "../UtilityFunctions/UtilityFunctions";
 import Multiselect from "multiselect-react-dropdown";
 import PhoneNumber from "../Input/PhoneNumber";
 import { GlobalContext } from "../../App";
+import { useLocation, useNavigate } from "react-router";
+import AddMemberDate from "../AddMemberDate/AddMemberDate";
 
 const AddMember = ({ api, getDataFunc, getCurrMembers, data, setData }) => {
-  console.log(data,'ADD MEMBER')
   const { loading, setLoading, setMsg, msg } = useContext(GlobalContext);
   const [show, setShow] = useState(false);
   const [selectedDate, setSelectedDate] = useState(["", "", ""]);
@@ -34,6 +35,8 @@ const AddMember = ({ api, getDataFunc, getCurrMembers, data, setData }) => {
   const [departmentList, setDepartmentList] = useState([]);
   const [department, setDepartment] = useState([]);
 
+  const navigate = useNavigate();
+  const location = useLocation();
   //------------location-------------------------
   const [displayLocation, setDisplayLocation] = useState({
     city: "",
@@ -111,7 +114,29 @@ const AddMember = ({ api, getDataFunc, getCurrMembers, data, setData }) => {
   };
 
   /* VALIDATION AND FUNCTION FOR DATE */
+  const validate = (value, min, max) =>
+    parseInt(value, 10) >= min && parseInt(value, 10) <= max;
 
+  const handleBlur = ({ target: { value } }) => {
+    const newValue = value.padStart(2, "0");
+    if (validate(newValue, min, max)) {
+      onBlur(newValue);
+    } else {
+      onBlur("");
+    }
+  };
+
+  //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  // const [selectedDate, setSelectedDate] = useState(["", "", ""]);
+  // const [newDate, setNewDate] = useState(["","",""])
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+  const handleProbDate = (date) => {
+    setproDate(date);
+  };
+  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   /*--------------------------------------------- */
   const rawStartDate = selectedDate.join("/");
   // const [day, month, year] = rawStartDate.split('/');
@@ -177,8 +202,11 @@ const AddMember = ({ api, getDataFunc, getCurrMembers, data, setData }) => {
         }
       )
       .then((res) => {
-        setData(prevData => [newData, ...prevData]); // add updated data to state
-        setLoading(false)
+        setData((prevData) => [newData, ...prevData]); // add updated data to state
+        setLoading(false);
+        if (location.pathname !== `/home/team-members/current-members`) {
+          navigate(`/home/team-members/current-members`);
+        }
       })
       .catch((err) => {
         console.log(err, "error");
@@ -366,15 +394,21 @@ const AddMember = ({ api, getDataFunc, getCurrMembers, data, setData }) => {
               <div className="d-flex justify-content-between">
                 <DatePickerComp
                   heading={"Start Date *"}
-                  dateInput={dateInput}
                   selectedDate={selectedDate}
+                  handleDateChange={handleDateChange}
                 />
                 <DatePickerComp
                   heading={"Probation Date *"}
-                  dateInput={probDate}
-                  selectedDate={proDate}
+                  selectedDate={probDate}
+                  handleDateChange={handleProbDate}
                 />
               </div>
+
+              {/* <AddMemberDate /> */}
+              {/* <AddMemberDate selectedDate={selectedDate} handleDateChange={handleDateChange} />
+              <AddMemberDate selectedDate={newDate} handleDateChange={handleNewDateChange} /> */}
+
+
 
               <div>
                 <input
@@ -382,7 +416,9 @@ const AddMember = ({ api, getDataFunc, getCurrMembers, data, setData }) => {
                   checked={showRatings}
                   onChange={() => setshowRatings(!showRatings)}
                 />
-                <span className="show-ratings-title">Show ratings on the employee’s card</span>
+                <span className="show-ratings-title">
+                  Show ratings on the employee’s card
+                </span>
               </div>
 
               <Button variant="primary" type="submit" className="save-btn">
@@ -397,3 +433,5 @@ const AddMember = ({ api, getDataFunc, getCurrMembers, data, setData }) => {
 };
 
 export default AddMember;
+
+//

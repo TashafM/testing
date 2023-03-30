@@ -7,7 +7,8 @@ import menuItems from "./menu.js";
 
 import { useLocation, useNavigate } from "react-router-dom";
 
-const Menus = () => {
+const Menus = (props) => {
+  console.log(props,'djljljl')
   const navigate = useNavigate();
   const location = useLocation()
   // const [data, setData] = useState(localStorage.getItem("data") || null);

@@ -33,7 +33,7 @@ const Home = () => {
           <div className="row">
             <div className="col-xl-2 menu-list">
               <div className="sub-menu-list">
-                <Menus />
+                <Menus name="tashaf mahmood"/>
                 {/* <Button onClick={()=>{
                   setA(true)
                   console.log(a,'aaaaaaaaaa')
