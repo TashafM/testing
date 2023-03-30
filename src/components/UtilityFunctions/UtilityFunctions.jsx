@@ -163,6 +163,7 @@ class Util {
     pastData,
     setPastData
   ) => {
+    console.log(selectedIds,'delete selected items called')
     const confirm = window.confirm(
       `Are you sure you want to delete ${selectedIds.length} users?`
     );

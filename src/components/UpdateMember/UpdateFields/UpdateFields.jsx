@@ -314,17 +314,16 @@ const UpdateFields = ({ editData, handleClose }) => {
       </FormGroup>
 
       <div className="d-flex justify-content-between">
-        <DatePickerComp
+        {/* <DatePickerComp
           heading={"Start Date *"}
           dateInput={dateInput}
           selectedDate={date}
         />
-        {/* {console.log(date)} */}
         <DatePickerComp
           heading={"Probation Date *"}
           dateInput={dateInput2}
           selectedDate={pdate}
-        />
+        /> */}
       </div>
 
       {/* <div>
