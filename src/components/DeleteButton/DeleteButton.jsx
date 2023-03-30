@@ -13,6 +13,9 @@ const DeleteButton = ({
   func1,
   func2,
   setSelectedIds,
+  setPastData,
+  setData,
+  pastData,
 }) => {
   const {setLoading, setMsg} = useContext(GlobalContext)
 
@@ -28,7 +31,11 @@ const DeleteButton = ({
               func1,
               setSelectedIds,
               setLoading,
-              setMsg
+              setMsg,
+              data,
+              setData,
+              pastData,
+              setPastData
             )
           }
         >

@@ -191,7 +191,10 @@ const DataTable = ({
                           <img
                             src={restoreBtn}
                             onClick={() =>
-                              myUtil.restoreSingle(row, restoreApi, getDataFunc, setLoading, setMsg)
+                              myUtil.restoreSingle(row, restoreApi, getDataFunc, setLoading, setMsg, setPastData,
+                                datum,
+                                setData,
+                                pastData)
                             }
                           />
                         </span>

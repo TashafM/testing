@@ -16,12 +16,19 @@ const PastMembers = ({
   dataLength,
   next,
   hasMore,
+  setPastData,
+  setData,
+  data
 }) => {
   return (
     <div>
       <DataTable
         columns={colPastMembers}
         datum={pastMemberData}
+        setData={setPastData}
+        pastData={data}
+        setPastData={setData}
+
         // datum={filteredItems2}
         selectedIds={selectedIds}
         api={pastMemberApi}

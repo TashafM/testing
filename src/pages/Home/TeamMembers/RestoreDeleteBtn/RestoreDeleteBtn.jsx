@@ -26,6 +26,8 @@ const RestoreDeleteBtn = ({
   handleSearch,
   handleSearch2,
   setData,
+  pastData,
+  setPastData,
 }) => {
   const location = useLocation();
   const {setMsg, setLoading} = useContext(GlobalContext)
@@ -48,12 +50,15 @@ const RestoreDeleteBtn = ({
                 <RestoreBtn
                   selectedIds={selectedIds}
                   api={API.RESTORE_TEAM_MEMBERS}
-                  data={pastMemberData}
+                  data={pastData}
                   apiTo={pastMemberApi}
                   apiFrom={currMemberApi}
                   // func1={getCurrMembers}
                   func={getPastMembers}
                   setSelectedIds={setSelectedIds}
+                  setData={setPastData}
+                  setPastData={setData}
+                  pastData={currMemberData}
                 />
               ) : (
                 <>
@@ -95,6 +100,9 @@ const RestoreDeleteBtn = ({
                     func1={getCurrMembers}
                     // func2={getPastMembers}
                     setSelectedIds={setSelectedIds}
+                    setData={setData}
+                    setPastData={setPastData}
+                    pastData={pastData}
                   />
                 </>
               )}

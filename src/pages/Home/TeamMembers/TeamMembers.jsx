@@ -201,6 +201,7 @@ const TeamMembers = (props) => {
 
   return (
     <>
+    {console.log(pastData,'team members')}
       <div className="upper-content">
         <Description
           icon={users}
@@ -233,6 +234,8 @@ const TeamMembers = (props) => {
             // currMemberData={currMemberData}
             currMemberData={data}
             setData={setData}
+            setPastData={setPastData}
+            pastData={pastData}
             handleSearch={handleSearch}
             handleSearch2={handleSearch2}
           />
@@ -285,6 +288,9 @@ const TeamMembers = (props) => {
               dataLength={pastData.length}
               next={pastHandleLoadMore}
               hasMore={pastHasMore}
+              setPastData={setPastData}
+              data={data}
+              setData={setData}
             />
             // </InfiniteScroll>
           )}

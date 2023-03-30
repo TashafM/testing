@@ -68,6 +68,9 @@ class Util {
     setData,
     pastData,
   ) => {
+    console.log(setPastData,
+      datum,
+      setData,)
     setLoading(true);
     setMsg(`Deleting ${user.displayFirstName} from current team members`);
     const { teamMemberId, displayFirstName } = user;
@@ -90,16 +93,11 @@ class Util {
           }
         )
         .then((res) => {
-          // getDataFunc(1).then((res) => {
-          //   setLoading(false);
-          // });
-          // onUpdate(res);
           const updatedData = datum.filter(
             (u) => u.teamMemberId !== user.teamMemberId
           ); // filter out the deleted user
           setData(updatedData); // update the state with the updated data
           setPastData((prevData) => [user, ...prevData]); // add updated data to state
-          // setPastData([user, ...pastData]); // add updated data to state
 
           setLoading(false);
         })
@@ -160,7 +158,11 @@ class Util {
     func1,
     setSelectedIds,
     setLoading,
-    setMsg
+    setMsg,
+    data,
+    setData,
+    pastData,
+    setPastData
   ) => {
     setLoading(true);
     setMsg(`Deleting ${selectedIds.length} team members`);
@@ -182,9 +184,13 @@ class Util {
           }
         )
         .then((res) => {
-          setLoading(false);
-          func1(1);
-          setSelectedIds([]);
+        const updatedData = data.filter((user) => !selectedIds.includes(user.teamMemberId)); // filter out the deleted users
+        setData(updatedData); // update the state with the updated data
+        setPastData((prevData) => [...selectedIds.map(id => data.find(user => user.teamMemberId === id)), ...prevData]); // add deleted users to past data state
+
+        setLoading(false);
+        setMsg(`Successfully deleted ${selectedIds.length} team member(s)`);
+        setSelectedIds('')
         });
     }
     return false;
@@ -256,7 +262,10 @@ class Util {
   //   }
   // };
 
-  restoreSingle = (user, api, getDataFunc, setLoading, setMsg) => {
+  restoreSingle = (user, api, getDataFunc, setLoading, setMsg, setPastData,
+    datum,
+    setData,
+    pastData) => {
     setLoading(true);
     setMsg(`Restoring ${user.displayFirstName} `);
     const { teamMemberId } = user;
@@ -273,7 +282,14 @@ class Util {
         }
       )
       .then((res) => {
-        getDataFunc(1);
+        // getDataFunc(1);
+        // setLoading(false);
+        const updatedData = datum.filter(
+          (u) => u.teamMemberId !== user.teamMemberId
+        ); // filter out the deleted user
+        setData(updatedData); // update the state with the updated data
+        setPastData((prevData) => [user, ...prevData]); // add updated data to state
+
         setLoading(false);
       })
       .catch((err) => {
@@ -284,11 +300,15 @@ class Util {
   // This function is used to restore multiple past members/deleted members to current table
   restorePastMembers = (
     selectedIds,
-    api,
-    func,
+    func1,
     setSelectedIds,
     setLoading,
-    setMsg
+    setMsg,
+    data,
+    setData,
+    pastData,
+    setPastData,
+    api
   ) => {
     setLoading(true);
     setMsg(`Restoring ${selectedIds.length} past team members`);
@@ -309,9 +329,13 @@ class Util {
           }
         )
         .then((res) => {
-          func(1);
-          setLoading(false);
-          setSelectedIds([]);
+        const updatedData = data.filter((user) => !selectedIds.includes(user.teamMemberId)); // filter out the restored users
+        setData(updatedData); // update the state with the updated data
+        setPastData((prevData) => [...selectedIds.map(id => data.find(user => user.teamMemberId === id)), ...prevData]); 
+
+        setLoading(false);
+        setMsg(`Successfully deleted ${selectedIds.length} team member(s)`);
+        setSelectedIds('')
         })
         .catch((err) => {
           setLoading(false);
@@ -486,7 +510,7 @@ class Util {
 
   deactiveRatings = (user, setLoading, setMsg, datum, setData) => {
     setLoading(true);
-    setMsg(`Activating rating for ${user.displayFirstName}`);
+    setMsg(`Deactivating rating for ${user.displayFirstName}`);
 
     const { teamMemberId, companyUserCode } = user;
     const accessToken = localStorage.getItem("accessToken");

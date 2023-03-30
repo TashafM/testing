@@ -21,7 +21,6 @@ const CurrentMembers = ({
   setPastData,
   pastData,
 }) => {
-
   return (
     <div>
       <DataTable
