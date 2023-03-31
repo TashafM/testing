@@ -32,7 +32,7 @@ const Home = () => {
             <TabMenus />
           </div>
           <div className="row">
-            <div className="col-xl-2 menu-list">
+            <div className="col-xl-2 menu-list ">
               <div className="sub-menu-list">
                 <Menus tabs={menuItems}/>
                 {/* <Button onClick={()=>{

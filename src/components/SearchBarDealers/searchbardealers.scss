@@ -1,0 +1,33 @@
+.search-div-dealers {
+    position: relative;
+    // margin-right: 5%;
+    margin-right: 10px;
+    width: 320px;
+    input {
+      background: #f0f2f9;
+      border: none;
+      outline: none;
+      color: #899197;
+      font-size: 14px;
+      width: 100%;
+      padding: 15px;
+      border-radius: 8px;
+      padding-left: 15%;
+    }
+    .icon-search {
+      position: absolute;
+      font-size: 24px;
+      top: 15%;
+      left: 5%;
+      color: #899197;
+    }
+  }
+
+  @media only screen and (max-width: 1199px){
+    .search-div-dealers{
+      input{
+        padding: 10px;
+        padding-left: 20%;
+      }
+    }
+  }

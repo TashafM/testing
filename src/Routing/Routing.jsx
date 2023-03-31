@@ -40,6 +40,7 @@ import AllProducts from "../pages/Dealers/SubPages/AllProducts/AllProducts";
 import DealerOrders from "../pages/Dealers/SubPages/Orders/DealerOrders";
 import Favorites from "../pages/Dealers/SubPages/Favorites/Favorites";
 import NewArrival from "../pages/Dealers/SubPages/NewArrival/NewArrival";
+import Products from "../pages/Dealers/SubPages/AllProducts/Products/Products";
 // import About from "../pages/About/";
 // import Contact from "./Contact";
 
@@ -90,6 +91,7 @@ const Routing = () => (
         <Route path="orders" element={<DealerOrders/>} />
         <Route path="favorites" element={<Favorites/>} />
         <Route path="new-arrival" element={<NewArrival/>} />
+        <Route path="all-products/products" element={<Products/>} />
       </Route>
     </Routes>
   </BrowserRouter>

@@ -1,0 +1,15 @@
+.top-comp {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    .title {
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 39px;
+    }
+  
+    .search-filter-btn {
+      display: flex;
+    }
+  }

@@ -14,23 +14,84 @@
   box-shadow: 0px 4px 24px 5px rgba(0, 0, 0, 0.11);
   border-radius: 12px;
 
-  .item-div{
+  .item-div {
     margin-left: 22px;
     cursor: pointer;
-    span{
-        img{
-            width: 25px !important;
-        }
+    span {
+      img {
+        width: 25px !important;
+      }
     }
 
-    .popup-title{
-        margin-left: 10px;
-        font-size: 20px;
-        font-weight: 500;
+    .popup-title {
+      margin-left: 10px;
+      font-size: 20px;
+      font-weight: 500;
     }
 
-    .popup-title.log{
-        color: #BE212A;
+    .popup-title.log {
+      color: #be212a;
+    }
+  }
+}
+
+.confirm-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+}
+
+.confirm-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 21%;
+  height: 21%;
+  background: #ffffff;
+  box-shadow: 0px 4px 24px 5px rgba(0, 0, 0, 0.11);
+  border-radius: 12px;
+  z-index: 10000;
+  padding: 20px 30px;
+  display: flex;
+  font-size: 20px;
+  font-weight: 500;
+  color: #000;
+  flex-direction: column;
+  justify-content: space-around;
+  // text-align: center;
+
+  .popup-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .cancel,
+    .action {
+      width: 45% !important;
+    }
+
+    .cancel {
+      background-color: transparent;
+      color: #be212a;
+      border-color: 
+      #BE212A;
+      font-size: 16px;
+      font-weight: 400;
+      padding: 10px;
+    }
+
+    .action {
+      background-color: #be212a;
+      color: white;
+      border: 1px solid #be212a;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 10px;
     }
   }
 }

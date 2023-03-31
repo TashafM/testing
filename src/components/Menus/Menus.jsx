@@ -22,7 +22,7 @@ const Menus = ({tabs}) => {
 
   return (
     <div className="menus-col">
-      <div className="menu-img">
+      <div className="menu-img dealer-flow">
         <img src={logo} alt="" />
       </div>
 

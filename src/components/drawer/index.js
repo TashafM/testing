@@ -26,6 +26,7 @@ import { useContext } from "react";
 import { GlobalContext } from "../../App";
 import { useState } from "react";
 import { Alert } from "react-bootstrap";
+import ConfirmBox from "../ConfirmBox/ConfirmBox";
 
 export default function RightDrawer() {
   const { loading, setLoading, setMsg, msg, alert, setAlert } =

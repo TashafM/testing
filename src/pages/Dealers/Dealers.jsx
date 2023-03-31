@@ -31,13 +31,13 @@ const Dealers = () => {
                 }}> click here</Button> */}
             </div>
           </div>
-          <div className="col-xl-8 col-lg-12 content-area">
+          <div className="col-xl-10 col-lg-12 content-area">
             {/* <div className="sub-content-area">
             <Outlet/>
           </div> */}
             <Outlet name="alkjaljfsa" />
           </div>
-          <div className="col-xl-2 noti-section"></div>
+          
         </div>
       </div>
       <div className="mobile-not-supported">

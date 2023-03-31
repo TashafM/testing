@@ -30,7 +30,7 @@ const NavbarTop = () => {
           <img src={user} alt="" />
           <span className="username">Username</span>
           <span className="btn-dropdown" onClick={()=>setShowPopup(!showPopup)}><BsChevronDown/></span>
-          {showPopup && <LogoutPopup/>}
+          {showPopup && <LogoutPopup setShowPopup={setShowPopup}/>}
         </div>
       </div>
     </div>

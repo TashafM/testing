@@ -7,10 +7,9 @@ import { useLocation } from "react-router-dom";
 const Dashboard = () => {
 
   const location = useLocation()
-  console.log(location,'location console')
   return (
     <div className="dashboard-container">
-      <Row>
+      {/* <Row>
         <Col className="column"></Col>
         <Col className="column"></Col>
         <Col className="column"></Col>
@@ -28,7 +27,7 @@ const Dashboard = () => {
                 </div>
             </div>
         </Col>
-      </Row>
+      </Row> */}
     </div>
   );
 };
