@@ -16,8 +16,9 @@ import UpdatePartners from "../../pages/Home/Partners/UpdatePartners/UpdatePartn
 import ScrollBtn from "../ScrollBtn/ScrollBtn";
 import { useNavigate } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { GlobalContext } from "../../App";
+import { FixedTableHead, GlobalContext } from "../../App";
 import { useContext } from "react";
+import { createContext } from "react";
 
 const DataTable = ({
   columns,
@@ -43,8 +44,9 @@ const DataTable = ({
   setPastData,
   pastData,
 }) => {
+  const {isOpen, setIsOpen} = useContext(FixedTableHead)
   const { loading, setLoading, setMsg, msg, setAlert } =
-    useContext(GlobalContext);
+  useContext(GlobalContext);
   const myRef = useRef(null);
   const [scrollX, setScrollX] = useState(0);
   // const data = datum.sort((a, b) => b.id - a.id);
@@ -78,7 +80,7 @@ const DataTable = ({
       >
         <div className="table-container" ref={myRef}>
           <Table hover>
-            <thead className="table-head">
+            <thead className={isOpen ? "table-head z0" : "table-head z1"}>
               <tr className="tr-head">
                 <th className="checkbox-div">
                   <input

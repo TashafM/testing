@@ -11,10 +11,12 @@ import Login from "./pages/Login/Login";
 import Routing from "./Routing/Routing";
 
 export const GlobalContext = createContext();
+export const FixedTableHead = createContext();
 
 function App() {
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
   // const [alert, setAlert] = useState(false);
 
   return (
@@ -25,13 +27,13 @@ function App() {
           setLoading,
           msg,
           setMsg,
-          // alert,
-          // setAlert,
         }}
       >
-        <ToastContainer position="top-center" />
-        <RightDrawer />
-        <Routing />
+        <FixedTableHead.Provider value={{isOpen, setIsOpen}}>
+          <ToastContainer position="top-center" />
+          <RightDrawer />
+          <Routing />
+        </FixedTableHead.Provider>
       </GlobalContext.Provider>
     </ContextProvider>
   );

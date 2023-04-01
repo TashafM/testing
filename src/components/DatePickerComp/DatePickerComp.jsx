@@ -14,11 +14,11 @@ const DatePickerComp = ({heading, date, setDate}) => {
       const newValue = value.padStart(2, '0');
       const isValid = validate(newValue, min, max);
       const newState = [...prevDate];
-      if (!isValid) {
-        newState[field] = '';
-      } else {
-        newState[field] = newValue;
-      }
+      // if (!isValid) {
+      //   newState[field] = '';
+      // } else {
+      //   newState[field] = newValue;
+      // }
       return newState;
     });
 
@@ -75,6 +75,11 @@ const DatePickerComp = ({heading, date, setDate}) => {
         />
         {date[2] && !validate(date[2], 1950, 2050) && <span style={{ color: 'red' , fontSize: '24px' }}>*</span>}
       </InputGroup>
+
+      {date[0] && !validate(date[0], 1, 31) && <span style={{ color: 'red' , fontSize: '24px' }}>Invalid Day</span>} <br/>
+      {date[1] && !validate(date[1], 1, 12) && <span style={{ color: 'red', fontSize: '24px'  }}>Invalid Month</span>} <br/>
+      {date[2] && !validate(date[2], 1950, 2050) && <span style={{ color: 'red' , fontSize: '24px' }}>Invalid Year</span>}
+
     </div>
   );
 };
