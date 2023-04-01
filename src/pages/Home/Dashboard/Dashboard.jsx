@@ -9,7 +9,7 @@ const Dashboard = () => {
   const location = useLocation()
   return (
     <div className="dashboard-container">
-      {/* <Row>
+      <Row>
         <Col className="column"></Col>
         <Col className="column"></Col>
         <Col className="column"></Col>
@@ -27,7 +27,7 @@ const Dashboard = () => {
                 </div>
             </div>
         </Col>
-      </Row> */}
+      </Row>
     </div>
   );
 };

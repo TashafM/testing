@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./allproducts.scss";
 import TopBar from "../../Components/TopBar/TopBar";
-import { Button } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router";
+import { superItems } from "../../data";
 
 const AllProducts = () => {
+  const [activeCategory, setActiveCategory] = useState(1);
+  const setCategory = (idx) => {
+    setActiveCategory(idx);
+  };
   const navigate = useNavigate();
   return (
     <>
@@ -12,13 +17,51 @@ const AllProducts = () => {
         <TopBar title={"Print Heads"} />
         <div>
           <div className="img-category-main">
-            <Button onClick={() => navigate(`/dealers/all-products/products`)}>
-              Click
-            </Button>
+            <div className="catItems">
+              {superItems.map((item, id) => (
+                <div
+                  className={
+                    item.index == activeCategory
+                      ? `isActive superCategory-div`
+                      : `superCategory-div`
+                  }
+                  style={{
+                    backgroundImage: `url(${item.logo})`,
+                    backgroundSize: "cover",
+                  }}
+                  onClick={() => setCategory(item.index)}
+                >
+                  {console.log(item.logo,'klljljl')}
+                  {item.itemName}
+                </div>
+              ))}
+            </div>
+            <hr />
+          </div>
+          <div className="company-names">
+            <Row className="category-row">
+              {superItems.map((item) =>
+                item.index == activeCategory ? (
+                  <>
+                    {item.subItems.map((abc) => (
+                      <Col
+                        className="catCol col-xl-4"
+                        style={{backgroundImage: `url(${abc.imgPath})`}}
+                      >
+                        {/* <img src={abc.imgPath} alt="" /> */}
+                        {console.log(abc.imgPath)}
+                        {abc.name}
+                      </Col>
+                    ))}
+                  </>
+                ) : (
+                  " "
+                )
+              )}
+            </Row>
           </div>
         </div>
       </div>
-      
     </>
   );
 };
