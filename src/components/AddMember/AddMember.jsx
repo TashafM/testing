@@ -204,9 +204,6 @@ const AddMember = ({ api, getDataFunc, getCurrMembers, data, setData }) => {
       .then((res) => {
         setData((prevData) => [newData, ...prevData]); // add updated data to state
         setLoading(false);
-        if (location.pathname !== `/home/team-members/current-members`) {
-          navigate(`/home/team-members/current-members`);
-        }
       })
       .catch((err) => {
         console.log(err, "error");
