@@ -9,6 +9,7 @@ function CardTimeSlot({
   endTime,
   onChange,
   index,
+  disabled,
   onTimeChange,
 }) {
   return (
@@ -21,7 +22,7 @@ function CardTimeSlot({
       <div className="d-flex align-items-center">
         <TimeInput
           value={startTime}
-          disabled={!active}
+          disabled={disabled}
           index={index}
           label="startTime"
           onChange={onTimeChange}
@@ -29,7 +30,7 @@ function CardTimeSlot({
         <span>To</span>
         <TimeInput
           value={endTime}
-          disabled={!active}
+          disabled={disabled}
           index={index}
           label="endTime"
           onChange={onTimeChange}

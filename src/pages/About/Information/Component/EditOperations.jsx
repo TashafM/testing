@@ -45,11 +45,49 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
     });
   };
 
-  const onApplySameTimeToAll = () => {
+  const onApplySameTimeToAll = (e, i, key, type) => {
     const obj = { ...defaultCard };
-    obj.active = !obj.active;
 
-    setDefaultCard({ ...obj });
+    try {
+      if (e) {
+        const obj2 = [...operationData];
+        let t = "";
+        operationData.map((item, index) => {
+          if (item.active) {
+            let time = obj2[index][key];
+
+            if (type === "hour") {
+              const hourValue = time?.split(":")?.shift() ?? "09";
+              time = time.replace(hourValue, e);
+            } else if (type === "minutes") {
+              const minutesValue =
+                time?.split(":")?.pop().split(" ").shift() ?? "30";
+              time = time.replace(minutesValue, e);
+            } else {
+              console.log({ time });
+
+              const amPmValue = time?.split(" ");
+              time = time.replace(amPmValue, e);
+            }
+            obj2[index][key] = time;
+            obj[key] = time;
+            t = time;
+          }
+        });
+        obj[key] = t;
+        setDefaultCard({ ...obj });
+
+        setOperationData([...obj2]);
+      } else {
+        obj.active = !obj.active;
+
+        console.log({ obj });
+        setDefaultCard({ ...obj });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
     // operationData.map
   };
 
@@ -66,9 +104,7 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
 
     if (type === "hour") {
       const hourValue = time?.split(":")?.shift() ?? "09";
-      // console.log({ hourValue }, { time });
       time = time.replace(hourValue, e);
-      // console.log(time.replace(hourValue, e));
     } else if (type === "minutes") {
       const minutesValue = time?.split(":")?.pop().split(" ").shift() ?? "30";
       time = time.replace(minutesValue, e);
@@ -76,8 +112,7 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
       console.log({ time });
 
       const amPmValue = time?.split(" ");
-      console.log({ time }, amPmValue);
-      // time = time.replace(amPmValue, e);
+      time = time.replace(amPmValue, e);
     }
     obj[index][key] = time;
 
@@ -110,9 +145,8 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
                 onChange={onApplySameTimeToAll}
                 startTime={defaultCard.startTime}
                 endTime={defaultCard.endTime}
-                index={defaultCard.index}
-                disabled={defaultCard.active}
-                // onTimeChange={onApplySameTimeToAll}
+                disabled={!defaultCard.active}
+                onTimeChange={onApplySameTimeToAll}
               />
 
               {operationData.map((item, index) => {
@@ -122,7 +156,9 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
                   <CardTimeSlot
                     title={item.day}
                     active={item.active}
-                    disabled={item.active}
+                    disabled={
+                      defaultCard.active ? defaultCard.active : item.active
+                    }
                     onChange={onChangeHandler}
                     startTime={item.startTime}
                     endTime={item.endTime}
