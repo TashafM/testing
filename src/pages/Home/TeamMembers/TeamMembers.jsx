@@ -79,12 +79,13 @@ const TeamMembers = (props) => {
   // };
 
   //-------------CURRENT MEMBER DATA----------------------
-  const [data, setData] = useState([]);
   const [pastData, setPastData] = useState([]);
   const [pastHasMore, setPastHasMore] = useState(true);
   const [pastPage, setPastPage] = useState(1);
+  const [data, setData] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
+  const [dataTotal, setDataTotal] = useState(0)
 
   const getCurrMembers = (p) => {
     const accessToken = localStorage.getItem("accessToken");
@@ -111,14 +112,19 @@ const TeamMembers = (props) => {
         }
 
         setPage((prevPage) => start + 10);
+        setDataTotal(res.totalCurrentTeamMembersCount);
       });
     // .then((res) => console.log(res.result,'save'));
     // console.log(res,'00000000000')
   };
   const handleLoadMore = () => {
     getCurrMembers();
+    if(data.length>=dataTotal){
+      setHasMore(false);
+    }
     // getCurrMembers(page+10); // this change is done
   };
+
 
   //----------------------END CURRENT MEMBER API-----------------
 
@@ -141,11 +147,11 @@ const TeamMembers = (props) => {
       )
       .then((res) => {
         console.log(res, "getpastmember");
-          if (start === 1) {
-            setPastData([...res.result]);
-         }else{
-            setPastData((prevItems) => [...prevItems,...res.result]);
-          }
+        if (start === 1) {
+          setPastData([...res.result]);
+        } else {
+          setPastData((prevItems) => [...prevItems, ...res.result]);
+        }
         // setPastData(res.result);
         setPastPage((prevPage) => start + 10);
       });
@@ -201,7 +207,7 @@ const TeamMembers = (props) => {
 
   return (
     <>
-    {console.log(pastData,'team members')}
+      {console.log(pastData, "team members")}
       <div className="upper-content">
         <Description
           icon={users}

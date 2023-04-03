@@ -19,6 +19,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { FixedTableHead, GlobalContext } from "../../App";
 import { useContext } from "react";
 import { createContext } from "react";
+import { ClipLoader, BeatLoader, SyncLoader } from "react-spinners";
+
 
 const DataTable = ({
   columns,
@@ -44,13 +46,13 @@ const DataTable = ({
   setPastData,
   pastData,
 }) => {
-  const {isOpen} = useContext(FixedTableHead)
+  const { isOpen } = useContext(FixedTableHead);
   const { loading, setLoading, setMsg, msg, setAlert } =
-  useContext(GlobalContext);
+    useContext(GlobalContext);
   const myRef = useRef(null);
   const [scrollX, setScrollX] = useState(0);
   // const data = datum.sort((a, b) => b.id - a.id);
-  const data = datum
+  const data = datum;
   const companyUserCode = localStorage.getItem("usercode");
   // const data = datum;
   const navigate = useNavigate();
@@ -72,13 +74,14 @@ const DataTable = ({
 
   return (
     <div className="dataTable">
-      <InfiniteScroll
-        dataLength={dataLength}
-        next={next}
-        hasMore={hasMore}
-        // loader={<h4>Loading...</h4>}
-      >
-        <div className="table-container" ref={myRef}>
+      <div className="table-container" ref={myRef} id="subTable">
+        <InfiniteScroll
+          dataLength={dataLength}
+          next={next}
+          hasMore={hasMore}
+          scrollableTarget="subTable"
+          loader={<div style={{textAlign:'center'}}><BeatLoader color="#e72d38" size={15}/></div>}
+        >
           <Table hover>
             <thead className={isOpen ? "table-head z0" : "table-head z1"}>
               <tr className="tr-head">
@@ -89,6 +92,7 @@ const DataTable = ({
                     onChange={handleSelectAll}
                   />
                 </th>
+                <th>S.no.</th>
                 {columns.map((col, idx) => (
                   <th key={idx}>{col.title}</th>
                 ))}
@@ -118,6 +122,7 @@ const DataTable = ({
                         }
                       />
                     </td>
+                    <td>{id+1}</td>
                     {columns.map((col, id) => (
                       <>
                         <td key={id}>
@@ -149,7 +154,7 @@ const DataTable = ({
                                   setLoading,
                                   setMsg,
                                   datum,
-                                  setData,
+                                  setData
                                 );
                               }}
                             />
@@ -165,7 +170,7 @@ const DataTable = ({
                                   setLoading,
                                   setMsg,
                                   datum,
-                                  setData,
+                                  setData
                                 );
                               }}
                             />
@@ -193,10 +198,17 @@ const DataTable = ({
                           <img
                             src={restoreBtn}
                             onClick={() =>
-                              myUtil.restoreSingle(row, restoreApi, getDataFunc, setLoading, setMsg, setPastData,
+                              myUtil.restoreSingle(
+                                row,
+                                restoreApi,
+                                getDataFunc,
+                                setLoading,
+                                setMsg,
+                                setPastData,
                                 datum,
                                 setData,
-                                pastData)
+                                pastData
+                              )
                             }
                           />
                         </span>
@@ -224,14 +236,16 @@ const DataTable = ({
                   </tr>
                 </>
               ))}
-              {console.log(datum,'datatatat')}
+              {console.log(datum, "datatatat")}
             </tbody>
           </Table>
-        </div>
-      </InfiniteScroll>
+        </InfiniteScroll>
+      </div>
       <ScrollBtn myRef={myRef} setScrollX={setScrollX} />
     </div>
   );
 };
 
 export default DataTable;
+
+
