@@ -21,14 +21,14 @@ const navigate = useNavigate()
           </div>
           <div className="account-types">
             {pages.map((item, id) => (
-              <div className="individual-account">
+              <div className="individual-account" onClick={()=>navigate(item.path)}>
                 <div className="items-div">
                   <div className="logo-div">
                     <img src={item.icon} alt="" />
                   </div>
                   <div className="account-title">{item.title}</div>
                 </div>
-                <div className="view-btn" onClick={()=>navigate(item.path)}>
+                <div className="view-btn">
                   <div className="name">View</div> <IoIosArrowForward />
                 </div>
               </div>

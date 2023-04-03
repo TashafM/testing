@@ -71,181 +71,183 @@ const DataTable = ({
 
   const myUtil = new Util();
 
+
   //#####################-----DELETE POPUP -------------
   //#####################
 
   return (
     <div className="dataTable">
-        <div className="table-container" id="subTable" ref={myRef}>
-          <InfiniteScroll
-            dataLength={dataLength}
-            next={next}
-            hasMore={hasMore}
-            scrollableTarget="subTable"
-            loader={
-              <div style={{ textAlign: "center" }}>
-                <BeatLoader color="#e72d38" size={15} />
-              </div>
-            }
-          >
-            <Table hover>
-              <thead className={isOpen ? "table-head z0" : "table-head z1"}>
-                <tr className="tr-head">
-                  <th className="checkbox-div">
-                    <input
-                      type="checkbox"
-                      checked={selectedIds.length === data.length}
-                      onChange={handleSelectAll}
-                    />
-                  </th>
-                  <th>S.no.</th>
-                  {columns.map((col, idx) => (
-                    <th key={idx}>{col.title}</th>
-                  ))}
-                  <th className="fixed-column">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="scroll-body">
-                {data.map((row, id) => (
-                  <>
-                    {/* {console.log(row.teamMemberId,'---------')} */}
-                    <tr
-                      key={row.teamMemberId}
-                      className="tr-body"
-                      // onClick={() => (partners ? gotoNew(row) : null)}
-                    >
-                      <td className="checkbox-div">
-                        <input
-                          type="checkbox"
-                          checked={selectedIds.includes(row.teamMemberId)}
-                          onChange={(e) =>
-                            myUtil.handleCheckboxChange(
-                              selectedIds,
-                              row,
-                              setSelectedIds,
-                              setRatingUser
-                            )
-                          }
-                        />
-                      </td>
-                      <td>{id + 1}</td>
-                      {columns.map((col, id) => (
-                        <>
-                          <td key={id}>
-                            {col.value.includes(".") ? (
-                              col.value
-                                .split(".")
-                                .reduce((obj, key) => obj[key], row)
-                            ) : Array.isArray(row[col.value]) ? (
-                              <>
-                                {row[col.value][0].value}{" "}
-                                <span>{row[col.value].length}</span>
-                              </>
-                            ) : (
-                              row[col.value]
-                            )}
-                          </td>
-                        </>
-                      ))}
-                      <td className="action-div fixed-column">
-                        {ratings &&
-                          (row.showRatings ? (
-                            <span className="icon-desc">
-                              <img
-                                src={rEnable}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  myUtil.deactiveRatings(
-                                    row,
-                                    setLoading,
-                                    setMsg,
-                                    datum,
-                                    setData
-                                  );
-                                }}
-                              />
-                            </span>
+      <InfiniteScroll
+        dataLength={dataLength}
+        next={next}
+        hasMore={hasMore}
+        scrollableTarget="subTable"
+        // loader={
+        //   <div style={{ textAlign: "center" }}>
+        //     <BeatLoader color="#e72d38" size={15} />
+        //   </div>
+        // }
+      >
+        <div className="table-container" ref={myRef} id="subTable">
+          <Table hover >
+            <thead className={isOpen ? "table-head z0" : "table-head z1"}>
+              <tr className="tr-head">
+                <th className="checkbox-div">
+                  <input
+                    type="checkbox"
+                    checked={selectedIds.length === data.length}
+                    onChange={handleSelectAll}
+                  />
+                </th>
+                <th>S.no.</th>
+                {columns.map((col, idx) => (
+                  <th key={idx}>{col.title}</th>
+                ))}
+                <th className="fixed-column">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="scroll-body">
+              {data.map((row, id) => (
+                <>
+                  {/* {console.log(row.teamMemberId,'---------')} */}
+                  <tr
+                    key={row.teamMemberId}
+                    className="tr-body"
+                    // onClick={() => (partners ? gotoNew(row) : null)}
+                  >
+                    <td className="checkbox-div">
+                      <input
+                        type="checkbox"
+                        checked={selectedIds.includes(row.teamMemberId)}
+                        onChange={(e) =>
+                          myUtil.handleCheckboxChange(
+                            selectedIds,
+                            row,
+                            setSelectedIds,
+                            setRatingUser
+                          )
+                        }
+                      />
+                    </td>
+                    <td>{id + 1}</td>
+                    {columns.map((col, id) => (
+                      <>
+                        <td key={id}>
+                          {col.value.includes(".") ? (
+                            col.value
+                              .split(".")
+                              .reduce((obj, key) => obj[key], row)
+                          ) : Array.isArray(row[col.value]) ? (
+                            <>
+                              {row[col.value][0].value}{" "}
+                              <span>{row[col.value].length}</span>
+                            </>
                           ) : (
-                            <span className="icon-desc">
-                              <img
-                                src={rDisable}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  myUtil.activeRatings(
-                                    row,
-                                    setLoading,
-                                    setMsg,
-                                    datum,
-                                    setData
-                                  );
-                                }}
-                              />
-                            </span>
-                          ))}
-                        <span className="editBtn">
-                          {teamMembers && (
-                            <UpdateMember
-                              editData={row}
-                              api={api}
-                              getDataFunc={getDataFunc}
-                              isCurrent={ratings}
-                            />
+                            row[col.value]
                           )}
-                          {partners && (
-                            <UpdatePartners
-                              editData={row}
-                              api={api}
-                              getDataFunc={getDataFunc}
-                            />
-                          )}
-                        </span>
-                        {resActive && (
+                        </td>
+                      </>
+                    ))}
+                    <td className="action-div fixed-column">
+                      {ratings &&
+                        (row.showRatings ? (
                           <span className="icon-desc">
                             <img
-                              src={restoreBtn}
-                              onClick={() =>
-                                myUtil.restoreSingle(
+                              src={rEnable}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                myUtil.deactiveRatings(
                                   row,
-                                  restoreApi,
-                                  getDataFunc,
                                   setLoading,
                                   setMsg,
-                                  setPastData,
                                   datum,
-                                  setData,
-                                  pastData
-                                )
-                              }
-                            />
-                          </span>
-                        )}
-                        {delActive && (
-                          <span className="icon-desc">
-                            <img
-                              src={deleteBtn}
-                              onClick={() => {
-                                myUtil.teamMemberSingleDelete(
-                                  row,
-                                  getDataFunc,
-                                  setLoading,
-                                  setMsg,
-                                  setPastData,
-                                  datum,
-                                  setData,
-                                  pastData
+                                  setData
                                 );
                               }}
                             />
                           </span>
+                        ) : (
+                          <span className="icon-desc">
+                            <img
+                              src={rDisable}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                myUtil.activeRatings(
+                                  row,
+                                  setLoading,
+                                  setMsg,
+                                  datum,
+                                  setData
+                                );
+                              }}
+                            />
+                          </span>
+                        ))}
+                      <span className="editBtn">
+                        {teamMembers && (
+                          <UpdateMember
+                            editData={row}
+                            api={api}
+                            getDataFunc={getDataFunc}
+                            isCurrent={ratings}
+                          />
                         )}
-                      </td>
-                    </tr>
-                  </>
-                ))}
-              </tbody>
-            </Table>
-          </InfiniteScroll>
+                        {partners && (
+                          <UpdatePartners
+                            editData={row}
+                            api={api}
+                            getDataFunc={getDataFunc}
+                          />
+                        )}
+                      </span>
+                      {resActive && (
+                        <span className="icon-desc">
+                          <img
+                            src={restoreBtn}
+                            onClick={() =>
+                              myUtil.restoreSingle(
+                                row,
+                                restoreApi,
+                                getDataFunc,
+                                setLoading,
+                                setMsg,
+                                setPastData,
+                                datum,
+                                setData,
+                                pastData
+                              )
+                            }
+                          />
+                        </span>
+                      )}
+                      {delActive && (
+                        <span className="icon-desc">
+                          <img
+                            src={deleteBtn}
+                            onClick={() => {
+                              myUtil.teamMemberSingleDelete(
+                                row,
+                                getDataFunc,
+                                setLoading,
+                                setMsg,
+                                setPastData,
+                                datum,
+                                setData,
+                                pastData
+                              );
+                            }}
+                          />
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                </>
+              ))}
+            </tbody>
+          </Table>
         </div>
+      </InfiniteScroll>
+
       <ScrollBtn myRef={myRef} setScrollX={setScrollX} scrollX={scrollX} />
     </div>
   );
