@@ -4,6 +4,7 @@ import TextArea from "../../../../components/Input/TextArea";
 import { usePostAsyncResponse } from "../../../../hooks/usePostAsyncResponse";
 import "./styles.scss";
 import { Offcanvas } from "react-bootstrap";
+import DrawerHead from "./DrawerHead";
 
 function EditStatement({ show, handleClose, data, onUpdate, completeData }) {
   const [statement, setStatement] = useState(data ?? "");
@@ -32,33 +33,32 @@ function EditStatement({ show, handleClose, data, onUpdate, completeData }) {
       className="teamMember-add"
     >
       <div className="content">
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>
+        <DrawerHead
+          title="Statement"
+          handleClose={handleClose}
+          description=" Write down the Statement of the Company to convey your vision to
+          your Potential Customer"
+        />
+        {/* <Offcanvas.Header closeButton>
+         <Offcanvas.Title>
             <div className="team-member-add">Statement</div>
           </Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          <div>
-            <p className="drawer-title">
-              Write down the Statement of the Company to convey your vision to
-              your Potential Customer
-            </p>
-
-            <TextArea
-              value={statement}
-              onChange={(e) => {
-                console.log(e.target.value);
-                setStatement(e.target.value);
-              }}
-            />
-            <BtnTitleCenter
-              title="Save"
-              type="button"
-              loading={loading}
-              onClick={onSaveStatement}
-            />
-          </div>
-        </Offcanvas.Body>
+        </Offcanvas.Header>  */}
+        <div>
+          <TextArea
+            value={statement}
+            onChange={(e) => {
+              console.log(e.target.value);
+              setStatement(e.target.value);
+            }}
+          />
+          <BtnTitleCenter
+            title="Save"
+            type="button"
+            loading={loading}
+            onClick={onSaveStatement}
+          />
+        </div>
       </div>
     </Offcanvas>
   );

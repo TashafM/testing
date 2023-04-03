@@ -27,6 +27,7 @@ import { GlobalContext } from "../../App";
 import { useState } from "react";
 import { Alert } from "react-bootstrap";
 import ConfirmBox from "../ConfirmBox/ConfirmBox";
+import DrawerHead from "../../pages/About/Information/Component/DrawerHead";
 
 export default function RightDrawer() {
   const { loading, setLoading, setMsg, msg, alert, setAlert } =
@@ -67,8 +68,19 @@ export default function RightDrawer() {
               setOpenDrawer({ ...openDrawer, open: true });
             }}
           >
-            <Box style={{ width: "536px" }} role="presentation">
-              <List>
+            <Box
+              style={{ width: "636px", padding: "42px" }}
+              role="presentation"
+            >
+              <div style={{ paddingBottom: "30px" }}>
+                <DrawerHead
+                  title="Other info"
+                  handleClose={() => toggleDrawer()}
+                  description=""
+                />
+              </div>
+
+              {/* <List>
                 <ListItem disablePadding>
                   <ListItemButton>
                     <ListItemIcon
@@ -92,8 +104,7 @@ export default function RightDrawer() {
                     )}
                   </ListItemButton>
                 </ListItem>
-              </List>
-              <Divider />
+              </List> */}
               <div className="side-container">
                 {openDrawer.type === "Edit" ? (
                   <EditAbout />

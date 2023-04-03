@@ -4,6 +4,7 @@ import { timeSlotData } from "../../data/data.js";
 import CardTimeSlot from "./CardTimeSlot";
 import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
 import { Offcanvas } from "react-bootstrap";
+import DrawerHead from "./DrawerHead";
 
 function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
   const [postData, { loading }] = usePatchAsyncReponse(
@@ -126,54 +127,45 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
       className="teamMember-add"
     >
       <div className="content">
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>
-            <div className="team-member-add">Hours of operations</div>
-          </Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
+        <DrawerHead
+          title="Other info"
+          handleClose={handleClose}
+          description=" Please provide the hours of operations"
+        />
+        <div>
           <div>
-            <p className="drawer-title">
-              Please provide the hours of operations
-            </p>
-            <div>
-              <CardTimeSlot
-                title={defaultCard.day}
-                active={defaultCard.active}
-                onChange={onApplySameTimeToAll}
-                startTime={defaultCard.startTime}
-                endTime={defaultCard.endTime}
-                disabled={!defaultCard.active}
-                onTimeChange={onApplySameTimeToAll}
-              />
-
-              {operationData.map((item, index) => {
-                // console.log({ item });
-
-                return (
-                  <CardTimeSlot
-                    title={item.day}
-                    active={item.active}
-                    disabled={
-                      defaultCard.active ? defaultCard.active : item.active
-                    }
-                    onChange={onChangeHandler}
-                    startTime={item.startTime}
-                    endTime={item.endTime}
-                    index={index}
-                    onTimeChange={onTimeChange}
-                  />
-                );
-              })}
-            </div>
-
-            <BtnTitleCenter
-              title={"SAVE"}
-              onClick={sendHOO}
-              loading={loading}
+            <CardTimeSlot
+              title={defaultCard.day}
+              active={defaultCard.active}
+              onChange={onApplySameTimeToAll}
+              startTime={defaultCard.startTime}
+              endTime={defaultCard.endTime}
+              disabled={!defaultCard.active}
+              onTimeChange={onApplySameTimeToAll}
             />
+
+            {operationData.map((item, index) => {
+              // console.log({ item });
+
+              return (
+                <CardTimeSlot
+                  title={item.day}
+                  active={item.active}
+                  disabled={
+                    defaultCard.active ? defaultCard.active : item.active
+                  }
+                  onChange={onChangeHandler}
+                  startTime={item.startTime}
+                  endTime={item.endTime}
+                  index={index}
+                  onTimeChange={onTimeChange}
+                />
+              );
+            })}
           </div>
-        </Offcanvas.Body>
+
+          <BtnTitleCenter title={"SAVE"} onClick={sendHOO} loading={loading} />
+        </div>
       </div>
     </Offcanvas>
   );

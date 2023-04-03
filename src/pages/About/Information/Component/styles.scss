@@ -2,7 +2,7 @@
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 24px;
   color: #899197;
   margin-bottom: 40px;
@@ -11,14 +11,37 @@
 .btn-add-container {
   width: 70px;
   position: absolute;
-  top: 20px;
-  right: 30px;
+
+  top: 42px;
+  right: 42px;
 }
 
 .count-text-color {
   color: #be212a !important;
 }
 
+.image-go-back {
+  height: 22px;
+  width: 22px;
+  cursor: pointer;
+}
+
+.drawer-title-text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 39px;
+  padding-left: 20px;
+  margin-bottom: 0 !important;
+  /* identical to box height */
+
+  color: #000000;
+}
+
+.drawer-header-container {
+  padding-bottom: 20px;
+}
 .stm-container {
   overflow: hidden;
   height: 150px;
@@ -196,14 +219,48 @@
   border-top: 1px solid #dadada;
 }
 
-@media only screen and (max-width: 1600px) {
-  .statement-title {
-    font-size: 16px;
-  }
+.drawer-description-text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  color: #899197;
+  margin-bottom: 40px;
 }
 
 @media only screen and (max-width: 1600px) {
   .statement-title {
+    font-size: 16px;
+  }
+
+  .drawer-description-text {
+    font-size: 18px !important;
+  }
+  .drawer-title-text {
+    font-size: 26px !important;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .statement-title {
     font-size: 14px;
+  }
+
+  .drawer-title-text {
+    font-size: 22px !important;
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  .statement-title {
+    font-size: 14px;
+  }
+
+  .drawer-description-text {
+    font-size: 16px !important;
+  }
+
+  .drawer-title-text {
+    font-size: 22px !important;
   }
 }

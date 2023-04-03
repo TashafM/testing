@@ -7,6 +7,7 @@ import usePostBrand from "../hooks/usePostBrand";
 import { useContextProvider } from "../../../../context";
 import useEditBrandPatch from "../hooks/useEditBrandPatch";
 import { Offcanvas } from "react-bootstrap";
+import DrawerHead from "../../Information/Component/DrawerHead";
 
 function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
   const formRef = useRef();
@@ -85,94 +86,90 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
       className="teamMember-add"
     >
       <div className="content">
-        <Offcanvas.Header closeButton>
+        <DrawerHead
+          title={`${show.type} Brands`}
+          handleClose={handleClose}
+          description="Write down the company’s sales reach, services & support and
+          interested to purchase"
+        />
+        {/* <Offcanvas.Header closeButton>
           <Offcanvas.Title>
             <div className="team-member-add">{show.type} Brands</div>
           </Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          <div>
-            <p className="drawer-title">
-              Write down the company’s sales reach, services & support and
-              interested to purchase
-            </p>
-            <Formik
-              initialValues={initialValues}
-              innerRef={formRef}
-              onSubmit={submitHandler}
-              // validationSchema={schema.createBrand}
-              render={({
-                handleSubmit,
-                errors,
-                values,
-                setFieldValue,
-                touched,
-              }) => (
-                <Form className="">
-                  <div className="input-wrapper">
-                    <File
-                      file={file}
-                      onChange={handleChange}
-                      label="Add Image"
-                      // error={touched.file && errors.file}
-                    />
-                  </div>
-                  <div className="input-wrapper">
-                    <TextInput
-                      name="brandName"
-                      value={values.brandName}
-                      onChange={(e) => {
-                        console.log(e.target.value);
-                        setFieldValue("brandName", e.target.value);
-                      }}
-                      error={touched.brandName && errors.brandName}
-                      label="Brand Name"
-                    />
-                  </div>
-                  <div className="input-wrapper">
-                    <TextInput
-                      name="location"
-                      value={values.location}
-                      onChange={(e) =>
-                        setFieldValue("location", e.target.value)
-                      }
-                      error={touched.location && errors.location}
-                      // placeholder="eg. Sales Team"
-                      label="Location"
-                    />
-                  </div>
-                  <div className="input-wrapper">
-                    <TextInput
-                      name="username"
-                      value={values.username}
-                      onChange={(e) =>
-                        setFieldValue("username", e.target.value)
-                      }
-                      error={touched.username && errors.username}
-                      // placeholder="eg. Sales Team"
-                      label="Username"
-                    />
-                  </div>
-                  <div className="input-wrapper">
-                    <TextInput
-                      name="email"
-                      value={values.email}
-                      onChange={(e) => setFieldValue("email", e.target.value)}
-                      error={touched.email && errors.email}
-                      label="Email ID"
-                    />
-                  </div>
-
-                  <BtnTitleCenter
-                    type="submit"
-                    title={"Send request"}
-                    loading={loading | editLoading}
+        </Offcanvas.Header> */}
+        <div>
+          <Formik
+            initialValues={initialValues}
+            innerRef={formRef}
+            onSubmit={submitHandler}
+            // validationSchema={schema.createBrand}
+            render={({
+              handleSubmit,
+              errors,
+              values,
+              setFieldValue,
+              touched,
+            }) => (
+              <Form className="">
+                <div className="input-wrapper">
+                  <File
+                    file={file}
+                    onChange={handleChange}
+                    label="Add Image"
+                    // error={touched.file && errors.file}
                   />
-                </Form>
-              )}
-            />
-          </div>
-        </Offcanvas.Body>
+                </div>
+                <div className="input-wrapper">
+                  <TextInput
+                    name="brandName"
+                    value={values.brandName}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      setFieldValue("brandName", e.target.value);
+                    }}
+                    error={touched.brandName && errors.brandName}
+                    label="Brand Name"
+                  />
+                </div>
+                <div className="input-wrapper">
+                  <TextInput
+                    name="location"
+                    value={values.location}
+                    onChange={(e) => setFieldValue("location", e.target.value)}
+                    error={touched.location && errors.location}
+                    // placeholder="eg. Sales Team"
+                    label="Location"
+                  />
+                </div>
+                <div className="input-wrapper">
+                  <TextInput
+                    name="username"
+                    value={values.username}
+                    onChange={(e) => setFieldValue("username", e.target.value)}
+                    error={touched.username && errors.username}
+                    // placeholder="eg. Sales Team"
+                    label="Username"
+                  />
+                </div>
+                <div className="input-wrapper">
+                  <TextInput
+                    name="email"
+                    value={values.email}
+                    onChange={(e) => setFieldValue("email", e.target.value)}
+                    error={touched.email && errors.email}
+                    label="Email ID"
+                  />
+                </div>
+
+                <BtnTitleCenter
+                  type="submit"
+                  title={"Send request"}
+                  loading={loading | editLoading}
+                />
+              </Form>
+            )}
+          />
+        </div>
       </div>
     </Offcanvas>
   );
