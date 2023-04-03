@@ -11,26 +11,21 @@ import product5 from "../../../../../assets/images/product5.png";
 import product6 from "../../../../../assets/images/product6.png";
 
 import { superItems } from "../../../data";
+import SidePanel from "../../../Components/SidePanel/SidePanel";
 
 const Products = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [currentId, setCurrentId] = useState(location.state.id)
+  const [showPanel, setShowPanel] = useState(false)
+
+  const handleShow = () => setShowPanel(true);
+  const handleClose = () => setShowPanel(false)
   console.log(location, "from products page");
   return (
     <>
       <div className="products">
         <TopBar title={"All Products"} goback={true}/>
-        {/* <Button onClick={()=>navigate(`/dealers/all-products`)}>go back</Button> */}
-        {/* <div className="products-container">
-          <div
-            className="img-category-main"
-            style={{ backgroundImage: `url(${product1})` }}
-          >
-            <div>Konica Chrome</div>
-            <div>Lorem ipsum dolor sit amet, consectetur adipiscing...</div>
-          </div>
-        </div> */}
 
         <Row className="products-row">
           {superItems.map((item) =>
@@ -41,6 +36,7 @@ const Products = () => {
                       <div
                         className="img-category-main"
                         style={{ backgroundImage: `url(${itm.image})` }}
+                        onClick={()=>setShowPanel(true)}
                       >
                         <div>{itm.pname}</div>
                         <div>
@@ -53,6 +49,7 @@ const Products = () => {
             )
           )}
         </Row>
+        <SidePanel show={showPanel} handleShow={handleShow} handleClose={handleClose}/>
       </div>
       <div className="bottom-strip">
         <div className="bottom-brands">

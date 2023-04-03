@@ -19,7 +19,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { FixedTableHead, GlobalContext } from "../../App";
 import { useContext } from "react";
 import { createContext } from "react";
-import { ClipLoader, BeatLoader, SyncLoader } from "react-spinners";
+// import { ClipLoader, BeatLoader, SyncLoader } from "react-spinners";
 import ConfirmBox from "../ConfirmBox/ConfirmBox";
 
 const DataTable = ({
@@ -45,6 +45,7 @@ const DataTable = ({
   setData,
   setPastData,
   pastData,
+  pastMembers,
 }) => {
   const { isOpen } = useContext(FixedTableHead);
   const { loading, setLoading, setMsg } = useContext(GlobalContext);
@@ -71,7 +72,6 @@ const DataTable = ({
 
   const myUtil = new Util();
 
-
   //#####################-----DELETE POPUP -------------
   //#####################
 
@@ -89,7 +89,7 @@ const DataTable = ({
         // }
       >
         <div className="table-container" ref={myRef} id="subTable">
-          <Table hover >
+          <Table hover>
             <thead className={isOpen ? "table-head z0" : "table-head z1"}>
               <tr className="tr-head">
                 <th className="checkbox-div">
@@ -183,23 +183,27 @@ const DataTable = ({
                             />
                           </span>
                         ))}
-                      <span className="editBtn">
-                        {teamMembers && (
-                          <UpdateMember
-                            editData={row}
-                            api={api}
-                            getDataFunc={getDataFunc}
-                            isCurrent={ratings}
-                          />
-                        )}
-                        {partners && (
-                          <UpdatePartners
-                            editData={row}
-                            api={api}
-                            getDataFunc={getDataFunc}
-                          />
-                        )}
-                      </span>
+                      {pastMembers ? (
+                        ""
+                      ) : (
+                        <span className="editBtn">
+                          {teamMembers && (
+                            <UpdateMember
+                              editData={row}
+                              api={api}
+                              getDataFunc={getDataFunc}
+                              isCurrent={ratings}
+                            />
+                          )}
+                          {partners && (
+                            <UpdatePartners
+                              editData={row}
+                              api={api}
+                              getDataFunc={getDataFunc}
+                            />
+                          )}
+                        </span>
+                      )}
                       {resActive && (
                         <span className="icon-desc">
                           <img

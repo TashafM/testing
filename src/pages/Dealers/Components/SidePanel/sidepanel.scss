@@ -1,0 +1,17 @@
+.offcanvas.show.dm {
+  width: 70% !important;
+}
+
+.divided-div {
+  display: flex;
+  
+  .div-1{
+    width: 60%;
+    // background: yellow;
+  }
+  .div-2{
+    width: 40%;
+    background: rgb(255, 136, 0);
+    text-align: center;
+  }
+}
