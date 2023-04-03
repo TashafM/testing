@@ -20,6 +20,6 @@ export const pages = [
     id: 3,
     title: "Manage purchase orders",
     icon: kart,
-    path:'/dealers'
+    path:'/dealers/dashboard'
   },
 ];

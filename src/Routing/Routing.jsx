@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import About from "../pages/About/About";
 import Information from "../pages/About/Information/Information";
 import Privacy from "../pages/About/Privacy/Privacy";
@@ -41,14 +41,18 @@ import DealerOrders from "../pages/Dealers/SubPages/Orders/DealerOrders";
 import Favorites from "../pages/Dealers/SubPages/Favorites/Favorites";
 import NewArrival from "../pages/Dealers/SubPages/NewArrival/NewArrival";
 import Products from "../pages/Dealers/SubPages/AllProducts/Products/Products";
+import ProtectedRoutes from "../components/ProtectedRoutes/ProtectedRoutes";
 // import About from "../pages/About/";
 // import Contact from "./Contact";
 
 const Routing = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/select-account-type" element={<SelectPage />} />
-      <Route path="/home/" element={<Home />}>
+      <Route
+        path="/select-account-type"
+        element={<ProtectedRoutes Component={SelectPage} />}
+      />
+      <Route path="/home/" element={<ProtectedRoutes Component={Home} />}>
         <Route path="team-members" element={<TeamMembers />}>
           <Route path="current-members" element={<CurrentMembers />} />
           <Route path="past-members" element={<PastMembers />} />
@@ -85,13 +89,13 @@ const Routing = () => (
         </Route>
       </Route>
       <Route path="/" element={<Login />} />
-      <Route path="dealers" element={<Dealers />}>
-        <Route path="dashboard" element={<DealerDashboard/>} />
-        <Route path="all-products" element={<AllProducts/>} />
-        <Route path="orders" element={<DealerOrders/>} />
-        <Route path="favorites" element={<Favorites/>} />
-        <Route path="new-arrival" element={<NewArrival/>} />
-        <Route path="all-products/products" element={<Products/>} />
+      <Route path="dealers" element={<ProtectedRoutes Component={Dealers} />}>
+        <Route path="dashboard" element={<DealerDashboard />} />
+        <Route path="all-products" element={<AllProducts />} />
+        <Route path="orders" element={<DealerOrders />} />
+        <Route path="favorites" element={<Favorites />} />
+        <Route path="new-arrival" element={<NewArrival />} />
+        <Route path="all-products/products" element={<Products />} />
       </Route>
     </Routes>
   </BrowserRouter>

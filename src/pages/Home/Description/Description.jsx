@@ -6,6 +6,7 @@ import AddMember from "../../../components/AddMember/AddMember";
 import AddPartners from "../Partners/AddPartners/AddPartners";
 import SearchBar from "../../../components/SearchBar/SearchBar";
 import FilterBtn from "../../../components/FilterButton/FilterButton";
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 
 const Description = ({
   icon,
@@ -21,6 +22,14 @@ const Description = ({
   data,
   setData,
 }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const gotoAddMember = () => {
+    if(location.pathname !== `/home/team-members/current-members`){
+      navigate(`/home/team-members/current-members`)
+    }
+    return false;
+  }
   return (
     <>
       <div className="row row-desc">
@@ -50,7 +59,7 @@ const Description = ({
             </div>
           </>
         ) : (
-          <div className="col-6  col-xl-5 btn-col">
+          <div className="col-6 col-xl-5 btn-col">
             <div className="buttons-div">
               <div className="upload-btn">
                 <span className="icon-desc">
@@ -58,6 +67,7 @@ const Description = ({
                 </span>
                 <span>Upload a csv file</span>
               </div>
+              <div onClick={addMember ? gotoAddMember : null}>
               {addMember && (
                 <AddMember
                   onUser
@@ -72,6 +82,7 @@ const Description = ({
               {addPartners && (
                 <AddPartners api={api} getDataFunc={getDataFunc} />
               )}
+              </div>
             </div>
           </div>
         )}

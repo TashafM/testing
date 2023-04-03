@@ -16,8 +16,11 @@ import UpdatePartners from "../../pages/Home/Partners/UpdatePartners/UpdatePartn
 import ScrollBtn from "../ScrollBtn/ScrollBtn";
 import { useNavigate } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { GlobalContext } from "../../App";
+import { FixedTableHead, GlobalContext } from "../../App";
 import { useContext } from "react";
+import { createContext } from "react";
+// import { ClipLoader, BeatLoader, SyncLoader } from "react-spinners";
+import ConfirmBox from "../ConfirmBox/ConfirmBox";
 
 const DataTable = ({
   columns,
@@ -42,13 +45,14 @@ const DataTable = ({
   setData,
   setPastData,
   pastData,
+  pastMembers,
 }) => {
-  const { loading, setLoading, setMsg, msg, setAlert } =
-    useContext(GlobalContext);
+  const { isOpen } = useContext(FixedTableHead);
+  const { loading, setLoading, setMsg } = useContext(GlobalContext);
   const myRef = useRef(null);
   const [scrollX, setScrollX] = useState(0);
   // const data = datum.sort((a, b) => b.id - a.id);
-  const data = datum
+  const data = datum;
   const companyUserCode = localStorage.getItem("usercode");
   // const data = datum;
   const navigate = useNavigate();
@@ -68,17 +72,25 @@ const DataTable = ({
 
   const myUtil = new Util();
 
+  //#####################-----DELETE POPUP -------------
+  //#####################
+
   return (
     <div className="dataTable">
       <InfiniteScroll
         dataLength={dataLength}
         next={next}
         hasMore={hasMore}
-        // loader={<h4>Loading...</h4>}
+        scrollableTarget="subTable"
+        // loader={
+        //   <div style={{ textAlign: "center" }}>
+        //     <BeatLoader color="#e72d38" size={15} />
+        //   </div>
+        // }
       >
-        <div className="table-container" ref={myRef}>
+        <div className="table-container" ref={myRef} id="subTable">
           <Table hover>
-            <thead className="table-head">
+            <thead className={isOpen ? "table-head z0" : "table-head z1"}>
               <tr className="tr-head">
                 <th className="checkbox-div">
                   <input
@@ -87,6 +99,7 @@ const DataTable = ({
                     onChange={handleSelectAll}
                   />
                 </th>
+                <th>S.no.</th>
                 {columns.map((col, idx) => (
                   <th key={idx}>{col.title}</th>
                 ))}
@@ -116,6 +129,7 @@ const DataTable = ({
                         }
                       />
                     </td>
+                    <td>{id + 1}</td>
                     {columns.map((col, id) => (
                       <>
                         <td key={id}>
@@ -147,7 +161,7 @@ const DataTable = ({
                                   setLoading,
                                   setMsg,
                                   datum,
-                                  setData,
+                                  setData
                                 );
                               }}
                             />
@@ -163,38 +177,49 @@ const DataTable = ({
                                   setLoading,
                                   setMsg,
                                   datum,
-                                  setData,
+                                  setData
                                 );
                               }}
                             />
                           </span>
                         ))}
-                      <span className="editBtn">
-                        {teamMembers && (
-                          <UpdateMember
-                            editData={row}
-                            api={api}
-                            getDataFunc={getDataFunc}
-                            isCurrent={ratings}
-                          />
-                        )}
-                        {partners && (
-                          <UpdatePartners
-                            editData={row}
-                            api={api}
-                            getDataFunc={getDataFunc}
-                          />
-                        )}
-                      </span>
+                      {pastMembers ? (
+                        ""
+                      ) : (
+                        <span className="editBtn">
+                          {teamMembers && (
+                            <UpdateMember
+                              editData={row}
+                              api={api}
+                              getDataFunc={getDataFunc}
+                              isCurrent={ratings}
+                            />
+                          )}
+                          {partners && (
+                            <UpdatePartners
+                              editData={row}
+                              api={api}
+                              getDataFunc={getDataFunc}
+                            />
+                          )}
+                        </span>
+                      )}
                       {resActive && (
                         <span className="icon-desc">
                           <img
                             src={restoreBtn}
                             onClick={() =>
-                              myUtil.restoreSingle(row, restoreApi, getDataFunc, setLoading, setMsg, setPastData,
+                              myUtil.restoreSingle(
+                                row,
+                                restoreApi,
+                                getDataFunc,
+                                setLoading,
+                                setMsg,
+                                setPastData,
                                 datum,
                                 setData,
-                                pastData)
+                                pastData
+                              )
                             }
                           />
                         </span>
@@ -222,12 +247,12 @@ const DataTable = ({
                   </tr>
                 </>
               ))}
-              {console.log(datum,'datatatat')}
             </tbody>
           </Table>
         </div>
       </InfiniteScroll>
-      <ScrollBtn myRef={myRef} setScrollX={setScrollX} />
+
+      <ScrollBtn myRef={myRef} setScrollX={setScrollX} scrollX={scrollX} />
     </div>
   );
 };

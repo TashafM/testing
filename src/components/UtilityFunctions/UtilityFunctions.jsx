@@ -66,7 +66,7 @@ class Util {
     setPastData,
     datum,
     setData,
-    pastData
+    pastData,
   ) => {
     console.log(setPastData, datum, setData);
 

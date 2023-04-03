@@ -38,6 +38,7 @@ const PastMembers = ({
         getDataFunc2={getCurrentMembers}
         setSelectedIds={setSelectedIds}
         teamMembers={true}
+        pastMembers={true}
         resActive={true}
         dataLength={dataLength}
         next={next}
