@@ -137,8 +137,8 @@ function EditContactList() {
               <img height={25} src={phone} alt="phone-icon" />
               <span className="email phone">{item?.contact ?? ""}</span>
             </div>
-            <div className="d-flex justify-content-between chat-container">
-              <div className="d-flex">
+            <div className="d-flex justify-content-between align-items-center chat-container">
+              <div className="d-flex align-items-center">
                 <img className="card-img" src={chat} alt="chat-icon" />
                 <p className="email mb-0">Enable Chat</p>
               </div>

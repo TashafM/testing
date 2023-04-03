@@ -2,7 +2,7 @@ import React from "react";
 import { Col } from "react-bootstrap";
 import Badges from "../../../../components/Input/Badges";
 import CardHead from "./CardHead";
-import quote from "../../../../assets/images/quote.png";
+import quote from "../../../../assets/images/other-info.png";
 
 function CardOtherInfo({ otherInfo, onClick }) {
   return (

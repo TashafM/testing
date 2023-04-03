@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
-import Checkbox from "../../../../components/Input/Checkbox";
 import { timeSlotData } from "../../data/data.js";
 import CardTimeSlot from "./CardTimeSlot";
 import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
@@ -87,8 +86,6 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
     } catch (error) {
       console.log(error);
     }
-
-    // operationData.map
   };
 
   const onChangeHandler = (index) => {
@@ -120,6 +117,7 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
 
     setOperationData([...obj]);
   };
+
   return (
     <Offcanvas
       show={show}

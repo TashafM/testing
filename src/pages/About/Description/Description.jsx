@@ -14,8 +14,8 @@ function Description() {
       <div className=" row-cont align-items-center">
         <img className="comp-logo" src={circularLogo} alt="company logo" />
         <div className="title-cont">
-          <p className="comp-title mb-0">A. T. links</p>
-          <p className="comp-subtitle  mb-0">Digital lnks</p>
+          <p className="comp-title mb-0">A.T Inks</p>
+          <p className="comp-subtitle  mb-0">Digital Inks</p>
         </div>
         <img
           className="verified-icon"
@@ -23,10 +23,7 @@ function Description() {
           alt="verified icon"
           style={{ marginTop: "-27px" }}
         />
-        <a
-          className="title-cont"
-          style={{ color: "#4793F4", fontWeight: "500", marginTop: "-27px" }}
-        >
+        <a className="verify-company" href="#">
           Verify Company
         </a>
       </div>

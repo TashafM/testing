@@ -36,7 +36,7 @@ function ModalComponent({
   return (
     <div>
       <Modal
-        size="lg"
+        size="xl"
         show={show}
         onHide={close}
         aria-labelledby="contained-modal-title-vcenter"

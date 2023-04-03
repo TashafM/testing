@@ -104,7 +104,7 @@ function EditContacts() {
                 onChange={(e) => setFieldValue("title", e.target.value)}
                 error={touched.title && errors.title}
                 placeholder="eg. Sales Team"
-                label="Title"
+                label="Title *"
               />
             </div>
 
@@ -114,7 +114,7 @@ function EditContacts() {
                 value={values.contact}
                 onChange={(e) => setFieldValue("contact", e)}
                 error={touched.contact && errors.contact}
-                label="Contact Number"
+                label="Contact Number *"
                 placeholder="eg. 8511591740"
               />
             </div>
@@ -124,7 +124,7 @@ function EditContacts() {
                 value={values.email}
                 onChange={(e) => setFieldValue("email", e.target.value)}
                 error={touched.email && errors.email}
-                label="Email ID"
+                label="Email ID *"
                 placeholder="eg. salesteam@br.in"
               />
             </div>
