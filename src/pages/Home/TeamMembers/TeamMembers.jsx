@@ -119,7 +119,9 @@ const TeamMembers = (props) => {
   };
   const handleLoadMore = () => {
     setMsg('Loading more data...')
-    getCurrMembers()
+    setTimeout(() => {
+      getCurrMembers()
+    }, 1000);
     if(data.length>=dataTotal){
       setHasMore(false);
     }
