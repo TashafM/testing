@@ -22,18 +22,17 @@ function CardTimeSlot({
         <TimeInput
           value={startTime}
           disabled={!active}
-          onChange={(e, ampm) => {
-            console.log({ ampm });
-            onTimeChange(e, index, "startTime");
-          }}
+          index={index}
+          label="startTime"
+          onChange={onTimeChange}
         />
         <span>To</span>
         <TimeInput
           value={endTime}
           disabled={!active}
-          onChange={(e) => {
-            onTimeChange(e, index, "endTime");
-          }}
+          index={index}
+          label="endTime"
+          onChange={onTimeChange}
         />
       </div>
     </div>

@@ -109,6 +109,39 @@ input:checked + .slider:before {
   padding: 16px;
 }
 
+.time-select-container {
+  padding: 2px;
+  background: #f7f7f7;
+  border: 1px solid #dadada;
+  border-radius: 6px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  color: #212529;
+  width: 100%;
+  border: none;
+  select {
+    border: none;
+    background: #f7f7f7;
+    font-size: 14px;
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  options {
+    background: #f7f7f7;
+  }
+}
+
+.minute-input {
+  border-left: 1px solid #dadada !important;
+  border-right: 1px solid #dadada !important;
+  padding-inline: 2px;
+  margin-inline: 2px;
+}
 .editor-wrapper {
   box-sizing: border-box;
 }

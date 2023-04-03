@@ -27,7 +27,7 @@ const FileDropzone = ({ file, onChange, label }) => {
         <div className="d-flex flex-column align-items-center">
           {file.length && file[0].name ? (
             <img
-              src={file[0].name}
+              src={file[0]?.preview ? file[0]?.preview?.url : file[0].name}
               className="preview-icon"
               alt="file-drop-img"
             />

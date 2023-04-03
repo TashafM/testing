@@ -11,6 +11,13 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
     "/portalPatchHoursOfOperation"
   );
 
+  const [defaultCard, setDefaultCard] = useState({
+    day: "All Days",
+    active: false,
+    startTime: "09:30 am",
+    endTime: "06:30 pm",
+    index: -1,
+  });
   useEffect(() => {
     if (
       data &&
@@ -39,6 +46,10 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
   };
 
   const onApplySameTimeToAll = () => {
+    const obj = { ...defaultCard };
+    obj.active = !obj.active;
+
+    setDefaultCard({ ...obj });
     // operationData.map
   };
 
@@ -49,11 +60,28 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
     setOperationData([...obj]);
   };
 
-  const onTimeChange = (e, index, key) => {
+  const onTimeChange = (e, index, key, type) => {
     const obj = [...operationData];
-    obj[index][key] = e;
+    let time = obj[index][key];
 
-    console.log({ e });
+    if (type === "hour") {
+      const hourValue = time?.split(":")?.shift() ?? "09";
+      // console.log({ hourValue }, { time });
+      time = time.replace(hourValue, e);
+      // console.log(time.replace(hourValue, e));
+    } else if (type === "minutes") {
+      const minutesValue = time?.split(":")?.pop().split(" ").shift() ?? "30";
+      time = time.replace(minutesValue, e);
+    } else {
+      console.log({ time });
+
+      const amPmValue = time?.split(" ");
+      console.log({ time }, amPmValue);
+      // time = time.replace(amPmValue, e);
+    }
+    obj[index][key] = time;
+
+    console.log(obj[index][key], { time });
 
     setOperationData([...obj]);
   };
@@ -76,31 +104,25 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
               Please provide the hours of operations
             </p>
             <div>
-              <div className="d-flex">
-                <Checkbox />
-                <span className="apply-all-checked">
-                  Apply same timings to all
-                </span>
-              </div>
+              <CardTimeSlot
+                title={defaultCard.day}
+                active={defaultCard.active}
+                onChange={onApplySameTimeToAll}
+                startTime={defaultCard.startTime}
+                endTime={defaultCard.endTime}
+                index={defaultCard.index}
+                disabled={defaultCard.active}
+                // onTimeChange={onApplySameTimeToAll}
+              />
 
               {operationData.map((item, index) => {
-                console.log({ item });
+                // console.log({ item });
 
-                function convert12to24(hour12, amPm) {
-                  let hour24 = parseInt(hour12, 10);
-
-                  if (amPm === "am" && hour24 === 12) {
-                    hour24 = 0;
-                  } else if (amPm === "pm" && hour24 < 12) {
-                    hour24 += 12;
-                  }
-
-                  return hour24;
-                }
                 return (
                   <CardTimeSlot
                     title={item.day}
                     active={item.active}
+                    disabled={item.active}
                     onChange={onChangeHandler}
                     startTime={item.startTime}
                     endTime={item.endTime}

@@ -129,7 +129,7 @@ function EditContactList() {
                 </div>
               </div>
             </div>
-            <div className="d-flex email-cont">
+            <div className="d-flex email-cont align-items-center">
               <img className="" height={25} src={email} alt="email-icon" />
               <span className="email">{item?.email ?? ""}</span>
             </div>

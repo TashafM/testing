@@ -17,7 +17,7 @@ function CardContacts({ contactUs, length, onClick, type, title, children }) {
         onClick={onClick}
         data={contactUs}
       />
-      <div className="d-flex email-cont">
+      <div className="d-flex email-cont align-items-center">
         <img className="" height={25} src={email} alt="email-icon" />
         <div className="d-flex justify-content-between align-items-center flex-grow-1">
           <span className="email">{contactUs?.email ?? ""}</span>
