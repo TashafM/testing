@@ -31,7 +31,6 @@ const AllProducts = () => {
                   }}
                   onClick={() => setCategory(item.index)}
                 >
-                  {console.log(item.logo,'klljljl')}
                   {item.itemName}
                 </div>
               ))}
@@ -46,10 +45,13 @@ const AllProducts = () => {
                     {item.subItems.map((abc) => (
                       <Col
                         className="catCol col-xl-4"
-                        style={{backgroundImage: `url(${abc.imgPath})`}}
+                        style={{ backgroundImage: `url(${abc.imgPath})` }}
+                        onClick={() =>
+                          navigate("/dealers/all-products/products", {
+                            state: { id: abc.id },
+                          })
+                        }
                       >
-                        {/* <img src={abc.imgPath} alt="" /> */}
-                        {console.log(abc.imgPath)}
                         {abc.name}
                       </Col>
                     ))}

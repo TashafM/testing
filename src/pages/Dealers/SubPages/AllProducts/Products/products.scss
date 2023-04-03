@@ -5,6 +5,21 @@
   margin-right: 40px;
   border-radius: 12px;
   padding: 25px 35px;
+  overflow: auto;
+
+  .products-container {
+    // margin-top: 20px;
+    margin-bottom: 60px;
+    .img-category-main {
+      height: 245px;
+      width: 252px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 0 15px 15px;
+    }
+  }
 }
 
 .bottom-strip {
@@ -14,4 +29,18 @@
   margin-right: 40px;
   border-radius: 12px;
   padding: 25px 35px;
+
+  .bottom-brands {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    .brand-div{
+      cursor: pointer;
+    }
+  }
+}
+
+.products-row {
+  margin-top: 60px;
 }

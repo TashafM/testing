@@ -44,7 +44,7 @@ const DataTable = ({
   setPastData,
   pastData,
 }) => {
-  const {isOpen, setIsOpen} = useContext(FixedTableHead)
+  const {isOpen} = useContext(FixedTableHead)
   const { loading, setLoading, setMsg, msg, setAlert } =
   useContext(GlobalContext);
   const myRef = useRef(null);
