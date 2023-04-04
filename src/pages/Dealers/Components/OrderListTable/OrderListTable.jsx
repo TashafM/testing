@@ -3,7 +3,7 @@ import "./orderlisttable.scss";
 import { Table } from "react-bootstrap";
 import ItemRow from "../ItemRow/ItemRow";
 
-const OrderListTable = () => {
+const OrderListTable = ({ disableDelete }) => {
   return (
     <Table>
       <thead className="header">
@@ -11,15 +11,14 @@ const OrderListTable = () => {
           <th>Products</th>
           <th>Quantity</th>
           <th>Price</th>
-          <th></th>
         </tr>
       </thead>
       <tbody className="right-side-body">
-        <ItemRow />
-        <ItemRow />
-        <ItemRow />
-        <ItemRow />
-        <ItemRow />
+        <ItemRow disableDelete={disableDelete} />
+        <ItemRow disableDelete={disableDelete} />
+        <ItemRow disableDelete={disableDelete} />
+        <ItemRow disableDelete={disableDelete} />
+        <ItemRow disableDelete={disableDelete} />
       </tbody>
     </Table>
   );

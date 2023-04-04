@@ -36,7 +36,6 @@ const Dealers = () => {
             <div className="col-xl-2 menu-list">
               <div className="sub-menu-list">
                 <Menus tabs={dealerMenu} />
-                kjh
               </div>
             </div>
             <div

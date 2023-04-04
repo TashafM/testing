@@ -1,3 +1,31 @@
 .offcanvas.show.seeAll {
-    width: 28% !important;
+  width: 28% !important;
+
+  .offcanvas-title {
+    padding-top: 20px;
+    padding-left: 40px;
+    margin-bottom: 15px;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 38px;
   }
+
+  button {
+    margin-right: 20px;
+  }
+
+  .offcanvas-body {
+    padding: 0;
+  }
+}
+
+.seeall-header {
+  background-color: #f1f3f8;
+  border: transparent;
+  tr {
+    th {
+      text-align: center;
+      padding: 20px;
+    }
+  }
+}
