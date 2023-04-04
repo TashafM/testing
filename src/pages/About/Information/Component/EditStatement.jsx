@@ -32,7 +32,7 @@ function EditStatement({ show, handleClose, data, onUpdate, completeData }) {
       placement="end"
       className="teamMember-add"
     >
-      <div className="content">
+      <div className="content content-height">
         <DrawerHead
           title="Statement"
           handleClose={handleClose}
@@ -52,12 +52,15 @@ function EditStatement({ show, handleClose, data, onUpdate, completeData }) {
               setStatement(e.target.value);
             }}
           />
-          <BtnTitleCenter
-            title="Save"
-            type="button"
-            loading={loading}
-            onClick={onSaveStatement}
-          />
+
+          <div className="btn-align-bottom">
+            <BtnTitleCenter
+              title="Save"
+              type="button"
+              loading={loading}
+              onClick={onSaveStatement}
+            />
+          </div>
         </div>
       </div>
     </Offcanvas>

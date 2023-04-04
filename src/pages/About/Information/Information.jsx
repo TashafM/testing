@@ -48,6 +48,7 @@ function Information() {
               onClick={() => {
                 setOpenDrawer({
                   type: "Contacts",
+                  title: "Contacts",
                   open: true,
                   data: [...data[0]?.contactUs],
                   callback: onUpdate,
@@ -63,6 +64,7 @@ function Information() {
                   setOpenDrawer({
                     open: true,
                     type: "Add Contact",
+                    title: "Add Contact",
                     data: {},
                     callback: onUpdate,
                     completeData: data,
@@ -94,12 +96,6 @@ function Information() {
           hoursOfOperation={data[0].hoursOfOperation}
           onClick={() => {
             setOpenOperation(true);
-            // setOpenDrawer({
-            //   type: "Hours of operations",
-            //   title: "Hours of operations",
-            //   open: true,
-            //   data: data[0]?.hoursOfOperation ?? [],
-            // });
           }}
         />
 
@@ -118,12 +114,6 @@ function Information() {
           socialMediaDetails={data[0].socialMediaDetails ?? []}
           onClick={() => {
             setOpenSocial(true);
-            // setOpenDrawer({
-            //   type: "Social Media & Links",
-            //   open: true,
-            //   data: data[0]?.socialMediaDetails ?? [],
-            //   completeData: data,
-            // });
           }}
         />
 
@@ -143,11 +133,6 @@ function Information() {
           companyStatement={data[0]?.companyStatement ?? ""}
           onClick={() => {
             setOpenStatement(true);
-            // setOpenDrawer({
-            //   type: "Statement",
-            //   open: true,
-            //   data: data[0]?.companyStatement ?? [],
-            // });
           }}
         />
 

@@ -7,7 +7,7 @@ import BtnIconOnly from "../../../components/Button/BtnIconOnly";
 import { useContextProvider } from "../../../context";
 
 function Description() {
-  const { openDrawer, setOpenDrawer } = useContextProvider();
+  const { setOpenDrawer } = useContextProvider();
   return (
     <div className="description-wrapper">
       <p className="title">About Us</p>
@@ -36,7 +36,7 @@ function Description() {
         <BtnIconOnly
           icon={edit}
           onClick={() => {
-            setOpenDrawer({ open: true, type: "Edit" });
+            setOpenDrawer({ open: true, type: "Edit", title: "Edit" });
           }}
         />
       </div>

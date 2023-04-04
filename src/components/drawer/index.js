@@ -1,15 +1,9 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
+
 import "./styles.css";
 import { useContextProvider } from "../../context";
-import back from "../../assets/images/back.png";
 import EditAbout from "../../pages/About/Information/Component/EditAbout";
 import EditSocialMedia from "../../pages/About/Information/Component/EditSocialMedia";
 import EditContacts from "../../pages/About/Information/Component/EditContacts";
@@ -18,20 +12,15 @@ import EditAddress from "../../pages/About/Information/Component/EditAddress";
 import EditOperations from "../../pages/About/Information/Component/EditOperations";
 import EditStatement from "../../pages/About/Information/Component/EditStatement";
 import EditOtherInfo from "../../pages/About/Information/Component/EditOtherInfo";
-import BtnIconOnly from "../Button/BtnIconOnly";
-import edit from "../../assets/images/edit-icon.png";
+
 import OtherInfoDetails from "../../pages/About/Information/Component/OtherInfoDetails";
 import AddBrand from "../../pages/About/Brand/Component/AddBrand";
 import { useContext } from "react";
 import { GlobalContext } from "../../App";
-import { useState } from "react";
-import { Alert } from "react-bootstrap";
-import ConfirmBox from "../ConfirmBox/ConfirmBox";
 import DrawerHead from "../../pages/About/Information/Component/DrawerHead";
 
 export default function RightDrawer() {
-  const { loading, setLoading, setMsg, msg, alert, setAlert } =
-    useContext(GlobalContext);
+  const { loading, msg } = useContext(GlobalContext);
   // const [showDiv, setShowDiv] = useState(false);
 
   const { openDrawer, setOpenDrawer } = useContextProvider();
@@ -69,12 +58,12 @@ export default function RightDrawer() {
             }}
           >
             <Box
-              style={{ width: "636px", padding: "42px" }}
+              style={{ width: "536px", padding: "35px" }}
               role="presentation"
             >
               <div style={{ paddingBottom: "30px" }}>
                 <DrawerHead
-                  title="Other info"
+                  title={openDrawer?.title}
                   handleClose={() => toggleDrawer()}
                   description=""
                 />

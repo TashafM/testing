@@ -138,6 +138,7 @@ function EditContacts() {
                   console.log(e);
                   setFieldValue("address", e.target.value);
                 }}
+                rows={4}
                 error={touched.address && errors.address}
                 placeholder="eg. Floor Number, building, area, nearest landmark, 
                 city, pin code."

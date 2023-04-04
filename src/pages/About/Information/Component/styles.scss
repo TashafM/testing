@@ -30,8 +30,7 @@
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
-  font-size: 32px;
-  line-height: 39px;
+  font-size: 28px;
   padding-left: 20px;
   margin-bottom: 0 !important;
   /* identical to box height */
@@ -66,7 +65,7 @@
 }
 
 .input-wrapper {
-  margin-bottom: 38px;
+  margin-bottom: 50px;
 }
 
 .check-container {
@@ -213,10 +212,20 @@
   margin-bottom: 20px;
 }
 
+.content-height {
+  height: 100%;
+}
 .chat-container {
   margin-top: 12px;
   padding: 12px 0 0 0;
   border-top: 1px solid #dadada;
+}
+
+.btn-align-bottom {
+  position: absolute;
+  bottom: 20px;
+  right: 35px;
+  left: 35px;
 }
 
 .drawer-description-text {
@@ -238,6 +247,13 @@
   }
   .drawer-title-text {
     font-size: 26px !important;
+  }
+
+  .btn-align-bottom {
+    position: absolute;
+    bottom: 20px;
+    right: 25px;
+    left: 25px;
   }
 }
 

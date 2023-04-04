@@ -11,7 +11,6 @@ import delet from "../../../../assets/images/delete.svg";
 import { usePostAsyncResponse } from "../../../../hooks/usePostAsyncResponse";
 import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
-import { Toast } from "react-bootstrap";
 import { toast } from "react-toastify";
 
 function EditContactList() {
@@ -21,7 +20,7 @@ function EditContactList() {
   const [deleteData] = usePostAsyncResponse(
     "/portalDeleteCompanyContactUsDetails"
   );
-  const [pathcData, { loading: editLoading }] = usePatchAsyncReponse(
+  const [pathcData] = usePatchAsyncReponse(
     "/portalPatchCompanyContactUsDetails"
   );
 
@@ -94,6 +93,7 @@ function EditContactList() {
             setOpenDrawer({
               ...openDrawer,
               type: "Add Contact",
+              title: "Add Contact",
               data: {},
             });
           }}
@@ -121,6 +121,7 @@ function EditContactList() {
                       setOpenDrawer({
                         ...openDrawer,
                         type: "Edit Contact",
+                        title: "Edit Contact",
                         data: { ...item },
                         index: index,
                       });

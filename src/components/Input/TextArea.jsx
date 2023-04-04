@@ -7,6 +7,7 @@ function TextArea({
   name,
   error,
   label,
+  rows = 10,
   placeholder,
   ...rest
 }) {
@@ -17,16 +18,18 @@ function TextArea({
         name={name}
         className="text-area-cont"
         onChange={(e) => onChange(e)}
-        rows="4"
+        rows={rows}
         cols="50"
         placeholder={placeholder}
         {...rest}
       >
         {value}
       </textarea>
-      <p className="mb-5" style={{ color: "red" }}>
-        {error}
-      </p>
+      {error && (
+        <p className="mb-5" style={{ color: "red" }}>
+          {error}
+        </p>
+      )}
     </>
   );
 }
