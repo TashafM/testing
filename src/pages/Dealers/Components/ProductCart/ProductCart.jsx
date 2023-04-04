@@ -8,9 +8,16 @@ import ItemRow from "../ItemRow/ItemRow";
 import { useContext } from "react";
 import { AddProducts } from "../../Dealers";
 import ArrowLink from "../ArrowLink/ArrowLink";
+import { useState } from "react";
+import SeeAllProducts from "../SeeAllProducts/SeeAllProducts";
 
 const ProductCart = () => {
   const { isEmpty } = useContext(AddProducts);
+  const [showAllProducts, setShowAllProducts] = useState(false);
+  const handleSetProduct = () => {
+    setShowAllProducts(true)
+  }
+  const handleClose = () => setShowAllProducts(false)
   return (
     <>
       {/* <div className="heading-div-cart">
@@ -43,8 +50,9 @@ const ProductCart = () => {
               <img src={editIcon} alt="" />
               <span className="text">Edit</span>
             </div>
-            <ArrowLink title={"See all"} />
+            <ArrowLink title={"See all"} onClick={handleSetProduct}/>
           </div>
+          <SeeAllProducts show={showAllProducts} handleClose={handleClose}/>
 
           {/**OTHER INSTRUCTIONS */}
           <div className="other-instructions">
