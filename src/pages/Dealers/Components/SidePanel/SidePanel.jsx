@@ -4,7 +4,7 @@ import { Button, Offcanvas } from "react-bootstrap";
 import LeftSide from "../LeftSide/LeftSide";
 import RightSide from "../RightSide/RightSide";
 
-const SidePanel = ({ show, handleClose, handleShow }) => {
+const SidePanel = ({ show, handleClose, closePanel }) => {
   return (
     <div className="sidepanel">
       <Offcanvas
@@ -24,7 +24,7 @@ const SidePanel = ({ show, handleClose, handleShow }) => {
                 <LeftSide/>
             </div>
             <div className="div-2">
-              <RightSide/>
+              <RightSide closePanel={closePanel}/>
             </div>
           </div>
         </Offcanvas.Body>

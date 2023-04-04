@@ -1,0 +1,57 @@
+.right-side-tr {
+  border: transparent;
+  background-color: white;
+  .single-product-item {
+    padding-top: 25px;
+    padding-left: 30px;
+    .img-div {
+      display: flex;
+      align-items: center;
+
+      .text-desc {
+        margin-left: 12px;
+        .product-name {
+          font-size: 16px;
+          font-weight: 600;
+          line-height: 19px;
+          color: #000;
+          margin-bottom: 10px;
+        }
+        .description {
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 14px;
+          color: #909090;
+        }
+      }
+    }
+  }
+  td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  .quantity {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #000;
+  }
+  .price {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    color: #000;
+  }
+  .price-padding {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    color: #000;
+    padding-right: 20px;
+  }
+  .remove-btn {
+    cursor: pointer;
+  }
+}
+
+

@@ -49,7 +49,7 @@ const Products = () => {
             )
           )}
         </Row>
-        <SidePanel show={showPanel} handleShow={handleShow} handleClose={handleClose}/>
+        <SidePanel show={showPanel} handleShow={handleShow} handleClose={handleClose} closePanel={setShowPanel}/>
       </div>
       <div className="bottom-strip">
         <div className="bottom-brands">

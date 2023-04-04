@@ -3,7 +3,7 @@ import "./itemrow.scss";
 import listproduct from "../../../../assets/images/listproduct.png";
 import x from "../../../../assets/images/x.svg";
 
-const ItemRow = () => {
+const ItemRow = ({ disableDelete, pr20 }) => {
   return (
     <tr className="right-side-tr">
       <td className="single-product-item">
@@ -16,10 +16,12 @@ const ItemRow = () => {
         </div>
       </td>
       <td className="quantity">1</td>
-      <td className="price">₹ 433</td>
-      <td className="remove-btn">
-        <img src={x} alt="" />
-      </td>
+      <td className={pr20 ? 'price-padding' : 'price'}>₹ 433</td>
+      {!disableDelete && (
+        <td className="remove-btn">
+          <img src={x} alt="" />
+        </td>
+      )}
     </tr>
   );
 };
