@@ -44,9 +44,9 @@ function ModalComponent({
         className="modal-content-container"
       >
         <Modal.Body className="modalbody">
-          <div className="d-flex justify-content-between  pb-3">
-            <p className="modal-title">{type}</p>
-            <div className="d-flex justify-content-center align-items-center me-2">
+          <div className="d-flex justify-content-between align-items-center modal-header-faq ">
+            <p className="modal-title">{title}</p>
+            <div className="d-flex justify-content-center btn-save-container  align-items-center me-2">
               <BtnTitleCenter onClick={onSaveData} title="Save" />
               <img
                 src={cross}

@@ -178,7 +178,7 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                 </div>
                 <BtnTitleCenter
                   type="submit"
-                  title={"SAVE"}
+                  title={"Save"}
                   loading={loading}
                 />
               </Form>

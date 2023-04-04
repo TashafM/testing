@@ -44,9 +44,9 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
       className="modal-content-container"
     >
       <Modal.Body className="modalbody">
-        <div className="d-flex justify-content-between  pb-3">
+        <div className="d-flex justify-content-between align-items-center modal-header-faq ">
           <p className="modal-title">Privacy Policy</p>
-          <div className="d-flex justify-content-center align-items-center me-2">
+          <div className="d-flex justify-content-center align-items-center btn-save-container me-2">
             <BtnTitleCenter onClick={onSaveData} title="Save" />
             <img
               src={cross}

@@ -5,6 +5,7 @@ import CardTimeSlot from "./CardTimeSlot";
 import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
 import { Offcanvas } from "react-bootstrap";
 import DrawerHead from "./DrawerHead";
+import "./styles.scss";
 
 function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
   const [postData, { loading }] = usePatchAsyncReponse(
@@ -124,7 +125,7 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
       show={show}
       onHide={handleClose}
       placement="end"
-      className="teamMember-add"
+      className="teamMember-add drawer-operation"
     >
       <div className="content">
         <DrawerHead
@@ -152,7 +153,7 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
                   title={item.day}
                   active={item.active}
                   disabled={
-                    defaultCard.active ? defaultCard.active : item.active
+                    defaultCard.active ? defaultCard.active : !item.active
                   }
                   onChange={onChangeHandler}
                   startTime={item.startTime}

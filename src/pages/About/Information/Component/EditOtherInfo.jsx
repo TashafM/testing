@@ -56,7 +56,7 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
       placement="end"
       className="teamMember-add"
     >
-      <div className="content">
+      <div className="content drawer-conter-canvas">
         <DrawerHead
           title="Other info"
           handleClose={handleClose}
@@ -120,6 +120,7 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
                   onChange={(e) => {
                     setValue(e.target.value);
                   }}
+                  rows={5}
                   placeholder="Please mention here"
                 />
               </div>

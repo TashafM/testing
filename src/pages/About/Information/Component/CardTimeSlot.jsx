@@ -27,7 +27,7 @@ function CardTimeSlot({
           label="startTime"
           onChange={onTimeChange}
         />
-        <span>To</span>
+        <span className="to-text-container">To</span>
         <TimeInput
           value={endTime}
           disabled={disabled}

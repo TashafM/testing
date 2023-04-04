@@ -148,7 +148,7 @@ function EditContacts() {
             <BtnTitleCenter
               loading={loading || editLoading}
               type="submit"
-              title={"SAVE"}
+              title={"Save"}
             />
           </Form>
         )}

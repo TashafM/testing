@@ -53,16 +53,19 @@
 }
 
 .modalbody {
-  height: 550px;
+  height: 600px;
   overflow: auto;
+  padding: 20px 35px;
 }
 
 .modal-title {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 600;
 }
 
 .crossCloseButton {
+  height: 18px;
+  width: 24px;
   cursor: pointer;
 }
 
@@ -72,4 +75,16 @@
 
 .iconpropertieslogo {
   width: 25px;
+}
+
+@media only screen and (max-width: 1199px) {
+}
+
+@media only screen and (max-width: 1600px) {
+}
+
+@media only screen and (max-width: 1440px) {
+  .modal-title {
+    font-size: 22px;
+  }
 }

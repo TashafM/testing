@@ -109,6 +109,10 @@ input:checked + .slider:before {
   padding: 16px;
 }
 
+.to-text-container {
+  display: inline-block;
+  padding-inline: 10px;
+}
 .time-select-container {
   padding: 2px;
   background: #f7f7f7;
@@ -128,6 +132,10 @@ input:checked + .slider:before {
 
     &:focus-visible {
       outline: none;
+    }
+
+    option {
+      padding: 20px;
     }
   }
 

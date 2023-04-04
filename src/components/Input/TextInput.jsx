@@ -22,7 +22,7 @@ function TextInput({
         placeholder={placeholder}
         onChange={onChange}
       />
-      <p style={{ color: "red" }}>{error}</p>
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 }

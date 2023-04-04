@@ -8,8 +8,6 @@ const FileDropzone = ({ file, onChange, label, setFile }) => {
     console.log("error code " + error.code + ": " + error.message);
   };
 
-  console.log({ file });
-
   return (
     <div className="files">
       {label ? <p className="input-lable">{label}</p> : null}

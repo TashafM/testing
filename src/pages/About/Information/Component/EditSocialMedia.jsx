@@ -129,7 +129,7 @@ function EditSocialMedia({ show, handleClose, data, onUpdate, completeData }) {
                 <BtnTitleCenter
                   type="submit"
                   loading={loading}
-                  title={"SAVE"}
+                  title={"Save"}
                 />
               </Form>
             )}

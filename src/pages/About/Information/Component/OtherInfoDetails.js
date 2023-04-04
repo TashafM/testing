@@ -35,7 +35,7 @@ function OtherInfoDetails() {
       </div>
 
       <BtnTitleCenter
-        title={"SAVE"}
+        title={"Save"}
         onClick={() => {
           console.log("save buttonclick");
         }}

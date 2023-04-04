@@ -58,7 +58,7 @@ export default function RightDrawer() {
             }}
           >
             <Box
-              style={{ width: "536px", padding: "35px" }}
+              style={{ width: "600px", padding: "35px" }}
               role="presentation"
             >
               <div style={{ paddingBottom: "30px" }}>

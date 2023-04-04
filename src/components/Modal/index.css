@@ -18,9 +18,20 @@
   font-weight: 600;
 }
 
+.modal-header-faq {
+  margin-bottom: 35px;
+}
+
+.btn-save-container {
+  .btn-title-center {
+    padding: 6px 35px !important;
+    border-radius: 5px;
+  }
+}
+
 .crossCloseButton {
-  height: 22px;
-  width: 30px;
+  height: 18px;
+  width: 24px;
   padding-left: 10px;
 }
 .text-input-faq .input-container {

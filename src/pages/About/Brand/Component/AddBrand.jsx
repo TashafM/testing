@@ -151,6 +151,7 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                     // placeholder="eg. Sales Team"
                     label="Username"
                   />
+                  <p className="tagging-text m-0">For tagging purpose</p>
                 </div>
                 <div className="input-wrapper">
                   <TextInput
@@ -160,6 +161,7 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                     error={touched.email && errors.email}
                     label="Email ID"
                   />
+                  <p className="tagging-text m-0">For tagging purpose</p>
                 </div>
 
                 <BtnTitleCenter
