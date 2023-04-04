@@ -18,7 +18,36 @@ import brand2 from "../../assets/images/brand2.png";
 import brand3 from "../../assets/images/brand3.png";
 import brand4 from "../../assets/images/brand4.png";
 
-
+export const productVariant = {
+  "cyan": {
+    "rnb1ltr": 300,
+    "akrct5ltr": 500,
+    "nm1ltr": 250,
+    "roundxt1ltr": 150,
+    "ribcan5ltr": 600,
+  },
+  "bluish_magenta": {
+    "rnb1ltr": 370,
+    "akrct5ltr": 650,
+    "nm1ltr": 290,
+    "roundxt1ltr": 200,
+    "ribcan5ltr": 800,
+  },
+  "lemon_yellow": {
+    "rnb1ltr": 350,
+    "akrct5ltr": 450,
+    "nm1ltr": 260,
+    "roundxt1ltr": 220,
+    "ribcan5ltr": 550,
+  },
+  "black": {
+    "rnb1ltr": 275,
+    "akrct5ltr": 650,
+    "nm1ltr": 190,
+    "roundxt1ltr": 200,
+    "ribcan5ltr": 430,
+  }
+};
 
 export const dealerMenu = [
   {
