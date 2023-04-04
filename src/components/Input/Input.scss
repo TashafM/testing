@@ -231,11 +231,25 @@ div.PhoneInputCountry {
 }
 
 .preview-icon {
-  height: 50px;
-  width: 50px;
+  height: 100px;
+  width: 200px;
   border-radius: 5px;
 }
 
+.default-file-icon {
+  height: 50px;
+  width: 50px;
+}
+.cross-icon-container {
+  position: absolute;
+  right: -50px;
+  top: -20px;
+  cursor: pointer;
+}
+
+.img-parent-preview {
+  position: relative;
+}
 input[type="time"]::-webkit-calendar-picker-indicator {
   background: none;
 }
@@ -244,7 +258,12 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   background: #f7f7f7;
   border: 1px dashed #899197;
   border-radius: 15px;
-  padding: 20px 15px;
+  padding: 25px 15px;
+}
+
+.without-border-dropzone {
+  border: none;
+  background-color: #fff;
 }
 
 .file-name {

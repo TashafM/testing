@@ -2,7 +2,8 @@ import React from "react";
 import Files from "react-files";
 import "./Input.scss";
 import icon from "../../assets/images/default-image.png";
-const FileDropzone = ({ file, onChange, label }) => {
+import cross from "../../assets/images/cross-icon.png";
+const FileDropzone = ({ file, onChange, label, setFile }) => {
   const handleError = (error, file) => {
     console.log("error code " + error.code + ": " + error.message);
   };
@@ -13,7 +14,11 @@ const FileDropzone = ({ file, onChange, label }) => {
     <div className="files">
       {label ? <p className="input-lable">{label}</p> : null}
       <Files
-        className="files-dropzone"
+        className={
+          file.length
+            ? "files-dropzone without-border-dropzone"
+            : "files-dropzone"
+        }
         onChange={(e) => {
           onChange(e);
         }}
@@ -26,17 +31,28 @@ const FileDropzone = ({ file, onChange, label }) => {
       >
         <div className="d-flex flex-column align-items-center">
           {file.length && file[0].name ? (
-            <img
-              src={file[0]?.preview ? file[0]?.preview?.url : file[0].name}
-              className="preview-icon"
-              alt="file-drop-img"
-            />
+            <div className="img-parent-preview">
+              <img
+                src={file[0]?.preview ? file[0]?.preview?.url : file[0].name}
+                className="preview-icon"
+                alt="file-drop-img"
+              />
+              <img
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setFile([]);
+                }}
+                src={cross}
+                alt="cross-icon"
+                className="cross-icon-container"
+              />
+            </div>
           ) : (
-            <img src={icon} alt="file-drop-img" />
+            <img src={icon} alt="file-drop-img" className="default-file-icon" />
           )}
-          <p className="file-name">
-            {file.length ? file[0].name : "Choose picture from your gallery"}
-          </p>
+          {!file.length && (
+            <p className="file-name">Choose picture from your gallery</p>
+          )}
         </div>
       </Files>
     </div>

@@ -116,6 +116,7 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                     file={file}
                     onChange={handleChange}
                     label="Add Image"
+                    setFile={setFile}
                     // error={touched.file && errors.file}
                   />
                 </div>
