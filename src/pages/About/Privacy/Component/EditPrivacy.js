@@ -63,18 +63,25 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
               style={{}}
               className="text-input-privacy"
             >
-              <TextInput
-                placeholder={"privacy title"}
-                value={item.title}
-                onChange={(e) => onChanContent(e.target.value, index, "title")}
-              />
+              <div className="privay-title-container">
+                <TextInput
+                  placeholder={"privacy title"}
+                  value={item.title}
+                  onChange={(e) =>
+                    onChanContent(e.target.value, index, "title")
+                  }
+                />
+              </div>
 
-              <TextArea
-                value={item.content}
-                onChange={(e) =>
-                  onChanContent(e.target.value, index, "content")
-                }
-              />
+              <div className="privacy-value-description">
+                <TextArea
+                  value={item.content}
+                  rows={6}
+                  onChange={(e) =>
+                    onChanContent(e.target.value, index, "content")
+                  }
+                />
+              </div>
             </div>
           );
         })}

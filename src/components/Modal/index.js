@@ -63,23 +63,28 @@ function ModalComponent({
                 style={{}}
                 className="text-input-faq"
               >
-                <TextInput
-                  placeholder={"privacy title"}
-                  value={type === "FAQ" ? item.question : item.title}
-                  onChange={(e) => {
-                    const key = type === "FAQ" ? "question" : "title";
-                    onChanContent(e.target.value, index, key);
-                  }}
-                />
+                <div className="privacy-title-container">
+                  <TextInput
+                    placeholder={"privacy title"}
+                    value={type === "FAQ" ? item.question : item.title}
+                    onChange={(e) => {
+                      const key = type === "FAQ" ? "question" : "title";
+                      onChanContent(e.target.value, index, key);
+                    }}
+                  />
+                </div>
 
-                <TextArea
-                  value={type === "FAQ" ? item.answer : item.content}
-                  onChange={(e) => {
-                    const key = type === "FAQ" ? "answer" : "content";
+                <div className="privacy-description-container">
+                  <TextArea
+                    rows={6}
+                    value={type === "FAQ" ? item.answer : item.content}
+                    onChange={(e) => {
+                      const key = type === "FAQ" ? "answer" : "content";
 
-                    onChanContent(e.target.value, index, key);
-                  }}
-                />
+                      onChanContent(e.target.value, index, key);
+                    }}
+                  />
+                </div>
               </div>
             );
           })}

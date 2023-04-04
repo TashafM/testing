@@ -4,7 +4,7 @@ import deleteBtn from "../../../../assets/images/delete.svg";
 
 import "../Brand.scss";
 
-function CardBrand({ title, item, location, onClick, onDelete, index }) {
+function CardBrand({ item, location, onClick, onDelete, index }) {
   // const { setOpenDrawer } = useContextProvider();
 
   return (
