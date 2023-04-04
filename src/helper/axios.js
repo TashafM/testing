@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-  // baseURL: "https://dev.elred.io/",
-  baseURL: "http://elredtest1-env.eba-ydsmdti3.ap-south-1.elasticbeanstalk.com/",
+  baseURL: "https://dev.elred.io/",
+  // baseURL: "http://elredtest1-env.eba-ydsmdti3.ap-south-1.elasticbeanstalk.com/",
 
   // timeout: 5000, // milliseconds
   headers: {

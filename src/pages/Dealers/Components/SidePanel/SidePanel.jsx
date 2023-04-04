@@ -2,6 +2,7 @@ import React from "react";
 import "./sidepanel.scss";
 import { Button, Offcanvas } from "react-bootstrap";
 import LeftSide from "../LeftSide/LeftSide";
+import RightSide from "../RightSide/RightSide";
 
 const SidePanel = ({ show, handleClose, handleShow }) => {
   return (
@@ -22,7 +23,9 @@ const SidePanel = ({ show, handleClose, handleShow }) => {
             <div className="div-1">
                 <LeftSide/>
             </div>
-            <div className="div-2">Order List</div>
+            <div className="div-2">
+              <RightSide/>
+            </div>
           </div>
         </Offcanvas.Body>
       </Offcanvas>
