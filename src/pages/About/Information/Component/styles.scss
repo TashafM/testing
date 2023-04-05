@@ -12,7 +12,7 @@
   width: 70px;
   position: absolute;
 
-  top: 42px;
+  top: 31px;
   right: 42px;
 }
 
@@ -39,10 +39,13 @@
   color: #000000;
 }
 
-.drawer-operation {
-  width: 40% !important;
+.offcanvas.drawer-operation.show {
+  width: 39% !important;
 }
 
+.switch-item-container {
+  padding-left: 30px;
+}
 .drawer-conter-canvas {
   height: 100%;
 }

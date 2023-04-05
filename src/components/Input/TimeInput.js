@@ -1,17 +1,17 @@
 import React from "react";
 import { amPm, hour, minutes } from "./data";
+import { Form } from "react-bootstrap";
 
 function TimeInput({ value, onChange, disabled, index, label }) {
-  // const [value, onChange] = useState('10:00');
-
   const hourValue = value?.split(":")?.shift() ?? "09";
   const minutesValue = value?.split(":")?.pop().split(" ").shift() ?? "30";
   const amPmValue = value.split(" ").pop() ?? "am";
 
   return (
-    <div className="time-select-container">
-      <select
+    <div className="time-select-container d-flex">
+      <Form.Select
         disabled={disabled}
+        className="hour-select"
         value={hourValue}
         onChange={(e) => {
           onChange(e.target.value, index, label, "hour");
@@ -24,15 +24,15 @@ function TimeInput({ value, onChange, disabled, index, label }) {
             </option>
           );
         })}
-      </select>
+      </Form.Select>
 
-      <select
+      <Form.Select
         disabled={disabled}
         onChange={(e) => {
           onChange(e.target.value, index, label, "minutes");
         }}
         value={minutesValue}
-        className="minute-input"
+        className="hour-select minute-input"
       >
         {minutes.map((item) => {
           return (
@@ -41,11 +41,12 @@ function TimeInput({ value, onChange, disabled, index, label }) {
             </option>
           );
         })}
-      </select>
+      </Form.Select>
 
-      <select
+      <Form.Select
         disabled={disabled}
         value={amPmValue}
+        className="hour-select"
         onChange={(e) => {
           onChange(e.target.value, index, label, "ampm");
         }}
@@ -57,7 +58,7 @@ function TimeInput({ value, onChange, disabled, index, label }) {
             </option>
           );
         })}
-      </select>
+      </Form.Select>
     </div>
   );
 }
