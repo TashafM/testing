@@ -3,12 +3,16 @@ import "./NavbarTop.scss";
 import * as BS from "react-icons/bs";
 import atinks from "../../assets/images/atinks.png";
 import BlackBtn from "../BlackBtn/BlackBtn";
-import {BsChevronDown} from 'react-icons/bs'
-import user from '../../assets/images/user.jpg'
-import LogoutPopup from "../LogoutPopup/LogoutPopup";
+import { BsChevronDown } from "react-icons/bs";
+import user from "../../assets/images/user.jpg";
+import atlogo from "../../assets/images/atlogo.png";
 
-const NavbarTop = () => {
-  const [showPopup, setShowPopup] = useState(false)
+import LogoutPopup from "../LogoutPopup/LogoutPopup";
+import MyDealersPopup from "../../pages/Dealers/Modal/MyDealersPopup/MyDealersPopup";
+
+const NavbarTop = ({ dealers }) => {
+  const [showPopup, setShowPopup] = useState(false);
+  const [dealerPopup, showDealerPopup] = useState(false)
   return (
     <div className="row navbar-top">
       <div className="col-md-2 col-sm-4">
@@ -24,13 +28,28 @@ const NavbarTop = () => {
       </div>
       <div className="col-md-3 right-div">
         <div>
-          <BlackBtn />
+          {dealers ? (
+            <div className="my-dealers" onClick={()=>showDealerPopup(true)}>
+              <div className="dealer-logo">
+                <img src={atlogo} alt="" />
+              </div>
+              <BsChevronDown />
+            </div>
+          ) : (
+            <BlackBtn />
+          )}
         </div>
+        <MyDealersPopup show={dealerPopup} setDealerPopup={showDealerPopup}/>
         <div className="user-profile">
           <img src={user} alt="" />
           <span className="username">Username</span>
-          <span className="btn-dropdown" onClick={()=>setShowPopup(!showPopup)}><BsChevronDown/></span>
-          {showPopup && <LogoutPopup setShowPopup={setShowPopup}/>}
+          <span
+            className="btn-dropdown"
+            onClick={() => setShowPopup(!showPopup)}
+          >
+            <BsChevronDown />
+          </span>
+          {showPopup && <LogoutPopup setShowPopup={setShowPopup} />}
         </div>
       </div>
     </div>

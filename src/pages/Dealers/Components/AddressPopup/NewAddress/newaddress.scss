@@ -1,0 +1,39 @@
+.new-address {
+  margin: 20px 40px;
+
+  .shipping-billing {
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 32px;
+    color: #000;
+    margin-bottom: 26px;
+  }
+
+  .radio-div{
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px !important;
+
+    .shipping, .billing{
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 22px;
+        color: #000;
+        
+        input{
+            margin-right: 15px;
+        }
+    }
+    .billing{
+        margin-left: 40px;
+    }
+  }
+
+  .button-div {
+    text-align: center;
+    button {
+      width: 80%;
+      margin-left: 20px;
+    }
+  }
+}
