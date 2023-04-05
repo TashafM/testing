@@ -1,0 +1,50 @@
+.selectaddress {
+    margin-bottom: 40px;
+    .title{
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 20px;
+        color: #000;
+    }
+  .address-box {
+    margin-top: 15px;
+    background: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    padding: 20px;
+    .upper-line {
+      display: flex;
+      align-items: center;
+      .text-add {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 30px;
+        margin-left: 25px;
+      }
+
+      img {
+        margin-top: -35px;
+      }
+    }
+
+    .mobile-line {
+      margin-left: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .num {
+        margin-top: 12px;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 23px;
+        color: #000;
+      }
+    }
+
+    .address-divider {
+      border: 1px solid #cccccc;
+      margin: 20px 0;
+    }
+  }
+}

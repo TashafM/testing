@@ -10,6 +10,8 @@ import { AddProducts } from "../../Dealers";
 import ArrowLink from "../ArrowLink/ArrowLink";
 import { useState } from "react";
 import SeeAllProducts from "../SeeAllProducts/SeeAllProducts";
+import AddressPopup from "../AddressPopup/AddressPopup";
+import OtherInstructions from "../OtherInstructions/OtherInstructions";
 
 const ProductCart = () => {
   const { isEmpty } = useContext(AddProducts);
@@ -18,6 +20,18 @@ const ProductCart = () => {
     setShowAllProducts(true)
   }
   const handleClose = () => setShowAllProducts(false)
+
+  //------------------ADRESS POPUP--------------------------
+  const [showAddress, setShowAddress] = useState(false);
+  const handleAddress = () => setShowAddress(true);
+  const handleCloseAddress = () => setShowAddress(false);
+  //--------------------------------------------------------
+//------------------OTHER INSTRUCTIONS POPUP--------------------------
+const [showInstruction, setShowInstruction] = useState(false);
+const handleInstruction = () => setShowInstruction(true);
+const handleCloseInstruction = () => setShowInstruction(false);
+//--------------------------------------------------------
+
   return (
     <>
       {/* <div className="heading-div-cart">
@@ -57,8 +71,10 @@ const ProductCart = () => {
           {/**OTHER INSTRUCTIONS */}
           <div className="other-instructions">
             <div className="text">Other Instructions</div>
-            <ArrowLink title={"Add"} />
+            <ArrowLink title={"Add"} onClick={handleInstruction}/>
           </div>
+          <OtherInstructions show={showInstruction} handleClose={handleCloseInstruction}/>
+
 
           {/**PURCHASE ORDER */}
           <div className="purchase-order">
@@ -69,12 +85,14 @@ const ProductCart = () => {
           {/**ADDRESS */}
           <div className="addresses">
             <div className="title">Addresses:</div>
-            <ArrowLink title={"View"} />
+            <ArrowLink title={"View"} onClick={handleAddress}/>
           </div>
           <div className="display-address">
             Lorem ipsum dolor sit amet adipi adik...
           </div>
           <div className="dashed-line"></div>
+          <AddressPopup show={showAddress} handleClose={handleCloseAddress}/>
+
 
           {/**ITEMS TOTAL */}
           <div className="item-rate-div">

@@ -1,0 +1,21 @@
+.addbutton-address {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #be212a;
+  width: 70%;
+  margin: 0 auto;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 40px;
+  margin-top: 20px;
+  cursor: pointer;
+
+  .text{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #BE212A;
+    margin-left: 10px;
+  }
+}

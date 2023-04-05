@@ -70,4 +70,8 @@
   color: white;
   background-color: #be212a;
   border: none;
+
+  &:active {
+    background-color: #be212a;
+  }
 }

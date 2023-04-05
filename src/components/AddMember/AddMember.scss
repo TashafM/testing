@@ -102,6 +102,10 @@
   &:hover {
     background-color: #be212a;
   }
+
+  &:active {
+    background-color: #be212a;
+  }
 }
 
 .date-main {
@@ -173,6 +177,10 @@
 
   .save-btn {
     font-size: 20px !important;
+
+    &:active {
+      background-color: #be212a;
+    }
   }
   .team-member-add {
     font-size: 24px !important;

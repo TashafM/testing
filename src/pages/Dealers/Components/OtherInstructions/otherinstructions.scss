@@ -1,0 +1,59 @@
+.offcanvas.show.instructions {
+  width: 28% !important;
+
+  button:active {
+    background-color: #be212a !important;
+  }
+  .some-margin {
+    margin-top: 50px;
+  }
+  .offcanvas-title {
+    padding-top: 20px;
+    padding-left: 40px;
+    margin-bottom: 15px;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 38px;
+  }
+
+  button {
+    margin-right: 20px;
+  }
+
+  .offcanvas-body {
+    padding: 0;
+  }
+}
+
+.seeall-header {
+  background-color: #f1f3f8;
+  border: transparent;
+  tr {
+    th {
+      text-align: center;
+      padding: 20px;
+    }
+  }
+}
+
+.instruction-div {
+  margin: 0 50px;
+  margin-top: 20px !important;
+
+  .inst-form {
+    margin-bottom: 45px;
+
+    .title-text {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 24px;
+      color: #000;
+      margin-bottom: 10px;
+    }
+  }
+
+  .writing-space {
+    background: #f7f7f7;
+    border: 1px solid #cccccc;
+  }
+}
