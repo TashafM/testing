@@ -34,3 +34,15 @@
 .popup-container{
   margin: 0 50px;
 }
+
+
+.newAddress-back{
+  margin-left: -20px;
+
+  .backToAddress{
+    img{
+      margin-right: 20px;
+      cursor: pointer;
+    }
+  }
+}

@@ -34,7 +34,7 @@ const Menus = ({tabs}) => {
                 <>
                   <div
                     key={id}
-                    className={`li ${location.pathname == item.path ? "active" : ""}`}
+                    className={`li ${location.pathname.slice(0,10) === item.path.slice(0,10) ? "active" : ""}`}
                     onClick={() => goto(item)}
                   >
                     <span className="icn">

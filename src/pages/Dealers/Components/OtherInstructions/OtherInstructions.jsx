@@ -31,7 +31,7 @@ const OtherInstructions = ({ show, handleClose }) => {
               </Form.Group>
             </Form>
 
-            <Button className="save-btn some-margin">Save</Button>
+            <Button className="save-btn some-margin" onClick={handleClose}>Save</Button>
           </div>
           {/* Some text as placeholder. In real life you can have the elements you
               have chosen. Like, text, images, lists, etc. */}

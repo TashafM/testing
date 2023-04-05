@@ -2,43 +2,52 @@ import React from "react";
 import noItem from "../../../../assets/images/item-not-added.png";
 import editIcon from "../../../../assets/images/edit-icon.png";
 
-import { Button, FormControl, FormGroup, Table } from "react-bootstrap";
+import { Button, FormControl, FormGroup, Modal, Table } from "react-bootstrap";
 import "./productcart.scss";
 import ItemRow from "../ItemRow/ItemRow";
 import { useContext } from "react";
-import { AddProducts } from "../../Dealers";
+import { AddProducts, GlobalSidePanel } from "../../Dealers";
 import ArrowLink from "../ArrowLink/ArrowLink";
 import { useState } from "react";
 import SeeAllProducts from "../SeeAllProducts/SeeAllProducts";
 import AddressPopup from "../AddressPopup/AddressPopup";
 import OtherInstructions from "../OtherInstructions/OtherInstructions";
+import OrderPlaced from "../../Modal/OrderPlaced/OrderPlaced";
 
 const ProductCart = () => {
-  const { isEmpty } = useContext(AddProducts);
+  const { isEmpty, setIsEmpty } = useContext(AddProducts);
+  const { setShowPanel } = useContext(GlobalSidePanel);
   const [showAllProducts, setShowAllProducts] = useState(false);
   const handleSetProduct = () => {
-    setShowAllProducts(true)
-  }
-  const handleClose = () => setShowAllProducts(false)
+    setShowAllProducts(true);
+  };
+  const handleClose = () => setShowAllProducts(false);
 
   //------------------ADRESS POPUP--------------------------
   const [showAddress, setShowAddress] = useState(false);
-  const handleAddress = () => setShowAddress(true);
-  const handleCloseAddress = () => setShowAddress(false);
+  const [addAddress, setAddress] = useState(true);
+  const handleAddress = () => {
+    setShowAddress(true);
+  };
+  const handleCloseAddress = () => {
+    setShowAddress(false);
+    setAddress(true);
+  };
+
   //--------------------------------------------------------
-//------------------OTHER INSTRUCTIONS POPUP--------------------------
-const [showInstruction, setShowInstruction] = useState(false);
-const handleInstruction = () => setShowInstruction(true);
-const handleCloseInstruction = () => setShowInstruction(false);
-//--------------------------------------------------------
+  //------------------OTHER INSTRUCTIONS POPUP--------------------------
+  const [showInstruction, setShowInstruction] = useState(false);
+  const handleInstruction = () => setShowInstruction(true);
+  const handleCloseInstruction = () => setShowInstruction(false);
+  //--------------------------------------------------------
+
+  //------------------------------------------------- modal
+  const [modalShow, setModalShow] = useState(false);
+
+  //------------------------------------------
 
   return (
     <>
-      {/* <div className="heading-div-cart">
-        <div>Products</div>
-        <div>Quantity</div>
-        <div>Price</div>
-      </div> */}
       <Table>
         <thead className="productcart-header">
           <tr>
@@ -60,21 +69,23 @@ const handleCloseInstruction = () => setShowInstruction(false);
         <>
           <div className="dashed-line"></div>
           <div className="edit-see-all">
-            <div className="edit">
+            <div className="edit" onClick={() => setShowPanel(true)}>
               <img src={editIcon} alt="" />
               <span className="text">Edit</span>
             </div>
-            <ArrowLink title={"See all"} onClick={handleSetProduct}/>
+            <ArrowLink title={"See all"} onClick={handleSetProduct} />
           </div>
-          <SeeAllProducts show={showAllProducts} handleClose={handleClose}/>
+          <SeeAllProducts show={showAllProducts} handleClose={handleClose} />
 
           {/**OTHER INSTRUCTIONS */}
           <div className="other-instructions">
             <div className="text">Other Instructions</div>
-            <ArrowLink title={"Add"} onClick={handleInstruction}/>
+            <ArrowLink title={"Add"} onClick={handleInstruction} />
           </div>
-          <OtherInstructions show={showInstruction} handleClose={handleCloseInstruction}/>
-
+          <OtherInstructions
+            show={showInstruction}
+            handleClose={handleCloseInstruction}
+          />
 
           {/**PURCHASE ORDER */}
           <div className="purchase-order">
@@ -85,14 +96,18 @@ const handleCloseInstruction = () => setShowInstruction(false);
           {/**ADDRESS */}
           <div className="addresses">
             <div className="title">Addresses:</div>
-            <ArrowLink title={"View"} onClick={handleAddress}/>
+            <ArrowLink title={"View"} onClick={handleAddress} />
           </div>
           <div className="display-address">
             Lorem ipsum dolor sit amet adipi adik...
           </div>
           <div className="dashed-line"></div>
-          <AddressPopup show={showAddress} handleClose={handleCloseAddress}/>
-
+          <AddressPopup
+            show={showAddress}
+            handleClose={handleCloseAddress}
+            addAddress={addAddress}
+            setAddress={setAddress}
+          />
 
           {/**ITEMS TOTAL */}
           <div className="item-rate-div">
@@ -111,9 +126,12 @@ const handleCloseInstruction = () => setShowInstruction(false);
 
           {/**PLACE ORDER - CLEAR CART */}
           <div className="cart-btns">
-            <Button className="clear">Clear Cart</Button>
-            <Button className="place-order">Place Order</Button>
+            <Button className="clear" onClick={() => setIsEmpty(true)}>Clear Cart</Button>
+            <Button className="place-order" onClick={() => setModalShow(true)}>
+              Place Order
+            </Button>
           </div>
+          <OrderPlaced modalShow={modalShow} setModalShow={setModalShow} />
         </>
       )}
 

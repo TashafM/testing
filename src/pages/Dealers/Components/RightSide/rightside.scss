@@ -1,11 +1,25 @@
 .rightside {
   padding-top: 20px;
   margin-right: 30px;
-  .title {
-    font-size: 32px;
-    font-weight: 600;
-    margin-bottom: 25px;
+  position: fixed;
+  width: 26.5%;
+
+  .title-close{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+
+    .title {
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 25px;
+    }
+
+    img{
+      cursor: pointer;
+    }
   }
+  
   .header {
     // display: flex;
     // align-items: center;
@@ -99,7 +113,7 @@
       font-weight: 600;
       width: 80%;
       line-height: 30px;
-      margin-top: 200px;
+      margin-top: 150px;
       margin-left: 20px;
     }
   }

@@ -1,27 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router";
 import TopBar from "../../../Components/TopBar/TopBar";
 import "./products.scss";
-import product1 from "../../../../../assets/images/product1.png";
-import product2 from "../../../../../assets/images/product2.png";
-import product3 from "../../../../../assets/images/product3.png";
-import product4 from "../../../../../assets/images/product4.png";
-import product5 from "../../../../../assets/images/product5.png";
-import product6 from "../../../../../assets/images/product6.png";
-
 import { superItems } from "../../../data";
 import SidePanel from "../../../Components/SidePanel/SidePanel";
+import { GlobalSidePanel } from "../../../Dealers";
 
 const Products = () => {
-  const navigate = useNavigate();
+  const {showPanel, setShowPanel} = useContext(GlobalSidePanel)
   const location = useLocation();
   const [currentId, setCurrentId] = useState(location.state.id)
-  const [showPanel, setShowPanel] = useState(false)
 
-  const handleShow = () => setShowPanel(true);
-  const handleClose = () => setShowPanel(false)
-  console.log(location, "from products page");
   return (
     <>
       <div className="products">
@@ -49,7 +39,7 @@ const Products = () => {
             )
           )}
         </Row>
-        <SidePanel show={showPanel} handleShow={handleShow} handleClose={handleClose} closePanel={setShowPanel}/>
+        <SidePanel show={showPanel} setShowPanel={setShowPanel}/>
       </div>
       <div className="bottom-strip">
         <div className="bottom-brands">

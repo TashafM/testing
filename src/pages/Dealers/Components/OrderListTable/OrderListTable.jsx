@@ -11,6 +11,7 @@ const OrderListTable = ({ disableDelete }) => {
           <th>Products</th>
           <th>Quantity</th>
           <th>Price</th>
+          <th></th>
         </tr>
       </thead>
       <tbody className="right-side-body">
