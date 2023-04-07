@@ -118,6 +118,12 @@ input:checked + .slider:before {
   display: inline-block;
   padding-inline: 10px;
 }
+
+.select__multi-value {
+  background-color: #51b2e2;
+  border: none;
+  border-radius: 0;
+}
 .time-select-container {
   padding: 2px;
   background: #f7f7f7;

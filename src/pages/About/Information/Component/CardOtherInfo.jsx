@@ -3,6 +3,7 @@ import { Col } from "react-bootstrap";
 import Badges from "../../../../components/Input/Badges";
 import CardHead from "./CardHead";
 import quote from "../../../../assets/images/other-info.png";
+import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 
 function CardOtherInfo({ otherInfo, onClick }) {
   return (
@@ -28,10 +29,14 @@ function CardOtherInfo({ otherInfo, onClick }) {
             Our Services & support?
           </div>
           {otherInfo?.servicesAndSupport?.provided === "yes" ? (
-            <div className="col-12 email margin-text">
+            <div className="col-12 email service-and-support margin-text">
               {otherInfo?.servicesAndSupport?.details}
             </div>
           ) : null}
+        </div>
+
+        <div className="d-flex justify-content-end btn-view-all-container">
+          <BtnTitleCenter title="View all" onClick={onClick} />
         </div>
         {/* <div className="row mb-2">
           <div className="col-6 title-other-Info">
