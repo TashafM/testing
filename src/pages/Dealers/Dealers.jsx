@@ -26,9 +26,9 @@ const Dealers = () => {
     <>
       <GlobalSidePanel.Provider value={{ showPanel, setShowPanel }}>
         <AddProducts.Provider value={{ isEmpty, setIsEmpty }}>
-          <div className="homepage">
+          <div className="homepage dealers-homepage">
             <div className="forDesktop">
-              <NavbarTop dealers={true}/>
+              <NavbarTop dealers={true} />
             </div>
             <div className="forTablets">
               <TabletNavbar />
@@ -39,7 +39,7 @@ const Dealers = () => {
             <div className="row">
               <div className="col-xl-2 menu-list">
                 <div className="sub-menu-list">
-                  <Menus tabs={dealerMenu} />
+                  <Menus tabs={dealerMenu} marginTop={true}/>
                 </div>
               </div>
               <div
@@ -49,9 +49,6 @@ const Dealers = () => {
                     : `col-xl-7 col-lg-12 content-area`
                 }
               >
-                {/* <div className="sub-content-area">
-            <Outlet/>
-          </div> */}
                 <Outlet name="alkjaljfsa" />
               </div>
               <div

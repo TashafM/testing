@@ -27,21 +27,21 @@ const SeeAllProducts = ({ show, handleClose }) => {
                   <th></th>
                 </tr>
               </thead>
-              <tbody className="right-side-body">
-                <ItemRow disableDelete={true} />
-                <ItemRow disableDelete={true} />
-                <ItemRow disableDelete={true} />
-                <ItemRow disableDelete={true} />
-                <ItemRow disableDelete={true} />
-                <ItemRow disableDelete={true} />
-                <ItemRow disableDelete={true} />
-                <ItemRow disableDelete={true} />
-                <ItemRow disableDelete={true} />
-                <ItemRow disableDelete={true} />
-                <ItemRow disableDelete={true} />
-                <ItemRow disableDelete={true} />
-                <ItemRow disableDelete={true} />
-              </tbody>
+                <tbody className="right-side-body">
+                  <ItemRow disableDelete={true} popupScreen={true}/>
+                  <ItemRow disableDelete={true} popupScreen={true}/>
+                  <ItemRow disableDelete={true} popupScreen={true}/>
+                  <ItemRow disableDelete={true} popupScreen={true}/>
+                  <ItemRow disableDelete={true} popupScreen={true}/>
+                  <ItemRow disableDelete={true} popupScreen={true}/>
+                  <ItemRow disableDelete={true} popupScreen={true}/>
+                  <ItemRow disableDelete={true} popupScreen={true}/>
+                  <ItemRow disableDelete={true} popupScreen={true}/>
+                  <ItemRow disableDelete={true} popupScreen={true}/>
+                  <ItemRow disableDelete={true} popupScreen={true}/>
+                  <ItemRow disableDelete={true} popupScreen={true}/>
+                  <ItemRow disableDelete={true} popupScreen={true}/>
+                </tbody>
             </Table>
           </div>
           {/* Some text as placeholder. In real life you can have the elements you

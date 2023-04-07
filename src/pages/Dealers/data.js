@@ -297,6 +297,7 @@ export const superItems = [
       {
         id: 5,
         imgPath: ph5,
+        subImg: brand4,
         name: "Xaar",
         products: [
           {
@@ -328,6 +329,7 @@ export const superItems = [
       {
         id: 6,
         imgPath: ph6,
+        subImg: brand2,
         name: "Toshiba",
         products: [
           {
@@ -365,6 +367,7 @@ export const superItems = [
     subItems: [
       {
         imgPath: ph1,
+        subImg: brand3,
         name: "Konica Minolta",
         products: [
           {
@@ -415,6 +418,7 @@ export const superItems = [
       {
         imgPath: ph2,
         name: "New Ink",
+        subImg: brand1,
         products: [
           {
             idx: 1,

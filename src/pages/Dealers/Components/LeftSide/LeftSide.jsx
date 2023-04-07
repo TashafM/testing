@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./leftside.scss";
 import mainproduct from "../../../../assets/images/mainproduct.png";
+import wishlist from "../../../../assets/images/wishlist.svg";
+
 import { Button, Form, FormControl, InputGroup } from "react-bootstrap";
 
 const LeftSide = () => {
@@ -14,7 +16,13 @@ const LeftSide = () => {
       <div className="leftside">
         <div className="title">Konica Chrome</div>
         <div className="image-div">
+          <div className="sub-images">
+            <div className="toggle-img"><img src={mainproduct} alt="" /></div>
+            <div className="toggle-img"><img src={mainproduct} alt="" /></div>
+            <div className="toggle-img"><img src={mainproduct} alt="" /></div>
+          </div>
           <img src={mainproduct} alt="" />
+          <div className="wish-list"><img src={wishlist} alt="" /></div>
         </div>
         <div className="about-product">
           <div className="product-code">#000789</div>

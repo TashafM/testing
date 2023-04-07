@@ -6,6 +6,7 @@ import "./products.scss";
 import { superItems } from "../../../data";
 import SidePanel from "../../../Components/SidePanel/SidePanel";
 import { GlobalSidePanel } from "../../../Dealers";
+import wishList from '../../../../../assets/images/wishlist.svg'
 
 const Products = () => {
   const {showPanel, setShowPanel} = useContext(GlobalSidePanel)
@@ -25,11 +26,13 @@ const Products = () => {
                     <Col className="products-container">
                       <div
                         className="img-category-main"
-                        style={{ backgroundImage: `url(${itm.image})` }}
+                        // style={{ backgroundImage: `url(${itm.image})`, backgroundRepeat: 'no-repeat' }}
                         onClick={()=>setShowPanel(true)}
                       >
-                        <div>{itm.pname}</div>
-                        <div>
+                        <div className="wish-list-icon"><img src={wishList} alt="" /></div>
+                        <div className="product-img"><img src={itm.image} alt="" /></div>
+                        <div className="title">{itm.pname}</div>
+                        <div className="description">
                           {itm.desc}
                         </div>
                       </div>

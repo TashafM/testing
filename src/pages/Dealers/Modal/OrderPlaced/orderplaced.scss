@@ -16,11 +16,68 @@
       color: #000;
     }
     img {
-      width: 330px;
+      max-width: 330px;
     }
 
-    .view-order-btn{
-        width: 70%;
+    .view-order-btn {
+      width: 70%;
+    }
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .success-order {
+    .modal-dialog {
+      width: 470px !important;
+    }
+
+    .orderplaced-popup {
+      height: 470px;
+
+      img{
+        width: 275px;
+      }
+
+      .msg{
+        font-size: 18px;
+      }
+
+      .view-order-btn{
+        font-size: 16px !important;
+      }
+    }
+  }
+}
+
+@media (min-width: 1440px) and (max-width: 1599px) {
+  .success-order {
+    .modal-dialog {
+      width: 525px !important;
+    }
+
+    .orderplaced-popup {
+      height: 525px;
+
+      img{
+        width: 310px;
+      }
+
+      .msg{
+        font-size: 20px;
+      }
+
+      .view-order-btn{
+        font-size: 20px !important;
+      }
+    }
+  }
+}
+
+
+@media only screen and (max-width: 1199px) {
+  .success-order{
+    .orderplaced-popup{
+      display: none;
     }
   }
 }

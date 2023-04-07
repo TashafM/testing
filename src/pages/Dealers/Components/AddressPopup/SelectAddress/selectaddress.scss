@@ -20,6 +20,8 @@
         font-weight: 400;
         line-height: 30px;
         margin-left: 25px;
+        padding-right: 15px;
+
       }
 
       img {
@@ -50,6 +52,69 @@
     .address-divider {
       border: 1px solid #cccccc;
       margin: 20px 0;
+    }
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .selectaddress{
+    .title{
+      font-size: 14px;
+    }
+
+    .address-box{
+      .upper-line{
+        .text-add{
+          font-size: 16px;
+          padding-right: 15px;
+        }
+      }
+      .mobile-line{
+        .num{
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1440px) and (max-width: 1599px) {
+  .selectaddress{
+    .title{
+      font-size: 14px;
+    }
+
+    .address-box{
+      .upper-line{
+        .text-add{
+          font-size: 16px;
+          padding-right: 15px;
+        }
+      }
+      .mobile-line{
+        .num{
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1600px) and (max-width: 1749px) {
+  .selectaddress{
+
+    .address-box{
+      .upper-line{
+        .text-add{
+          font-size: 18px;
+          padding-right: 15px;
+        }
+      }
+      .mobile-line{
+        .num{
+          font-size: 18px;
+        }
+      }
     }
   }
 }

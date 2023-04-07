@@ -6,7 +6,7 @@ import logo from "../../assets/images/atinks-dashboard.png";
 
 import { useLocation, useNavigate } from "react-router-dom";
 
-const Menus = ({tabs}) => {
+const Menus = ({tabs, marginTop}) => {
   const navigate = useNavigate();
   const location = useLocation()
   // const [data, setData] = useState(localStorage.getItem("data") || null);
@@ -27,7 +27,7 @@ const Menus = ({tabs}) => {
       </div>
 
       <div style={{overflow:'auto'}}>
-        <div className="menu-list">
+        <div className={marginTop? "menu-list marginTop40": "menu-list"}>
           <ul>
             {tabs.map((item, id) => {
               return (

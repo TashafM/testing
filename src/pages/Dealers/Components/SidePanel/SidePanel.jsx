@@ -23,6 +23,7 @@ const SidePanel = ({ show, setShowPanel }) => {
             <div className="div-1">
                 <LeftSide/>
             </div>
+            <div className="vertical-line"></div>
             <div className="div-2">
               <RightSide setShowPanel={setShowPanel}/>
             </div>

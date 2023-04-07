@@ -1,5 +1,5 @@
 .offcanvas.show.address-popup {
-  width: 28% !important;
+  width: 32% !important;
 
   .offcanvas-title {
     padding-top: 20px;
@@ -30,19 +30,53 @@
   }
 }
 
-
-.popup-container{
+.popup-container {
   margin: 0 50px;
 }
 
-
-.newAddress-back{
+.newAddress-back {
   margin-left: -20px;
 
-  .backToAddress{
-    img{
+  .backToAddress {
+    img {
       margin-right: 20px;
       cursor: pointer;
     }
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .offcanvas.show.address-popup {
+    width: 38% !important;
+
+    .offcanvas-title {
+      padding-left: 30px;
+      font-size: 20px;
+    }
+  }
+  .popup-container{
+    margin: 0 40px;
+  }
+}
+
+
+@media (min-width: 1440px) and (max-width: 1559px) {
+  .offcanvas.show.address-popup {
+    width: 35% !important;
+
+    .offcanvas-title {
+      padding-left: 30px;
+      font-size: 24px;
+    }
+  }
+  .popup-container{
+    margin: 0 40px;
+  }
+}
+
+
+@media only screen and (max-width: 1199px) {
+  .offcanvas.show.address-popup {
+    display: none;
   }
 }

@@ -4,6 +4,7 @@ import SearchBarDealers from "../../../../components/SearchBarDealers/SearchBarD
 import FilterBtn from "../../../../components/FilterButton/FilterButton";
 import backpage from "../../../../assets/images/backpage.svg";
 import { useNavigate } from "react-router-dom";
+import Filter from "../Filter/Filter";
 
 const TopBar = ({ title, goback }) => {
   const navigate = useNavigate()
@@ -18,7 +19,7 @@ const TopBar = ({ title, goback }) => {
       </div>
       <div className="search-filter-btn">
         <SearchBarDealers />
-        <FilterBtn />
+        <Filter/>
       </div>
     </div>
   );
