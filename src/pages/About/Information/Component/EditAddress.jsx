@@ -58,7 +58,7 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
         <DrawerHead
           title="Other info"
           handleClose={handleClose}
-          description="Add Address"
+          // description="Add Address"
         />
         {/* <Offcanvas.Header closeButton>
           <Offcanvas.Title>

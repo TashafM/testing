@@ -2,7 +2,7 @@
   margin-bottom: 20px;
 }
 .card-otherinfo-head {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .about-sectio {
@@ -36,6 +36,7 @@
   padding: 12px 20px;
   margin-bottom: 30px;
   height: 180px;
+  overflow: hidden;
 }
 
 .contact-us-container {
@@ -80,10 +81,9 @@
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  line-height: 30px;
+  line-height: 22px;
   /* identical to box height, or 150% */
   margin-left: 10px;
-  letter-spacing: 0.04em;
 
   color: #000000;
 }
@@ -102,7 +102,6 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
-
   color: #899197;
 }
 
@@ -110,6 +109,14 @@
   height: 180px;
 }
 
+.hours-container {
+  overflow: hidden;
+  height: 120px;
+}
+.address-container {
+  overflow: hidden;
+  height: 120px;
+}
 @media only screen and (max-width: 1199px) {
   .cont-title {
     font-size: 14px;

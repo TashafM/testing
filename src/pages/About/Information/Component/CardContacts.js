@@ -19,8 +19,10 @@ function CardContacts({ contactUs, length, onClick, type, title, children }) {
       />
       <div className="d-flex email-cont align-items-center">
         <img className="" height={25} src={email} alt="email-icon" />
-        <div className="d-flex justify-content-between align-items-center flex-grow-1">
-          <span className="email">{contactUs?.email ?? ""}</span>
+        <div className="d-flex justify-content-between align-items-center flex-grow-1 overflow-hidden">
+          <span className="email email-overflow-container">
+            {contactUs?.email ?? ""}
+          </span>
           {length > 1 ? (
             <div className="d-flex contacts-count align-items-center justify-content-center">
               <span className="email count-text-color m-0">+{length - 1}</span>

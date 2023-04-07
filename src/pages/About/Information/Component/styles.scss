@@ -12,7 +12,7 @@
   width: 70px;
   position: absolute;
 
-  top: 42px;
+  top: 31px;
   right: 42px;
 }
 
@@ -39,10 +39,13 @@
   color: #000000;
 }
 
-.drawer-operation {
-  width: 40% !important;
+.offcanvas.drawer-operation.show {
+  width: 39% !important;
 }
 
+.switch-item-container {
+  padding-left: 30px;
+}
 .drawer-conter-canvas {
   height: 100%;
 }
@@ -55,7 +58,7 @@
 
   p {
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -177,7 +180,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  margin-bottom: 16px;
+  margin-bottom: 6px;
   color: #000000;
 }
 
@@ -202,9 +205,17 @@
   line-height: 30px;
   /* identical to box height, or 150% */
   margin-left: 10px;
-  letter-spacing: 0.04em;
 
   color: #000000;
+}
+
+.email-overflow-container {
+  width: 80%;
+  padding-right: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
 }
 
 .cont-wrapper-title {
@@ -250,6 +261,10 @@
     font-size: 16px;
   }
 
+  .input-wrapper {
+    margin-bottom: 40px !important;
+  }
+
   .drawer-description-text {
     font-size: 18px !important;
   }
@@ -270,6 +285,10 @@
     font-size: 14px;
   }
 
+  .input-wrapper {
+    margin-bottom: 35px !important;
+  }
+
   .drawer-title-text {
     font-size: 22px !important;
   }
@@ -278,6 +297,10 @@
 @media only screen and (max-width: 1199px) {
   .statement-title {
     font-size: 14px;
+  }
+
+  .input-wrapper {
+    margin-bottom: 30px !important;
   }
 
   .drawer-description-text {

@@ -24,13 +24,15 @@ function CardHOpration({ hoursOfOperation, onClick }) {
           title="Hours of operations"
           icon={business}
         />
-        <div className="d-flex flex-column">
-          {hoursOfOperation?.hoursOfOperationString.map((item) => {
-            return (
-              <span key={item} className="email margin-text">
-                {item}
-              </span>
-            );
+        <div className="d-flex flex-column hours-container ">
+          {hoursOfOperation?.hoursOfOperationString.map((item, index) => {
+            if (index < 4) {
+              return (
+                <span key={item} className="email margin-text">
+                  {item}
+                </span>
+              );
+            }
           })}
         </div>
       </div>

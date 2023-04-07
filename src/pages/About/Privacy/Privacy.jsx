@@ -40,7 +40,7 @@ function Privacy() {
     return (
       <div className="default-height d-flex align-items-center justify-content-center">
         <BtnTitleIcon
-          title="Add Address"
+          title="Add privacy"
           onClick={() => {
             setShowModal(true);
           }}
@@ -61,7 +61,7 @@ function Privacy() {
   return (
     <div>
       <div className="d-flex privacy-title privacy-title-botton">
-        Your Privacy Matters{" "}
+        Your Privacy Matters
         <BtnIconOnly
           onClick={() => {
             setShowModal(true);

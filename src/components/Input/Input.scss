@@ -130,15 +130,16 @@ input:checked + .slider:before {
   color: #212529;
   width: 100%;
   border: none;
-  select {
+  .hour-select {
     border: none;
     background: #f7f7f7;
     font-size: 14px;
-
+    padding: 5px 9px;
+    border-radius: 0;
     &:focus-visible {
       outline: none;
     }
-
+    outline: none;
     option {
       padding: 20px;
     }
@@ -154,6 +155,7 @@ input:checked + .slider:before {
   border-right: 1px solid #dadada !important;
   padding-inline: 2px;
   margin-inline: 2px;
+  border-radius: 0;
 }
 .editor-wrapper {
   box-sizing: border-box;
