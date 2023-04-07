@@ -55,7 +55,7 @@ function Terms() {
     return (
       <div className="default-height d-flex align-items-center justify-content-center">
         <BtnTitleIcon
-          title="Add Term And Condition"
+          title="Add term and condition"
           onClick={() => {
             setShowModal(true);
           }}

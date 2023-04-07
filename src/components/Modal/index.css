@@ -13,22 +13,22 @@
 /* .modal-content ::-webkit-scrollbar-thumb{
   background-color: #000000;
 } */
-.scrollbody::-webkit-scrollbar{
+.scrollbody::-webkit-scrollbar {
   width: 4px;
 }
- 
-.scrollbody::-webkit-scrollbar-thumb{
+
+.scrollbody::-webkit-scrollbar-thumb {
   /* background-color: #000000; */
   background-color: #6c757d;
-  
 }
 .scrollbody::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #6c757d;
   /* background-color: #a32222; */
-} 
-.scrollbody{
+}
+.scrollbody {
   height: 550px;
+  padding: 20px 30px;
   overflow: auto;
 }
 .modalbody {
@@ -45,9 +45,8 @@
 }
 
 .btn-save-container .btn-title-center {
-padding: 6px 35px !important;
-border-radius: 5px;
-  
+  padding: 6px 35px !important;
+  border-radius: 5px;
 }
 
 .crossCloseButton {

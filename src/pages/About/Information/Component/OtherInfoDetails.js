@@ -1,60 +1,86 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Badge, Offcanvas } from "react-bootstrap";
 import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import Badges from "../../../../components/Input/Badges";
 import DrawerHead from "./DrawerHead";
+import EditOtherInfo from "./EditOtherInfo";
 
 function OtherInfoDetails({ show, handleClose, data, onUpdate, completeData }) {
+  const [showEditOther, setShowEditOther] = useState(false);
   return (
-    <Offcanvas
-      show={show}
-      onHide={handleClose}
-      placement="end"
-      className="teamMember-add"
-    >
-      <div className="content drawer-conter-canvas">
-        <DrawerHead
-          title="Other info"
-          handleClose={handleClose}
-          description="Write down the company’s sales reach, services & support and
-            interested to purchase"
-        />
-        <p className="drawer-title">
-          Write down the company’s sales reach, services & support and
-          interested to purchase
-        </p>
-        <h5>Sales reach is at</h5>
-        <div className="d-flex">
-          {["India", "Bangaluru", "Goa"].map((item) => {
-            return <Badges value={item} />;
-          })}
-        </div>
-        <hr />
-        <div className="mb-3 mt-5">
-          <h5 className="mb-2">Do you offer any services & support?</h5>
-          <p className="drawer-title">
-            Write down the company’s sales reach, services & support and
-            interested to purchase
-          </p>
-        </div>
-        <hr />
-        <div className="mb-4">
-          <h5>You are interested to purchase</h5>
-        </div>
-        <div className="mb-4 d-flex">
-          {["Printing", "Print Heads", "Paper Sheets", "Pages"].map((item) => {
-            return <Badges value={item} />;
-          })}
-        </div>
+    <Fragment>
+      <EditOtherInfo
+        show={showEditOther}
+        handleClose={() => {
+          setShowEditOther(false);
+        }}
+        data={data}
+        completeData={completeData}
+        onUpdate={onUpdate}
+      />
+      <Offcanvas
+        show={show}
+        onHide={handleClose}
+        placement="end"
+        className="teamMember-add"
+      >
+        <div className="content drawer-conter-canvas">
+          <div className="d-flex justify-content-between">
+            <DrawerHead
+              title="Other info"
+              handleClose={handleClose}
+              description=" Write down the company’s sales reach, services & support and
+          interested to purchase"
+            />
+            <div className="">
+              <BtnTitleCenter
+                title="Edit"
+                className="btn-bg-trasparent"
+                onClick={() => {
+                  setShowEditOther(true);
+                }}
+              />
+            </div>
+          </div>
 
-        <BtnTitleCenter
-          title={"Save"}
-          onClick={() => {
-            console.log("save buttonclick");
-          }}
-        />
-      </div>
-    </Offcanvas>
+          <div className="row ">
+            <div className="mb-4">
+              <h5 className="cont-title">Our Sales reach is at</h5>
+            </div>
+            <div className="col-12 title-other-Info d-flex">
+              {data?.salesReachAt &&
+                data?.salesReachAt.map((item) => {
+                  return <Badges value={item.city} />;
+                })}
+            </div>
+          </div>
+          <hr />
+          <div className="row ">
+            <div className="mb-4">
+              <h5 className="cont-title"> Our Services & support?</h5>
+            </div>
+
+            {data?.servicesAndSupport?.provided === "yes" ? (
+              <div className="col-12 email margin-text">
+                {data?.servicesAndSupport?.details}
+              </div>
+            ) : null}
+          </div>
+          <hr />
+          <div className="mb-4">
+            <h5 className="cont-title">You are interested to purchase</h5>
+          </div>
+          <div className="row mb-2">
+            <div className="col-12 title-other-Info d-flex">
+              {data?.interestedToPurchase &&
+                data?.interestedToPurchase.map((item) => {
+                  return <Badges key={item._id} value={item.value} />;
+                })}
+            </div>
+          </div>
+        </div>
+      </Offcanvas>
+    </Fragment>
   );
 }
 

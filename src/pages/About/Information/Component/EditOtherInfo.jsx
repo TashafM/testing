@@ -3,7 +3,7 @@ import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import ReactSelector from "../../../../components/ReactSelect";
 import "./styles.scss";
 import TextArea from "../../../../components/Input/TextArea";
-import { Interested, nameLabel, Placeses } from "../../../../helper/constant";
+import { Interested, Placeses } from "../../../../helper/constant";
 import { Offcanvas } from "react-bootstrap";
 import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
 import Checkbox from "../../../../components/Input/Checkbox";

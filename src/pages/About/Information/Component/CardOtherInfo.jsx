@@ -14,7 +14,7 @@ function CardOtherInfo({ otherInfo, onClick }) {
           icon={quote}
           changemargin={"csschange"}
         />
-        <div className="row ">
+        {/* <div className="row ">
           <div className="col-6 title-other-Info">Our Sales reach is at</div>
           <div className="col-6 title-other-Info d-flex">
             {otherInfo?.salesReachAt &&
@@ -22,26 +22,28 @@ function CardOtherInfo({ otherInfo, onClick }) {
                 return <Badges value={item.city} />;
               })}
           </div>
-        </div>
+        </div> */}
         <div className="row ">
-          <div className="col-6 title-other-Info ">Our Services & support?</div>
+          <div className="col-12 email margin-text">
+            Our Services & support?
+          </div>
           {otherInfo?.servicesAndSupport?.provided === "yes" ? (
-            <div className="col-6 title-other-Info">
+            <div className="col-12 email margin-text">
               {otherInfo?.servicesAndSupport?.details}
             </div>
           ) : null}
         </div>
-        <div className="row mb-2">
+        {/* <div className="row mb-2">
           <div className="col-6 title-other-Info">
             We are interested to purchase
-          </div>
-          <div className="col-6 title-other-Info d-flex">
+          </div> */}
+        {/* <div className="col-6 title-other-Info d-flex">
             {otherInfo?.interestedToPurchase &&
               otherInfo?.interestedToPurchase.map((item) => {
                 return <Badges key={item._id} value={item.value} />;
               })}
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
       </div>
     </Col>
   );

@@ -10,7 +10,7 @@ function TimeInput({ value, onChange, disabled, index, label }) {
   return (
     <div className="time-select-container d-flex">
       <Form.Select
-        disabled={disabled}
+        // disabled={disabled}
         className="hour-select"
         value={hourValue}
         onChange={(e) => {
@@ -27,7 +27,7 @@ function TimeInput({ value, onChange, disabled, index, label }) {
       </Form.Select>
 
       <Form.Select
-        disabled={disabled}
+        // disabled={disabled}
         onChange={(e) => {
           onChange(e.target.value, index, label, "minutes");
         }}
@@ -44,7 +44,7 @@ function TimeInput({ value, onChange, disabled, index, label }) {
       </Form.Select>
 
       <Form.Select
-        disabled={disabled}
+        // disabled={disabled}
         value={amPmValue}
         className="hour-select"
         onChange={(e) => {

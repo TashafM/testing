@@ -18,8 +18,8 @@ function CardBrand({ item, location, onClick, onDelete, index }) {
           src={item.brandLogoURL}
           alt={"brand-logo"}
         />
-        <p className="title-brand">{item.brandName}</p>
-        <p className="m-0">{location}</p>
+        <p className="title-brand m-0">{item.brandName}</p>
+        <p className="m-0 email">{"Mumbai"}</p>
       </div>
       <div className="text-end">
         <BtnIconOnly icon={deleteBtn} onClick={() => onDelete(item, index)} />

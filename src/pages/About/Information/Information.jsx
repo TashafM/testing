@@ -18,6 +18,7 @@ import EditSocialMedia from "./Component/EditSocialMedia";
 import EditStatement from "./Component/EditStatement";
 import EditOperations from "./Component/EditOperations";
 import EditOtherInfo from "./Component/EditOtherInfo";
+import OtherInfoDetails from "./Component/OtherInfoDetails";
 
 function Information() {
   const [data, setData] = useOutletContext();
@@ -154,7 +155,7 @@ function Information() {
           }}
         />
 
-        <EditOtherInfo
+        <OtherInfoDetails
           show={openotherInfor}
           handleClose={() => {
             setOpenOtherInfor(false);
