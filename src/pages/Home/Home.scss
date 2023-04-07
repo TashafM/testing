@@ -108,6 +108,8 @@
 
 // @media only screen and (max-width: 992px){
 @media only screen and (max-width: 1199px) {
+
+  
   .sub-menu-list {
     display: none !important;
   }
@@ -122,6 +124,10 @@
 }
 
 @media only screen and (max-width: 655px) {
+  .offcanvas.show{
+    display: none;
+  }
+  
   .homepage {
     display: none;
   }

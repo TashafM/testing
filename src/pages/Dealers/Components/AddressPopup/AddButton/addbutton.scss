@@ -19,3 +19,26 @@
     margin-left: 10px;
   }
 }
+
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .addbutton-address{
+    width: 90%;
+    img{
+      width: 16px;
+    }
+    .text{
+      font-size: 14px;
+    }
+  }
+}
+
+@media (min-width: 1440px) and (max-width: 1599px) {
+  .addbutton-address{
+    img{
+      width: 16px;
+    }
+    .text{
+      font-size: 14px;
+    }
+  }
+}

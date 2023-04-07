@@ -3,10 +3,10 @@ import "./itemrow.scss";
 import listproduct from "../../../../assets/images/listproduct.png";
 import x from "../../../../assets/images/x.svg";
 
-const ItemRow = ({ disableDelete, pr20 }) => {
+const ItemRow = ({ disableDelete, pr20, popupScreen }) => {
   return (
     <tr className="right-side-tr">
-      <td className="single-product-item">
+      <td className={popupScreen  ? 'single-product-item pl40' : "single-product-item"}>
         <div className="img-div">
           <img src={listproduct} alt="" />
           <div className="text-desc">

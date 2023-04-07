@@ -9,23 +9,24 @@
     margin-bottom: 26px;
   }
 
-  .radio-div{
+  .radio-div {
     display: flex;
     align-items: center;
     margin-bottom: 50px !important;
 
-    .shipping, .billing{
-        font-size: 18px;
-        font-weight: 400;
-        line-height: 22px;
-        color: #000;
-        
-        input{
-            margin-right: 15px;
-        }
+    .shipping,
+    .billing {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 22px;
+      color: #000;
+
+      input {
+        margin-right: 15px;
+      }
     }
-    .billing{
-        margin-left: 40px;
+    .billing {
+      margin-left: 40px;
     }
   }
 
@@ -34,6 +35,63 @@
     button {
       width: 80%;
       margin-left: 20px;
+    }
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .new-address {
+    margin: 10px 30px;
+
+    .shipping-billing {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .radio-div {
+      margin-bottom: 30px !important;
+      .shipping, .billing {
+        font-size: 16px;
+        margin-bottom: 15px;
+      }
+    }
+
+    .button-div{
+      button{
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 20px;
+        font-size: 16px !important;
+      }
+    }
+  }
+}
+
+
+@media (min-width: 1440px) and (max-width: 1599px) {
+  .new-address {
+    margin: 10px 30px;
+
+    .shipping-billing {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .radio-div {
+      margin-bottom: 30px !important;
+      .shipping, .billing {
+        font-size: 16px;
+        margin-bottom: 15px;
+      }
+    }
+
+    .button-div{
+      button{
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 20px;
+        font-size: 16px !important;
+      }
     }
   }
 }

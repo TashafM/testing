@@ -45,14 +45,17 @@ const AllProducts = () => {
                     {item.subItems.map((abc) => (
                       <Col
                         className="catCol col-xl-4"
-                        style={{ backgroundImage: `url(${abc.imgPath})` }}
+                        // style={{ backgroundImage: `url(${abc.imgPath})`, backgroundPosition:'center' }}
                         onClick={() =>
                           navigate("/dealers/all-products/products", {
                             state: { id: abc.id },
                           })
                         }
                       >
-                        {abc.name}
+                        <div>
+                          <img src={abc.imgPath} alt="" />
+                        </div>
+                        <div>{abc.name}</div>
                       </Col>
                     ))}
                   </>

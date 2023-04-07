@@ -11,6 +11,9 @@ const OrderPlaced = ({ modalShow, setModalShow }) => {
         <div className="msg">Your order has been sent successfully !!!</div>
         <Button className="save-btn view-order-btn" onClick={()=>setModalShow(false)}>View Order</Button>
       </div>
+      <div className="mobile-not-supported">
+
+      </div>
     </Modal>
   );
 };

@@ -4,13 +4,75 @@
 
 .divided-div {
   display: flex;
-  
-  .div-1{
+
+  .div-1 {
     width: 58%;
     // background: yellow;
   }
-  .div-2{
+  .div-2 {
     width: 42%;
+    margin-left: 2%;
     // background: rgb(255, 136, 0);
+  }
+  .vertical-line {
+    border-left: 2px dashed #c8c8c8;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .offcanvas.show.dm {
+    width: 80% !important;
+  }
+  .divided-div {
+    .div-1 {
+      width: 50%;
+    }
+    .div-2 {
+      width: 45%;
+    }
+
+    .div-1 {
+      margin-right: 7%;
+    }
+
+    .div-2 {
+      margin-left: 2%;
+    }
+    .vertical-line {
+      border-left: 2px dashed #c8c8c8;
+      padding: 10px;
+    }
+  }
+}
+
+@media (min-width: 1440px) and (max-width: 1750px) {
+  .offcanvas.show.dm {
+    width: 70% !important;
+  }
+  .divided-div {
+    .div-1 {
+      width: 50%;
+    }
+    .div-2 {
+      width: 45%;
+    }
+
+    .div-1 {
+      margin-right: 5%;
+    }
+
+    .div-2 {
+      margin-left: 1%;
+    }
+    .vertical-line {
+      border-left: 2px dashed #c8c8c8;
+      padding: 10px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  .offcanvas.show.dm {
+    display: none;
   }
 }

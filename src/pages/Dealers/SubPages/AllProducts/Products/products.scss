@@ -6,7 +6,7 @@
   border-radius: 12px;
   padding: 25px 35px;
   overflow: auto;
-  
+
   &::-webkit-scrollbar {
     width: 0.2em;
     height: 0.2em;
@@ -21,16 +21,44 @@
   }
 
   .products-container {
+    .title {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 24px;
+      color: #000;
+      padding-left: 15px;
+    }
+    .description{
+      padding-left: 15px;
+      padding-bottom: 20px;
+    }
     // margin-top: 20px;
-    margin-bottom: 60px;
+    margin-bottom: 5%;
     .img-category-main {
+      border: 1px solid #959ec3;
+      border-radius: 12px;
       height: 245px;
-      width: 252px;
-
+      width: 250px;
+      cursor: pointer;
+      position: relative;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 0 0 15px 15px;
+      // padding: 0 0 15px 15px;
+
+      .product-img {
+        text-align: center;
+
+        img{
+          width: 120px;
+        }
+      }
+
+      .wish-list-icon{
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
     }
   }
 }
@@ -46,14 +74,113 @@
   .bottom-brands {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    // justify-content: space-around;
 
     .brand-div {
       cursor: pointer;
+      margin-right: 3%;
+      img{
+        max-width: 160px;
+        // width: 100%;
+      }
     }
   }
 }
 
 .products-row {
   margin-top: 60px;
+}
+
+@media only screen and (max-width: 1600px) {
+  .products{
+    margin-left: 6%;
+  }
+  .bottom-strip{
+    margin-left: 6%;
+  }
+}
+
+@media (min-width: 1440px) and (max-width: 1600px) {
+  .products{
+    .products-container{
+      .title{
+        font-size: 16px;
+        line-height: 19px;
+        margin-top: 10px;
+      }
+      .description{
+        font-size: 12px;
+        line-height: 15px;
+        font-weight: 400;
+      }
+      .img-category-main{
+        width: 200px;
+        height: 200px;
+
+        .product-img{
+          img{
+            width: 100px;
+          }
+        }
+
+        .wish-list-icon{
+          img{
+            width: 25px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .products{
+    .products-container{
+      margin-bottom: 6%;
+      .title{
+        font-size: 12px;
+        line-height: 15px;
+        margin-top: 5px;
+      }
+      .description{
+        font-size: 10px;
+        line-height: 15px;
+        font-weight: 400;
+        padding-bottom: 10px;
+      }
+      .img-category-main{
+        width: 160px;
+        height: 160px;
+
+        .product-img{
+          img{
+            width: 70px;
+          }
+        }
+
+        .wish-list-icon{
+          top: 10px;
+          right: 10px;
+          img{
+            width: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  .bottom-strip{
+    .bottom-brands{
+      .brand-div{
+        img{
+          width: 140px;
+        }
+      }
+    }
+  }
 }

@@ -1,5 +1,5 @@
 .offcanvas.show.instructions {
-  width: 28% !important;
+  width: 32% !important;
 
   button:active {
     background-color: #be212a !important;
@@ -55,5 +55,49 @@
   .writing-space {
     background: #f7f7f7;
     border: 1px solid #cccccc;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .offcanvas.show.instructions {
+    width: 35% !important;
+
+    .offcanvas-title {
+      font-size: 20px;
+      padding-left: 25px;
+    }
+
+    .some-margin {
+      font-size: 16px !important;
+    }
+  }
+
+  .instruction-div {
+    margin: 0 40px;
+    margin-top: 10px !important;
+
+    .inst-form {
+      .title-text {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1440px) and (max-width: 1599px) {
+  .offcanvas.show.instructions {
+    width: 32% !important;
+
+    .offcanvas-title {
+      font-size: 24px;
+      padding-left: 30px;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 1199px) {
+  .offcanvas.show.instructions {
+    display: none;
   }
 }

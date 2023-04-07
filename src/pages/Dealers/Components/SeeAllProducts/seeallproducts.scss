@@ -1,5 +1,5 @@
 .offcanvas.show.seeAll {
-  width: 28% !important;
+  width: 32% !important;
 
   .offcanvas-title {
     padding-top: 20px;
@@ -27,5 +27,34 @@
       text-align: center;
       padding: 20px;
     }
+  }
+}
+
+
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .offcanvas.show.seeAll {
+    width: 35% !important;
+
+    .offcanvas-title{
+      font-size: 20px;
+    }
+  }
+}
+
+@media (min-width: 1440px) and (max-width: 1599px) {
+  .offcanvas.show.seeAll {
+    width: 32% !important;
+
+    .offcanvas-title{
+      font-size: 24px;
+    }
+  }
+}
+
+
+
+@media only screen and (max-width: 1199px) {
+  .offcanvas.show.seeAll {
+    display: none;
   }
 }
