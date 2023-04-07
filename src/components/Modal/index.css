@@ -1,13 +1,35 @@
-.rdw-editor-toolbar {
+/* .rdw-editor-toolbar {
 }
 .modal-content {
-  /* padding: 8px; */
-}
+  padding: 8px;
+} */
 .rdw-editor-main {
   overflow: hidden;
 }
 .notranslate .public-DraftEditor-content {
   width: 97% !important;
+}
+/* modal-dialog */
+/* .modal-content ::-webkit-scrollbar-thumb{
+  background-color: #000000;
+} */
+.scrollbody::-webkit-scrollbar{
+  width: 4px;
+}
+ 
+.scrollbody::-webkit-scrollbar-thumb{
+  /* background-color: #000000; */
+  background-color: #6c757d;
+  
+}
+.scrollbody::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #6c757d;
+  /* background-color: #a32222; */
+} 
+.scrollbody{
+  height: 550px;
+  overflow: auto;
 }
 .modalbody {
   height: 550px;
@@ -22,11 +44,10 @@
   margin-bottom: 35px;
 }
 
-.btn-save-container {
-  .btn-title-center {
-    padding: 6px 35px !important;
-    border-radius: 5px;
-  }
+.btn-save-container .btn-title-center {
+padding: 6px 35px !important;
+border-radius: 5px;
+  
 }
 
 .crossCloseButton {

@@ -19,57 +19,59 @@ function EditContacts() {
   const submitHandler = async (values, action) => {
     console.log("values", openDrawer.type);
 
-    if (openDrawer.type === "Edit Contact") {
-      const contactUsId = data._id;
-      delete values.address;
-      delete data._id;
+    if (values.contact.match(/^\+?[0-9]\d{1,20}$/)) {
+      if (openDrawer.type === "Edit Contact") {
+        const contactUsId = data._id;
+        delete values.address;
+        delete data._id;
 
-      const body = {
-        ...data,
-        ...values,
-        contactUsId,
-      };
+        const body = {
+          ...data,
+          ...values,
+          contactUsId,
+        };
 
-      pathcData(body, (res) => {
-        console.log({ res });
-        try {
+        pathcData(body, (res) => {
+          console.log({ res });
+          try {
+            const d = JSON.parse(JSON.stringify(openDrawer.completeData));
+            d[0].contactUs[openDrawer.index] = { ...res[0] };
+            openDrawer.callback(d);
+          } catch (error) {
+            console.log(error);
+          }
+
+          setOpenDrawer({
+            open: false,
+            type: "",
+          });
+        });
+      } else {
+        const body = {
+          ...values,
+          address: {
+            city: "Banglore",
+            state: "Karnataka",
+            latitude: "1293.123",
+            longitude: "12.345678",
+            country: "India",
+            fullAddress: "asdas",
+          },
+        };
+
+        postData(body, (res) => {
+          console.log({ res });
           const d = JSON.parse(JSON.stringify(openDrawer.completeData));
-          d[0].contactUs[openDrawer.index] = { ...res[0] };
+          d[0].contactUs.push(res[0]);
+
+          console.log({ d });
           openDrawer.callback(d);
-        } catch (error) {
-          console.log(error);
-        }
-
-        setOpenDrawer({
-          open: false,
-          type: "",
+          setOpenDrawer({
+            open: false,
+            type: "",
+          });
         });
-      });
-    } else {
-      const body = {
-        ...values,
-        address: {
-          city: "Banglore",
-          state: "Karnataka",
-          latitude: "1293.123",
-          longitude: "12.345678",
-          country: "India",
-          fullAddress: "asdas",
-        },
-      };
-
-      postData(body, (res) => {
-        console.log({ res });
-        const d = JSON.parse(JSON.stringify(openDrawer.completeData));
-        d[0].contactUs.push(res[0]);
-
-        console.log({ d });
-        openDrawer.callback(d);
-        setOpenDrawer({
-          open: false,
-          type: "",
-        });
-      });
+      }
     }
   };
 
@@ -108,15 +110,29 @@ function EditContacts() {
               />
             </div>
 
-            <div className="input-wrapper">
-              <PhoneNumber
+            <div className="input-wrapper ">
+              <TextInput
+                name="contact"
+                value={values.contact}
+                onChange={(e) => {
+                  const reg = new RegExp("^[0-9]*$");
+
+                  if (e.target.value.match(reg) || e.target.value === "+") {
+                    setFieldValue("contact", e.target.value);
+                  }
+                }}
+                error={touched.contact && errors.contact}
+                label="Contact Number *"
+                placeholder="eg. 8511591740"
+              />
+              {/* <PhoneNumber
                 name="contact"
                 value={values.contact}
                 onChange={(e) => setFieldValue("contact", e)}
                 error={touched.contact && errors.contact}
                 label="Contact Number *"
                 placeholder="eg. 8511591740"
-              />
+              /> */}
             </div>
             <div className="input-wrapper">
               <TextInput

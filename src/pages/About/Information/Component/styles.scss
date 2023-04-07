@@ -253,6 +253,10 @@
     font-size: 16px;
   }
 
+  .input-wrapper {
+    margin-bottom: 40px !important;
+  }
+
   .drawer-description-text {
     font-size: 18px !important;
   }
@@ -273,6 +277,10 @@
     font-size: 14px;
   }
 
+  .input-wrapper {
+    margin-bottom: 35px !important;
+  }
+
   .drawer-title-text {
     font-size: 22px !important;
   }
@@ -281,6 +289,10 @@
 @media only screen and (max-width: 1199px) {
   .statement-title {
     font-size: 14px;
+  }
+
+  .input-wrapper {
+    margin-bottom: 30px !important;
   }
 
   .drawer-description-text {

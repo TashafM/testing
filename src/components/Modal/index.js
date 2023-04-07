@@ -43,7 +43,7 @@ function ModalComponent({
         centered
         className="modal-content-container"
       >
-        <Modal.Body className="modalbody">
+        <Modal.Body className=" scrollbody">
           <div className="d-flex justify-content-between align-items-center modal-header-faq ">
             <p className="modal-title">{title}</p>
             <div className="d-flex justify-content-center btn-save-container  align-items-center me-2">

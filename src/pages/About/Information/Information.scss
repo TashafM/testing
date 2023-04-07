@@ -102,7 +102,6 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
-
   color: #899197;
 }
 
@@ -110,6 +109,14 @@
   height: 180px;
 }
 
+.hours-container{
+  overflow: hidden;
+  height: 120px;
+}
+.address-container{
+  overflow: hidden;
+  height: 120px;
+}
 @media only screen and (max-width: 1199px) {
   .cont-title {
     font-size: 14px;

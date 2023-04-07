@@ -26,7 +26,7 @@ function CardAddress({ registeredAddress, onClick }) {
           icon={location}
           onClick={onClick}
         />
-        <div>
+        <div className="address-container">
           <span className="email margin-text">
             {prepareAddressString(registeredAddress)}
           </span>
