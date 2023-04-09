@@ -64,6 +64,10 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
               const minutesValue =
                 time?.split(":")?.pop().split(" ").shift() ?? "30";
               time = time.replace(minutesValue, e);
+            } else if (type === "ampm") {
+              const ampm = time?.split(" ")?.pop() ?? "am";
+
+              time = time.replace(ampm, e);
             } else {
               console.log({ time });
 
@@ -107,15 +111,14 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
     } else if (type === "minutes") {
       const minutesValue = time?.split(":")?.pop().split(" ").shift() ?? "30";
       time = time.replace(minutesValue, e);
+    } else if (type === "ampm") {
+      const ampm = time?.split(" ")?.pop() ?? "am";
+      time = time.replace(ampm, e);
     } else {
-      console.log({ time });
-
       const amPmValue = time?.split(" ");
       time = time.replace(amPmValue, e);
     }
     obj[index][key] = time;
-
-    console.log(obj[index][key], { time });
 
     setOperationData([...obj]);
   };

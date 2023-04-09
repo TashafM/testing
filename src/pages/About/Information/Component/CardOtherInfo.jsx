@@ -8,7 +8,7 @@ import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 function CardOtherInfo({ otherInfo, onClick }) {
   return (
     <Col className="card-wrapper" md={6} xl={4}>
-      <div className="card-cont">
+      <div className="card-cont card-other-cont">
         <CardHead
           title="Other Info"
           onClick={onClick}
