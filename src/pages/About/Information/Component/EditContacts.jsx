@@ -9,17 +9,18 @@ import schema from "../../../../helper/validation/schema";
 import { usePostAsyncResponse } from "../../../../hooks/usePostAsyncResponse";
 import { useContextProvider } from "../../../../context";
 import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
+import { useState } from "react";
 
 function EditContacts() {
   const formRef = useRef();
   const { openDrawer, setOpenDrawer } = useContextProvider();
+  const [makeApiCall, setMakeApiCall] = useState(false);
 
   const data = openDrawer.data;
 
   const submitHandler = async (values, action) => {
     console.log("values", openDrawer.type);
-
-    if (values.contact.match(/^\+?[0-9]\d{1,20}$/)) {
+    if (makeApiCall) {
       if (openDrawer.type === "Edit Contact") {
         const contactUsId = data._id;
         delete values.address;
@@ -72,7 +73,16 @@ function EditContacts() {
           });
         });
       }
+    } else {
+      setOpenDrawer({
+        open: false,
+        type: "",
+      });
     }
+
+    // if (values.contact.match(/^\+?[0-9]\d{1,20}$/)) {
+
+    // }
   };
 
   const [postData, { loading }] = usePostAsyncResponse(
@@ -103,7 +113,10 @@ function EditContacts() {
               <TextInput
                 name="title"
                 value={values.title}
-                onChange={(e) => setFieldValue("title", e.target.value)}
+                onChange={(e) => {
+                  !makeApiCall && setMakeApiCall(true);
+                  setFieldValue("title", e.target.value);
+                }}
                 error={touched.title && errors.title}
                 placeholder="eg. Sales Team"
                 label="Title *"
@@ -116,10 +129,11 @@ function EditContacts() {
                 value={values.contact}
                 onChange={(e) => {
                   const reg = new RegExp("^[0-9]*$");
+                  !makeApiCall && setMakeApiCall(true);
 
-                  if (e.target.value.match(reg) || e.target.value === "+") {
-                    setFieldValue("contact", e.target.value);
-                  }
+                  // if (e.target.value.match(reg) || e.target.value === "+") {
+                  setFieldValue("contact", e.target.value);
+                  // }
                 }}
                 error={touched.contact && errors.contact}
                 label="Contact Number *"
@@ -138,7 +152,10 @@ function EditContacts() {
               <TextInput
                 name="email"
                 value={values.email}
-                onChange={(e) => setFieldValue("email", e.target.value)}
+                onChange={(e) => {
+                  !makeApiCall && setMakeApiCall(true);
+                  setFieldValue("email", e.target.value);
+                }}
                 error={touched.email && errors.email}
                 label="Email ID *"
                 placeholder="eg. salesteam@br.in"
@@ -151,6 +168,7 @@ function EditContacts() {
                 name="address"
                 value={values.address}
                 onChange={(e) => {
+                  !makeApiCall && setMakeApiCall(true);
                   console.log(e);
                   setFieldValue("address", e.target.value);
                 }}

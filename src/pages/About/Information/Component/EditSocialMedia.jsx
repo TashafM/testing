@@ -6,9 +6,12 @@ import { Formik, Form } from "formik";
 import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
 import { Offcanvas } from "react-bootstrap";
 import DrawerHead from "./DrawerHead";
+import { useState } from "react";
 
 function EditSocialMedia({ show, handleClose, data, onUpdate, completeData }) {
   const formRef = useRef();
+
+  const [makeApiCall, setMakeApiCall] = useState(false);
 
   // const { openDrawer } = useContextProvider();
 
@@ -21,25 +24,28 @@ function EditSocialMedia({ show, handleClose, data, onUpdate, completeData }) {
   const submitHandler = async (values, action) => {
     console.log("values", values);
     const socialMediaLinks = [];
+    if (makeApiCall) {
+      Object.keys(values).map((key) => {
+        if (values[key]) {
+          socialMediaLinks.push({ type: key, socialMediaLink: values[key] });
+        }
+      });
+      const body = {
+        socialMediaLinks,
+      };
 
-    Object.keys(values).map((key) => {
-      if (values[key]) {
-        socialMediaLinks.push({ type: key, socialMediaLink: values[key] });
-      }
-    });
-    const body = {
-      socialMediaLinks,
-    };
+      console.log({ body });
 
-    console.log({ body });
-
-    patchData(body, (res) => {
-      const arr = JSON.parse(JSON.stringify(completeData));
-      arr[0].socialMediaDetails = res;
-      console.log({ arr });
-      onUpdate(arr);
+      patchData(body, (res) => {
+        const arr = JSON.parse(JSON.stringify(completeData));
+        arr[0].socialMediaDetails = res;
+        console.log({ arr });
+        onUpdate(arr);
+        handleClose();
+      });
+    } else {
       handleClose();
-    });
+    }
   };
 
   let initialValues = {
@@ -89,7 +95,10 @@ function EditSocialMedia({ show, handleClose, data, onUpdate, completeData }) {
                   <TextInput
                     name="instagram"
                     value={values.instagram}
-                    onChange={(e) => setFieldValue("instagram", e.target.value)}
+                    onChange={(e) => {
+                      !makeApiCall && setMakeApiCall(true);
+                      setFieldValue("instagram", e.target.value);
+                    }}
                     error={touched.instagram && errors.instagram}
                     label="Instagram"
                     placeholder="eg. www.instagram.com/companyname"
@@ -99,7 +108,10 @@ function EditSocialMedia({ show, handleClose, data, onUpdate, completeData }) {
                   <TextInput
                     name="facebook"
                     value={values.facebook}
-                    onChange={(e) => setFieldValue("facebook", e.target.value)}
+                    onChange={(e) => {
+                      !makeApiCall && setMakeApiCall(true);
+                      setFieldValue("facebook", e.target.value);
+                    }}
                     error={touched.facebook && errors.facebook}
                     label="Facebook"
                     placeholder="eg. www.facebook.com/companyname"
@@ -109,7 +121,10 @@ function EditSocialMedia({ show, handleClose, data, onUpdate, completeData }) {
                   <TextInput
                     name="twitter"
                     value={values.twitter}
-                    onChange={(e) => setFieldValue("twitter", e.target.value)}
+                    onChange={(e) => {
+                      !makeApiCall && setMakeApiCall(true);
+                      setFieldValue("twitter", e.target.value);
+                    }}
                     error={touched.twitter && errors.twitter}
                     label="Twitter"
                     placeholder="eg. www.twitter.com/companyname"
@@ -119,7 +134,10 @@ function EditSocialMedia({ show, handleClose, data, onUpdate, completeData }) {
                   <TextInput
                     name="website"
                     value={values.website}
-                    onChange={(e) => setFieldValue("website", e.target.value)}
+                    onChange={(e) => {
+                      !makeApiCall && setMakeApiCall(true);
+                      setFieldValue("website", e.target.value);
+                    }}
                     error={touched.website && errors.website}
                     label="Website"
                     placeholder="eg. www.companyname.com"

@@ -12,6 +12,8 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
     "/portalPatchHoursOfOperation"
   );
 
+  const [makeApiCall, setMakeApiCall] = useState(false);
+
   const [defaultCard, setDefaultCard] = useState({
     day: "All Days",
     active: false,
@@ -34,20 +36,26 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
   const [operationData, setOperationData] = useState([]);
 
   const sendHOO = () => {
-    const body = {
-      hoursOfOperation: [...operationData],
-    };
+    if (makeApiCall) {
+      const body = {
+        hoursOfOperation: [...operationData],
+      };
 
-    postData(body, (res) => {
-      const arr = JSON.parse(JSON.stringify(completeData));
-      arr[0].hoursOfOperation = res[0];
-      onUpdate(arr);
+      postData(body, (res) => {
+        const arr = JSON.parse(JSON.stringify(completeData));
+        arr[0].hoursOfOperation = res[0];
+        onUpdate(arr);
+        handleClose();
+      });
+    } else {
       handleClose();
-    });
+    }
   };
 
   const onApplySameTimeToAll = (e, i, key, type) => {
     const obj = { ...defaultCard };
+
+    !makeApiCall && setMakeApiCall(true);
 
     try {
       if (e) {
@@ -95,6 +103,7 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
   };
 
   const onChangeHandler = (index) => {
+    !makeApiCall && setMakeApiCall(true);
     const obj = [...operationData];
     obj[index].active = !obj[index].active;
 
@@ -102,6 +111,7 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
   };
 
   const onTimeChange = (e, index, key, type) => {
+    !makeApiCall && setMakeApiCall(true);
     const obj = [...operationData];
     let time = obj[index][key];
 
@@ -155,9 +165,7 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
                 <CardTimeSlot
                   title={item.day}
                   active={item.active}
-                  disabled={
-                    defaultCard.active ? defaultCard.active : !item.active
-                  }
+                  disabled={!item.active}
                   onChange={onChangeHandler}
                   startTime={item.startTime}
                   endTime={item.endTime}

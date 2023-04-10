@@ -4,7 +4,6 @@ import TextInput from "../../../../components/Input/TextInput";
 import { Formik, Form } from "formik";
 import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import usePostBrand from "../hooks/usePostBrand";
-import { useContextProvider } from "../../../../context";
 import useEditBrandPatch from "../hooks/useEditBrandPatch";
 import { Offcanvas } from "react-bootstrap";
 import DrawerHead from "../../Information/Component/DrawerHead";
@@ -12,7 +11,7 @@ import DrawerHead from "../../Information/Component/DrawerHead";
 function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
   const formRef = useRef();
   const [file, setFile] = useState([]);
-  // const { openDrawer } = useContextProvider();
+  const [makeApiCall, setMakeApiCall] = useState(false);
 
   const { postData, loading } = usePostBrand("/portalAddCompanyBrands");
   const { postData: editBrnad, loading: editLoading } = useEditBrandPatch(
@@ -26,46 +25,49 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
   }, [data?.brandLogoURL, data, show.type]);
 
   const submitHandler = async (values, action) => {
-    console.log("values", values);
-    const formData = new FormData();
-    const userId = localStorage.getItem("usercode");
+    if (makeApiCall) {
+      const formData = new FormData();
+      const userId = localStorage.getItem("usercode");
 
-    formData.append("brandName", values.brandName);
+      formData.append("brandName", values.brandName);
 
-    formData.append("username", values.username);
-    formData.append("email", values.email);
-    formData.append("brandLocation[state]", "");
-    formData.append("brandLocation[city]", "");
-    formData.append("brandLocation[latitude]", "");
-    formData.append("brandLocation[longitude]", "");
-    formData.append("brandLocation[country]", "");
-    if (show.type === "Edit") {
-      if (file.length && file[0]?.name !== data.brandLogoURL) {
-        // alert(222);
+      formData.append("username", values.username);
+      formData.append("email", values.email);
+      formData.append("brandLocation[state]", "");
+      formData.append("brandLocation[city]", "");
+      formData.append("brandLocation[latitude]", "");
+      formData.append("brandLocation[longitude]", "");
+      formData.append("brandLocation[country]", "");
+      if (show.type === "Edit") {
+        if (file.length && file[0]?.name !== data.brandLogoURL) {
+          // alert(222);
+          formData.append("brandLogoURL", file[0]);
+        }
+
+        formData.append("brandId", data.brandId);
+
+        editBrnad(formData, (res) => {
+          onUpdate(res);
+          handleClose();
+        });
+      } else {
+        formData.append("companyUserCode", userId);
+
         formData.append("brandLogoURL", file[0]);
+        postData(formData, (res) => {
+          onUpdate(res);
+          handleClose();
+        });
       }
 
-      formData.append("brandId", data.brandId);
-
-      editBrnad(formData, (res) => {
-        onUpdate(res);
-        handleClose();
-      });
+      action.reset();
     } else {
-      formData.append("companyUserCode", userId);
-
-      formData.append("brandLogoURL", file[0]);
-      postData(formData, (res) => {
-        onUpdate(res);
-        handleClose();
-      });
+      handleClose();
     }
-
-    action.reset();
   };
 
   const handleChange = (files) => {
-    console.log(files);
+    !makeApiCall && setMakeApiCall(true);
     setFile(files);
   };
 
@@ -125,7 +127,7 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                     name="brandName"
                     value={values.brandName}
                     onChange={(e) => {
-                      console.log(e.target.value);
+                      !makeApiCall && setMakeApiCall(true);
                       setFieldValue("brandName", e.target.value);
                     }}
                     error={touched.brandName && errors.brandName}
@@ -136,7 +138,10 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                   <TextInput
                     name="location"
                     value={values.location}
-                    onChange={(e) => setFieldValue("location", e.target.value)}
+                    onChange={(e) => {
+                      !makeApiCall && setMakeApiCall(true);
+                      setFieldValue("location", e.target.value);
+                    }}
                     error={touched.location && errors.location}
                     // placeholder="eg. Sales Team"
                     label="Location"
@@ -146,7 +151,10 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                   <TextInput
                     name="username"
                     value={values.username}
-                    onChange={(e) => setFieldValue("username", e.target.value)}
+                    onChange={(e) => {
+                      !makeApiCall && setMakeApiCall(true);
+                      setFieldValue("username", e.target.value);
+                    }}
                     error={touched.username && errors.username}
                     // placeholder="eg. Sales Team"
                     label="Username"
@@ -157,7 +165,10 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                   <TextInput
                     name="email"
                     value={values.email}
-                    onChange={(e) => setFieldValue("email", e.target.value)}
+                    onChange={(e) => {
+                      !makeApiCall && setMakeApiCall(true);
+                      setFieldValue("email", e.target.value);
+                    }}
                     error={touched.email && errors.email}
                     label="Email ID"
                   />

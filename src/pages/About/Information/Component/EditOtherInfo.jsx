@@ -19,6 +19,8 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
     "/portalPatchCompanyOtherInfo"
   );
 
+  const [makeApiCall, setMakeApiCall] = useState(false);
+
   useEffect(() => {
     setSalesReachAt(data?.salesReachAt ?? []);
     setIntrestedIn(data?.interestedToPurchase);
@@ -27,26 +29,26 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
     setValue(data?.servicesAndSupport?.details);
   }, [data]);
 
-  const onchange = (e) => {
-    setIschecked(e.target.value);
-  };
-
   const onUpdateData = () => {
-    const body = {
-      interestedToPurchase: [...intrestedIn],
-      salesReachAt: [...salesReachAt],
-      servicesAndSupport: {
-        provided: ischecked ? "yes" : "no",
-        details: ischecked ? value : "",
-      },
-    };
+    if (makeApiCall) {
+      const body = {
+        interestedToPurchase: [...intrestedIn],
+        salesReachAt: [...salesReachAt],
+        servicesAndSupport: {
+          provided: ischecked ? "yes" : "no",
+          details: ischecked ? value : "",
+        },
+      };
 
-    postData(body, (res) => {
-      const data = JSON.parse(JSON.stringify(completeData));
-      data[0].otherInfo = res[0];
-      onUpdate(data);
+      postData(body, (res) => {
+        const data = JSON.parse(JSON.stringify(completeData));
+        data[0].otherInfo = res[0];
+        onUpdate(data);
+        handleClose();
+      });
+    } else {
       handleClose();
-    });
+    }
   };
 
   return (
@@ -63,17 +65,13 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
           description="Write down the company’s sales reach, services & support and
               interested to purchase"
         />
-        {/* <Offcanvas.Header closeButton>
-          <Offcanvas.Title>
-            <div className="team-member-add">Other info</div>
-          </Offcanvas.Title>
-        </Offcanvas.Header> */}
         <div>
           <div>
             <h5>Sales reach is at</h5>
             <ReactSelector
               value={salesReachAt}
               onChange={(e) => {
+                !makeApiCall && setMakeApiCall(true);
                 setSalesReachAt(e);
               }}
               options={Placeses}
@@ -88,6 +86,7 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
                 <Checkbox
                   checked={ischecked}
                   onChange={() => {
+                    !makeApiCall && setMakeApiCall(true);
                     setIschecked(!ischecked);
                     setIsCheckedNo(false);
                   }}
@@ -98,6 +97,7 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
                 <Checkbox
                   checked={isCheckedNo}
                   onChange={() => {
+                    !makeApiCall && setMakeApiCall(true);
                     setIsCheckedNo(!isCheckedNo);
                     setIschecked(false);
                   }}
@@ -118,6 +118,7 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
                   name="about"
                   value={value}
                   onChange={(e) => {
+                    !makeApiCall && setMakeApiCall(true);
                     setValue(e.target.value);
                   }}
                   rows={5}
@@ -132,6 +133,7 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
               options={Interested}
               value={intrestedIn}
               onChange={(e) => {
+                !makeApiCall && setMakeApiCall(true);
                 setIntrestedIn(e);
               }}
               getOptionLabel={(options) => options.value}
@@ -140,7 +142,7 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
           </div>
           <div>
             <BtnTitleCenter
-              title={"Edit"}
+              title={"Save"}
               loading={loading}
               onClick={onUpdateData}
             />

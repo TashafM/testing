@@ -53,18 +53,32 @@
   padding-bottom: 20px;
 }
 .stm-container {
-  overflow: hidden;
-  height: 150px;
+  overflow: auto;
+  height: 105px;
 
   p {
     display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    // -webkit-line-clamp: 3;
+    // -webkit-box-orient: vertical;
+    // overflow: hidden;
+    // text-overflow: ellipsis;
   }
 }
 
+.stm-container::-webkit-scrollbar {
+  width: 0.2em;
+  background-color: #f5f5f5;
+}
+
+.stm-container::-webkit-scrollbar-thumb {
+  background-color: #6c757d;
+  background-clip: padding-box;
+}
+
+.stm-container::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+}
 .contacts-count {
   background-color: #fff2f2;
   // padding: 8px;
@@ -286,7 +300,7 @@
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 18px !important;
   color: #899197;
   margin-bottom: 40px;
 }
@@ -301,7 +315,7 @@
   }
 
   .drawer-description-text {
-    font-size: 18px !important;
+    font-size: 16px !important;
   }
   .drawer-title-text {
     font-size: 26px !important;

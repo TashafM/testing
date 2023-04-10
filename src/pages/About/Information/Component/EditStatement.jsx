@@ -8,22 +8,27 @@ import DrawerHead from "./DrawerHead";
 
 function EditStatement({ show, handleClose, data, onUpdate, completeData }) {
   const [statement, setStatement] = useState(data ?? "");
+  const [makeApiCall, setMakeApiCall] = useState(false);
   const [postData, { loading }] = usePostAsyncResponse(
     "/portalPostCompanyStatement"
   );
 
   const onSaveStatement = () => {
     const body = {
-      companyStatement: statement,
+      companyStatement: statement?.trim(),
     };
 
-    postData(body, (res) => {
-      const arr = JSON.parse(JSON.stringify(completeData));
-      arr[0].companyStatement = res[0].companyStatement;
-      console.log({ arr });
-      onUpdate(arr);
+    if (makeApiCall) {
+      postData(body, (res) => {
+        const arr = JSON.parse(JSON.stringify(completeData));
+        arr[0].companyStatement = res[0].companyStatement;
+        console.log({ arr });
+        onUpdate(arr);
+        handleClose();
+      });
+    } else {
       handleClose();
-    });
+    }
   };
   return (
     <Offcanvas
@@ -39,16 +44,11 @@ function EditStatement({ show, handleClose, data, onUpdate, completeData }) {
           description=" Write down the Statement of the Company to convey your vision to
           your Potential Customer"
         />
-        {/* <Offcanvas.Header closeButton>
-         <Offcanvas.Title>
-            <div className="team-member-add">Statement</div>
-          </Offcanvas.Title>
-        </Offcanvas.Header>  */}
         <div>
           <TextArea
             value={statement}
             onChange={(e) => {
-              console.log(e.target.value);
+              !makeApiCall && setMakeApiCall(true);
               setStatement(e.target.value);
             }}
           />

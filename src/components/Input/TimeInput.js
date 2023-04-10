@@ -10,7 +10,11 @@ function TimeInput({ value, onChange, disabled, index, label }) {
   return (
     <div className="time-select-container d-flex">
       <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
+        <Dropdown.Toggle
+          disabled={disabled}
+          variant="success"
+          id="dropdown-basic"
+        >
           {hourValue}
         </Dropdown.Toggle>
 
@@ -43,7 +47,11 @@ function TimeInput({ value, onChange, disabled, index, label }) {
       </Form.Select> */}
 
       <Dropdown className="minutes-dropdown">
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
+        <Dropdown.Toggle
+          disabled={disabled}
+          variant="success"
+          id="dropdown-basic"
+        >
           {minutesValue}
         </Dropdown.Toggle>
 
@@ -85,7 +93,11 @@ function TimeInput({ value, onChange, disabled, index, label }) {
       </Form.Select> */}
 
       <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
+        <Dropdown.Toggle
+          disabled={disabled}
+          variant="success"
+          id="dropdown-basic"
+        >
           {amPmValue}
         </Dropdown.Toggle>
 

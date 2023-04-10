@@ -6,29 +6,35 @@ import schema from "../../../../helper/validation/schema";
 import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
 import { Offcanvas } from "react-bootstrap";
 import DrawerHead from "./DrawerHead";
+import { useState } from "react";
 
 function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
   const formRef = useRef();
+  const [makeApiCall, setMakeApiCall] = useState(false);
 
   const submitHandler = async (values) => {
-    delete values.googlePlace;
-    const body = {
-      ...values,
-      address: {
-        city: "",
-        state: "",
-        country: "",
-        latitude: "",
-        longitude: "",
-        fullAddress: "",
-      },
-    };
-    patchData(body, (res) => {
-      const arr = JSON.parse(JSON.stringify(completeData));
-      arr[0].registeredAddress = { ...res[0] };
-      onUpdate(arr);
+    if (makeApiCall) {
+      delete values.googlePlace;
+      const body = {
+        ...values,
+        address: {
+          city: "",
+          state: "",
+          country: "",
+          latitude: "",
+          longitude: "",
+          fullAddress: "",
+        },
+      };
+      patchData(body, (res) => {
+        const arr = JSON.parse(JSON.stringify(completeData));
+        arr[0].registeredAddress = { ...res[0] };
+        onUpdate(arr);
+        handleClose();
+      });
+    } else {
       handleClose();
-    });
+    }
   };
 
   const [patchData, { loading }] = usePatchAsyncReponse(
@@ -85,7 +91,10 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                   <TextInput
                     name="fullName"
                     value={values.fullName}
-                    onChange={(e) => setFieldValue("fullName", e.target.value)}
+                    onChange={(e) => {
+                      !makeApiCall && setMakeApiCall(true);
+                      setFieldValue("fullName", e.target.value);
+                    }}
                     placeholder="Enter your full name"
                     label={"Full Name*"}
                     error={touched.fullName && errors.fullName}
@@ -95,9 +104,10 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                   <TextInput
                     name="officeName"
                     value={values.floorNumber}
-                    onChange={(e) =>
-                      setFieldValue("floorNumber", e.target.value)
-                    }
+                    onChange={(e) => {
+                      !makeApiCall && setMakeApiCall(true);
+                      setFieldValue("floorNumber", e.target.value);
+                    }}
                     placeholder="Enter your Floor Number / Block no / Office Name"
                     label={"Floor Number / Block no / Office Name*"}
                     error={touched.floorNumber && errors.floorNumber}
@@ -108,7 +118,10 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                   <TextInput
                     name="block"
                     value={values.block}
-                    onChange={(e) => setFieldValue("block", e.target.value)}
+                    onChange={(e) => {
+                      !makeApiCall && setMakeApiCall(true);
+                      setFieldValue("block", e.target.value);
+                    }}
                     placeholder="Enter your Area / block"
                     label={"Area / block*"}
                     error={touched.block && errors.block}
@@ -118,7 +131,10 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                   <TextInput
                     name="street"
                     value={values.street}
-                    onChange={(e) => setFieldValue("street", e.target.value)}
+                    onChange={(e) => {
+                      !makeApiCall && setMakeApiCall(true);
+                      setFieldValue("street", e.target.value);
+                    }}
                     placeholder="Enter your street / City"
                     label={"Block (optional)"}
                     error={touched.street && errors.street}
@@ -128,7 +144,10 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                   <TextInput
                     name="city"
                     value={values.city}
-                    onChange={(e) => setFieldValue("city", e.target.value)}
+                    onChange={(e) => {
+                      !makeApiCall && setMakeApiCall(true);
+                      setFieldValue("city", e.target.value);
+                    }}
                     error={touched.city && errors.city}
                     placeholder="Enter your City"
                     label={"City*"}
@@ -138,7 +157,10 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                   <TextInput
                     name="state"
                     value={values.state}
-                    onChange={(e) => setFieldValue("state", e.target.value)}
+                    onChange={(e) => {
+                      !makeApiCall && setMakeApiCall(true);
+                      setFieldValue("state", e.target.value);
+                    }}
                     error={touched.state && errors.state}
                     placeholder="Enter your state"
                     label={"State*"}
@@ -148,7 +170,10 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                   <TextInput
                     name="country"
                     value={values.country}
-                    onChange={(e) => setFieldValue("country", e.target.value)}
+                    onChange={(e) => {
+                      !makeApiCall && setMakeApiCall(true);
+                      setFieldValue("country", e.target.value);
+                    }}
                     error={touched.country && errors.country}
                     placeholder="Enter your country"
                     label={"Country*"}
@@ -158,7 +183,10 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                   <TextInput
                     name="zipCode"
                     value={values.zipCode}
-                    onChange={(e) => setFieldValue("zipCode", e.target.value)}
+                    onChange={(e) => {
+                      !makeApiCall && setMakeApiCall(true);
+                      setFieldValue("zipCode", e.target.value);
+                    }}
                     error={touched.zipCode && errors.zipCode}
                     placeholder="Enter your Zip Code*"
                     label={"Zip Code*"}
@@ -168,9 +196,10 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                   <TextInput
                     name="Google Places Location"
                     value={values.googlePlace}
-                    onChange={(e) =>
-                      setFieldValue("Google Places Location", e.target.value)
-                    }
+                    onChange={(e) => {
+                      !makeApiCall && setMakeApiCall(true);
+                      setFieldValue("Google Places Location", e.target.value);
+                    }}
                     error={touched.googlePlace && errors.googlePlace}
                     placeholder="Enter your Google Places Location"
                     label={"Google Places Location"}
