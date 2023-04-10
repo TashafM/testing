@@ -222,3 +222,11 @@
     height: 74.5vh;
   }
 }
+
+@media (min-width: 1200px) and (max-width: 1249px) {
+  .allproducts {
+    margin-left: 50px;
+    margin-top: 30px;
+    height: 85vh;
+  }
+}

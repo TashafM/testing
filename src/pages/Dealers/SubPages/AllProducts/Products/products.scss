@@ -69,12 +69,13 @@
   margin-top: 22px;
   margin-right: 40px;
   border-radius: 12px;
-  padding: 20 px 35px;
+  padding: 20px 35px;
 
   .bottom-brands {
     display: flex;
     align-items: center;
     overflow-x: auto;
+    // justify-content: center;
 
     &::-webkit-scrollbar {
       display: none;

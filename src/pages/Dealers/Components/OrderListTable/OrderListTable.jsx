@@ -17,9 +17,6 @@ const OrderListTable = ({ disableDelete }) => {
       <tbody className="right-side-body">
         <ItemRow disableDelete={disableDelete} />
         <ItemRow disableDelete={disableDelete} />
-        <ItemRow disableDelete={disableDelete} />
-        <ItemRow disableDelete={disableDelete} />
-        <ItemRow disableDelete={disableDelete} />
         <ItemRow
           disableDelete={disableDelete}
           pName={"Konica Chrome Konica Chrome"}
