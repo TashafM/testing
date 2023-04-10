@@ -31,7 +31,7 @@ const Dealers = () => {
               <NavbarTop dealers={true} />
             </div>
             <div className="forTablets">
-              <TabletNavbar />
+              <TabletNavbar dealers={true}/>
             </div>
             <div className="tablet-menu">
               <TabMenus tabs={tabletMenuDealers}/>

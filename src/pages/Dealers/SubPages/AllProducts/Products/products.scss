@@ -92,7 +92,7 @@
       cursor: pointer;
       margin-right: 3%;
       img {
-        max-width: 160px;
+        max-width: 125px;
         // width: 100%;
       }
     }
@@ -217,7 +217,7 @@
   }
 }
 
-@media (min-width: 992px) and (max-width: 1200px) {
+@media (min-width: 992px) and (max-width: 1199px) {
   .products {
     margin-left: 3%;
     margin-right: 4%;
