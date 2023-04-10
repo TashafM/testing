@@ -11,8 +11,11 @@ import LogoutPopup from "../LogoutPopup/LogoutPopup";
 import MyDealersPopup from "../../pages/Dealers/Modal/MyDealersPopup/MyDealersPopup";
 
 const NavbarTop = ({ dealers }) => {
+  const dealerUserName = localStorage.getItem("firstname");
+  const dealerDp = localStorage.getItem("dpURL");
+
   const [showPopup, setShowPopup] = useState(false);
-  const [dealerPopup, showDealerPopup] = useState(false)
+  const [dealerPopup, showDealerPopup] = useState(false);
   return (
     <div className="row navbar-top">
       <div className="col-md-2 col-sm-4">
@@ -29,7 +32,7 @@ const NavbarTop = ({ dealers }) => {
       <div className="col-md-3 right-div">
         <div>
           {dealers ? (
-            <div className="my-dealers" onClick={()=>showDealerPopup(true)}>
+            <div className="my-dealers" onClick={() => showDealerPopup(true)}>
               <div className="dealer-logo">
                 <img src={atlogo} alt="" />
               </div>
@@ -39,10 +42,12 @@ const NavbarTop = ({ dealers }) => {
             <BlackBtn />
           )}
         </div>
-        <MyDealersPopup show={dealerPopup} setDealerPopup={showDealerPopup}/>
+        <MyDealersPopup show={dealerPopup} setDealerPopup={showDealerPopup} />
         <div className="user-profile">
-          <img src={user} alt="" />
-          <span className="username">Username</span>
+          <img src={dealers ? dealerDp : user} alt="" />
+          <span className="username">
+            {dealers ? dealerUserName : "Username"}
+          </span>
           <span
             className="btn-dropdown"
             onClick={() => setShowPopup(!showPopup)}

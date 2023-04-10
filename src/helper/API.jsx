@@ -14,6 +14,18 @@ export const API = {
     EDIT_TEAM_MEMBER_DETAILS: 'https://dev.elred.io/portalEditCompanyTeamMemberDetails',
     DESIGNATION_LIST: 'https://dev.elred.io/getDesignations',
     DEPARTMENTS_LIST: 'https://dev.elred.io/getDepartments',
-    PRODUCT_SERVICES_LIST: 'https://dev.elred.io/getProductOrServices'
+    PRODUCT_SERVICES_LIST: 'https://dev.elred.io/getProductOrServices',
     // -------------------------------------
+
+
+
+    //------------------------- DEALERS API STARTING HERE ---------------------------
+    VIEW_COMPANY_DEALERS : '/dealerViewCompanyDealers?start=1&offset=10',
+    VIEW_DEALER_PRODUCT_CATEGORY: '/dealerViewAssignedProductsCategory?start=1&offset=10',
+    VIEW_DEALER_PRODUCT_SUBCATEGORY: '/dealerViewAssignedProductsSubCategory?start=1&offset=10',
+    VIEW_DEALER_PRODUCTS: '/dealerViewAssignedProducts?start=1&offset=10',
+    DEALER_ADD_TO_CART: '/dealerAddProductsToCart',
+
+
+    //------------------------- DEALERS API ENDING HERE -----------------------------
 };
