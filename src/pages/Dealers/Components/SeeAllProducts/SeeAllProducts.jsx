@@ -28,7 +28,7 @@ const SeeAllProducts = ({ show, handleClose }) => {
                 </tr>
               </thead>
                 <tbody className="right-side-body">
-                  <ItemRow disableDelete={true} popupScreen={true}/>
+                  <ItemRow disableDelete={true} popupScreen={true} pName={'Konica Chrome Minolta'} desc={'Bluish Magenta Cyan'}/>
                   <ItemRow disableDelete={true} popupScreen={true}/>
                   <ItemRow disableDelete={true} popupScreen={true}/>
                   <ItemRow disableDelete={true} popupScreen={true}/>

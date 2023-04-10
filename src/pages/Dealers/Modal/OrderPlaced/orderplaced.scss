@@ -74,10 +74,28 @@
 }
 
 
-@media only screen and (max-width: 1199px) {
-  .success-order{
-    .orderplaced-popup{
-      display: none;
+@media (min-width: 992px) and (max-width: 1199px) {
+  .success-order {
+    .modal-dialog {
+      width: 400px !important;
+    }
+
+    .orderplaced-popup {
+      height: 400px;
+
+      img{
+        width: 240px;
+      }
+
+      .msg{
+        font-size: 14px;
+      }
+
+      .view-order-btn{
+        font-size: 16px !important;
+      }
     }
   }
 }
+
+

@@ -62,6 +62,18 @@ const ProductCart = () => {
             <ItemRow disableDelete={true} pr20={true} />
             <ItemRow disableDelete={true} pr20={true} />
             <ItemRow disableDelete={true} pr20={true} />
+            <ItemRow
+              disableDelete={true}
+              pName={"Konica Chrome Konica Chrome"}
+              desc={"Magenta | 1 L. | RNB"}
+              pr20={true}
+            />
+            <ItemRow
+              disableDelete={true}
+              pName={"Konica Chrome Konica Chrome Konica Chrome Konica Chrome "}
+              desc={"Lemon Yellow | 5 L. | AK-RCT Bottle"}
+              pr20={true}
+            />
           </tbody>
         )}
       </Table>
@@ -126,7 +138,9 @@ const ProductCart = () => {
 
           {/**PLACE ORDER - CLEAR CART */}
           <div className="cart-btns">
-            <Button className="clear" onClick={() => setIsEmpty(true)}>Clear Cart</Button>
+            <Button className="clear" onClick={() => setIsEmpty(true)}>
+              Clear Cart
+            </Button>
             <Button className="place-order" onClick={() => setModalShow(true)}>
               Place Order
             </Button>

@@ -39,6 +39,35 @@
   }
 }
 
+@media (min-width: 992px) and (max-width: 1199px) {
+  .new-address {
+    margin: 10px 30px;
+
+    .shipping-billing {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .radio-div {
+      margin-bottom: 15px !important;
+      .shipping,
+      .billing {
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+    }
+
+    .button-div {
+      button {
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 20px;
+        font-size: 14px !important;
+      }
+    }
+  }
+}
+
 @media (min-width: 1200px) and (max-width: 1439px) {
   .new-address {
     margin: 10px 30px;
@@ -50,14 +79,15 @@
 
     .radio-div {
       margin-bottom: 30px !important;
-      .shipping, .billing {
+      .shipping,
+      .billing {
         font-size: 16px;
         margin-bottom: 15px;
       }
     }
 
-    .button-div{
-      button{
+    .button-div {
+      button {
         width: 100%;
         margin-left: 0;
         margin-bottom: 20px;
@@ -66,7 +96,6 @@
     }
   }
 }
-
 
 @media (min-width: 1440px) and (max-width: 1599px) {
   .new-address {
@@ -79,14 +108,15 @@
 
     .radio-div {
       margin-bottom: 30px !important;
-      .shipping, .billing {
+      .shipping,
+      .billing {
         font-size: 16px;
         margin-bottom: 15px;
       }
     }
 
-    .button-div{
-      button{
+    .button-div {
+      button {
         width: 100%;
         margin-left: 0;
         margin-bottom: 20px;

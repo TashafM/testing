@@ -27,7 +27,7 @@
     }
   }
 
-  @media (min-width: 1200px) and (max-width: 1439px) {
+  @media (min-width: 1200px) and (max-width: 1440px) {
     .top-comp{
       .title{
         font-size: 18px;
@@ -36,4 +36,12 @@
     }
   }
 
-  
+  @media (min-width: 992px) and (max-width: 1200px) {
+    .top-comp{
+      .title{
+        font-size: 18px;
+        line-height: 22px;
+        font-weight: 600;
+      }
+    }
+  }

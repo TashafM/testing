@@ -12,29 +12,33 @@ import Routing from "./Routing/Routing";
 
 export const GlobalContext = createContext();
 export const FixedTableHead = createContext();
+export const TestData = createContext();
 
 function App() {
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   // const [alert, setAlert] = useState(false);
+  // const [testData, setTestData] = useState([]);
 
   return (
     <ContextProvider>
-      <GlobalContext.Provider
-        value={{
-          loading,
-          setLoading,
-          msg,
-          setMsg,
-        }}
-      >
-        <FixedTableHead.Provider value={{isOpen, setIsOpen}}>
-          <ToastContainer position="top-center" />
-          <RightDrawer />
-          <Routing />
-        </FixedTableHead.Provider>
-      </GlobalContext.Provider>
+      {/* <TestData.Provider value={{testData, setTestData}}> */}
+        <GlobalContext.Provider
+          value={{
+            loading,
+            setLoading,
+            msg,
+            setMsg,
+          }}
+        >
+          <FixedTableHead.Provider value={{ isOpen, setIsOpen }}>
+            <ToastContainer position="top-center" />
+            <RightDrawer />
+            <Routing />
+          </FixedTableHead.Provider>
+        </GlobalContext.Provider>
+      {/* </TestData.Provider> */}
     </ContextProvider>
   );
 }

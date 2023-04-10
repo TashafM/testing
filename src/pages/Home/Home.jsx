@@ -29,7 +29,7 @@ const Home = () => {
             <TabletNavbar />
           </div>
           <div className="tablet-menu">
-            <TabMenus />
+            <TabMenus tabs={menuItems}/>
           </div>
           <div className="row">
             <div className="col-xl-2 menu-list ">

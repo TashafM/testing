@@ -54,7 +54,62 @@
   }
 }
 
-@media (min-width: 1200px) and (max-width: 1439px) {
+@media (min-width: 992px) and (max-width: 1199px) {
+  .right-side-tr {
+
+    .price{
+      font-size: 14px;
+    }
+    .single-product-item {
+      padding-top: 15px;
+      padding-left: 15px;
+
+      .img-div {
+        .text-desc {
+          margin-right: 8px;
+
+          .product-name {
+            font-size: 12px;
+            margin-bottom: 2px;
+            max-width: 95px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+          .description {
+            font-size: 10px;
+            max-width: 96px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+      }
+
+      .img-div {
+        img {
+          width: 30px;
+        }
+      }
+    }
+
+    .pl40 {
+      padding-left: 22px !important;
+    }
+
+    .quantity {
+      font-size: 14px;
+    }
+
+    .price-padding {
+      font-size: 14px;
+      padding-right: 10px;
+    }
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1440px) {
   .right-side-tr {
     .single-product-item {
       padding-top: 15px;
@@ -67,10 +122,18 @@
           .product-name {
             font-size: 12px;
             margin-bottom: 2px;
+            max-width: 95px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
           }
 
           .description {
             font-size: 10px;
+            max-width: 96px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
           }
         }
       }
@@ -82,7 +145,7 @@
       }
     }
 
-    .pl40{
+    .pl40 {
       padding-left: 22px !important;
     }
 
@@ -97,43 +160,102 @@
   }
 }
 
-@media (min-width: 1440px) and (max-width: 1599px) {
+@media (min-width: 1440px) and (max-width: 1600px) {
   .right-side-tr {
     .single-product-item {
       padding-top: 20px;
       padding-left: 20px;
 
       .img-div {
+        img{
+          width: 52px;
+        }
         .text-desc {
           .product-name {
             font-size: 15px;
             margin-bottom: 8px;
+            max-width: 115px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
+
+          .description {
+            max-width: 116px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
           }
         }
       }
     }
 
-    .pl40{
+    .pl40 {
       padding-left: 32px !important;
     }
 
-    .quantity{
+    .quantity {
       font-size: 18px;
     }
-    .price-padding{
+    .price-padding {
       font-size: 18px;
       line-height: 22px;
     }
   }
-
-  
 }
 
+@media (min-width: 1600px) and (max-width: 1750px) {
+  .right-side-tr {
+    .single-product-item {
+      padding-left: 25px;
 
-@media (min-width: 1600px) and (max-width: 1749px) {
-.right-side-tr{
-  .single-product-item{
-    padding-left: 25px;
+      .img-div {
+        .text-desc {
+          .product-name {
+            font-size: 15px;
+            margin-bottom: 8px;
+            max-width: 115px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
+
+          .description {
+            max-width: 116px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
   }
 }
+
+@media (min-width: 1750px) {
+  .right-side-tr {
+    .single-product-item {
+      // padding-left: 25px;
+
+      .img-div {
+        .text-desc {
+          .product-name {
+            // font-size: 15px;
+            // margin-bottom: 8px;
+            max-width: 118px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
+
+          .description {
+            max-width: 120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+  }
 }

@@ -6,7 +6,7 @@ import searchBg from "../../assets/images/searchBg.svg";
 import cartBg from "../../assets/images/cartBg.svg";
 import user from "../../assets/images/user.jpg";
 
-const TabletNavbar = () => {
+const TabletNavbar = ({dealers}) => {
   return (
     <Row className="tabletNavbar">
       <Col className="company-logo">

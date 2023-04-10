@@ -1,9 +1,9 @@
 import React from "react";
 import "./TabMenus.scss";
-import menuItems from "../Menus/menu";
+// import menuItems from "../Menus/menu";
 import { useLocation, useNavigate } from "react-router";
 
-const TabMenus = () => {
+const TabMenus = ({tabs}) => {
   const location = useLocation();
   const navigate = useNavigate();
   const openPage = (link) => {
@@ -11,7 +11,7 @@ const TabMenus = () => {
   };
   return (
     <div className="tabMenus">
-      {menuItems.map((item,id) => (
+      {tabs.map((item,id) => (
         <>
           <div
             className={
