@@ -44,9 +44,9 @@ const NavbarTop = ({ dealers }) => {
         </div>
         <MyDealersPopup show={dealerPopup} setDealerPopup={showDealerPopup} />
         <div className="user-profile">
-          <img src={dealers ? dealerDp : user} alt="" />
+          <img src={ user} alt="" />
           <span className="username">
-            {dealers ? dealerUserName : "Username"}
+            {"Username"}
           </span>
           <span
             className="btn-dropdown"
