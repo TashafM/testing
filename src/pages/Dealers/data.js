@@ -17,6 +17,9 @@ import brand1 from "../../assets/images/brand1.png";
 import brand2 from "../../assets/images/brand2.png";
 import brand3 from "../../assets/images/brand3.png";
 import brand4 from "../../assets/images/brand4.png";
+import brand5 from "../../assets/images/brand5.png";
+import brand6 from "../../assets/images/brand6.png";
+
 
 export const productVariant = {
   "cyan": {
@@ -97,7 +100,7 @@ export const superItems = [
           {
             idx: 1,
             image: product1,
-            pname: "Konica Chrome",
+            pname: "Konica Minolta Konica Chrome Konica Chrome",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing...",
           },
           {
@@ -297,7 +300,7 @@ export const superItems = [
       {
         id: 5,
         imgPath: ph5,
-        subImg: brand4,
+        subImg: brand5,
         name: "Xaar",
         products: [
           {
@@ -329,7 +332,7 @@ export const superItems = [
       {
         id: 6,
         imgPath: ph6,
-        subImg: brand2,
+        subImg: brand6,
         name: "Toshiba",
         products: [
           {
@@ -367,7 +370,7 @@ export const superItems = [
     subItems: [
       {
         imgPath: ph1,
-        subImg: brand3,
+        // subImg: brand3,
         name: "Konica Minolta",
         products: [
           {
@@ -418,7 +421,7 @@ export const superItems = [
       {
         imgPath: ph2,
         name: "New Ink",
-        subImg: brand1,
+        // subImg: brand1,
         products: [
           {
             idx: 1,

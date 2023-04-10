@@ -160,13 +160,16 @@
   }
 }
 
-@media (min-width: 1440px) and (max-width: 1599px) {
+@media (min-width: 1440px) and (max-width: 1600px) {
   .right-side-tr {
     .single-product-item {
       padding-top: 20px;
       padding-left: 20px;
 
       .img-div {
+        img{
+          width: 52px;
+        }
         .text-desc {
           .product-name {
             font-size: 15px;

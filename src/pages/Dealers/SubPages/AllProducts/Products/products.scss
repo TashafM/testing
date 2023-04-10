@@ -27,6 +27,10 @@
       line-height: 24px;
       color: #000;
       padding-left: 15px;
+      width: 240px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .description {
       padding-left: 15px;
@@ -64,6 +68,7 @@
 }
 
 .bottom-strip {
+  display: flex;
   height: 11vh;
   background: white;
   margin-top: 22px;
@@ -74,7 +79,8 @@
   .bottom-brands {
     display: flex;
     align-items: center;
-    overflow-x: auto;
+    overflow-x: scroll;
+    width: 100%;
     // justify-content: center;
 
     &::-webkit-scrollbar {
@@ -109,6 +115,17 @@
   }
   .bottom-strip {
     margin-left: 6%;
+    padding: 10px 25px;
+    margin-top: 15px;
+
+
+    .bottom-brands {
+      .brand-div {
+        img {
+          max-width: 100px;
+        }
+      }
+    }
   }
 }
 
@@ -119,6 +136,10 @@
         font-size: 16px;
         line-height: 19px;
         margin-top: 10px;
+        width: 190px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .description {
         font-size: 12px;
@@ -153,6 +174,10 @@
         font-size: 12px;
         line-height: 15px;
         margin-top: 5px;
+        width: 155px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .description {
         font-size: 10px;
@@ -205,6 +230,10 @@
         font-size: 12px;
         line-height: 15px;
         margin-top: 5px;
+        width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .description {
         font-size: 10px;
