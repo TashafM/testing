@@ -11,6 +11,24 @@
   border: none;
 }
 
+.dropdown-divider {
+  margin: 0;
+}
+
+.dropdown-menu {
+  background: #f7f7f7;
+}
+.dropdown-item {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  /* identical to box height */
+
+  color: #899197;
+}
+
 .text-area-cont:focus-visible {
   outline: none;
   box-shadow: none;

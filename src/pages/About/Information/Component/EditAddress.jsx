@@ -56,7 +56,7 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
     >
       <div className="content">
         <DrawerHead
-          title="Other info"
+          title="Edit Address"
           handleClose={handleClose}
           // description="Add Address"
         />

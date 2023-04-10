@@ -25,7 +25,7 @@ function CardOtherInfo({ otherInfo, onClick }) {
           </div>
         </div> */}
         <div className="row ">
-          <div className="col-12 email margin-text">
+          <div className="col-12 email margin-text title-our-service">
             Our Services & support?
           </div>
           {otherInfo?.servicesAndSupport?.provided === "yes" ? (

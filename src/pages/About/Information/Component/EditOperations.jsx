@@ -132,7 +132,7 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
     >
       <div className="content">
         <DrawerHead
-          title="Other info"
+          title="Hours of operation"
           handleClose={handleClose}
           description=" Please provide the hours of operations"
         />
