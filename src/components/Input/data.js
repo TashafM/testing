@@ -1,5 +1,9 @@
 export const hour = [
   {
+    label: "00",
+    value: "00",
+  },
+  {
     label: "01",
     value: "01",
   },
@@ -42,6 +46,10 @@ export const hour = [
   {
     label: "11",
     value: "11",
+  },
+  {
+    label: "12",
+    value: "12",
   },
 ];
 
