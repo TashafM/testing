@@ -6,7 +6,7 @@ import NavbarTop from "../../components/NavbarTop/NavbarTop";
 import NeedHelp from "../../components/NeedHelp/NeedHelp";
 import TabletNavbar from "../../components/TabletNavbar/TabletNavbar";
 import TabMenus from "../../components/TabMenus/TabMenus";
-import { dealerMenu } from "./data";
+import { dealerMenu, tabletMenuDealers } from "./data";
 import "./dealers.scss";
 import ProductCart from "./Components/ProductCart/ProductCart";
 import { createContext } from "react";
@@ -34,7 +34,7 @@ const Dealers = () => {
               <TabletNavbar />
             </div>
             <div className="tablet-menu">
-              <TabMenus />
+              <TabMenus tabs={tabletMenuDealers}/>
             </div>
             <div className="row">
               <div className="col-xl-2 menu-list">
@@ -46,7 +46,7 @@ const Dealers = () => {
                 className={
                   location.pathname == dealersDashboard
                     ? `col-xl-10 col-lg-12 content-area`
-                    : `col-xl-7 col-lg-12 content-area`
+                    : `col-xl-7 col-lg-8 content-area`
                 }
               >
                 <Outlet name="alkjaljfsa" />
@@ -55,7 +55,7 @@ const Dealers = () => {
                 className={
                   location.pathname == dealersDashboard
                     ? "dontShow"
-                    : "col-xl-3 newnew"
+                    : "col-xl-3 col-lg-4 newnew"
                 }
               >
                 <ProductCart />

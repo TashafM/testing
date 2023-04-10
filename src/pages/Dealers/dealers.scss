@@ -52,11 +52,10 @@
   }
 }
 
-
 @media only screen and (max-width: 1600px) {
-  .newnew{
-    .no-item{
-      .no-text{
+  .newnew {
+    .no-item {
+      .no-text {
         font-size: 20px;
         font-weight: 500;
         line-height: 24px;
@@ -67,9 +66,9 @@
 }
 
 @media only screen and (max-width: 1300px) {
-  .newnew{
-    .no-item{
-      .no-text{
+  .newnew {
+    .no-item {
+      .no-text {
         font-size: 14px;
         font-weight: 500;
         line-height: 17px;
@@ -80,10 +79,27 @@
 }
 
 @media only screen and (max-width: 1199px) {
+  // .dealers-homepage{
+  //   display: none;
+  // }
+  .newnew {
+    margin-top: 15px;
+    height: 75vh;
+
+    .no-item {
+      height: 65vh;
+    }
+  }
+  // .mobile-not-supported{
+  //   display: block;
+  // }
+}
+
+@media only screen and (max-width: 991px) {
   .dealers-homepage{
     display: none;
   }
-  .mobile-not-supported{
+  .mobile-not-supported {
     display: block;
   }
 }

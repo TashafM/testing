@@ -22,6 +22,7 @@
       position: relative;
 
       .sub-images {
+        display: none;
         position: absolute;
         top: 30px;
         left: 30px;
@@ -177,6 +178,107 @@
         color: #be212a;
         border-radius: 12px;
         padding: 20px 180px;
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .scrollable-left {
+    .leftside {
+      padding-left: 20px;
+      .title {
+        font-size: 20px;
+        line-height: 28px;
+        // margin-top: 20px;
+      }
+
+      .about-product {
+        .product-code {
+          font-size: 14px;
+          line-height: 24px;
+        }
+        .product-desc {
+          font-size: 13px;
+          line-height: 20px;
+        }
+        .product-price {
+          font-size: 18px;
+          line-height: 24px;
+        }
+      }
+
+      .color-description {
+        .color-desc-title {
+          font-size: 18px;
+          line-height: 24px;
+          margin-bottom: 15px;
+        }
+        .select-color-btn {
+          font-size: 12px;
+          line-height: 17px;
+          padding: 12px 21px;
+          margin-right: 16px;
+          margin-bottom: 16px;
+        }
+      }
+
+      .quantity-input {
+        font-size: 20px;
+        line-height: 25px;
+
+        input {
+          font-size: 18px;
+          line-height: 22px;
+          font-weight: 400;
+          height: 45px;
+        }
+
+        .quantity-desc-title {
+          margin-bottom: 15px;
+          font-size: 18px;
+        }
+      }
+
+      .add-div-btn {
+        max-width: 600px;
+        width: 100%;
+        margin-top: 70px;
+        .add-product-button {
+          font-size: 14px;
+          line-height: 20px;
+          padding: 12px 160px;
+        }
+      }
+      .image-div {
+        height: 245px !important;
+        margin-top: 15px;
+
+        img {
+          width: 100px;
+        }
+
+        .wish-list {
+          // position: absolute;
+          top: 20px;
+          right: 20px;
+          img {
+            width: 20px;
+          }
+        }
+      }
+
+      .urgent-order {
+        .form-check {
+          .form-check-input {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+
+      .urgent-order{
+        margin-top: 40px;
       }
     }
   }

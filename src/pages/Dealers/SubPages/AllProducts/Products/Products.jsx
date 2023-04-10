@@ -23,7 +23,7 @@ const Products = () => {
             item.subItems.map((val) =>
               val.id == currentId
                 ? val.products.map((itm) => (
-                    <Col className="products-container">
+                    <Col className="products-container col-lg-4">
                       <div
                         className="img-category-main"
                         // style={{ backgroundImage: `url(${itm.image})`, backgroundRepeat: 'no-repeat' }}

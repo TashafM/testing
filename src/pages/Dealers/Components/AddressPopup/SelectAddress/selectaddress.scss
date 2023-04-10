@@ -1,11 +1,11 @@
 .selectaddress {
-    margin-bottom: 40px;
-    .title{
-        font-size: 16px;
-        font-weight: 500;
-        line-height: 20px;
-        color: #000;
-    }
+  margin-bottom: 40px;
+  .title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #000;
+  }
   .address-box {
     margin-top: 15px;
     background: #ffffff;
@@ -21,7 +21,6 @@
         line-height: 30px;
         margin-left: 25px;
         padding-right: 15px;
-
       }
 
       img {
@@ -36,7 +35,7 @@
       align-items: center;
       justify-content: space-between;
 
-      img{
+      img {
         cursor: pointer;
       }
 
@@ -56,21 +55,58 @@
   }
 }
 
-@media (min-width: 1200px) and (max-width: 1439px) {
-  .selectaddress{
-    .title{
+@media (min-width: 992px) and (max-width: 1199px) {
+  .selectaddress {
+    .title {
       font-size: 14px;
     }
 
-    .address-box{
-      .upper-line{
-        .text-add{
+    .address-box {
+      padding: 15px;
+      margin-top: 10px;
+      .upper-line {
+        img{
+          margin-top: -20px;
+          width: 15px;
+        }
+        .text-add {
+          font-size: 12px;
+          padding-right: 10px;
+          line-height: 22px;
+        }
+      }
+      .mobile-line {
+        img{
+          width: 15px;
+        }
+        .num {
+          font-size: 12px;
+          margin-top: 6px;
+        }
+      }
+
+      .address-divider{
+        margin: 10px 0;
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .selectaddress {
+    .title {
+      font-size: 14px;
+    }
+
+    .address-box {
+      .upper-line {
+        .text-add {
           font-size: 16px;
           padding-right: 15px;
         }
       }
-      .mobile-line{
-        .num{
+      .mobile-line {
+        .num {
           font-size: 16px;
         }
       }
@@ -79,20 +115,20 @@
 }
 
 @media (min-width: 1440px) and (max-width: 1599px) {
-  .selectaddress{
-    .title{
+  .selectaddress {
+    .title {
       font-size: 14px;
     }
 
-    .address-box{
-      .upper-line{
-        .text-add{
+    .address-box {
+      .upper-line {
+        .text-add {
           font-size: 16px;
           padding-right: 15px;
         }
       }
-      .mobile-line{
-        .num{
+      .mobile-line {
+        .num {
           font-size: 16px;
         }
       }
@@ -101,17 +137,16 @@
 }
 
 @media (min-width: 1600px) and (max-width: 1749px) {
-  .selectaddress{
-
-    .address-box{
-      .upper-line{
-        .text-add{
+  .selectaddress {
+    .address-box {
+      .upper-line {
+        .text-add {
           font-size: 18px;
           padding-right: 15px;
         }
       }
-      .mobile-line{
-        .num{
+      .mobile-line {
+        .num {
           font-size: 18px;
         }
       }

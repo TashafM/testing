@@ -36,4 +36,12 @@
     }
   }
 
-  
+  @media (min-width: 992px) and (max-width: 1199px) {
+    .top-comp{
+      .title{
+        font-size: 18px;
+        line-height: 22px;
+        font-weight: 600;
+      }
+    }
+  }

@@ -187,6 +187,98 @@
   }
 }
 
+@media (min-width: 992px) and (max-width: 1199px) {
+  .productcart-header {
+    tr {
+      th {
+        font-size: 12px;
+        line-height: 17px;
+        padding: 10px 0;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .other-instructions {
+    padding: 15px 0;
+    padding-right: 30px;
+    padding-left: 25px;
+    .text {
+      font-size: 16px;
+      line-height: 22px;
+    }
+  }
+
+  .purchase-order {
+    .title {
+      font-size: 16px;
+    }
+
+    input {
+      font-size: 16px;
+      line-height: 20px;
+      height: 40px;
+      padding: 10px 15px;
+    }
+  }
+
+  .addresses {
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+    .title {
+      font-size: 16px;
+      line-height: 20px;
+    }
+  }
+
+  .display-address {
+    font-size: 15px;
+    line-height: 22px;
+    margin-bottom: 25px;
+  }
+
+  .item-rate-div {
+    font-size: 16px;
+    margin-bottom: 10px !important;
+    line-height: 20px;
+  }
+
+  .total-rate-div {
+    font-size: 16px;
+    margin-bottom: 15px !important;
+    line-height: 20px;
+  }
+
+  .edit-see-all {
+    font-size: 14px;
+    padding: 15px;
+    padding-right: 30px;
+    padding-left: 25px;
+  }
+
+  .cart-btns {
+    button {
+      // padding: 15px 25px;
+    }
+    .clear {
+      font-size: 14px;
+      line-height: 14px;
+      border-radius: 8px;
+      padding: 15px 30px;
+    }
+    .place-order {
+      line-height: 15px;
+      font-size: 14px;
+      border-radius: 8px;
+      padding: 15px 30px;
+    }
+  }
+
+  .simple-line {
+    border: 1px solid #efefef;
+  }
+}
+
 @media (min-width: 1200px) and (max-width: 1439px) {
   .productcart-header {
     tr {
@@ -287,59 +379,60 @@
     padding: 20px 30px;
   }
 
-  .purchase-order{
-    .title{
+  .purchase-order {
+    .title {
       font-size: 18px;
     }
-    input{
-      font-size: 18px;
-    }
-  }
-
-  .addresses{
-    .title{
+    input {
       font-size: 18px;
     }
   }
 
-  .display-address{
+  .addresses {
+    .title {
+      font-size: 18px;
+    }
+  }
+
+  .display-address {
     font-size: 18px;
     margin-bottom: 25px;
   }
 
-  .item-rate-div{
+  .item-rate-div {
     font-size: 18px;
   }
 
-  .total-rate-div{
+  .total-rate-div {
     font-size: 18px;
   }
 
-  .cart-btns{
-    button{
+  .cart-btns {
+    button {
       padding: 12px 25px;
     }
-    .place-order, .clear{
+    .place-order,
+    .clear {
       font-size: 18px;
       border-radius: 10px;
     }
   }
 }
 
-
 @media (min-width: 1600px) and (max-width: 1749px) {
-.other-instructions{
-  padding: 20px 30px;
-}
-.edit-see-all{
-  padding: 20px 30px;
-}
-.cart-btns{
-  button{
-    padding: 15px 35px;
+  .other-instructions {
+    padding: 20px 30px;
   }
-  .place-order, .clear{
-    font-size: 18px;
+  .edit-see-all {
+    padding: 20px 30px;
   }
-}
+  .cart-btns {
+    button {
+      padding: 15px 35px;
+    }
+    .place-order,
+    .clear {
+      font-size: 18px;
+    }
+  }
 }
