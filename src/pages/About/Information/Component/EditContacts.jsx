@@ -53,8 +53,8 @@ function EditContacts() {
           address: {
             city: "Banglore",
             state: "Karnataka",
-            latitude: "1293.123",
-            longitude: "12.345678",
+            latitude: "12.123",
+            longitude: "12.123",
             country: "India",
             fullAddress: "asdas",
           },

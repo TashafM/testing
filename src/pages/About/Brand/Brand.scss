@@ -28,12 +28,18 @@
     color: #848484;
   }
 }
-
-.brand-image {
-  height: 55px;
-  width: 55px;
+.brand-img-container {
+  padding: 5px;
   border-radius: 50%;
   border: 1px solid #dadada;
+}
+
+.brand-image {
+  height: 65px;
+  width: 65px;
+  object-fit: contain;
+  border-radius: 50%;
+  // border: 1px solid #dadada;
 }
 
 .add-brand-container {

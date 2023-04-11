@@ -13,11 +13,14 @@ function CardBrand({ item, location, onClick, onDelete, index }) {
         <BtnIconOnly onClick={onClick} />
       </div>
       <div className="d-flex flex-column align-items-center justify-content-center">
-        <img
-          className="brand-image"
-          src={item.brandLogoURL}
-          alt={"brand-logo"}
-        />
+        <div className="brand-img-container">
+          <img
+            className="brand-image"
+            src={item.brandLogoURL}
+            alt={"brand-logo"}
+          />
+        </div>
+
         <p className="title-brand m-0">{item.brandName}</p>
         <p className="m-0 email">{"Mumbai"}</p>
       </div>
