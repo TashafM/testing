@@ -85,13 +85,12 @@ function EditContacts() {
     // }
   };
 
-  const [postData, { loading }] = usePostAsyncResponse(
+  const [postData, { loading, error }] = usePostAsyncResponse(
     "/portalPostCompanyContactUsDetails"
   );
 
-  const [pathcData, { loading: editLoading }] = usePatchAsyncReponse(
-    "/portalPatchCompanyContactUsDetails"
-  );
+  const [pathcData, { loading: editLoading, error: errorPatch }] =
+    usePatchAsyncReponse("/portalPatchCompanyContactUsDetails");
   return (
     <div>
       <p className="drawer-title">
@@ -178,7 +177,12 @@ function EditContacts() {
                 city, pin code."
               />
             </div>
-
+            {error.error || errorPatch.error ? (
+              <p className="validation-error">
+                Error: Invalid input parameters. Please check your input and try
+                again.
+              </p>
+            ) : null}
             <BtnTitleCenter
               loading={loading || editLoading}
               type="submit"

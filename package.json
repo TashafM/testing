@@ -27,6 +27,7 @@
     "react-dom": "^18.2.0",
     "react-draft-wysiwyg": "^1.15.0",
     "react-files": "^3.0.0",
+    "react-google-autocomplete": "^2.7.3",
     "react-icons": "^4.7.1",
     "react-infinite-scroll-component": "^6.1.0",
     "react-phone-number-input": "^3.2.19",

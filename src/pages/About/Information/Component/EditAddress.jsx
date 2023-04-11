@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import TextInput from "../../../../components/Input/TextInput";
 import { Formik, Form } from "formik";
@@ -6,7 +6,7 @@ import schema from "../../../../helper/validation/schema";
 import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
 import { Offcanvas } from "react-bootstrap";
 import DrawerHead from "./DrawerHead";
-import { useState } from "react";
+import PlaceAutoComplete from "../../../../components/Input/PlaceAutoComplete";
 
 function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
   const formRef = useRef();
@@ -100,6 +100,13 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                     error={touched.fullName && errors.fullName}
                   />
                 </div>
+                {/* 
+                <PlaceAutoComplete
+                  apiKey={"AIzaSyAROpxxRmrXiah-FooutbY7rmY1m8HnucQ"}
+                  onPlaceSelected={(place) => {
+                    console.log(place);
+                  }}
+                /> */}
                 <div className="input-wrapper">
                   <TextInput
                     name="officeName"
@@ -113,7 +120,6 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                     error={touched.floorNumber && errors.floorNumber}
                   />
                 </div>
-
                 <div className="input-wrapper">
                   <TextInput
                     name="block"
@@ -205,6 +211,7 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                     label={"Google Places Location"}
                   />
                 </div>
+
                 <BtnTitleCenter
                   type="submit"
                   title={"Save"}

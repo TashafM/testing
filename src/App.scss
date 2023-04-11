@@ -15,6 +15,16 @@ body::-webkit-scrollbar-track {
   background-color: #f5f5f5;
 }
 
+.validation-error {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  margin-bottom: 0;
+  margin-bottom: 6px;
+  color: #e72d38;
+}
 
 .offcanvas-header .btn-close {
   font-size: 18px !important;

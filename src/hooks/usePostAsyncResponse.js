@@ -3,7 +3,7 @@ import instance from "../helper/axios";
 
 export const usePostAsyncResponse = (url) => {
   const [data, setData] = useState({});
-  const [error, setError] = useState({});
+  const [error, setError] = useState({ error: false, message: "" });
   const [loading, setLoading] = useState(false);
 
   const postData = useCallback(

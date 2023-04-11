@@ -11,14 +11,16 @@ function BtnTitleCenter({
   loading = false,
   className = "",
 }) {
-  let newstyle = (smallbutton ? "btnsmall " : "btn-title-center ") + className;
-
   return (
     <div>
       <button
         disabled={disabled}
         type={type}
-        className={newstyle}
+        className={
+          !disabled
+            ? "btn-title-center"
+            : " btn-title-center btn-disbaled-opacity "
+        }
         onClick={onClick}
       >
         {loading ? (
