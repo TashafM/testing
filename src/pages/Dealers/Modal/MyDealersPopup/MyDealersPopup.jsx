@@ -5,17 +5,23 @@ import closeX from "../../../../assets/images/closeX.svg";
 import SearchBar from "../../../../components/SearchBar/SearchBar";
 import DealerPopSearch from "../../Components/DealerPopSearch/DealerPopSearch";
 import { dealersLogo } from "../data";
+import { useNavigate } from "react-router-dom";
 // import ordersuccess from '../../../../assets/images/ordersuccess.gif'
 
 const MyDealersPopup = ({ show, setDealerPopup, data, setChange }) => {
+  const navigate = useNavigate();
 
   const activateDealer = (dealer) => {
-    localStorage.setItem('principalCompanyUserCode', dealer.principalCompanyUserCode);
-    localStorage.setItem('firstname', dealer.firstname)
-    localStorage.setItem('dpURL', dealer.dpURL)
-    localStorage.setItem('taxPercentage', dealer.taxPercentage)
-    setDealerPopup(false)
-  }
+    localStorage.setItem(
+      "principalCompanyUserCode",
+      dealer.principalCompanyUserCode
+    );
+    localStorage.setItem("firstname", dealer.firstname);
+    localStorage.setItem("dpURL", dealer.dpURL);
+    localStorage.setItem("taxPercentage", dealer.taxPercentage);
+    navigate(`/dealers/dashboard`);
+    setDealerPopup(false);
+  };
   return (
     <Modal
       centered
@@ -35,7 +41,10 @@ const MyDealersPopup = ({ show, setDealerPopup, data, setChange }) => {
       <div className="all-dealers">
         <Row className="dealer-logo-row">
           {data.map((item) => (
-            <Col className="col-xl-2 custom-column" onClick={()=>activateDealer(item)}>
+            <Col
+              className="col-xl-2 custom-column"
+              onClick={() => activateDealer(item)}
+            >
               <div className="logo-company">
                 <img src={item.dpURL} alt="" />
               </div>

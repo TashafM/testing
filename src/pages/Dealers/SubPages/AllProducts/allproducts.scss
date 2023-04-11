@@ -88,6 +88,11 @@
       }
     }
   }
+
+  .activeBorder {
+    border: 3px solid red;
+    border-radius: 12px;
+  }
 }
 
 @media only screen and (max-width: 1728px) {

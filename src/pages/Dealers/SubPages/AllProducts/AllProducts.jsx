@@ -11,59 +11,81 @@ import atlogo from "../../../../assets/images/atlogo.png";
 import { GlobalContext } from "../../../../App";
 
 const AllProducts = () => {
-  const {loading,
-    setLoading,
-    msg,
-    setMsg,} = useContext(GlobalContext)
-  const dealersLogo = localStorage.getItem("dpURL");
-  const accessToken = localStorage.getItem("accessToken");
   const principalCompanyUserCode = localStorage.getItem(
     "principalCompanyUserCode"
   );
 
   const navigate = useNavigate();
 
-  const [category, setcategory] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [categoryData, setcategoryData] = useState([]);
+  const [subCategory, setSubCategory] = useState([]);
 
-  const fetchCategory = () => {
-    return axiosInstance
-      .post(
-        API.VIEW_DEALER_PRODUCT_CATEGORY,
-        { principalCompanyUserCode },
-        {
-          headers: { Authorization: `Bearer ${accessToken}` },
-        }
-      )
-      .then((res) => {
-        setcategory(res.result);
-        setSelectedCategory(res.result[0].categoryId);
-      })
-      .catch((err) => console.log(err));
-  };
+  const [active, setActive] = useState(0);
 
-  useEffect(() => {
-    fetchCategory();
-  }, [dealersLogo]);
+  //     .post(
+  //       API.VIEW_DEALER_PRODUCT_CATEGORY,
+  //       { principalCompanyUserCode },
+  //       {
+  //         headers: { Authorization: `Bearer ${accessToken}` },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       setcategory(res.result);
+  //       setSelectedCategory(res.result[0].categoryId).then(()=>{
+  //         axiosInstance.post(API.VIEW_DEALER_PRODUCT_SUBCATEGORY)
+  //       })
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
+
+  // useEffect(() => {
+  //   fetchCategory();
+
+  // }, [dealersLogo]);
 
   //------------------------------------------------------------------------------------------SUB CATEGORY
-  const [subCat, setSubCat] = useState([]);
+  // const [subCat, setSubCat] = useState([]);
 
-  const subCategory = () => {
-    axiosInstance
-      .post(API.VIEW_DEALER_PRODUCT_SUBCATEGORY, {
+  // const subCategory = () => {
+  //   axiosInstance
+  //     .post(API.VIEW_DEALER_PRODUCT_SUBCATEGORY, {
+  //       principalCompanyUserCode,
+  //       categoryId: selectedCategory,
+  //     })
+  //     .then((res) => {
+  //       setSubCat(res.result)
+  //     })
+  // };
+
+  useEffect(() => {
+    const principalCompanyUserCode = localStorage.getItem(
+      "principalCompanyUserCode"
+    );
+    const fetchData = async () => {
+      const api1 = await axiosInstance.post(API.VIEW_DEALER_PRODUCT_CATEGORY, {
         principalCompanyUserCode,
-        categoryId: selectedCategory,
-      })
-      .then((res) => {
-        setSubCat(res.result)
-      })
-  };
+      });
+      setcategoryData(api1.result);
 
-  const abc = (val) => {
-    console.log(val);
-    setSelectedCategory(val);
-    subCategory();
+      const api2 = await axiosInstance.post(
+        API.VIEW_DEALER_PRODUCT_SUBCATEGORY,
+        {
+          principalCompanyUserCode,
+          categoryId: api1.result[0].categoryId,
+        }
+      );
+      setSubCategory(api2.result);
+    };
+    fetchData();
+  }, []);
+
+  const chng = async (id,idx) => {
+    setActive(idx)
+    const api2 = await axiosInstance.post(API.VIEW_DEALER_PRODUCT_SUBCATEGORY, {
+      principalCompanyUserCode,
+      categoryId: id,
+    });
+    setSubCategory(api2.result);
   };
 
   return (
@@ -73,23 +95,30 @@ const AllProducts = () => {
         <div>
           <div className="img-category-main">
             <div className="catItems">
-              {category.map((item, id) => (
+              {categoryData.map((item, id) => (
                 <div
-                  className={`superCategory-div`}
+                  className={
+                    active == id
+                      ? `superCategory-div activeBorder`
+                      : `superCategory-div `
+                  }
                   style={{
-                    backgroundImage: `url(${item.categoryImageURL? item.categoryImageURL : abcImg})`,
+                    backgroundImage: `url(${
+                      item.categoryImageURL ? item.categoryImageURL : abcImg
+                    })`,
                     backgroundSize: "cover",
                   }}
-                  onClick={() => abc(item.categoryId)}
+                  onClick={() => chng(item.categoryId,id)}
                 >
                   {item.categoryName}
                 </div>
               ))}
             </div>
+
             <hr />
 
             <div>
-              {subCat.map((item) => (
+              {subCategory.map((item) => (
                 <div className="sub-category-div">
                   <div className="image-div">
                     <img src={item.subCategoryImageURL} alt="" />
