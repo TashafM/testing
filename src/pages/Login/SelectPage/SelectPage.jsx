@@ -10,7 +10,6 @@ import { TestData } from "../../../App";
 
 const SelectPage = () => {
   const [dealerData, setDealerData] = useState([]);
-  // const {testData, setTestData} = useContext(TestData)
 
   const fetchDetails = () => {
     const ACCESS_TOKEN = localStorage.getItem("accessToken");
@@ -24,17 +23,26 @@ const SelectPage = () => {
           },
         }
       )
-      // .then((res) => console.log(res.result, "from dealers api"));
       .then((res) => {
         setDealerData(res.result);
-        // setTestData(res.result[0])
-        localStorage.setItem("firstname", res.result[0].firstname);
-        localStorage.setItem("dpURL", res.result[0].dpURL);
-        // sessionStorage.setItem("taxPercentage", res[0].result.taxPercentage);
-        // sessionStorage.setItem("taxPercentage", parseInt(res.result[0].taxPercentage));
+        localStorage.setItem(
+          "principalCompanyUserCode",
+          localStorage.getItem("principalCompanyUserCode") ??
+            res.result[0].principalCompanyUserCode
+        );
+
+        localStorage.setItem(
+          "firstname",
+          localStorage.getItem("firstname") ?? res.result[0].firstname
+        );
+        localStorage.setItem(
+          "dpURL",
+          localStorage.getItem("dpURL") ?? res.result[0].dpURL
+        );
         localStorage.setItem(
           "taxPercentage",
-          Number(res.result[0].taxPercentage)
+          localStorage.getItem("taxPercentage") ??
+            Number(res.result[0].taxPercentage)
         );
       });
   };
