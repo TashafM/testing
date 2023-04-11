@@ -16,12 +16,12 @@ function CardCompStatement({ companyStatement, onClick }) {
   }
   return (
     <Col className="card-wrapper" md={6} xl={4}>
-      <div className="card-cont" onClick={onClick}>
-        <CardHead title="Statement" icon={quote} onClick={onClick} />
-        <div>
-          <div className="stm-container">
-            <p className="email margin-text">{companyStatement}</p>
-          </div>
+      <div className="card-cont stm-card-container" onClick={onClick}>
+        <div className=" stm-head-container">
+          <CardHead title="Statement" icon={quote} onClick={onClick} />
+        </div>
+        <div className="stm-container">
+          <p className="email margin-text">{companyStatement}</p>
         </div>
       </div>
     </Col>

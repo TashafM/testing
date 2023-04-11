@@ -55,9 +55,12 @@
 .stm-container {
   overflow: auto;
   height: 105px;
+  margin-right: 5px;
 
   p {
     display: -webkit-box;
+    padding-left: 10px;
+
     // -webkit-line-clamp: 3;
     // -webkit-box-orient: vertical;
     // overflow: hidden;
