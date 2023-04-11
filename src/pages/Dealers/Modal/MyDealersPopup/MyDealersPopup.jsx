@@ -7,7 +7,15 @@ import DealerPopSearch from "../../Components/DealerPopSearch/DealerPopSearch";
 import { dealersLogo } from "../data";
 // import ordersuccess from '../../../../assets/images/ordersuccess.gif'
 
-const MyDealersPopup = ({ show, setDealerPopup }) => {
+const MyDealersPopup = ({ show, setDealerPopup, data, setChange }) => {
+
+  const activateDealer = (dealer) => {
+    localStorage.setItem('principalCompanyUserCode', dealer.principalCompanyUserCode);
+    localStorage.setItem('firstname', dealer.firstname)
+    localStorage.setItem('dpURL', dealer.dpURL)
+    localStorage.setItem('taxPercentage', dealer.taxPercentage)
+    setDealerPopup(false)
+  }
   return (
     <Modal
       centered
@@ -26,12 +34,12 @@ const MyDealersPopup = ({ show, setDealerPopup }) => {
       </div>
       <div className="all-dealers">
         <Row className="dealer-logo-row">
-          {dealersLogo.map((item) => (
-            <Col className="col-xl-2 custom-column">
+          {data.map((item) => (
+            <Col className="col-xl-2 custom-column" onClick={()=>activateDealer(item)}>
               <div className="logo-company">
-                <img src={item.logo} alt="" />
+                <img src={item.dpURL} alt="" />
               </div>
-              <div className="name-company">{item.name}</div>
+              <div className="name-company">{item.firstname}</div>
             </Col>
           ))}
         </Row>

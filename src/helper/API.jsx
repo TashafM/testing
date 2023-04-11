@@ -21,7 +21,7 @@ export const API = {
 
     //------------------------- DEALERS API STARTING HERE ---------------------------
     VIEW_COMPANY_DEALERS : '/dealerViewCompanyDealers?start=1&offset=10',
-    VIEW_DEALER_PRODUCT_CATEGORY: '/dealerViewAssignedProductsCategory?start=1&offset=10',
+    VIEW_DEALER_PRODUCT_CATEGORY: '/dealerViewAssignedProductsCategory',
     VIEW_DEALER_PRODUCT_SUBCATEGORY: '/dealerViewAssignedProductsSubCategory?start=1&offset=10',
     VIEW_DEALER_PRODUCTS: '/dealerViewAssignedProducts?start=1&offset=10',
     DEALER_ADD_TO_CART: '/dealerAddProductsToCart',

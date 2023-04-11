@@ -9,21 +9,25 @@ import { ContextProvider } from "./context";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Routing from "./Routing/Routing";
+import { API } from "./helper/API";
+import useFetchApi from "./pages/hooks/useFetchApi";
 
 export const GlobalContext = createContext();
 export const FixedTableHead = createContext();
-export const TestData = createContext();
+export const DealersData = createContext();
 
 function App() {
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  
+
+
   // const [alert, setAlert] = useState(false);
   // const [testData, setTestData] = useState([]);
 
   return (
     <ContextProvider>
-      {/* <TestData.Provider value={{testData, setTestData}}> */}
         <GlobalContext.Provider
           value={{
             loading,
@@ -38,7 +42,6 @@ function App() {
             <Routing />
           </FixedTableHead.Provider>
         </GlobalContext.Provider>
-      {/* </TestData.Provider> */}
     </ContextProvider>
   );
 }
