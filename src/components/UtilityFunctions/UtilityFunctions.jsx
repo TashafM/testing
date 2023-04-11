@@ -563,6 +563,10 @@ class Util {
       });
   };
 
+
+  //---------------DEALERS DATA ON LOADING-------------------
+  
+
   // deactiveRatings = (user, getDataFunc, setLoading, setMsg) => {
   //   setLoading(true);
   //   setMsg(`Deactivating rating for ${user.displayFirstName}`);
