@@ -94,6 +94,7 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
           description="Write down the company’s sales reach, services & support and
           interested to purchase"
         />
+
         {/* <Offcanvas.Header closeButton>
           <Offcanvas.Title>
             <div className="team-member-add">{show.type} Brands</div>
@@ -117,7 +118,7 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                   <File
                     file={file}
                     onChange={handleChange}
-                    label="Add Image"
+                    label="Add Image*"
                     setFile={setFile}
                     // error={touched.file && errors.file}
                   />
@@ -131,12 +132,12 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                       setFieldValue("brandName", e.target.value);
                     }}
                     error={touched.brandName && errors.brandName}
-                    label="Brand Name"
+                    label="Brand Name*"
                   />
                 </div>
                 <div className="input-wrapper">
                   <TextInput
-                    name="location"
+                    name="location*"
                     value={values.location}
                     onChange={(e) => {
                       !makeApiCall && setMakeApiCall(true);
@@ -178,7 +179,7 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                 <BtnTitleCenter
                   type="submit"
                   title={"Send request"}
-                  loading={loading | editLoading}
+                  loading={show.type === "Edit" ? editLoading : loading}
                 />
               </Form>
             )}

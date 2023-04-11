@@ -18,7 +18,10 @@ const PlaceAutoComplete = () => {
         {
           placeId: placePredictions[0].place_id,
         },
-        (placeDetails) => setOptions(placeDetails?.address_components ?? [])
+        (placeDetails) => {
+          console.log({ placeDetails });
+          setOptions(placeDetails?.address_components ?? []);
+        }
       );
   }, [placePredictions, placesService]);
 

@@ -100,13 +100,13 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                     error={touched.fullName && errors.fullName}
                   />
                 </div>
-                {/* 
+
                 <PlaceAutoComplete
                   apiKey={"AIzaSyAROpxxRmrXiah-FooutbY7rmY1m8HnucQ"}
                   onPlaceSelected={(place) => {
                     console.log(place);
                   }}
-                /> */}
+                />
                 <div className="input-wrapper">
                   <TextInput
                     name="officeName"

@@ -12,10 +12,13 @@ import { usePostAsyncResponse } from "../../../../hooks/usePostAsyncResponse";
 import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
 import { toast } from "react-toastify";
+import ConfirmBox from "../../../../components/ConfirmBox/ConfirmBox";
 
 function EditContactList() {
   const { openDrawer, setOpenDrawer } = useContextProvider();
   const [data, setData] = useState(openDrawer.data ?? []);
+  const [showModal, setShowModal] = useState(false);
+  const [deletedItem, setDeletedItem] = useState({ item: {}, index: -1 });
 
   const [deleteData] = usePostAsyncResponse(
     "/portalDeleteCompanyContactUsDetails"
@@ -28,7 +31,8 @@ function EditContactList() {
     setData(openDrawer.data ?? []);
   }, [openDrawer]);
 
-  const onDeletecontacts = (item, index) => {
+  const onDeletecontacts = () => {
+    const { item, index } = deletedItem;
     const body = {
       contactUsId: item._id,
     };
@@ -40,10 +44,8 @@ function EditContactList() {
 
       const d = JSON.parse(JSON.stringify(openDrawer.completeData));
       d[0].contactUs = arr;
-
-      console.log({ d });
       openDrawer.callback(d);
-
+      setShowModal(false);
       setData(arr);
     });
   };
@@ -110,10 +112,14 @@ function EditContactList() {
                 <span className="cont-title contact-us-title">
                   {item.title}
                 </span>
+
                 <div className="d-flex">
                   <BtnIconOnly
                     icon={delet}
-                    onClick={() => onDeletecontacts(item, index)}
+                    onClick={() => {
+                      setDeletedItem({ item, index });
+                      setShowModal(true);
+                    }}
                   />
                   <BtnIconOnly
                     icon={edit}
@@ -130,6 +136,17 @@ function EditContactList() {
                 </div>
               </div>
             </div>
+
+            <ConfirmBox
+              msg={"Are you sure you want to delete this item?"}
+              cancelFunction={() => {
+                setShowModal(false);
+              }}
+              showNow={showModal}
+              confirmFunction={onDeletecontacts}
+              cancelBtn={"Cancel"}
+              actionBtn={"Delete"}
+            />
             <div className="d-flex email-cont align-items-center">
               <img className="" height={25} src={email} alt="email-icon" />
               <span className="email">{item?.email ?? ""}</span>

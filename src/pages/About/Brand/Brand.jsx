@@ -9,6 +9,7 @@ import AddBrand from "./Component/AddBrand";
 import { setIn } from "formik";
 import { usePostAsyncResponse } from "../../../hooks/usePostAsyncResponse";
 import { toast } from "react-toastify";
+import ConfirmBox from "../../../components/ConfirmBox/ConfirmBox";
 
 function Brand() {
   const { setOpenDrawer } = useContextProvider();
@@ -18,12 +19,17 @@ function Brand() {
     type: "Add",
   });
 
+  const [showModal, setShowModal] = useState(false);
+  const [deletedItem, setDeletedItem] = useState({ item: {}, index: -1 });
+
   const [deleteData, { loading: deleteLoading }] = usePostAsyncResponse(
     "/portalDeleteCompanyBrands"
   );
   const [index, setIndex] = useState(-1);
 
-  const onDeleteBrand = (item, index) => {
+  const onDeleteBrand = () => {
+    const { item, index } = deletedItem;
+    console.log({ item }, { index });
     const body = {
       brandId: item.brandId,
     };
@@ -33,7 +39,9 @@ function Brand() {
       arr.splice(index, 1);
       toast.success("brand deleted successfully!!");
       setData([...arr]);
+      setShowModal(false);
     });
+
     console.log({ body });
   };
 
@@ -49,7 +57,10 @@ function Brand() {
             <div className="col-4 col-lg-3 ">
               <CardBrand
                 index={index}
-                onDelete={onDeleteBrand}
+                onDelete={() => {
+                  setShowModal(true);
+                  setDeletedItem({ item, index });
+                }}
                 item={item}
                 onClick={() => {
                   setIndex(index);
@@ -88,6 +99,17 @@ function Brand() {
           }}
         />
       )}
+
+      <ConfirmBox
+        msg={"Are you sure you want to delete this item?"}
+        cancelFunction={() => {
+          setShowModal(false);
+        }}
+        showNow={showModal}
+        confirmFunction={onDeleteBrand}
+        cancelBtn={"Cancel"}
+        actionBtn={"Delete"}
+      />
       <div className="d-flex justify-content-center">
         <div className="add-brand-container text-center">
           <BtnTitleCenter
