@@ -8,19 +8,41 @@ import { uniqBy } from "lodash";
 import { Button, Form, FormControl, InputGroup } from "react-bootstrap";
 
 //---------THIS IS TESTING CODE ----------------------------
-const LeftSide = ({ data }) => {
-  const [variant, setVariant] = useState(data.variants);
-  const uniqueVariants = uniqBy(variant, "packingDescription");
-  const uniqueColor = uniqBy(variant, "colorDescription");
+function LeftSide({ data }) {
+  const [variants, setVariants] = useState(data.variants);
+  const uniqueColors = uniqBy(variants, "colorDescription");
+  const firstColor = uniqueColors[0].colorDescription;
+  const uniqueQuantities = uniqBy(
+    variants.filter((variant) => variant.colorDescription === firstColor),
+    "packingDescription"
+  );
+  const firstQuantity = uniqueQuantities[0].packingDescription;
 
-  const [initial, setInitial] = useState(variant[0]);
-  const [isChecked, setIsChecked] = useState(false);
+  const [selectedColor, setSelectedColor] = useState(firstColor);
+  const [selectedQuantity, setSelectedQuantity] = useState(firstQuantity);
 
-  const [values, setValues] = useState(data);
-
-  const handleCheckboxChange = (e) => {
-    setIsChecked(e.target.checked);
+  const handleColorClick = (color) => {
+    setSelectedColor(color);
+    // setSelectedQuantity(null); // clear selected quantity --------------------- *IMPORTANT FOR CLEARING THE VALUE FROM BUTTON*
   };
+
+  const handleQuantityClick = (quantity) => {
+    setSelectedQuantity(quantity);
+  };
+
+  const availableQuantities = variants.filter(
+    (variant) => variant.colorDescription === selectedColor
+  );
+  const prices = availableQuantities.filter(
+    (variant) => variant.packingDescription === selectedQuantity
+  );
+
+  const testConsole = () => {
+    console.log(selectedColor,'selected Color');
+    console.log(selectedQuantity,'selected Quantity')
+    console.log(prices[0].saleDescription)
+  }
+
   return (
     <div className="scrollable-left">
       <div className="leftside">
@@ -43,24 +65,38 @@ const LeftSide = ({ data }) => {
           </div>
         </div>
         <div className="about-product">
-          <div className="product-code">{initial.bpCatalogNumber}</div>
+          <div className="product-code">
+            {" "}
+            {prices?.[0]?.bpCatalogNumber ?? "----"}
+          </div>
           <div className="product-price">
-            <div className="product-name">{values.itemDescription}</div>
+            <div className="product-name"> {data.itemDescription}</div>
             <div>
-              {values.currency.symbol} {initial.grossPrice}
+              {console.log(prices, "prices")}
+              {data.currency.symbol}{prices.length > 0 ? prices[0].grossPrice || "N/A API" : "--"}
             </div>
           </div>
-          <div className="product-desc">{initial.saleDescription}</div>
+          <div className="product-desc">
+            {prices?.[0]?.saleDescription ?? ""}
+          </div>
         </div>
 
         <div className="color-description">
           <div className="color-desc-title">
             Please Select Color Description
           </div>
-          {uniqueColor.map((item, id) => (
-            <Button className="select-color-btn">
-              {item.colorDescription}
-            </Button>
+          {uniqueColors.map((variant, id) => (
+            <button
+              key={variant.colorDescription}
+              className={`color-btn ${
+                variant.colorDescription === selectedColor
+                  ? "selected"
+                  : "not-selected"
+              }`}
+              onClick={() => handleColorClick(variant.colorDescription)}
+            >
+              {variant.colorDescription}
+            </button>
           ))}
         </div>
 
@@ -68,10 +104,18 @@ const LeftSide = ({ data }) => {
           <div className="color-desc-title">
             Please Select Packaging Description
           </div>
-          {uniqueVariants.map((item, id) => (
-            <Button className="select-color-btn">
-              {item.packingDescription}
-            </Button>
+          {availableQuantities.map((variant, id) => (
+            <button
+              key={variant.packingDescription}
+              className={`quantity-btn ${
+                variant.packingDescription === selectedQuantity
+                  ? "selected"
+                  : "not-selected"
+              }`}
+              onClick={() => handleQuantityClick(variant.packingDescription)}
+            >
+              {variant.packingDescription}
+            </button>
           ))}
         </div>
 
@@ -84,19 +128,18 @@ const LeftSide = ({ data }) => {
           <Form.Check
             type="checkbox"
             label="Need urgent order"
-            checked={isChecked}
-            onChange={handleCheckboxChange}
+            // checked={isChecked}
+            // onChange={handleCheckboxChange}
           />
         </Form>
 
         <div className="add-div-btn">
-          <Button className="add-product-button">Add</Button>
+          <Button className="add-product-button" onClick={testConsole}>Add</Button>
         </div>
       </div>
     </div>
   );
-};
-
+}
 
 //-----------THIS IS WORKING CODE
 // const LeftSide = ({ data }) => {
