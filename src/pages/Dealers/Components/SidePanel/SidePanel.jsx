@@ -4,7 +4,7 @@ import { Button, Offcanvas } from "react-bootstrap";
 import LeftSide from "../LeftSide/LeftSide";
 import RightSide from "../RightSide/RightSide";
 
-const SidePanel = ({ show, setShowPanel }) => {
+const SidePanel = ({ show, setShowPanel, data }) => {
   return (
     <div className="sidepanel">
       <Offcanvas
@@ -21,7 +21,7 @@ const SidePanel = ({ show, setShowPanel }) => {
           have chosen. Like, text, images, lists, etc. */}
           <div className="divided-div">
             <div className="div-1">
-                <LeftSide/>
+                <LeftSide data={data}/>
             </div>
             <div className="vertical-line"></div>
             <div className="div-2">

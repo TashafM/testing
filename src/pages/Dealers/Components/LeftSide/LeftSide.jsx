@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import "./leftside.scss";
 import mainproduct from "../../../../assets/images/mainproduct.png";
 import wishlist from "../../../../assets/images/wishlist.svg";
+import img600 from "../../../../assets/images/600x600pix(300dpi).png";
 
 import { Button, Form, FormControl, InputGroup } from "react-bootstrap";
 
-const LeftSide = () => {
+const LeftSide = ({ data }) => {
+  const [variant, setVariant] = useState(data.variants);
+  const [initial, setInitial] = useState(variant[0]);
   const [isChecked, setIsChecked] = useState(false);
+
+  const [values, setValues] = useState(data);
 
   const handleCheckboxChange = (e) => {
     setIsChecked(e.target.checked);
@@ -17,49 +22,52 @@ const LeftSide = () => {
         <div className="title">Konica Chrome</div>
         <div className="image-div">
           <div className="sub-images">
-            <div className="toggle-img"><img src={mainproduct} alt="" /></div>
-            <div className="toggle-img"><img src={mainproduct} alt="" /></div>
-            <div className="toggle-img"><img src={mainproduct} alt="" /></div>
+            <div className="toggle-img">
+              <img src={mainproduct} alt="" />
+            </div>
+            <div className="toggle-img">
+              <img src={mainproduct} alt="" />
+            </div>
+            <div className="toggle-img">
+              <img src={mainproduct} alt="" />
+            </div>
           </div>
-          <img src={mainproduct} alt="" />
-          <div className="wish-list"><img src={wishlist} alt="" /></div>
+          <img src={img600} alt="" className="main-img" />
+          <div className="wish-list">
+            <img src={wishlist} alt="" />
+          </div>
         </div>
         <div className="about-product">
-          <div className="product-code">#000789</div>
+          <div className="product-code">{initial.bpCatalogNumber}</div>
           <div className="product-price">
-            <div>Konica Chrome</div>
-            <div>$300</div>
+            <div className="product-name">{values.itemDescription}</div>
+            <div>
+              {values.currency.symbol} {initial.grossPrice}
+            </div>
           </div>
-          <div className="product-desc">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusm od tempor incididunt ut labore et dolore ent, sunt in culpa
-            qui officia deserunt mollit anim id est laborum.
-          </div>
+          <div className="product-desc">{initial.saleDescription}</div>
         </div>
 
         <div className="color-description">
           <div className="color-desc-title">
             Please Select Color Description
           </div>
-          <Button className="select-color-btn">Cyan color</Button>
-          <Button className="select-color-btn">Bluish Magenta Color</Button>
-          <Button className="select-color-btn">Lemon Yellow Color</Button>
-          <Button className="select-color-btn">Black Color</Button>
+          {variant.map((item, id) => (
+            <Button className="select-color-btn">
+              {item.colorDescription}
+            </Button>
+          ))}
         </div>
 
         <div className="color-description">
           <div className="color-desc-title">
             Please Select Packaging Description
           </div>
-          <Button className="select-color-btn">RNB 1 Liter</Button>
-          <Button className="select-color-btn">
-            5 Liter Bottle AK-RCT (467A)
-          </Button>
-          <Button className="select-color-btn">NM 1 Liter</Button>
-          <Button className="select-color-btn">
-            1 Liter Round XT 45 Bottle
-          </Button>
-          <Button className="select-color-btn">5 Ltr RIB Can</Button>
+          {variant.map((item, id) => (
+            <Button className="select-color-btn">
+              {item.packingDescription}
+            </Button>
+          ))}{" "}
         </div>
 
         <div className="quantity-input">
