@@ -22,41 +22,6 @@ const AllProducts = () => {
 
   const [active, setActive] = useState(0);
 
-  //     .post(
-  //       API.VIEW_DEALER_PRODUCT_CATEGORY,
-  //       { principalCompanyUserCode },
-  //       {
-  //         headers: { Authorization: `Bearer ${accessToken}` },
-  //       }
-  //     )
-  //     .then((res) => {
-  //       setcategory(res.result);
-  //       setSelectedCategory(res.result[0].categoryId).then(()=>{
-  //         axiosInstance.post(API.VIEW_DEALER_PRODUCT_SUBCATEGORY)
-  //       })
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
-  // useEffect(() => {
-  //   fetchCategory();
-
-  // }, [dealersLogo]);
-
-  //------------------------------------------------------------------------------------------SUB CATEGORY
-  // const [subCat, setSubCat] = useState([]);
-
-  // const subCategory = () => {
-  //   axiosInstance
-  //     .post(API.VIEW_DEALER_PRODUCT_SUBCATEGORY, {
-  //       principalCompanyUserCode,
-  //       categoryId: selectedCategory,
-  //     })
-  //     .then((res) => {
-  //       setSubCat(res.result)
-  //     })
-  // };
-
   useEffect(() => {
     const principalCompanyUserCode = localStorage.getItem(
       "principalCompanyUserCode"
@@ -79,13 +44,18 @@ const AllProducts = () => {
     fetchData();
   }, []);
 
-  const chng = async (id,idx) => {
-    setActive(idx)
+  const chng = async (id, idx) => {
+    setActive(idx);
     const api2 = await axiosInstance.post(API.VIEW_DEALER_PRODUCT_SUBCATEGORY, {
       principalCompanyUserCode,
       categoryId: id,
     });
     setSubCategory(api2.result);
+  };
+
+  const seeProducts = (itm) => {
+    const {categoryId, subCategoryId} = itm;
+    navigate('/dealers/all-products/products', { state: { categoryId, subCategoryId } });
   };
 
   return (
@@ -108,7 +78,7 @@ const AllProducts = () => {
                     })`,
                     backgroundSize: "cover",
                   }}
-                  onClick={() => chng(item.categoryId,id)}
+                  onClick={() => chng(item.categoryId, id)}
                 >
                   {item.categoryName}
                 </div>
@@ -118,8 +88,8 @@ const AllProducts = () => {
             <hr />
 
             <div>
-              {subCategory.map((item) => (
-                <div className="sub-category-div">
+              {subCategory.map((item,id) => (
+                <div className="sub-category-div" onClick={()=>seeProducts(item)} key={id}>
                   <div className="image-div">
                     <img src={item.subCategoryImageURL} alt="" />
                   </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router";
 import TopBar from "../../../Components/TopBar/TopBar";
@@ -7,11 +7,33 @@ import { superItems } from "../../../data";
 import SidePanel from "../../../Components/SidePanel/SidePanel";
 import { GlobalSidePanel } from "../../../Dealers";
 import wishList from "../../../../../assets/images/wishlist.svg";
+import { API } from "../../../../../helper/API";
+import { axiosInstance } from "../../../../../helper/axios";
 
 const Products = () => {
   const { showPanel, setShowPanel } = useContext(GlobalSidePanel);
   const location = useLocation();
-  const [currentId, setCurrentId] = useState(location.state.id);
+  const [products, setProducts] = useState([]);
+  // const [currentId, setCurrentId] = useState(location.state.id);
+
+  useEffect(() => {
+    const { categoryId, subCategoryId } = location.state;
+    const principalCompanyUserCode = localStorage.getItem(
+      "principalCompanyUserCode"
+    );
+    // console.log(categoryId, subCategoryId, principalCompanyUserCode, 'tashaf')
+
+    const fetchProducts = async () => {
+      const api1 = await axiosInstance.post(API.VIEW_DEALER_PRODUCTS, {
+        principalCompanyUserCode,
+        categoryId,
+        subCategoryId,
+      });
+      setProducts(api1.result);
+      console.log(api1.result, "all products");
+    };
+    fetchProducts();
+  }, []);
 
   return (
     <>
@@ -19,30 +41,23 @@ const Products = () => {
         <TopBar title={"All Products"} goback={true} />
 
         <Row className="products-row">
-          {superItems.map((item) =>
-            item.subItems.map((val) =>
-              val.id == currentId
-                ? val.products.map((itm) => (
-                    <Col className="products-container col-lg-4">
-                      <div
-                        className="img-category-main"
-                        // style={{ backgroundImage: `url(${itm.image})`, backgroundRepeat: 'no-repeat' }}
-                        onClick={() => setShowPanel(true)}
-                      >
-                        <div className="wish-list-icon">
-                          <img src={wishList} alt="" />
-                        </div>
-                        <div className="product-img">
-                          <img src={itm.image} alt="" />
-                        </div>
-                        <div className="title">{itm.pname}</div>
-                        <div className="description">{itm.desc}</div>
-                      </div>
-                    </Col>
-                  ))
-                : ""
-            )
-          )}
+          {products.map((itm, id) => (
+            <Col className="products-container col-lg-4">
+              <div
+                className="img-category-main"
+                onClick={() => setShowPanel(true)}
+              >
+                <div className="wish-list-icon">
+                  <img src={wishList} alt="" />
+                </div>
+                <div className="product-img">
+                  <img src={itm.productImages[0]} alt="" />
+                </div>
+                <div className="title">{itm.itemDescription}</div>
+                <div className="description">{itm.itemDescription}</div>
+              </div>
+            </Col>
+          ))}
         </Row>
         <SidePanel show={showPanel} setShowPanel={setShowPanel} />
       </div>
@@ -51,10 +66,11 @@ const Products = () => {
           {superItems.map((item) =>
             item.subItems.map((subitem) => (
               <div
-                className={
-                  currentId == subitem.id ? "brand-div active-div" : "brand-div"
-                }
-                onClick={() => setCurrentId(subitem.id)}
+                // className={
+                //   currentId == subitem.id ? "brand-div active-div" : "brand-div"
+                // }
+                // onClick={() => setCurrentId(subitem.id)}
+                className={"brand-div"}
               >
                 <img src={subitem.subImg} />
               </div>
