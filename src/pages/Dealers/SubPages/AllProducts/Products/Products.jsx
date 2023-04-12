@@ -15,6 +15,7 @@ import img1000 from "../../../../../assets/images/1000x1000pix(300dpi).png";
 
 import { API } from "../../../../../helper/API";
 import { axiosInstance } from "../../../../../helper/axios";
+import Category from "../Category/Category";
 
 const Products = () => {
   const { showPanel, setShowPanel } = useContext(GlobalSidePanel);
@@ -75,6 +76,8 @@ const Products = () => {
           ))}
         </Row>
         <SidePanel show={showPanel} setShowPanel={setShowPanel} data={data}/>
+
+        {/* <Category/> */}
       </div>
       <div className="bottom-strip">
         <div className="bottom-brands">
@@ -91,6 +94,7 @@ const Products = () => {
               </div>
             ))
           )}
+
         </div>
       </div>
     </>
