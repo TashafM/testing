@@ -177,7 +177,7 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                 ) : null}
                 <BtnTitleCenter
                   type="submit"
-                  title={"Send request"}
+                  title={"Save"}
                   disabled={show.type === "Edit" ? editLoading : loading}
                   loading={show.type === "Edit" ? editLoading : loading}
                 />
