@@ -1,0 +1,118 @@
+.dealers-main-container {
+  position: relative;
+  .dealers-scroll-container {
+    height: 59vh;
+    overflow: auto;
+    position: relative;
+
+    &::-webkit-scrollbar {
+      width: 0.2em;
+      height: 0.2em;
+      background-color: #f5f5f5;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #899197;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: #f5f5f5;
+    }
+
+    thead {
+      position: sticky;
+      top: 0;
+      width: 77%;
+      background: #f7f7f7;
+    }
+    .dealer-table-head,
+    .table-body-container {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .dealer-table-head {
+      th {
+        font-size: 14px;
+        font-weight: 500;
+        color: #899197;
+        padding: 15px;
+        background-color: #f7f7f7;
+        z-index: 1;
+      }
+    }
+    .table-body-container {
+      td {
+        padding: 30px 20px;
+        font-size: 18px;
+        font-weight: 500;
+        background-color: white;
+        // min-width: 170px !important;
+        min-width: 165px !important;
+        width: 100% !important;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1600px) {
+  .dealers-main-container {
+    .dealers-scroll-container {
+      height: 52vh !important;
+
+      .table-body-container {
+        td {
+          font-size: 16px;
+          padding: 20px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .dealers-main-container {
+    .dealers-scroll-container {
+      .table-body-container {
+        td {
+          font-size: 14px;
+          padding: 15px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-height: 760px) {
+  .dealers-main-container {
+    .dealers-scroll-container {
+      height: 50vh !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .dealers-main-container {
+    .dealers-scroll-container {
+      .dealer-table-head {
+        th {
+          font-size: 12px !important;
+        }
+      }
+      .table-body-container {
+        td {
+          font-size: 12px !important;
+          padding: 12px !important;
+          min-width: 120px !important;
+        }
+      }
+    }
+  }
+}
+
+@media (min-height: 1100px) {
+  .dealers-main-container {
+    .dealers-scroll-container {
+      height: 60vh !important;
+    }
+  }
+}

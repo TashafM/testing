@@ -44,6 +44,7 @@ import Products from "../pages/Dealers/SubPages/AllProducts/Products/Products";
 import ProtectedRoutes from "../components/ProtectedRoutes/ProtectedRoutes";
 import DealerCurrentOrder from "../pages/Dealers/SubPages/Orders/DealerCurrentOrder";
 import DealerPastOrder from "../pages/Dealers/SubPages/Orders/DealerPastOrder";
+import DealerOrderDetails from "../pages/Dealers/SubPages/Orders/DealerOrderDetails";
 // import About from "../pages/About/";
 // import Contact from "./Contact";
 
@@ -97,6 +98,7 @@ const Routing = () => (
         <Route path="orders" element={<DealerOrders />}>
           <Route index element={<DealerCurrentOrder />} />
           <Route path="past-order" element={<DealerPastOrder />} />
+          <Route path="detail" element={<DealerOrderDetails />} />
         </Route>
         <Route path="favorites" element={<Favorites />} />
         <Route path="new-arrival" element={<NewArrival />} />

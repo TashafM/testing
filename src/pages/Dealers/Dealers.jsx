@@ -21,52 +21,55 @@ const Dealers = () => {
   // console.log(testData,'testDAta')
   const location = useLocation();
   const dealersDashboard = `/dealers/dashboard`;
+  const orderPath = "/dealers/orders";
   const [isEmpty, setIsEmpty] = useState(true);
 
   //--------------FOR SIDE PANEL OPENING----------------
   const [showPanel, setShowPanel] = useState(false);
   return (
     <>
-        <GlobalSidePanel.Provider value={{ showPanel, setShowPanel }}>
-          <AddProducts.Provider value={{ isEmpty, setIsEmpty }}>
-            <div className="homepage dealers-homepage">
-              <div className="forDesktop">
-                <NavbarTop dealers={true} />
-              </div>
-              <div className="forTablets">
-                <TabletNavbar dealers={true} />
-              </div>
-              <div className="tablet-menu">
-                <TabMenus tabs={tabletMenuDealers} />
-              </div>
-              <div className="row">
-                <div className="col-xl-2 menu-list">
-                  <div className="sub-menu-list">
-                    <Menus tabs={dealerMenu} marginTop={true} />
-                  </div>
+      <GlobalSidePanel.Provider value={{ showPanel, setShowPanel }}>
+        <AddProducts.Provider value={{ isEmpty, setIsEmpty }}>
+          <div className="homepage dealers-homepage">
+            <div className="forDesktop">
+              <NavbarTop dealers={true} />
+            </div>
+            <div className="forTablets">
+              <TabletNavbar dealers={true} />
+            </div>
+            <div className="tablet-menu">
+              <TabMenus tabs={tabletMenuDealers} />
+            </div>
+            <div className="row">
+              <div className="col-xl-2 menu-list">
+                <div className="sub-menu-list">
+                  <Menus tabs={dealerMenu} marginTop={true} />
                 </div>
-                <div
-                  className={
-                    location.pathname == dealersDashboard
-                      ? `col-xl-10 col-lg-12 content-area`
-                      : `col-xl-7 col-lg-8 content-area`
-                  }
-                >
-                  <Outlet name="alkjaljfsa" />
-                </div>
-                <div
-                  className={
-                    location.pathname == dealersDashboard
-                      ? "dontShow"
-                      : "col-xl-3 col-lg-4 newnew"
-                  }
-                >
-                  <ProductCart />
-                </div>
+              </div>
+              <div
+                className={
+                  location.pathname == dealersDashboard ||
+                  location.pathname.includes(orderPath)
+                    ? `col-xl-10 col-lg-12 content-area`
+                    : `col-xl-7 col-lg-8 content-area`
+                }
+              >
+                <Outlet name="alkjaljfsa" />
+              </div>
+              <div
+                className={
+                  location.pathname == dealersDashboard ||
+                  location.pathname.includes(orderPath)
+                    ? "dontShow"
+                    : "col-xl-3 col-lg-4 newnew"
+                }
+              >
+                <ProductCart />
               </div>
             </div>
-          </AddProducts.Provider>
-        </GlobalSidePanel.Provider>
+          </div>
+        </AddProducts.Provider>
+      </GlobalSidePanel.Provider>
       <div className="mobile-not-supported">
         <MobileNotSupported />
       </div>
