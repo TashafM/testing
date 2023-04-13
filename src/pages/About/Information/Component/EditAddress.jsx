@@ -101,22 +101,22 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                   />
                 </div>
 
-                <PlaceAutoComplete
+                {/* <PlaceAutoComplete
                   apiKey={"AIzaSyAROpxxRmrXiah-FooutbY7rmY1m8HnucQ"}
                   onPlaceSelected={(place) => {
                     console.log(place);
                   }}
-                />
+                /> */}
                 <div className="input-wrapper">
                   <TextInput
-                    name="officeName"
+                    name="floorNumber"
                     value={values.floorNumber}
                     onChange={(e) => {
                       !makeApiCall && setMakeApiCall(true);
                       setFieldValue("floorNumber", e.target.value);
                     }}
-                    placeholder="Enter your Floor Number / Block no / Office Name"
-                    label={"Floor Number / Block no / Office Name*"}
+                    placeholder="House No.  / Building No. / Floor*"
+                    label={"House No.  / Building No. / Floor*"}
                     error={touched.floorNumber && errors.floorNumber}
                   />
                 </div>
@@ -129,7 +129,7 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                       setFieldValue("block", e.target.value);
                     }}
                     placeholder="Enter your Area / block"
-                    label={"Area / block*"}
+                    label={"Block (Optional)"}
                     error={touched.block && errors.block}
                   />
                 </div>
@@ -141,8 +141,8 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                       !makeApiCall && setMakeApiCall(true);
                       setFieldValue("street", e.target.value);
                     }}
-                    placeholder="Enter your street / City"
-                    label={"Block (optional)"}
+                    placeholder="Enter your street"
+                    label={"Street*"}
                     error={touched.street && errors.street}
                   />
                 </div>
@@ -211,7 +211,30 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                     label={"Google Places Location"}
                   />
                 </div>
+                {
+                  // fullName: data?.fullName ?? "",
+                  // floorNumber: data?.floorNumber ?? "",
+                  // block: data?.block ?? "",
+                  // street: data?.street ?? "",
+                  // city: data?.city ?? "",
+                  // state: data?.state ?? "",
+                  // zipCode: data?.zipCode ?? "",
+                  // googlePlace: "",
+                  // country: data.country ?? "",
 
+                  errors?.fullName ||
+                  errors?.floorNumber ||
+                  errors?.street ||
+                  errors?.city ||
+                  errors?.state ||
+                  errors?.zipCode ||
+                  errors?.country ? (
+                    <p className="validation-error">
+                      Error: Invalid input parameters. Please check your input
+                      and try again.
+                    </p>
+                  ) : null
+                }
                 <BtnTitleCenter
                   type="submit"
                   title={"Save"}

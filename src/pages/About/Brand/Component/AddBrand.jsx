@@ -7,6 +7,7 @@ import usePostBrand from "../hooks/usePostBrand";
 import useEditBrandPatch from "../hooks/useEditBrandPatch";
 import { Offcanvas } from "react-bootstrap";
 import DrawerHead from "../../Information/Component/DrawerHead";
+import schema from "../../../../helper/validation/schema";
 
 function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
   const formRef = useRef();
@@ -94,25 +95,13 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
           description="Write down the company’s sales reach, services & support and
           interested to purchase"
         />
-
-        {/* <Offcanvas.Header closeButton>
-          <Offcanvas.Title>
-            <div className="team-member-add">{show.type} Brands</div>
-          </Offcanvas.Title>
-        </Offcanvas.Header> */}
         <div>
           <Formik
             initialValues={initialValues}
             innerRef={formRef}
             onSubmit={submitHandler}
-            // validationSchema={schema.createBrand}
-            render={({
-              handleSubmit,
-              errors,
-              values,
-              setFieldValue,
-              touched,
-            }) => (
+            validationSchema={schema.createBrand}
+            render={({ errors, values, setFieldValue, touched }) => (
               <Form className="">
                 <div className="input-wrapper">
                   <File
@@ -137,15 +126,14 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                 </div>
                 <div className="input-wrapper">
                   <TextInput
-                    name="location*"
+                    name="location"
                     value={values.location}
                     onChange={(e) => {
                       !makeApiCall && setMakeApiCall(true);
                       setFieldValue("location", e.target.value);
                     }}
                     error={touched.location && errors.location}
-                    // placeholder="eg. Sales Team"
-                    label="Location"
+                    label="Location*"
                   />
                 </div>
                 <div className="input-wrapper">
@@ -157,7 +145,6 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                       setFieldValue("username", e.target.value);
                     }}
                     error={touched.username && errors.username}
-                    // placeholder="eg. Sales Team"
                     label="Username"
                   />
                   <p className="tagging-text m-0">For tagging purpose</p>
@@ -175,7 +162,12 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                   />
                   <p className="tagging-text m-0">For tagging purpose</p>
                 </div>
-
+                {errors?.brnadName || errors?.location ? (
+                  <p className="validation-error">
+                    Error: Invalid input parameters. Please check your input and
+                    try again.
+                  </p>
+                ) : null}
                 <BtnTitleCenter
                   type="submit"
                   title={"Send request"}

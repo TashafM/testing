@@ -3,7 +3,6 @@ import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import TextInput from "../../../../components/Input/TextInput";
 import "./styles.scss";
 import { Formik, Form } from "formik";
-import PhoneNumber from "../../../../components/Input/PhoneNumber";
 import TextArea from "../../../../components/Input/TextArea";
 import schema from "../../../../helper/validation/schema";
 import { usePostAsyncResponse } from "../../../../hooks/usePostAsyncResponse";
@@ -127,7 +126,7 @@ function EditContacts() {
                 name="contact"
                 value={values.contact}
                 onChange={(e) => {
-                  const reg = new RegExp("^[0-9]*$");
+                  // const reg = new RegExp("^[0-9]*$");
                   !makeApiCall && setMakeApiCall(true);
 
                   // if (e.target.value.match(reg) || e.target.value === "+") {
@@ -177,7 +176,10 @@ function EditContacts() {
                 city, pin code."
               />
             </div>
-            {error.error || errorPatch.error ? (
+            {errors?.address ||
+            errors?.email ||
+            errors?.contact ||
+            errors?.title ? (
               <p className="validation-error">
                 Error: Invalid input parameters. Please check your input and try
                 again.
