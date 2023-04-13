@@ -2,10 +2,7 @@ import React from "react";
 import ScrollBtn from "../../../../../../components/ScrollBtn/ScrollBtn";
 import { Table } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {
-  delalersCurrentOrderColumn,
-  delalersCurrentOrderData,
-} from "../../../../../About/data/data";
+
 import { useNavigate } from "react-router-dom";
 import "./tables.scss";
 
