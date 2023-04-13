@@ -17,7 +17,9 @@ function FAQ() {
 
   const { data, loading } = useResponse("/portalViewCompanyFaqs");
 
-  const [postData, { error }] = usePostAsyncResponse("/portalPostCompanyFaqs");
+  const [postData, { error, loading: loadingFaq }] = usePostAsyncResponse(
+    "/portalPostCompanyFaqs"
+  );
 
   useEffect(() => {
     setFAQ(data);
@@ -66,9 +68,8 @@ function FAQ() {
             type={"FAQ"}
             btnTitle="Create more FAQ"
             emptyadta={{ question: "", answer: "" }}
-          >
-            <EditFAQ close={() => setShowModal(false)} />
-          </ModalComponent>
+            loading={loadingFaq}
+          />
         )}
       </div>
     );
@@ -77,7 +78,7 @@ function FAQ() {
   return (
     <Fragment>
       <div className="d-flex faq-title">
-        Frequently Asked Questions <BtnIconOnly onClick={HandleOpenModal} />{" "}
+        Frequently Asked Questions <BtnIconOnly onClick={HandleOpenModal} />
       </div>
       {getFAQ.map((item, index) => {
         return (
@@ -99,9 +100,8 @@ function FAQ() {
           type={"FAQ"}
           btnTitle="Create more FAQ"
           emptyadta={{ question: "", answer: "" }}
-        >
-          <EditFAQ close={() => setShowModal(false)} />
-        </ModalComponent>
+          loading={loadingFaq}
+        />
       )}
     </Fragment>
   );

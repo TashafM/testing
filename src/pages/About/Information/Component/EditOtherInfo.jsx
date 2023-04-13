@@ -144,6 +144,7 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
             <BtnTitleCenter
               title={"Save"}
               loading={loading}
+              disabled={loading}
               onClick={onUpdateData}
             />
           </div>

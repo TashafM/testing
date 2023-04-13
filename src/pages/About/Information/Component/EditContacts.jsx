@@ -187,6 +187,7 @@ function EditContacts() {
             ) : null}
             <BtnTitleCenter
               loading={loading || editLoading}
+              disabled={loading}
               type="submit"
               title={"Save"}
             />

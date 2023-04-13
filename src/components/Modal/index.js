@@ -15,7 +15,8 @@ function ModalComponent({
   title,
   children,
   editSaveCallback,
-  btntitle,
+  btnTitle,
+  loading,
   type,
 }) {
   const [Data, setData] = useState(data ?? []);
@@ -47,7 +48,12 @@ function ModalComponent({
           <div className="d-flex justify-content-between align-items-center modal-header-faq ">
             <p className="modal-title">{title}</p>
             <div className="d-flex justify-content-center btn-save-container  align-items-center me-2">
-              <BtnTitleCenter onClick={onSaveData} title="Save" />
+              <BtnTitleCenter
+                loading={loading}
+                disabled={loading}
+                onClick={onSaveData}
+                title="Save"
+              />
               <img
                 src={cross}
                 alt="icon-cross"
@@ -91,7 +97,7 @@ function ModalComponent({
 
           <div className="default-height d-flex align-items-center justify-content-center btn-add-more">
             <BtnTitleIcon
-              title="Create more FAQ"
+              title={btnTitle}
               onClick={() => {
                 const arr = [...Data];
                 arr.push({ ...empty });

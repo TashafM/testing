@@ -22,7 +22,7 @@ function CardBrand({ item, location, onClick, onDelete, index }) {
         </div>
 
         <p className="title-brand m-0">{item.brandName}</p>
-        <p className="m-0 email">{"Mumbai"}</p>
+        <p className="m-0 email">{item.brandLocation?.city ?? ""}</p>
       </div>
       <div className="text-end">
         <BtnIconOnly icon={deleteBtn} onClick={() => onDelete(item, index)} />

@@ -176,7 +176,12 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
             })}
           </div>
 
-          <BtnTitleCenter title={"SAVE"} onClick={sendHOO} loading={loading} />
+          <BtnTitleCenter
+            disabled={loading}
+            title={"SAVE"}
+            onClick={sendHOO}
+            loading={loading}
+          />
         </div>
       </div>
     </Offcanvas>

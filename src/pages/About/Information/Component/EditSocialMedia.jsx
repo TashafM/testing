@@ -147,6 +147,7 @@ function EditSocialMedia({ show, handleClose, data, onUpdate, completeData }) {
                 <BtnTitleCenter
                   type="submit"
                   loading={loading}
+                  disabled={loading}
                   title={"Save"}
                 />
               </Form>

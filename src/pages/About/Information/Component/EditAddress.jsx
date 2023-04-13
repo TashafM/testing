@@ -198,47 +198,23 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                     label={"Zip Code*"}
                   />
                 </div>
-                <div className="input-wrapper">
-                  <TextInput
-                    name="Google Places Location"
-                    value={values.googlePlace}
-                    onChange={(e) => {
-                      !makeApiCall && setMakeApiCall(true);
-                      setFieldValue("Google Places Location", e.target.value);
-                    }}
-                    error={touched.googlePlace && errors.googlePlace}
-                    placeholder="Enter your Google Places Location"
-                    label={"Google Places Location"}
-                  />
-                </div>
-                {
-                  // fullName: data?.fullName ?? "",
-                  // floorNumber: data?.floorNumber ?? "",
-                  // block: data?.block ?? "",
-                  // street: data?.street ?? "",
-                  // city: data?.city ?? "",
-                  // state: data?.state ?? "",
-                  // zipCode: data?.zipCode ?? "",
-                  // googlePlace: "",
-                  // country: data.country ?? "",
-
-                  errors?.fullName ||
-                  errors?.floorNumber ||
-                  errors?.street ||
-                  errors?.city ||
-                  errors?.state ||
-                  errors?.zipCode ||
-                  errors?.country ? (
-                    <p className="validation-error">
-                      Error: Invalid input parameters. Please check your input
-                      and try again.
-                    </p>
-                  ) : null
-                }
+                {errors?.fullName ||
+                errors?.floorNumber ||
+                errors?.street ||
+                errors?.city ||
+                errors?.state ||
+                errors?.zipCode ||
+                errors?.country ? (
+                  <p className="validation-error">
+                    Error: Invalid input parameters. Please check your input and
+                    try again.
+                  </p>
+                ) : null}
                 <BtnTitleCenter
                   type="submit"
                   title={"Save"}
                   loading={loading}
+                  disabled={loading}
                 />
               </Form>
             )}

@@ -15,7 +15,7 @@ const ConfirmBox = ({
         <div>
           <div className="confirm-overlay"></div>
           <div className="confirm-box">
-            {msg}
+            <p>{msg}</p>
             <div className="popup-btn">
               <Button className="cancel" onClick={cancelFunction}>
                 {cancelBtn}

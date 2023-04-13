@@ -27,7 +27,7 @@ function Description() {
           Verify Company
         </a>
       </div>
-      <div className="discription-cont">
+      {/* <div className="discription-cont">
         <p className="comp-discription mb-0">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -39,7 +39,7 @@ function Description() {
             setOpenDrawer({ open: true, type: "Edit", title: "Edit" });
           }}
         />
-      </div>
+      </div> */}
     </div>
   );
 }

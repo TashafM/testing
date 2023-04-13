@@ -23,7 +23,7 @@ const schema = {
   }),
 
   createBrand: Yup.object({
-    brandName: Yup.string().required("brand name is require"),
+    brandName: Yup.string().required("brand name is required"),
     location: Yup.string().required("location is required"),
   }),
 };

@@ -58,6 +58,7 @@ function EditStatement({ show, handleClose, data, onUpdate, completeData }) {
               title="Save"
               type="button"
               loading={loading}
+              disabled={loading}
               onClick={onSaveStatement}
             />
           </div>

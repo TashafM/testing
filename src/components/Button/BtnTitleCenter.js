@@ -10,6 +10,7 @@ function BtnTitleCenter({
   disabled = false,
   loading = false,
   className = "",
+  ...rest
 }) {
   return (
     <div>

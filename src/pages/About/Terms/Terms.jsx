@@ -15,7 +15,7 @@ function Terms() {
 
   const { data, loading } = useResponse("/portalViewCompanyTermsConditions");
 
-  const [postData, { error }] = usePostAsyncResponse(
+  const [postData, { error, loading: loadingTerms }] = usePostAsyncResponse(
     "/portalPostCompanyTermsConditions"
   );
 
@@ -62,17 +62,16 @@ function Terms() {
         />
         {showModal && (
           <ModalComponent
-            title="Frequently Asked Questions"
+            title="Terms & Conditions"
             show={showModal}
             close={() => setShowModal(false)}
             data={termCondition}
             editSaveCallback={editSaveCallback}
             type={"Term & Condition"}
-            btntitle="Add more topics"
+            btnTitle="Add more topics"
             emptyadta={{ title: "", content: "" }}
-          >
-            {/* <EditFAQ close={() => setShowModal(false)} /> */}
-          </ModalComponent>
+            loading={loadingTerms}
+          />
         )}
       </div>
     );
@@ -85,17 +84,16 @@ function Terms() {
       </div>
       {showModal && (
         <ModalComponent
-          title="Frequently Asked Questions"
+          title="Terms & Conditions"
           show={showModal}
           close={() => setShowModal(false)}
           data={termCondition}
           editSaveCallback={editSaveCallback}
           type={"Term & Condition"}
-          btntitle="Add more topics"
+          btnTitle="Add more topics"
           emptyadta={{ title: "", content: "" }}
-        >
-          {/* <EditTerm close={() => setShowModal(false)} /> */}
-        </ModalComponent>
+          loading={loadingTerms}
+        />
       )}
       <ContentPrivacy data={termCondition} />
     </div>

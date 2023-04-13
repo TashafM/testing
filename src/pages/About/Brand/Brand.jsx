@@ -73,7 +73,7 @@ function Brand() {
                   }, [500]);
                 }}
                 data={item}
-                location={item.location}
+                location={item.brandLocation?.city ?? ""}
               />
             </div>
           );

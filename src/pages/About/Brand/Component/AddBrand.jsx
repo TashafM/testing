@@ -13,6 +13,7 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
   const formRef = useRef();
   const [file, setFile] = useState([]);
   const [makeApiCall, setMakeApiCall] = useState(false);
+  const [fileError, setFileError] = useState("");
 
   const { postData, loading } = usePostBrand("/portalAddCompanyBrands");
   const { postData: editBrnad, loading: editLoading } = useEditBrandPatch(
@@ -26,49 +27,54 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
   }, [data?.brandLogoURL, data, show.type]);
 
   const submitHandler = async (values, action) => {
-    if (makeApiCall) {
-      const formData = new FormData();
-      const userId = localStorage.getItem("usercode");
+    if (file && file.length) {
+      if (makeApiCall) {
+        const formData = new FormData();
+        const userId = localStorage.getItem("usercode");
 
-      formData.append("brandName", values.brandName);
+        formData.append("brandName", values.brandName);
 
-      formData.append("username", values.username);
-      formData.append("email", values.email);
-      formData.append("brandLocation[state]", "");
-      formData.append("brandLocation[city]", "");
-      formData.append("brandLocation[latitude]", "");
-      formData.append("brandLocation[longitude]", "");
-      formData.append("brandLocation[country]", "");
-      if (show.type === "Edit") {
-        if (file.length && file[0]?.name !== data.brandLogoURL) {
-          // alert(222);
+        formData.append("username", values.username);
+        formData.append("email", values.email);
+        formData.append("brandLocation[state]", "");
+        formData.append("brandLocation[city]", values.location);
+        formData.append("brandLocation[latitude]", "");
+        formData.append("brandLocation[longitude]", "");
+        formData.append("brandLocation[country]", "");
+        if (show.type === "Edit") {
+          if (file.length && file[0]?.name !== data.brandLogoURL) {
+            // alert(222);
+            formData.append("brandLogoURL", file[0]);
+          }
+
+          formData.append("brandId", data.brandId);
+
+          editBrnad(formData, (res) => {
+            onUpdate(res);
+            handleClose();
+          });
+        } else {
+          formData.append("companyUserCode", userId);
+
           formData.append("brandLogoURL", file[0]);
+          postData(formData, (res) => {
+            onUpdate(res);
+            handleClose();
+          });
         }
 
-        formData.append("brandId", data.brandId);
-
-        editBrnad(formData, (res) => {
-          onUpdate(res);
-          handleClose();
-        });
+        action.reset();
       } else {
-        formData.append("companyUserCode", userId);
-
-        formData.append("brandLogoURL", file[0]);
-        postData(formData, (res) => {
-          onUpdate(res);
-          handleClose();
-        });
+        handleClose();
       }
-
-      action.reset();
     } else {
-      handleClose();
+      setFileError("file is required");
     }
   };
 
   const handleChange = (files) => {
     !makeApiCall && setMakeApiCall(true);
+    setFileError("");
     setFile(files);
   };
 
@@ -111,6 +117,7 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                     setFile={setFile}
                     // error={touched.file && errors.file}
                   />
+                  {fileError && <p style={{ color: "red" }}>{fileError}</p>}
                 </div>
                 <div className="input-wrapper">
                   <TextInput
@@ -162,7 +169,7 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                   />
                   <p className="tagging-text m-0">For tagging purpose</p>
                 </div>
-                {errors?.brnadName || errors?.location ? (
+                {errors?.brnadName || errors?.location || file.length ? (
                   <p className="validation-error">
                     Error: Invalid input parameters. Please check your input and
                     try again.
@@ -171,6 +178,7 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                 <BtnTitleCenter
                   type="submit"
                   title={"Send request"}
+                  disabled={show.type === "Edit" ? editLoading : loading}
                   loading={show.type === "Edit" ? editLoading : loading}
                 />
               </Form>
