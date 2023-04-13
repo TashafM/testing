@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import TextInput from "../../../../components/Input/TextInput";
 import EditorInput from "../../../../components/Input/EditorInput";
-import { faqData } from "../../data/data";
 
 function EditFAQ() {
   const [value, setValue] = useState("");
@@ -9,7 +8,7 @@ function EditFAQ() {
 
   return (
     <div>
-      {faqData.map((item, index) => {
+      {[].map((item, index) => {
         return (
           <div style={{ marginTop: index === 0 ? 0 : "40px" }}>
             <TextInput

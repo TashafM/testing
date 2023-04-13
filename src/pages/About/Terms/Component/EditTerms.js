@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import TextInput from "../../../../components/Input/TextInput";
 import EditorInput from "../../../../components/Input/EditorInput";
-import { faqData } from "../../data/data";
-import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import "../Terms.scss";
 
 function EditTerm() {
