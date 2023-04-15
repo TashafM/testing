@@ -3,7 +3,8 @@ import "./itemrow.scss";
 import listproduct from "../../../../assets/images/listproduct.png";
 import x from "../../../../assets/images/x.svg";
 
-const ItemRow = ({ disableDelete, pr20, popupScreen, pName, desc }) => {
+const ItemRow = ({ disableDelete, pr20, popupScreen, data}) => {
+  console.log(data,'from item row')
   return (
     <tr className="right-side-tr">
       <td
@@ -15,16 +16,16 @@ const ItemRow = ({ disableDelete, pr20, popupScreen, pName, desc }) => {
           <img src={listproduct} alt="" />
           <div className="text-desc">
             <div className="product-name">
-              {pName ? pName : "Konica Chrome"}
+              {data.name}
             </div>
             <div className="description">
-              {desc ? desc : "Magenta | 1 L. | RNB"}
+              {data.selectedColor} | {data.saleDescription}
             </div>
           </div>
         </div>
       </td>
-      <td className="quantity">1</td>
-      <td className={pr20 ? "price-padding" : "price"}>₹ 433</td>
+      <td className="quantity">{data.quantity}</td>
+      <td className={pr20 ? "price-padding" : "price"}>{data.totalPrice}</td>
       {!disableDelete && (
         <td className="remove-btn">
           <img src={x} alt="" />
