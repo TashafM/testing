@@ -3,7 +3,8 @@ import "./orderlisttable.scss";
 import { Table } from "react-bootstrap";
 import ItemRow from "../ItemRow/ItemRow";
 
-const OrderListTable = ({ disableDelete }) => {
+const OrderListTable = ({ disableDelete, data }) => {
+  console.log(data, "from orderlisttable");
   return (
     <Table>
       <thead className="header">
@@ -15,23 +16,14 @@ const OrderListTable = ({ disableDelete }) => {
         </tr>
       </thead>
       <tbody className="right-side-body">
-        <ItemRow disableDelete={disableDelete} />
-        <ItemRow disableDelete={disableDelete} />
-        <ItemRow
+        {data.map((item, id) => (
+          <ItemRow disableDelete={disableDelete} data={item}/>
+        ))}
+        {/* <ItemRow
           disableDelete={disableDelete}
           pName={"Konica Chrome Konica Chrome"}
           desc={"Magenta | 1 L. | RNB"}
-        />
-        <ItemRow
-          disableDelete={disableDelete}
-          pName={"Konica Chrome Konica Chrome"}
-          desc={"Magenta | 1 L. | RNB"}
-        />
-        <ItemRow
-          disableDelete={disableDelete}
-          pName={"Konica Chrome Konica Chrome Konica Chrome Konica Chrome "}
-          desc={"Lemon Yellow | 5 L. | AK-RCT Bottle"}
-        />
+        /> */}
       </tbody>
     </Table>
   );

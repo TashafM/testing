@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./sidepanel.scss";
 import { Button, Offcanvas } from "react-bootstrap";
 import LeftSide from "../LeftSide/LeftSide";
 import RightSide from "../RightSide/RightSide";
 
 const SidePanel = ({ show, setShowPanel, data }) => {
+  const [cartProducts ,setCartProducts] = useState([])
   return (
     <div className="sidepanel">
       <Offcanvas
@@ -21,11 +22,11 @@ const SidePanel = ({ show, setShowPanel, data }) => {
           have chosen. Like, text, images, lists, etc. */}
           <div className="divided-div">
             <div className="div-1">
-                <LeftSide data={data}/>
+                <LeftSide data={data} setCartProducts={setCartProducts} cartProducts={cartProducts}/>
             </div>
             <div className="vertical-line"></div>
             <div className="div-2">
-              <RightSide setShowPanel={setShowPanel}/>
+              <RightSide setShowPanel={setShowPanel} cartProducts={cartProducts}/>
             </div>
           </div>
         </Offcanvas.Body>

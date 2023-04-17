@@ -6,9 +6,10 @@ import img600 from "../../../../assets/images/600x600pix(300dpi).png";
 import { uniqBy } from "lodash";
 
 import { Button, Form, FormControl, InputGroup } from "react-bootstrap";
+import { useEffect } from "react";
 
-//---------THIS IS TESTING CODE ----------------------------
-function LeftSide({ data }) {
+// ---------THIS IS TESTING CODE ----------------------------
+function LeftSide({ data, setCartProducts, cartProducts }) {
   const [variants, setVariants] = useState(data.variants);
   const uniqueColors = uniqBy(variants, "colorDescription");
   const firstColor = uniqueColors[0].colorDescription;
@@ -21,13 +22,27 @@ function LeftSide({ data }) {
   const [selectedColor, setSelectedColor] = useState(firstColor);
   const [selectedQuantity, setSelectedQuantity] = useState(firstQuantity);
 
+  const [isValid, setIsValid] = useState(false); // validation for options
+
   const handleColorClick = (color) => {
     setSelectedColor(color);
-    // setSelectedQuantity(null); // clear selected quantity --------------------- *IMPORTANT FOR CLEARING THE VALUE FROM BUTTON*
+    setSelectedQuantity(null); // clear selected quantity --------------------- *IMPORTANT FOR CLEARING THE VALUE FROM BUTTON*
   };
 
   const handleQuantityClick = (quantity) => {
     setSelectedQuantity(quantity);
+  };
+
+  const [productQuantity, setProductQuantity] = useState(1);
+  // const handleQuantity = (e) => {
+  //   setProductQuantity(e.target.value)
+  // }
+
+  const handleQuantity = (e) => {
+    const value = e.target.value;
+    if (!isNaN(value)) {
+      setProductQuantity(value);
+    }
   };
 
   const availableQuantities = variants.filter(
@@ -37,11 +52,46 @@ function LeftSide({ data }) {
     (variant) => variant.packingDescription === selectedQuantity
   );
 
+  // const [cart, setCart] = useState([]);
+
   const testConsole = () => {
-    console.log(selectedColor,'selected Color');
-    console.log(selectedQuantity,'selected Quantity')
-    console.log(prices[0].saleDescription)
-  }
+    // console.log(isValid,'jjjjjjjjjjjj')
+    // if (!isValid) {
+    //   return;
+    // }
+  
+    // const principalCompanyUserCode = localStorage.getItem('pricipalCompanyUserCode')
+    const newItem = {
+      principalCompanyUserCode : localStorage.getItem('principalCompanyUserCode'),
+      variantId: prices[0].variantId,
+      selectedColor: selectedColor,
+      selectedQuantity: selectedQuantity,
+      saleDescription: prices[0].saleDescription,
+      quantity: productQuantity,
+      totalPrice: productQuantity * prices[0].grossPrice,
+      productId: prices[0]._id,
+      name: data.itemDescription,
+    };
+  
+    console.log(newItem,'new item'); // log the new item to check
+  
+    setCartProducts([...cartProducts, newItem]); // push the new item to the cart array
+  };
+
+  //***************************VALIDATION */
+  
+
+  useEffect(() => {
+    if (!productQuantity || !selectedColor || !selectedQuantity) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+  }, [productQuantity, selectedColor, selectedQuantity]);
+  
+  // const testConsole = () => {
+  //   localStorage.setItem('myArr', JSON.stringify(myArr))
+  // };
 
   return (
     <div className="scrollable-left">
@@ -72,8 +122,8 @@ function LeftSide({ data }) {
           <div className="product-price">
             <div className="product-name"> {data.itemDescription}</div>
             <div>
-              {console.log(prices, "prices")}
-              {data.currency.symbol}{prices.length > 0 ? prices[0].grossPrice || "N/A API" : "--"}
+              {data.currency.symbol}
+              {prices.length > 0 ? prices[0].grossPrice || "N/A API" : "--"}
             </div>
           </div>
           <div className="product-desc">
@@ -121,7 +171,11 @@ function LeftSide({ data }) {
 
         <div className="quantity-input">
           <div className="quantity-desc-title">Enter Quantity</div>
-          <FormControl type="text" />
+          <FormControl
+            type="text"
+            onChange={handleQuantity}
+            value={productQuantity}
+          />
         </div>
 
         <Form className="urgent-order">
@@ -134,14 +188,20 @@ function LeftSide({ data }) {
         </Form>
 
         <div className="add-div-btn">
-          <Button className="add-product-button" onClick={testConsole}>Add</Button>
+          <Button
+            className="add-product-button"
+            onClick={testConsole}
+            disabled={isValid}
+          >
+            Add
+          </Button>
         </div>
       </div>
     </div>
   );
 }
 
-//-----------THIS IS WORKING CODE
+//==========================STABLE DATA======================S
 // const LeftSide = ({ data }) => {
 //   const [variant, setVariant] = useState(data.variants);
 //   const uniqueVariants = uniqBy(variant, "packingDescription");
@@ -229,6 +289,6 @@ function LeftSide({ data }) {
 //       </div>
 //     </div>
 //   );
-// };  THIS IS WORKING CODE
+// };
 
 export default LeftSide;
