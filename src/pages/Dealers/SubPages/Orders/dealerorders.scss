@@ -1,3 +1,126 @@
 .dealers-order-main-container {
   margin-top: 56px;
 }
+.address-card-main {
+  margin-bottom: 30px;
+  .cont-title {
+    font-size: 18px;
+  }
+
+  .card-img {
+    width: 20px;
+    height: auto;
+  }
+}
+.address-card-container {
+  border: 1px solid #a2a2a2;
+  border-radius: 9px;
+}
+
+.address-head {
+  img {
+    height: 24px;
+    width: 24px;
+    margin-right: 10px;
+  }
+  p {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 10px !important;
+
+    /* identical to box height */
+
+    color: #000000;
+  }
+}
+
+.over-flow-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.over-flow-text-other {
+  -webkit-line-clamp: 4;
+}
+.address-field {
+  p {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    /* or 179% */
+    margin-bottom: 10px !important;
+    // margin-bottom: 13px !important;
+
+    color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.total-container-div {
+  border: 0.6px solid rgba(0, 0, 0, 0.2);
+  border-width: 0;
+  border-top-width: 1px;
+  p {
+    color: #000;
+    margin-top: 6px !important;
+    margin-bottom: 0px !important;
+  }
+}
+.detail-top-card {
+  padding: 21px;
+  height: 157px;
+}
+.width-50 {
+  width: 50%;
+}
+
+@media only screen and (max-width: 1600px) {
+  .dealers-order-main-container {
+    margin-top: 45px;
+  }
+  .address-card-main {
+    margin-bottom: 24px;
+    .cont-title {
+      font-size: 16px;
+    }
+
+    .card-img {
+      width: 20px;
+      height: auto;
+    }
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .dealers-order-main-container {
+    margin-top: 40px;
+  }
+  .address-card-main {
+    margin-bottom: 24px;
+    .cont-title {
+      font-size: 16px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  .dealers-order-main-container {
+    margin-top: 35px;
+  }
+  .address-card-main {
+    margin-bottom: 20px;
+    .cont-title {
+      font-size: 14px;
+    }
+
+    .card-img {
+      width: 18px;
+      height: auto;
+    }
+  }
+}

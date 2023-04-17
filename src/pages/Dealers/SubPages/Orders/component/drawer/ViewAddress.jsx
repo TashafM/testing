@@ -1,0 +1,46 @@
+import React from "react";
+
+import { Offcanvas } from "react-bootstrap";
+import DrawerHead from "../../../../../About/Information/Component/DrawerHead";
+import billing from "../../../../../../assets/images/billing.png";
+
+function ViewAddress({ show, handleClose }) {
+  return (
+    <Offcanvas
+      show={show}
+      onHide={handleClose}
+      placement="end"
+      className="teamMember-add"
+    >
+      <div className="content">
+        <DrawerHead title="Addresses" handleClose={handleClose} />
+        <div className=" flex-grow-1 detail-top-card ">
+          <div className="address-head d-flex">
+            <p className="m-0">Billing Address :</p>
+          </div>
+          <div className="address-field">
+            <p className="m-0  ">
+              28, Rajasthani Udhyog Nagar, G.T. Karnal Road, Delhi - 110033 IN
+            </p>
+            <p className="m-0">+91-22-28770321</p>
+          </div>
+        </div>
+        <hr />
+
+        <div className=" flex-grow-1 detail-top-card ">
+          <div className="address-head d-flex">
+            <p className="m-0">Shipping Address :</p>
+          </div>
+          <div className="address-field">
+            <p className="m-0 over-flow-text">
+              28, Rajasthani Udhyog Nagar, G.T. Karnal Road, Delhi - 110033 IN
+            </p>
+            <p className="m-0">+91-22-28770321</p>
+          </div>
+        </div>
+      </div>
+    </Offcanvas>
+  );
+}
+
+export default ViewAddress;

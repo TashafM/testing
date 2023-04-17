@@ -81,12 +81,12 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
   const initialValues = {
     file: "",
     brandName: data?.brandName ?? "",
-    location: "",
-    username: data?.brandName ?? "",
+    location: data?.brandLocation?.city,
+    username: data?.username ?? "",
     email: data?.email ?? "",
   };
 
-  console.log({ initialValues });
+  console.log({ file });
   return (
     <Offcanvas
       show={show.open}
@@ -96,10 +96,9 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
     >
       <div className="content">
         <DrawerHead
-          title={`${show.type} Brands`}
+          title={show.type === "Edit" ? "Edit details" : `${show.type} Brands`}
           handleClose={handleClose}
-          description="Write down the company’s sales reach, services & support and
-          interested to purchase"
+          description="Please fill these following details to add your brand."
         />
         <div>
           <Formik
@@ -169,7 +168,8 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                   />
                   <p className="tagging-text m-0">For tagging purpose</p>
                 </div>
-                {errors?.brnadName || errors?.location || file.length ? (
+
+                {errors?.brandName || errors?.location ? (
                   <p className="validation-error">
                     Error: Invalid input parameters. Please check your input and
                     try again.

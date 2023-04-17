@@ -35,8 +35,8 @@
 }
 
 .form-check-input:checked {
-  background-color: #e72d38;
-  border-color: #e72d38;
+  background-color: #4793f4;
+  border-color: #4793f4;
 }
 
 .input-lable {
@@ -161,6 +161,7 @@ input:checked + .slider:before {
     border-radius: 0;
     padding: 3px 15px;
     color: #899197;
+    text-transform: uppercase; /* Transforms all characters to uppercase */
   }
   .dropdown-menu {
     max-height: 147px;

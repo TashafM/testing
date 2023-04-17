@@ -13,20 +13,13 @@ function Terms() {
   const [showModal, setShowModal] = useState(false);
   const [termCondition, setTermCondition] = useState([]);
 
-  const { data, loading } = useResponse("/portalViewCompanyTermsConditions");
+  const { data, setData, loading } = useResponse(
+    "/portalViewCompanyTermsConditions"
+  );
 
   const [postData, { error, loading: loadingTerms }] = usePostAsyncResponse(
     "/portalPostCompanyTermsConditions"
   );
-
-  useEffect(() => {
-    const arr = [];
-    data?.map((ele) => {
-      arr.push({ title: ele?.title, content: ele?.content });
-    });
-    console.log("sbjk", arr);
-    setTermCondition(arr);
-  }, [data]);
 
   const HandleOpenModal = () => {
     setShowModal(true);
@@ -34,24 +27,21 @@ function Terms() {
 
   const editSaveCallback = (data) => {
     console.log("shdj", data);
-    const arr = [];
-
     const body = {
       termsConditions: data,
     };
 
     postData(body, () => {
       setShowModal(false);
-      setTermCondition(data);
+      setData(data);
     });
   };
-  console.log("nskj", termCondition);
 
   if (loading) {
     return <div>loading</div>;
   }
 
-  if (!termCondition.length) {
+  if (!data.length) {
     return (
       <div className="default-height d-flex align-items-center justify-content-center">
         <BtnTitleIcon
@@ -87,7 +77,7 @@ function Terms() {
           title="Terms & Conditions"
           show={showModal}
           close={() => setShowModal(false)}
-          data={termCondition}
+          data={data}
           editSaveCallback={editSaveCallback}
           type={"Term & Condition"}
           btnTitle="Add more topics"
@@ -95,7 +85,7 @@ function Terms() {
           loading={loadingTerms}
         />
       )}
-      <ContentPrivacy data={termCondition} />
+      <ContentPrivacy data={data} />
     </div>
   );
 }

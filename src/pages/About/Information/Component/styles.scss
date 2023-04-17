@@ -25,6 +25,7 @@
   height: 26px;
   width: 29px;
   cursor: pointer;
+  margin-right: 20px !important;
 }
 
 .drawer-title-text {
@@ -32,8 +33,18 @@
   font-style: normal;
   font-weight: 600;
   font-size: 26px;
-  padding-left: 20px;
   margin-bottom: 0 !important;
+  /* identical to box height */
+
+  color: #000000;
+}
+
+.otherinfo-titel-text-inpiut {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
   /* identical to box height */
 
   color: #000000;
@@ -128,6 +139,7 @@
     font-weight: 500;
     font-size: 16px;
     color: #000000;
+    text-transform: capitalize; /* Transforms the first character of each word to uppercase */
   }
   .cardspace {
     margin-left: 10px;

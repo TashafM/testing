@@ -4,7 +4,7 @@ import TopBar from "../../Components/TopBar/TopBar";
 import UnderLineTabs from "../../../../components/Tabs/UnderLineTabs";
 import { dealerOrderTabs } from "../../../About/data/data";
 import { useLocation } from "react-router-dom";
-import "./dealerorders.scss";
+import "./dealerOrders.scss";
 
 const DealerOrders = () => {
   const location = useLocation();

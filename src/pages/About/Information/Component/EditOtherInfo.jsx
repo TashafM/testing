@@ -3,11 +3,13 @@ import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import ReactSelector from "../../../../components/ReactSelect";
 import "./styles.scss";
 import TextArea from "../../../../components/Input/TextArea";
-import { Interested, Placeses } from "../../../../helper/constant";
+import { Placeses } from "../../../../helper/constant";
 import { Offcanvas } from "react-bootstrap";
 import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
 import Checkbox from "../../../../components/Input/Checkbox";
 import DrawerHead from "./DrawerHead";
+import { useResponse } from "../../../../hooks/useResponse";
+import { useGetResponse } from "../../../../hooks/useGetResponse";
 
 function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
   const [ischecked, setIschecked] = useState(false);
@@ -18,6 +20,8 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
   const [postData, { loading }] = usePatchAsyncReponse(
     "/portalPatchCompanyOtherInfo"
   );
+
+  const { data: Interested, error } = useGetResponse("/getProductOrServices");
 
   const [makeApiCall, setMakeApiCall] = useState(false);
 
@@ -67,7 +71,7 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
         />
         <div>
           <div>
-            <h5>Sales reach is at</h5>
+            <h5 className="otherinfo-titel-text-inpiut">Sales reach is at</h5>
             <ReactSelector
               value={salesReachAt}
               onChange={(e) => {
@@ -80,7 +84,9 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
             />
           </div>
           <div className="mb-3 mt-4">
-            <h5 className="mb-2">Do you offer any services & support?</h5>
+            <h5 className="mb-2 otherinfo-titel-text-inpiut">
+              Do you offer any services & support?
+            </h5>
             <div className="d-flex">
               <div className="d-flex check-container">
                 <Checkbox
@@ -128,7 +134,9 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
             )}
           </div>
           <div className="mb-3 mt-3">
-            <h5 className="mb-2">You are interested to purchase</h5>
+            <h5 className="mb-2 otherinfo-titel-text-inpiut">
+              You are interested to purchase
+            </h5>
             <ReactSelector
               options={Interested}
               value={intrestedIn}

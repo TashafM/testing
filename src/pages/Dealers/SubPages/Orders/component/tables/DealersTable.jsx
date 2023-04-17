@@ -2,6 +2,7 @@ import React from "react";
 import ScrollBtn from "../../../../../../components/ScrollBtn/ScrollBtn";
 import { Table } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
+import arrow from "../../../../../../assets/images/greater-then.png";
 
 import { useNavigate } from "react-router-dom";
 import "./tables.scss";
@@ -40,10 +41,22 @@ function DealersTable({ showIcon, row, column }) {
                 >
                   <td>{id + 1}</td>
                   {column?.map((col, id) => {
-                    if (id) {
+                    if (id && id < column?.length - 1) {
                       return <td key={id}>{row[col.value]}</td>;
                     }
                   })}
+                  <td>
+                    <div className="d-flex align-items-center">
+                      <p className="table-status-chip m-0">
+                        <span className="status-circel " /> In Transit
+                      </p>
+                      <img
+                        src={arrow}
+                        alt="arrow right-action"
+                        className="arrow-right-image"
+                      />
+                    </div>
+                  </td>
                 </tr>
               ))}
             </tbody>

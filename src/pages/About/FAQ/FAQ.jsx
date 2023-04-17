@@ -15,15 +15,11 @@ function FAQ() {
   const [getFAQ, setFAQ] = useState([]);
   // const { data, loading, error } = useResponse();
 
-  const { data, loading } = useResponse("/portalViewCompanyFaqs");
+  const { data, setData, loading } = useResponse("/portalViewCompanyFaqs");
 
   const [postData, { error, loading: loadingFaq }] = usePostAsyncResponse(
     "/portalPostCompanyFaqs"
   );
-
-  useEffect(() => {
-    setFAQ(data);
-  }, [data]);
 
   const HandleOpenModal = () => {
     setShowModal(true);
@@ -41,7 +37,7 @@ function FAQ() {
 
     postData(body, () => {
       setShowModal(false);
-      setFAQ(data);
+      setData(data);
     });
   };
 
@@ -49,7 +45,7 @@ function FAQ() {
     return <div>loading...</div>;
   }
 
-  if (!getFAQ.length) {
+  if (!data.length) {
     return (
       <div className="default-height d-flex align-items-center justify-content-center">
         <BtnTitleIcon
@@ -63,7 +59,7 @@ function FAQ() {
             title="Frequently Asked Questions"
             show={showModal}
             close={() => setShowModal(false)}
-            data={getFAQ}
+            data={data}
             editSaveCallback={editSaveCallback}
             type={"FAQ"}
             btnTitle="Create more FAQ"
@@ -80,7 +76,7 @@ function FAQ() {
       <div className="d-flex faq-title">
         Frequently Asked Questions <BtnIconOnly onClick={HandleOpenModal} />
       </div>
-      {getFAQ.map((item, index) => {
+      {data.map((item, index) => {
         return (
           <Collapsible
             key={index}
@@ -95,7 +91,7 @@ function FAQ() {
           title="Frequently Asked Questions"
           show={showModal}
           close={() => setShowModal(false)}
-          data={getFAQ}
+          data={data}
           editSaveCallback={editSaveCallback}
           type={"FAQ"}
           btnTitle="Create more FAQ"

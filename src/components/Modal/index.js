@@ -13,15 +13,13 @@ function ModalComponent({
   show,
   close,
   title,
-  children,
   editSaveCallback,
   btnTitle,
   loading,
   type,
 }) {
-  const [Data, setData] = useState(data ?? []);
+  const [Data, setData] = useState(JSON.parse(JSON.stringify(data)) ?? []);
   const empty = emptydata;
-  console.log("kjshkj", emptydata);
   const onChanContent = (value, index, key) => {
     const arr = [...Data];
     arr[index][key] = value;

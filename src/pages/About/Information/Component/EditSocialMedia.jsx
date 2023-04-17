@@ -7,6 +7,7 @@ import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
 import { Offcanvas } from "react-bootstrap";
 import DrawerHead from "./DrawerHead";
 import { useState } from "react";
+import { isValidUrl } from "../../../../components/Utils/Utils";
 
 function EditSocialMedia({ show, handleClose, data, onUpdate, completeData }) {
   const formRef = useRef();
@@ -22,12 +23,14 @@ function EditSocialMedia({ show, handleClose, data, onUpdate, completeData }) {
   );
 
   const submitHandler = async (values, action) => {
-    console.log("values", values);
+    console.log("values", values, makeApiCall);
     const socialMediaLinks = [];
     if (makeApiCall) {
       Object.keys(values).map((key) => {
         if (values[key]) {
           socialMediaLinks.push({ type: key, socialMediaLink: values[key] });
+        } else {
+          socialMediaLinks.push({ type: key, socialMediaLink: "" });
         }
       });
       const body = {
@@ -86,6 +89,7 @@ function EditSocialMedia({ show, handleClose, data, onUpdate, completeData }) {
             render={({
               handleSubmit,
               errors,
+              setErrors,
               values,
               setFieldValue,
               touched,
@@ -97,9 +101,12 @@ function EditSocialMedia({ show, handleClose, data, onUpdate, completeData }) {
                     value={values.instagram}
                     onChange={(e) => {
                       !makeApiCall && setMakeApiCall(true);
+                      if (isValidUrl(e.target.value)) {
+                        setErrors({ ...errors, instagram: "enter valid url" });
+                      }
                       setFieldValue("instagram", e.target.value);
                     }}
-                    error={touched.instagram && errors.instagram}
+                    error={errors.instagram}
                     label="Instagram"
                     placeholder="eg. www.instagram.com/companyname"
                   />

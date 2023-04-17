@@ -81,17 +81,19 @@ function Information() {
           }}
           registeredAddress={data[0]?.registeredAddress ?? {}}
         />
-        <EditAddress
-          show={openAddress}
-          handleClose={() => {
-            setopenAddress(false);
-          }}
-          data={data[0]?.registeredAddress ?? {}}
-          completeData={data}
-          onUpdate={(data) => {
-            setData(data);
-          }}
-        />
+        {openAddress && (
+          <EditAddress
+            show={openAddress}
+            handleClose={() => {
+              setopenAddress(false);
+            }}
+            data={data[0]?.registeredAddress ?? {}}
+            completeData={data}
+            onUpdate={(data) => {
+              setData(data);
+            }}
+          />
+        )}
 
         <CardHOpration
           hoursOfOperation={data[0].hoursOfOperation}
@@ -100,17 +102,19 @@ function Information() {
           }}
         />
 
-        <EditOperations
-          show={openOperation}
-          handleClose={() => {
-            setOpenOperation(false);
-          }}
-          data={data[0]?.hoursOfOperation ?? {}}
-          completeData={data}
-          onUpdate={(data) => {
-            setData(data);
-          }}
-        />
+        {openOperation && (
+          <EditOperations
+            show={openOperation}
+            handleClose={() => {
+              setOpenOperation(false);
+            }}
+            data={data[0]?.hoursOfOperation ?? {}}
+            completeData={data}
+            onUpdate={(data) => {
+              setData(data);
+            }}
+          />
+        )}
         <CardSocial
           socialMediaDetails={data[0].socialMediaDetails ?? []}
           onClick={() => {
@@ -118,17 +122,19 @@ function Information() {
           }}
         />
 
-        <EditSocialMedia
-          show={openSocial}
-          handleClose={() => {
-            setOpenSocial(false);
-          }}
-          data={data[0]?.socialMediaDetails ?? []}
-          completeData={data}
-          onUpdate={(data) => {
-            setData(data);
-          }}
-        />
+        {openSocial && (
+          <EditSocialMedia
+            show={openSocial}
+            handleClose={() => {
+              setOpenSocial(false);
+            }}
+            data={data[0]?.socialMediaDetails ?? []}
+            completeData={data}
+            onUpdate={(data) => {
+              setData(data);
+            }}
+          />
+        )}
 
         <CardCompStatement
           companyStatement={data[0]?.companyStatement ?? ""}
@@ -137,17 +143,19 @@ function Information() {
           }}
         />
 
-        <EditStatement
-          show={openStatement}
-          handleClose={() => {
-            setOpenStatement(false);
-          }}
-          data={data[0]?.companyStatement ?? []}
-          completeData={data}
-          onUpdate={(data) => {
-            setData(data);
-          }}
-        />
+        {openStatement && (
+          <EditStatement
+            show={openStatement}
+            handleClose={() => {
+              setOpenStatement(false);
+            }}
+            data={data[0]?.companyStatement ?? []}
+            completeData={data}
+            onUpdate={(data) => {
+              setData(data);
+            }}
+          />
+        )}
         <CardOtherInfo
           otherInfo={data[0]?.otherInfo}
           onClick={() => {
@@ -155,17 +163,19 @@ function Information() {
           }}
         />
 
-        <OtherInfoDetails
-          show={openotherInfor}
-          handleClose={() => {
-            setOpenOtherInfor(false);
-          }}
-          data={data[0]?.otherInfo ?? []}
-          completeData={data}
-          onUpdate={(res) => {
-            setData(res);
-          }}
-        />
+        {openotherInfor && (
+          <OtherInfoDetails
+            show={openotherInfor}
+            handleClose={() => {
+              setOpenOtherInfor(false);
+            }}
+            data={data[0]?.otherInfo ?? []}
+            completeData={data}
+            onUpdate={(res) => {
+              setData(res);
+            }}
+          />
+        )}
       </Row>
     </Container>
   );
