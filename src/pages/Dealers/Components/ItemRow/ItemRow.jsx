@@ -4,9 +4,7 @@ import listproduct from "../../../../assets/images/listproduct.png";
 import x from "../../../../assets/images/x.svg";
 
 const ItemRow = ({ disableDelete, pr20, popupScreen, data, removeItem }) => {
-  console.log(data, "itemreow");
-  console.log(data, "from item row");
-
+  
   return (
     <tr className="right-side-tr">
       <td
@@ -29,7 +27,7 @@ const ItemRow = ({ disableDelete, pr20, popupScreen, data, removeItem }) => {
       </td>
       <td className={pr20 ? "price-padding" : "price"}>{data.totalPrice}</td>
       {!disableDelete && (
-        <td className="remove-btn" onClick={() => removeItem(data.productId)}>
+        <td className="remove-btn" onClick={() => removeItem(data.variantId)}>
           <img src={x} alt="" />
         </td>
       )}

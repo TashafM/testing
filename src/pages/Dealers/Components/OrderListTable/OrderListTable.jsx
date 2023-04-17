@@ -5,7 +5,7 @@ import ItemRow from "../ItemRow/ItemRow";
 
 const OrderListTable = ({ disableDelete, data, setData }) => {
   const del = (val) => {
-    const filtered = data.filter((item) => item.productId !== val);
+    const filtered = data.filter((item) => item.variantId !== val);
     setData(filtered);
   };
 
