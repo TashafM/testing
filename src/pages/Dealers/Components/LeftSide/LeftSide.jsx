@@ -54,29 +54,51 @@ function LeftSide({ data, setCartProducts, cartProducts }) {
 
   // const [cart, setCart] = useState([]);
 
+  // const testConsole = () => {
+  //   const newItem = {
+  //     principalCompanyUserCode : localStorage.getItem('principalCompanyUserCode'),
+  //     variantId: prices[0].variantId,
+  //     selectedColor: selectedColor,
+  //     selectedQuantity: selectedQuantity,
+  //     saleDescription: prices[0].saleDescription,
+  //     quantity: productQuantity,
+  //     totalPrice: productQuantity * prices[0].grossPrice,
+  //     productId: prices[0]._id,
+  //     name: data.itemDescription,
+  //   };
+  
+  //   console.log(newItem,'new item'); // log the new item to check
+  
+  //   setCartProducts([...cartProducts, newItem]); // push the new item to the cart array
+  // };
+
   const testConsole = () => {
-    // console.log(isValid,'jjjjjjjjjjjj')
-    // if (!isValid) {
-    //   return;
-    // }
-  
-    // const principalCompanyUserCode = localStorage.getItem('pricipalCompanyUserCode')
-    const newItem = {
-      principalCompanyUserCode : localStorage.getItem('principalCompanyUserCode'),
-      variantId: prices[0].variantId,
-      selectedColor: selectedColor,
-      selectedQuantity: selectedQuantity,
-      saleDescription: prices[0].saleDescription,
-      quantity: productQuantity,
-      totalPrice: productQuantity * prices[0].grossPrice,
-      productId: prices[0]._id,
-      name: data.itemDescription,
-    };
-  
-    console.log(newItem,'new item'); // log the new item to check
-  
-    setCartProducts([...cartProducts, newItem]); // push the new item to the cart array
+    const itemIndex = cartProducts.findIndex(item => item.variantId === prices[0].variantId);
+    
+    if (itemIndex === -1) {
+      // Item not found in cart, add it as a new item
+      const newItem = {
+        principalCompanyUserCode : localStorage.getItem('principalCompanyUserCode'),
+        variantId: prices[0].variantId,
+        selectedColor: selectedColor,
+        selectedQuantity: selectedQuantity,
+        saleDescription: prices[0].saleDescription,
+        quantity: Number(productQuantity),
+        totalPrice: productQuantity * prices[0].grossPrice,
+        grossPrice: Number(prices[0].grossPrice),
+        productId: data.productId,
+        name: data.itemDescription,
+      };
+      setCartProducts([...cartProducts, newItem]); // push the new item to the cart array
+    } else {
+      // Item found in cart, update its quantity 
+      const updatedCart = [...cartProducts];
+      updatedCart[itemIndex].quantity += Number(productQuantity);
+      updatedCart[itemIndex].totalPrice += productQuantity * prices[0].grossPrice;
+      setCartProducts(updatedCart);
+    }
   };
+  
 
   //***************************VALIDATION */
   

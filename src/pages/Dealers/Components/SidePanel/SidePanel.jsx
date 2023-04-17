@@ -26,7 +26,7 @@ const SidePanel = ({ show, setShowPanel, data }) => {
             </div>
             <div className="vertical-line"></div>
             <div className="div-2">
-              <RightSide setShowPanel={setShowPanel} cartProducts={cartProducts}/>
+              <RightSide setShowPanel={setShowPanel} cartProducts={cartProducts} setCartProducts={setCartProducts}/>
             </div>
           </div>
         </Offcanvas.Body>
