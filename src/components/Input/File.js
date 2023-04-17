@@ -21,7 +21,7 @@ const FileDropzone = ({ file, onChange, label, setFile }) => {
           onChange(e);
         }}
         onError={handleError}
-        accepts={["image/png", ".pdf", "audio/*"]}
+        accepts={["image/png", "image/jpeg", "image/jpg", "image/svg"]}
         multiple
         maxFileSize={10000000}
         minFileSize={0}

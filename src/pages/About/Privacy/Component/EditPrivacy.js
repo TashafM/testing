@@ -9,7 +9,9 @@ import { usePostAsyncResponse } from "../../../../hooks/usePostAsyncResponse";
 // import BtnTitleCenter from "../Button/BtnTitleCenter";
 
 function EditPrivacy({ data = [], show, close, editSaveCallback }) {
-  const [privacyData, setPrivacyData] = useState(data ?? []);
+  const [privacyData, setPrivacyData] = useState(
+    JSON.parse(JSON.stringify(data)) ?? []
+  );
   const empty = { title: "", content: "" };
 
   const [postData, { loading, error }] = usePostAsyncResponse(

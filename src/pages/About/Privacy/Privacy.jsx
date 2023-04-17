@@ -13,30 +13,20 @@ function Privacy() {
   const [privacy, setPrivacy] = useState([]);
   const [showModal, setShowModal] = useState("");
 
-  const { data, loading } = useResponse("/portalViewCompanyPrivacyPolicy");
-
-  console.log({ data });
-
-  useEffect(() => {
-    const arr = [];
-    data?.map((ele) => {
-      arr.push({ title: ele?.title, content: ele?.content });
-    });
-    // console.log("sbjk",arr)
-    setPrivacy(arr);
-  }, [data]);
+  const { data, setData, loading } = useResponse(
+    "/portalViewCompanyPrivacyPolicy"
+  );
 
   const editSaveCallback = (data) => {
     console.log("shdj", data);
-    setPrivacy(data);
+    setData(data);
   };
 
   if (loading) {
     return <div>loading ...</div>;
   }
-  console.log("jhsgjh", privacy);
 
-  if (!privacy.length) {
+  if (!data.length) {
     return (
       <div className="default-height d-flex align-items-center justify-content-center">
         <BtnTitleIcon
@@ -50,7 +40,7 @@ function Privacy() {
             title="Privacy Policy"
             show={showModal}
             close={() => setShowModal(false)}
-            data={privacy}
+            data={data}
             editSaveCallback={editSaveCallback}
           />
         )}
@@ -61,20 +51,20 @@ function Privacy() {
   return (
     <div>
       <div className="d-flex privacy-title privacy-title-botton">
-        Your Privacy Matters
+        Privacy Policy
         <BtnIconOnly
           onClick={() => {
             setShowModal(true);
           }}
         />
       </div>
-      <ContentPrivacy data={privacy} />
+      <ContentPrivacy data={data} />
       {showModal && (
         <EditPrivacy
           title="Privacy Policy"
           show={showModal}
           close={() => setShowModal(false)}
-          data={privacy}
+          data={data}
           editSaveCallback={editSaveCallback}
         />
       )}

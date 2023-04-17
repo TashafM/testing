@@ -101,6 +101,9 @@ function EditContactList() {
           }}
         />
       </div>
+      <p className="drawer-description-text">
+        Please provide the company’s email & contacts
+      </p>
 
       {data.map((item, index) => {
         return (

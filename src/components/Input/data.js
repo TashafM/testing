@@ -51,12 +51,12 @@ export const hour = [
 
 export const amPm = [
   {
-    label: "am",
-    value: "am",
+    label: "AM",
+    value: "AM",
   },
   {
-    label: "pm",
-    value: "pm",
+    label: "PM",
+    value: "PM",
   },
 ];
 
