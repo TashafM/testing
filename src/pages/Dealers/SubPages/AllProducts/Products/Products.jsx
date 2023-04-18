@@ -38,7 +38,8 @@ const Products = () => {
         subCategoryId,
       });
       setProducts(api1.result);
-      console.log(api1.result, "all products");
+      localStorage.setItem('currencySymbol', api1.result[0].currency.symbol);
+      localStorage.setItem('currencyType', api1.result[0].currency.type)
     };
     fetchProducts();
   }, []);

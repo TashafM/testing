@@ -6,7 +6,6 @@ import logo from "../../../assets/images/logo.png";
 import { useNavigate } from "react-router-dom";
 import axios from "../../../helper/axios.js";
 import { API } from "../../../helper/API";
-import { TestData } from "../../../App";
 
 const SelectPage = () => {
   const [dealerData, setDealerData] = useState([]);

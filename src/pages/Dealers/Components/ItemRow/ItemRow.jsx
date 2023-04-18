@@ -15,9 +15,9 @@ const ItemRow = ({ disableDelete, pr20, popupScreen, data, removeItem }) => {
         <div className="img-div">
           <img src={listproduct} alt="" />
           <div className="text-desc">
-            <div className="product-name">{data.name}</div>
+            <div className="product-name">{data.name || data.itemDescription}</div>
             <div className="description">
-              {data.selectedColor} | {data.saleDescription}
+              {data.selectedColor || data.colorDescription} | {data.saleDescription}
             </div>
           </div>
         </div>

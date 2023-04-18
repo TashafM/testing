@@ -1,8 +1,6 @@
 import React from "react";
-import { useState } from "react";
 import './otherinstructions.scss'
 import { Button, Form, Offcanvas, Table } from "react-bootstrap";
-import ItemRow from "../ItemRow/ItemRow";
 
 const OtherInstructions = ({ show, handleClose }) => {
   return (

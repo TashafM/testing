@@ -24,25 +24,27 @@ function RightSide({ setShowPanel, cartProducts, setCartProducts }) {
     const taxAmount = (sumOfTotal * sumOfTaxes) / 100; // this is final taxAmount
     const totalAmt = taxAmount + sumOfTotal; // this is totalAmount
 
-    axiosInstance.post(API.DEALER_ADD_TO_CART, {
-      principalCompanyUserCode: localStorage.getItem(
-        "principalCompanyUserCode"
-      ),
-      cartItems: cartProducts.map((item) => ({
-        variantId: item.variantId,
-        quantity: item.quantity.toString(),
-        grossPrice: item.grossPrice.toString(),
-        productId: item.productId,
-        saleDescription: item.saleDescription,
-        totalPrice: item.totalPrice.toString(),
-      })),
-      totalAmount: totalAmt.toString(),
-      taxAmount: taxAmount.toString(),
-    });
-
-    // console.log(cartProducts,'submitted')
-    // const totalAmount = cartProducts.reduce((acc, item) => acc + item.totalPrice, 0);
-    // console.log(totalAmount)
+    axiosInstance
+      .post(API.DEALER_ADD_TO_CART, {
+        principalCompanyUserCode: localStorage.getItem(
+          "principalCompanyUserCode"
+        ),
+        cartItems: cartProducts.map((item) => ({
+          variantId: item.variantId,
+          quantity: item.quantity.toString(),
+          grossPrice: item.grossPrice.toString(),
+          productId: item.productId,
+          saleDescription: item.saleDescription,
+          totalPrice: item.totalPrice.toString(),
+        })),
+        totalAmount: totalAmt.toString(),
+        taxAmount: taxAmount.toString(),
+      })
+      .then((res) => {
+        if (res.success) {
+          setShowPanel(false);
+        }
+      });
   };
   return (
     <div className="rightside">
@@ -50,7 +52,7 @@ function RightSide({ setShowPanel, cartProducts, setCartProducts }) {
         <div className="title">Order List</div>
         <img src={closeX} alt="" onClick={() => setShowPanel(false)} />
       </div>
-        <OrderListTable data={cartProducts} setData={setCartProducts} />
+      <OrderListTable data={cartProducts} setData={setCartProducts} />
       <div className="add-to-cart">
         <Button
           // onClick={() => {

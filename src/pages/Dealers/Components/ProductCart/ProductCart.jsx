@@ -16,8 +16,8 @@ import OrderPlaced from "../../Modal/OrderPlaced/OrderPlaced";
 import { axiosInstance } from "../../../../helper/axios";
 import { API } from "../../../../helper/API";
 
-const ProductCart = () => {
-  const { isEmpty, setIsEmpty } = useContext(AddProducts);
+const ProductCart = ({ showPanel }) => {
+  // const { isEmpty, setIsEmpty } = useContext(AddProducts);
   const { setShowPanel } = useContext(GlobalSidePanel);
   const [showAllProducts, setShowAllProducts] = useState(false);
   const handleSetProduct = () => {
@@ -47,7 +47,12 @@ const ProductCart = () => {
   const [modalShow, setModalShow] = useState(false);
 
   //------------------------------------------
+  const [cart, setCart] = useState([]);
   const [cartItem, setCartItem] = useState([]);
+  const [itemTotal, setItemTotal] = useState(0);
+  const [isEmpty, setIsEmpty] = useState(true);
+  const currencySymbol = localStorage.getItem("currencySymbol");
+
   useEffect(() => {
     const getViewCart = () => {
       const principalCompanyUserCode = localStorage.getItem(
@@ -55,13 +60,23 @@ const ProductCart = () => {
       );
       axiosInstance
         .post(API.VIEW_DEALER_CART, { principalCompanyUserCode })
-        .then((res) => setCartItem(res.result[0].cartItems));
-      console.log("hellow");
+        .then((res) => {
+          setCartItem(res.result[0].cartItems);
+          setCart(res.result[0]);
+          if (res.result[0].cartItems.length > 0) {
+            setIsEmpty(false);
+          }
+          const sumOfTotal = res.result[0].cartItems.reduce(
+            (acc, item) => acc + Number(item.totalPrice),
+            0
+          );
+          setItemTotal(sumOfTotal);
+        });
     };
 
     getViewCart();
     console.log("tahsf");
-  }, []);
+  }, [showPanel]);
 
   return (
     <>
@@ -75,27 +90,9 @@ const ProductCart = () => {
         </thead>
         {!isEmpty && (
           <tbody className="right-side-body">
-            {/* {cartItem.map((item, id) => (
-              <ItemRow disableDelete={true} pr20={true} data={item}/>
-            ))} */}
-
-            {console.log(cartItem,'cartitemeeeeee')}
-            <ItemRow disableDelete={true} pr20={true} />
-            <ItemRow disableDelete={true} pr20={true} />
-            <ItemRow disableDelete={true} pr20={true} />
-            <ItemRow disableDelete={true} pr20={true} />
-            <ItemRow
-              disableDelete={true}
-              pName={"Konica Chrome Konica Chrome"}
-              desc={"Magenta | 1 L. | RNB"}
-              pr20={true}
-            />
-            <ItemRow
-              disableDelete={true}
-              pName={"Konica Chrome Konica Chrome Konica Chrome Konica Chrome "}
-              desc={"Lemon Yellow | 5 L. | AK-RCT Bottle"}
-              pr20={true}
-            />
+            {cartItem.map((item, id) => (
+              <ItemRow disableDelete pr20 data={item} />
+            ))}
           </tbody>
         )}
       </Table>
@@ -146,16 +143,25 @@ const ProductCart = () => {
           {/**ITEMS TOTAL */}
           <div className="item-rate-div">
             <div>Items total</div>
-            <div>500</div>
+            <div>
+              {currencySymbol}
+              {itemTotal}
+            </div>
           </div>
           <div className="item-rate-div">
             <div>Taxes</div>
-            <div>$100</div>
+            <div>
+              {currencySymbol}
+              {cart.taxAmount}
+            </div>
           </div>
           <div className="simple-line"></div>
           <div className="total-rate-div">
             <div>Order total</div>
-            <div>$1600</div>
+            <div>
+              {currencySymbol}
+              {cart.totalAmount}
+            </div>
           </div>
 
           {/**PLACE ORDER - CLEAR CART */}
