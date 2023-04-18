@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import noItem from "../../../../assets/images/item-not-added.png";
 import editIcon from "../../../../assets/images/edit-icon.png";
 
@@ -13,6 +13,8 @@ import SeeAllProducts from "../SeeAllProducts/SeeAllProducts";
 import AddressPopup from "../AddressPopup/AddressPopup";
 import OtherInstructions from "../OtherInstructions/OtherInstructions";
 import OrderPlaced from "../../Modal/OrderPlaced/OrderPlaced";
+import { axiosInstance } from "../../../../helper/axios";
+import { API } from "../../../../helper/API";
 
 const ProductCart = () => {
   const { isEmpty, setIsEmpty } = useContext(AddProducts);
@@ -45,6 +47,21 @@ const ProductCart = () => {
   const [modalShow, setModalShow] = useState(false);
 
   //------------------------------------------
+  const [cartItem, setCartItem] = useState([]);
+  useEffect(() => {
+    const getViewCart = () => {
+      const principalCompanyUserCode = localStorage.getItem(
+        "principalCompanyUserCode"
+      );
+      axiosInstance
+        .post(API.VIEW_DEALER_CART, { principalCompanyUserCode })
+        .then((res) => setCartItem(res.result[0].cartItems));
+      console.log("hellow");
+    };
+
+    getViewCart();
+    console.log("tahsf");
+  }, []);
 
   return (
     <>
@@ -58,6 +75,11 @@ const ProductCart = () => {
         </thead>
         {!isEmpty && (
           <tbody className="right-side-body">
+            {/* {cartItem.map((item, id) => (
+              <ItemRow disableDelete={true} pr20={true} data={item}/>
+            ))} */}
+
+            {console.log(cartItem,'cartitemeeeeee')}
             <ItemRow disableDelete={true} pr20={true} />
             <ItemRow disableDelete={true} pr20={true} />
             <ItemRow disableDelete={true} pr20={true} />
