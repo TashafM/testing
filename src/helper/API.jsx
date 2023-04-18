@@ -26,6 +26,10 @@ export const API = {
     VIEW_DEALER_PRODUCTS: '/dealerViewAssignedProducts?start=1&offset=10',
     DEALER_ADD_TO_CART: '/dealerAddProductsToCart',
     VIEW_DEALER_CART: '/dealerViewCartProducts', //?start=1&offset=10
+    EDIT_OTHER_INSTRUCTIONS: '/dealerEditCartOtherInstructions',
+    DEALER_CLEAR_CART: '/dealerClearCart',
+
+
 
 
 

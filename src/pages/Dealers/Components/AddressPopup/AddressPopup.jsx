@@ -9,7 +9,7 @@ import SimpleInput from "../SimpleInput/SimpleInput";
 import NewAddress from "./NewAddress/NewAddress";
 import backpage from "../../../../assets/images/backpage.svg";
 
-const AddressPopup = ({ show, handleClose, setAddress, addAddress }) => {
+const AddressPopup = ({ show, handleClose, setAddress, addAddress, data }) => {
   const [isEdit, setIsEdit] = useState(false);
 
   const addNewAddress = () => {
@@ -69,6 +69,7 @@ const AddressPopup = ({ show, handleClose, setAddress, addAddress }) => {
                   value2={"s-address2"}
                   setIsEdit={setIsEdit}
                   setAddress={setAddress}
+                  data={data.billingAddress}
                 />
                 <SelectAddress
                   title={"Bill To"}
@@ -77,6 +78,7 @@ const AddressPopup = ({ show, handleClose, setAddress, addAddress }) => {
                   value2={"b-address2"}
                   setIsEdit={setIsEdit}
                   setAddress={setAddress}
+                  data={data.shippingAddress}
                 />
               </div>
             </>

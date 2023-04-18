@@ -53,6 +53,14 @@ const ProductCart = ({ showPanel }) => {
   const [isEmpty, setIsEmpty] = useState(true);
   const currencySymbol = localStorage.getItem("currencySymbol");
 
+  const emptyCart = () => {
+    const principalCompanyUserCode = localStorage.getItem(
+      "principalCompanyUserCode"
+    );
+    axiosInstance.post(API.DEALER_CLEAR_CART,{principalCompanyUserCode})
+    .then((res)=>res.success && setIsEmpty(true))
+  }
+
   useEffect(() => {
     const getViewCart = () => {
       const principalCompanyUserCode = localStorage.getItem(
@@ -75,7 +83,6 @@ const ProductCart = ({ showPanel }) => {
     };
 
     getViewCart();
-    console.log("tahsf");
   }, [showPanel]);
 
   return (
@@ -90,7 +97,7 @@ const ProductCart = ({ showPanel }) => {
         </thead>
         {!isEmpty && (
           <tbody className="right-side-body">
-            {cartItem.map((item, id) => (
+            {cartItem.slice(0, 5).map((item, id) => (
               <ItemRow disableDelete pr20 data={item} />
             ))}
           </tbody>
@@ -106,7 +113,7 @@ const ProductCart = ({ showPanel }) => {
             </div>
             <ArrowLink title={"See all"} onClick={handleSetProduct} />
           </div>
-          <SeeAllProducts show={showAllProducts} handleClose={handleClose} />
+          <SeeAllProducts show={showAllProducts} handleClose={handleClose} data={cartItem}/>
 
           {/**OTHER INSTRUCTIONS */}
           <div className="other-instructions">
@@ -138,6 +145,7 @@ const ProductCart = ({ showPanel }) => {
             handleClose={handleCloseAddress}
             addAddress={addAddress}
             setAddress={setAddress}
+            data={cart}
           />
 
           {/**ITEMS TOTAL */}
@@ -166,7 +174,7 @@ const ProductCart = ({ showPanel }) => {
 
           {/**PLACE ORDER - CLEAR CART */}
           <div className="cart-btns">
-            <Button className="clear" onClick={() => setIsEmpty(true)}>
+            <Button className="clear" onClick={emptyCart}>
               Clear Cart
             </Button>
             <Button className="place-order" onClick={() => setModalShow(true)}>

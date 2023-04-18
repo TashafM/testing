@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./itemrow.scss";
 import listproduct from "../../../../assets/images/listproduct.png";
 import x from "../../../../assets/images/x.svg";
 
 const ItemRow = ({ disableDelete, pr20, popupScreen, data, removeItem }) => {
+  const currency = localStorage.getItem('currencySymbol')
+  
   
   return (
     <tr className="right-side-tr">
@@ -25,7 +27,7 @@ const ItemRow = ({ disableDelete, pr20, popupScreen, data, removeItem }) => {
       <td className="quantity">
         {data.quantity}
       </td>
-      <td className={pr20 ? "price-padding" : "price"}>{data.totalPrice}</td>
+      <td className={pr20 ? "price-padding" : "price"}>{currency}{data.totalPrice}</td>
       {!disableDelete && (
         <td className="remove-btn" onClick={() => removeItem(data.variantId)}>
           <img src={x} alt="" />
