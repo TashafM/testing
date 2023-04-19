@@ -74,8 +74,16 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
 
   const handleChange = (files) => {
     !makeApiCall && setMakeApiCall(true);
-    setFileError("");
+    if (files.length) {
+      setFileError("");
+    }
+
     setFile(files);
+  };
+
+  const handleError = (e) => {
+    console.log(e);
+    setFileError("max file size allowed is 10MB");
   };
 
   const initialValues = {
@@ -86,7 +94,7 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
     email: data?.email ?? "",
   };
 
-  console.log({ file });
+  console.log({ file }, fileError);
   return (
     <Offcanvas
       show={show.open}
@@ -112,6 +120,7 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                   <File
                     file={file}
                     onChange={handleChange}
+                    handleError={handleError}
                     label="Add Image*"
                     setFile={setFile}
                     // error={touched.file && errors.file}
