@@ -5,28 +5,31 @@ import LeftSide from "../LeftSide/LeftSide";
 import RightSide from "../RightSide/RightSide";
 
 const SidePanel = ({ show, setShowPanel, data }) => {
-  const [cartProducts ,setCartProducts] = useState([])
+  const [cartProducts, setCartProducts] = useState([]);
   return (
     <div className="sidepanel">
       <Offcanvas
         show={show}
-        onHide={()=>setShowPanel(false)}
+        onHide={() => setShowPanel(false)}
         placement="end"
         className="dm"
       >
-        {/* <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-        </Offcanvas.Header> */}
         <Offcanvas.Body>
-          {/* Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists, etc. */}
           <div className="divided-div">
             <div className="div-1">
-                <LeftSide data={data} setCartProducts={setCartProducts} cartProducts={cartProducts}/>
+              <LeftSide
+                data={data}
+                setCartProducts={setCartProducts}
+                cartProducts={cartProducts}
+              />
             </div>
             <div className="vertical-line"></div>
             <div className="div-2">
-              <RightSide setShowPanel={setShowPanel} cartProducts={cartProducts} setCartProducts={setCartProducts}/>
+              <RightSide
+                setShowPanel={setShowPanel}
+                cartProducts={cartProducts}
+                setCartProducts={setCartProducts}
+              />
             </div>
           </div>
         </Offcanvas.Body>

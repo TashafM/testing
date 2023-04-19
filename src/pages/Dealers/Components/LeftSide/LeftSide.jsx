@@ -111,16 +111,13 @@ function LeftSide({ data, setCartProducts, cartProducts }) {
     }
   }, [productQuantity, selectedColor, selectedQuantity]);
   
-  // const testConsole = () => {
-  //   localStorage.setItem('myArr', JSON.stringify(myArr))
-  // };
 
   return (
     <div className="scrollable-left">
       <div className="leftside">
         <div className="title">Konica Chrome</div>
         <div className="image-div">
-          <div className="sub-images">
+          {/* <div className="sub-images">
             <div className="toggle-img">
               <img src={mainproduct} alt="" />
             </div>
@@ -130,7 +127,7 @@ function LeftSide({ data, setCartProducts, cartProducts }) {
             <div className="toggle-img">
               <img src={mainproduct} alt="" />
             </div>
-          </div>
+          </div> */}
           <img src={img600} alt="" className="main-img" />
           <div className="wish-list">
             <img src={wishlist} alt="" />
