@@ -44,11 +44,12 @@ function RightSide({ setShowPanel, cartProducts, setCartProducts }) {
         if (res.success) {
           setShowPanel(false);
           console.log(res.result[0].cartItems,'cart items')
-          const productsString = JSON.stringify(res.result[0].cartItems)
-          localStorage.setItem('cartProducts',productsString)
         }
       });
   };
+
+
+
   return (
     <div className="rightside">
       <div className="title-close">

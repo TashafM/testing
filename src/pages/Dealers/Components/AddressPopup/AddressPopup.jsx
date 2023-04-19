@@ -1,7 +1,7 @@
 import React from "react";
 import "./addresspopup.scss";
 import { useState } from "react";
-import { Offcanvas, Table } from "react-bootstrap";
+import { Button, Offcanvas, Table } from "react-bootstrap";
 import SelectAddress from "./SelectAddress/SelectAddress";
 import AddButton from "./AddButton/AddButton";
 import TextInput from "../../../../components/Input/TextInput";
@@ -14,8 +14,8 @@ const AddressPopup = ({ show, handleClose, setAddress, addAddress, data }) => {
 
   const addNewAddress = () => {
     setAddress(false);
-    setIsEdit(false)
-  }
+    setIsEdit(false);
+  };
   return (
     <div className="addresspopup">
       <Offcanvas
@@ -80,10 +80,19 @@ const AddressPopup = ({ show, handleClose, setAddress, addAddress, data }) => {
                   setAddress={setAddress}
                   data={data.shippingAddress}
                 />
+                <div className="save-address-div">
+                  <Button className="save-address save-btn">Save</Button>
+                </div>
               </div>
             </>
           ) : (
-            <>{isEdit ? <NewAddress setAddress={setAddress} editMode={true}/> : <NewAddress setAddress={setAddress} />}</>
+            <>
+              {isEdit ? (
+                <NewAddress setAddress={setAddress} editMode={true} />
+              ) : (
+                <NewAddress setAddress={setAddress} />
+              )}
+            </>
           )}
         </Offcanvas.Body>
       </Offcanvas>

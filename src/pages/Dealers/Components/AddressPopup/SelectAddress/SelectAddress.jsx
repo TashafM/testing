@@ -33,7 +33,7 @@ const SelectAddress = ({
             </div>
             <div className="mobile-line">
               <div className="num">{item.contactNumber}</div>
-              {data.length > 1 && <img src={deleteIcon} alt="" />}
+              {id!==0 && <img src={deleteIcon} alt="" />}
             </div>
 
             <div className="address-divider"></div>
