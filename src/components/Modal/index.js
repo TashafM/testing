@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import "./index.css";
+import "./index.scss";
 import { Modal } from "react-bootstrap";
 import cross from "../../assets/images/cross.png";
+import deleteIcon from "../../assets/images/delete.png";
+
 import BtnTitleCenter from "../Button/BtnTitleCenter";
 import TextInput from "../Input/TextInput";
 import TextArea from "../Input/TextArea";
 import BtnTitleIcon from "../Button/BtnTitleIcon";
+import BtnIconOnly from "../Button/BtnIconOnly";
 
 function ModalComponent({
   data = [],
@@ -28,6 +31,12 @@ function ModalComponent({
 
   const onSaveData = () => {
     editSaveCallback([...Data]);
+  };
+
+  const onDelete = (index) => {
+    const data = JSON.parse(JSON.stringify(Data));
+    data.splice(index, 1);
+    setData(data);
   };
 
   console.log("faqData", Data);
@@ -67,13 +76,19 @@ function ModalComponent({
                 style={{}}
                 className="text-input-faq"
               >
-                <div className="privacy-title-container">
+                <div className="privacy-title-container d-flex align-items-center">
                   <TextInput
-                    placeholder={"privacy title"}
+                    placeholder={"type here..."}
                     value={type === "FAQ" ? item.question : item.title}
                     onChange={(e) => {
                       const key = type === "FAQ" ? "question" : "title";
                       onChanContent(e.target.value, index, key);
+                    }}
+                  />
+                  <BtnIconOnly
+                    icon={deleteIcon}
+                    onClick={() => {
+                      onDelete(index);
                     }}
                   />
                 </div>
@@ -81,6 +96,7 @@ function ModalComponent({
                 <div className="privacy-description-container">
                   <TextArea
                     rows={6}
+                    placeholder={"type here..."}
                     value={type === "FAQ" ? item.answer : item.content}
                     onChange={(e) => {
                       const key = type === "FAQ" ? "answer" : "content";

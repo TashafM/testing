@@ -8,6 +8,7 @@ import { Offcanvas } from "react-bootstrap";
 import DrawerHead from "./DrawerHead";
 import { useState } from "react";
 import { isValidUrl } from "../../../../components/Utils/Utils";
+import schema from "../../../../helper/validation/schema";
 
 function EditSocialMedia({ show, handleClose, data, onUpdate, completeData }) {
   const formRef = useRef();
@@ -85,6 +86,7 @@ function EditSocialMedia({ show, handleClose, data, onUpdate, completeData }) {
           <Formik
             initialValues={initialValues}
             innerRef={formRef}
+            validationSchema={schema.social}
             onSubmit={submitHandler}
             render={({
               handleSubmit,

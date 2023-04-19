@@ -1,8 +1,10 @@
 import React, { Fragment, useEffect, useState } from "react";
 import "./styles.scss";
 import { useContextProvider } from "../../../../context";
-import email from "../../../../assets/images/email.png";
-import phone from "../../../../assets/images/phone.png";
+import email from "../../../../assets/images/color-email.png";
+import phone from "../../../../assets/images/color-contact.png";
+import location from "../../../../assets/images/color-location.png";
+
 import chat from "../../../../assets/images/chat-icon.png";
 import Switch from "../../../../components/Input/Switch";
 import BtnIconOnly from "../../../../components/Button/BtnIconOnly";
@@ -154,9 +156,15 @@ function EditContactList() {
               <img className="" height={25} src={email} alt="email-icon" />
               <span className="email">{item?.email ?? ""}</span>
             </div>
-            <div className="d-flex">
+
+            <div className="d-flex email-cont">
               <img height={25} src={phone} alt="phone-icon" />
               <span className="email phone">{item?.contact ?? ""}</span>
+            </div>
+
+            <div className="d-flex">
+              <img height={25} src={location} alt="phone-icon" />
+              <span className="email phone">{item?.address?.city ?? ""}</span>
             </div>
             <div className="d-flex justify-content-between align-items-center chat-container">
               <div className="d-flex align-items-center">

@@ -10,6 +10,7 @@ import { setIn } from "formik";
 import { usePostAsyncResponse } from "../../../hooks/usePostAsyncResponse";
 import { toast } from "react-toastify";
 import ConfirmBox from "../../../components/ConfirmBox/ConfirmBox";
+import { CircularProgress } from "@mui/material";
 
 function Brand() {
   const { setOpenDrawer } = useContextProvider();
@@ -46,7 +47,11 @@ function Brand() {
   };
 
   if (loading) {
-    return <div>loading...</div>;
+    return (
+      <div className=" loading-screen default-height d-flex align-items-center justify-content-center">
+        <CircularProgress size={24} />
+      </div>
+    );
   }
 
   return (

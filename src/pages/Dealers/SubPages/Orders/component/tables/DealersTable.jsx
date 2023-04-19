@@ -42,7 +42,7 @@ function DealersTable({ showIcon, row, column }) {
                   <td>{id + 1}</td>
                   {column?.map((col, id) => {
                     if (id && id < column?.length - 1) {
-                      return <td key={id}>{row[col.value]}</td>;
+                      return <td key={id}>kkkkkk{row[col.value]}</td>;
                     }
                   })}
                   <td>

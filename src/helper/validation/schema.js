@@ -1,5 +1,8 @@
 import * as Yup from "yup";
 
+const re =
+  /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
+
 const schema = {
   address: Yup.object({
     fullName: Yup.string().required("full name is required"),
@@ -13,18 +16,30 @@ const schema = {
     city: Yup.string().required("city is required"),
     country: Yup.string().required("country is required"),
 
-    zipCode: Yup.string().required("zip code is required"),
+    zipCode: Yup.number("zip code must be a number").required(
+      "zip code is required"
+    ),
+  }),
+
+  social: Yup.object({
+    instagram: Yup.string().matches(re, "URL is not valid"),
+    facebook: Yup.string().matches(re, "URL is not valid"),
+    twitter: Yup.string().matches(re, "URL is not valid"),
+    website: Yup.string().matches(re, "URL is not valid"),
   }),
 
   contacts: Yup.object({
-    email: Yup.string().required("email is required"),
+    email: Yup.string().email("invalid email id").required("email is required"),
     title: Yup.string().required("title is required"),
-    // contact: Yup.string().required("contact is reuired"),
+    contact: Yup.number("contact must be a number").required(
+      "contact is reuired"
+    ),
   }),
 
   createBrand: Yup.object({
     brandName: Yup.string().required("brand name is required"),
     location: Yup.string().required("location is required"),
+    email: Yup.string().email("invalid email id"),
   }),
 };
 

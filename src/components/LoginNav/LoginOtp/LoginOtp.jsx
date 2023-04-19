@@ -12,7 +12,7 @@ const LoginOtp = () => {
   const [reqOtp, setReqOtp] = useState(false);
   const [email, setEmail] = useState("");
   const [userCode, setUserCode] = useState("");
-  const [isDisabled, setIsDisabled] = useState(false)
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const navigate = useNavigate();
 
@@ -30,19 +30,22 @@ const LoginOtp = () => {
     if (/^\d*$/.test(inputValue)) {
       newOtp[index] = inputValue;
       setOtp(newOtp);
-  
+
       // Move focus to the next input field if maxLength is reached
       const nextIndex = index + 1;
       const nextInput = document.getElementById(`otp-input-${nextIndex}`);
-      if (inputValue && nextInput && event.target.value.length === event.target.maxLength) {
+      if (
+        inputValue &&
+        nextInput &&
+        event.target.value.length === event.target.maxLength
+      ) {
         nextInput.focus();
       }
     }
   };
 
-
   const getOtp = () => {
-    setEmail('')
+    setEmail("");
     axios
       .post(API.LOGIN_API, emailData)
       .then((res) => {
@@ -51,14 +54,14 @@ const LoginOtp = () => {
           setReqOtp(true);
           setUserCode(res.data.result[0].userCode);
           toast.success("OTP sent to your email address!");
-          setIsDisabled(false)
+          setIsDisabled(false);
         }
         // console.log(res.data.result[0].userCode,'jjjjjjj')
       })
       .catch((err) => {
         if (err.response.status !== 200) {
           toast.error("Email id is not registered with us!");
-          setIsDisabled(false)
+          setIsDisabled(false);
         }
         console.log(err.response.status, "erorro");
       });
@@ -81,6 +84,8 @@ const LoginOtp = () => {
           localStorage.setItem("usercode", res.data.userCode);
           localStorage.setItem("accessToken", res.data.result[0].accessToken);
           localStorage.setItem("username", res.data.userName);
+          delete res.data.result[0].accessToken;
+          localStorage.setItem("userData", JSON.stringify(res.data.result[0]));
           navigate("/select-account-type");
         }
       });
@@ -88,7 +93,7 @@ const LoginOtp = () => {
 
   return (
     <>
-      <ToastContainer position="top-center"/>
+      <ToastContainer position="top-center" />
 
       <div className="text-login">Login</div>
       <div className="email-enter-msg">
@@ -126,7 +131,9 @@ const LoginOtp = () => {
       )}
 
       <button className="get-otp-btn" onClick={getOtp} disabled={isDisabled}>
-        {isDisabled ? 'Getting Otp...' : reqOtp ? (
+        {isDisabled ? (
+          "Getting Otp..."
+        ) : reqOtp ? (
           <>
             <span
               onClick={(event) => {

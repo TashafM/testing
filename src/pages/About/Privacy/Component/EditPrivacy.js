@@ -4,8 +4,12 @@ import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import BtnTitleIcon from "../../../../components/Button/BtnTitleIcon";
 import TextArea from "../../../../components/Input/TextArea";
 import cross from "../../../../assets/images/cross.png";
+import deleteIcon from "../../../../assets/images/delete.png";
+
 import { Modal } from "react-bootstrap";
 import { usePostAsyncResponse } from "../../../../hooks/usePostAsyncResponse";
+import BtnIconOnly from "../../../../components/Button/BtnIconOnly";
+
 // import BtnTitleCenter from "../Button/BtnTitleCenter";
 
 function EditPrivacy({ data = [], show, close, editSaveCallback }) {
@@ -33,6 +37,13 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
       close();
       editSaveCallback([...privacyData]);
     });
+  };
+
+  const onDelete = (index) => {
+    const privacy = JSON.parse(JSON.stringify(data)) ?? [];
+    privacy.splice(index, 1);
+
+    setPrivacyData(privacy);
   };
 
   // console.log("jfhkj",privacyData)
@@ -70,19 +81,26 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
               style={{}}
               className="text-input-privacy"
             >
-              <div className="privay-title-container">
+              <div className="privay-title-container d-flex align-items-center">
                 <TextInput
-                  placeholder={"privacy title"}
+                  placeholder={"type here..."}
                   value={item.title}
                   onChange={(e) =>
                     onChanContent(e.target.value, index, "title")
                   }
+                />
+                <BtnIconOnly
+                  icon={deleteIcon}
+                  onClick={() => {
+                    onDelete(index);
+                  }}
                 />
               </div>
 
               <div className="privacy-value-description">
                 <TextArea
                   value={item.content}
+                  placeholder={"type here..."}
                   rows={6}
                   onChange={(e) =>
                     onChanContent(e.target.value, index, "content")
@@ -95,7 +113,7 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
 
         <div className="default-height d-flex align-items-center justify-content-center btn-add-more">
           <BtnTitleIcon
-            title="Add more topics"
+            title="Add more"
             onClick={() => {
               const arr = [...privacyData];
               arr.push({ ...empty });

@@ -13,7 +13,7 @@ function TextInput({
   // const [ meta] = useField(props);
 
   return (
-    <div>
+    <div className="input-main-container-common">
       {label ? <p className="input-lable">{label}</p> : null}
       <input
         name={name}

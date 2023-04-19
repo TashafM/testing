@@ -18,16 +18,24 @@ function EditContacts() {
   const data = openDrawer.data;
 
   const submitHandler = async (values, action) => {
-    console.log("values", openDrawer.type);
+    console.log("values", data);
     if (makeApiCall) {
       if (openDrawer.type === "Edit Contact") {
         const contactUsId = data._id;
-        delete values.address;
-        delete data._id;
+        const d = Object.assign({}, data);
+        // const address = values.address;
+        // delete values.address;
+        delete d._id;
 
         const body = {
-          ...data,
-          ...values,
+          ...d,
+          contact: values.contact,
+          email: values.email,
+          title: values.title,
+          address: {
+            ...d.address,
+            city: values.address,
+          },
           contactUsId,
         };
 
@@ -50,7 +58,7 @@ function EditContacts() {
         const body = {
           ...values,
           address: {
-            city: "Banglore",
+            city: values.address,
             state: "Karnataka",
             latitude: "12.123",
             longitude: "12.123",
@@ -100,7 +108,7 @@ function EditContacts() {
           email: data.email,
           title: data.title,
           contact: data.contact,
-          address: "",
+          address: data?.address?.city,
         }}
         innerRef={formRef}
         onSubmit={submitHandler}
@@ -137,14 +145,6 @@ function EditContacts() {
                 label="Contact Number *"
                 placeholder="eg. 8511591740"
               />
-              {/* <PhoneNumber
-                name="contact"
-                value={values.contact}
-                onChange={(e) => setFieldValue("contact", e)}
-                error={touched.contact && errors.contact}
-                label="Contact Number *"
-                placeholder="eg. 8511591740"
-              /> */}
             </div>
             <div className="input-wrapper">
               <TextInput
