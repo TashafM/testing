@@ -38,6 +38,15 @@
   padding-left: 10px;
 }
 
+.empty-screen-text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  /* identical to box height */
+
+  color: #929292;
+}
+
 @media only screen and (max-width: 1199px) {
   .terms-title {
     font-size: 14px;

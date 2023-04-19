@@ -47,7 +47,7 @@ function OtherInfoDetails({ show, handleClose, data, onUpdate, completeData }) {
             <div className="mb-4">
               <h5 className="cont-title">Our Sales reach is at</h5>
             </div>
-            <div className="col-12 title-other-Info d-flex">
+            <div className="col-12 title-other-Info d-flex flex-wrap">
               {data?.salesReachAt &&
                 data?.salesReachAt.map((item) => {
                   return <Badges value={item.city} />;
@@ -71,10 +71,14 @@ function OtherInfoDetails({ show, handleClose, data, onUpdate, completeData }) {
             <h5 className="cont-title">You are interested to purchase</h5>
           </div>
           <div className="row mb-2">
-            <div className="col-12 title-other-Info d-flex">
+            <div className="col-12 title-other-Info d-flex flex-wrap">
               {data?.interestedToPurchase &&
                 data?.interestedToPurchase.map((item) => {
-                  return <Badges key={item._id} value={item.value} />;
+                  return (
+                    <div className="mb-2">
+                      <Badges key={item._id} value={item.value} />
+                    </div>
+                  );
                 })}
             </div>
           </div>

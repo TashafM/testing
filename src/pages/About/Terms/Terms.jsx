@@ -8,6 +8,7 @@ import EditTerm from "./Component/EditTerms";
 import { useResponse } from "../../../hooks/useResponse";
 import { usePostAsyncResponse } from "../../../hooks/usePostAsyncResponse";
 import BtnTitleIcon from "../../../components/Button/BtnTitleIcon";
+import { CircularProgress } from "@mui/material";
 
 function Terms() {
   const [showModal, setShowModal] = useState(false);
@@ -38,31 +39,9 @@ function Terms() {
   };
 
   if (loading) {
-    return <div>loading</div>;
-  }
-
-  if (!data.length) {
     return (
-      <div className="default-height d-flex align-items-center justify-content-center">
-        <BtnTitleIcon
-          title="Add term and condition"
-          onClick={() => {
-            setShowModal(true);
-          }}
-        />
-        {showModal && (
-          <ModalComponent
-            title="Terms & Conditions"
-            show={showModal}
-            close={() => setShowModal(false)}
-            data={termCondition}
-            editSaveCallback={editSaveCallback}
-            type={"Term & Condition"}
-            btnTitle="Add more topics"
-            emptyadta={{ title: "", content: "" }}
-            loading={loadingTerms}
-          />
-        )}
+      <div className=" loading-screen default-height d-flex align-items-center justify-content-center">
+        <CircularProgress size={24} />
       </div>
     );
   }
@@ -80,12 +59,20 @@ function Terms() {
           data={data}
           editSaveCallback={editSaveCallback}
           type={"Term & Condition"}
-          btnTitle="Add more topics"
+          btnTitle="Add more"
           emptyadta={{ title: "", content: "" }}
           loading={loadingTerms}
         />
       )}
-      <ContentPrivacy data={data} />
+      {data.length ? (
+        <ContentPrivacy data={data} />
+      ) : (
+        <div className="default-height d-flex align-items-center justify-content-center">
+          <p className="terms-title empty-screen-text">
+            No terms & conditions added yet.
+          </p>
+        </div>
+      )}
     </div>
   );
 }

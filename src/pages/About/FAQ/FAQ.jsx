@@ -9,6 +9,7 @@ import { Button } from "react-bootstrap";
 import { useResponse } from "../../../hooks/useResponse";
 import BtnTitleIcon from "../../../components/Button/BtnTitleIcon";
 import { usePostAsyncResponse } from "../../../hooks/usePostAsyncResponse";
+import { CircularProgress } from "@mui/material";
 
 function FAQ() {
   const [showModal, setShowModal] = useState(false);
@@ -42,31 +43,9 @@ function FAQ() {
   };
 
   if (loading) {
-    return <div>loading...</div>;
-  }
-
-  if (!data.length) {
     return (
-      <div className="default-height d-flex align-items-center justify-content-center">
-        <BtnTitleIcon
-          title="Add FAQ"
-          onClick={() => {
-            setShowModal(true);
-          }}
-        />
-        {showModal && (
-          <ModalComponent
-            title="Frequently Asked Questions"
-            show={showModal}
-            close={() => setShowModal(false)}
-            data={data}
-            editSaveCallback={editSaveCallback}
-            type={"FAQ"}
-            btnTitle="Create more FAQ"
-            emptyadta={{ question: "", answer: "" }}
-            loading={loadingFaq}
-          />
-        )}
+      <div className=" loading-screen default-height d-flex align-items-center justify-content-center">
+        <CircularProgress size={24} />
       </div>
     );
   }
@@ -76,16 +55,26 @@ function FAQ() {
       <div className="d-flex faq-title">
         Frequently Asked Questions <BtnIconOnly onClick={HandleOpenModal} />
       </div>
-      {data.map((item, index) => {
-        return (
-          <Collapsible
-            key={index}
-            title={item.question}
-            description={item.answer}
-            eventKey={index.toString()}
-          />
-        );
-      })}
+      {data.length ? (
+        <div>
+          {data.map((item, index) => {
+            return (
+              <Collapsible
+                key={index}
+                title={item.question}
+                description={item.answer}
+                eventKey={index.toString()}
+              />
+            );
+          })}
+        </div>
+      ) : (
+        <div className="default-height d-flex align-items-center justify-content-center">
+          <p className="terms-title empty-screen-text">
+            No frequently asked questions added yet.
+          </p>
+        </div>
+      )}
       {showModal && (
         <ModalComponent
           title="Frequently Asked Questions"
@@ -94,7 +83,7 @@ function FAQ() {
           data={data}
           editSaveCallback={editSaveCallback}
           type={"FAQ"}
-          btnTitle="Create more FAQ"
+          btnTitle="Add more"
           emptyadta={{ question: "", answer: "" }}
           loading={loadingFaq}
         />

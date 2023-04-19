@@ -62,6 +62,23 @@
 
 .privacy-title-container {
   margin-bottom: 20px;
+  background: #f7f7f7;
+  border-radius: 6px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  color: #212529;
+  width: 100%;
+  border: none;
+  .input-main-container-common {
+    flex-grow: 1;
+  }
+}
+
+.privacy-title-container button {
+  background-color: #f7f7f7 !important;
+  padding-right: 30px;
 }
 
 .privacy-description-container {

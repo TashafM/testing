@@ -3,11 +3,7 @@ import Files from "react-files";
 import "./Input.scss";
 import icon from "../../assets/images/default-image.png";
 import cross from "../../assets/images/cross-icon.png";
-const FileDropzone = ({ file, onChange, label, setFile }) => {
-  const handleError = (error, file) => {
-    console.log("error code " + error.code + ": " + error.message);
-  };
-
+const FileDropzone = ({ file, onChange, handleError, label, setFile }) => {
   return (
     <div className="files">
       {label ? <p className="input-lable">{label}</p> : null}

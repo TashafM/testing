@@ -8,6 +8,7 @@ import { privacyPolicyData } from "../data/data";
 import ContentPrivacy from "./Component/ContentPrivacy";
 import EditPrivacy from "./Component/EditPrivacy";
 import "./Privacy.scss";
+import { CircularProgress } from "@mui/material";
 
 function Privacy() {
   const [privacy, setPrivacy] = useState([]);
@@ -23,27 +24,9 @@ function Privacy() {
   };
 
   if (loading) {
-    return <div>loading ...</div>;
-  }
-
-  if (!data.length) {
     return (
-      <div className="default-height d-flex align-items-center justify-content-center">
-        <BtnTitleIcon
-          title="Add privacy"
-          onClick={() => {
-            setShowModal(true);
-          }}
-        />
-        {showModal && (
-          <EditPrivacy
-            title="Privacy Policy"
-            show={showModal}
-            close={() => setShowModal(false)}
-            data={data}
-            editSaveCallback={editSaveCallback}
-          />
-        )}
+      <div className=" loading-screen default-height d-flex align-items-center justify-content-center">
+        <CircularProgress size={24} />
       </div>
     );
   }
@@ -58,7 +41,6 @@ function Privacy() {
           }}
         />
       </div>
-      <ContentPrivacy data={data} />
       {showModal && (
         <EditPrivacy
           title="Privacy Policy"
@@ -67,6 +49,17 @@ function Privacy() {
           data={data}
           editSaveCallback={editSaveCallback}
         />
+      )}
+      {data.length ? (
+        <div>
+          <ContentPrivacy data={data} />
+        </div>
+      ) : (
+        <div className="default-height d-flex align-items-center justify-content-center">
+          <p className="terms-title empty-screen-text">
+            No privacy policy added yet.
+          </p>
+        </div>
       )}
     </div>
   );
