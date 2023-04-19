@@ -1,10 +1,9 @@
 import React from "react";
 import "./seeallproducts.scss";
-import { useState } from "react";
 import { Offcanvas, Table } from "react-bootstrap";
 import ItemRow from "../ItemRow/ItemRow";
 
-const SeeAllProducts = ({ show, handleClose }) => {
+const SeeAllProducts = ({ show, handleClose, data }) => {
   return (
     <div className="sidepanel">
       <Offcanvas
@@ -27,25 +26,13 @@ const SeeAllProducts = ({ show, handleClose }) => {
                   <th></th>
                 </tr>
               </thead>
-                <tbody className="right-side-body">
-                  <ItemRow disableDelete={true} popupScreen={true} pName={'Konica Chrome Minolta'} desc={'Bluish Magenta Cyan'}/>
-                  <ItemRow disableDelete={true} popupScreen={true}/>
-                  <ItemRow disableDelete={true} popupScreen={true}/>
-                  <ItemRow disableDelete={true} popupScreen={true}/>
-                  <ItemRow disableDelete={true} popupScreen={true}/>
-                  <ItemRow disableDelete={true} popupScreen={true}/>
-                  <ItemRow disableDelete={true} popupScreen={true}/>
-                  <ItemRow disableDelete={true} popupScreen={true}/>
-                  <ItemRow disableDelete={true} popupScreen={true}/>
-                  <ItemRow disableDelete={true} popupScreen={true}/>
-                  <ItemRow disableDelete={true} popupScreen={true}/>
-                  <ItemRow disableDelete={true} popupScreen={true}/>
-                  <ItemRow disableDelete={true} popupScreen={true}/>
-                </tbody>
+              <tbody className="right-side-body">
+                {data.map((item, id) => (
+                  <ItemRow data={item} popupScreen disableDelete />
+                ))}
+              </tbody>
             </Table>
           </div>
-          {/* Some text as placeholder. In real life you can have the elements you
-              have chosen. Like, text, images, lists, etc. */}
         </Offcanvas.Body>
       </Offcanvas>
     </div>

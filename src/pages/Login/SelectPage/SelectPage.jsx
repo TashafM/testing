@@ -6,7 +6,6 @@ import logo from "../../../assets/images/logo.png";
 import { useNavigate } from "react-router-dom";
 import axios from "../../../helper/axios.js";
 import { API } from "../../../helper/API";
-import { TestData } from "../../../App";
 
 const SelectPage = () => {
   const [dealerData, setDealerData] = useState([]);
@@ -25,6 +24,7 @@ const SelectPage = () => {
       )
       .then((res) => {
         setDealerData(res.result);
+        console.log(res.result,'rsult')
         localStorage.setItem(
           "principalCompanyUserCode",
           localStorage.getItem("principalCompanyUserCode") ??
@@ -40,9 +40,19 @@ const SelectPage = () => {
           localStorage.getItem("dpURL") ?? res.result[0].dpURL
         );
         localStorage.setItem(
-          "taxPercentage",
-          localStorage.getItem("taxPercentage") ??
-            Number(res.result[0].taxPercentage)
+          "cgstPercentage",
+          localStorage.getItem("cgstPercentage") ??
+            Number(res.result[0].cgstPercentage)
+        );
+        localStorage.setItem(
+          "sgstPercentage",
+          localStorage.getItem("sgstPercentage") ??
+            Number(res.result[0].sgstPercentage)
+        );
+        localStorage.setItem(
+          "igstPercentage",
+          localStorage.getItem("igstPercentage") ??
+            Number(res.result[0].igstPercentage)
         );
       });
   };

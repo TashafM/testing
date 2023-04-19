@@ -18,7 +18,9 @@ const MyDealersPopup = ({ show, setDealerPopup, data, setChange }) => {
     );
     localStorage.setItem("firstname", dealer.firstname);
     localStorage.setItem("dpURL", dealer.dpURL);
-    localStorage.setItem("taxPercentage", dealer.taxPercentage);
+    localStorage.setItem("cgstPercentage", dealer.cgstPercentage);
+    localStorage.setItem("sgstPercentage", dealer.sgstPercentage);
+    localStorage.setItem("igstPercentage", dealer.igstPercentage);
     navigate(`/dealers/dashboard`);
     setDealerPopup(false);
   };

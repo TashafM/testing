@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import noItem from "../../../../assets/images/item-not-added.png";
 import editIcon from "../../../../assets/images/edit-icon.png";
 
@@ -13,9 +13,11 @@ import SeeAllProducts from "../SeeAllProducts/SeeAllProducts";
 import AddressPopup from "../AddressPopup/AddressPopup";
 import OtherInstructions from "../OtherInstructions/OtherInstructions";
 import OrderPlaced from "../../Modal/OrderPlaced/OrderPlaced";
+import { axiosInstance } from "../../../../helper/axios";
+import { API } from "../../../../helper/API";
 
-const ProductCart = () => {
-  const { isEmpty, setIsEmpty } = useContext(AddProducts);
+const ProductCart = ({ showPanel }) => {
+  // const { isEmpty, setIsEmpty } = useContext(AddProducts);
   const { setShowPanel } = useContext(GlobalSidePanel);
   const [showAllProducts, setShowAllProducts] = useState(false);
   const handleSetProduct = () => {
@@ -45,6 +47,43 @@ const ProductCart = () => {
   const [modalShow, setModalShow] = useState(false);
 
   //------------------------------------------
+  const [cart, setCart] = useState([]);
+  const [cartItem, setCartItem] = useState([]);
+  const [itemTotal, setItemTotal] = useState(0);
+  const [isEmpty, setIsEmpty] = useState(true);
+  const currencySymbol = localStorage.getItem("currencySymbol");
+
+  const emptyCart = () => {
+    const principalCompanyUserCode = localStorage.getItem(
+      "principalCompanyUserCode"
+    );
+    axiosInstance.post(API.DEALER_CLEAR_CART,{principalCompanyUserCode})
+    .then((res)=>res.success && setIsEmpty(true))
+  }
+
+  useEffect(() => {
+    const getViewCart = () => {
+      const principalCompanyUserCode = localStorage.getItem(
+        "principalCompanyUserCode"
+      );
+      axiosInstance
+        .post(API.VIEW_DEALER_CART, { principalCompanyUserCode })
+        .then((res) => {
+          setCartItem(res.result[0].cartItems);
+          setCart(res.result[0]);
+          if (res.result[0].cartItems.length > 0) {
+            setIsEmpty(false);
+          }
+          const sumOfTotal = res.result[0].cartItems.reduce(
+            (acc, item) => acc + Number(item.totalPrice),
+            0
+          );
+          setItemTotal(sumOfTotal);
+        });
+    };
+
+    getViewCart();
+  }, [showPanel]);
 
   return (
     <>
@@ -58,22 +97,9 @@ const ProductCart = () => {
         </thead>
         {!isEmpty && (
           <tbody className="right-side-body">
-            <ItemRow disableDelete={true} pr20={true} />
-            <ItemRow disableDelete={true} pr20={true} />
-            <ItemRow disableDelete={true} pr20={true} />
-            <ItemRow disableDelete={true} pr20={true} />
-            <ItemRow
-              disableDelete={true}
-              pName={"Konica Chrome Konica Chrome"}
-              desc={"Magenta | 1 L. | RNB"}
-              pr20={true}
-            />
-            <ItemRow
-              disableDelete={true}
-              pName={"Konica Chrome Konica Chrome Konica Chrome Konica Chrome "}
-              desc={"Lemon Yellow | 5 L. | AK-RCT Bottle"}
-              pr20={true}
-            />
+            {cartItem.slice(0, 5).map((item, id) => (
+              <ItemRow disableDelete pr20 data={item} />
+            ))}
           </tbody>
         )}
       </Table>
@@ -87,7 +113,7 @@ const ProductCart = () => {
             </div>
             <ArrowLink title={"See all"} onClick={handleSetProduct} />
           </div>
-          <SeeAllProducts show={showAllProducts} handleClose={handleClose} />
+          <SeeAllProducts show={showAllProducts} handleClose={handleClose} data={cartItem}/>
 
           {/**OTHER INSTRUCTIONS */}
           <div className="other-instructions">
@@ -119,26 +145,36 @@ const ProductCart = () => {
             handleClose={handleCloseAddress}
             addAddress={addAddress}
             setAddress={setAddress}
+            data={cart}
           />
 
           {/**ITEMS TOTAL */}
           <div className="item-rate-div">
             <div>Items total</div>
-            <div>500</div>
+            <div>
+              {currencySymbol}
+              {itemTotal}
+            </div>
           </div>
           <div className="item-rate-div">
             <div>Taxes</div>
-            <div>$100</div>
+            <div>
+              {currencySymbol}
+              {cart.taxAmount}
+            </div>
           </div>
           <div className="simple-line"></div>
           <div className="total-rate-div">
             <div>Order total</div>
-            <div>$1600</div>
+            <div>
+              {currencySymbol}
+              {cart.totalAmount}
+            </div>
           </div>
 
           {/**PLACE ORDER - CLEAR CART */}
           <div className="cart-btns">
-            <Button className="clear" onClick={() => setIsEmpty(true)}>
+            <Button className="clear" onClick={emptyCart}>
               Clear Cart
             </Button>
             <Button className="place-order" onClick={() => setModalShow(true)}>

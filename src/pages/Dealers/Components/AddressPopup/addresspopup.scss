@@ -32,6 +32,25 @@
 
 .popup-container {
   margin: 0 50px;
+  height: 88vh;
+  position: relative;
+
+
+  .save-address-div{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    .save-address {
+      width: 80%;
+      margin-bottom: 20px;
+      border-radius: 12px !important;
+      padding: 18px;
+      margin-right: 0 !important;
+    }
+  }
+  
 }
 
 .newAddress-back {
@@ -44,6 +63,8 @@
     }
   }
 }
+
+
 
 @media (min-width: 1200px) and (max-width: 1439px) {
   .offcanvas.show.address-popup {

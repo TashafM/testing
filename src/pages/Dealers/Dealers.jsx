@@ -64,7 +64,7 @@ const Dealers = () => {
                     : "col-xl-3 col-lg-4 newnew"
                 }
               >
-                <ProductCart />
+                <ProductCart showPanel={showPanel}/>
               </div>
             </div>
           </div>
