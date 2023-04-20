@@ -32,7 +32,7 @@ function OtherInfoDetails({ show, handleClose, data, onUpdate, completeData }) {
               description=" Write down the company’s sales reach, services & support and
           interested to purchase"
             />
-            <div className="">
+            <div className="drawer-header-main-container">
               <BtnTitleCenter
                 title="Edit"
                 className="btn-bg-trasparent"
