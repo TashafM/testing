@@ -17,7 +17,7 @@ const SidePanel = ({ show, setShowPanel, data }) => {
       setCartProducts(products)
       
     }
-  },[cartProducts])
+  },[])
   
   return (
     <div className="sidepanel">

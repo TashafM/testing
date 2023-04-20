@@ -7,12 +7,12 @@ export const newAddressField = [
     {
         title: 'Contact Number',
         placeholderText: 'Enter your contact number',
-        name: 'contact'
+        name: 'contactNumber'
     },
     {
         title: 'House No. / Building No. / Floor*',
         placeholderText: 'Enter your house / building / floor no.',
-        name: 'house'
+        name: 'floorNumber'
     },
     {
         title: 'Block',

@@ -8,14 +8,14 @@ import * as Yup from "yup";
 
 const newAddressSchema = Yup.object().shape({
   fullname: Yup.string().required("Full Name is required"),
-  contact: Yup.string().matches(/^[0-9+\-()]*$/, "Invalid phone number"),
-  house: Yup.string().required("House/Buiding/Floor No. is required"),
+  contactNumber: Yup.string().matches(/^[0-9+\-()]*$/, "Invalid phone number"),
+  floorNumber: Yup.string().required("House/Buiding/Floor No. is required"),
   block: Yup.string(),
   street: Yup.string().required("Street is required"),
   city: Yup.string().required("City is required"),
   state: Yup.string().required("State is required"),
   country: Yup.string().required("Country is required"),
-  zipcode: Yup.string().required("Zip Code is required"),
+  zipcode: Yup.number().required("Zip Code is required"),
   googleplaces: Yup.string(),
 });
 
@@ -25,7 +25,7 @@ const NewAddress = ({ setAddress, editMode, setFreshAddress }) => {
       initialValues={{
         addressType: "shipping",
         ...newAddressField.reduce(
-          (acc, curr) => ({ ...acc, [curr.name]: "", touched: false }),
+          (acc, curr) => ({ ...acc, [curr.name]: "", selected: true }),
           {}
         ),
       }}
