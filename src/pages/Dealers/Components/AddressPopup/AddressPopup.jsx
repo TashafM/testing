@@ -8,9 +8,33 @@ import TextInput from "../../../../components/Input/TextInput";
 import SimpleInput from "../SimpleInput/SimpleInput";
 import NewAddress from "./NewAddress/NewAddress";
 import backpage from "../../../../assets/images/backpage.svg";
+import { axiosInstance } from "../../../../helper/axios";
+import { API } from "../../../../helper/API";
 
 const AddressPopup = ({ show, handleClose, setAddress, addAddress, data }) => {
   const [isEdit, setIsEdit] = useState(false);
+  const [freshAddress, setFreshAddress] = useState(null);
+
+  console.log(freshAddress, "from addresspopup");
+
+  const addApi = () => {
+    const principalCompanyUserCode = localStorage.getItem(
+      "principalCompanyUserCode"
+    );
+    const { addressType, googleplaces, ...addresses } = freshAddress;
+
+    const emptyAddresses = {};
+    Object.keys(addresses).forEach((key) => {
+      emptyAddresses[key] = key === "selected" ? false : "";
+    });
+    axiosInstance
+      .post(API.EDIT_CART_ADDRESS, {
+        principalCompanyUserCode,
+        shippingAddress: [addresses],
+        billingAddress: [emptyAddresses],
+      })
+      .then((res) => console.log(res, "from addApi"));
+  };
 
   const addNewAddress = () => {
     setAddress(false);
@@ -81,7 +105,9 @@ const AddressPopup = ({ show, handleClose, setAddress, addAddress, data }) => {
                   data={data.shippingAddress}
                 />
                 <div className="save-address-div">
-                  <Button className="save-address save-btn">Save</Button>
+                  <Button className="save-address save-btn" onClick={addApi}>
+                    Save
+                  </Button>
                 </div>
               </div>
             </>
@@ -90,7 +116,10 @@ const AddressPopup = ({ show, handleClose, setAddress, addAddress, data }) => {
               {isEdit ? (
                 <NewAddress setAddress={setAddress} editMode={true} />
               ) : (
-                <NewAddress setAddress={setAddress} />
+                <NewAddress
+                  setAddress={setAddress}
+                  setFreshAddress={setFreshAddress}
+                />
               )}
             </>
           )}

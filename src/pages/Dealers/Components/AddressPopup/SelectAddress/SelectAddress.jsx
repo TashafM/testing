@@ -24,7 +24,7 @@ const SelectAddress = ({
         {data.map((item, id) => (
           <>
             <div className="upper-line">
-              <input type="radio" name={name} value={value1} />
+              <input type="radio" name={name} value={value1} checked/>
               <div className="text-add">
                 {item.fullName}, {item.floorNumber}, {item.block}, {item.street}
                 , {item.city}, {item.state}, {item.country}, {item.zipCode}
