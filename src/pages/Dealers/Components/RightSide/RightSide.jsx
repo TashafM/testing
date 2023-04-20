@@ -9,7 +9,6 @@ import { axiosInstance } from "../../../../helper/axios";
 import { API } from "../../../../helper/API";
 
 function RightSide({ setShowPanel, cartProducts, setCartProducts }) {
-  const { setIsEmpty } = useContext(AddProducts);
 
   const addItemToCart = () => {
     const sgst = localStorage.getItem("sgstPercentage");

@@ -1,88 +1,44 @@
-// import React, { useState } from "react";
-// import { newAddressField } from "../data";
-// import SimpleInput from "../../SimpleInput/SimpleInput";
-// import "./newaddress.scss";
-// import { Button } from "react-bootstrap";
-
-// const NewAddress = ({ setAddress, editMode }) => {
-//   const [addressType, setAddressType] = useState('shipping');
-
-//   const handleSetAddressType = (event) => {
-//     setAddressType(event.target.value);
-//     console.log(event.target.value);
-//   }
-
-//   return (
-//     <div className="new-address">
-//       {editMode ? null : (
-//         <>
-//           <div className="shipping-billing">This address is :</div>
-//           <div className="radio-div">
-//             <div className="shipping">
-//               <input
-//                 type="radio"
-//                 name="shipping-billing"
-//                 id="shipping"
-//                 value="shipping"
-//                 checked={addressType === "shipping"}
-//                 onChange={handleSetAddressType}
-//               />
-//               <label htmlFor="shipping">Shipping address</label>
-//             </div>
-//             <div className="billing">
-//               <input
-//                 type="radio"
-//                 name="shipping-billing"
-//                 id="billing"
-//                 value="billing"
-//                 checked={addressType === "billing"}
-//                 onChange={handleSetAddressType}
-//               />
-//               <label htmlFor="billing">Billing address</label>
-//             </div>
-//           </div>
-//         </>
-//       )}
-
-//       {newAddressField.map((item) => (
-//         <SimpleInput title={item.title} placeholder={item.placeholderText} />
-//       ))}
-
-//       <div className="button-div">
-//         <Button className="save-btn" onClick={() => setAddress(true)}>
-//           Save
-//         </Button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default NewAddress;
-
-
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import { newAddressField } from "../data";
 import SimpleInput from "../../SimpleInput/SimpleInput";
 import "./newaddress.scss";
 import { Button } from "react-bootstrap";
+import * as Yup from "yup";
 
-const NewAddress = ({ setAddress, editMode }) => {
+const newAddressSchema = Yup.object().shape({
+  fullname: Yup.string().required("Full Name is required"),
+  contact: Yup.string().matches(/^[0-9+\-()]*$/, "Invalid phone number"),
+  house: Yup.string().required("House/Buiding/Floor No. is required"),
+  block: Yup.string(),
+  street: Yup.string().required("Street is required"),
+  city: Yup.string().required("City is required"),
+  state: Yup.string().required("State is required"),
+  country: Yup.string().required("Country is required"),
+  zipcode: Yup.string().required("Zip Code is required"),
+  googleplaces: Yup.string(),
+});
+
+const NewAddress = ({ setAddress, editMode, setFreshAddress }) => {
   return (
     <Formik
       initialValues={{
         addressType: "shipping",
         ...newAddressField.reduce(
-          (acc, curr) => ({ ...acc, [curr.name]: "" }),
+          (acc, curr) => ({ ...acc, [curr.name]: "", touched: false }),
           {}
         ),
       }}
       onSubmit={(values) => {
         console.log(values);
         setAddress(true);
+        console.log("clicked submit");
+        setFreshAddress(values)
       }}
+      validationSchema={newAddressSchema}
     >
-      {({ handleChange, values }) => (
+      {/* {({ handleChange, values }) => ( */}
+      {({ handleChange, values, errors, touched }) => (
         <Form className="new-address">
           {editMode ? null : (
             <>
@@ -117,7 +73,8 @@ const NewAddress = ({ setAddress, editMode }) => {
               placeholder={item.placeholderText}
               value={values[item.name]}
               onChange={handleChange}
-              name={item.name} // make sure the name attribute is set
+              name={item.name}
+              error={touched[item.name] && errors[item.name]} // display error if field has been touched and has an error message
             />
           ))}
 

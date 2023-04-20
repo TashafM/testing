@@ -4,9 +4,15 @@ import { Table } from "react-bootstrap";
 import ItemRow from "../ItemRow/ItemRow";
 
 const OrderListTable = ({ disableDelete, data, setData }) => {
+  // const del = (val) => {
+  //   const filtered = data.filter((item) => item.variantId !== val);
+  //   setData(filtered);
+  // };
+
   const del = (val) => {
     const filtered = data.filter((item) => item.variantId !== val);
     setData(filtered);
+    localStorage.setItem("cartProducts", JSON.stringify(filtered)); // Add this line to update local storage
   };
 
   return (

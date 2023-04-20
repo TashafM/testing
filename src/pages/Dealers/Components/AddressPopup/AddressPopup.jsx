@@ -10,7 +10,11 @@ import NewAddress from "./NewAddress/NewAddress";
 import backpage from "../../../../assets/images/backpage.svg";
 
 const AddressPopup = ({ show, handleClose, setAddress, addAddress, data }) => {
+  
   const [isEdit, setIsEdit] = useState(false);
+  const [freshAddress, setFreshAddress] = useState(null)
+
+  console.log(freshAddress,'from addresspopup')
 
   const addNewAddress = () => {
     setAddress(false);
@@ -90,7 +94,7 @@ const AddressPopup = ({ show, handleClose, setAddress, addAddress, data }) => {
               {isEdit ? (
                 <NewAddress setAddress={setAddress} editMode={true} />
               ) : (
-                <NewAddress setAddress={setAddress} />
+                <NewAddress setAddress={setAddress} setFreshAddress={setFreshAddress}/>
               )}
             </>
           )}
