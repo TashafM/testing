@@ -1,11 +1,15 @@
 import React from "react";
 import { Col } from "react-bootstrap";
-import Badges from "../../../../components/Input/Badges";
 import CardHead from "./CardHead";
 import quote from "../../../../assets/images/other-info.png";
 import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 
 function CardOtherInfo({ otherInfo, onClick }) {
+  console.log(
+    otherInfo.salesReachAt.length ||
+      otherInfo.interestedToPurchase.length ||
+      otherInfo.servicesAndSupport.details !== ""
+  );
   return (
     <Col className="card-wrapper" md={6} xl={4}>
       <div className="card-cont card-other-cont">
@@ -15,40 +19,28 @@ function CardOtherInfo({ otherInfo, onClick }) {
           icon={quote}
           changemargin={"csschange"}
         />
-        {/* <div className="row ">
-          <div className="col-6 title-other-Info">Our Sales reach is at</div>
-          <div className="col-6 title-other-Info d-flex">
-            {otherInfo?.salesReachAt &&
-              otherInfo?.salesReachAt.map((item) => {
-                return <Badges value={item.city} />;
-              })}
-          </div>
-        </div> */}
-        <div className="row ">
-          <div className="col-12 email margin-text title-our-service">
-            Our Services & support?
-          </div>
-          {otherInfo?.servicesAndSupport?.provided === "yes" ? (
-            <div className="col-12 email service-and-support margin-text">
-              {otherInfo?.servicesAndSupport?.details}
+        {otherInfo?.salesReachAt?.length ||
+        otherInfo?.interestedToPurchase?.length ||
+        otherInfo?.servicesAndSupport?.details !== "" ? (
+          <div>
+            <div className="row ">
+              <div className="col-12 email margin-text title-our-service">
+                Our Services & support?
+              </div>
+              {otherInfo?.servicesAndSupport?.provided === "yes" ? (
+                <div className="col-12 email service-and-support margin-text">
+                  {otherInfo?.servicesAndSupport?.details}
+                </div>
+              ) : null}
             </div>
-          ) : null}
-        </div>
 
-        <div className="d-flex justify-content-end btn-view-all-container">
-          <BtnTitleCenter title="View all" onClick={onClick} />
-        </div>
-        {/* <div className="row mb-2">
-          <div className="col-6 title-other-Info">
-            We are interested to purchase
-          </div> */}
-        {/* <div className="col-6 title-other-Info d-flex">
-            {otherInfo?.interestedToPurchase &&
-              otherInfo?.interestedToPurchase.map((item) => {
-                return <Badges key={item._id} value={item.value} />;
-              })}
-          </div> */}
-        {/* </div> */}
+            <div className="d-flex justify-content-end btn-view-all-container">
+              <BtnTitleCenter title="View all" onClick={onClick} />
+            </div>
+          </div>
+        ) : (
+          <p className="email empty-card-text">No info added yet.</p>
+        )}
       </div>
     </Col>
   );

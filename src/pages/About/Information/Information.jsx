@@ -10,7 +10,6 @@ import CardSocial from "./Component/CardSocial";
 import CardCompStatement from "./Component/CardCompStatement";
 import CardOtherInfo from "./Component/CardOtherInfo";
 import { Col } from "react-bootstrap";
-import BtnTitleIcon from "../../../components/Button/BtnTitleIcon";
 import { useContextProvider } from "../../../context";
 import EditAddress from "./Component/EditAddress";
 import { useState } from "react";
@@ -45,40 +44,23 @@ function Information() {
       ) : (
         <Row className="info-container">
           <Col className="card-wrapper" md={6} xl={4}>
-            {data[0]?.contactUs?.length ? (
-              <CardContacts
-                type={"Contact"}
-                contactUs={data[0]?.contactUs[0] ?? {}}
-                length={data[0]?.contactUs?.length ?? 0}
-                title="Contact"
-                onClick={() => {
-                  setOpenDrawer({
-                    type: "Contacts",
-                    title: "Contacts",
-                    open: true,
-                    data: [...data[0]?.contactUs],
-                    callback: onUpdate,
-                    completeData: data,
-                  });
-                }}
-              />
-            ) : (
-              <div className="card-cont default-height d-flex align-items-center justify-content-center">
-                <BtnTitleIcon
-                  title="Add Contacts"
-                  onClick={() => {
-                    setOpenDrawer({
-                      open: true,
-                      type: "Add Contact",
-                      title: "Add Contact",
-                      data: {},
-                      callback: onUpdate,
-                      completeData: data,
-                    });
-                  }}
-                />
-              </div>
-            )}
+            {/* {data[0]?.contactUs?.length ? ( */}
+            <CardContacts
+              type={"Contact"}
+              contactUs={data[0]?.contactUs ?? {}}
+              length={data[0]?.contactUs?.length ?? 0}
+              title="Contact"
+              onClick={() => {
+                setOpenDrawer({
+                  type: "Contacts",
+                  title: "Contacts",
+                  open: true,
+                  data: [...data[0]?.contactUs],
+                  callback: onUpdate,
+                  completeData: data,
+                });
+              }}
+            />
           </Col>
           <CardAddress
             onClick={() => {
@@ -182,7 +164,7 @@ function Information() {
             />
           )}
         </Row>
-      )}{" "}
+      )}
     </Container>
   );
 }
