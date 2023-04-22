@@ -50,8 +50,12 @@ function EditContacts() {
           }
 
           setOpenDrawer({
-            open: false,
-            type: "",
+            type: "Contacts",
+            title: "Contacts",
+            open: true,
+            data: d[0].contactUs,
+            callback: openDrawer.callback,
+            completeData: d,
           });
         });
       } else {
@@ -75,8 +79,12 @@ function EditContacts() {
           console.log({ d });
           openDrawer.callback(d);
           setOpenDrawer({
-            open: false,
-            type: "",
+            type: "Contacts",
+            title: "Contacts",
+            open: true,
+            data: d[0].contactUs,
+            callback: openDrawer.callback,
+            completeData: d,
           });
         });
       }

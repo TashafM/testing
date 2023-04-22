@@ -47,6 +47,11 @@ function EditContactList() {
       const d = JSON.parse(JSON.stringify(openDrawer.completeData));
       d[0].contactUs = arr;
       openDrawer.callback(d);
+      setOpenDrawer({
+        ...openDrawer,
+        data: arr,
+        completeData: d,
+      });
       setShowModal(false);
       setData(arr);
     });
