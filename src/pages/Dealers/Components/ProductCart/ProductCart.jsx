@@ -18,12 +18,21 @@ import { API } from "../../../../helper/API";
 
 const ProductCart = ({ showPanel }) => {
   // const { isEmpty, setIsEmpty } = useContext(AddProducts);
+
+  //==========================BILLING-ADDRESS | SHIPPING-ADDRESS==========================
+  const [billingAddress, setBillingAddress] = useState([]);
+  const [shippingAddress, setShippingAddress] = useState([]);
+  const [defaultShipping, setDefaultShipping] = useState([]);
+  const [defaultBilling, setDefaultBilling] = useState([]);
+
   const { setShowPanel } = useContext(GlobalSidePanel);
   const [showAllProducts, setShowAllProducts] = useState(false);
   const handleSetProduct = () => {
     setShowAllProducts(true);
   };
-  const handleClose = () => setShowAllProducts(false);
+  const handleClose = () => {
+    setShowAllProducts(false);
+  };
 
   //------------------ADRESS POPUP--------------------------
   const [showAddress, setShowAddress] = useState(false);
@@ -34,6 +43,9 @@ const ProductCart = ({ showPanel }) => {
   const handleCloseAddress = () => {
     setShowAddress(false);
     setAddress(true);
+    setShippingAddress(defaultShipping);
+    setBillingAddress(defaultBilling);
+    console.log("closed");
   };
 
   //--------------------------------------------------------
@@ -57,9 +69,10 @@ const ProductCart = ({ showPanel }) => {
     const principalCompanyUserCode = localStorage.getItem(
       "principalCompanyUserCode"
     );
-    axiosInstance.post(API.DEALER_CLEAR_CART,{principalCompanyUserCode})
-    .then((res)=>res.success && setIsEmpty(true))
-  }
+    axiosInstance
+      .post(API.DEALER_CLEAR_CART, { principalCompanyUserCode })
+      .then((res) => res.success && setIsEmpty(true));
+  };
 
   useEffect(() => {
     const getViewCart = () => {
@@ -71,6 +84,11 @@ const ProductCart = ({ showPanel }) => {
         .then((res) => {
           setCartItem(res.result[0].cartItems);
           setCart(res.result[0]);
+          setBillingAddress(res.result[0].billingAddress);
+          setShippingAddress(res.result[0].shippingAddress);
+          setDefaultBilling(res.result[0].billingAddress);
+          setDefaultShipping(res.result[0].shippingAddress);
+
           if (res.result[0].cartItems.length > 0) {
             setIsEmpty(false);
           }
@@ -84,6 +102,15 @@ const ProductCart = ({ showPanel }) => {
 
     getViewCart();
   }, [showPanel]);
+
+  //==============================================SET ADDRESS API
+  const dummy = () => {
+    axiosInstance.post(API.EDIT_CART_ADDRESS,{
+      principalCompanyUserCode: localStorage.getItem('principalCompanyUserCode'),
+      billingAddress: billingAddress,
+      shippingAddress: shippingAddress,
+    }).then((res)=>console.log(res))
+  };
 
   return (
     <>
@@ -113,7 +140,11 @@ const ProductCart = ({ showPanel }) => {
             </div>
             <ArrowLink title={"See all"} onClick={handleSetProduct} />
           </div>
-          <SeeAllProducts show={showAllProducts} handleClose={handleClose} data={cartItem}/>
+          <SeeAllProducts
+            show={showAllProducts}
+            handleClose={handleClose}
+            data={cartItem}
+          />
 
           {/**OTHER INSTRUCTIONS */}
           <div className="other-instructions">
@@ -145,7 +176,12 @@ const ProductCart = ({ showPanel }) => {
             handleClose={handleCloseAddress}
             addAddress={addAddress}
             setAddress={setAddress}
-            data={cart}
+            billingAddress={billingAddress}
+            shippingAddress={shippingAddress}
+            setShippingAddress={setShippingAddress}
+            setBillingAddress={setBillingAddress}
+            callApi={dummy}
+            // data={cart}
           />
 
           {/**ITEMS TOTAL */}

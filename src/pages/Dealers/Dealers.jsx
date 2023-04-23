@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Outlet, useLocation } from "react-router";
 import Menus from "../../components/Menus/Menus";
 import MobileNotSupported from "../../components/MobileNotSupported/MobileNotSupported";
@@ -26,6 +26,7 @@ const Dealers = () => {
 
   //--------------FOR SIDE PANEL OPENING----------------
   const [showPanel, setShowPanel] = useState(false);
+
   return (
     <>
       <GlobalSidePanel.Provider value={{ showPanel, setShowPanel }}>

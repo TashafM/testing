@@ -12,6 +12,7 @@ const SelectAddress = ({
   setAddress,
   data,
 }) => {
+  // console.log(data,'jjjjjjjj')
   const editEnable = () => {
     setAddress(false);
     setIsEdit(true);
@@ -23,8 +24,10 @@ const SelectAddress = ({
       <div className="address-box">
         {data.map((item, id) => (
           <>
+            {id !== 0 && <div className="address-divider"></div>}
+
             <div className="upper-line">
-              <input type="radio" name={name} value={value1} checked/>
+              <input type="radio" name={name} value={value1} checked />
               <div className="text-add">
                 {item.fullName}, {item.floorNumber}, {item.block}, {item.street}
                 , {item.city}, {item.state}, {item.country}, {item.zipCode}
@@ -33,10 +36,8 @@ const SelectAddress = ({
             </div>
             <div className="mobile-line">
               <div className="num">{item.contactNumber}</div>
-              {id!==0 && <img src={deleteIcon} alt="" />}
+              {id !== 0 && <img src={deleteIcon} alt="" />}
             </div>
-
-            <div className="address-divider"></div>
           </>
         ))}
       </div>

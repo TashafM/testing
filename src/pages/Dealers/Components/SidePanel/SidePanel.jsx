@@ -7,6 +7,7 @@ import RightSide from "../RightSide/RightSide";
 const SidePanel = ({ show, setShowPanel, data }) => {
   const [cartProducts, setCartProducts] = useState([]);
 
+
   useEffect(()=>{
     if (localStorage.getItem('cartProducts')) {
       // Retrieve the data as a string

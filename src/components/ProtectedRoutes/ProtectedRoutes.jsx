@@ -10,7 +10,7 @@ const ProtectedRoutes = (props) => {
         if(!login){
             navigate(`/`);
         }
-    })
+    },[])
   return (
     <>
         <Component/>

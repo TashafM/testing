@@ -11,30 +11,51 @@ import backpage from "../../../../assets/images/backpage.svg";
 import { axiosInstance } from "../../../../helper/axios";
 import { API } from "../../../../helper/API";
 
-const AddressPopup = ({ show, handleClose, setAddress, addAddress, data }) => {
+const AddressPopup = ({ show, handleClose, setAddress, addAddress, shippingAddress, billingAddress, setShippingAddress, setBillingAddress, callApi }) => {
   const [isEdit, setIsEdit] = useState(false);
-  const [freshAddress, setFreshAddress] = useState(null);
 
-  console.log(freshAddress, "from addresspopup");
+  // const addApi = () => {
+  //   const principalCompanyUserCode = localStorage.getItem(
+  //     "principalCompanyUserCode"
+  //   );
+  //   const { addressType, googleplaces, ...addresses } = freshAddress;
 
-  const addApi = () => {
-    const principalCompanyUserCode = localStorage.getItem(
-      "principalCompanyUserCode"
-    );
-    const { addressType, googleplaces, ...addresses } = freshAddress;
-
-    const emptyAddresses = {};
-    Object.keys(addresses).forEach((key) => {
-      emptyAddresses[key] = key === "selected" ? false : "";
-    });
-    axiosInstance
-      .post(API.EDIT_CART_ADDRESS, {
-        principalCompanyUserCode,
-        shippingAddress: [addresses],
-        billingAddress: [emptyAddresses],
-      })
-      .then((res) => console.log(res, "from addApi"));
-  };
+  //   const emptyAddresses = {};
+  //   Object.keys(addresses).forEach((key) => {
+  //     emptyAddresses[key] = key === "selected" ? true : "";
+  //   });
+  //   axiosInstance
+  //     .post(API.EDIT_CART_ADDRESS, {
+  //       principalCompanyUserCode,
+  //       shippingAddress: [
+  //         {
+  //           ...addresses,
+  //           address: {
+  //             city: "",
+  //             state: "",
+  //             country: "",
+  //             latitude: "",
+  //             longitude: "",
+  //             fullAddress:'',
+  //           },
+  //         },
+  //       ],
+  //       billingAddress: [
+  //         {
+  //           ...emptyAddresses,
+  //           address: {
+  //             city: "",
+  //             state: "",
+  //             country: "",
+  //             latitude: "",
+  //             longitude: "",
+  //             fullAddress: '',
+  //           },
+  //         },
+  //       ],
+  //     })
+  //     .then((res) => console.log(res, "from addApi"));
+  // };
 
   const addNewAddress = () => {
     setAddress(false);
@@ -93,7 +114,8 @@ const AddressPopup = ({ show, handleClose, setAddress, addAddress, data }) => {
                   value2={"s-address2"}
                   setIsEdit={setIsEdit}
                   setAddress={setAddress}
-                  data={data.billingAddress}
+                  data={shippingAddress}
+                  // addAddressFunction={setBillingAddress}
                 />
                 <SelectAddress
                   title={"Bill To"}
@@ -102,10 +124,12 @@ const AddressPopup = ({ show, handleClose, setAddress, addAddress, data }) => {
                   value2={"b-address2"}
                   setIsEdit={setIsEdit}
                   setAddress={setAddress}
-                  data={data.shippingAddress}
+                  data={billingAddress}
+                  // addAddressFunction={setShippingAddress}
                 />
                 <div className="save-address-div">
-                  <Button className="save-address save-btn" onClick={addApi}>
+                  {/* <Button className="save-address save-btn" onClick={addApi}> */}
+                  <Button className="save-address save-btn" onClick={callApi}>
                     Save
                   </Button>
                 </div>
@@ -117,8 +141,7 @@ const AddressPopup = ({ show, handleClose, setAddress, addAddress, data }) => {
                 <NewAddress setAddress={setAddress} editMode={true} />
               ) : (
                 <NewAddress
-                  setAddress={setAddress}
-                  setFreshAddress={setFreshAddress}
+                  setAddress={setAddress} setShipping={setShippingAddress} setBilling={setBillingAddress} billingAddress={billingAddress} shippingAddress={shippingAddress}
                 />
               )}
             </>

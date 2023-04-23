@@ -7,7 +7,7 @@ import { Button } from "react-bootstrap";
 import * as Yup from "yup";
 
 const newAddressSchema = Yup.object().shape({
-  fullname: Yup.string().required("Full Name is required"),
+  fullName: Yup.string().required("Full Name is required"),
   contactNumber: Yup.string().matches(/^[0-9+\-()]*$/, "Invalid phone number"),
   floorNumber: Yup.string().required("House/Buiding/Floor No. is required"),
   block: Yup.string(),
@@ -15,17 +15,27 @@ const newAddressSchema = Yup.object().shape({
   city: Yup.string().required("City is required"),
   state: Yup.string().required("State is required"),
   country: Yup.string().required("Country is required"),
-  zipcode: Yup.number().required("Zip Code is required"),
+  zipCode: Yup.number().required("Zip Code is required"),
   googleplaces: Yup.string(),
 });
 
-const NewAddress = ({ setAddress, editMode, setFreshAddress }) => {
+const NewAddress = ({
+  setAddress,
+  editMode,
+  setShipping,
+  setBilling,
+  billingAddress,
+  shippingAddress,
+}) => {
+  console.log(billingAddress, "billing array");
+  console.log(shippingAddress, "shipping array");
+
   return (
     <Formik
       initialValues={{
         addressType: "shipping",
         ...newAddressField.reduce(
-          (acc, curr) => ({ ...acc, [curr.name]: "", selected: true }),
+          (acc, curr) => ({ ...acc, [curr.name]: "", selected: false }),
           {}
         ),
       }}
@@ -33,7 +43,42 @@ const NewAddress = ({ setAddress, editMode, setFreshAddress }) => {
         console.log(values);
         setAddress(true);
         console.log("clicked submit");
-        setFreshAddress(values)
+
+        if (values.addressType == "shipping") {
+          const blankAddress = {
+            city: "",
+            country: "",
+            fullAddress: "",
+            latitude: "",
+            longitude: "",
+            state: "",
+          };
+          const { googleplaces, addressType, ...restdata } = values;
+          console.log("executed");
+          const shippingArray = [
+            ...shippingAddress,
+            { ...restdata, ...{ address: blankAddress } },
+          ];
+          console.log(shippingArray);
+          setShipping(shippingArray);
+        } else {
+          const blankAddress = {
+            city: "",
+            country: "",
+            fullAddress: "",
+            latitude: "",
+            longitude: "",
+            state: "",
+          };
+          const { googleplaces, addressType, ...restdata } = values;
+          console.log("executed");
+          const billingArray = [
+            ...billingAddress,
+            { ...restdata, ...{ address: blankAddress } },
+          ];
+          console.log(billingArray);
+          setBilling(billingArray);
+        }
       }}
       validationSchema={newAddressSchema}
     >

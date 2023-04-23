@@ -12,6 +12,7 @@
     border: 1px solid #cccccc;
     border-radius: 8px;
     padding: 20px;
+    position: relative;
     .upper-line {
       display: flex;
       align-items: center;
@@ -65,7 +66,7 @@
       padding: 15px;
       margin-top: 10px;
       .upper-line {
-        img{
+        img {
           margin-top: -20px;
           width: 15px;
         }
@@ -76,7 +77,7 @@
         }
       }
       .mobile-line {
-        img{
+        img {
           width: 15px;
         }
         .num {
@@ -85,7 +86,7 @@
         }
       }
 
-      .address-divider{
+      .address-divider {
         margin: 10px 0;
       }
     }
