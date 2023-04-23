@@ -13,13 +13,7 @@ function About() {
     error,
   } = useResponse("/portalViewCompanyAboutUsInfo");
 
-  if (loading) {
-    return (
-      <div className="upper-content about-sectio">
-        <div>loading</div>
-      </div>
-    );
-  }
+  const userData = JSON.parse(localStorage.getItem("userData") ?? "");
 
   if (error.error) {
     return (
@@ -32,10 +26,10 @@ function About() {
   return (
     <div className="upper-content about-sectio">
       <div className="about-wrapper">
-        <Description />
+        <Description userData={userData} />
         <UnderLineTabs tabs={AboutTabs} />
         <div className="tabs-container-section">
-          <Outlet context={[aboutData, setData]} />
+          <Outlet context={[aboutData, setData, loading]} />
         </div>
       </div>
     </div>

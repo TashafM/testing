@@ -7,13 +7,22 @@
   color: #899197;
   margin-bottom: 40px;
 }
+.drawer-header-main-container {
+  button {
+    background-color: #fff;
+    color: #be212a;
+  }
+}
 
 .btn-add-container {
-  width: 70px;
+  width: 100px;
   position: absolute;
-
-  top: 31px;
+  top: 32px;
   right: 42px;
+  button {
+    color: #be212a !important;
+    background-color: #fff;
+  }
 }
 
 .count-text-color {

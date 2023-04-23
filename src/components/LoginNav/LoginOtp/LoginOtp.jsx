@@ -84,8 +84,8 @@ const LoginOtp = () => {
           localStorage.setItem("usercode", res.data.userCode);
           localStorage.setItem("accessToken", res.data.result[0].accessToken);
           localStorage.setItem("username", res.data.userName);
-          delete res.data.result[0].accessToken;
-          localStorage.setItem("userData", JSON.stringify(res.data.result[0]));
+          delete res?.data?.result;
+          localStorage.setItem("userData", JSON.stringify(res?.data));
           navigate("/select-account-type");
         }
       });

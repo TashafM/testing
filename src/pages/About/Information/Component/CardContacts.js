@@ -17,24 +17,31 @@ function CardContacts({ contactUs, length, onClick, type, title, children }) {
         onClick={onClick}
         data={contactUs}
       />
-      <div className="d-flex email-cont align-items-center">
-        <img className="" height={25} src={email} alt="email-icon" />
-        <div className="d-flex justify-content-between align-items-center flex-grow-1 overflow-hidden">
-          <span className="email email-overflow-container">
-            {contactUs?.email ?? ""}
-          </span>
-          {length > 1 ? (
-            <div className="d-flex contacts-count align-items-center justify-content-center">
-              <span className="email count-text-color m-0">+{length - 1}</span>
+      {contactUs.length ? (
+        <div>
+          <div className="d-flex email-cont align-items-center">
+            <img className="" height={25} src={email} alt="email-icon" />
+            <div className="d-flex justify-content-between align-items-center flex-grow-1 overflow-hidden">
+              <span className="email email-overflow-container">
+                {contactUs?.[0].email ?? ""}
+              </span>
+              {length > 1 ? (
+                <div className="d-flex contacts-count align-items-center justify-content-center">
+                  <span className="email count-text-color m-0">
+                    +{length - 1}
+                  </span>
+                </div>
+              ) : null}
             </div>
-          ) : null}
+          </div>
+          <div className="d-flex">
+            <img height={25} src={phone} alt="phone-icon" />
+            <span className="email phone">{contactUs?.[0].contact ?? ""}</span>
+          </div>
         </div>
-      </div>
-      <div className="d-flex">
-        <img height={25} src={phone} alt="phone-icon" />
-        <span className="email phone">{contactUs?.contact ?? ""}</span>
-      </div>
-      {children}
+      ) : (
+        <p className="email empty-card-text"> No contacts added yet.</p>
+      )}
     </div>
   );
 }
