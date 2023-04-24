@@ -1,19 +1,15 @@
 import React, { useState } from "react";
-import { brandData } from "../data/data";
 import CardBrand from "./Component/CardBrand";
 import BtnTitleCenter from "../../../components/Button/BtnTitleCenter";
 import "./Brand.scss";
-import { useContextProvider } from "../../../context";
 import { useResponse } from "../../../hooks/useResponse";
 import AddBrand from "./Component/AddBrand";
-import { setIn } from "formik";
 import { usePostAsyncResponse } from "../../../hooks/usePostAsyncResponse";
 import { toast } from "react-toastify";
 import ConfirmBox from "../../../components/ConfirmBox/ConfirmBox";
 import { CircularProgress } from "@mui/material";
 
 function Brand() {
-  const { setOpenDrawer } = useContextProvider();
   const { data, setData, loading } = useResponse("/portalViewCompanyBrands");
   const [showBrand, setShowBrand] = useState({
     open: false,
@@ -23,9 +19,7 @@ function Brand() {
   const [showModal, setShowModal] = useState(false);
   const [deletedItem, setDeletedItem] = useState({ item: {}, index: -1 });
 
-  const [deleteData, { loading: deleteLoading }] = usePostAsyncResponse(
-    "/portalDeleteCompanyBrands"
-  );
+  const [deleteData] = usePostAsyncResponse("/portalDeleteCompanyBrands");
   const [index, setIndex] = useState(-1);
 
   const onDeleteBrand = () => {

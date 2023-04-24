@@ -100,12 +100,13 @@ function EditContacts() {
     // }
   };
 
-  const [postData, { loading, error }] = usePostAsyncResponse(
+  const [postData, { loading }] = usePostAsyncResponse(
     "/portalPostCompanyContactUsDetails"
   );
 
-  const [pathcData, { loading: editLoading, error: errorPatch }] =
-    usePatchAsyncReponse("/portalPatchCompanyContactUsDetails");
+  const [pathcData, { loading: editLoading }] = usePatchAsyncReponse(
+    "/portalPatchCompanyContactUsDetails"
+  );
   return (
     <div>
       <p className="drawer-title">

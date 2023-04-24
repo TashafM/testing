@@ -82,31 +82,16 @@ export const AboutTabs = [
   // },
 ];
 
-export const dealerOrderTabs = [
-  {
-    id: 1,
-    title: "Current Orders",
-    index: 1,
-    link: "/dealers/orders",
-  },
-  {
-    id: 2,
-    title: "Past Orders",
-    index: 2,
-    link: "/dealers/orders/past-order",
-  },
-];
-
 export const delalersCurrentOrderColumn = [
   { title: "#", value: "#" },
-  { title: "Order No.", value: "orderNo" },
-  { title: "PO number", value: "poNumber" },
-  { title: "Partner", value: "partner" },
-  { title: "Place of Delivery", value: "placeOfDelivery" },
-  { title: "Order Date", value: "orderDate" },
-  { title: "No. of Item", value: "totalItems" },
-  { title: "Price", value: "price" },
-  { title: "Status", value: "status" },
+  { value: "Order No.", title: "orderNumber" },
+  { value: "PO number", title: "purchaseOrderNumber" },
+  { value: "Partner", title: "companyName" },
+  { value: "Place of Delivery", title: "placeOfDelivery" },
+  { value: "Order Date", title: "orderDate" },
+  { value: "No. of Item", title: "numberOfItems" },
+  { value: "Price", title: "totalAmount" },
+  { value: "Status", title: "orderStatus" },
 ];
 
 export const delalersCurrentOrderData = [
@@ -284,17 +269,17 @@ export const delalersCurrentOrderData = [
 
 export const orderDetailColumn = [
   { title: "SI No", value: "SI No" },
-  { title: "BP Catalog Code", value: "bpCatalogCode" },
+  { title: "BP Catalog Code", value: "bpCatalogNumber" },
   { title: "Item Description", value: "itemDescription" },
-  { title: "Qty", value: "qty" },
-  { title: "Price per unit", value: "pricePerUnit" },
-  { title: "Amount", value: "amount" },
-  { title: "Rate (CGST)", value: "rate" },
-  { title: "Amount (CGST)", value: "amountCGST" },
-  { title: "Rate (SGST)", value: "rateSGST" },
-  { title: "Amount (SGST)", value: "amountSGST" },
-  { title: "Rate (IGST)", value: "rateIGST" },
-  { title: "Amount (IGST)", value: "amountIGST" },
+  { title: "Qty", value: "quantity" },
+  { title: "Price per unit", value: "grossPrice" },
+  { title: "Amount", value: "totalPrice" },
+  { title: "Rate (CGST)", value: "cgstPercentage" },
+  { title: "Amount (CGST)", value: "cgstAmount" },
+  { title: "Rate (SGST)", value: "sgstPercentage" },
+  { title: "Amount (SGST)", value: "sgstAmount" },
+  { title: "Rate (IGST)", value: "igstPercentage" },
+  { title: "Amount (IGST)", value: "igstAmount" },
   { title: "Taxable Amount", value: "taxableAmount" },
   { title: "Total Amount", value: "totalAmount" },
 ];

@@ -7,10 +7,59 @@ import shipping from "../../../../assets/images/shipping.png";
 import ViewAddress from "./component/drawer/ViewAddress";
 import { useState } from "react";
 import ViewOtherInfo from "./component/drawer/ViewOtherInfo";
+import { useEffect } from "react";
+import { usePaginatedData } from "../../../../hooks/pagination/usePaginatedData";
+import { useLocation } from "react-router-dom";
+import OrderTable from "../../../Home/Orders/components/OrderTable/OrderTable";
+import { CircularProgress } from "@mui/material";
+import { prepareAddressString } from "../../../../components/Utils/Utils";
 
 function DealerOrderDetails() {
   const [showAddress, setShowAddress] = useState(false);
   const [showOther, setShowOther] = useState(false);
+  const location = useLocation();
+  const orderId = location.state.data;
+
+  const [page, setPage] = useState(0);
+
+  const { data, loading, setData, getData } = usePaginatedData();
+
+  useEffect(() => {
+    getCurrentOrders();
+  }, []);
+
+  const getCurrentOrders = () => {
+    const count = page + 1;
+    const body = {
+      orderId: orderId.orderId,
+    };
+    const url = `/dealerViewOrderDetails?start=${count}&offset=10`;
+    getData(
+      url,
+      count,
+      (res) => {
+        if (count === 1) {
+          setData(res.result);
+        } else {
+          setData([...data, ...res.result]);
+        }
+        // setPage(count);
+        console.log({ res });
+      },
+      body
+    );
+  };
+
+  if (loading) {
+    return (
+      <div className="default-height">
+        <CircularProgress size={24} />
+      </div>
+    );
+  }
+
+  console.log(data);
+
   return (
     <div className="dealers-order-main-container">
       <div className="container-fluid m-0 p-0 ">
@@ -33,10 +82,13 @@ function DealerOrderDetails() {
                 </div>
                 <div className="address-field">
                   <p className="m-0 over-flow-text ">
-                    28, Rajasthani Udhyog Nagar, G.T. Karnal Road, Delhi -
-                    110033 IN
+                    {data?.length
+                      ? prepareAddressString(data[0]?.billingAddress ?? {})
+                      : ""}
                   </p>
-                  <p className="m-0">+91-22-28770321</p>
+                  <p className="m-0">
+                    {data.length ? data[0].billingAddress?.contactNumber : ""}
+                  </p>
                 </div>
               </div>
               <div className=" flex-grow-1  detail-top-card width-50 ">
@@ -51,10 +103,15 @@ function DealerOrderDetails() {
                   </div>
                   <div className="address-field">
                     <p className="m-0 over-flow-text">
-                      28, Rajasthani Udhyog Nagar, G.T. Karnal Road, Delhi -
-                      110033 IN
+                      {data?.length
+                        ? prepareAddressString(data[0]?.shippingAddress ?? {})
+                        : ""}
                     </p>
-                    <p className="m-0">+91-22-28770321</p>
+                    <p className="m-0">
+                      {data?.length
+                        ? data[0]?.shippingAddress?.contactNumber
+                        : ""}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -122,7 +179,10 @@ function DealerOrderDetails() {
         />
       )}
 
-      <DealersTable column={orderDetailColumn} row={orderDetailRow} />
+      <OrderTable
+        columns={orderDetailColumn}
+        data={data?.length ? data[0]?.order ?? [] : []}
+      />
     </div>
   );
 }

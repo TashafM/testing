@@ -2,9 +2,9 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import TopBar from "../../Components/TopBar/TopBar";
 import UnderLineTabs from "../../../../components/Tabs/UnderLineTabs";
-import { dealerOrderTabs } from "../../../About/data/data";
 import { useLocation } from "react-router-dom";
 import "./dealerorders.scss";
+import { dealerOrderTabs } from "../../../../constant/tabsData";
 
 const DealerOrders = () => {
   const location = useLocation();

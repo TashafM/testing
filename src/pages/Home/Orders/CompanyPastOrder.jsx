@@ -1,17 +1,16 @@
 import React from "react";
+import PlainTable from "../../../components/PlainTable/PlainTable";
 import { useState } from "react";
+import { usePaginatedData } from "../../../hooks/pagination/usePaginatedData";
 import { useEffect } from "react";
+import { companyCurrentOrder } from "../../../constant/tablesTitle";
 import { CircularProgress } from "@mui/material";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useNavigate } from "react-router-dom";
-import { usePaginatedData } from "../../../../hooks/pagination/usePaginatedData";
-import PlainTable from "../../../../components/PlainTable/PlainTable";
-import { delalersCurrentOrderColumn } from "../../../About/data/data";
 
-function DealerPastOrder() {
+function CompanyPastOrder() {
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
-
   const { data, loading, setData, error, getData } = usePaginatedData();
 
   const getCurrentOrders = () => {
@@ -23,6 +22,7 @@ function DealerPastOrder() {
       } else {
         setData([...data, ...res.result]);
       }
+
       setPage(count);
       console.log({ res });
     });
@@ -41,10 +41,8 @@ function DealerPastOrder() {
   }
 
   const onDetailClicked = (item) => {
-    navigate(`/dealers/orders/detail`, { state: { data: item } });
+    navigate(`/home/order/details`, { state: { data: item } });
   };
-
-  console.log({ data });
   return (
     <InfiniteScroll
       dataLength={data.length}
@@ -53,12 +51,13 @@ function DealerPastOrder() {
       scrollableTarget="order-table-container"
     >
       <PlainTable
-        columns={delalersCurrentOrderColumn}
+        columns={companyCurrentOrder}
         data={data}
         onClick={onDetailClicked}
+        type={"company"}
       />
     </InfiniteScroll>
   );
 }
 
-export default DealerPastOrder;
+export default CompanyPastOrder;

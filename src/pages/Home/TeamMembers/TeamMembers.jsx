@@ -19,7 +19,7 @@ import { GlobalContext } from "../../../App";
 
 const TeamMembers = (props) => {
   const location = useLocation();
-  const {loading, setLoading, msg, setMsg} = useContext(GlobalContext)
+  const { loading, setLoading, msg, setMsg } = useContext(GlobalContext);
   //-----------------
   // const [currentData, setCurrentData] = useState([]);
   //--------------
@@ -84,7 +84,7 @@ const TeamMembers = (props) => {
   const [data, setData] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
-  const [dataTotal, setDataTotal] = useState(0)
+  const [dataTotal, setDataTotal] = useState(0);
 
   const getCurrMembers = (p) => {
     const accessToken = localStorage.getItem("accessToken");
@@ -112,22 +112,21 @@ const TeamMembers = (props) => {
 
         setPage((prevPage) => start + 10);
         setDataTotal(res.totalCurrentTeamMembersCount);
-        setLoading(false)
+        setLoading(false);
       });
     // .then((res) => console.log(res.result,'save'));
     // console.log(res,'00000000000')
   };
   const handleLoadMore = () => {
-    setMsg('Loading more data...')
+    setMsg("Loading more data...");
     setTimeout(() => {
-      getCurrMembers()
+      getCurrMembers();
     }, 1000);
-    if(data.length>=dataTotal){
+    if (data.length >= dataTotal) {
       setHasMore(false);
     }
     // getCurrMembers(page+10); // this change is done
   };
-
 
   //----------------------END CURRENT MEMBER API-----------------
 
@@ -140,7 +139,7 @@ const TeamMembers = (props) => {
     axios
       .post(
         // `https://dev.elred.io/portalViewCompanyCurrentTeamMembers?start=${page}&offset=10`,
-        API.VIEW_PAST_TEAM_MEMBERS + `start=${start}&offset=10`,
+        API.VIEW_PAST_TEAM_MEMBERS + `start=${start}&offset=3`,
         { companyUserCode: userCode },
         {
           headers: {
