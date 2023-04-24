@@ -11,56 +11,26 @@ import backpage from "../../../../assets/images/backpage.svg";
 import { axiosInstance } from "../../../../helper/axios";
 import { API } from "../../../../helper/API";
 
-const AddressPopup = ({ show, handleClose, setAddress, addAddress, shippingAddress, billingAddress, setShippingAddress, setBillingAddress, callApi }) => {
+const AddressPopup = ({
+  show,
+  handleClose,
+  setAddress,
+  addAddress,
+  shippingAddress,
+  billingAddress,
+  setShippingAddress,
+  setBillingAddress,
+  callApi,
+  setDisplayAddress
+}) => {
   const [isEdit, setIsEdit] = useState(false);
-
-  // const addApi = () => {
-  //   const principalCompanyUserCode = localStorage.getItem(
-  //     "principalCompanyUserCode"
-  //   );
-  //   const { addressType, googleplaces, ...addresses } = freshAddress;
-
-  //   const emptyAddresses = {};
-  //   Object.keys(addresses).forEach((key) => {
-  //     emptyAddresses[key] = key === "selected" ? true : "";
-  //   });
-  //   axiosInstance
-  //     .post(API.EDIT_CART_ADDRESS, {
-  //       principalCompanyUserCode,
-  //       shippingAddress: [
-  //         {
-  //           ...addresses,
-  //           address: {
-  //             city: "",
-  //             state: "",
-  //             country: "",
-  //             latitude: "",
-  //             longitude: "",
-  //             fullAddress:'',
-  //           },
-  //         },
-  //       ],
-  //       billingAddress: [
-  //         {
-  //           ...emptyAddresses,
-  //           address: {
-  //             city: "",
-  //             state: "",
-  //             country: "",
-  //             latitude: "",
-  //             longitude: "",
-  //             fullAddress: '',
-  //           },
-  //         },
-  //       ],
-  //     })
-  //     .then((res) => console.log(res, "from addApi"));
-  // };
 
   const addNewAddress = () => {
     setAddress(false);
     setIsEdit(false);
   };
+
+  const [editData, setEditData] = useState([]);
   return (
     <div className="addresspopup">
       <Offcanvas
@@ -69,6 +39,7 @@ const AddressPopup = ({ show, handleClose, setAddress, addAddress, shippingAddre
         placement="end"
         className="address-popup"
       >
+        
         <Offcanvas.Header closeButton={addAddress && true}>
           <Offcanvas.Title>
             {addAddress ? (
@@ -115,6 +86,9 @@ const AddressPopup = ({ show, handleClose, setAddress, addAddress, shippingAddre
                   setIsEdit={setIsEdit}
                   setAddress={setAddress}
                   data={shippingAddress}
+                  addAddressFunction={setShippingAddress}
+                  setEditData={setEditData}
+                  setDisplayAddress={setDisplayAddress}
                   // addAddressFunction={setBillingAddress}
                 />
                 <SelectAddress
@@ -125,10 +99,11 @@ const AddressPopup = ({ show, handleClose, setAddress, addAddress, shippingAddre
                   setIsEdit={setIsEdit}
                   setAddress={setAddress}
                   data={billingAddress}
-                  // addAddressFunction={setShippingAddress}
+                  addAddressFunction={setBillingAddress}
+                  setEditData={setEditData}
+                  setDisplayAddress={setDisplayAddress}
                 />
                 <div className="save-address-div">
-                  {/* <Button className="save-address save-btn" onClick={addApi}> */}
                   <Button className="save-address save-btn" onClick={callApi}>
                     Save
                   </Button>
@@ -138,10 +113,22 @@ const AddressPopup = ({ show, handleClose, setAddress, addAddress, shippingAddre
           ) : (
             <>
               {isEdit ? (
-                <NewAddress setAddress={setAddress} editMode={true} />
+                <NewAddress
+                  setAddress={setAddress}
+                  editMode={true}
+                  editData={editData}
+                  setShipping={setShippingAddress}
+                  shippingAddress={shippingAddress}
+                  setBilling={setBillingAddress}
+                  billingAddress={billingAddress}
+                />
               ) : (
                 <NewAddress
-                  setAddress={setAddress} setShipping={setShippingAddress} setBilling={setBillingAddress} billingAddress={billingAddress} shippingAddress={shippingAddress}
+                  setAddress={setAddress}
+                  setShipping={setShippingAddress}
+                  setBilling={setBillingAddress}
+                  billingAddress={billingAddress}
+                  shippingAddress={shippingAddress}
                 />
               )}
             </>

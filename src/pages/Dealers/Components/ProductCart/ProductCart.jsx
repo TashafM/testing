@@ -21,8 +21,7 @@ const ProductCart = () => {
 
   const {showPanel, setShowPanel} = useContext(GlobalSidePanel)
   const location = useLocation()
-  console.log(showPanel,'showpanelllllllll')
-  console.log(location,'productCart')
+  
   // const { isEmpty, setIsEmpty } = useContext(AddProducts);
 
   //==========================BILLING-ADDRESS | SHIPPING-ADDRESS==========================
@@ -30,6 +29,7 @@ const ProductCart = () => {
   const [shippingAddress, setShippingAddress] = useState([]);
   const [defaultShipping, setDefaultShipping] = useState([]);
   const [defaultBilling, setDefaultBilling] = useState([]);
+
 
   const [showAllProducts, setShowAllProducts] = useState(false);
   const handleSetProduct = () => {
@@ -51,6 +51,8 @@ const ProductCart = () => {
     setShippingAddress(defaultShipping);
     setBillingAddress(defaultBilling);
   };
+
+  const [displayAddress, setDisplayAddress] = useState('Lorem ipsum dolor sita amet adipi adik...')
 
   //--------------------------------------------------------
   //------------------OTHER INSTRUCTIONS POPUP--------------------------
@@ -109,12 +111,16 @@ const ProductCart = () => {
 
   //==============================================SET ADDRESS API
   const dummy = () => {
+    const modifiedBillingAddress = billingAddress.map(({ type, ...rest }) => rest);
+    const modifiedShippingAddress = shippingAddress.map(({ type, ...rest }) => rest);
+  
     axiosInstance.post(API.EDIT_CART_ADDRESS,{
       principalCompanyUserCode: localStorage.getItem('principalCompanyUserCode'),
-      billingAddress: billingAddress,
-      shippingAddress: shippingAddress,
+      billingAddress: modifiedBillingAddress,
+      shippingAddress: modifiedShippingAddress,
     }).then((res)=>console.log(res))
   };
+  
 
   return (
     <>
@@ -175,7 +181,7 @@ const ProductCart = () => {
             <ArrowLink title={"View"} onClick={handleAddress} />
           </div>
           <div className="display-address">
-            Lorem ipsum dolor sit amet adipi adik...
+            {displayAddress}
           </div>
           <div className="dashed-line"></div>
           <AddressPopup
@@ -188,6 +194,8 @@ const ProductCart = () => {
             setShippingAddress={setShippingAddress}
             setBillingAddress={setBillingAddress}
             callApi={dummy}
+            defaultShipping={defaultShipping}
+            setDisplayAddress={setDisplayAddress}
             // data={cart}
           />
 

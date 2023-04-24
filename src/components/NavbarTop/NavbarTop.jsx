@@ -19,6 +19,8 @@ const NavbarTop = ({ dealers }) => {
   const [dealerPopup, showDealerPopup] = useState(false);
   const [allDealerData, setAllDealerData] = useState([])
 
+
+  
   const fetchDealers = () => {
     const accessToken = localStorage.getItem("accessToken");
     axios.post(

@@ -80,7 +80,6 @@ const Products = () => {
           ))}
         </Row>
         {showPanel && <SidePanel />}
-        {console.log(showPanel,'sssssssssssssssssss')}
 
         {/* <Category/> */}
       </div>

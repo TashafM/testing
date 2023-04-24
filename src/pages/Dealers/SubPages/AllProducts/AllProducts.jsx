@@ -58,7 +58,6 @@ const AllProducts = () => {
   };
 
   const seeProducts = (itm) => {
-    console.log(itm, "hhhhhhhhhhhhh");
     const { categoryId, subCategoryId } = itm;
     navigate("/dealers/all-products/products", {
       state: { categoryId, subCategoryId },
