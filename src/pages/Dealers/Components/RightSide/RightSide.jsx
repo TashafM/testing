@@ -48,12 +48,21 @@ function RightSide({ setShowPanel, cartProducts, setCartProducts }) {
   };
 
 
+  const retainData = () => {
+    axiosInstance.post(API.VIEW_DEALER_CART,{
+      principalCompanyUserCode : localStorage.getItem('principalCompanyUserCode')
+    }).then((res)=>localStorage.setItem('cartProducts',JSON.stringify(res.result[0].cartItems)))
+  }
+
 
   return (
     <div className="rightside">
       <div className="title-close">
         <div className="title">Order List</div>
-        <img src={closeX} alt="" onClick={() => setShowPanel(false)} />
+        <img src={closeX} alt="" onClick={() => {
+          setShowPanel(false);
+          // retainData()
+        }} />
       </div>
       <OrderListTable data={cartProducts} setData={setCartProducts} />
       <div className="add-to-cart">

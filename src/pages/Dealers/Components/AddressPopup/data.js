@@ -2,7 +2,7 @@ export const newAddressField = [
     {
         title: 'Full Name*',
         placeholderText: 'Enter your full name',
-        name: 'fullname'
+        name: 'fullName'
     },
     {
         title: 'Contact Number',
@@ -42,7 +42,7 @@ export const newAddressField = [
     {
         title: 'Zip Code*',
         placeholderText: 'Enter your zip code',
-        name: 'zipcode'
+        name: 'zipCode'
     },
     {
         title: 'Google Places Location',

@@ -15,15 +15,29 @@ import OtherInstructions from "../OtherInstructions/OtherInstructions";
 import OrderPlaced from "../../Modal/OrderPlaced/OrderPlaced";
 import { axiosInstance } from "../../../../helper/axios";
 import { API } from "../../../../helper/API";
+import { useLocation } from "react-router-dom";
 
-const ProductCart = ({ showPanel }) => {
+const ProductCart = () => {
+
+  const {showPanel, setShowPanel} = useContext(GlobalSidePanel)
+  const location = useLocation()
+  console.log(showPanel,'showpanelllllllll')
+  console.log(location,'productCart')
   // const { isEmpty, setIsEmpty } = useContext(AddProducts);
-  const { setShowPanel } = useContext(GlobalSidePanel);
+
+  //==========================BILLING-ADDRESS | SHIPPING-ADDRESS==========================
+  const [billingAddress, setBillingAddress] = useState([]);
+  const [shippingAddress, setShippingAddress] = useState([]);
+  const [defaultShipping, setDefaultShipping] = useState([]);
+  const [defaultBilling, setDefaultBilling] = useState([]);
+
   const [showAllProducts, setShowAllProducts] = useState(false);
   const handleSetProduct = () => {
     setShowAllProducts(true);
   };
-  const handleClose = () => setShowAllProducts(false);
+  const handleClose = () => {
+    setShowAllProducts(false);
+  };
 
   //------------------ADRESS POPUP--------------------------
   const [showAddress, setShowAddress] = useState(false);
@@ -34,6 +48,8 @@ const ProductCart = ({ showPanel }) => {
   const handleCloseAddress = () => {
     setShowAddress(false);
     setAddress(true);
+    setShippingAddress(defaultShipping);
+    setBillingAddress(defaultBilling);
   };
 
   //--------------------------------------------------------
@@ -57,9 +73,10 @@ const ProductCart = ({ showPanel }) => {
     const principalCompanyUserCode = localStorage.getItem(
       "principalCompanyUserCode"
     );
-    axiosInstance.post(API.DEALER_CLEAR_CART,{principalCompanyUserCode})
-    .then((res)=>res.success && setIsEmpty(true))
-  }
+    axiosInstance
+      .post(API.DEALER_CLEAR_CART, { principalCompanyUserCode })
+      .then((res) => res.success && setIsEmpty(true));
+  };
 
   useEffect(() => {
     const getViewCart = () => {
@@ -71,6 +88,11 @@ const ProductCart = ({ showPanel }) => {
         .then((res) => {
           setCartItem(res.result[0].cartItems);
           setCart(res.result[0]);
+          setBillingAddress(res.result[0].billingAddress);
+          setShippingAddress(res.result[0].shippingAddress);
+          setDefaultBilling(res.result[0].billingAddress);
+          setDefaultShipping(res.result[0].shippingAddress);
+
           if (res.result[0].cartItems.length > 0) {
             setIsEmpty(false);
           }
@@ -84,6 +106,15 @@ const ProductCart = ({ showPanel }) => {
 
     getViewCart();
   }, [showPanel]);
+
+  //==============================================SET ADDRESS API
+  const dummy = () => {
+    axiosInstance.post(API.EDIT_CART_ADDRESS,{
+      principalCompanyUserCode: localStorage.getItem('principalCompanyUserCode'),
+      billingAddress: billingAddress,
+      shippingAddress: shippingAddress,
+    }).then((res)=>console.log(res))
+  };
 
   return (
     <>
@@ -107,13 +138,20 @@ const ProductCart = ({ showPanel }) => {
         <>
           <div className="dashed-line"></div>
           <div className="edit-see-all">
-            <div className="edit" onClick={() => setShowPanel(true)}>
+            <div className="edit" onClick={() => {
+              setShowPanel(true)
+              console.log('hiii')
+            }}>
               <img src={editIcon} alt="" />
               <span className="text">Edit</span>
             </div>
             <ArrowLink title={"See all"} onClick={handleSetProduct} />
           </div>
-          <SeeAllProducts show={showAllProducts} handleClose={handleClose} data={cartItem}/>
+          <SeeAllProducts
+            show={showAllProducts}
+            handleClose={handleClose}
+            data={cartItem}
+          />
 
           {/**OTHER INSTRUCTIONS */}
           <div className="other-instructions">
@@ -124,7 +162,7 @@ const ProductCart = ({ showPanel }) => {
             show={showInstruction}
             handleClose={handleCloseInstruction}
           />
-
+          {console.log(showPanel,'showPanel fro global')}
           {/**PURCHASE ORDER */}
           <div className="purchase-order">
             <div className="title">Purchase Order Number:</div>
@@ -145,7 +183,12 @@ const ProductCart = ({ showPanel }) => {
             handleClose={handleCloseAddress}
             addAddress={addAddress}
             setAddress={setAddress}
-            data={cart}
+            billingAddress={billingAddress}
+            shippingAddress={shippingAddress}
+            setShippingAddress={setShippingAddress}
+            setBillingAddress={setBillingAddress}
+            callApi={dummy}
+            // data={cart}
           />
 
           {/**ITEMS TOTAL */}

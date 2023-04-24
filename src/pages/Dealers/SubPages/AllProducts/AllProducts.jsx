@@ -9,6 +9,8 @@ import axios, { axiosInstance } from "../../../../helper/axios";
 import abcImg from "../../../../assets/images/application.png";
 import atlogo from "../../../../assets/images/atlogo.png";
 import { GlobalContext } from "../../../../App";
+import SidePanel from "../../Components/SidePanel/SidePanel";
+import { GlobalSidePanel } from "../../Dealers";
 
 const AllProducts = () => {
   const principalCompanyUserCode = localStorage.getItem(
@@ -21,6 +23,8 @@ const AllProducts = () => {
   const [subCategory, setSubCategory] = useState([]);
 
   const [active, setActive] = useState(0);
+
+  const { showPanel } = useContext(GlobalSidePanel);
 
   useEffect(() => {
     const principalCompanyUserCode = localStorage.getItem(
@@ -54,8 +58,11 @@ const AllProducts = () => {
   };
 
   const seeProducts = (itm) => {
-    const {categoryId, subCategoryId} = itm;
-    navigate('/dealers/all-products/products', { state: { categoryId, subCategoryId } });
+    console.log(itm, "hhhhhhhhhhhhh");
+    const { categoryId, subCategoryId } = itm;
+    navigate("/dealers/all-products/products", {
+      state: { categoryId, subCategoryId },
+    });
   };
 
   return (
@@ -84,12 +91,16 @@ const AllProducts = () => {
                 </div>
               ))}
             </div>
-
+            {showPanel && <SidePanel />}
             <hr />
 
             <div>
-              {subCategory.map((item,id) => (
-                <div className="sub-category-div" onClick={()=>seeProducts(item)} key={id}>
+              {subCategory.map((item, id) => (
+                <div
+                  className="sub-category-div"
+                  onClick={() => seeProducts(item)}
+                  key={id}
+                >
                   <div className="image-div">
                     <img src={item.subCategoryImageURL} alt="" />
                   </div>
