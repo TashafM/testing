@@ -52,7 +52,7 @@ const ProductCart = () => {
     setBillingAddress(defaultBilling);
   };
 
-  const [displayAddress, setDisplayAddress] = useState('Lorem ipsum dolor sita amet adipi adik...')
+  const [displayAddress, setDisplayAddress] = useState([])
 
   //--------------------------------------------------------
   //------------------OTHER INSTRUCTIONS POPUP--------------------------
@@ -103,6 +103,10 @@ const ProductCart = () => {
             0
           );
           setItemTotal(sumOfTotal);
+
+          const selectedAddress = res.result[0].shippingAddress.filter(address => address.selected === true);
+          console.log(...selectedAddress,'selected address')
+          setDisplayAddress(...selectedAddress)
         });
     };
 
@@ -118,10 +122,17 @@ const ProductCart = () => {
       principalCompanyUserCode: localStorage.getItem('principalCompanyUserCode'),
       billingAddress: modifiedBillingAddress,
       shippingAddress: modifiedShippingAddress,
-    }).then((res)=>console.log(res))
+    }).then((res)=>{
+
+      const selectedAddress = res.result[0].shippingAddress.filter(address => address.selected === true);
+      console.log(...selectedAddress,'selected address')
+      setDisplayAddress(...selectedAddress)
+  // Return the selected address, or null if none found
+  // return selectedAddress || null;
+    })
   };
   
-
+const {fullName, floorNumber,block , street, city, state, country, zipCode, contactNumber} = displayAddress
   return (
     <>
       <Table>
@@ -181,7 +192,7 @@ const ProductCart = () => {
             <ArrowLink title={"View"} onClick={handleAddress} />
           </div>
           <div className="display-address">
-            {displayAddress}
+            {`${fullName}, ${floorNumber}, ${block}, ${street}, ${city}, ${state}, ${country}, ${zipCode}, ${contactNumber}`}
           </div>
           <div className="dashed-line"></div>
           <AddressPopup
