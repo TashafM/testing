@@ -62,30 +62,30 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
         const obj2 = [...operationData];
         let t = "";
         operationData.map((item, index) => {
-          if (item.active) {
-            let time = obj2[index][key];
+          // if (item.active) {
+          let time = obj2[index][key];
 
-            if (type === "hour") {
-              const hourValue = time?.split(":")?.shift() ?? "09";
-              time = time.replace(hourValue, e);
-            } else if (type === "minutes") {
-              const minutesValue =
-                time?.split(":")?.pop().split(" ").shift() ?? "30";
-              time = time.replace(minutesValue, e);
-            } else if (type === "ampm") {
-              const ampm = time?.split(" ")?.pop() ?? "am";
+          if (type === "hour") {
+            const hourValue = time?.split(":")?.shift() ?? "09";
+            time = time.replace(hourValue, e);
+          } else if (type === "minutes") {
+            const minutesValue =
+              time?.split(":")?.pop().split(" ").shift() ?? "30";
+            time = time.replace(minutesValue, e);
+          } else if (type === "ampm") {
+            const ampm = time?.split(" ")?.pop() ?? "am";
 
-              time = time.replace(ampm, e);
-            } else {
-              console.log({ time });
+            time = time.replace(ampm, e);
+          } else {
+            console.log({ time });
 
-              const amPmValue = time?.split(" ");
-              time = time.replace(amPmValue, e);
-            }
-            obj2[index][key] = time;
-            obj[key] = time;
-            t = time;
+            const amPmValue = time?.split(" ");
+            time = time.replace(amPmValue, e);
           }
+          obj2[index][key] = time;
+          obj[key] = time;
+          t = time;
+          // }
         });
         obj[key] = t;
         setDefaultCard({ ...obj });
@@ -154,13 +154,11 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
               onChange={onApplySameTimeToAll}
               startTime={defaultCard.startTime}
               endTime={defaultCard.endTime}
-              disabled={!defaultCard.active}
+              showSwitch={false}
               onTimeChange={onApplySameTimeToAll}
             />
 
             {operationData.map((item, index) => {
-              // console.log({ item });
-
               return (
                 <CardTimeSlot
                   title={item.day}
