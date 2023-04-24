@@ -1,48 +1,57 @@
 /*eslint-disable */
-import React, { useEffect, useRef, useState } from "react";
-import { Button, Table } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { Table } from "react-bootstrap";
 import "./PlainTable.scss";
 
-const PlainTable = ({ columns, datum }) => {
+const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
   //   const data = datum.sort((a, b) => b.id - a.id);  -----------> for sorting we can use this
-  const navigate = useNavigate();
-
-  const orderDetails = (item) => {
-    // navigate(`/home/order/details`, { state: { data: val } });
-    navigate(`/home/order/details`, { state: { data: item } });
-  };
-
-  const dummy = (a) => console.log(a);
 
   return (
-    <div className="plainTable">
+    <div className="plainTable" id="order-table-container">
       <div className="table-container">
         <Table hover>
           <thead className="table-head">
             <tr className="tr-head">
               {columns.map((col, idx) => (
-                <th key={idx}>{col.title}</th>
+                <th key={idx}>{col.value}</th>
               ))}
             </tr>
           </thead>
           <tbody className="scroll-body">
-            {datum.map((row, id) => (
+            {data.map((row, index) => (
               <>
                 <tr
                   key={row.id}
                   className="tr-body"
-                  onClick={() => orderDetails(row)}
+                  onClick={() => onClick(row)}
                 >
-                  {columns.map((col, id) => (
-                    <>
-                      <td key={id}>
-                        <div className={col.value}>
-                          {row[col.value]}
-                        </div>
-                      </td>
-                    </>
-                  ))}
+                  {columns.map((col, id) => {
+                    if (!id) {
+                      return (
+                        <td>
+                          <div>{index + 1}</div>
+                        </td>
+                      );
+                    }
+                    if (id === columns.length - 2 && type !== "company") {
+                      return (
+                        <>
+                          <td key={id}>
+                            <div className={col.value}>
+                              {row?.currency?.symbol} {row[col.title]}
+                            </div>
+                          </td>
+                        </>
+                      );
+                    }
+                    return (
+                      <>
+                        <td key={id}>
+                          <div className={col.value}>{row[col.title]}</div>
+                        </td>
+                      </>
+                    );
+                  })}
                 </tr>
               </>
             ))}

@@ -43,6 +43,10 @@
   // }
 }
 
+.orders-upper-content {
+  overflow-y: hidden !important;
+}
+
 @media only screen and (max-width: 1600px) {
   .order-details-div {
     margin-bottom: 20px !important;

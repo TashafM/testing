@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import About from "../pages/About/About";
 import Information from "../pages/About/Information/Information";
 import Privacy from "../pages/About/Privacy/Privacy";
@@ -45,6 +45,9 @@ import ProtectedRoutes from "../components/ProtectedRoutes/ProtectedRoutes";
 import DealerCurrentOrder from "../pages/Dealers/SubPages/Orders/DealerCurrentOrder";
 import DealerPastOrder from "../pages/Dealers/SubPages/Orders/DealerPastOrder";
 import DealerOrderDetails from "../pages/Dealers/SubPages/Orders/DealerOrderDetails";
+import CompanyPastOrder from "../pages/Home/Orders/CompanyPastOrder";
+import CompanyCurrentOrder from "../pages/Home/Orders/CompanyCurrentOrder";
+
 // import About from "../pages/About/";
 // import Contact from "./Contact";
 
@@ -73,7 +76,10 @@ const Routing = () => (
           <Route path="current-partners" element={<CurrentPartners />} />
           <Route path="past-partners" element={<PastPartners />} />
         </Route>
-        <Route path="orders" element={<Orders />} />
+        <Route path="orders" element={<Orders />}>
+          <Route index element={<CompanyCurrentOrder />} />
+          <Route path="past-order" element={<CompanyPastOrder />} />
+        </Route>
         <Route path="order/details" element={<OrderDetails />} />
         <Route path="product-listings" element={<ProductListings />} />
         <Route path="awards-honours" element={<AwardsHonours />} />

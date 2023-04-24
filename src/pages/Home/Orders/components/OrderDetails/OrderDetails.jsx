@@ -11,10 +11,45 @@ import PlainTable from "../../../../../components/PlainTable/PlainTable";
 import { orderTableColumn, orderTableData } from "../data/data";
 import OrderTable from "../OrderTable/OrderTable";
 import { useLocation } from "react-router-dom";
+import { usePaginatedData } from "../../../../../hooks/pagination/usePaginatedData";
+import { useState } from "react";
+import { useEffect } from "react";
 
+//  https://dev.elred.io/dealerViewOrderDetails?start=1&offset=10
+//  https://dev.elred.io/dealerViewOrderDetails?start=1&offset=10
 const OrderDetails = () => {
   const location = useLocation();
-  const data = location.state.data;
+  const orderId = location.state.data;
+  const [page, setPage] = useState(0);
+
+  const { data, loading, setData, getData } = usePaginatedData();
+
+  useEffect(() => {
+    getCurrentOrders();
+  }, []);
+
+  const getCurrentOrders = () => {
+    const count = page + 1;
+    const body = {
+      orderId: orderId.orderId,
+    };
+    const url = `dealerViewOrderDetails?start=${count}&offset=10`;
+    getData(
+      url,
+      count,
+      (res) => {
+        if (count === 1) {
+          setData(res.result);
+        } else {
+          setData([...data, ...res.result]);
+        }
+        setPage(count);
+        console.log({ res });
+      },
+      body
+    );
+  };
+
   return (
     <div className="upper-content">
       <Row>
@@ -32,15 +67,11 @@ const OrderDetails = () => {
             </div>
           </div>
         </div>
-        {/* <div className="ordering-boxes tablet-view"> */}
         <OrderDetailsBox icon={bill} icon2={truck} />
         <OrderSummaryBox />
-        {/* </div> */}
-        {/* <OrderDetailsBox /> */}
       </Row>
       <div className="table-div-order-details">
-        {/* <PlainTable columns={orderTableColumn} datum={orderTableData} /> */}
-        <OrderTable />
+        <OrderTable data={data} columns={[]} />
       </div>
     </div>
   );
