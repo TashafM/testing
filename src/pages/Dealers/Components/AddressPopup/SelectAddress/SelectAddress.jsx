@@ -11,32 +11,59 @@ const SelectAddress = ({
   setIsEdit,
   setAddress,
   data,
+  addAddressFunction,
+  setEditData,
+  setDisplayAddress
 }) => {
-  // console.log(data,'jjjjjjjj')
-  const editEnable = () => {
+  const editEnable = (data,idx) => {
     setAddress(false);
     setIsEdit(true);
+    setEditData(data)
   };
+
+  const deleteAddress = (idx) => {
+    const filteredData = data.filter((item, id) => id !== idx);
+    addAddressFunction(filteredData);
+  };
+
+  const changeHandler = (e) => {
+    console.log(e.target.value,'tashaf')
+    const newData = data.map((obj, i) => {
+      if (obj._id === e.target.value) {
+        return { ...obj, selected: true };
+      } else {
+        return { ...obj, selected: false };
+      }
+    });
+    addAddressFunction(newData);
+  }
 
   return (
     <div className="selectaddress">
       <div className="title">{title} :</div>
+      {console.log(data,'checinkjkj...........')}
       <div className="address-box">
         {data.map((item, id) => (
           <>
+          {console.log(item,'00000000000000000000000000000000')}
             {id !== 0 && <div className="address-divider"></div>}
-
             <div className="upper-line">
-              <input type="radio" name={name} value={value1} checked />
+              <input type="radio" name={name} value={item._id} onChange={changeHandler} checked={item.selected} />
               <div className="text-add">
                 {item.fullName}, {item.floorNumber}, {item.block}, {item.street}
                 , {item.city}, {item.state}, {item.country}, {item.zipCode}
               </div>
-              <img src={editIcon} alt="" onClick={editEnable} />
+              {id !== 0 && <img src={editIcon} alt="" onClick={()=>editEnable(item,id)} />}
             </div>
             <div className="mobile-line">
               <div className="num">{item.contactNumber}</div>
-              {id !== 0 && <img src={deleteIcon} alt="" />}
+              {id !== 0 && (
+                <img
+                  src={deleteIcon}
+                  alt=""
+                  onClick={() => deleteAddress(id)}
+                />
+              )}
             </div>
           </>
         ))}

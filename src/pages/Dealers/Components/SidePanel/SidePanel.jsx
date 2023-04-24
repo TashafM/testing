@@ -4,6 +4,8 @@ import { Button, Offcanvas } from "react-bootstrap";
 import LeftSide from "../LeftSide/LeftSide";
 import RightSide from "../RightSide/RightSide";
 import { GlobalSidePanel } from "../../Dealers";
+import { API } from "../../../../helper/API";
+import { axiosInstance } from "../../../../helper/axios";
 
 const SidePanel = () => {
   const {setShowPanel, showPanel} = useContext(GlobalSidePanel)
@@ -31,12 +33,53 @@ const SidePanel = () => {
       setData(products);
     }
   },[localStorage.getItem('initialProductData')])
+
+
+  const addItemToCart = () => {
+    const sgst = localStorage.getItem("sgstPercentage");
+    const igst = localStorage.getItem("igstPercentage");
+    const cgst = localStorage.getItem("cgstPercentage");
+
+    const sumOfTotal = cartProducts.reduce(
+      (acc, item) => acc + item.totalPrice,
+      0
+    );
+    const sumOfTaxes = Number(cgst) + Number(sgst) + Number(igst);
+    const taxAmount = (sumOfTotal * sumOfTaxes) / 100; // this is final taxAmount
+    const totalAmt = taxAmount + sumOfTotal; // this is totalAmount
+
+    axiosInstance
+      .post(API.DEALER_ADD_TO_CART, {
+        principalCompanyUserCode: localStorage.getItem(
+          "principalCompanyUserCode"
+        ),
+        cartItems: cartProducts.map((item) => ({
+          variantId: item.variantId,
+          quantity: item.quantity.toString(),
+          grossPrice: item.grossPrice.toString(),
+          productId: item.productId,
+          saleDescription: item.saleDescription,
+          totalPrice: item.totalPrice.toString(),
+        })),
+        totalAmount: totalAmt.toString(),
+        taxAmount: taxAmount.toString(),
+      })
+      .then((res) => {
+        if (res.success) {
+          setShowPanel(false);
+          console.log(res.result[0].cartItems,'cart items')
+        }
+      });
+  };
   
   return (
     <div className="sidepanel">
       <Offcanvas
         show={showPanel}
-        onHide={() => setShowPanel(false)}
+        onHide={() => {
+          setShowPanel(false);
+          addItemToCart()
+        }}
         placement="end"
         className="dm"
       >
@@ -55,6 +98,7 @@ const SidePanel = () => {
                 setShowPanel={setShowPanel}
                 cartProducts={cartProducts}
                 setCartProducts={setCartProducts}
+                addItemToCart={addItemToCart}
               />
             </div>
           </div>

@@ -21,6 +21,7 @@ const MyDealersPopup = ({ show, setDealerPopup, data, setChange }) => {
     localStorage.setItem("cgstPercentage", dealer.cgstPercentage);
     localStorage.setItem("sgstPercentage", dealer.sgstPercentage);
     localStorage.setItem("igstPercentage", dealer.igstPercentage);
+    localStorage.removeItem('cartProducts');
     navigate(`/dealers/dashboard`);
     setDealerPopup(false);
   };

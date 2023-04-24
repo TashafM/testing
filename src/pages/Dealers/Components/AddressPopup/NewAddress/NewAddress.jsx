@@ -26,25 +26,26 @@ const NewAddress = ({
   setBilling,
   billingAddress,
   shippingAddress,
+  editData,
+  defaultShipping,
 }) => {
-  console.log(billingAddress, "billing array");
-  console.log(shippingAddress, "shipping array");
-
   return (
     <Formik
-      initialValues={{
-        addressType: "shipping",
-        ...newAddressField.reduce(
-          (acc, curr) => ({ ...acc, [curr.name]: "", selected: false }),
-          {}
-        ),
-      }}
+      initialValues={
+        editMode
+          ? editData
+          : {
+              addressType: "shipping",
+              ...newAddressField.reduce(
+                (acc, curr) => ({ ...acc, [curr.name]: "", selected: false }),
+                {}
+              ),
+            }
+      }
       onSubmit={(values) => {
-        console.log(values);
         setAddress(true);
-        console.log("clicked submit");
-
         if (values.addressType == "shipping") {
+          console.log('if block')
           const blankAddress = {
             city: "",
             country: "",
@@ -53,15 +54,17 @@ const NewAddress = ({
             longitude: "",
             state: "",
           };
-          const { googleplaces, addressType, ...restdata } = values;
-          console.log("executed");
+          const { googleplaces,addressType, ...restdata } = values;
+          const currentDate = new Date();
+          const id = currentDate.getTime().toString();
           const shippingArray = [
             ...shippingAddress,
-            { ...restdata, ...{ address: blankAddress } },
+            { ...restdata, ...{ address: blankAddress }, _id: id, type: 'shipping'},
           ];
           console.log(shippingArray);
           setShipping(shippingArray);
-        } else {
+        } else if (values.addressType == "billing") {
+          console.log('else block')
           const blankAddress = {
             city: "",
             country: "",
@@ -70,14 +73,50 @@ const NewAddress = ({
             longitude: "",
             state: "",
           };
-          const { googleplaces, addressType, ...restdata } = values;
+          const { googleplaces,addressType, ...restdata } = values;
+          const currentDate = new Date();
+          const id = currentDate.getTime().toString();
           console.log("executed");
           const billingArray = [
             ...billingAddress,
-            { ...restdata, ...{ address: blankAddress } },
+            { ...restdata, ...{ address: blankAddress }, _id: id, type: 'billing' },
           ];
           console.log(billingArray);
           setBilling(billingArray);
+        }else{
+
+          console.log(values,'--------------------------------------')
+            if(values.type=='shipping'){
+              console.log(values,'shippin values')
+              const updated = shippingAddress.map((item)=>{
+                if(item._id== values._id){
+                  return {...item, ...values};
+                }
+                return item
+              })
+              setShipping(updated)
+            }else if(values.type=='billing'){
+              console.log(values,'billin values')
+              const updated = billingAddress.map((item)=>{
+                if(item._id== values._id){
+                  return {...item, ...values};
+                }
+                return item
+              })
+              setBilling(updated)
+            }
+          
+
+            if(shippingAddress){
+              const updated = shippingAddress.map((item)=>{
+                if(item._id== values._id){
+                  return {...item, ...values};
+                }
+                return item
+              })
+              console.log(updated,'jjjjjjjjjjjjjjjjjj', values._id,'kkkkkkkkkkkkkkk')
+            }
+
         }
       }}
       validationSchema={newAddressSchema}
@@ -110,10 +149,9 @@ const NewAddress = ({
               </div>
             </>
           )}
-
-          {newAddressField.map((item) => (
+          {newAddressField.map((item,id) => (
             <SimpleInput
-              key={item.name}
+              key={id}
               title={item.title}
               placeholder={item.placeholderText}
               value={values[item.name]}
@@ -122,7 +160,6 @@ const NewAddress = ({
               error={touched[item.name] && errors[item.name]} // display error if field has been touched and has an error message
             />
           ))}
-
           <div className="button-div">
             <Button className="save-btn" type="submit">
               Save
