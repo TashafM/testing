@@ -21,7 +21,7 @@ const Products = () => {
   const { showPanel, setShowPanel } = useContext(GlobalSidePanel);
   const location = useLocation();
   const [products, setProducts] = useState([]);
-  const [data, setData] = useState([])
+  // const [data, setData] = useState([])
   // const [currentId, setCurrentId] = useState(location.state.id);
 
   useEffect(() => {
@@ -46,8 +46,11 @@ const Products = () => {
 
 
   const callFunc = (val) => {
-    setData(val)
+    // setData(val)
+    console.log('open it')
     setShowPanel(true)
+    const productData = JSON.stringify(val);
+    localStorage.setItem('initialProductData', productData)
   }
 
   return (
@@ -76,7 +79,8 @@ const Products = () => {
             </Col>
           ))}
         </Row>
-        <SidePanel show={showPanel} setShowPanel={setShowPanel} data={data}/>
+        {showPanel && <SidePanel />}
+        {console.log(showPanel,'sssssssssssssssssss')}
 
         {/* <Category/> */}
       </div>

@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./sidepanel.scss";
 import { Button, Offcanvas } from "react-bootstrap";
 import LeftSide from "../LeftSide/LeftSide";
 import RightSide from "../RightSide/RightSide";
+import { GlobalSidePanel } from "../../Dealers";
 
-const SidePanel = ({ show, setShowPanel, data }) => {
+const SidePanel = () => {
+  const {setShowPanel, showPanel} = useContext(GlobalSidePanel)
   const [cartProducts, setCartProducts] = useState([]);
+  const [data, setData] = useState([])
 
 
   useEffect(()=>{
@@ -19,11 +22,20 @@ const SidePanel = ({ show, setShowPanel, data }) => {
       
     }
   },[])
+
+  useEffect(()=>{
+    if(localStorage.getItem('initialProductData')){
+      const productDataStr = localStorage.getItem('initialProductData');
+
+      const products = JSON.parse(productDataStr);
+      setData(products);
+    }
+  },[localStorage.getItem('initialProductData')])
   
   return (
     <div className="sidepanel">
       <Offcanvas
-        show={show}
+        show={showPanel}
         onHide={() => setShowPanel(false)}
         placement="end"
         className="dm"

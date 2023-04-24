@@ -15,8 +15,14 @@ import OtherInstructions from "../OtherInstructions/OtherInstructions";
 import OrderPlaced from "../../Modal/OrderPlaced/OrderPlaced";
 import { axiosInstance } from "../../../../helper/axios";
 import { API } from "../../../../helper/API";
+import { useLocation } from "react-router-dom";
 
-const ProductCart = ({ showPanel }) => {
+const ProductCart = () => {
+
+  const {showPanel, setShowPanel} = useContext(GlobalSidePanel)
+  const location = useLocation()
+  console.log(showPanel,'showpanelllllllll')
+  console.log(location,'productCart')
   // const { isEmpty, setIsEmpty } = useContext(AddProducts);
 
   //==========================BILLING-ADDRESS | SHIPPING-ADDRESS==========================
@@ -25,7 +31,6 @@ const ProductCart = ({ showPanel }) => {
   const [defaultShipping, setDefaultShipping] = useState([]);
   const [defaultBilling, setDefaultBilling] = useState([]);
 
-  const { setShowPanel } = useContext(GlobalSidePanel);
   const [showAllProducts, setShowAllProducts] = useState(false);
   const handleSetProduct = () => {
     setShowAllProducts(true);
@@ -45,7 +50,6 @@ const ProductCart = ({ showPanel }) => {
     setAddress(true);
     setShippingAddress(defaultShipping);
     setBillingAddress(defaultBilling);
-    console.log("closed");
   };
 
   //--------------------------------------------------------
@@ -134,7 +138,10 @@ const ProductCart = ({ showPanel }) => {
         <>
           <div className="dashed-line"></div>
           <div className="edit-see-all">
-            <div className="edit" onClick={() => setShowPanel(true)}>
+            <div className="edit" onClick={() => {
+              setShowPanel(true)
+              console.log('hiii')
+            }}>
               <img src={editIcon} alt="" />
               <span className="text">Edit</span>
             </div>
@@ -155,7 +162,7 @@ const ProductCart = ({ showPanel }) => {
             show={showInstruction}
             handleClose={handleCloseInstruction}
           />
-
+          {console.log(showPanel,'showPanel fro global')}
           {/**PURCHASE ORDER */}
           <div className="purchase-order">
             <div className="title">Purchase Order Number:</div>
