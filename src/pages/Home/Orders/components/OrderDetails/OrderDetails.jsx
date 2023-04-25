@@ -11,9 +11,13 @@ import PlainTable from "../../../../../components/PlainTable/PlainTable";
 import { orderTableColumn, orderTableData } from "../data/data";
 import OrderTable from "../OrderTable/OrderTable";
 import { useLocation } from "react-router-dom";
-import { usePaginatedData } from "../../../../../hooks/pagination/usePaginatedData";
+import {
+  usePaginatedCompanyData,
+  usePaginatedData,
+} from "../../../../../hooks/pagination/usePaginatedData";
 import { useState } from "react";
 import { useEffect } from "react";
+import { orderDetailColumn } from "../../../../About/data/data";
 
 //  https://dev.elred.io/dealerViewOrderDetails?start=1&offset=10
 //  https://dev.elred.io/dealerViewOrderDetails?start=1&offset=10
@@ -22,7 +26,7 @@ const OrderDetails = () => {
   const orderId = location.state.data;
   const [page, setPage] = useState(0);
 
-  const { data, loading, setData, getData } = usePaginatedData();
+  const { data, loading, setData, getData } = usePaginatedCompanyData();
 
   useEffect(() => {
     getCurrentOrders();
@@ -30,10 +34,13 @@ const OrderDetails = () => {
 
   const getCurrentOrders = () => {
     const count = page + 1;
+
+    console.log({ orderId });
     const body = {
-      orderId: orderId.orderId,
+      orderId: orderId?.orderId,
+      partnerUserCode: orderId?.partnerUserCode,
     };
-    const url = `dealerViewOrderDetails?start=${count}&offset=10`;
+    const url = `/portalViewOrderDetails?start=${count}&offset=10`;
     getData(
       url,
       count,
@@ -50,13 +57,17 @@ const OrderDetails = () => {
     );
   };
 
+  const order = data && data.length ? data[0] : {};
+
+  console.log({ order });
+
   return (
     <div className="upper-content">
       <Row>
         <div className="order-details-div">
           <div className="order-company">
             <div className="order-date">
-              Order Received on <span>{data.date}</span>
+              Order Received on <span>{order.orderDate}</span>
             </div>
             <div className="company-name">{data.name}</div>
           </div>
@@ -67,11 +78,14 @@ const OrderDetails = () => {
             </div>
           </div>
         </div>
-        <OrderDetailsBox icon={bill} icon2={truck} />
-        <OrderSummaryBox />
+        <OrderDetailsBox icon={bill} icon2={truck} order={order} />
+        <OrderSummaryBox order={order} />
       </Row>
       <div className="table-div-order-details">
-        <OrderTable data={data} columns={[]} />
+        <OrderTable
+          data={data?.length ? data[0]?.order ?? [] : []}
+          columns={orderDetailColumn}
+        />
       </div>
     </div>
   );

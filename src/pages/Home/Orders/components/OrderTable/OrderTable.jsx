@@ -25,7 +25,7 @@ const OrderTable = ({ columns, data, row }) => {
 
                 {columns.map((col, id) => {
                   let value = row;
-                  col.value.split(",").map((item, index) => {
+                  col.value.split(",").map((item) => {
                     value = value[item];
                   });
                   if (col.title === "Item Description") {

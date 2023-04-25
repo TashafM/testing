@@ -35,7 +35,7 @@ function DealersTable({ showIcon, row, column }) {
                   }
                 })}
                 <td>
-                  <div className="d-flex align-items-center">
+                  <div className="d-flex align-items-center justify-content-end">
                     <p className="table-status-chip m-0">
                       <span className="status-circel " /> In Transit
                     </p>

@@ -7,7 +7,7 @@ import { useState } from "react";
 import ViewOtherInfo from "./component/drawer/ViewOtherInfo";
 import { useEffect } from "react";
 import { usePaginatedData } from "../../../../hooks/pagination/usePaginatedData";
-import { useLocation } from "react-router-dom";
+import { useLocation, useOutletContext } from "react-router-dom";
 import OrderTable from "../../../Home/Orders/components/OrderTable/OrderTable";
 import { CircularProgress } from "@mui/material";
 import { prepareAddressString } from "../../../../components/Utils/Utils";
@@ -17,6 +17,7 @@ function DealerOrderDetails() {
   const [showOther, setShowOther] = useState(false);
   const location = useLocation();
   const orderId = location.state.data;
+  const [orderDetail, setOrderDetail] = useOutletContext();
 
   const [page, setPage] = useState(0);
 
@@ -24,6 +25,10 @@ function DealerOrderDetails() {
 
   useEffect(() => {
     getCurrentOrders();
+
+    return () => {
+      setOrderDetail({});
+    };
   }, []);
 
   const getCurrentOrders = () => {
@@ -36,6 +41,7 @@ function DealerOrderDetails() {
       url,
       count,
       (res) => {
+        setOrderDetail(res.result);
         if (count === 1) {
           setData(res.result);
         } else {

@@ -6,6 +6,15 @@
 .text-input-privacy {
   margin-bottom: 40px;
 }
+.content-table-of-content {
+  a {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
 
 .privay-title-container {
   margin-bottom: 20px;

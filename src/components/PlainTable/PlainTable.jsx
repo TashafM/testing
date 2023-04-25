@@ -2,6 +2,7 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import "./PlainTable.scss";
+import arrow from "../../assets/images/greater-then.png";
 
 const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
   //   const data = datum.sort((a, b) => b.id - a.id);  -----------> for sorting we can use this
@@ -33,10 +34,28 @@ const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
                         </td>
                       );
                     }
+
                     let value = row;
                     col.title.split(",").map((item, index) => {
                       value = value[item];
                     });
+                    if (col.value.includes("Status")) {
+                      return (
+                        <td>
+                          <div className="d-flex align-items-center justify-content-end">
+                            <p className="table-status-chip m-0">
+                              <span className="status-circel " /> {value}
+                            </p>
+                            <img
+                              src={arrow}
+                              alt="arrow right-action"
+                              className="arrow-right-image"
+                            />
+                          </div>
+                        </td>
+                      );
+                    }
+
                     return (
                       <>
                         <td key={id}>

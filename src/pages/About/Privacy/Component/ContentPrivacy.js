@@ -25,7 +25,7 @@ function ContentPrivacy({ data }) {
             <div className="title">Table of Contents:</div>
             {data.map((item, index) => {
               return (
-                <div className="content" key={index}>
+                <div className="content content-table-of-content" key={index}>
                   <a href="#">{item.title}</a>
                 </div>
               );

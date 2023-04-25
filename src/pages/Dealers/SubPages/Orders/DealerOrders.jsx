@@ -1,22 +1,26 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import TopBar from "../../Components/TopBar/TopBar";
 import UnderLineTabs from "../../../../components/Tabs/UnderLineTabs";
 import { useLocation } from "react-router-dom";
 import "./dealerorders.scss";
 import { dealerOrderTabs } from "../../../../constant/tabsData";
+import { useState } from "react";
+import OrderTopBar from "./component/OrderTopBar";
 
 const DealerOrders = () => {
   const location = useLocation();
+
+  const [orderDetail, setOrderDetail] = useState({});
+
   return (
     <div className="allproducts">
-      <TopBar title={"Orders"} />
+      <OrderTopBar title={"Orders"} orderDetail={orderDetail} />
       {location.pathname !== "/dealers/orders/detail" ? (
         <div className="dealers-order-main-container">
           <UnderLineTabs tabs={dealerOrderTabs} />
         </div>
       ) : null}
-      <Outlet />
+      <Outlet context={[orderDetail, setOrderDetail]} />
     </div>
   );
 };
