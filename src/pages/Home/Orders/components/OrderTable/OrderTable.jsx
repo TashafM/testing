@@ -1,20 +1,11 @@
 /*eslint-disable */
-import React, { useEffect, useRef, useState } from "react";
-import { Button, Table } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-// import pdf from "../../assets/images/pdf.svg";
-import atink from "../../../../../assets/images/atink.png";
-// import "./InvoiceTable.scss";
-import { orderTableData } from "../data/data";
+import React from "react";
+import { Table } from "react-bootstrap";
+import defaultProduct from "../../../../../assets/images/default-product-image.png";
 import "./OrderTable.scss";
 
 const OrderTable = ({ columns, data, row }) => {
   //   const data = datum.sort((a, b) => b.id - a.id);  -----------> for sorting we can use this
-  const navigate = useNavigate();
-
-  const dummy = (a) => console.log(a);
-
-  console.log({ columns }, { data });
 
   return (
     <div className="orderTable">
@@ -29,14 +20,24 @@ const OrderTable = ({ columns, data, row }) => {
           </thead>
           <tbody className="scroll-body">
             {data.map((row, id) => (
-              <tr className="tr-body">
+              <tr key={`orders-tabel-row-${id}`} className="tr-body">
                 <td>{id + 1}</td>
 
                 {columns.map((col, id) => {
-                  console.log(row[col.value], row);
+                  let value = row;
+                  col.value.split(",").map((item, index) => {
+                    value = value[item];
+                  });
+                  if (col.title === "Item Description") {
+                    return (
+                      <td className="detail-div-img">
+                        <img src={row?.productImages?.[0] ?? defaultProduct} />
+                        <span className="orderTable-name">{value}</span>
+                      </td>
+                    );
+                  }
                   if (id) {
-                    console.log(col.value);
-                    return <td>{row[col.value]}</td>;
+                    return <td>{value}</td>;
                   }
                 })}
               </tr>

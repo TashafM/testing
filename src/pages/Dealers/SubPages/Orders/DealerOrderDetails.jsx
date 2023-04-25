@@ -1,7 +1,5 @@
 import React from "react";
 import { orderDetailColumn } from "../../../About/data/data";
-import DealersTable from "./component/tables/DealersTable";
-import CardHead from "../../../About/Information/Component/CardHead";
 import billing from "../../../../assets/images/billing.png";
 import shipping from "../../../../assets/images/shipping.png";
 import ViewAddress from "./component/drawer/ViewAddress";

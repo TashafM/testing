@@ -134,9 +134,13 @@
   cursor: pointer;
 }
 
-.div-img {
+.detail-div-img {
   display: flex;
   align-items: center;
+  img {
+    height: 52px;
+    width: 48px;
+  }
   .orderTable-name {
     margin-left: 10px;
     width: 160px;

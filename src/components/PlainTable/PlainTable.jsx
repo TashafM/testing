@@ -34,10 +34,7 @@ const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
                       );
                     }
                     let value = row;
-                    console.log(col.title, col.title.split(","));
                     col.title.split(",").map((item, index) => {
-                      console.log(item);
-                      console.log(value[item]);
                       value = value[item];
                     });
                     return (
