@@ -15,14 +15,24 @@ import OtherInstructions from "../OtherInstructions/OtherInstructions";
 import OrderPlaced from "../../Modal/OrderPlaced/OrderPlaced";
 import { axiosInstance } from "../../../../helper/axios";
 import { API } from "../../../../helper/API";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ProductCart = () => {
+  const navigate = useNavigate()
 
   const {showPanel, setShowPanel} = useContext(GlobalSidePanel)
   const location = useLocation()
   
   // const { isEmpty, setIsEmpty } = useContext(AddProducts);
+
+  const [purchaseOrderNumber, setPurchaseOrderNumber] = useState('');
+
+  const handlePurchaseOrderNumberChange = (event) => {
+    setPurchaseOrderNumber(event.target.value);
+  };
+
+  const isPurchaseOrderNumberEmpty = purchaseOrderNumber.trim() === '';
+
 
   //==========================BILLING-ADDRESS | SHIPPING-ADDRESS==========================
   const [billingAddress, setBillingAddress] = useState([]);
@@ -63,6 +73,15 @@ const ProductCart = () => {
 
   //------------------------------------------------- modal
   const [modalShow, setModalShow] = useState(false);
+  const closeSuccessModal = () => {
+    emptyCart();
+    setModalShow(false);
+  }
+  const gotoOrders = () => {
+    setModalShow(false)
+    navigate('/dealers/orders')
+    emptyCart()
+  }
 
   //------------------------------------------
   const [cart, setCart] = useState([]);
@@ -77,7 +96,12 @@ const ProductCart = () => {
     );
     axiosInstance
       .post(API.DEALER_CLEAR_CART, { principalCompanyUserCode })
-      .then((res) => res.success && setIsEmpty(true));
+      .then((res) => {
+        if (res.success) {
+          setIsEmpty(true);
+          localStorage.removeItem('cartProducts');
+        }
+      })
   };
 
   useEffect(() => {
@@ -95,6 +119,8 @@ const ProductCart = () => {
           setDefaultBilling(res.result[0].billingAddress);
           setDefaultShipping(res.result[0].shippingAddress);
 
+          const toString = JSON.stringify(res.result[0]);
+          localStorage.setItem('placeOrderData', toString)
           if (res.result[0].cartItems.length > 0) {
             setIsEmpty(false);
           }
@@ -122,10 +148,59 @@ const ProductCart = () => {
     }).then((res)=>{
 
       const selectedAddress = res.result[0].shippingAddress.filter(address => address.selected === true);
-      console.log(...selectedAddress,'selected address')
       setDisplayAddress(...selectedAddress)
+      setShowAddress(false)
     })
   };
+
+
+  //===========PLACE ORDER API====================================
+
+  const [order, setOrder] = useState([])
+  const placeOrder= () => {
+    const data = localStorage.getItem('placeOrderData')
+    const parsedData = JSON.parse(data);
+    setOrder(parsedData);
+    console.log(parsedData,'parseddata')
+    const principalCompanyUserCode = localStorage.getItem('principalCompanyUserCode');
+    const selectedShipping = shippingAddress.find(item => item.selected === true);
+    const { _id: shippingId, type: shippingType, selected: shippingSelected, ...shippingFinal } = selectedShipping;
+    
+    const selectedBilling = billingAddress.find(item => item.selected === true);
+    const { _id: billingId, type: billingType, selected: billingSelected, ...billingFinal } = selectedBilling;
+    
+
+
+    axiosInstance.post(
+      API.PLACE_ORDER,{
+        principalCompanyUserCode,
+        labelInstruction: parsedData.labelInstruction,
+        otherInstruction: parsedData.otherInstruction,
+        purchaseOrderNumber: purchaseOrderNumber,
+        cartItems: parsedData.cartItems.map(item=>{
+          return{
+            variantId: item.variantId,
+            grossPrice: item.grossPrice,
+            saleDescription: item.saleDescription,
+            productId: item.productId,
+            quantity: item.quantity,
+            totalPrice: item.totalPrice
+          }
+        }),
+        shippingAddress: shippingFinal,
+        billingAddress: billingFinal,
+        cgstPercentage: parsedData.cgstPercentage,
+        igstPercentage: parsedData.igstPercentage,
+        sgstPercentage: parsedData.sgstPercentage,
+        totalAmount: parsedData.totalAmount,
+        taxAmount: parsedData.taxAmount
+      }
+    ).then((res)=>{
+      if(res.success){
+        setModalShow(true)
+      }
+    })
+  }
   
 const {fullName, floorNumber,block , street, city, state, country, zipCode, contactNumber} = displayAddress
   return (
@@ -174,11 +249,10 @@ const {fullName, floorNumber,block , street, city, state, country, zipCode, cont
             show={showInstruction}
             handleClose={handleCloseInstruction}
           />
-          {console.log(showPanel,'showPanel fro global')}
           {/**PURCHASE ORDER */}
           <div className="purchase-order">
-            <div className="title">Purchase Order Number:</div>
-            <FormControl type="text" />
+            <div className="title">Purchase Order Number * :</div>
+            <FormControl type="text" value={purchaseOrderNumber} onChange={handlePurchaseOrderNumberChange}/>
           </div>
 
           {/**ADDRESS */}
@@ -231,14 +305,17 @@ const {fullName, floorNumber,block , street, city, state, country, zipCode, cont
 
           {/**PLACE ORDER - CLEAR CART */}
           <div className="cart-btns">
-            <Button className="clear" onClick={emptyCart}>
+            <Button className="clear" onClick={emptyCart} >
               Clear Cart
             </Button>
-            <Button className="place-order" onClick={() => setModalShow(true)}>
+            <Button className="place-order" onClick={() => {
+              // setModalShow(true);
+              placeOrder()
+            }} disabled={isPurchaseOrderNumberEmpty}>
               Place Order
             </Button>
           </div>
-          <OrderPlaced modalShow={modalShow} setModalShow={setModalShow} />
+          <OrderPlaced modalShow={modalShow} closeSuccessModal={closeSuccessModal} gotoOrders={gotoOrders}/>
         </>
       )}
 
