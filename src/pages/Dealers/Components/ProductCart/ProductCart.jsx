@@ -115,20 +115,15 @@ const ProductCart = () => {
 
   //==============================================SET ADDRESS API
   const dummy = () => {
-    const modifiedBillingAddress = billingAddress.map(({ type, ...rest }) => rest);
-    const modifiedShippingAddress = shippingAddress.map(({ type, ...rest }) => rest);
-  
     axiosInstance.post(API.EDIT_CART_ADDRESS,{
       principalCompanyUserCode: localStorage.getItem('principalCompanyUserCode'),
-      billingAddress: modifiedBillingAddress,
-      shippingAddress: modifiedShippingAddress,
+      billingAddress: billingAddress,
+      shippingAddress: shippingAddress,
     }).then((res)=>{
 
       const selectedAddress = res.result[0].shippingAddress.filter(address => address.selected === true);
       console.log(...selectedAddress,'selected address')
       setDisplayAddress(...selectedAddress)
-  // Return the selected address, or null if none found
-  // return selectedAddress || null;
     })
   };
   
