@@ -64,6 +64,13 @@ function DealerOrderDetails() {
 
   console.log(data);
 
+  const order = data && data?.length ? data[0] : {};
+  const total =
+    order && Object.keys(order).length
+      ? parseFloat(order?.totalAmount ?? "0.0") +
+        parseFloat(order?.taxAmount ?? "0.0")
+      : 0.0;
+
   return (
     <div className="dealers-order-main-container">
       <div className="container-fluid m-0 p-0 ">
@@ -86,12 +93,10 @@ function DealerOrderDetails() {
                 </div>
                 <div className="address-field">
                   <p className="m-0 over-flow-text ">
-                    {data?.length
-                      ? prepareAddressString(data[0]?.billingAddress ?? {})
-                      : ""}
+                    {prepareAddressString(order?.billingAddress ?? {})}
                   </p>
                   <p className="m-0">
-                    {data.length ? data[0].billingAddress?.contactNumber : ""}
+                    {order?.billingAddress?.contactNumber ?? ""}
                   </p>
                 </div>
               </div>
@@ -107,14 +112,10 @@ function DealerOrderDetails() {
                   </div>
                   <div className="address-field">
                     <p className="m-0 over-flow-text">
-                      {data?.length
-                        ? prepareAddressString(data[0]?.shippingAddress ?? {})
-                        : ""}
+                      {prepareAddressString(order?.shippingAddress ?? {})}
                     </p>
                     <p className="m-0">
-                      {data?.length
-                        ? data[0]?.shippingAddress?.contactNumber
-                        : ""}
+                      {order.shippingAddress?.contactNumber}
                     </p>
                   </div>
                 </div>
@@ -135,10 +136,7 @@ function DealerOrderDetails() {
                   </div>
                   <div className="address-field">
                     <p className="m-0 over-flow-text over-flow-text-other">
-                      Lorem ipsum dolor sit amet, consectetur adipis cing elit,
-                      sed do eiusmod tempor, Lorem ipsum dolor sit amet,
-                      consectetur adipis cing elit, sed do eiusmod tempor
-                      consectetur adipis...See all
+                      {order.otherInstruction}
                     </p>
                   </div>
                 </div>
@@ -150,15 +148,15 @@ function DealerOrderDetails() {
                 <div className="address-field">
                   <div className="d-flex justify-content-between">
                     <p className="m-0">Items total</p>
-                    <p className="m-0">INR 1440.0</p>
+                    <p className="m-0">INR {order?.itemsTotal ?? "0.0"}</p>
                   </div>
                   <div className="d-flex justify-content-between">
                     <p className="m-0">Taxes</p>
-                    <p className="m-0">INR 194.00</p>
+                    <p className="m-0">INR {order?.taxAmount ?? "0.0"}</p>
                   </div>
                   <div className="d-flex justify-content-between total-container-div">
                     <p className="m-0">Total Price</p>
-                    <p className="m-0">INR 1630.00</p>
+                    <p className="m-0">INR {order?.totalAmount}</p>
                   </div>
                 </div>
               </div>

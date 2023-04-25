@@ -5,6 +5,7 @@ import backpage from "../../../../../assets/images/backpage.svg";
 import { useNavigate } from "react-router-dom";
 import Filter from "../../../Components/Filter/Filter";
 import "../dealerorders.scss";
+import { getDesireDateFormate } from "../../../../../components/Utils/Utils";
 
 const OrderTopBar = ({ title, goback, orderDetail }) => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const OrderTopBar = ({ title, goback, orderDetail }) => {
             <div className="d-flex align-items-center">
               <span className="order-status-title-text">Ordered on </span>
               <span className="order-status-title-text text-span-date">
-                {order?.orderDate}
+                {order?.orderDate ? getDesireDateFormate(order.orderDate) : ""}
               </span>
               <div className="d-flex align-items-center justify-content-end">
                 <p className="table-status-chip m-0">

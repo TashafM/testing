@@ -7,20 +7,13 @@ import OrderSummaryBox from "../OrderSummayBox/OrderSummaryBox";
 import FilterBtn from "../../../../../components/FilterButton/FilterButton";
 import SearchBar from "../../../../../components/SearchBar/SearchBar";
 import "./OrderDetails.scss";
-import PlainTable from "../../../../../components/PlainTable/PlainTable";
-import { orderTableColumn, orderTableData } from "../data/data";
 import OrderTable from "../OrderTable/OrderTable";
 import { useLocation } from "react-router-dom";
-import {
-  usePaginatedCompanyData,
-  usePaginatedData,
-} from "../../../../../hooks/pagination/usePaginatedData";
-import { useState } from "react";
-import { useEffect } from "react";
+import { usePaginatedCompanyData } from "../../../../../hooks/pagination/usePaginatedData";
+import { useState, useEffect } from "react";
 import { orderDetailColumn } from "../../../../About/data/data";
+import { getDesireDateFormate } from "../../../../../components/Utils/Utils";
 
-//  https://dev.elred.io/dealerViewOrderDetails?start=1&offset=10
-//  https://dev.elred.io/dealerViewOrderDetails?start=1&offset=10
 const OrderDetails = () => {
   const location = useLocation();
   const orderId = location.state.data;
@@ -59,17 +52,18 @@ const OrderDetails = () => {
 
   const order = data && data.length ? data[0] : {};
 
-  console.log({ order });
-
   return (
     <div className="upper-content">
       <Row>
         <div className="order-details-div">
           <div className="order-company">
             <div className="order-date">
-              Order Received on <span>{order.orderDate}</span>
+              Order Received on{" "}
+              <span>
+                {order?.orderDate ? getDesireDateFormate(order.orderDate) : ""}
+              </span>
             </div>
-            <div className="company-name">{data.name}</div>
+            <div className="company-name">{order?.labelInstruction}</div>
           </div>
           <div className="search-filter-div">
             <SearchBar />

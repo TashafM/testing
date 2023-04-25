@@ -3,6 +3,7 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import "./PlainTable.scss";
 import arrow from "../../assets/images/greater-then.png";
+import { getDesireDateFormate } from "../Utils/Utils";
 
 const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
   //   const data = datum.sort((a, b) => b.id - a.id);  -----------> for sorting we can use this
@@ -39,6 +40,10 @@ const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
                     col.title.split(",").map((item, index) => {
                       value = value[item];
                     });
+
+                    if (col.title.includes("Date")) {
+                      value = getDesireDateFormate(value ?? "");
+                    }
                     if (col.value.includes("Status")) {
                       return (
                         <td>
