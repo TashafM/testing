@@ -29,7 +29,7 @@ export const API = {
     EDIT_OTHER_INSTRUCTIONS: '/dealerEditCartOtherInstructions',
     DEALER_CLEAR_CART: '/dealerClearCart',
     EDIT_CART_ADDRESS: '/dealerEditCartAddress',
-
+    PLACE_ORDER: '/dealerPlaceOrder'
 
 
 
