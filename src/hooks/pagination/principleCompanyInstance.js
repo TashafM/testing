@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const instance = axios.create({
+const principleCompanyInstance = axios.create({
   baseURL: "https://dev.elred.io/",
   // baseURL: "http://elredtest1-env.eba-ydsmdti3.ap-south-1.elasticbeanstalk.com/",
 
@@ -12,7 +12,7 @@ const instance = axios.create({
 });
 
 //intercept request
-instance.interceptors.request.use((config) => {
+principleCompanyInstance.interceptors.request.use((config) => {
   const token = localStorage.getItem("accessToken");
   const principalCompanyUserCode = localStorage.getItem(
     "principalCompanyUserCode"
@@ -32,7 +32,7 @@ instance.interceptors.request.use((config) => {
 });
 
 //intercep response
-instance.interceptors.response.use(
+principleCompanyInstance.interceptors.response.use(
   (response) => {
     //restun response
     return response.data;
@@ -44,4 +44,4 @@ instance.interceptors.response.use(
   }
 );
 
-export { instance };
+export { principleCompanyInstance };

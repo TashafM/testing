@@ -33,21 +33,17 @@ const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
                         </td>
                       );
                     }
-                    if (id === columns.length - 2 && type !== "company") {
-                      return (
-                        <>
-                          <td key={id}>
-                            <div className={col.value}>
-                              {row?.currency?.symbol} {row[col.title]}
-                            </div>
-                          </td>
-                        </>
-                      );
-                    }
+                    let value = row;
+                    console.log(col.title, col.title.split(","));
+                    col.title.split(",").map((item, index) => {
+                      console.log(item);
+                      console.log(value[item]);
+                      value = value[item];
+                    });
                     return (
                       <>
                         <td key={id}>
-                          <div className={col.value}>{row[col.title]}</div>
+                          <div className={col.value}>{value}</div>
                         </td>
                       </>
                     );
