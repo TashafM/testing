@@ -16,9 +16,9 @@ const schema = {
     city: Yup.string().required("city is required"),
     country: Yup.string().required("country is required"),
 
-    zipCode: Yup.number("zip code must be a number").required(
-      "zip code is required"
-    ),
+    zipCode: Yup.number()
+      .required("zip code is required")
+      .typeError("zipcode must be a number"),
   }),
 
   social: Yup.object({
@@ -31,9 +31,9 @@ const schema = {
   contacts: Yup.object({
     email: Yup.string().email("invalid email id").required("email is required"),
     title: Yup.string().required("title is required"),
-    contact: Yup.number("contact must be a number").required(
-      "contact is reuired"
-    ),
+    contact: Yup.number()
+      .required("contact is reuired")
+      .typeError("contact must be a number"),
   }),
 
   createBrand: Yup.object({

@@ -1,19 +1,15 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import "./FAQ.scss";
-import { faqData } from "../data/data";
 import Collapsible from "../../../components/Collapsible/Collapsible";
 import BtnIconOnly from "../../../components/Button/BtnIconOnly";
 import ModalComponent from "../../../components/Modal";
-import EditFAQ from "./Component/EditFAQ";
-import { Button } from "react-bootstrap";
+
 import { useResponse } from "../../../hooks/useResponse";
-import BtnTitleIcon from "../../../components/Button/BtnTitleIcon";
 import { usePostAsyncResponse } from "../../../hooks/usePostAsyncResponse";
 import { CircularProgress } from "@mui/material";
 
 function FAQ() {
   const [showModal, setShowModal] = useState(false);
-  const [getFAQ, setFAQ] = useState([]);
   // const { data, loading, error } = useResponse();
 
   const { data, setData, loading } = useResponse("/portalViewCompanyFaqs");

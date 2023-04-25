@@ -65,11 +65,6 @@ function DealerOrderDetails() {
   console.log(data);
 
   const order = data && data?.length ? data[0] : {};
-  const total =
-    order && Object.keys(order).length
-      ? parseFloat(order?.totalAmount ?? "0.0") +
-        parseFloat(order?.taxAmount ?? "0.0")
-      : 0.0;
 
   return (
     <div className="dealers-order-main-container">
@@ -79,7 +74,7 @@ function DealerOrderDetails() {
             <div
               className="d-flex address-card-container "
               onClick={() => {
-                setShowAddress(true);
+                // setShowAddress(true);
               }}
             >
               <div className=" flex-grow-1 detail-top-card width-50 ">
@@ -126,7 +121,7 @@ function DealerOrderDetails() {
             <div
               className="d-flex address-card-container "
               onClick={() => {
-                setShowOther(true);
+                // setShowOther(true);
               }}
             >
               <div className=" flex-grow-1 detail-top-card width-50 ">
