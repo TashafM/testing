@@ -47,7 +47,7 @@ const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
                     if (col.value.includes("Status")) {
                       return (
                         <td>
-                          <div className="d-flex align-items-center justify-content-end">
+                          <div className="d-flex align-items-center justify-content-center">
                             <p className="table-status-chip m-0">
                               <span className="status-circel " /> {value}
                             </p>
@@ -64,7 +64,12 @@ const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
                     return (
                       <>
                         <td key={id}>
-                          <div className={col.value}>{value}</div>
+                          <div className={col.value}>
+                            {col?.value?.includes("Price")
+                              ? `${row?.currency?.symbol} `
+                              : ""}
+                            {value}
+                          </div>
                         </td>
                       </>
                     );

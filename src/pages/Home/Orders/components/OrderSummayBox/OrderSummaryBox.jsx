@@ -16,20 +16,22 @@ const OrderSummaryBox = ({ order }) => {
             <div className="items-total">
               <div className="summary-heading">Items total</div>
               <div className="summary-amount">
-                INR {order?.itemsTotal ?? "0.0"}
+                {order?.symbol?.currency} {order?.itemsTotal ?? "0.0"}
               </div>
             </div>
             <div className="taxes">
               <div className="summary-heading">Taxes</div>
               <div className="summary-amount">
-                INR {order?.taxAmount ?? "0.0"}
+                {order?.symbol?.currency} {order?.taxAmount ?? "0.0"}
               </div>
             </div>
           </div>
           <hr className="horizontal-line" />
           <div className="amount-total">
             <div className="total-title">Order Total</div>
-            <div className="total-amount">INR {order?.totalAmount ?? 0.0}</div>
+            <div className="total-amount">
+              {order?.symbol?.currency} {order?.totalAmount ?? 0.0}
+            </div>
           </div>
         </div>
       </div>

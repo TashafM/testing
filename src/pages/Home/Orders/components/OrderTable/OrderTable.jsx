@@ -8,7 +8,7 @@ const OrderTable = ({ columns, data, row }) => {
   //   const data = datum.sort((a, b) => b.id - a.id);  -----------> for sorting we can use this
 
   return (
-    <div className="orderTable">
+    <div className="orderTable" id="company-order-table-container">
       <div className="table-container">
         <Table hover>
           <thead className="table-head">
@@ -29,6 +29,7 @@ const OrderTable = ({ columns, data, row }) => {
                     value = value[item];
                   });
                   if (col.title === "Item Description") {
+                    console.log(col?.title);
                     return (
                       <td className="detail-div-img">
                         <img src={row?.productImages?.[0] ?? defaultProduct} />
@@ -37,7 +38,17 @@ const OrderTable = ({ columns, data, row }) => {
                     );
                   }
                   if (id) {
-                    return <td>{value}</td>;
+                    return (
+                      <td>
+                        {(col?.title?.includes("Amount") ||
+                          col?.title?.includes("Price")) &&
+                        value
+                          ? `${row?.currency?.symbol}`
+                          : ""}
+                        {value}
+                        {col?.title?.includes("Rate") && value ? " %" : ""}
+                      </td>
+                    );
                   }
                 })}
               </tr>

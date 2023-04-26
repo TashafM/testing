@@ -13,6 +13,7 @@ import { usePaginatedCompanyData } from "../../../../../hooks/pagination/usePagi
 import { useState, useEffect } from "react";
 import { orderDetailColumn } from "../../../../About/data/data";
 import { getDesireDateFormate } from "../../../../../components/Utils/Utils";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const OrderDetails = () => {
   const location = useLocation();
@@ -26,9 +27,8 @@ const OrderDetails = () => {
   }, []);
 
   const getCurrentOrders = () => {
-    const count = page + 1;
+    const count = page * 10 + 1;
 
-    console.log({ orderId });
     const body = {
       orderId: orderId?.orderId,
       partnerUserCode: orderId?.partnerUserCode,
@@ -41,9 +41,20 @@ const OrderDetails = () => {
         if (count === 1) {
           setData(res.result);
         } else {
-          setData([...data, ...res.result]);
+          if (res.result.length) {
+            if (res.result[0].order.length) {
+              const order = [
+                {
+                  ...data[0],
+                  order: [...data[0].order, ...res.result[0].order],
+                },
+              ];
+              console.log({ order });
+              setData([...order]);
+            }
+          }
         }
-        setPage(count);
+        setPage(page + 1);
         console.log({ res });
       },
       body
@@ -53,7 +64,7 @@ const OrderDetails = () => {
   const order = data && data.length ? data[0] : {};
 
   return (
-    <div className="upper-content">
+    <div className="upper-content order-detail-upper-content">
       <Row>
         <div className="order-details-div">
           <div className="order-company">
@@ -76,10 +87,17 @@ const OrderDetails = () => {
         <OrderSummaryBox order={order} />
       </Row>
       <div className="table-div-order-details">
-        <OrderTable
-          data={data?.length ? data[0]?.order ?? [] : []}
-          columns={orderDetailColumn}
-        />
+        <InfiniteScroll
+          dataLength={data?.length ? data[0]?.order ?? [] : 0}
+          next={getCurrentOrders}
+          hasMore={true}
+          scrollableTarget="company-order-table-container"
+        >
+          <OrderTable
+            data={data?.length ? data[0]?.order ?? [] : []}
+            columns={orderDetailColumn}
+          />
+        </InfiniteScroll>
       </div>
     </div>
   );

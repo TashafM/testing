@@ -11,6 +11,7 @@ import { useLocation, useOutletContext } from "react-router-dom";
 import OrderTable from "../../../Home/Orders/components/OrderTable/OrderTable";
 import { CircularProgress } from "@mui/material";
 import { prepareAddressString } from "../../../../components/Utils/Utils";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function DealerOrderDetails() {
   const [showAddress, setShowAddress] = useState(false);
@@ -32,7 +33,7 @@ function DealerOrderDetails() {
   }, []);
 
   const getCurrentOrders = () => {
-    const count = page + 1;
+    const count = page * 10 + 1;
     const body = {
       orderId: orderId.orderId,
     };
@@ -45,10 +46,19 @@ function DealerOrderDetails() {
         if (count === 1) {
           setData(res.result);
         } else {
-          setData([...data, ...res.result]);
+          if (res.result.length) {
+            if (res.result[0].order.length) {
+              const order = [
+                {
+                  ...data[0],
+                  order: [...data[0].order, ...res.result[0].order],
+                },
+              ];
+              setData([...order]);
+            }
+          }
         }
-        // setPage(count);
-        console.log({ res });
+        setPage(page + 1);
       },
       body
     );
@@ -175,11 +185,17 @@ function DealerOrderDetails() {
           }}
         />
       )}
-
-      <OrderTable
-        columns={orderDetailColumn}
-        data={data?.length ? data[0]?.order ?? [] : []}
-      />
+      <InfiniteScroll
+        dataLength={data?.length ? data[0]?.order ?? [] : 0}
+        next={getCurrentOrders}
+        hasMore={true}
+        scrollableTarget="company-order-table-container"
+      >
+        <OrderTable
+          columns={orderDetailColumn}
+          data={data?.length ? data[0]?.order ?? [] : []}
+        />
+      </InfiniteScroll>
     </div>
   );
 }
