@@ -187,6 +187,15 @@
   }
 }
 
+.place-order-spinner{
+  padding: 0 40px;
+
+  .spinner-border{
+    width: 24px;
+    height: 24px;
+  }
+}
+
 @media (min-width: 992px) and (max-width: 1199px) {
   .productcart-header {
     tr {

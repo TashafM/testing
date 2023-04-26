@@ -5,40 +5,45 @@ import { Button } from "react-bootstrap";
 import { AddProducts } from "../../Dealers";
 import { useContext } from "react";
 import closeX from "../../../../assets/images/closeX.svg";
+import noItem from "../../../../assets/images/item-not-added.png";
 import { axiosInstance } from "../../../../helper/axios";
 import { API } from "../../../../helper/API";
+import Spinner from "react-bootstrap/Spinner";
 
-function RightSide({ setShowPanel, cartProducts, setCartProducts, addItemToCart }) {
-
-  
-
-
-  // const retainData = () => {
-  //   axiosInstance.post(API.VIEW_DEALER_CART,{
-  //     principalCompanyUserCode : localStorage.getItem('principalCompanyUserCode')
-  //   }).then((res)=>localStorage.setItem('cartProducts',JSON.stringify(res.result[0].cartItems)))
-  // }
-
-
-  
+function RightSide({
+  setShowPanel,
+  cartProducts,
+  setCartProducts,
+  addItemToCart,
+  isLoading
+}) {
   return (
     <div className="rightside">
       <div className="title-close">
         <div className="title">Order List</div>
-        <img src={closeX} alt="" onClick={() => {
-          setShowPanel(false);
-          addItemToCart();
-        }} />
+        <img
+          src={closeX}
+          alt=""
+          onClick={() => {
+            setShowPanel(false);
+            addItemToCart();
+          }}
+        />
       </div>
       <OrderListTable data={cartProducts} setData={setCartProducts} />
-      <div className="add-to-cart">
-        <Button
 
-          onClick={addItemToCart}
-        >
-          Add to cart
-        </Button>
-      </div>
+      {cartProducts.length == 0 ? (
+        <div className="no-item empty-cart">
+          <img src={noItem} alt="" />
+          <div className="no-text">No items added yet </div>
+        </div>
+      ) : (
+        <div className="add-to-cart">
+          <Button onClick={addItemToCart} disabled={isLoading}>
+            {isLoading ? <Spinner animation="border" variant="light" /> : 'Add to cart'}
+          </Button>
+        </div>
+      )}
     </div>
     // </div>
   );

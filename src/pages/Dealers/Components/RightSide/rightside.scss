@@ -119,6 +119,14 @@
   }
 }
 
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 70vh;
+  justify-content: center;
+}
+
 @media (min-width: 992px) and (max-width: 1199px) {
   .rightside {
     padding-top: 20px;

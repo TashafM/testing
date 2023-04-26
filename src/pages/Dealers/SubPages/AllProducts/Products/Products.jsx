@@ -11,6 +11,7 @@ import img300 from "../../../../../assets/images/300x300pix(300dpi).png";
 import img500 from "../../../../../assets/images/500x500pix(300dpi).png";
 import img600 from "../../../../../assets/images/600x600pix(300dpi).png";
 import img1000 from "../../../../../assets/images/1000x1000pix(300dpi).png";
+import noImage from "../../../../../assets/images/noImage.png";
 
 
 import { API } from "../../../../../helper/API";
@@ -21,6 +22,7 @@ const Products = () => {
   const { showPanel, setShowPanel } = useContext(GlobalSidePanel);
   const location = useLocation();
   const [products, setProducts] = useState([]);
+  console.log(location,'location')
   // const [data, setData] = useState([])
   // const [currentId, setCurrentId] = useState(location.state.id);
 
@@ -85,7 +87,7 @@ const Products = () => {
       </div>
       <div className="bottom-strip">
         <div className="bottom-brands">
-          {superItems.map((item) =>
+          {/* {superItems.map((item) =>
             item.subItems.map((subitem) => (
               <div
                 // className={
@@ -95,10 +97,15 @@ const Products = () => {
                 className={"brand-div"}
               >
                 <img src={subitem.subImg} />
+
               </div>
             ))
-          )}
-
+          )} */}
+          {location.state.subCategory.map((item, id)=>(
+            <div key={id} className="bottom-logos">
+              <img src={item.subCategoryImageURL!=''? item.subCategoryImageURL: noImage} alt="" width={70}/>
+            </div>
+          ))}
         </div>
       </div>
     </>

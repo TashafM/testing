@@ -11,7 +11,6 @@ import "./dealers.scss";
 import ProductCart from "./Components/ProductCart/ProductCart";
 import { createContext } from "react";
 import { useState } from "react";
-import { TestData } from "../../App";
 
 export const AddProducts = createContext();
 export const GlobalSidePanel = createContext();
