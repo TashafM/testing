@@ -61,17 +61,7 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
       className="teamMember-add"
     >
       <div className="content">
-        <DrawerHead
-          title="Edit Address"
-          handleClose={handleClose}
-          // description="Add Address"
-        />
-        {/* <Offcanvas.Header closeButton>
-          <Offcanvas.Title>
-            <div className="team-member-add">Add Address</div>
-          </Offcanvas.Title>
-        </Offcanvas.Header> */}
-        {/* <Offcanvas.Body> */}
+        <DrawerHead title="Edit Address" handleClose={handleClose} />
         <div>
           <Formik
             initialValues={{ ...initialValues }}
@@ -100,13 +90,6 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                     error={touched.fullName && errors.fullName}
                   />
                 </div>
-
-                {/* <PlaceAutoComplete
-                  apiKey={"AIzaSyAROpxxRmrXiah-FooutbY7rmY1m8HnucQ"}
-                  onPlaceSelected={(place) => {
-                    console.log(place);
-                  }}
-                /> */}
                 <div className="input-wrapper">
                   <TextInput
                     name="floorNumber"
@@ -220,7 +203,6 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
             )}
           />
         </div>
-        {/* </Offcanvas.Body> */}
       </div>
     </Offcanvas>
   );

@@ -40,7 +40,7 @@ function EditContacts() {
         };
 
         pathcData(body, (res) => {
-          console.log({ res });
+          console.log({ res }, openDrawer.callback(d));
           try {
             const d = JSON.parse(JSON.stringify(openDrawer.completeData));
             d[0].contactUs[openDrawer.index] = { ...res[0] };
@@ -49,6 +49,14 @@ function EditContacts() {
             console.log(error);
           }
 
+          console.log({
+            type: "Contacts",
+            title: "Contacts",
+            open: true,
+            data: d[0].contactUs,
+            callback: openDrawer.callback,
+            completeData: d,
+          });
           setOpenDrawer({
             type: "Contacts",
             title: "Contacts",

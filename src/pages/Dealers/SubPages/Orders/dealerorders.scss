@@ -1,6 +1,27 @@
 .dealers-order-main-container {
   margin-top: 56px;
 }
+
+.dealers-order-wrapper-container {
+  overflow-y: hidden !important;
+}
+
+.order-status-title-text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  color: #9f9f9f;
+}
+
+.text-span-date {
+  color: #000;
+  margin-left: 10px;
+  margin-right: 20px;
+}
 .address-card-main {
   margin-bottom: 30px;
   .cont-title {
@@ -15,6 +36,31 @@
 .address-card-container {
   border: 1px solid #a2a2a2;
   border-radius: 9px;
+}
+
+.table-status-chip {
+  background: #fdf2e7;
+  border-radius: 30px;
+  font-family: "Work Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #ee8d31;
+  text-align: center;
+  padding: 6px 20px;
+}
+.status-circel {
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: #ee8d31;
+}
+.arrow-right-image {
+  height: 35px;
+  width: 30px;
 }
 
 .address-head {

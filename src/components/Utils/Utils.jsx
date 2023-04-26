@@ -1,3 +1,5 @@
+import moment from "moment/moment";
+
 export const prepareAddressString = (add) => {
   let address = "";
 
@@ -35,3 +37,10 @@ export function isValidUrl(str) {
   );
   return pattern.test(str);
 }
+
+export const getDesireDateFormate = (date) => {
+  console.log({ date });
+  if (date) {
+    return moment(date).format("DD/MM/YYYY");
+  }
+};

@@ -1,7 +1,7 @@
 import React from "react";
 import PlainTable from "../../../components/PlainTable/PlainTable";
 import { useState } from "react";
-import { usePaginatedData } from "../../../hooks/pagination/usePaginatedData";
+import { usePaginatedCompanyData } from "../../../hooks/pagination/usePaginatedData";
 import { useEffect } from "react";
 import { companyCurrentOrder } from "../../../constant/tablesTitle";
 import { CircularProgress } from "@mui/material";
@@ -11,11 +11,11 @@ import { useNavigate } from "react-router-dom";
 function CompanyPastOrder() {
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
-  const { data, loading, setData, error, getData } = usePaginatedData();
+  const { data, loading, setData, error, getData } = usePaginatedCompanyData();
 
   const getCurrentOrders = () => {
-    const count = page + 1;
-    const url = `/dealerViewCurrentOrders?start=${count}&offset=10`;
+    const count = page * 10 + 1;
+    const url = `/portalViewPastOrders?start=${count}&offset=10`;
     getData(url, count, (res) => {
       if (count === 1) {
         setData(res.result);
@@ -23,7 +23,7 @@ function CompanyPastOrder() {
         setData([...data, ...res.result]);
       }
 
-      setPage(count);
+      setPage(count + 1);
       console.log({ res });
     });
   };

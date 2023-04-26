@@ -10,12 +10,12 @@ import { Modal } from "react-bootstrap";
 import { usePostAsyncResponse } from "../../../../hooks/usePostAsyncResponse";
 import BtnIconOnly from "../../../../components/Button/BtnIconOnly";
 
-// import BtnTitleCenter from "../Button/BtnTitleCenter";
-
 function EditPrivacy({ data = [], show, close, editSaveCallback }) {
   const [privacyData, setPrivacyData] = useState(
     JSON.parse(JSON.stringify(data)) ?? []
   );
+
+  const [makeApiCall, setMakeApiCall] = useState(false);
   const empty = { title: "", content: "" };
 
   const [postData, { loading, error }] = usePostAsyncResponse(
@@ -33,10 +33,13 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
       privacyPolicy: [...privacyData],
     };
 
-    postData(body, () => {
+    if (makeApiCall) {
+      postData(body, () => {
+        editSaveCallback([...privacyData]);
+      });
+    } else {
       close();
-      editSaveCallback([...privacyData]);
-    });
+    }
   };
 
   const onDelete = (index) => {
@@ -85,9 +88,10 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
                 <TextInput
                   placeholder={"type here..."}
                   value={item.title}
-                  onChange={(e) =>
-                    onChanContent(e.target.value, index, "title")
-                  }
+                  onChange={(e) => {
+                    makeApiCall && setMakeApiCall(true);
+                    onChanContent(e.target.value, index, "title");
+                  }}
                 />
                 <BtnIconOnly
                   icon={deleteIcon}
@@ -102,9 +106,10 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
                   value={item.content}
                   placeholder={"type here..."}
                   rows={6}
-                  onChange={(e) =>
-                    onChanContent(e.target.value, index, "content")
-                  }
+                  onChange={(e) => {
+                    makeApiCall && setMakeApiCall(true);
+                    onChanContent(e.target.value, index, "content");
+                  }}
                 />
               </div>
             </div>

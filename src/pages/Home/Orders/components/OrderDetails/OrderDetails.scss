@@ -1,5 +1,7 @@
 .upper-content {
-  overflow-y: scroll;
+  .order-detail-upper-content {
+    overflow: hidden;
+  }
   .order-details-div {
     display: flex;
     justify-content: space-between;

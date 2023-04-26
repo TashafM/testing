@@ -5,8 +5,8 @@
   margin: 0 10px;
   padding: 2%;
   display: flex;
-  
-  .internal-div{
+
+  .internal-div {
     display: flex;
   }
 
@@ -25,7 +25,7 @@
   }
 
   .order-summary {
-    width: 100%;
+    // width: 100%;
     // background-color: yellow;
     margin-left: 10%;
 
@@ -44,15 +44,16 @@
       }
     }
 
-    .horizontal-line{
-        margin: 10px 0 !important;
+    .horizontal-line {
+      margin: 10px 0 !important;
     }
 
     .amount-total {
       display: flex;
       justify-content: space-between;
 
-      .total-title, .total-amount{
+      .total-title,
+      .total-amount {
         font-size: 14px;
         font-weight: 500;
         line-height: 18px;
@@ -61,116 +62,114 @@
   }
 }
 
-
-@media only screen and (max-width: 1600px){
- .order-summary-box{
-  .box-one{
-    width: 100%;
+@media only screen and (max-width: 1600px) {
+  .order-summary-box {
+    .box-one {
+      width: 100%;
+    }
+    .title-text {
+      font-size: 16px;
+    }
+    .summary-text {
+      font-size: 13px;
+    }
   }
-  .title-text{
-    font-size: 16px;
-  }
-  .summary-text{
-    font-size: 13px;
-  }
- }
 }
 
-@media only screen and (max-width: 1440px){
-  .order-summary-box{
-   .title-text{
-    font-size: 16px;
-   }
-   .summary-text{
-    font-size: 13px;
-    line-height: 20px;
-   }
+@media only screen and (max-width: 1440px) {
+  .order-summary-box {
+    .title-text {
+      font-size: 16px;
+    }
+    .summary-text {
+      font-size: 13px;
+      line-height: 20px;
+    }
   }
- }
+}
 
- @media only screen and (max-width: 992px){
-  .order-summary-box{
-   .title-text{
-    font-size: 14px !important;
-   }
-   .summary-text{
-    font-size: 12px !important;
-    line-height: 18px !important;
-   }
-
-   .order-summary{
-    .items-total{
-      .summary-heading{
-        font-size: 12px;
-        margin-bottom: 5px;
-
-      }
-      .summary-amount{
-        font-size: 12px;
-        margin-bottom: 5px;
-      }
+@media only screen and (max-width: 992px) {
+  .order-summary-box {
+    .title-text {
+      font-size: 14px !important;
+    }
+    .summary-text {
+      font-size: 12px !important;
+      line-height: 18px !important;
     }
 
-    .taxes{
-      .summary-heading{
-        font-size: 12px;
-        // margin-bottom: 0;
+    .order-summary {
+      .items-total {
+        .summary-heading {
+          font-size: 12px;
+          margin-bottom: 5px;
+        }
+        .summary-amount {
+          font-size: 12px;
+          margin-bottom: 5px;
+        }
       }
-      .summary-amount{
-        font-size: 12px;
-        // margin-bottom: 0;
-      }
-    }
 
-    .amount-total{
-      .total-title{
-        font-size: 12px;
+      .taxes {
+        .summary-heading {
+          font-size: 12px;
+          // margin-bottom: 0;
+        }
+        .summary-amount {
+          font-size: 12px;
+          // margin-bottom: 0;
+        }
       }
-      .total-amount{
-        font-size: 12px;
+
+      .amount-total {
+        .total-title {
+          font-size: 12px;
+        }
+        .total-amount {
+          font-size: 12px;
+        }
       }
     }
-   }
   }
- }
+}
 
- @media only screen and (max-width: 780px){
-  .order-summary-box{
-    .order-summary{
+@media only screen and (max-width: 780px) {
+  .order-summary-box {
+    .order-summary {
       margin-left: 0;
     }
-    .box-one{
+    .box-one {
       padding-right: 20px;
     }
   }
- }
+}
 
- @media only screen and (max-width: 730px){
-  .order-summary-box{
-    .internal-div{
+@media only screen and (max-width: 730px) {
+  .order-summary-box {
+    .internal-div {
       flex-direction: column;
 
-      .box-one{
-        .title-text{
+      .box-one {
+        .title-text {
           margin-bottom: 0px;
         }
         margin-bottom: 5px;
       }
 
-      .order-summary{
-        .title-text{
+      .order-summary {
+        .title-text {
           margin: 0;
         }
 
-        .taxes{
-          .summary-heading{
+        .taxes {
+          .summary-heading {
             margin-bottom: 0;
           }
-          .summary-amount{
+          .summary-amount {
             margin-bottom: 0;
           }
         }
       }
     }
   }
- }
+}

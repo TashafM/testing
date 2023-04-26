@@ -12,10 +12,10 @@ function DealerCurrentOrder() {
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
 
-  const { data, loading, setData, error, getData } = usePaginatedData();
+  const { data, loading, setData, getData } = usePaginatedData();
 
   const getCurrentOrders = () => {
-    const count = page + 1;
+    const count = page * 10 + 1;
     const url = `/dealerViewCurrentOrders?start=${count}&offset=10`;
     getData(url, count, (res) => {
       if (count === 1) {
@@ -23,7 +23,7 @@ function DealerCurrentOrder() {
       } else {
         setData([...data, ...res.result]);
       }
-      setPage(count);
+      setPage(page + 1);
       console.log({ res });
     });
   };

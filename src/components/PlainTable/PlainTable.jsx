@@ -2,6 +2,8 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import "./PlainTable.scss";
+import arrow from "../../assets/images/greater-then.png";
+import { getDesireDateFormate } from "../Utils/Utils";
 
 const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
   //   const data = datum.sort((a, b) => b.id - a.id);  -----------> for sorting we can use this
@@ -33,21 +35,41 @@ const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
                         </td>
                       );
                     }
-                    if (id === columns.length - 2 && type !== "company") {
+
+                    let value = row;
+                    col.title.split(",").map((item, index) => {
+                      value = value[item];
+                    });
+
+                    if (col.title.includes("Date")) {
+                      value = getDesireDateFormate(value ?? "");
+                    }
+                    if (col.value.includes("Status")) {
                       return (
-                        <>
-                          <td key={id}>
-                            <div className={col.value}>
-                              {row?.currency?.symbol} {row[col.title]}
-                            </div>
-                          </td>
-                        </>
+                        <td>
+                          <div className="d-flex align-items-center justify-content-center">
+                            <p className="table-status-chip m-0">
+                              <span className="status-circel " /> {value}
+                            </p>
+                            <img
+                              src={arrow}
+                              alt="arrow right-action"
+                              className="arrow-right-image"
+                            />
+                          </div>
+                        </td>
                       );
                     }
+
                     return (
                       <>
                         <td key={id}>
-                          <div className={col.value}>{row[col.title]}</div>
+                          <div className={col.value}>
+                            {col?.value?.includes("Price")
+                              ? `${row?.currency?.symbol} `
+                              : ""}
+                            {value}
+                          </div>
                         </td>
                       </>
                     );

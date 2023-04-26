@@ -1,7 +1,5 @@
 import React from "react";
-import { orderDetailColumn, orderDetailRow } from "../../../About/data/data";
-import DealersTable from "./component/tables/DealersTable";
-import CardHead from "../../../About/Information/Component/CardHead";
+import { orderDetailColumn } from "../../../About/data/data";
 import billing from "../../../../assets/images/billing.png";
 import shipping from "../../../../assets/images/shipping.png";
 import ViewAddress from "./component/drawer/ViewAddress";
@@ -9,16 +7,18 @@ import { useState } from "react";
 import ViewOtherInfo from "./component/drawer/ViewOtherInfo";
 import { useEffect } from "react";
 import { usePaginatedData } from "../../../../hooks/pagination/usePaginatedData";
-import { useLocation } from "react-router-dom";
+import { useLocation, useOutletContext } from "react-router-dom";
 import OrderTable from "../../../Home/Orders/components/OrderTable/OrderTable";
 import { CircularProgress } from "@mui/material";
 import { prepareAddressString } from "../../../../components/Utils/Utils";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function DealerOrderDetails() {
   const [showAddress, setShowAddress] = useState(false);
   const [showOther, setShowOther] = useState(false);
   const location = useLocation();
   const orderId = location.state.data;
+  const [orderDetail, setOrderDetail] = useOutletContext();
 
   const [page, setPage] = useState(0);
 
@@ -26,10 +26,14 @@ function DealerOrderDetails() {
 
   useEffect(() => {
     getCurrentOrders();
+
+    return () => {
+      setOrderDetail({});
+    };
   }, []);
 
   const getCurrentOrders = () => {
-    const count = page + 1;
+    const count = page * 10 + 1;
     const body = {
       orderId: orderId.orderId,
     };
@@ -38,13 +42,23 @@ function DealerOrderDetails() {
       url,
       count,
       (res) => {
+        setOrderDetail(res.result);
         if (count === 1) {
           setData(res.result);
         } else {
-          setData([...data, ...res.result]);
+          if (res.result.length) {
+            if (res.result[0].order.length) {
+              const order = [
+                {
+                  ...data[0],
+                  order: [...data[0].order, ...res.result[0].order],
+                },
+              ];
+              setData([...order]);
+            }
+          }
         }
-        // setPage(count);
-        console.log({ res });
+        setPage(page + 1);
       },
       body
     );
@@ -60,6 +74,8 @@ function DealerOrderDetails() {
 
   console.log(data);
 
+  const order = data && data?.length ? data[0] : {};
+
   return (
     <div className="dealers-order-main-container">
       <div className="container-fluid m-0 p-0 ">
@@ -68,7 +84,7 @@ function DealerOrderDetails() {
             <div
               className="d-flex address-card-container "
               onClick={() => {
-                setShowAddress(true);
+                // setShowAddress(true);
               }}
             >
               <div className=" flex-grow-1 detail-top-card width-50 ">
@@ -82,12 +98,10 @@ function DealerOrderDetails() {
                 </div>
                 <div className="address-field">
                   <p className="m-0 over-flow-text ">
-                    {data?.length
-                      ? prepareAddressString(data[0]?.billingAddress ?? {})
-                      : ""}
+                    {prepareAddressString(order?.billingAddress ?? {})}
                   </p>
                   <p className="m-0">
-                    {data.length ? data[0].billingAddress?.contactNumber : ""}
+                    {order?.billingAddress?.contactNumber ?? ""}
                   </p>
                 </div>
               </div>
@@ -103,14 +117,10 @@ function DealerOrderDetails() {
                   </div>
                   <div className="address-field">
                     <p className="m-0 over-flow-text">
-                      {data?.length
-                        ? prepareAddressString(data[0]?.shippingAddress ?? {})
-                        : ""}
+                      {prepareAddressString(order?.shippingAddress ?? {})}
                     </p>
                     <p className="m-0">
-                      {data?.length
-                        ? data[0]?.shippingAddress?.contactNumber
-                        : ""}
+                      {order.shippingAddress?.contactNumber}
                     </p>
                   </div>
                 </div>
@@ -121,7 +131,7 @@ function DealerOrderDetails() {
             <div
               className="d-flex address-card-container "
               onClick={() => {
-                setShowOther(true);
+                // setShowOther(true);
               }}
             >
               <div className=" flex-grow-1 detail-top-card width-50 ">
@@ -131,10 +141,7 @@ function DealerOrderDetails() {
                   </div>
                   <div className="address-field">
                     <p className="m-0 over-flow-text over-flow-text-other">
-                      Lorem ipsum dolor sit amet, consectetur adipis cing elit,
-                      sed do eiusmod tempor, Lorem ipsum dolor sit amet,
-                      consectetur adipis cing elit, sed do eiusmod tempor
-                      consectetur adipis...See all
+                      {order.otherInstruction}
                     </p>
                   </div>
                 </div>
@@ -146,15 +153,15 @@ function DealerOrderDetails() {
                 <div className="address-field">
                   <div className="d-flex justify-content-between">
                     <p className="m-0">Items total</p>
-                    <p className="m-0">INR 1440.0</p>
+                    <p className="m-0">INR {order?.itemsTotal ?? "0.0"}</p>
                   </div>
                   <div className="d-flex justify-content-between">
                     <p className="m-0">Taxes</p>
-                    <p className="m-0">INR 194.00</p>
+                    <p className="m-0">INR {order?.taxAmount ?? "0.0"}</p>
                   </div>
                   <div className="d-flex justify-content-between total-container-div">
                     <p className="m-0">Total Price</p>
-                    <p className="m-0">INR 1630.00</p>
+                    <p className="m-0">INR {order?.totalAmount}</p>
                   </div>
                 </div>
               </div>
@@ -178,11 +185,17 @@ function DealerOrderDetails() {
           }}
         />
       )}
-
-      <OrderTable
-        columns={orderDetailColumn}
-        data={data?.length ? data[0]?.order ?? [] : []}
-      />
+      <InfiniteScroll
+        dataLength={data?.length ? data[0]?.order ?? [] : 0}
+        next={getCurrentOrders}
+        hasMore={true}
+        scrollableTarget="company-order-table-container"
+      >
+        <OrderTable
+          columns={orderDetailColumn}
+          data={data?.length ? data[0]?.order ?? [] : []}
+        />
+      </InfiniteScroll>
     </div>
   );
 }

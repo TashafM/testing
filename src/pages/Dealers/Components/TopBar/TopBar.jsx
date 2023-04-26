@@ -7,19 +7,30 @@ import { useNavigate } from "react-router-dom";
 import Filter from "../Filter/Filter";
 
 const TopBar = ({ title, goback }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleBack = () => {
-    navigate(-1)
-  }
+    navigate(-1);
+  };
   return (
     <div className="top-comp">
-      <div className="title">
-        <span >{goback ? <img src={backpage} onClick={handleBack} className="back-btn"/> : ""}</span>
+      <div className="title-container">
+        <span>
+          {goback ? (
+            <img
+              src={backpage}
+              onClick={handleBack}
+              className="back-btn"
+              alt="order"
+            />
+          ) : (
+            ""
+          )}
+        </span>
         {title}
       </div>
       <div className="search-filter-btn">
         <SearchBarDealers />
-        <Filter/>
+        <Filter />
       </div>
     </div>
   );

@@ -22,6 +22,8 @@ function ModalComponent({
   type,
 }) {
   const [Data, setData] = useState(JSON.parse(JSON.stringify(data)) ?? []);
+
+  const [makeApiCall, setMakeApiCall] = useState(false);
   const empty = emptydata;
   const onChanContent = (value, index, key) => {
     const arr = [...Data];
@@ -30,7 +32,11 @@ function ModalComponent({
   };
 
   const onSaveData = () => {
-    editSaveCallback([...Data]);
+    if (makeApiCall) {
+      editSaveCallback([...Data]);
+    } else {
+      close();
+    }
   };
 
   const onDelete = (index) => {
@@ -81,6 +87,7 @@ function ModalComponent({
                     placeholder={"type here..."}
                     value={type === "FAQ" ? item.question : item.title}
                     onChange={(e) => {
+                      makeApiCall && setMakeApiCall(true);
                       const key = type === "FAQ" ? "question" : "title";
                       onChanContent(e.target.value, index, key);
                     }}
@@ -99,8 +106,8 @@ function ModalComponent({
                     placeholder={"type here..."}
                     value={type === "FAQ" ? item.answer : item.content}
                     onChange={(e) => {
+                      makeApiCall && setMakeApiCall(true);
                       const key = type === "FAQ" ? "answer" : "content";
-
                       onChanContent(e.target.value, index, key);
                     }}
                   />
