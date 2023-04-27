@@ -20,7 +20,7 @@ const AllProducts = () => {
   );
 
   const navigate = useNavigate();
-
+  const [noData, setNoData] = useState(false);
   const [categoryData, setcategoryData] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
 
@@ -37,16 +37,20 @@ const AllProducts = () => {
         principalCompanyUserCode,
       });
       setcategoryData(api1.result);
-
-      const api2 = await axiosInstance.post(
-        API.VIEW_DEALER_PRODUCT_SUBCATEGORY,
-        {
-          principalCompanyUserCode,
-          categoryId: api1.result[0].categoryId,
-        }
-      );
-      setSubCategory(api2.result);
+      if (api1.result.length == 0) {
+        setNoData(true);
+      } else {
+        const api2 = await axiosInstance.post(
+          API.VIEW_DEALER_PRODUCT_SUBCATEGORY,
+          {
+            principalCompanyUserCode,
+            categoryId: api1.result[0].categoryId,
+          }
+        );
+        setSubCategory(api2.result);
+      }
     };
+
     fetchData();
   }, []);
 
@@ -69,48 +73,59 @@ const AllProducts = () => {
   return (
     <>
       <div className="allproducts">
-        <TopBar title={"Print Heads"} />
-        <div>
-          <div className="img-category-main">
-            <div className="catItems">
-              {categoryData.map((item, id) => (
-                <div
-                  className={
-                    active == id
-                      ? `superCategory-div activeBorder`
-                      : `superCategory-div `
-                  }
-                  style={{
-                    backgroundImage: `url(${
-                      item.categoryImageURL ? item.categoryImageURL : abcImg
-                    })`,
-                    backgroundSize: "cover",
-                  }}
-                  onClick={() => chng(item.categoryId, id)}
-                >
-                  {item.categoryName}
-                </div>
-              ))}
-            </div>
-            {showPanel && <SidePanel />}
-            <hr />
-
-            <div>
-              {subCategory.map((item, id) => (
-                <div
-                  className="sub-category-div"
-                  onClick={() => seeProducts(item)}
-                  key={id}
-                >
-                  <div className="image-div">
-                    <img src={item.subCategoryImageURL?item.subCategoryImageURL:noImage} alt="" />
+        <TopBar title={!noData?"Print Heads":null} />
+        {noData ? (
+          <div className="nodata">No categories added yet</div>
+        ) : (
+          <div>
+            <div className="img-category-main">
+              <div className="catItems">
+                {categoryData.map((item, id) => (
+                  <div
+                    className={
+                      active == id
+                        ? `superCategory-div activeBorder`
+                        : `superCategory-div `
+                    }
+                    style={{
+                      backgroundImage: `url(${
+                        item.categoryImageURL ? item.categoryImageURL : abcImg
+                      })`,
+                      backgroundSize: "cover",
+                    }}
+                    onClick={() => chng(item.categoryId, id)}
+                  >
+                    {item.categoryName}
                   </div>
-                  <div className="name">{item.subCategoryName}</div>
-                </div>
-              ))}
+                ))}
+              </div>
+              {showPanel && <SidePanel />}
+              <hr />
+
+              <div>
+                {subCategory.map((item, id) => (
+                  <div
+                    className="sub-category-div"
+                    onClick={() => seeProducts(item)}
+                    key={id}
+                  >
+                    <div className="image-div">
+                      <img
+                        src={
+                          item.subCategoryImageURL
+                            ? item.subCategoryImageURL
+                            : noImage
+                        }
+                        alt=""
+                      />
+                    </div>
+                    <div className="name">{item.subCategoryName}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

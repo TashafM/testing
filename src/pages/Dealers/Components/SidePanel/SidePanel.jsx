@@ -3,12 +3,13 @@ import "./sidepanel.scss";
 import { Button, Offcanvas } from "react-bootstrap";
 import LeftSide from "../LeftSide/LeftSide";
 import RightSide from "../RightSide/RightSide";
-import { GlobalSidePanel } from "../../Dealers";
+import { AddProducts, GlobalSidePanel } from "../../Dealers";
 import { API } from "../../../../helper/API";
 import { axiosInstance } from "../../../../helper/axios";
 
 const SidePanel = () => {
   const {setShowPanel, showPanel} = useContext(GlobalSidePanel)
+  const {setIsEmpty, isEmpty} = useContext(AddProducts)
   const [cartProducts, setCartProducts] = useState([]);
   const [data, setData] = useState([])
 
@@ -40,8 +41,10 @@ const SidePanel = () => {
     setIsLoading(true);
     addItemToCart((res)=>{
       setIsLoading(false)
+      setIsEmpty(false)
     })
   }
+
 
 
   const addItemToCart = () => {
@@ -86,7 +89,7 @@ const SidePanel = () => {
       <Offcanvas
         show={showPanel}
         onHide={() => {
-          setShowPanel(false);
+          // setShowPanel(false);
           addItemToCart()
         }}
         placement="end"

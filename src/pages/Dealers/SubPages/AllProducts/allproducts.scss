@@ -7,6 +7,17 @@
   padding: 25px 35px;
   overflow-y: auto;
   // overflow-x: scroll;
+  .nodata {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 28px;
+    color: #929292;
+  }
 
   .catItems {
     display: flex;
@@ -17,7 +28,6 @@
       display: none;
     }
 
-   
     .superCategory-div {
       margin-right: 20px;
       min-height: 150px;

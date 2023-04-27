@@ -22,7 +22,7 @@ const Products = () => {
   const { showPanel, setShowPanel } = useContext(GlobalSidePanel);
   const location = useLocation();
   const [products, setProducts] = useState([]);
-  console.log(location,'location')
+  // console.log(location,'location')
   // const [data, setData] = useState([])
   // const [currentId, setCurrentId] = useState(location.state.id);
 
@@ -49,7 +49,6 @@ const Products = () => {
 
   const callFunc = (val) => {
     // setData(val)
-    console.log('open it')
     setShowPanel(true)
     const productData = JSON.stringify(val);
     localStorage.setItem('initialProductData', productData)

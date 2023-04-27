@@ -6,13 +6,15 @@ import BlackBtn from "../BlackBtn/BlackBtn";
 import { BsChevronDown } from "react-icons/bs";
 import user from "../../assets/images/user.jpg";
 import atlogo from "../../assets/images/atlogo.png";
-import axios from "../../helper/axios";
+import axios, { axiosInstance } from "../../helper/axios";
 
 import LogoutPopup from "../LogoutPopup/LogoutPopup";
 import MyDealersPopup from "../../pages/Dealers/Modal/MyDealersPopup/MyDealersPopup";
 import { API } from "../../helper/API";
+import { AddProducts } from "../../pages/Dealers/Dealers";
 
 const NavbarTop = ({ dealers }) => {
+  const {setIsEmpty, isEmpty} = useContext(AddProducts)
   const idCode = localStorage.getItem("principalCompanyUserCode");
   const dealersLogo = localStorage.getItem('dpURL')
   const [showPopup, setShowPopup] = useState(false);
@@ -34,8 +36,23 @@ const NavbarTop = ({ dealers }) => {
 
   useEffect(() => {
     fetchDealers();
+    emptyCart();
   }, [idCode]);
   
+
+  const emptyCart = () => {
+    const principalCompanyUserCode = localStorage.getItem(
+      "principalCompanyUserCode"
+    );
+    axiosInstance
+      .post(API.DEALER_CLEAR_CART, { principalCompanyUserCode })
+      .then((res) => {
+        if (res.success) {
+          setIsEmpty(false);
+          localStorage.removeItem("cartProducts");
+        }
+      });
+  };
 
   return (
     <div className="row navbar-top">

@@ -25,9 +25,10 @@ function RightSide({
           src={closeX}
           alt=""
           onClick={() => {
-            setShowPanel(false);
-            addItemToCart();
+            // addItemToCart()
+            {cartProducts.length != 0 && addItemToCart()}
           }}
+          className="close-button"
         />
       </div>
       <OrderListTable data={cartProducts} setData={setCartProducts} />

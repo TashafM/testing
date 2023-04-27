@@ -138,7 +138,6 @@ const ProductCart = () => {
           const selectedAddress = res.result[0].shippingAddress.filter(
             (address) => address.selected === true
           );
-          console.log(...selectedAddress, "selected address");
           setDisplayAddress(...selectedAddress);
         });
     };
@@ -174,7 +173,7 @@ const ProductCart = () => {
     const data = localStorage.getItem("placeOrderData");
     const parsedData = JSON.parse(data);
     setOrder(parsedData);
-    console.log(parsedData, "parseddata");
+    // console.log(parsedData, "parseddata");
     const principalCompanyUserCode = localStorage.getItem(
       "principalCompanyUserCode"
     );
@@ -201,8 +200,8 @@ const ProductCart = () => {
     axiosInstance
       .post(API.PLACE_ORDER, {
         principalCompanyUserCode,
-        labelInstruction: parsedData.labelInstruction,
-        otherInstruction: parsedData.otherInstruction,
+        labelInstruction: localStorage.getItem('labelInstruction'),
+        otherInstruction: localStorage.getItem('otherInstruction'),
         purchaseOrderNumber: purchaseOrderNumber,
         cartItems: parsedData.cartItems.map((item) => {
           return {
@@ -251,6 +250,7 @@ const ProductCart = () => {
             <th>Quantity</th>
             <th className="price">Price</th>
           </tr>
+          {console.log(isEmpty,'value from cart')}
         </thead>
         {!isEmpty && (
           <tbody className="right-side-body">
