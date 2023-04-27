@@ -187,14 +187,14 @@ const testConsole = () => {
           />
         </div>
 
-        <Form className="urgent-order">
+        {/* <Form className="urgent-order">
           <Form.Check
             type="checkbox"
             label="Need urgent order"
             // checked={isChecked}
             // onChange={handleCheckboxChange}
           />
-        </Form>
+        </Form> */}
 
         <div className="add-div-btn">
           <Button

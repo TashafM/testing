@@ -2,7 +2,14 @@ import React, { useEffect } from "react";
 import noItem from "../../../../assets/images/item-not-added.png";
 import editIcon from "../../../../assets/images/edit-icon.png";
 
-import { Button, FormControl, FormGroup, Modal, Table } from "react-bootstrap";
+import {
+  Button,
+  FormControl,
+  FormGroup,
+  Modal,
+  Spinner,
+  Table,
+} from "react-bootstrap";
 import "./productcart.scss";
 import ItemRow from "../ItemRow/ItemRow";
 import { useContext } from "react";
@@ -18,28 +25,25 @@ import { API } from "../../../../helper/API";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const ProductCart = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const {showPanel, setShowPanel} = useContext(GlobalSidePanel)
-  const location = useLocation()
-  
+  const { showPanel, setShowPanel } = useContext(GlobalSidePanel);
+
   // const { isEmpty, setIsEmpty } = useContext(AddProducts);
 
-  const [purchaseOrderNumber, setPurchaseOrderNumber] = useState('');
+  const [purchaseOrderNumber, setPurchaseOrderNumber] = useState("");
 
   const handlePurchaseOrderNumberChange = (event) => {
     setPurchaseOrderNumber(event.target.value);
   };
 
-  const isPurchaseOrderNumberEmpty = purchaseOrderNumber.trim() === '';
-
+  const isPurchaseOrderNumberEmpty = purchaseOrderNumber.trim() === "";
 
   //==========================BILLING-ADDRESS | SHIPPING-ADDRESS==========================
   const [billingAddress, setBillingAddress] = useState([]);
   const [shippingAddress, setShippingAddress] = useState([]);
   const [defaultShipping, setDefaultShipping] = useState([]);
   const [defaultBilling, setDefaultBilling] = useState([]);
-
 
   const [showAllProducts, setShowAllProducts] = useState(false);
   const handleSetProduct = () => {
@@ -62,7 +66,7 @@ const ProductCart = () => {
     setBillingAddress(defaultBilling);
   };
 
-  const [displayAddress, setDisplayAddress] = useState([])
+  const [displayAddress, setDisplayAddress] = useState([]);
 
   //--------------------------------------------------------
   //------------------OTHER INSTRUCTIONS POPUP--------------------------
@@ -76,12 +80,12 @@ const ProductCart = () => {
   const closeSuccessModal = () => {
     emptyCart();
     setModalShow(false);
-  }
+  };
   const gotoOrders = () => {
-    setModalShow(false)
-    navigate('/dealers/orders')
-    emptyCart()
-  }
+    setModalShow(false);
+    navigate("/dealers/orders");
+    emptyCart();
+  };
 
   //------------------------------------------
   const [cart, setCart] = useState([]);
@@ -99,11 +103,12 @@ const ProductCart = () => {
       .then((res) => {
         if (res.success) {
           setIsEmpty(true);
-          localStorage.removeItem('cartProducts');
+          localStorage.removeItem("cartProducts");
         }
-      })
+      });
   };
 
+  const [load, setLoad] = useState(false);
   useEffect(() => {
     const getViewCart = () => {
       const principalCompanyUserCode = localStorage.getItem(
@@ -118,9 +123,9 @@ const ProductCart = () => {
           setShippingAddress(res.result[0].shippingAddress);
           setDefaultBilling(res.result[0].billingAddress);
           setDefaultShipping(res.result[0].shippingAddress);
-
+          // setIsEmpty(false);
           const toString = JSON.stringify(res.result[0]);
-          localStorage.setItem('placeOrderData', toString)
+          localStorage.setItem("placeOrderData", toString);
           if (res.result[0].cartItems.length > 0) {
             setIsEmpty(false);
           }
@@ -130,9 +135,11 @@ const ProductCart = () => {
           );
           setItemTotal(sumOfTotal);
 
-          const selectedAddress = res.result[0].shippingAddress.filter(address => address.selected === true);
-          console.log(...selectedAddress,'selected address')
-          setDisplayAddress(...selectedAddress)
+          const selectedAddress = res.result[0].shippingAddress.filter(
+            (address) => address.selected === true
+          );
+          console.log(...selectedAddress, "selected address");
+          setDisplayAddress(...selectedAddress);
         });
     };
 
@@ -141,51 +148,71 @@ const ProductCart = () => {
 
   //==============================================SET ADDRESS API
   const dummy = () => {
-    axiosInstance.post(API.EDIT_CART_ADDRESS,{
-      principalCompanyUserCode: localStorage.getItem('principalCompanyUserCode'),
-      billingAddress: billingAddress,
-      shippingAddress: shippingAddress,
-    }).then((res)=>{
-
-      const selectedAddress = res.result[0].shippingAddress.filter(address => address.selected === true);
-      setDisplayAddress(...selectedAddress)
-      setShowAddress(false)
-    })
+    axiosInstance
+      .post(API.EDIT_CART_ADDRESS, {
+        principalCompanyUserCode: localStorage.getItem(
+          "principalCompanyUserCode"
+        ),
+        billingAddress: billingAddress,
+        shippingAddress: shippingAddress,
+      })
+      .then((res) => {
+        const selectedAddress = res.result[0].shippingAddress.filter(
+          (address) => address.selected === true
+        );
+        setDisplayAddress(...selectedAddress);
+        setShowAddress(false);
+      });
   };
-
 
   //===========PLACE ORDER API====================================
 
-  const [order, setOrder] = useState([])
-  const placeOrder= () => {
-    const data = localStorage.getItem('placeOrderData')
+  const [order, setOrder] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const placeOrder = () => {
+    setIsLoading(true);
+    const data = localStorage.getItem("placeOrderData");
     const parsedData = JSON.parse(data);
     setOrder(parsedData);
-    console.log(parsedData,'parseddata')
-    const principalCompanyUserCode = localStorage.getItem('principalCompanyUserCode');
-    const selectedShipping = shippingAddress.find(item => item.selected === true);
-    const { _id: shippingId, type: shippingType, selected: shippingSelected, ...shippingFinal } = selectedShipping;
-    
-    const selectedBilling = billingAddress.find(item => item.selected === true);
-    const { _id: billingId, type: billingType, selected: billingSelected, ...billingFinal } = selectedBilling;
-    
+    console.log(parsedData, "parseddata");
+    const principalCompanyUserCode = localStorage.getItem(
+      "principalCompanyUserCode"
+    );
+    const selectedShipping = shippingAddress.find(
+      (item) => item.selected === true
+    );
+    const {
+      _id: shippingId,
+      type: shippingType,
+      selected: shippingSelected,
+      ...shippingFinal
+    } = selectedShipping;
 
+    const selectedBilling = billingAddress.find(
+      (item) => item.selected === true
+    );
+    const {
+      _id: billingId,
+      type: billingType,
+      selected: billingSelected,
+      ...billingFinal
+    } = selectedBilling;
 
-    axiosInstance.post(
-      API.PLACE_ORDER,{
+    axiosInstance
+      .post(API.PLACE_ORDER, {
         principalCompanyUserCode,
         labelInstruction: parsedData.labelInstruction,
         otherInstruction: parsedData.otherInstruction,
         purchaseOrderNumber: purchaseOrderNumber,
-        cartItems: parsedData.cartItems.map(item=>{
-          return{
+        cartItems: parsedData.cartItems.map((item) => {
+          return {
             variantId: item.variantId,
             grossPrice: item.grossPrice,
             saleDescription: item.saleDescription,
             productId: item.productId,
             quantity: item.quantity,
-            totalPrice: item.totalPrice
-          }
+            totalPrice: item.totalPrice,
+          };
         }),
         shippingAddress: shippingFinal,
         billingAddress: billingFinal,
@@ -193,16 +220,28 @@ const ProductCart = () => {
         igstPercentage: parsedData.igstPercentage,
         sgstPercentage: parsedData.sgstPercentage,
         totalAmount: parsedData.totalAmount,
-        taxAmount: parsedData.taxAmount
-      }
-    ).then((res)=>{
-      if(res.success){
-        setModalShow(true)
-      }
-    })
-  }
-  
-const {fullName, floorNumber,block , street, city, state, country, zipCode, contactNumber} = displayAddress
+        taxAmount: parsedData.taxAmount,
+      })
+      .then((res) => {
+        if (res.success) {
+          setIsLoading(false);
+          setModalShow(true);
+        }
+      })
+      .catch((err) => setIsLoading(false));
+  };
+
+  const {
+    fullName,
+    floorNumber,
+    block,
+    street,
+    city,
+    state,
+    country,
+    zipCode,
+    contactNumber,
+  } = displayAddress;
   return (
     <>
       <Table>
@@ -225,10 +264,12 @@ const {fullName, floorNumber,block , street, city, state, country, zipCode, cont
         <>
           <div className="dashed-line"></div>
           <div className="edit-see-all">
-            <div className="edit" onClick={() => {
-              setShowPanel(true)
-              console.log('hiii')
-            }}>
+            <div
+              className="edit"
+              onClick={() => {
+                setShowPanel(true);
+              }}
+            >
               <img src={editIcon} alt="" />
               <span className="text">Edit</span>
             </div>
@@ -252,7 +293,11 @@ const {fullName, floorNumber,block , street, city, state, country, zipCode, cont
           {/**PURCHASE ORDER */}
           <div className="purchase-order">
             <div className="title">Purchase Order Number * :</div>
-            <FormControl type="text" value={purchaseOrderNumber} onChange={handlePurchaseOrderNumberChange}/>
+            <FormControl
+              type="text"
+              value={purchaseOrderNumber}
+              onChange={handlePurchaseOrderNumberChange}
+            />
           </div>
 
           {/**ADDRESS */}
@@ -289,6 +334,7 @@ const {fullName, floorNumber,block , street, city, state, country, zipCode, cont
           </div>
           <div className="item-rate-div">
             <div>Taxes</div>
+
             <div>
               {currencySymbol}
               {cart.taxAmount}
@@ -305,17 +351,31 @@ const {fullName, floorNumber,block , street, city, state, country, zipCode, cont
 
           {/**PLACE ORDER - CLEAR CART */}
           <div className="cart-btns">
-            <Button className="clear" onClick={emptyCart} >
+            <Button className="clear" onClick={emptyCart}>
               Clear Cart
             </Button>
-            <Button className="place-order" onClick={() => {
-              // setModalShow(true);
-              placeOrder()
-            }} disabled={isPurchaseOrderNumberEmpty}>
-              Place Order
+            <Button
+              className="place-order"
+              onClick={() => {
+                // setModalShow(true);
+                placeOrder();
+              }}
+              disabled={isPurchaseOrderNumberEmpty}
+            >
+              {isLoading ? (
+                <div className="place-order-spinner">
+                  <Spinner animation="border" variant="light" />
+                </div>
+              ) : (
+                "Place Order"
+              )}
             </Button>
           </div>
-          <OrderPlaced modalShow={modalShow} closeSuccessModal={closeSuccessModal} gotoOrders={gotoOrders}/>
+          <OrderPlaced
+            modalShow={modalShow}
+            closeSuccessModal={closeSuccessModal}
+            gotoOrders={gotoOrders}
+          />
         </>
       )}
 

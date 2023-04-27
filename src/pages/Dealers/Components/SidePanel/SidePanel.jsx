@@ -34,6 +34,15 @@ const SidePanel = () => {
     }
   },[localStorage.getItem('initialProductData')])
 
+  const [isLoading, setIsLoading] = useState(false)
+
+  const addingItems =()=>{
+    setIsLoading(true);
+    addItemToCart((res)=>{
+      setIsLoading(false)
+    })
+  }
+
 
   const addItemToCart = () => {
     const sgst = localStorage.getItem("sgstPercentage");
@@ -98,7 +107,8 @@ const SidePanel = () => {
                 setShowPanel={setShowPanel}
                 cartProducts={cartProducts}
                 setCartProducts={setCartProducts}
-                addItemToCart={addItemToCart}
+                addItemToCart={addingItems}
+                isLoading={isLoading}
               />
             </div>
           </div>

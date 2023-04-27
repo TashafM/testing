@@ -7,6 +7,8 @@ import { superItems } from "../../data";
 import { API } from "../../../../helper/API";
 import axios, { axiosInstance } from "../../../../helper/axios";
 import abcImg from "../../../../assets/images/application.png";
+import noImage from "../../../../assets/images/noImage.png";
+
 import atlogo from "../../../../assets/images/atlogo.png";
 import { GlobalContext } from "../../../../App";
 import SidePanel from "../../Components/SidePanel/SidePanel";
@@ -60,7 +62,7 @@ const AllProducts = () => {
   const seeProducts = (itm) => {
     const { categoryId, subCategoryId } = itm;
     navigate("/dealers/all-products/products", {
-      state: { categoryId, subCategoryId },
+      state: { categoryId, subCategoryId, subCategory },
     });
   };
 
@@ -101,7 +103,7 @@ const AllProducts = () => {
                   key={id}
                 >
                   <div className="image-div">
-                    <img src={item.subCategoryImageURL} alt="" />
+                    <img src={item.subCategoryImageURL?item.subCategoryImageURL:noImage} alt="" />
                   </div>
                   <div className="name">{item.subCategoryName}</div>
                 </div>
