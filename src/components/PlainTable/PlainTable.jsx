@@ -65,8 +65,8 @@ const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
                       <>
                         <td key={id}>
                           <div className={col.value}>
-                            {col?.value?.includes("Price")
-                              ? `${row?.currency?.symbol} `
+                            {col?.value?.includes("Total")
+                              ? `${row?.currency?.symbol}`
                               : ""}
                             {value}
                           </div>

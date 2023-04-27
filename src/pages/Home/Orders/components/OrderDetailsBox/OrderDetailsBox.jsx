@@ -2,8 +2,9 @@ import React from "react";
 import { Col } from "react-bootstrap";
 import "./OrderDetailsBox.scss";
 import { prepareAddressString } from "../../../../../components/Utils/Utils";
+import BtnTitleCenter from "../../../../../components/Button/BtnTitleCenter";
 
-const OrderDetailsBox = ({ icon, icon2, order }) => {
+const OrderDetailsBox = ({ icon, icon2, order, onClick }) => {
   return (
     <Col className="order-details-box">
       <div className="display-desktop">
@@ -32,15 +33,17 @@ const OrderDetailsBox = ({ icon, icon2, order }) => {
                 <img src={icon2} alt="icon" />
               </span>
             )}
-            Billing Address :
+            Shipping Address :
           </div>
           <div className="full-address">
             {Object.keys(order ?? {}).length
               ? prepareAddressString(order.shippingAddress)
               : ""}
           </div>
-          <div className="mobile">
+          <div className="mobile d-flex address-contact-card justify-content-between align-items-center">
             {order?.shippingAddress?.contactNumber ?? ""}
+
+            <BtnTitleCenter title="View all" onClick={onClick} />
           </div>
         </div>
       </div>

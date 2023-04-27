@@ -12,6 +12,7 @@ import OrderTable from "../../../Home/Orders/components/OrderTable/OrderTable";
 import { CircularProgress } from "@mui/material";
 import { prepareAddressString } from "../../../../components/Utils/Utils";
 import InfiniteScroll from "react-infinite-scroll-component";
+import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 
 function DealerOrderDetails() {
   const [showAddress, setShowAddress] = useState(false);
@@ -119,9 +120,21 @@ function DealerOrderDetails() {
                     <p className="m-0 over-flow-text">
                       {prepareAddressString(order?.shippingAddress ?? {})}
                     </p>
-                    <p className="m-0">
+                    {/* <p className="m-0">
                       {order.shippingAddress?.contactNumber}
-                    </p>
+                    </p> */}
+                    <div className="mobile d-flex address-contact-card justify-content-between align-items-center">
+                      <p className="m-0">
+                        {order?.shippingAddress?.contactNumber ?? ""}
+                      </p>
+
+                      <BtnTitleCenter
+                        title="View all"
+                        onClick={() => {
+                          setShowAddress(true);
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -172,6 +185,7 @@ function DealerOrderDetails() {
       {showAddress && (
         <ViewAddress
           show={showAddress}
+          order={order}
           handleClose={() => {
             setShowAddress(false);
           }}

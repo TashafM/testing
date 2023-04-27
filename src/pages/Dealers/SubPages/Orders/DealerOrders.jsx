@@ -13,7 +13,7 @@ const DealerOrders = () => {
   const [orderDetail, setOrderDetail] = useState({});
 
   return (
-    <div className="allproducts">
+    <div className="allproducts dealers-order-wrapper-container">
       <OrderTopBar title={"Orders"} orderDetail={orderDetail} />
       {location.pathname !== "/dealers/orders/detail" ? (
         <div className="dealers-order-main-container">

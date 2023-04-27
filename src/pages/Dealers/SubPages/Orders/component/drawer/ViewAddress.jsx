@@ -3,8 +3,9 @@ import React from "react";
 import { Offcanvas } from "react-bootstrap";
 import DrawerHead from "../../../../../About/Information/Component/DrawerHead";
 import billing from "../../../../../../assets/images/billing.png";
+import { prepareAddressString } from "../../../../../../components/Utils/Utils";
 
-function ViewAddress({ show, handleClose }) {
+function ViewAddress({ show, handleClose, order }) {
   return (
     <Offcanvas
       show={show}
@@ -20,9 +21,9 @@ function ViewAddress({ show, handleClose }) {
           </div>
           <div className="address-field">
             <p className="m-0  ">
-              28, Rajasthani Udhyog Nagar, G.T. Karnal Road, Delhi - 110033 IN
+              {prepareAddressString(order?.billingAddress ?? {})}
             </p>
-            <p className="m-0">+91-22-28770321</p>
+            <p className="m-0"> {order?.billingAddress?.contactNumber ?? ""}</p>
           </div>
         </div>
         <hr />
@@ -33,9 +34,9 @@ function ViewAddress({ show, handleClose }) {
           </div>
           <div className="address-field">
             <p className="m-0 over-flow-text">
-              28, Rajasthani Udhyog Nagar, G.T. Karnal Road, Delhi - 110033 IN
+              {prepareAddressString(order?.shippingAddress ?? {})}
             </p>
-            <p className="m-0">+91-22-28770321</p>
+            <p className="m-0">{order?.shippingAddress?.contactNumber ?? ""}</p>
           </div>
         </div>
       </div>
