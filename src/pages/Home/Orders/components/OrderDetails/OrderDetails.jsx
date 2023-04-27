@@ -14,11 +14,13 @@ import { useState, useEffect } from "react";
 import { orderDetailColumn } from "../../../../About/data/data";
 import { getDesireDateFormate } from "../../../../../components/Utils/Utils";
 import InfiniteScroll from "react-infinite-scroll-component";
+import ViewAddress from "../../../../Dealers/SubPages/Orders/component/drawer/ViewAddress";
 
 const OrderDetails = () => {
   const location = useLocation();
   const orderId = location.state.data;
   const [page, setPage] = useState(0);
+  const [showAddress, setShowAddress] = useState(false);
 
   const { data, loading, setData, getData } = usePaginatedCompanyData();
 
@@ -49,7 +51,6 @@ const OrderDetails = () => {
                   order: [...data[0].order, ...res.result[0].order],
                 },
               ];
-              console.log({ order });
               setData([...order]);
             }
           }
@@ -83,9 +84,23 @@ const OrderDetails = () => {
             </div>
           </div>
         </div>
-        <OrderDetailsBox icon={bill} icon2={truck} order={order} />
+        <OrderDetailsBox
+          icon={bill}
+          icon2={truck}
+          order={order}
+          onClick={() => setShowAddress(true)}
+        />
         <OrderSummaryBox order={order} />
       </Row>
+      {showAddress && (
+        <ViewAddress
+          show={showAddress}
+          order={order}
+          handleClose={() => {
+            setShowAddress(false);
+          }}
+        />
+      )}
       <div className="table-div-order-details">
         <InfiniteScroll
           dataLength={data?.length ? data[0]?.order ?? [] : 0}

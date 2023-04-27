@@ -6,10 +6,22 @@
   padding: 2%;
   display: flex;
 
-  .display-desktop{
+  .display-desktop {
     display: flex;
   }
-
+  .address-contact-card {
+    button {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      // line-height: 15px;
+      color: #be212a;
+      background-color: #fff;
+      text-align: center;
+      padding: 0;
+    }
+  }
   .address {
     font-size: 18px;
     font-weight: 500;
@@ -17,9 +29,9 @@
     margin-bottom: 12px;
     display: flex;
     align-items: flex-end;
-    
-    span{
-        margin-right: 12px;
+
+    span {
+      margin-right: 12px;
     }
     // margin-top: 12px;
   }
@@ -38,17 +50,17 @@
     line-height: 25px;
     color: rgba(0, 0, 0, 0.5);
     margin-top: 15px;
+
     // margin-bottom: 20px;
   }
 }
 
-
 @media only screen and (max-width: 1660px) {
-  .order-details-box{
-    .address{
+  .order-details-box {
+    .address {
       font-size: 16px;
     }
-    .full-address{
+    .full-address {
       font-size: 13px;
       line-height: 20px;
       padding-right: 10px;
@@ -57,52 +69,51 @@
 }
 
 @media only screen and (max-width: 1440px) {
-  .order-details-box{
-    .address{
+  .order-details-box {
+    .address {
       font-size: 16px;
-      span{
+      span {
         margin-right: 5px !important;
       }
     }
-    .full-address{
+    .full-address {
       font-size: 13px;
       line-height: 20px;
       padding-right: 10px;
     }
 
-    .mobile{
+    .mobile {
       font-size: 12px !important;
     }
   }
 }
 
 @media only screen and (max-width: 992px) {
-  .order-details-box{
-    .address{
+  .order-details-box {
+    .address {
       font-size: 14px !important;
     }
-    .full-address{
+    .full-address {
       font-size: 12px !important;
       line-height: 18px !important;
     }
   }
 }
 
-@media only screen and (max-width: 730px){
-  .order-details-box{
-
-    .address{
+@media only screen and (max-width: 730px) {
+  .order-details-box {
+    .address {
       margin-bottom: 5px;
     }
-    .display-desktop{
+    .display-desktop {
       display: block;
 
-      .add-1{
+      .add-1 {
         margin-bottom: 5px;
       }
     }
 
-    .mobile{
+    .mobile {
       margin-top: 0;
     }
   }
