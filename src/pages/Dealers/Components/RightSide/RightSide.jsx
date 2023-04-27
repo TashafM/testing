@@ -26,6 +26,7 @@ function RightSide({
           alt=""
           onClick={() => {
             // addItemToCart()
+            {cartProducts.length==0 && setShowPanel(false)}
             {cartProducts.length != 0 && addItemToCart()}
           }}
           className="close-button"

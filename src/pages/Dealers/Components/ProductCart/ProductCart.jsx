@@ -32,9 +32,13 @@ const ProductCart = () => {
   // const { isEmpty, setIsEmpty } = useContext(AddProducts);
 
   const [purchaseOrderNumber, setPurchaseOrderNumber] = useState("");
+  const [noPurchaseNumber, setNoPurchaseNumber] = useState(false);
 
   const handlePurchaseOrderNumberChange = (event) => {
     setPurchaseOrderNumber(event.target.value);
+    if(event.target.value.length>0){
+      setNoPurchaseNumber(false)
+    }
   };
 
   const isPurchaseOrderNumberEmpty = purchaseOrderNumber.trim() === "";
@@ -169,65 +173,70 @@ const ProductCart = () => {
   const [order, setOrder] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const placeOrder = () => {
-    setIsLoading(true);
-    const data = localStorage.getItem("placeOrderData");
-    const parsedData = JSON.parse(data);
-    setOrder(parsedData);
-    // console.log(parsedData, "parseddata");
-    const principalCompanyUserCode = localStorage.getItem(
-      "principalCompanyUserCode"
-    );
-    const selectedShipping = shippingAddress.find(
-      (item) => item.selected === true
-    );
-    const {
-      _id: shippingId,
-      type: shippingType,
-      selected: shippingSelected,
-      ...shippingFinal
-    } = selectedShipping;
+    if (purchaseOrderNumber == "") {
+      setNoPurchaseNumber(true);
+    } else {
+      setIsLoading(true);
+      const data = localStorage.getItem("placeOrderData");
+      const parsedData = JSON.parse(data);
+      setOrder(parsedData);
+      // console.log(parsedData, "parseddata");
+      const principalCompanyUserCode = localStorage.getItem(
+        "principalCompanyUserCode"
+      );
+      const selectedShipping = shippingAddress.find(
+        (item) => item.selected === true
+      );
+      const {
+        _id: shippingId,
+        type: shippingType,
+        selected: shippingSelected,
+        ...shippingFinal
+      } = selectedShipping;
 
-    const selectedBilling = billingAddress.find(
-      (item) => item.selected === true
-    );
-    const {
-      _id: billingId,
-      type: billingType,
-      selected: billingSelected,
-      ...billingFinal
-    } = selectedBilling;
+      const selectedBilling = billingAddress.find(
+        (item) => item.selected === true
+      );
+      const {
+        _id: billingId,
+        type: billingType,
+        selected: billingSelected,
+        ...billingFinal
+      } = selectedBilling;
 
-    axiosInstance
-      .post(API.PLACE_ORDER, {
-        principalCompanyUserCode,
-        labelInstruction: localStorage.getItem('labelInstruction'),
-        otherInstruction: localStorage.getItem('otherInstruction'),
-        purchaseOrderNumber: purchaseOrderNumber,
-        cartItems: parsedData.cartItems.map((item) => {
-          return {
-            variantId: item.variantId,
-            grossPrice: item.grossPrice,
-            saleDescription: item.saleDescription,
-            productId: item.productId,
-            quantity: item.quantity,
-            totalPrice: item.totalPrice,
-          };
-        }),
-        shippingAddress: shippingFinal,
-        billingAddress: billingFinal,
-        cgstPercentage: parsedData.cgstPercentage,
-        igstPercentage: parsedData.igstPercentage,
-        sgstPercentage: parsedData.sgstPercentage,
-        totalAmount: parsedData.totalAmount,
-        taxAmount: parsedData.taxAmount,
-      })
-      .then((res) => {
-        if (res.success) {
-          setIsLoading(false);
-          setModalShow(true);
-        }
-      })
-      .catch((err) => setIsLoading(false));
+      axiosInstance
+        .post(API.PLACE_ORDER, {
+          principalCompanyUserCode,
+          labelInstruction: localStorage.getItem("labelInstruction") ?? "",
+          otherInstruction: localStorage.getItem("otherInstruction") ?? "",
+          purchaseOrderNumber: purchaseOrderNumber,
+          cartItems: parsedData.cartItems.map((item) => {
+            return {
+              variantId: item.variantId,
+              grossPrice: item.grossPrice,
+              saleDescription: item.saleDescription,
+              productId: item.productId,
+              quantity: item.quantity,
+              totalPrice: item.totalPrice,
+            };
+          }),
+          shippingAddress: shippingFinal,
+          billingAddress: billingFinal,
+          cgstPercentage: parsedData.cgstPercentage,
+          igstPercentage: parsedData.igstPercentage,
+          sgstPercentage: parsedData.sgstPercentage,
+          totalAmount: parsedData.totalAmount,
+          taxAmount: parsedData.taxAmount,
+        })
+        .then((res) => {
+          if (res.success) {
+            setIsLoading(false);
+            setModalShow(true);
+            setPurchaseOrderNumber('')
+          }
+        })
+        .catch((err) => setIsLoading(false));
+    }
   };
 
   const {
@@ -250,7 +259,7 @@ const ProductCart = () => {
             <th>Quantity</th>
             <th className="price">Price</th>
           </tr>
-          {console.log(isEmpty,'value from cart')}
+          {console.log(isEmpty, "value from cart")}
         </thead>
         {!isEmpty && (
           <tbody className="right-side-body">
@@ -292,12 +301,15 @@ const ProductCart = () => {
           />
           {/**PURCHASE ORDER */}
           <div className="purchase-order">
-            <div className="title">Purchase Order Number * :</div>
+            <div className="title">Purchase Order Number :</div>
             <FormControl
               type="text"
               value={purchaseOrderNumber}
               onChange={handlePurchaseOrderNumberChange}
             />
+            {noPurchaseNumber && (
+              <div className="error-order">Please enter the purchase order number</div>
+            )}
           </div>
 
           {/**ADDRESS */}
@@ -360,7 +372,6 @@ const ProductCart = () => {
                 // setModalShow(true);
                 placeOrder();
               }}
-              disabled={isPurchaseOrderNumberEmpty}
             >
               {isLoading ? (
                 <div className="place-order-spinner">

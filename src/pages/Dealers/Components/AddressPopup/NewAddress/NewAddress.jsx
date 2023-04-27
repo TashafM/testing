@@ -7,8 +7,8 @@ import { Button } from "react-bootstrap";
 import * as Yup from "yup";
 
 const newAddressSchema = Yup.object().shape({
-  fullName: Yup.string().required("Full Name is required"),
-  contactNumber: Yup.string().matches(/^[0-9+\-()]*$/, "Invalid phone number"),
+  fullName: Yup.string().max(30, "Full Name must be 30 characters or less").required("Full Name is required"),
+  contactNumber: Yup.string().matches(/^[0-9+\-()]*$/, "Invalid phone number").max(15, "Phone number must be at most 15 characters long"),
   floorNumber: Yup.string().required("House/Buiding/Floor No. is required"),
   block: Yup.string(),
   street: Yup.string().required("Street is required"),
@@ -120,6 +120,7 @@ const NewAddress = ({
         }
       }}
       validationSchema={newAddressSchema}
+      
     >
       {/* {({ handleChange, values }) => ( */}
       {({ handleChange, values, errors, touched }) => (

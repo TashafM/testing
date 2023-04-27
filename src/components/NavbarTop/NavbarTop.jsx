@@ -14,7 +14,7 @@ import { API } from "../../helper/API";
 import { AddProducts } from "../../pages/Dealers/Dealers";
 
 const NavbarTop = ({ dealers }) => {
-  const {setIsEmpty, isEmpty} = useContext(AddProducts)
+  // const {setIsEmpty} = useContext(AddProducts)
   const idCode = localStorage.getItem("principalCompanyUserCode");
   const dealersLogo = localStorage.getItem('dpURL')
   const [showPopup, setShowPopup] = useState(false);
@@ -48,7 +48,7 @@ const NavbarTop = ({ dealers }) => {
       .post(API.DEALER_CLEAR_CART, { principalCompanyUserCode })
       .then((res) => {
         if (res.success) {
-          setIsEmpty(false);
+          // setIsEmpty(false);
           localStorage.removeItem("cartProducts");
         }
       });

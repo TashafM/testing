@@ -90,7 +90,7 @@ const SidePanel = () => {
         show={showPanel}
         onHide={() => {
           // setShowPanel(false);
-          addItemToCart()
+          {cartProducts.length>0 ? addItemToCart() : setShowPanel(false)}
         }}
         placement="end"
         className="dm"
