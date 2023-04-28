@@ -7,13 +7,28 @@
 
   .div-1 {
     width: 58%;
+    overflow-y: scroll;
+    // background: #e8ffe8;
+    max-height: 97vh;
     // background: yellow;
   }
   .div-2 {
     width: 42%;
     margin-left: 2%;
+    // background: yellow;
+    max-height: 90vh;
+    overflow-y: scroll;
     // background: rgb(255, 136, 0);
   }
+
+  .div-1::-webkit-scrollbar,.div-2::-webkit-scrollbar {
+    width: 7px; /* change this value to adjust the thickness */
+  }
+  
+  .div-1::-webkit-scrollbar-thumb,.div-2::-webkit-scrollbar-thumb {
+    background-color: #C8C8C8; /* change this value to adjust the color */
+  }
+
   .vertical-line {
     border-left: 2px dashed #c8c8c8;
   }
