@@ -4,7 +4,7 @@ import CardHead from "./CardHead";
 import quote from "../../../../assets/images/other-info.png";
 import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 
-function CardOtherInfo({ otherInfo, onClick }) {
+function CardOtherInfo({ otherInfo, onClick, onViewAllClick }) {
   console.log(
     otherInfo.salesReachAt.length ||
       otherInfo.interestedToPurchase.length ||
@@ -35,7 +35,7 @@ function CardOtherInfo({ otherInfo, onClick }) {
             </div>
 
             <div className="d-flex justify-content-end btn-view-all-container">
-              <BtnTitleCenter title="View all" onClick={onClick} />
+              <BtnTitleCenter title="View all" onClick={onViewAllClick} />
             </div>
           </div>
         ) : (

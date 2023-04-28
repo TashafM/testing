@@ -34,6 +34,7 @@ function ModalComponent({
   const onSaveData = () => {
     if (makeApiCall) {
       editSaveCallback([...Data]);
+      close();
     } else {
       close();
     }
@@ -87,7 +88,7 @@ function ModalComponent({
                     placeholder={"type here..."}
                     value={type === "FAQ" ? item.question : item.title}
                     onChange={(e) => {
-                      makeApiCall && setMakeApiCall(true);
+                      !makeApiCall && setMakeApiCall(true);
                       const key = type === "FAQ" ? "question" : "title";
                       onChanContent(e.target.value, index, key);
                     }}
@@ -106,7 +107,7 @@ function ModalComponent({
                     placeholder={"type here..."}
                     value={type === "FAQ" ? item.answer : item.content}
                     onChange={(e) => {
-                      makeApiCall && setMakeApiCall(true);
+                      !makeApiCall && setMakeApiCall(true);
                       const key = type === "FAQ" ? "answer" : "content";
                       onChanContent(e.target.value, index, key);
                     }}

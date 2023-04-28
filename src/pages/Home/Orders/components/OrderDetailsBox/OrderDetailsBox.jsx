@@ -3,6 +3,7 @@ import { Col } from "react-bootstrap";
 import "./OrderDetailsBox.scss";
 import { prepareAddressString } from "../../../../../components/Utils/Utils";
 import BtnTitleCenter from "../../../../../components/Button/BtnTitleCenter";
+import arrow from "../../../../../assets/images/arrow-right-red.png";
 
 const OrderDetailsBox = ({ icon, icon2, order, onClick }) => {
   return (
@@ -43,7 +44,14 @@ const OrderDetailsBox = ({ icon, icon2, order, onClick }) => {
           <div className="mobile d-flex address-contact-card justify-content-between align-items-center">
             {order?.shippingAddress?.contactNumber ?? ""}
 
-            <BtnTitleCenter title="View all" onClick={onClick} />
+            <div className="d-flex">
+              <BtnTitleCenter title="View all" onClick={onClick} />
+              <img
+                className="image-icon-other"
+                src={arrow}
+                alt="arrow-right-icon"
+              />
+            </div>
           </div>
         </div>
       </div>

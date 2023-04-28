@@ -8,6 +8,7 @@
 .about-sectio {
   height: calc(100vh - 170px);
   min-height: 350px;
+  overflow: auto;
 }
 .about-sectio::-webkit-scrollbar {
   width: 0.2em;

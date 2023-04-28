@@ -12,7 +12,6 @@ import { CircularProgress } from "@mui/material";
 
 function Terms() {
   const [showModal, setShowModal] = useState(false);
-  const [termCondition, setTermCondition] = useState([]);
 
   const { data, setData, loading } = useResponse(
     "/portalViewCompanyTermsConditions"

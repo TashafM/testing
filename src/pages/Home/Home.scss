@@ -2,6 +2,7 @@
   min-height: 100vh;
   background-color: #f0f2f9;
   overflow-x: hidden;
+  overflow-y: hidden;
 
   .tablet-menu {
     display: none;
@@ -12,8 +13,7 @@
   }
 
   .row {
-
-    .dealers-menu{
+    .dealers-menu {
       margin-top: 50px;
     }
     .menu-list {
@@ -57,7 +57,6 @@
   margin-right: 20px;
   height: 85vh;
   border-radius: 12px;
-
 }
 
 .mobile-not-supported {
@@ -96,20 +95,16 @@
           }
         }
       }
-
-     
     }
   }
 }
 
-.mt60{
+.mt60 {
   margin-top: 60px;
 }
 
 // @media only screen and (max-width: 992px){
 @media only screen and (max-width: 1199px) {
-
-  
   .sub-menu-list {
     display: none !important;
   }
@@ -124,10 +119,10 @@
 }
 
 @media only screen and (max-width: 655px) {
-  .offcanvas.show{
+  .offcanvas.show {
     display: none;
   }
-  
+
   .homepage {
     display: none;
   }

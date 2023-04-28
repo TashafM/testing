@@ -166,15 +166,21 @@ function DealerOrderDetails() {
                 <div className="address-field">
                   <div className="d-flex justify-content-between">
                     <p className="m-0">Items total</p>
-                    <p className="m-0">INR {order?.itemsTotal ?? "0.0"}</p>
+                    <p className="m-0">
+                      {order?.currency?.symbol} {order?.itemsTotal ?? "0.0"}
+                    </p>
                   </div>
                   <div className="d-flex justify-content-between">
                     <p className="m-0">Taxes</p>
-                    <p className="m-0">INR {order?.taxAmount ?? "0.0"}</p>
+                    <p className="m-0">
+                      {order?.currency?.symbol} {order?.taxAmount ?? "0.0"}
+                    </p>
                   </div>
                   <div className="d-flex justify-content-between total-container-div">
                     <p className="m-0">Total Price</p>
-                    <p className="m-0">INR {order?.totalAmount}</p>
+                    <p className="m-0">
+                      {order?.currency?.symbol} {order?.totalAmount}
+                    </p>
                   </div>
                 </div>
               </div>

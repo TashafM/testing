@@ -33,9 +33,11 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
       privacyPolicy: [...privacyData],
     };
 
+    alert(makeApiCall);
     if (makeApiCall) {
       postData(body, () => {
         editSaveCallback([...privacyData]);
+        close();
       });
     } else {
       close();
@@ -89,7 +91,7 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
                   placeholder={"type here..."}
                   value={item.title}
                   onChange={(e) => {
-                    makeApiCall && setMakeApiCall(true);
+                    !makeApiCall && setMakeApiCall(true);
                     onChanContent(e.target.value, index, "title");
                   }}
                 />
@@ -107,7 +109,7 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
                   placeholder={"type here..."}
                   rows={6}
                   onChange={(e) => {
-                    makeApiCall && setMakeApiCall(true);
+                    !makeApiCall && setMakeApiCall(true);
                     onChanContent(e.target.value, index, "content");
                   }}
                 />
