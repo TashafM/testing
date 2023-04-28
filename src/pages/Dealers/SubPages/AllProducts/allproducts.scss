@@ -19,6 +19,18 @@
     color: #929292;
   }
 
+  .noSubcategory {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 55vh;
+
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 28px;
+    color: #929292;
+  }
+
   .catItems {
     display: flex;
     align-items: center;

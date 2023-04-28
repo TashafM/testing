@@ -129,7 +129,8 @@
       }
     }
 
-    .color-btn, .quantity-btn {
+    .color-btn,
+    .quantity-btn {
       padding: 15px 40px;
       border: 1px solid #be212a;
       // border: transparent;
@@ -145,7 +146,7 @@
       border-color: 1px solid #be212a !important;
     }
 
-    .not-selected{
+    .not-selected {
       border: 1px solid #c8c8c8 !important;
     }
 
@@ -216,6 +217,15 @@
       }
     }
   }
+}
+
+.max-orders {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 17px;
+  /* identical to box height */
+
+  color: #e72d38;
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {

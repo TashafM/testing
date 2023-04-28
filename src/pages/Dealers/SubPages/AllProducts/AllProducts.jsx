@@ -64,16 +64,21 @@ const AllProducts = () => {
   };
 
   const seeProducts = (itm) => {
+    console.log("tashaf mahmood");
+    const parseItm = JSON.stringify(itm);
+    localStorage.setItem("subCategory", parseItm);
     const { categoryId, subCategoryId } = itm;
     navigate("/dealers/all-products/products", {
-      state: { categoryId, subCategoryId, subCategory },
+      state: { subCategory },
     });
+    // navigate('/dealers/all-products/products')
   };
 
   return (
     <>
       <div className="allproducts">
-        <TopBar title={!noData?"Print Heads":null} />
+        {console.log(subCategory.length, "subcategory length")}
+        <TopBar title={!noData ? "Print Heads" : null} />
         {noData ? (
           <div className="nodata">No categories added yet</div>
         ) : (
@@ -103,25 +108,55 @@ const AllProducts = () => {
               <hr />
 
               <div>
-                {subCategory.map((item, id) => (
-                  <div
-                    className="sub-category-div"
-                    onClick={() => seeProducts(item)}
-                    key={id}
-                  >
-                    <div className="image-div">
-                      <img
-                        src={
-                          item.subCategoryImageURL
-                            ? item.subCategoryImageURL
-                            : noImage
-                        }
-                        alt=""
-                      />
-                    </div>
-                    <div className="name">{item.subCategoryName}</div>
+                {subCategory.length == 0 ? (
+                  <div className="noSubcategory">
+                    No sub categories added yet
                   </div>
-                ))}
+                ) : (
+                  <>
+                    {/* {subCategory.map((item, id) => (
+                      <div
+                        className="sub-category-div"
+                        onClick={() => seeProducts(item)}
+                        key={id}
+                      >
+                        <div className="image-div">
+                          <img
+                            src={
+                              item.subCategoryImageURL
+                                ? item.subCategoryImageURL
+                                : noImage
+                            }
+                            alt=""
+                          />
+                        </div>
+                        <div className="name">{item.subCategoryName}</div>
+                      </div>
+                    ))} */}
+                    <Row  xs={1} sm={2} md={4} xxl={4}>
+                      {subCategory.map((item, id) => (
+                        <Col xs={12} sm={6} md={4} xxl={3} key={id}>
+                          <div
+                            className="sub-category-div"
+                            onClick={() => seeProducts(item)}
+                          >
+                            <div className="image-div">
+                              <img
+                                src={
+                                  item.subCategoryImageURL
+                                    ? item.subCategoryImageURL
+                                    : noImage
+                                }
+                                alt=""
+                              />
+                            </div>
+                            <div className="name">{item.subCategoryName}</div>
+                          </div>
+                        </Col>
+                      ))}
+                    </Row>
+                  </>
+                )}
               </div>
             </div>
           </div>

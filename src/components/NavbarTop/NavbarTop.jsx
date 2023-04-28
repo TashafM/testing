@@ -36,7 +36,7 @@ const NavbarTop = ({ dealers }) => {
 
   useEffect(() => {
     fetchDealers();
-    emptyCart();
+    // emptyCart();
   }, [idCode]);
   
 

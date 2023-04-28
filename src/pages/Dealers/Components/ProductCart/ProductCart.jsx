@@ -119,7 +119,7 @@ const ProductCart = () => {
         "principalCompanyUserCode"
       );
       axiosInstance
-        .post(API.VIEW_DEALER_CART, { principalCompanyUserCode })
+        .post(API.VIEW_DEALER_CART+`?start=1&offset=10`, { principalCompanyUserCode })
         .then((res) => {
           setCartItem(res.result[0].cartItems);
           setCart(res.result[0]);

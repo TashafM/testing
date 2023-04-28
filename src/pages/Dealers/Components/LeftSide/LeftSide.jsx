@@ -38,8 +38,15 @@ function LeftSide({ data, setCartProducts, cartProducts }) {
   //   setProductQuantity(e.target.value)
   // }
 
+  const [exceedQuantity, setExceedQuantity] = useState(false);
+  
   const handleQuantity = (e) => {
     const value = e.target.value;
+    if (Number(value) > 100) {
+      setExceedQuantity(true);
+    }else{
+      setExceedQuantity(false)
+    }
     if (!isNaN(value)) {
       setProductQuantity(value);
     }
@@ -52,46 +59,57 @@ function LeftSide({ data, setCartProducts, cartProducts }) {
     (variant) => variant.packingDescription === selectedQuantity
   );
 
+  const testConsole = () => {
+    console.log(exceedQuantity,'exceed quantity')
+    if (exceedQuantity) {
+      console.log("quantity exceeding");
+    } else {
+      const storedCartProducts = JSON.parse(
+        localStorage.getItem("cartProducts") || "[]"
+      );
+      const itemIndex = storedCartProducts.findIndex(
+        (item) => item.variantId === prices[0].variantId
+      );
 
-const testConsole = () => {
-  const storedCartProducts = JSON.parse(localStorage.getItem('cartProducts') || '[]');
-  const itemIndex = storedCartProducts.findIndex(item => item.variantId === prices[0].variantId);
+      if (itemIndex === -1) {
+        // Item not found in cart, add it as a new item
+        const newItem = {
+          principalCompanyUserCode: localStorage.getItem(
+            "principalCompanyUserCode"
+          ),
+          variantId: prices[0].variantId,
+          selectedColor: selectedColor,
+          selectedQuantity: selectedQuantity,
+          saleDescription: prices[0].saleDescription,
+          quantity: Number(productQuantity),
+          totalPrice: productQuantity * prices[0].grossPrice,
+          grossPrice: Number(prices[0].grossPrice),
+          productId: data.productId,
+          name: data.itemDescription,
+        };
+        const updatedCartProducts = [...storedCartProducts, newItem];
+        setCartProducts(updatedCartProducts); // push the new item to the cart array
 
-  if (itemIndex === -1) {
-    // Item not found in cart, add it as a new item
-    const newItem = {
-      principalCompanyUserCode: localStorage.getItem('principalCompanyUserCode'),
-      variantId: prices[0].variantId,
-      selectedColor: selectedColor,
-      selectedQuantity: selectedQuantity,
-      saleDescription: prices[0].saleDescription,
-      quantity: Number(productQuantity),
-      totalPrice: productQuantity * prices[0].grossPrice,
-      grossPrice: Number(prices[0].grossPrice),
-      productId: data.productId,
-      name: data.itemDescription,
-    };
-    const updatedCartProducts = [...storedCartProducts, newItem];
-    setCartProducts(updatedCartProducts); // push the new item to the cart array
+        // Store updated cartProducts in localStorage
+        localStorage.setItem(
+          "cartProducts",
+          JSON.stringify(updatedCartProducts)
+        );
+      } else {
+        // Item found in cart, update its quantity
+        const updatedCart = [...storedCartProducts];
+        updatedCart[itemIndex].quantity += Number(productQuantity);
+        updatedCart[itemIndex].totalPrice +=
+          productQuantity * prices[0].grossPrice;
+        setCartProducts(updatedCart);
 
-    // Store updated cartProducts in localStorage
-    localStorage.setItem('cartProducts', JSON.stringify(updatedCartProducts));
-
-  } else {
-    // Item found in cart, update its quantity
-    const updatedCart = [...storedCartProducts];
-    updatedCart[itemIndex].quantity += Number(productQuantity);
-    updatedCart[itemIndex].totalPrice += productQuantity * prices[0].grossPrice;
-    setCartProducts(updatedCart);
-
-    // Store updated cartProducts in localStorage
-    localStorage.setItem('cartProducts', JSON.stringify(updatedCart));
-  }
-};
-
+        // Store updated cartProducts in localStorage
+        localStorage.setItem("cartProducts", JSON.stringify(updatedCart));
+      }
+    }
+  };
 
   //***************************VALIDATION */
-  
 
   useEffect(() => {
     if (!productQuantity || !selectedColor || !selectedQuantity) {
@@ -100,7 +118,6 @@ const testConsole = () => {
       setIsValid(false);
     }
   }, [productQuantity, selectedColor, selectedQuantity]);
-  
 
   return (
     <div className="scrollable-left">
@@ -185,6 +202,7 @@ const testConsole = () => {
             onChange={handleQuantity}
             value={productQuantity}
           />
+          <div className="max-orders">Maximum orders 100 *</div>
         </div>
 
         {/* <Form className="urgent-order">
@@ -200,7 +218,7 @@ const testConsole = () => {
           <Button
             className="add-product-button"
             onClick={testConsole}
-            disabled={isValid}
+            disabled={isValid || exceedQuantity}
           >
             Add
           </Button>
@@ -209,95 +227,5 @@ const testConsole = () => {
     </div>
   );
 }
-
-//==========================STABLE DATA======================S
-// const LeftSide = ({ data }) => {
-//   const [variant, setVariant] = useState(data.variants);
-//   const uniqueVariants = uniqBy(variant, "packingDescription");
-//   const uniqueColor = uniqBy(variant, "colorDescription");
-
-//   const [initial, setInitial] = useState(variant[0]);
-//   const [isChecked, setIsChecked] = useState(false);
-
-//   const [values, setValues] = useState(data);
-
-//   const handleCheckboxChange = (e) => {
-//     setIsChecked(e.target.checked);
-//   };
-//   return (
-//     <div className="scrollable-left">
-//       <div className="leftside">
-//         <div className="title">Konica Chrome</div>
-//         <div className="image-div">
-//           <div className="sub-images">
-//             <div className="toggle-img">
-//               <img src={mainproduct} alt="" />
-//             </div>
-//             <div className="toggle-img">
-//               <img src={mainproduct} alt="" />
-//             </div>
-//             <div className="toggle-img">
-//               <img src={mainproduct} alt="" />
-//             </div>
-//           </div>
-//           <img src={img600} alt="" className="main-img" />
-//           <div className="wish-list">
-//             <img src={wishlist} alt="" />
-//           </div>
-//         </div>
-//         <div className="about-product">
-//           <div className="product-code">{initial.bpCatalogNumber}</div>
-//           <div className="product-price">
-//             <div className="product-name">{values.itemDescription}</div>
-//             <div>
-//               {values.currency.symbol} {initial.grossPrice}
-//             </div>
-//           </div>
-//           <div className="product-desc">{initial.saleDescription}</div>
-//         </div>
-
-//         <div className="color-description">
-//           <div className="color-desc-title">
-//             Please Select Color Description
-//           </div>
-//           {uniqueColor.map((item, id) => (
-//             <Button className="select-color-btn">
-//               {item.colorDescription}
-//             </Button>
-//           ))}
-//         </div>
-
-//         <div className="color-description">
-//           <div className="color-desc-title">
-//             Please Select Packaging Description
-//           </div>
-//           {uniqueVariants.map((item, id) => (
-//             <Button className="select-color-btn">
-//               {item.packingDescription}
-//             </Button>
-//           ))}
-//         </div>
-
-//         <div className="quantity-input">
-//           <div className="quantity-desc-title">Enter Quantity</div>
-//           <FormControl type="text" />
-//         </div>
-
-//         <Form className="urgent-order">
-//           <Form.Check
-//             type="checkbox"
-//             label="Need urgent order"
-//             checked={isChecked}
-//             onChange={handleCheckboxChange}
-//           />
-//         </Form>
-
-//         <div className="add-div-btn">
-//           <Button className="add-product-button">Add</Button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
 
 export default LeftSide;
