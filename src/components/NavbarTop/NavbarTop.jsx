@@ -31,7 +31,10 @@ const NavbarTop = ({ dealers }) => {
       {
         headers: { Authorization: `Bearer ${accessToken}` },
       }
-    ).then((res)=>setAllDealerData(res.result))
+    ).then((res)=>{
+      setAllDealerData(res.result)
+      localStorage.removeItem('cart')
+    })
   };
 
   useEffect(() => {

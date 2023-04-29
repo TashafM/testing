@@ -15,9 +15,9 @@ const SidePanel = () => {
 
 
   useEffect(()=>{
-    if (localStorage.getItem('cartProducts')) {
+    if (localStorage.getItem('cart')) {
       // Retrieve the data as a string
-      const productString = localStorage.getItem('cartProducts');
+      const productString = localStorage.getItem('cart');
       
       // Parse the string into an array
       const products = JSON.parse(productString);
@@ -25,6 +25,7 @@ const SidePanel = () => {
       
     }
   },[])
+
 
   useEffect(()=>{
     if(localStorage.getItem('initialProductData')){
@@ -52,10 +53,15 @@ const SidePanel = () => {
     const igst = localStorage.getItem("igstPercentage");
     const cgst = localStorage.getItem("cgstPercentage");
 
+    // const sumOfTotal = cartProducts.reduce(
+    //   (acc, item) => acc + item.totalPrice,
+    //   0
+    // );
     const sumOfTotal = cartProducts.reduce(
-      (acc, item) => acc + item.totalPrice,
+      (acc, item) => acc + Number(item.totalPrice),
       0
     );
+    console.log(sumOfTotal, 'sumtotal')
     const sumOfTaxes = Number(cgst) + Number(sgst) + Number(igst);
     const taxAmount = (sumOfTotal * sumOfTaxes) / 100; // this is final taxAmount
     const totalAmt = taxAmount + sumOfTotal; // this is totalAmount

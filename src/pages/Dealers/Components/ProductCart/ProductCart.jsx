@@ -106,7 +106,8 @@ const ProductCart = () => {
       .then((res) => {
         if (res.success) {
           setIsEmpty(true);
-          localStorage.removeItem("cartProducts");
+          // localStorage.removeItem("cartProducts");
+          localStorage.removeItem('cart')
         }
       });
   };
@@ -122,25 +123,27 @@ const ProductCart = () => {
         .post(API.VIEW_DEALER_CART, { principalCompanyUserCode })
         .then((res) => {
           console.log(res.result[0].cart.cartItems, "from product cart");
-          setCartItem(res.result[0].cartItems);
-          setCart(res.result[0]);
-          setBillingAddress(res.result[0].billingAddress);
-          setShippingAddress(res.result[0].shippingAddress);
-          setDefaultBilling(res.result[0].billingAddress);
-          setDefaultShipping(res.result[0].shippingAddress);
+          setCartItem(res.result[0].cart.cartItems);
+          setCart(res.result[0].cart);
+          setBillingAddress(res.result[0].cart.billingAddress);
+          setShippingAddress(res.result[0].cart.shippingAddress);
+          setDefaultBilling(res.result[0].cart.billingAddress);
+          setDefaultShipping(res.result[0].cart.shippingAddress);
           // setIsEmpty(false);
+          console.log(res.result[0],'from addddddddddddddddddddddddddddddddddddd')
           const toString = JSON.stringify(res.result[0]);
           localStorage.setItem("placeOrderData", toString);
-          if (res.result[0].cartItems.length > 0) {
+          if (res.result[0].cart.cartItems.length > 0) {
             setIsEmpty(false);
           }
-          const sumOfTotal = res.result[0].cartItems.reduce(
+          const sumOfTotal = res.result[0].cart.cartItems.reduce(
             (acc, item) => acc + Number(item.totalPrice),
             0
           );
+          console.log(sumOfTotal,'summmmmmmmmmmmmmmmmmmm')
           setItemTotal(sumOfTotal);
 
-          const selectedAddress = res.result[0].shippingAddress.filter(
+          const selectedAddress = res.result[0].cart.shippingAddress.filter(
             (address) => address.selected === true
           );
           setDisplayAddress(...selectedAddress);
@@ -162,7 +165,7 @@ const ProductCart = () => {
         shippingAddress: shippingAddress,
       })
       .then((res) => {
-        const selectedAddress = res.result[0].shippingAddress.filter(
+        const selectedAddress = res.result[0].cart.shippingAddress.filter(
           (address) => address.selected === true
         );
         setDisplayAddress(...selectedAddress);
@@ -240,6 +243,15 @@ const ProductCart = () => {
     }
   };
 
+  const [tas, setTas] = useState([])
+  useEffect(()=>{
+    if(localStorage.getItem('cart')){
+      const cart = localStorage.getItem('cart')
+      const myCart = JSON.parse(cart);
+      setTas(myCart)
+    }
+  },[localStorage.getItem('cart')])
+
   const {
     fullName,
     floorNumber,
@@ -262,13 +274,14 @@ const ProductCart = () => {
               <th className="price">Price</th>
             </tr>
           </thead>
-          {/* {!isEmpty && ( */}
-          {/* <tbody className="right-side-body">
-            {cartItem.slice(0, 5).map((item, id) => (
+          {!isEmpty && (
+           <tbody className="right-side-body">
+            {tas.slice(0, 5).map((item, id) => (
               <ItemRow disableDelete pr20 data={item} />
             ))}
-          </tbody> */}
-          {/* )} */}
+          </tbody> 
+           )} 
+          {console.log(tas,'final product')}
         </Table>
         {!isEmpty && (
           <>
@@ -285,11 +298,12 @@ const ProductCart = () => {
               </div>
               <ArrowLink title={"See all"} onClick={handleSetProduct} />
             </div>
-            {/* <SeeAllProducts
+            <SeeAllProducts
             show={showAllProducts}
             handleClose={handleClose}
             data={cartItem}
-          /> */}
+          />
+          {/* {console.log(cartItem,'data from see all')} */}
 
             {/**OTHER INSTRUCTIONS */}
             <div className="other-instructions">

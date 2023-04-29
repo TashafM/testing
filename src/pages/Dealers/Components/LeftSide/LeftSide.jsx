@@ -59,18 +59,68 @@ function LeftSide({ data, setCartProducts, cartProducts }) {
     (variant) => variant.packingDescription === selectedQuantity
   );
 
+  // const testConsole = () => {
+  //   console.log(exceedQuantity,'exceed quantity')
+  //   if (exceedQuantity) {
+  //     console.log("quantity exceeding");
+  //   } else {
+  //     const storedCartProducts = JSON.parse(
+  //       localStorage.getItem("cart") || "[]"
+  //     );
+  //     const itemIndex = storedCartProducts.findIndex(
+  //       (item) => item.variantId === prices[0].variantId
+  //     );
+
+  //     if (itemIndex === -1) {
+  //       // Item not found in cart, add it as a new item
+  //       const newItem = {
+  //         principalCompanyUserCode: localStorage.getItem(
+  //           "principalCompanyUserCode"
+  //         ),
+  //         variantId: prices[0].variantId,
+  //         selectedColor: selectedColor,
+  //         selectedQuantity: selectedQuantity,
+  //         saleDescription: prices[0].saleDescription,
+  //         quantity: Number(productQuantity),
+  //         totalPrice: productQuantity * prices[0].grossPrice,
+  //         grossPrice: Number(prices[0].grossPrice),
+  //         productId: data.productId,
+  //         name: data.itemDescription,
+  //       };
+  //       const updatedCartProducts = [...storedCartProducts, newItem];
+  //       setCartProducts(updatedCartProducts); // push the new item to the cart array
+
+  //       // Store updated cartProducts in localStorage
+  //       localStorage.setItem(
+  //         "cart",
+  //         JSON.stringify(updatedCartProducts)
+  //       );
+  //     } else {
+  //       // Item found in cart, update its quantity
+  //       const updatedCart = [...storedCartProducts];
+  //       updatedCart[itemIndex].quantity += Number(productQuantity);
+  //       updatedCart[itemIndex].totalPrice +=
+  //         productQuantity * prices[0].grossPrice;
+  //       setCartProducts(updatedCart);
+
+  //       // Store updated cartProducts in localStorage
+  //       localStorage.setItem("cart", JSON.stringify(updatedCart));
+  //     }
+  //   }
+  // };
+
   const testConsole = () => {
     console.log(exceedQuantity,'exceed quantity')
     if (exceedQuantity) {
       console.log("quantity exceeding");
     } else {
       const storedCartProducts = JSON.parse(
-        localStorage.getItem("cartProducts") || "[]"
+        localStorage.getItem("cart") || "[]"
       );
       const itemIndex = storedCartProducts.findIndex(
         (item) => item.variantId === prices[0].variantId
       );
-
+  
       if (itemIndex === -1) {
         // Item not found in cart, add it as a new item
         const newItem = {
@@ -82,33 +132,32 @@ function LeftSide({ data, setCartProducts, cartProducts }) {
           selectedQuantity: selectedQuantity,
           saleDescription: prices[0].saleDescription,
           quantity: Number(productQuantity),
-          totalPrice: productQuantity * prices[0].grossPrice,
+          totalPrice: Number(productQuantity) * Number(prices[0].grossPrice),
           grossPrice: Number(prices[0].grossPrice),
           productId: data.productId,
           name: data.itemDescription,
         };
         const updatedCartProducts = [...storedCartProducts, newItem];
         setCartProducts(updatedCartProducts); // push the new item to the cart array
-
+  
         // Store updated cartProducts in localStorage
         localStorage.setItem(
-          "cartProducts",
+          "cart",
           JSON.stringify(updatedCartProducts)
         );
       } else {
         // Item found in cart, update its quantity
         const updatedCart = [...storedCartProducts];
-        updatedCart[itemIndex].quantity += Number(productQuantity);
-        updatedCart[itemIndex].totalPrice +=
-          productQuantity * prices[0].grossPrice;
+        updatedCart[itemIndex].quantity = Number(updatedCart[itemIndex].quantity) + Number(productQuantity);
+        updatedCart[itemIndex].totalPrice = Number(updatedCart[itemIndex].totalPrice) + Number(productQuantity) * Number(prices[0].grossPrice);
         setCartProducts(updatedCart);
-
+  
         // Store updated cartProducts in localStorage
-        localStorage.setItem("cartProducts", JSON.stringify(updatedCart));
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
       }
     }
   };
-
+  
   //***************************VALIDATION */
 
   useEffect(() => {
