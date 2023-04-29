@@ -13,8 +13,10 @@ import atlogo from "../../../../assets/images/atlogo.png";
 import { GlobalContext } from "../../../../App";
 import SidePanel from "../../Components/SidePanel/SidePanel";
 import { GlobalSidePanel } from "../../Dealers";
+import { AddProducts } from "../../Dealers";
 
 const AllProducts = () => {
+  const {isEmpty, setIsEmpty} = useContext(AddProducts)
   const principalCompanyUserCode = localStorage.getItem(
     "principalCompanyUserCode"
   );
@@ -51,7 +53,29 @@ const AllProducts = () => {
       }
     };
 
+    
+
+    const viewCart =() =>{
+      axiosInstance.post(API.VIEW_DEALER_CART,{
+        principalCompanyUserCode
+      }).then((res)=>{
+        const cart = res.result[0].cart.cartItems
+        const popupItems = res.result[0].popUpDisplayItems
+        console.log(res.result[0].cart.cartItems,'viewCart from all products')
+        if(res.totalCartItemCount==0){
+          setIsEmpty(true)
+        }else{
+          setIsEmpty(false)
+          const parseData = JSON.stringify(cart)
+          localStorage.setItem('cart',parseData)
+          const popupData = JSON.stringify(popupItems)
+          localStorage.setItem('popupItems',popupData)
+        }
+      })
+    }
+
     fetchData();
+    viewCart()
   }, []);
 
   const chng = async (id, idx) => {
@@ -64,7 +88,6 @@ const AllProducts = () => {
   };
 
   const seeProducts = (itm) => {
-    console.log("tashaf mahmood");
     const parseItm = JSON.stringify(itm);
     localStorage.setItem("subCategory", parseItm);
     const { categoryId, subCategoryId } = itm;
@@ -77,7 +100,7 @@ const AllProducts = () => {
   return (
     <>
       <div className="allproducts">
-        {console.log(subCategory.length, "subcategory length")}
+        {console.log(isEmpty,'------------')}
         <TopBar title={!noData ? "Print Heads" : null} />
         {noData ? (
           <div className="nodata">No categories added yet</div>

@@ -15,7 +15,7 @@ const instance = axios.create({
 instance.interceptors.request.use((config) => {
   const token = localStorage.getItem("accessToken");
   const userId = localStorage.getItem("usercode");
-  console.log(config);
+  // console.log(config);
   if (token) {
     //set default and body header
 
@@ -50,7 +50,7 @@ const axiosInstance = axios.create({
 //intercept request
 axiosInstance.interceptors.request.use((config) => {
   const token = localStorage.getItem("accessToken");
-  console.log(config);
+  // console.log(config);
   if (token) {
     //set default and body header
 
