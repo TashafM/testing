@@ -17,6 +17,7 @@ import { AddProducts } from "../../Dealers";
 
 const AllProducts = () => {
   const {isEmpty, setIsEmpty} = useContext(AddProducts)
+  const {setLoading, setMsg} = useContext(GlobalContext)
   const principalCompanyUserCode = localStorage.getItem(
     "principalCompanyUserCode"
   );
@@ -25,6 +26,7 @@ const AllProducts = () => {
   const [noData, setNoData] = useState(false);
   const [categoryData, setcategoryData] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
 
   const [active, setActive] = useState(0);
 
@@ -56,6 +58,7 @@ const AllProducts = () => {
     
 
     const viewCart =() =>{
+      setLoading(true)
       axiosInstance.post(API.VIEW_DEALER_CART,{
         principalCompanyUserCode
       }).then((res)=>{
@@ -64,14 +67,16 @@ const AllProducts = () => {
         console.log(res.result[0].cart.cartItems,'viewCart from all products')
         if(res.totalCartItemCount==0){
           setIsEmpty(true)
+          setLoading(false)
         }else{
           setIsEmpty(false)
           const parseData = JSON.stringify(cart)
           localStorage.setItem('cart',parseData)
           const popupData = JSON.stringify(popupItems)
           localStorage.setItem('popupItems',popupData)
+          setLoading(false)
         }
-      })
+      }).catch((err)=>setLoading(false))
     }
 
     fetchData();

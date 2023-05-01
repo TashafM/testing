@@ -130,7 +130,6 @@ const ProductCart = () => {
           setDefaultBilling(res.result[0].cart.billingAddress);
           setDefaultShipping(res.result[0].cart.shippingAddress);
           // setIsEmpty(false);
-          console.log(res.result[0],'from addddddddddddddddddddddddddddddddddddd')
           const toString = JSON.stringify(res.result[0]);
           localStorage.setItem("placeOrderData", toString);
           if (res.result[0].cart.cartItems.length > 0) {
@@ -140,7 +139,6 @@ const ProductCart = () => {
             (acc, item) => acc + Number(item.totalPrice),
             0
           );
-          console.log(sumOfTotal,'summmmmmmmmmmmmmmmmmmm')
           setItemTotal(sumOfTotal);
 
           const selectedAddress = res.result[0].cart.shippingAddress.filter(
@@ -148,7 +146,7 @@ const ProductCart = () => {
           );
           setDisplayAddress(...selectedAddress);
         })
-        .catch((err) => console.log(err, "erro msg"));
+        .catch((err) => setLoad(false));
     };
 
     getViewCart();
