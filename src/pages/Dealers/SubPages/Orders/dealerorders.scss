@@ -20,6 +20,40 @@
   }
 }
 
+.order-info-title {
+  margin-top: 34px !important;
+}
+
+.summary-text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 31px;
+  /* or 155% */
+
+  color: #7f7f7f;
+}
+.other-summary-title {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 31px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  /* identical to box h
+  eight, or 155% */
+
+  color: #000000;
+}
+.imge-icon-red {
+  height: 7px;
+  width: 7px;
+  margin-left: 6px;
+  margin-top: 3px;
+}
+
 .order-status-title-text {
   font-family: "Inter";
   font-style: normal;
@@ -96,6 +130,16 @@
   }
 }
 
+.instuction-title-other {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px !important;
+  /* identical to box height, or 157% */
+
+  color: #000000 !important;
+}
+
 .over-flow-text {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -112,7 +156,7 @@
     font-family: "Inter";
     font-style: normal;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 15px;
     /* or 179% */
     margin-bottom: 10px !important;
     // margin-bottom: 13px !important;

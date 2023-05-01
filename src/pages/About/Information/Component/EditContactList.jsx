@@ -15,12 +15,15 @@ import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
 import { toast } from "react-toastify";
 import ConfirmBox from "../../../../components/ConfirmBox/ConfirmBox";
+import { SUCCESS_MESSAGES } from "../../../../helper/messages";
 
 function EditContactList() {
   const { openDrawer, setOpenDrawer } = useContextProvider();
   const [data, setData] = useState(openDrawer.data ?? []);
   const [showModal, setShowModal] = useState(false);
   const [deletedItem, setDeletedItem] = useState({ item: {}, index: -1 });
+
+  console.log(deletedItem);
 
   const [deleteData] = usePostAsyncResponse(
     "/portalDeleteCompanyContactUsDetails"
@@ -52,17 +55,19 @@ function EditContactList() {
         data: arr,
         completeData: d,
       });
+      toast.success(SUCCESS_MESSAGES.DELETE_CONTACT);
       setShowModal(false);
       setData(arr);
     });
   };
 
   const onPostEnableChat = (arr) => {
-    const contactUsId = arr._id;
-    delete arr._id;
+    const currentContact = JSON.parse(JSON.stringify(arr));
+    const contactUsId = currentContact._id;
+    delete currentContact._id;
 
     const body = {
-      ...arr,
+      ...currentContact,
       contactUsId,
     };
 
@@ -75,12 +80,11 @@ function EditContactList() {
         console.log(error);
       }
 
-      toast.success("chat enabled!!");
-
-      setOpenDrawer({
-        open: false,
-        type: "",
-      });
+      if (currentContact.enableChat) {
+        toast.success("chat enabled!!");
+      } else {
+        toast.success("chat disabled!!");
+      }
     });
   };
 

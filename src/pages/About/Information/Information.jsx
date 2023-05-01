@@ -18,6 +18,7 @@ import EditStatement from "./Component/EditStatement";
 import EditOperations from "./Component/EditOperations";
 import OtherInfoDetails from "./Component/OtherInfoDetails";
 import { CircularProgress } from "@mui/material";
+import EditOtherInfo from "./Component/EditOtherInfo";
 
 function Information() {
   const [data, setData, loading] = useOutletContext();
@@ -27,6 +28,7 @@ function Information() {
   const [openStatement, setOpenStatement] = useState(false);
   const [openOperation, setOpenOperation] = useState(false);
   const [openotherInfor, setOpenOtherInfor] = useState(false);
+  const [editOtherInfo, setEditOtherInfo] = useState(false);
 
   const onUpdate = (cache) => {
     setData(cache);
@@ -146,9 +148,24 @@ function Information() {
           <CardOtherInfo
             otherInfo={data[0]?.otherInfo}
             onClick={() => {
+              setEditOtherInfo(true);
+            }}
+            onViewAllClick={() => {
               setOpenOtherInfor(true);
             }}
           />
+
+          {editOtherInfo && (
+            <EditOtherInfo
+              show={editOtherInfo}
+              handleClose={() => {
+                setEditOtherInfo(false);
+              }}
+              data={data[0]?.otherInfo ?? []}
+              completeData={data}
+              onUpdate={onUpdate}
+            />
+          )}
 
           {openotherInfor && (
             <OtherInfoDetails

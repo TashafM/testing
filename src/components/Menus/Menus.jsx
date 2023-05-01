@@ -2,13 +2,17 @@
 import React, { useEffect, useState } from "react";
 import "./Menus.scss";
 import logo from "../../assets/images/atinks-dashboard.png";
+import compIcon from "../../assets/images/company-default-icon.png";
+
 // import NeedHelp from "../NeedHelp/NeedHelp";
 
 import { useLocation, useNavigate } from "react-router-dom";
 
-const Menus = ({tabs, marginTop}) => {
+const Menus = ({ tabs, marginTop }) => {
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
+
+  const userData = JSON.parse(localStorage.getItem("userData") ?? "");
   // const [data, setData] = useState(localStorage.getItem("data") || null);
 
   const goto = (url) => {
@@ -20,21 +24,33 @@ const Menus = ({tabs, marginTop}) => {
   //   localStorage.setItem("data", data);
   // }, [data]);
 
+  console.log({ userData });
+
   return (
     <div className="menus-col">
-      <div className="menu-img dealer-flow">
-        <img src={logo} alt="" />
+      <div className="menu-img dealer-flow d-flex align-items-center">
+        <img src={userData?.dpURL ? userData.dpURL : compIcon} alt="" />
+        <div className="title-cont">
+          <p className="comp-title mb-0">
+            {userData?.firstname} {userData?.lastname}
+          </p>
+          {/* <p className="comp-subtitle  mb-0">{userData?.userName}</p> */}
+        </div>
       </div>
 
-      <div style={{overflow:'auto'}}>
-        <div className={marginTop? "menu-list marginTop40": "menu-list"}>
+      <div style={{ overflow: "auto" }}>
+        <div className={marginTop ? "menu-list marginTop40" : "menu-list"}>
           <ul>
             {tabs.map((item, id) => {
               return (
                 <>
                   <div
                     key={id}
-                    className={`li ${location.pathname.slice(0,10) === item.path.slice(0,10) ? "active" : ""}`}
+                    className={`li ${
+                      location.pathname.slice(0, 10) === item.path.slice(0, 10)
+                        ? "active"
+                        : ""
+                    }`}
                     onClick={() => goto(item)}
                   >
                     <span className="icn">

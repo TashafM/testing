@@ -8,8 +8,12 @@
     padding-left: 50px;
 
     img {
-      width: 110px;
+      height: 77px;
+      width: 77px;
+      background-color: #eaeaea;
+      padding: 13px;
       cursor: pointer;
+      border-radius: 50%;
     }
   }
 
@@ -66,7 +70,7 @@
         margin-right: 14px;
         /* background: yellow; */
         /* padding: 5px; */
-        border: 1px solid #BABABA;
+        border: 1px solid #bababa;
         border-radius: 50%;
         height: 50px;
         width: 50px;

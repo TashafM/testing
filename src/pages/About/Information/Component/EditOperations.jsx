@@ -6,6 +6,8 @@ import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
 import { Offcanvas } from "react-bootstrap";
 import DrawerHead from "./DrawerHead";
 import "./styles.scss";
+import { toast } from "react-toastify";
+import { SUCCESS_MESSAGES } from "../../../../helper/messages";
 
 function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
   const [postData, { loading }] = usePatchAsyncReponse(
@@ -46,6 +48,7 @@ function EditOperations({ show, handleClose, data, onUpdate, completeData }) {
         arr[0].hoursOfOperation = res[0];
         onUpdate(arr);
         handleClose();
+        toast.success(SUCCESS_MESSAGES.HOUR_OF_OPERATIONS);
       });
     } else {
       handleClose();

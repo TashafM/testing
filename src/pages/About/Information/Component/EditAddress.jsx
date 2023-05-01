@@ -7,6 +7,8 @@ import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
 import { Offcanvas } from "react-bootstrap";
 import DrawerHead from "./DrawerHead";
 import PlaceAutoComplete from "../../../../components/Input/PlaceAutoComplete";
+import { toast } from "react-toastify";
+import { SUCCESS_MESSAGES } from "../../../../helper/messages";
 
 function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
   const formRef = useRef();
@@ -31,6 +33,7 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
         arr[0].registeredAddress = { ...res[0] };
         onUpdate(arr);
         handleClose();
+        toast.success(SUCCESS_MESSAGES.EDIT_ADDRESS);
       });
     } else {
       handleClose();

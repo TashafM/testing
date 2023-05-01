@@ -9,6 +9,8 @@ import { usePostAsyncResponse } from "../../../../hooks/usePostAsyncResponse";
 import { useContextProvider } from "../../../../context";
 import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { SUCCESS_MESSAGES } from "../../../../helper/messages";
 
 function EditContacts() {
   const formRef = useRef();
@@ -45,26 +47,19 @@ function EditContacts() {
             const d = JSON.parse(JSON.stringify(openDrawer.completeData));
             d[0].contactUs[openDrawer.index] = { ...res[0] };
             openDrawer.callback(d);
+
+            setOpenDrawer({
+              type: "Contacts",
+              title: "Contacts",
+              open: true,
+              data: d[0].contactUs,
+              callback: openDrawer.callback,
+              completeData: d,
+            });
           } catch (error) {
             console.log(error);
           }
-
-          console.log({
-            type: "Contacts",
-            title: "Contacts",
-            open: true,
-            data: d[0].contactUs,
-            callback: openDrawer.callback,
-            completeData: d,
-          });
-          setOpenDrawer({
-            type: "Contacts",
-            title: "Contacts",
-            open: true,
-            data: d[0].contactUs,
-            callback: openDrawer.callback,
-            completeData: d,
-          });
+          toast.success(SUCCESS_MESSAGES.EDIT_CONTACT);
         });
       } else {
         const body = {
@@ -94,6 +89,8 @@ function EditContacts() {
             callback: openDrawer.callback,
             completeData: d,
           });
+
+          toast.success(SUCCESS_MESSAGES.CONTACT);
         });
       }
     } else {
@@ -204,7 +201,7 @@ function EditContacts() {
             ) : null}
             <BtnTitleCenter
               loading={loading || editLoading}
-              disabled={loading}
+              disabled={loading || editLoading}
               type="submit"
               title={"Save"}
             />

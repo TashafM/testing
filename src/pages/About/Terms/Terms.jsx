@@ -9,10 +9,11 @@ import { useResponse } from "../../../hooks/useResponse";
 import { usePostAsyncResponse } from "../../../hooks/usePostAsyncResponse";
 import BtnTitleIcon from "../../../components/Button/BtnTitleIcon";
 import { CircularProgress } from "@mui/material";
+import { toast } from "react-toastify";
+import { SUCCESS_MESSAGES } from "../../../helper/messages";
 
 function Terms() {
   const [showModal, setShowModal] = useState(false);
-  const [termCondition, setTermCondition] = useState([]);
 
   const { data, setData, loading } = useResponse(
     "/portalViewCompanyTermsConditions"
@@ -35,6 +36,7 @@ function Terms() {
     postData(body, () => {
       setShowModal(false);
       setData(data);
+      toast.success(SUCCESS_MESSAGES.EDIT_TERMS);
     });
   };
 

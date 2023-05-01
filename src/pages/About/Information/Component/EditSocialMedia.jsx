@@ -9,6 +9,8 @@ import DrawerHead from "./DrawerHead";
 import { useState } from "react";
 import { isValidUrl } from "../../../../components/Utils/Utils";
 import schema from "../../../../helper/validation/schema";
+import { toast } from "react-toastify";
+import { SUCCESS_MESSAGES } from "../../../../helper/messages";
 
 function EditSocialMedia({ show, handleClose, data, onUpdate, completeData }) {
   const formRef = useRef();
@@ -46,6 +48,7 @@ function EditSocialMedia({ show, handleClose, data, onUpdate, completeData }) {
         console.log({ arr });
         onUpdate(arr);
         handleClose();
+        toast.success(SUCCESS_MESSAGES.SOCIAL_MEDIA_LINKS);
       });
     } else {
       handleClose();

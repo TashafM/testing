@@ -9,6 +9,11 @@
   .display-desktop {
     display: flex;
   }
+
+  .image-icon-other {
+    height: 19px;
+    width: 19px;
+  }
   .address-contact-card {
     button {
       font-family: "Inter";
@@ -22,6 +27,18 @@
       padding: 0;
     }
   }
+
+  .other-summary-title {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    /* identical to box height, or 157% */
+
+    color: #000000;
+  }
+
   .address {
     font-size: 18px;
     font-weight: 500;

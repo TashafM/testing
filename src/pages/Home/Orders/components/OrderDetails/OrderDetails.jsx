@@ -1,9 +1,5 @@
 import React from "react";
 import { Row } from "react-bootstrap";
-import OrderDetailsBox from "../OrderDetailsBox/OrderDetailsBox";
-import truck from "../../../../../assets/images/truck.svg";
-import bill from "../../../../../assets/images/bill.svg";
-import OrderSummaryBox from "../OrderSummayBox/OrderSummaryBox";
 import FilterBtn from "../../../../../components/FilterButton/FilterButton";
 import SearchBar from "../../../../../components/SearchBar/SearchBar";
 import "./OrderDetails.scss";
@@ -15,12 +11,15 @@ import { orderDetailColumn } from "../../../../About/data/data";
 import { getDesireDateFormate } from "../../../../../components/Utils/Utils";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ViewAddress from "../../../../Dealers/SubPages/Orders/component/drawer/ViewAddress";
+import ViewOtherInfo from "../../../../Dealers/SubPages/Orders/component/drawer/ViewOtherInfo";
+import OrderSummary from "../../../../Dealers/SubPages/Orders/component/OrderSummary";
 
 const OrderDetails = () => {
   const location = useLocation();
   const orderId = location.state.data;
   const [page, setPage] = useState(0);
   const [showAddress, setShowAddress] = useState(false);
+  const [showOther, setShowOther] = useState(false);
 
   const { data, loading, setData, getData } = usePaginatedCompanyData();
 
@@ -84,13 +83,13 @@ const OrderDetails = () => {
             </div>
           </div>
         </div>
-        <OrderDetailsBox
-          icon={bill}
-          icon2={truck}
+        <OrderSummary
           order={order}
           onClick={() => setShowAddress(true)}
+          onClickOther={() => {
+            setShowOther(true);
+          }}
         />
-        <OrderSummaryBox order={order} />
       </Row>
       {showAddress && (
         <ViewAddress
@@ -98,6 +97,25 @@ const OrderDetails = () => {
           order={order}
           handleClose={() => {
             setShowAddress(false);
+          }}
+        />
+      )}
+
+      {showAddress && (
+        <ViewAddress
+          show={showAddress}
+          order={order}
+          handleClose={() => {
+            setShowAddress(false);
+          }}
+        />
+      )}
+      {showOther && (
+        <ViewOtherInfo
+          show={showOther}
+          order={order}
+          handleClose={() => {
+            setShowOther(false);
           }}
         />
       )}

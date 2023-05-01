@@ -12,36 +12,39 @@ import LogoutPopup from "../LogoutPopup/LogoutPopup";
 import MyDealersPopup from "../../pages/Dealers/Modal/MyDealersPopup/MyDealersPopup";
 import { API } from "../../helper/API";
 import { AddProducts } from "../../pages/Dealers/Dealers";
+import compIcon from "../../assets/images/company-default-icon.png";
 
 const NavbarTop = ({ dealers }) => {
   // const {setIsEmpty} = useContext(AddProducts)
   const idCode = localStorage.getItem("principalCompanyUserCode");
-  const dealersLogo = localStorage.getItem('dpURL')
+  const dealersLogo = localStorage.getItem("dpURL");
   const [showPopup, setShowPopup] = useState(false);
   const [dealerPopup, showDealerPopup] = useState(false);
-  const [allDealerData, setAllDealerData] = useState([])
+  const [allDealerData, setAllDealerData] = useState([]);
+  // const [dpURL, setDpURL] = useState("")
+  const userData = JSON.parse(localStorage.getItem("userData") ?? "");
 
-
-  
   const fetchDealers = () => {
     const accessToken = localStorage.getItem("accessToken");
-    axios.post(
-      API.VIEW_COMPANY_DEALERS,
-      {},
-      {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      }
-    ).then((res)=>{
-      setAllDealerData(res.result)
-      localStorage.removeItem('cart')
-    })
+    axios
+      .post(
+        API.VIEW_COMPANY_DEALERS,
+        {},
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      )
+      .then((res) => {
+        setAllDealerData(res.result);
+        localStorage.removeItem("cart");
+      });
   };
 
   useEffect(() => {
     fetchDealers();
+
     // emptyCart();
   }, [idCode]);
-  
 
   const emptyCart = () => {
     const principalCompanyUserCode = localStorage.getItem(
@@ -61,7 +64,7 @@ const NavbarTop = ({ dealers }) => {
     <div className="row navbar-top">
       <div className="col-md-2 col-sm-4">
         <span className="logo">
-          <img src={atinks} alt="" />
+          <img src={userData?.dpURL ? userData?.dpURL : compIcon} alt="" />
         </span>
       </div>
       <div className="col-md-7 search-div-top">
@@ -73,7 +76,7 @@ const NavbarTop = ({ dealers }) => {
       <div className="col-md-3 right-div">
         <div>
           {dealers ? (
-            <div className="my-dealers" onClick={() => showDealerPopup(true)} >
+            <div className="my-dealers" onClick={() => showDealerPopup(true)}>
               <div className="dealer-logo">
                 <img src={dealers ? dealersLogo : atlogo} alt="" />
               </div>
@@ -83,7 +86,11 @@ const NavbarTop = ({ dealers }) => {
             <BlackBtn />
           )}
         </div>
-        <MyDealersPopup show={dealerPopup} setDealerPopup={showDealerPopup} data={allDealerData} />
+        <MyDealersPopup
+          show={dealerPopup}
+          setDealerPopup={showDealerPopup}
+          data={allDealerData}
+        />
         <div className="user-profile">
           <img src={user} alt="" />
           <span className="username">{"Username"}</span>

@@ -64,7 +64,7 @@ const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
                     return (
                       <>
                         <td key={id}>
-                          <div className={col.value}>
+                          <div className="table-over-flow-text">
                             {col?.value?.includes("Total")
                               ? `${row?.currency?.symbol}`
                               : ""}

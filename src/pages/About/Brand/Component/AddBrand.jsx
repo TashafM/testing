@@ -8,6 +8,8 @@ import useEditBrandPatch from "../hooks/useEditBrandPatch";
 import { Offcanvas } from "react-bootstrap";
 import DrawerHead from "../../Information/Component/DrawerHead";
 import schema from "../../../../helper/validation/schema";
+import { toast } from "react-toastify";
+import { SUCCESS_MESSAGES } from "../../../../helper/messages";
 
 function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
   const formRef = useRef();
@@ -52,6 +54,7 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
           editBrnad(formData, (res) => {
             onUpdate(res);
             handleClose();
+            toast.success(SUCCESS_MESSAGES.BRAND_EDIT);
           });
         } else {
           formData.append("companyUserCode", userId);
@@ -60,6 +63,7 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
           postData(formData, (res) => {
             onUpdate(res);
             handleClose();
+            toast.success(SUCCESS_MESSAGES.BRAND_ADD);
           });
         }
 

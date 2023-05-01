@@ -5,6 +5,8 @@ import { usePostAsyncResponse } from "../../../../hooks/usePostAsyncResponse";
 import "./styles.scss";
 import { Offcanvas } from "react-bootstrap";
 import DrawerHead from "./DrawerHead";
+import { toast } from "react-toastify";
+import { SUCCESS_MESSAGES } from "../../../../helper/messages";
 
 function EditStatement({ show, handleClose, data, onUpdate, completeData }) {
   const [statement, setStatement] = useState(data ?? "");
@@ -25,6 +27,7 @@ function EditStatement({ show, handleClose, data, onUpdate, completeData }) {
         console.log({ arr });
         onUpdate(arr);
         handleClose();
+        toast.success(SUCCESS_MESSAGES.STAEMENT);
       });
     } else {
       handleClose();

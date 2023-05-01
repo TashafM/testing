@@ -14,42 +14,41 @@ import { GlobalContext } from "../../App";
 import { useContext } from "react";
 import menuItems from "../../components/Menus/menu";
 
-
 const Home = () => {
   const navigate = useNavigate();
 
-  const {a, setA} = useContext(GlobalContext)
+  const { a, setA } = useContext(GlobalContext);
   return (
     <>
-        <div className="homepage">
-          <div className="forDesktop">
-            <NavbarTop />
-          </div>
-          <div className="forTablets">
-            <TabletNavbar />
-          </div>
-          <div className="tablet-menu">
-            <TabMenus tabs={menuItems}/>
-          </div>
-          <div className="row">
-            <div className="col-xl-2 menu-list ">
-              <div className="sub-menu-list">
-                <Menus tabs={menuItems}/>
-                {/* <Button onClick={()=>{
+      <div className="homepage">
+        <div className="forDesktop">
+          <NavbarTop />
+        </div>
+        <div className="forTablets">
+          <TabletNavbar />
+        </div>
+        <div className="tablet-menu">
+          <TabMenus tabs={menuItems} />
+        </div>
+        <div className="row">
+          <div className="col-xl-2 menu-list ">
+            <div className="sub-menu-list">
+              <Menus tabs={menuItems} />
+              {/* <Button onClick={()=>{
                   setA(true)
                   console.log(a,'aaaaaaaaaa')
                 }}> click here</Button> */}
-                <NeedHelp />
-              </div>
-            </div>
-            <div className="col-xl-10 col-lg-12 content-area">
-              {/* <div className="sub-content-area">
-            <Outlet/>
-          </div> */}
-              <Outlet name="alkjaljfsa" />
+              <NeedHelp />
             </div>
           </div>
+          <div className="col-xl-10 col-lg-12 content-area content-about-us">
+            {/* <div className="sub-content-area">
+            <Outlet/>
+          </div> */}
+            <Outlet name="alkjaljfsa" />
+          </div>
         </div>
+      </div>
       <div className="mobile-not-supported">
         <MobileNotSupported />
       </div>

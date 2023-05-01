@@ -8,7 +8,25 @@ const OrderSummaryBox = ({ order }) => {
       <div className="internal-div flex-grow-1">
         <div className="box-one flex-grow-1">
           <div className="title-text">Other Information :</div>
-          <div className="summary-text">{order?.otherInstruction ?? ""}</div>
+          {order.labelInstruction ? (
+            <>
+              <div className="other-summary-title">Label instruction </div>
+
+              <div className="summary-text">
+                {order?.labelInstruction ?? ""}
+              </div>
+            </>
+          ) : order.otherInstruction ? (
+            <>
+              <div className="other-summary-title">Other Instruction </div>
+
+              <div className="summary-text">
+                {order?.otherInstruction ?? ""}
+              </div>
+            </>
+          ) : (
+            ""
+          )}
         </div>
         <div className="order-summary flex-grow-1">
           <div className="title-text">Order Summary :</div>
@@ -16,13 +34,13 @@ const OrderSummaryBox = ({ order }) => {
             <div className="items-total">
               <div className="summary-heading">Items total</div>
               <div className="summary-amount">
-                {order?.symbol?.currency} {order?.itemsTotal ?? "0.0"}
+                {order?.currency?.symbol} {order?.itemsTotal ?? "0.0"}
               </div>
             </div>
             <div className="taxes">
               <div className="summary-heading">Taxes</div>
               <div className="summary-amount">
-                {order?.symbol?.currency} {order?.taxAmount ?? "0.0"}
+                {order?.currency?.symbol} {order?.taxAmount ?? "0.0"}
               </div>
             </div>
           </div>
@@ -30,7 +48,7 @@ const OrderSummaryBox = ({ order }) => {
           <div className="amount-total">
             <div className="total-title">Order Total</div>
             <div className="total-amount">
-              {order?.symbol?.currency} {order?.totalAmount ?? 0.0}
+              {order?.currency?.symbol} {order?.totalAmount ?? 0.0}
             </div>
           </div>
         </div>

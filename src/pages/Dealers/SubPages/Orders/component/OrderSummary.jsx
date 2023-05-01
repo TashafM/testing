@@ -1,12 +1,12 @@
 import React from "react";
-import "./OrderDetailsBox.scss";
+import "../dealerorders.scss";
 import { prepareAddressString } from "../../../../../components/Utils/Utils";
 import BtnTitleCenter from "../../../../../components/Button/BtnTitleCenter";
 import arrow from "../../../../../assets/images/arrow-right-red.png";
 import billing from "../../../../../assets/images/billing.png";
 import shipping from "../../../../../assets/images/shipping.png";
 
-const OrderDetailsBox = ({ order, onClick, onClickOther }) => {
+const OrderSummary = ({ order, onClick, onClickOther }) => {
   return (
     <div className="row address-card-main">
       <div className="col-6 ">
@@ -73,14 +73,33 @@ const OrderDetailsBox = ({ order, onClick, onClickOther }) => {
               <div className="address-head d-flex">
                 <p className="order-summary-text">Other information :</p>
               </div>
-              <div className="address-field address-contact-card">
-                <p className="m-0 d-flex justify-content-between align-items-center over-flow-text over-flow-text-other">
-                  {order.otherInstruction}
-                  {order.otherInstruction || order.labelInstruction ? (
-                    <BtnTitleCenter title={"See all"} onClick={onClickOther} />
-                  ) : null}
-                </p>
-              </div>
+              {order.labelInstruction ? (
+                <div className="address-field address-contact-card">
+                  <p className="instuction-title-other">Other Instruction</p>
+                  <p className="m-0 d-flex justify-content-between align-items-center over-flow-text over-flow-text-other">
+                    {order.otherInstruction}
+                    {order.otherInstruction || order.labelInstruction ? (
+                      <BtnTitleCenter
+                        title={"See all"}
+                        onClick={onClickOther}
+                      />
+                    ) : null}
+                  </p>
+                </div>
+              ) : order.otherInstruction ? (
+                <div className="address-field address-contact-card">
+                  <p className="instuction-title-other">Other Instruction</p>
+                  <p className="m-0 d-flex justify-content-between align-items-center over-flow-text over-flow-text-other">
+                    {order.otherInstruction}
+                    {order.otherInstruction || order.otherInstruction ? (
+                      <BtnTitleCenter
+                        title={"See all"}
+                        onClick={onClickOther}
+                      />
+                    ) : null}
+                  </p>
+                </div>
+              ) : null}
             </div>
           </div>
           <div className=" flex-grow-1  detail-top-card width-50 ">
@@ -114,4 +133,4 @@ const OrderDetailsBox = ({ order, onClick, onClickOther }) => {
   );
 };
 
-export default OrderDetailsBox;
+export default OrderSummary;

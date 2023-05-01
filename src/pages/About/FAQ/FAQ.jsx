@@ -7,6 +7,8 @@ import ModalComponent from "../../../components/Modal";
 import { useResponse } from "../../../hooks/useResponse";
 import { usePostAsyncResponse } from "../../../hooks/usePostAsyncResponse";
 import { CircularProgress } from "@mui/material";
+import { toast } from "react-toastify";
+import { SUCCESS_MESSAGES } from "../../../helper/messages";
 
 function FAQ() {
   const [showModal, setShowModal] = useState(false);
@@ -35,6 +37,7 @@ function FAQ() {
     postData(body, () => {
       setShowModal(false);
       setData(data);
+      toast.success(SUCCESS_MESSAGES.EDIT_FAQ);
     });
   };
 
