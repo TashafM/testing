@@ -16,6 +16,7 @@ const SimpleInput = ({ title, placeholder, name, value, onChange, error }) => {
       />
       {error && <div className="invalid-feedback">{error}</div>}
     </div>
+    
   );
 };
 

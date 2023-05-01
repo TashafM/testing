@@ -7,15 +7,19 @@ import { Button } from "react-bootstrap";
 import * as Yup from "yup";
 
 const newAddressSchema = Yup.object().shape({
-  fullName: Yup.string().required("Full Name is required"),
-  contactNumber: Yup.string().matches(/^[0-9+\-()]*$/, "Invalid phone number"),
-  floorNumber: Yup.string().required("House/Buiding/Floor No. is required"),
-  block: Yup.string(),
-  street: Yup.string().required("Street is required"),
-  city: Yup.string().required("City is required"),
-  state: Yup.string().required("State is required"),
-  country: Yup.string().required("Country is required"),
-  zipCode: Yup.number().required("Zip Code is required"),
+  fullName: Yup.string().max(30, "Full Name must be 30 characters or less").required("Full Name is required"),
+  contactNumber: Yup.string().matches(/^[0-9+\-()]*$/, "Invalid phone number").max(15, "Phone number must be at most 15 characters long"),
+  floorNumber: Yup.string().max(15, "Floor number must be 15 characters or less").required("House/Buiding/Floor No. is required"),
+  block: Yup.string().max(15, "Block must be 15 characters or less"),
+  street: Yup.string().max(15, "Street must be 15 characters or less").required("Street is required"),
+  city: Yup.string().max(15, "City must be 15 characters or less").required("City is required"),
+  state: Yup.string().max(15, "State must be 15 characters or less").required("State is required"),
+  country: Yup.string().max(15, "Country must be 15 characters or less").required("Country is required"),
+  zipCode: Yup.string()
+    .matches(/^[0-9]+$/, "Zip Code must be a number")
+    .min(5, "Zip Code must be 5 digits")
+    .max(10, "Zip Code must be 10 digits or less")
+    .required("Zip Code is required"),
   googleplaces: Yup.string(),
 });
 
@@ -120,6 +124,7 @@ const NewAddress = ({
         }
       }}
       validationSchema={newAddressSchema}
+      
     >
       {/* {({ handleChange, values }) => ( */}
       {({ handleChange, values, errors, touched }) => (

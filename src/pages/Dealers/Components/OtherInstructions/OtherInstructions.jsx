@@ -10,15 +10,19 @@ const OtherInstructions = ({ show, handleClose }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setLabelInstruction('');
-    setOtherInstruction('');
+    // setLabelInstruction('');
+    // setOtherInstruction('');
 
     const principalCompanyUserCode = localStorage.getItem('principalCompanyUserCode');
     axiosInstance.post(API.EDIT_OTHER_INSTRUCTIONS,{
       principalCompanyUserCode,
       labelInstruction,
       otherInstruction
-    }).then((res)=>res.success && handleClose())
+    }).then((res)=>{
+      console.log(res.result,'res.result')
+        localStorage.setItem('labelInstruction',res.result[0].labelInstruction)
+        localStorage.setItem('otherInstruction',res.result[0].otherInstruction)
+    })
     // you can do something with the data here, such as send it to a server
   };
 

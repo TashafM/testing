@@ -73,7 +73,18 @@
   }
 }
 
-.bottom-logos{
+.noProductsmsg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 55vh;
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 28px;
+  color: #929292;
+}
+
+.bottom-logos {
   margin-right: 2%;
 }
 

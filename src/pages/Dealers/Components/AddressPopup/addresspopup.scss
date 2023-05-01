@@ -12,6 +12,7 @@
 
   button {
     margin-right: 20px;
+    padding: 18px;
   }
 
   .offcanvas-body {
@@ -32,8 +33,11 @@
 
 .popup-container {
   margin: 0 50px;
-  height: 88vh;
+  height: 82vh;
   position: relative;
+  overflow-y: scroll;
+
+  
 
 
   .save-address-div{
@@ -51,6 +55,24 @@
     }
   }
   
+}
+
+.popup-container::-webkit-scrollbar,
+.popup-container::-moz-scrollbar,
+.popup-container::-ms-scrollbar {
+  display: none;
+}
+.popup-container::-webkit-scrollbar {
+  display: none;
+}
+
+.save-address-div{
+  position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 4% 17%;
+    box-shadow: 0px -4px 12px 3px rgba(0, 0, 0, 0.1);
+    background-color: white;
 }
 
 .newAddress-back {

@@ -15,7 +15,8 @@ function RightSide({
   cartProducts,
   setCartProducts,
   addItemToCart,
-  isLoading
+  isLoading,
+  editProducts
 }) {
   return (
     <div className="rightside">
@@ -25,12 +26,14 @@ function RightSide({
           src={closeX}
           alt=""
           onClick={() => {
-            setShowPanel(false);
-            addItemToCart();
+            // addItemToCart()
+            {cartProducts.length==0 && setShowPanel(false)}
+            {cartProducts.length != 0 && addItemToCart()}
           }}
+          className="close-button"
         />
       </div>
-      <OrderListTable data={cartProducts} setData={setCartProducts} />
+      <OrderListTable data={cartProducts} setData={setCartProducts} editProducts={editProducts}/>
 
       {cartProducts.length == 0 ? (
         <div className="no-item empty-cart">
@@ -39,7 +42,7 @@ function RightSide({
         </div>
       ) : (
         <div className="add-to-cart">
-          <Button onClick={addItemToCart} disabled={isLoading}>
+          <Button onClick={addItemToCart} disabled={isLoading} >
             {isLoading ? <Spinner animation="border" variant="light" /> : 'Add to cart'}
           </Button>
         </div>

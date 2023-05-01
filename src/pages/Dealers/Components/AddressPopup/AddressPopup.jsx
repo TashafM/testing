@@ -21,7 +21,7 @@ const AddressPopup = ({
   setShippingAddress,
   setBillingAddress,
   callApi,
-  setDisplayAddress
+  setDisplayAddress,
 }) => {
   const [isEdit, setIsEdit] = useState(false);
 
@@ -39,7 +39,6 @@ const AddressPopup = ({
         placement="end"
         className="address-popup"
       >
-        
         <Offcanvas.Header closeButton={addAddress && true}>
           <Offcanvas.Title>
             {addAddress ? (
@@ -103,11 +102,11 @@ const AddressPopup = ({
                   setEditData={setEditData}
                   setDisplayAddress={setDisplayAddress}
                 />
-                <div className="save-address-div">
-                  <Button className="save-address save-btn" onClick={callApi}>
-                    Save
-                  </Button>
-                </div>
+              </div>
+              <div className="save-address-div">
+                <Button className="save-address save-btn" onClick={callApi}>
+                  Save
+                </Button>
               </div>
             </>
           ) : (

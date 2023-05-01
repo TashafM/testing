@@ -3,20 +3,21 @@ import "./sidepanel.scss";
 import { Button, Offcanvas } from "react-bootstrap";
 import LeftSide from "../LeftSide/LeftSide";
 import RightSide from "../RightSide/RightSide";
-import { GlobalSidePanel } from "../../Dealers";
+import { AddProducts, GlobalSidePanel } from "../../Dealers";
 import { API } from "../../../../helper/API";
 import { axiosInstance } from "../../../../helper/axios";
 
 const SidePanel = () => {
   const {setShowPanel, showPanel} = useContext(GlobalSidePanel)
+  const {setIsEmpty, isEmpty} = useContext(AddProducts)
   const [cartProducts, setCartProducts] = useState([]);
   const [data, setData] = useState([])
 
 
   useEffect(()=>{
-    if (localStorage.getItem('cartProducts')) {
+    if (localStorage.getItem('cart')) {
       // Retrieve the data as a string
-      const productString = localStorage.getItem('cartProducts');
+      const productString = localStorage.getItem('cart');
       
       // Parse the string into an array
       const products = JSON.parse(productString);
@@ -24,6 +25,7 @@ const SidePanel = () => {
       
     }
   },[])
+
 
   useEffect(()=>{
     if(localStorage.getItem('initialProductData')){
@@ -40,8 +42,10 @@ const SidePanel = () => {
     setIsLoading(true);
     addItemToCart((res)=>{
       setIsLoading(false)
+      setIsEmpty(false)
     })
   }
+
 
 
   const addItemToCart = () => {
@@ -49,10 +53,15 @@ const SidePanel = () => {
     const igst = localStorage.getItem("igstPercentage");
     const cgst = localStorage.getItem("cgstPercentage");
 
+    // const sumOfTotal = cartProducts.reduce(
+    //   (acc, item) => acc + item.totalPrice,
+    //   0
+    // );
     const sumOfTotal = cartProducts.reduce(
-      (acc, item) => acc + item.totalPrice,
+      (acc, item) => acc + Number(item.totalPrice),
       0
     );
+    console.log(sumOfTotal, 'sumtotal')
     const sumOfTaxes = Number(cgst) + Number(sgst) + Number(igst);
     const taxAmount = (sumOfTotal * sumOfTaxes) / 100; // this is final taxAmount
     const totalAmt = taxAmount + sumOfTotal; // this is totalAmount
@@ -86,8 +95,8 @@ const SidePanel = () => {
       <Offcanvas
         show={showPanel}
         onHide={() => {
-          setShowPanel(false);
-          addItemToCart()
+          // setShowPanel(false);
+          {cartProducts.length>0 ? addItemToCart() : setShowPanel(false)}
         }}
         placement="end"
         className="dm"

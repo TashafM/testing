@@ -3,7 +3,7 @@ import "./orderlisttable.scss";
 import { Table } from "react-bootstrap";
 import ItemRow from "../ItemRow/ItemRow";
 
-const OrderListTable = ({ disableDelete, data, setData }) => {
+const OrderListTable = ({ disableDelete, data, setData, editProducts }) => {
   // const del = (val) => {
   //   const filtered = data.filter((item) => item.variantId !== val);
   //   setData(filtered);
@@ -31,6 +31,7 @@ const OrderListTable = ({ disableDelete, data, setData }) => {
               disableDelete={disableDelete}
               data={item}
               removeItem={del}
+              editProducts={editProducts}
             />
           ))}
       </tbody>

@@ -89,6 +89,12 @@
   }
 }
 
+.error-order {
+  margin-top: 1%;
+  color: #e72d38;
+  font-weight: 500;
+}
+
 .addresses {
   display: flex;
   width: 85%;
@@ -187,10 +193,10 @@
   }
 }
 
-.place-order-spinner{
+.place-order-spinner {
   padding: 0 40px;
 
-  .spinner-border{
+  .spinner-border {
     width: 24px;
     height: 24px;
   }

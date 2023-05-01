@@ -44,10 +44,10 @@ export const newAddressField = [
         placeholderText: 'Enter your zip code',
         name: 'zipCode'
     },
-    {
-        title: 'Google Places Location',
-        placeholderText: 'Enter google places location',
-        name: 'googleplaces'
-    },
+    // {
+    //     title: 'Google Places Location',
+    //     placeholderText: 'Enter google places location',
+    //     name: 'googleplaces'
+    // },
 
 ]
