@@ -74,12 +74,17 @@ const Products = () => {
     fetchProducts();
   }, []);
 
+
   const callFunc = (val) => {
     // setData(val)
+    const popup = JSON.parse(localStorage.getItem('popupItems'))
+    console.log(popup,'popup')
     setShowPanel(true);
     const productData = JSON.stringify(val);
     localStorage.setItem("initialProductData", productData);
   };
+
+
 
   return (
     <>

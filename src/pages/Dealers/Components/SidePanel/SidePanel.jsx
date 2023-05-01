@@ -28,8 +28,8 @@ const SidePanel = () => {
 
 
   useEffect(()=>{
-    if(localStorage.getItem('popupItems')){
-      const productDataStr = localStorage.getItem('popupItems');
+    if(localStorage.getItem('initialProductData')){
+      const productDataStr = localStorage.getItem('initialProductData');
 
       const products = JSON.parse(productDataStr);
       setData(products);
@@ -105,7 +105,7 @@ const SidePanel = () => {
           <div className="divided-div">
             <div className="div-1">
               <LeftSide
-                data={data[0]}
+                data={data}
                 setCartProducts={setCartProducts}
                 cartProducts={cartProducts}
               />
