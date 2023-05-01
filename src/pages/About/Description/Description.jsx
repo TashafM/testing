@@ -1,5 +1,4 @@
 import React from "react";
-import circularLogo from "../../../assets/images/circular-logo.svg";
 import verified from "../../../assets/images/verified.png";
 import "./Description.scss";
 import compIcon from "../../../assets/images/company-default-icon.png";

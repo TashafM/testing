@@ -1,15 +1,36 @@
 .menus-col {
-  // .dealer-flow{
-  //   margin-bottom: 60px;
-  // }
+  .dealer-flow {
+    // margin-bottom: 60px;
+    .title-cont {
+      margin-left: 7px;
+      overflow: hidden;
+
+      .comp-title {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        /* identical to box height */
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        color: #000000;
+      }
+    }
+  }
   .menu-img {
     img {
-      max-width: 120px;
-      width: 100%;
+      height: 77px;
+      width: 77px;
+      background-color: #eaeaea;
+      padding: 13px;
+      cursor: pointer;
+      border-radius: 50%;
     }
   }
 
-  
   .menu-list {
     padding-top: 10px;
 
@@ -53,7 +74,7 @@
         border-radius: 5px;
 
         .menu-name {
-          color:  #be212a;
+          color: #be212a;
         }
 
         .icn {
@@ -65,7 +86,7 @@
     }
   }
 
-  .marginTop40{
+  .marginTop40 {
     margin-top: 40px;
   }
 }
