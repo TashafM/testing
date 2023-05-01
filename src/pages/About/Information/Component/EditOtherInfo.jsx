@@ -10,6 +10,8 @@ import Checkbox from "../../../../components/Input/Checkbox";
 import DrawerHead from "./DrawerHead";
 import { useResponse } from "../../../../hooks/useResponse";
 import { useGetResponse } from "../../../../hooks/useGetResponse";
+import { toast } from "react-toastify";
+import { SUCCESS_MESSAGES } from "../../../../helper/messages";
 
 function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
   const [ischecked, setIschecked] = useState(false);
@@ -49,6 +51,7 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
         data[0].otherInfo = res[0];
         onUpdate(data);
         handleClose();
+        toast.success(SUCCESS_MESSAGES.OTHER_INFO);
       });
     } else {
       handleClose();

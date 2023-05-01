@@ -34,7 +34,6 @@ function ModalComponent({
   const onSaveData = () => {
     if (makeApiCall) {
       editSaveCallback([...Data]);
-      close();
     } else {
       close();
     }

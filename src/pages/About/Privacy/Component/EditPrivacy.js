@@ -9,6 +9,8 @@ import deleteIcon from "../../../../assets/images/delete.png";
 import { Modal } from "react-bootstrap";
 import { usePostAsyncResponse } from "../../../../hooks/usePostAsyncResponse";
 import BtnIconOnly from "../../../../components/Button/BtnIconOnly";
+import { toast } from "react-toastify";
+import { SUCCESS_MESSAGES } from "../../../../helper/messages";
 
 function EditPrivacy({ data = [], show, close, editSaveCallback }) {
   const [privacyData, setPrivacyData] = useState(
@@ -37,6 +39,7 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
       postData(body, () => {
         editSaveCallback([...privacyData]);
         close();
+        toast.success(SUCCESS_MESSAGES.EDIT_PRIVACY);
       });
     } else {
       close();

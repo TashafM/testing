@@ -11,7 +11,6 @@ import "./Privacy.scss";
 import { CircularProgress } from "@mui/material";
 
 function Privacy() {
-  const [privacy, setPrivacy] = useState([]);
   const [showModal, setShowModal] = useState("");
 
   const { data, setData, loading } = useResponse(
@@ -19,7 +18,6 @@ function Privacy() {
   );
 
   const editSaveCallback = (data) => {
-    console.log("shdj", data);
     setData(data);
   };
 

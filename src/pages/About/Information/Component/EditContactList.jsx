@@ -15,6 +15,7 @@ import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
 import { toast } from "react-toastify";
 import ConfirmBox from "../../../../components/ConfirmBox/ConfirmBox";
+import { SUCCESS_MESSAGES } from "../../../../helper/messages";
 
 function EditContactList() {
   const { openDrawer, setOpenDrawer } = useContextProvider();
@@ -54,6 +55,7 @@ function EditContactList() {
         data: arr,
         completeData: d,
       });
+      toast.success(SUCCESS_MESSAGES.DELETE_CONTACT);
       setShowModal(false);
       setData(arr);
     });
@@ -83,11 +85,6 @@ function EditContactList() {
       } else {
         toast.success("chat disabled!!");
       }
-
-      setOpenDrawer({
-        open: false,
-        type: "",
-      });
     });
   };
 
