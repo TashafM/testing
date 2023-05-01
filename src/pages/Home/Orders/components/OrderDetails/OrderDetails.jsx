@@ -1,9 +1,5 @@
 import React from "react";
 import { Row } from "react-bootstrap";
-import OrderDetailsBox from "../OrderDetailsBox/OrderDetailsBox";
-import truck from "../../../../../assets/images/truck.svg";
-import bill from "../../../../../assets/images/bill.svg";
-import OrderSummaryBox from "../OrderSummayBox/OrderSummaryBox";
 import FilterBtn from "../../../../../components/FilterButton/FilterButton";
 import SearchBar from "../../../../../components/SearchBar/SearchBar";
 import "./OrderDetails.scss";
@@ -16,6 +12,7 @@ import { getDesireDateFormate } from "../../../../../components/Utils/Utils";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ViewAddress from "../../../../Dealers/SubPages/Orders/component/drawer/ViewAddress";
 import ViewOtherInfo from "../../../../Dealers/SubPages/Orders/component/drawer/ViewOtherInfo";
+import OrderSummary from "../../../../Dealers/SubPages/Orders/component/OrderSummary";
 
 const OrderDetails = () => {
   const location = useLocation();
@@ -86,7 +83,7 @@ const OrderDetails = () => {
             </div>
           </div>
         </div>
-        <OrderDetailsBox
+        <OrderSummary
           order={order}
           onClick={() => setShowAddress(true)}
           onClickOther={() => {
