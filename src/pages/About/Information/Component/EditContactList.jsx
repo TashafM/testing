@@ -22,6 +22,8 @@ function EditContactList() {
   const [showModal, setShowModal] = useState(false);
   const [deletedItem, setDeletedItem] = useState({ item: {}, index: -1 });
 
+  console.log(deletedItem);
+
   const [deleteData] = usePostAsyncResponse(
     "/portalDeleteCompanyContactUsDetails"
   );
@@ -58,11 +60,12 @@ function EditContactList() {
   };
 
   const onPostEnableChat = (arr) => {
-    const contactUsId = arr._id;
-    delete arr._id;
+    const currentContact = JSON.parse(JSON.stringify(arr));
+    const contactUsId = currentContact._id;
+    delete currentContact._id;
 
     const body = {
-      ...arr,
+      ...currentContact,
       contactUsId,
     };
 
@@ -75,7 +78,11 @@ function EditContactList() {
         console.log(error);
       }
 
-      toast.success("chat enabled!!");
+      if (currentContact.enableChat) {
+        toast.success("chat enabled!!");
+      } else {
+        toast.success("chat disabled!!");
+      }
 
       setOpenDrawer({
         open: false,

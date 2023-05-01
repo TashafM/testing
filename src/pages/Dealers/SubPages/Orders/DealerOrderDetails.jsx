@@ -13,6 +13,7 @@ import { CircularProgress } from "@mui/material";
 import { prepareAddressString } from "../../../../components/Utils/Utils";
 import InfiniteScroll from "react-infinite-scroll-component";
 import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
+import arrow from "../../../../assets/images/arrow-right-red.png";
 
 function DealerOrderDetails() {
   const [showAddress, setShowAddress] = useState(false);
@@ -127,13 +128,19 @@ function DealerOrderDetails() {
                       <p className="m-0">
                         {order?.shippingAddress?.contactNumber ?? ""}
                       </p>
-
-                      <BtnTitleCenter
-                        title="View all"
-                        onClick={() => {
-                          setShowAddress(true);
-                        }}
-                      />
+                      <div className="d-flex align-items-center ">
+                        <BtnTitleCenter
+                          title="View all"
+                          onClick={() => {
+                            setShowAddress(true);
+                          }}
+                        />
+                        <img
+                          className="imge-icon-red"
+                          src={arrow}
+                          alt="arrow-right"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -152,9 +159,15 @@ function DealerOrderDetails() {
                   <div className="address-head d-flex">
                     <p className="order-summary-text">Other information :</p>
                   </div>
-                  <div className="address-field">
-                    <p className="m-0 over-flow-text over-flow-text-other">
+                  <div className="address-field address-contact-card">
+                    <p className="m-0 d-flex justify-content-between align-items-center over-flow-text over-flow-text-other">
                       {order.otherInstruction}
+                      <BtnTitleCenter
+                        title={"See all"}
+                        onClick={() => {
+                          setShowOther(true);
+                        }}
+                      />
                     </p>
                   </div>
                 </div>
@@ -200,6 +213,7 @@ function DealerOrderDetails() {
       {showOther && (
         <ViewOtherInfo
           show={showOther}
+          order={order}
           handleClose={() => {
             setShowOther(false);
           }}

@@ -15,12 +15,14 @@ import { orderDetailColumn } from "../../../../About/data/data";
 import { getDesireDateFormate } from "../../../../../components/Utils/Utils";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ViewAddress from "../../../../Dealers/SubPages/Orders/component/drawer/ViewAddress";
+import ViewOtherInfo from "../../../../Dealers/SubPages/Orders/component/drawer/ViewOtherInfo";
 
 const OrderDetails = () => {
   const location = useLocation();
   const orderId = location.state.data;
   const [page, setPage] = useState(0);
   const [showAddress, setShowAddress] = useState(false);
+  const [showOther, setShowOther] = useState(false);
 
   const { data, loading, setData, getData } = usePaginatedCompanyData();
 
@@ -85,12 +87,12 @@ const OrderDetails = () => {
           </div>
         </div>
         <OrderDetailsBox
-          icon={bill}
-          icon2={truck}
           order={order}
           onClick={() => setShowAddress(true)}
+          onClickOther={() => {
+            setShowOther(true);
+          }}
         />
-        <OrderSummaryBox order={order} />
       </Row>
       {showAddress && (
         <ViewAddress
@@ -98,6 +100,25 @@ const OrderDetails = () => {
           order={order}
           handleClose={() => {
             setShowAddress(false);
+          }}
+        />
+      )}
+
+      {showAddress && (
+        <ViewAddress
+          show={showAddress}
+          order={order}
+          handleClose={() => {
+            setShowAddress(false);
+          }}
+        />
+      )}
+      {showOther && (
+        <ViewOtherInfo
+          show={showOther}
+          order={order}
+          handleClose={() => {
+            setShowOther(false);
           }}
         />
       )}

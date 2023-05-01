@@ -33,7 +33,6 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
       privacyPolicy: [...privacyData],
     };
 
-    alert(makeApiCall);
     if (makeApiCall) {
       postData(body, () => {
         editSaveCallback([...privacyData]);

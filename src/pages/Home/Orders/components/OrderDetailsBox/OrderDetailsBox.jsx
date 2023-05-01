@@ -1,61 +1,116 @@
 import React from "react";
-import { Col } from "react-bootstrap";
 import "./OrderDetailsBox.scss";
 import { prepareAddressString } from "../../../../../components/Utils/Utils";
 import BtnTitleCenter from "../../../../../components/Button/BtnTitleCenter";
 import arrow from "../../../../../assets/images/arrow-right-red.png";
+import billing from "../../../../../assets/images/billing.png";
+import shipping from "../../../../../assets/images/shipping.png";
 
-const OrderDetailsBox = ({ icon, icon2, order, onClick }) => {
+const OrderDetailsBox = ({ order, onClick, onClickOther }) => {
   return (
-    <Col className="order-details-box">
-      <div className="display-desktop">
-        <div className="add-1">
-          <div className="address">
-            {icon && (
-              <span>
-                <img src={icon} alt="icon" />
-              </span>
-            )}
-            Billing Address :
-          </div>
-          <div className="full-address">
-            {Object.keys(order ?? {}).length
-              ? prepareAddressString(order.billingAddress)
-              : ""}
-          </div>
-          <div className="mobile">
-            {order?.billingAddress?.contactNumber ?? ""}
-          </div>
-        </div>
-        <div className="add-2">
-          <div className="address">
-            {icon2 && (
-              <span>
-                <img src={icon2} alt="icon" />
-              </span>
-            )}
-            Shipping Address :
-          </div>
-          <div className="full-address">
-            {Object.keys(order ?? {}).length
-              ? prepareAddressString(order.shippingAddress)
-              : ""}
-          </div>
-          <div className="mobile d-flex address-contact-card justify-content-between align-items-center">
-            {order?.shippingAddress?.contactNumber ?? ""}
-
-            <div className="d-flex">
-              <BtnTitleCenter title="View all" onClick={onClick} />
+    <div className="row address-card-main">
+      <div className="col-6 ">
+        <div
+          className="d-flex address-card-container "
+          onClick={() => {
+            // setShowAddress(true);
+          }}
+        >
+          <div className=" flex-grow-1 detail-top-card width-50 ">
+            <div className="address-head d-flex">
               <img
-                className="image-icon-other"
-                src={arrow}
-                alt="arrow-right-icon"
+                src={billing}
+                className="icon-address-head"
+                alt="billing address"
               />
+              <p className="m-0">Billing Address :</p>
+            </div>
+            <div className="address-field">
+              <p className="m-0 over-flow-text ">
+                {prepareAddressString(order?.billingAddress ?? {})}
+              </p>
+              <p className="m-0">
+                {order?.billingAddress?.contactNumber ?? ""}
+              </p>
+            </div>
+          </div>
+          <div className=" flex-grow-1  detail-top-card width-50 ">
+            <div className=" flex-grow-1 ">
+              <div className="address-head d-flex">
+                <img
+                  src={shipping}
+                  className="icon-address-head"
+                  alt="billing address"
+                />
+                <p className="m-0">Shipping Address :</p>
+              </div>
+              <div className="address-field">
+                <p className="m-0 over-flow-text">
+                  {prepareAddressString(order?.shippingAddress ?? {})}
+                </p>
+                <div className="mobile d-flex address-contact-card justify-content-between align-items-center">
+                  <p className="m-0">
+                    {order?.shippingAddress?.contactNumber ?? ""}
+                  </p>
+                  <div className="d-flex align-items-center ">
+                    <BtnTitleCenter title="View all" onClick={onClick} />
+                    <img
+                      className="imge-icon-red"
+                      src={arrow}
+                      alt="arrow-right"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </Col>
+      <div className="col-6 ">
+        <div className="d-flex address-card-container ">
+          <div className=" flex-grow-1 detail-top-card width-50 ">
+            <div className=" flex-grow-1 ">
+              <div className="address-head d-flex">
+                <p className="order-summary-text">Other information :</p>
+              </div>
+              <div className="address-field address-contact-card">
+                <p className="m-0 d-flex justify-content-between align-items-center over-flow-text over-flow-text-other">
+                  {order.otherInstruction}
+                  {order.otherInstruction || order.labelInstruction ? (
+                    <BtnTitleCenter title={"See all"} onClick={onClickOther} />
+                  ) : null}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className=" flex-grow-1  detail-top-card width-50 ">
+            <div className="address-head d-flex ">
+              <p className="order-summary-text">Order summary:</p>
+            </div>
+            <div className="address-field">
+              <div className="d-flex justify-content-between">
+                <p className="m-0">Items total</p>
+                <p className="m-0">
+                  {order?.currency?.symbol} {order?.itemsTotal ?? "0.0"}
+                </p>
+              </div>
+              <div className="d-flex justify-content-between">
+                <p className="m-0">Taxes</p>
+                <p className="m-0">
+                  {order?.currency?.symbol} {order?.taxAmount ?? "0.0"}
+                </p>
+              </div>
+              <div className="d-flex justify-content-between total-container-div">
+                <p className="m-0">Total Price</p>
+                <p className="m-0">
+                  {order?.currency?.symbol} {order?.totalAmount}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
