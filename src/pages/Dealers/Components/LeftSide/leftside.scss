@@ -149,6 +149,10 @@
     .not-selected {
       border: 1px solid #c8c8c8 !important;
     }
+    .disabled-selected {
+      border: 1px solid #d1d1d1 !important;
+      color: #d1d1d1;
+    }
 
     // .selected-color-btn {
     //   background-color: #fdeaeb;

@@ -9,19 +9,23 @@ import { Button, Form, FormControl, InputGroup } from "react-bootstrap";
 import { useEffect } from "react";
 
 // ---------THIS IS TESTING CODE ----------------------------
-function LeftSide({ data, setCartProducts, cartProducts }) {
-  
-  console.log(data.variants,'----------leftside----------------')
+function LeftSide({ data, setCartProducts, cartProducts, clicked, aData }) {
+  console.log(aData,'aData')
   const [variants, setVariants] = useState(data.variants);
   const uniqueColors = uniqBy(data.variants, "colorDescription");
-  const firstColor = uniqueColors[0].colorDescription ;
+  const firstColor = clicked ? aData.colorDescription : uniqueColors[0].colorDescription ;
   const uniqueQuantities = uniqBy(
     data.variants.filter((variant) => variant.colorDescription === firstColor),
     "packingDescription"
   );
-  const firstQuantity = uniqueQuantities[0].packingDescription;
 
-  const [selectedColor, setSelectedColor] = useState(firstColor);
+  const firstQuantity = clicked? aData.packingDescription : uniqueQuantities[0].packingDescription;
+  console.log(firstColor, firstQuantity,'object')
+
+  // const [selectedColor, setSelectedColor] = useState(clicked ? aData.colorDescription : uniqueColors[0].colorDescription);
+    const [selectedColor, setSelectedColor] = useState(firstColor);
+
+  console.log(selectedColor,'66666666666')
   const [selectedQuantity, setSelectedQuantity] = useState(firstQuantity);
 
   const [isValid, setIsValid] = useState(false); // validation for options
@@ -29,6 +33,7 @@ function LeftSide({ data, setCartProducts, cartProducts }) {
 
 
   const handleColorClick = (color) => {
+    console.log(color, 'handle color click')
     setSelectedColor(color);
     setSelectedQuantity(null); // clear selected quantity --------------------- *IMPORTANT FOR CLEARING THE VALUE FROM BUTTON*
   };
@@ -37,7 +42,7 @@ function LeftSide({ data, setCartProducts, cartProducts }) {
     setSelectedQuantity(quantity);
   };
 
-  const [productQuantity, setProductQuantity] = useState(1);
+  const [productQuantity, setProductQuantity] = useState(clicked? aData.quantity: 1);
  
 
   const [exceedQuantity, setExceedQuantity] = useState(false);
@@ -54,16 +59,37 @@ function LeftSide({ data, setCartProducts, cartProducts }) {
     }
   };
 
-  const availableQuantities = variants.filter(
-    (variant) => variant.colorDescription === selectedColor
+  const availableQuantities = data.variants.filter(
+    (variant) => variant.colorDescription === (clicked ? aData.colorDescription : selectedColor)
   );
-  const prices = availableQuantities.filter(
+  const prices = clicked ? aData : availableQuantities.filter(
     (variant) => variant.packingDescription === selectedQuantity
   );
 
 
+
+
+const updateQuantity = () => {
+  // console.log(aData.cartId,'cart id')
+  // const filtered = cartProducts.filter((item)=>item.cartId==aData.cartId)
+  // console.log(filtered,'**************')
+  
+  // console.log(cartProducts,'cartPRoducts--------------------------')
+
+
+  const updatedArray = cartProducts.map(obj => {
+    if (obj.cartId === aData.cartId) {
+      obj.quantity = productQuantity;
+    }
+    return obj;
+  });
+  setCartProducts(updatedArray);
+};
+
+// rest of your code...
+
+
   const testConsole = () => {
-    console.log(exceedQuantity,'exceed quantity')
     if (exceedQuantity) {
       console.log("quantity exceeding");
     } else {
@@ -145,17 +171,17 @@ function LeftSide({ data, setCartProducts, cartProducts }) {
         <div className="about-product">
           <div className="product-code">
             {" "}
-            {prices?.[0]?.bpCatalogNumber ?? "----"}
+            {clicked ?  prices.bpCatalogNumber :(prices?.[0]?.bpCatalogNumber ?? "----") }
           </div>
           <div className="product-price">
             <div className="product-name"> {data.itemDescription}</div>
             <div>
               {data.currency.symbol}
-              {prices.length > 0 ? prices[0].grossPrice || "N/A API" : "--"}
+              {clicked ? prices.grossPrice : (prices.length > 0 ? prices[0].grossPrice || "N/A API" : "--")}
             </div>
           </div>
           <div className="product-desc">
-            {prices?.[0]?.saleDescription ?? ""}
+            {clicked ? prices.saleDescription : (prices?.[0]?.saleDescription ?? "")}
           </div>
         </div>
 
@@ -166,15 +192,20 @@ function LeftSide({ data, setCartProducts, cartProducts }) {
           {uniqueColors.map((variant, id) => (
             <button
               key={id}
+              // className={`color-btn ${
+              //   variant.colorDescription === selectedColor
+              //     ? "selected"
+              //     : "not-selected"
+              // }`}
               className={`color-btn ${
-                variant.colorDescription === selectedColor
+                // variant.colorDescription === (clicked ? aData.colorDescription : selectedColor)
+                variant.colorDescription === (clicked ? aData.colorDescription : selectedColor)
                   ? "selected"
-                  : "not-selected"
+                  : (clicked ? 'disabled-selected' : 'not-selected')
               }`}
               onClick={() => handleColorClick(variant.colorDescription)}
             >
               {variant.colorDescription}
-              {console.log(variant.colorDescription,'-----variants')}
             </button>
           ))}
         </div>
@@ -187,14 +218,13 @@ function LeftSide({ data, setCartProducts, cartProducts }) {
             <button
               key={id}
               className={`quantity-btn ${
-                variant.packingDescription === selectedQuantity
+                variant.packingDescription === (clicked ? aData.packingDescription : selectedQuantity)
                   ? "selected"
-                  : "not-selected"
+                  : (clicked ? 'disabled-selected' : 'not-selected')
               }`}
               onClick={() => handleQuantityClick(variant.packingDescription)}
             >
               {variant.packingDescription}
-              {console.log(variant.packingDescription,'----------variant packaging')}
             </button>
           ))}
         </div>
@@ -221,10 +251,10 @@ function LeftSide({ data, setCartProducts, cartProducts }) {
         <div className="add-div-btn">
           <Button
             className="add-product-button"
-            onClick={testConsole}
+            onClick={clicked? updateQuantity : testConsole}
             disabled={isValid || exceedQuantity}
           >
-            Add
+            {clicked? 'Update' : 'Add'}
           </Button>
         </div>
       </div>

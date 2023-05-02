@@ -7,12 +7,15 @@ import { AddProducts, GlobalSidePanel } from "../../Dealers";
 import { API } from "../../../../helper/API";
 import { axiosInstance } from "../../../../helper/axios";
 
+
+
 const SidePanel = () => {
   const {setShowPanel, showPanel} = useContext(GlobalSidePanel)
   const {setIsEmpty, isEmpty} = useContext(AddProducts)
   const [cartProducts, setCartProducts] = useState([]);
   const [data, setData] = useState([])
 
+  const [clicked, setClicked] = useState(false)
 
   useEffect(()=>{
     if (localStorage.getItem('cart')) {
@@ -25,6 +28,8 @@ const SidePanel = () => {
       
     }
   },[])
+
+ 
 
 
   useEffect(()=>{
@@ -58,6 +63,15 @@ const SidePanel = () => {
     // console.log(final,'final result')
     setData(result)
     localStorage.setItem('initialProductData', final)
+    setClicked(true)
+  }
+
+
+  const [aData, setA] = useState([])
+  const getFromPop = (product) => {
+    const data = JSON.parse(localStorage.getItem('cart'))
+    const flt = data.filter((itm)=>itm.variantId == product.variantId)
+    setA(flt[0])
   }
 
   const addItemToCart = () => {
@@ -120,6 +134,8 @@ const SidePanel = () => {
                 data={data}
                 setCartProducts={setCartProducts}
                 cartProducts={cartProducts}
+                clicked={clicked}
+                aData={aData}
               />
             </div>
             <div className="vertical-line"></div>
@@ -131,6 +147,7 @@ const SidePanel = () => {
                 addItemToCart={addingItems}
                 isLoading={isLoading}
                 editProducts={editProducts}
+                getFromPop={getFromPop}
               />
             </div>
           </div>

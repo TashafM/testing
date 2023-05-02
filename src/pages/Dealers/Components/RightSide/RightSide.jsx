@@ -16,7 +16,8 @@ function RightSide({
   setCartProducts,
   addItemToCart,
   isLoading,
-  editProducts
+  editProducts,
+  getFromPop
 }) {
   return (
     <div className="rightside">
@@ -33,7 +34,7 @@ function RightSide({
           className="close-button"
         />
       </div>
-      <OrderListTable data={cartProducts} setData={setCartProducts} editProducts={editProducts}/>
+      <OrderListTable data={cartProducts} setData={setCartProducts} editProducts={editProducts} getFromPop={getFromPop}/>
 
       {cartProducts.length == 0 ? (
         <div className="no-item empty-cart">
