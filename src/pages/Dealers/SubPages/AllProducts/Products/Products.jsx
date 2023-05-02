@@ -52,7 +52,6 @@ const Products = () => {
     const principalCompanyUserCode = localStorage.getItem(
       "principalCompanyUserCode"
     );
-    console.log(location, "jjjjjjjjjj");
     const data = localStorage.getItem("subCategory");
     const parseData = JSON.parse(data);
     // console.log(categoryId, subCategoryId, principalCompanyUserCode, 'tashaf')

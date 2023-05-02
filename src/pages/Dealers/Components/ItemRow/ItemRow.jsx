@@ -13,7 +13,7 @@ const ItemRow = ({ disableDelete, pr20, popupScreen, data, removeItem,editProduc
         className={
           popupScreen ? "single-product-item pl40" : "single-product-item"
         }
-        onClick={()=>editProducts(data.itemNumber)}
+        onClick={()=>editProducts(data)}
       >
         <div className="img-div">
           <img src={listproduct} alt="" />

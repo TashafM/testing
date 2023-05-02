@@ -10,12 +10,13 @@ import { useEffect } from "react";
 
 // ---------THIS IS TESTING CODE ----------------------------
 function LeftSide({ data, setCartProducts, cartProducts }) {
+  
   console.log(data.variants,'----------leftside----------------')
   const [variants, setVariants] = useState(data.variants);
-  const uniqueColors = uniqBy(variants, "colorDescription");
-  const firstColor = uniqueColors[0].colorDescription;
+  const uniqueColors = uniqBy(data.variants, "colorDescription");
+  const firstColor = uniqueColors[0].colorDescription ;
   const uniqueQuantities = uniqBy(
-    variants.filter((variant) => variant.colorDescription === firstColor),
+    data.variants.filter((variant) => variant.colorDescription === firstColor),
     "packingDescription"
   );
   const firstQuantity = uniqueQuantities[0].packingDescription;
@@ -24,6 +25,8 @@ function LeftSide({ data, setCartProducts, cartProducts }) {
   const [selectedQuantity, setSelectedQuantity] = useState(firstQuantity);
 
   const [isValid, setIsValid] = useState(false); // validation for options
+
+
 
   const handleColorClick = (color) => {
     setSelectedColor(color);
