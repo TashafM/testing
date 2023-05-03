@@ -5,6 +5,7 @@ import defaultProduct from "../../../../../assets/images/default-product-image.p
 import "./OrderTable.scss";
 
 const OrderTable = ({ columns, data, row }) => {
+  alert("umesh");
   //   const data = datum.sort((a, b) => b.id - a.id);  -----------> for sorting we can use this
 
   return (
@@ -28,6 +29,7 @@ const OrderTable = ({ columns, data, row }) => {
                   col.value.split(",").map((item) => {
                     value = value[item];
                   });
+
                   if (col.title === "Item Description") {
                     console.log(col?.title);
                     return (
@@ -37,6 +39,7 @@ const OrderTable = ({ columns, data, row }) => {
                       </td>
                     );
                   }
+
                   if (id) {
                     return (
                       <td>

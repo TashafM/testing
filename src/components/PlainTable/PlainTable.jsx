@@ -35,7 +35,6 @@ const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
                         </td>
                       );
                     }
-
                     let value = row;
                     col.title.split(",").map((item, index) => {
                       value = value[item];
@@ -60,12 +59,26 @@ const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
                         </td>
                       );
                     }
-
+                    if (col.value.includes("Total")) {
+                      return (
+                        <td>
+                          <div className="d-flex align-items-center justify-content-center">
+                            <p className="m-0">{value}</p>
+                            <img
+                              src={arrow}
+                              alt="arrow right-action"
+                              className="arrow-right-image arrow-right-icon"
+                            />
+                          </div>
+                        </td>
+                      );
+                    }
                     return (
                       <>
                         <td key={id}>
                           <div className="table-over-flow-text">
-                            {col?.value?.includes("Total")
+                            {col?.value?.includes("Price") ||
+                            col?.value?.includes("Total")
                               ? `${row?.currency?.symbol}`
                               : ""}
                             {value}
