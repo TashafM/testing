@@ -119,7 +119,7 @@ const SidePanel = ({ noHover }) => {
             addItemToCart();
           } else {
             setShowPanel(false);
-            setNotEditable(false);
+            setNotEditable(true);
           }
         }}
         placement="end"
