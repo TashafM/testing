@@ -9,6 +9,7 @@ const ItemRow = ({ disableDelete, pr20, popupScreen, data, removeItem,editProduc
   const currency = localStorage.getItem('currencySymbol')
   const {notEditable} = useContext(EditItems);
   console.log(nohover,'8888888888888888888')
+  console.log(notEditable,'99999999999')
 
   // const getFromPop = (product) => {
   //   const data = JSON.parse(localStorage.getItem('cart'))
@@ -17,7 +18,7 @@ const ItemRow = ({ disableDelete, pr20, popupScreen, data, removeItem,editProduc
   // }
   
   return (
-    <tr className={selectedId==id && id!=undefined ?"right-side-tr selected-tr": (nohover?'right-side-tr':'right-side-tr')} onClick={!notEditable?()=>setSelectedId(id):null}>
+    <tr className={selectedId==id && id!=undefined ?"right-side-tr selected-tr": (nohover || notEditable?'right-side-tr no-hover':'right-side-tr')} onClick={!notEditable?()=>setSelectedId(id):null}>
       <td
         className={
           popupScreen ? "single-product-item pl40" : "single-product-item"

@@ -3,75 +3,70 @@ import "./sidepanel.scss";
 import { Button, Offcanvas } from "react-bootstrap";
 import LeftSide from "../LeftSide/LeftSide";
 import RightSide from "../RightSide/RightSide";
-import { AddProducts, GlobalSidePanel } from "../../Dealers";
+import { AddProducts, EditItems, GlobalSidePanel } from "../../Dealers";
 import { API } from "../../../../helper/API";
 import { axiosInstance } from "../../../../helper/axios";
 
+const SidePanel = ({ noHover }) => {
+  const { setShowPanel, showPanel } = useContext(GlobalSidePanel);
+  const { notEditable, setNotEditable } = useContext(EditItems);
 
-
-const SidePanel = () => {
-  const {setShowPanel, showPanel} = useContext(GlobalSidePanel)
-  const {setIsEmpty, isEmpty} = useContext(AddProducts)
+  const { setIsEmpty, isEmpty } = useContext(AddProducts);
   const [cartProducts, setCartProducts] = useState([]);
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
 
-  const [clicked, setClicked] = useState(false)
+  const [clicked, setClicked] = useState(false);
 
-  useEffect(()=>{
-    if (localStorage.getItem('cart')) {
+  useEffect(() => {
+    if (localStorage.getItem("cart")) {
       // Retrieve the data as a string
-      const productString = localStorage.getItem('cart');
-      
+      const productString = localStorage.getItem("cart");
+
       // Parse the string into an array
       const products = JSON.parse(productString);
-      setCartProducts(products)
-      
+      setCartProducts(products);
     }
-  },[])
+  }, []);
 
- 
-
-
-  useEffect(()=>{
-    if(localStorage.getItem('initialProductData')){
-      const productDataStr = localStorage.getItem('initialProductData');
+  useEffect(() => {
+    if (localStorage.getItem("initialProductData")) {
+      const productDataStr = localStorage.getItem("initialProductData");
 
       const products = JSON.parse(productDataStr);
       setData(products);
       // console.log(products,'products changes')
     }
-  },[localStorage.getItem('initialProductData')])
+  }, [localStorage.getItem("initialProductData")]);
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
-  const addingItems =()=>{
+  const addingItems = () => {
     setIsLoading(true);
-    addItemToCart((res)=>{
-      setIsLoading(false)
-      setIsEmpty(false)
-    })
-  }
+    addItemToCart((res) => {
+      setIsLoading(false);
+      setIsEmpty(false);
+    });
+  };
 
-  const editProducts =(id)=>{
-    const pop = JSON.parse(localStorage.getItem('popupItems'))
+  const editProducts = (id) => {
+    const pop = JSON.parse(localStorage.getItem("popupItems"));
     // console.log(id)
-    const filtered = pop.filter((item)=>item.itemNumber == id.itemNumber)
-    const result = filtered[0]
+    const filtered = pop.filter((item) => item.itemNumber == id.itemNumber);
+    const result = filtered[0];
     // console.log(result,'data fileererer')
-    const final = JSON.stringify(result)
+    const final = JSON.stringify(result);
     // console.log(final,'final result')
-    setData(result)
-    localStorage.setItem('initialProductData', final)
-    setClicked(true)
-  }
+    setData(result);
+    localStorage.setItem("initialProductData", final);
+    setClicked(true);
+  };
 
-
-  const [aData, setA] = useState([])
+  const [aData, setA] = useState([]);
   const getFromPop = (product) => {
-    const data = JSON.parse(localStorage.getItem('cart'))
-    const flt = data.filter((itm)=>itm.variantId == product.variantId)
-    setA(flt[0])
-  }
+    const data = JSON.parse(localStorage.getItem("cart"));
+    const flt = data.filter((itm) => itm.variantId == product.variantId);
+    setA(flt[0]);
+  };
 
   const addItemToCart = () => {
     const sgst = localStorage.getItem("sgstPercentage");
@@ -86,7 +81,7 @@ const SidePanel = () => {
       (acc, item) => acc + Number(item.totalPrice),
       0
     );
-    console.log(sumOfTotal, 'sumtotal')
+    console.log(sumOfTotal, "sumtotal");
     const sumOfTaxes = Number(cgst) + Number(sgst) + Number(igst);
     const taxAmount = (sumOfTotal * sumOfTaxes) / 100; // this is final taxAmount
     const totalAmt = taxAmount + sumOfTotal; // this is totalAmount
@@ -110,18 +105,22 @@ const SidePanel = () => {
       .then((res) => {
         if (res.success) {
           setShowPanel(false);
-          console.log(res.result[0].cartItems,'cart items')
+          console.log(res.result[0].cartItems, "cart items");
         }
       });
   };
-  
+
   return (
     <div className="sidepanel">
       <Offcanvas
         show={showPanel}
         onHide={() => {
-          // setShowPanel(false);
-          {cartProducts.length>0 ? addItemToCart() : setShowPanel(false)}
+          if (cartProducts.length > 0) {
+            addItemToCart();
+          } else {
+            setShowPanel(false);
+            setNotEditable(false);
+          }
         }}
         placement="end"
         className="dm"
@@ -147,6 +146,7 @@ const SidePanel = () => {
                 isLoading={isLoading}
                 editProducts={editProducts}
                 getFromPop={getFromPop}
+                noHover={noHover}
               />
             </div>
           </div>

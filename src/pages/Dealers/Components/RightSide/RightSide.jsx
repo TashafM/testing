@@ -17,7 +17,8 @@ function RightSide({
   addItemToCart,
   isLoading,
   editProducts,
-  getFromPop
+  getFromPop,
+  noHover,
 }) {
 
   const {setNotEditable} = useContext(EditItems)
@@ -41,7 +42,7 @@ function RightSide({
           className="close-button"
         />
       </div>
-      <OrderListTable data={cartProducts} setData={setCartProducts} editProducts={editProducts} getFromPop={getFromPop} setSelectedId={setSelectedId} selectedId={selectedId}/>
+      <OrderListTable data={cartProducts} setData={setCartProducts} editProducts={editProducts} getFromPop={getFromPop} setSelectedId={setSelectedId} selectedId={selectedId} noHover={noHover}/>
 
       {cartProducts.length == 0 ? (
         <div className="no-item empty-cart">

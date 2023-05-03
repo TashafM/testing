@@ -3,7 +3,7 @@ import "./orderlisttable.scss";
 import { Table } from "react-bootstrap";
 import ItemRow from "../ItemRow/ItemRow";
 
-const OrderListTable = ({ disableDelete, data, setData, editProducts, getFromPop, setSelectedId, selectedId }) => {
+const OrderListTable = ({ disableDelete, data, setData, editProducts, getFromPop, setSelectedId, selectedId, noHover }) => {
 
 
 

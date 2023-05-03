@@ -9,27 +9,29 @@ import { Button, Form, FormControl, InputGroup } from "react-bootstrap";
 import { useEffect } from "react";
 
 // ---------THIS IS TESTING CODE ----------------------------
-function LeftSide({ data, setCartProducts, cartProducts, clicked, aData }) {
+function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover }) {
   const [variants, setVariants] = useState(data.variants);
   const uniqueColors = uniqBy(data.variants, "colorDescription");
-  const firstColor = clicked ? aData.colorDescription : uniqueColors[0].colorDescription ;
+  const firstColor = clicked
+    ? aData.colorDescription
+    : uniqueColors[0].colorDescription;
   const uniqueQuantities = uniqBy(
     data.variants.filter((variant) => variant.colorDescription === firstColor),
     "packingDescription"
   );
 
-  const firstQuantity = clicked? aData.packingDescription : uniqueQuantities[0].packingDescription;
+  const firstQuantity = clicked
+    ? aData.packingDescription
+    : uniqueQuantities[0].packingDescription;
   // console.log(firstColor, firstQuantity,'object')
 
   // const [selectedColor, setSelectedColor] = useState(clicked ? aData.colorDescription : uniqueColors[0].colorDescription);
-    const [selectedColor, setSelectedColor] = useState(firstColor);
+  const [selectedColor, setSelectedColor] = useState(firstColor);
 
   // console.log(selectedColor,'66666666666')
   const [selectedQuantity, setSelectedQuantity] = useState(firstQuantity);
 
   const [isValid, setIsValid] = useState(false); // validation for options
-
-
 
   const handleColorClick = (color) => {
     setSelectedColor(color);
@@ -40,18 +42,19 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData }) {
     setSelectedQuantity(quantity);
   };
 
-  console.log(aData.quantity,'qqqqqqqqqqqq')
-  const [productQuantity, setProductQuantity] = useState(clicked? aData.quantity: 1);
- 
+  console.log(aData.quantity, "qqqqqqqqqqqq");
+  const [productQuantity, setProductQuantity] = useState(
+    clicked ? aData.quantity : 1
+  );
 
   const [exceedQuantity, setExceedQuantity] = useState(false);
-  
+
   const handleQuantity = (e) => {
     const value = e.target.value;
     if (Number(value) > 100) {
       setExceedQuantity(true);
-    }else{
-      setExceedQuantity(false)
+    } else {
+      setExceedQuantity(false);
     }
     if (!isNaN(value)) {
       setProductQuantity(value);
@@ -59,36 +62,35 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData }) {
   };
 
   const availableQuantities = data.variants.filter(
-    (variant) => variant.colorDescription === (clicked ? aData.colorDescription : selectedColor)
+    (variant) =>
+      variant.colorDescription ===
+      (clicked ? aData.colorDescription : selectedColor)
   );
-  const prices = clicked ? aData : availableQuantities.filter(
-    (variant) => variant.packingDescription === selectedQuantity
-  );
+  const prices = clicked
+    ? aData
+    : availableQuantities.filter(
+        (variant) => variant.packingDescription === selectedQuantity
+      );
 
+  const updateQuantity = () => {
+    // console.log(aData.cartId,'cart id')
+    // const filtered = cartProducts.filter((item)=>item.cartId==aData.cartId)
+    // console.log(filtered,'**************')
 
+    // console.log(cartProducts,'cartPRoducts--------------------------')
 
+    const updatedArray = cartProducts.map((obj) => {
+      if (obj.cartId === aData.cartId) {
+        obj.quantity = productQuantity;
+        obj.totalPrice = Number(productQuantity) * Number(prices.grossPrice);
+        obj.grossPrice = Number(prices.grossPrice);
+      }
+      return obj;
+    });
+    setCartProducts(updatedArray);
+  };
 
-const updateQuantity = () => {
-  // console.log(aData.cartId,'cart id')
-  // const filtered = cartProducts.filter((item)=>item.cartId==aData.cartId)
-  // console.log(filtered,'**************')
-  
-  // console.log(cartProducts,'cartPRoducts--------------------------')
-
-
-  const updatedArray = cartProducts.map(obj => {
-    if (obj.cartId === aData.cartId) {
-      obj.quantity = productQuantity;
-      obj.totalPrice = Number(productQuantity) * Number(prices.grossPrice);
-      obj.grossPrice = Number(prices.grossPrice);
-    }
-    return obj;
-  });
-  setCartProducts(updatedArray);
-};
-
-// rest of your code...
-
+  // rest of your code...
 
   const testConsole = () => {
     if (exceedQuantity) {
@@ -100,7 +102,7 @@ const updateQuantity = () => {
       const itemIndex = storedCartProducts.findIndex(
         (item) => item.variantId === prices[0].variantId
       );
-  
+
       if (itemIndex === -1) {
         // Item not found in cart, add it as a new item
         const newItem = {
@@ -119,25 +121,25 @@ const updateQuantity = () => {
         };
         const updatedCartProducts = [...storedCartProducts, newItem];
         setCartProducts(updatedCartProducts); // push the new item to the cart array
-  
+
         // Store updated cartProducts in localStorage
-        localStorage.setItem(
-          "cart",
-          JSON.stringify(updatedCartProducts)
-        );
+        localStorage.setItem("cart", JSON.stringify(updatedCartProducts));
       } else {
         // Item found in cart, update its quantity
         const updatedCart = [...storedCartProducts];
-        updatedCart[itemIndex].quantity = Number(updatedCart[itemIndex].quantity) + Number(productQuantity);
-        updatedCart[itemIndex].totalPrice = Number(updatedCart[itemIndex].totalPrice) + Number(productQuantity) * Number(prices[0].grossPrice);
+        updatedCart[itemIndex].quantity =
+          Number(updatedCart[itemIndex].quantity) + Number(productQuantity);
+        updatedCart[itemIndex].totalPrice =
+          Number(updatedCart[itemIndex].totalPrice) +
+          Number(productQuantity) * Number(prices[0].grossPrice);
         setCartProducts(updatedCart);
-  
+
         // Store updated cartProducts in localStorage
         localStorage.setItem("cart", JSON.stringify(updatedCart));
       }
     }
   };
-  
+
   //***************************VALIDATION */
 
   useEffect(() => {
@@ -172,23 +174,31 @@ const updateQuantity = () => {
         <div className="about-product">
           <div className="product-code">
             {" "}
-            {clicked ?  prices.bpCatalogNumber :(prices?.[0]?.bpCatalogNumber ?? "----") }
+            {clicked
+              ? prices.bpCatalogNumber
+              : prices?.[0]?.bpCatalogNumber ?? "----"}
           </div>
           <div className="product-price">
             <div className="product-name"> {data.itemDescription}</div>
             <div>
               {data.currency.symbol}
-              {clicked ? prices.grossPrice : (prices.length > 0 ? prices[0].grossPrice || "N/A API" : "--")}
+              {clicked
+                ? prices.grossPrice
+                : prices.length > 0
+                ? prices[0].grossPrice || "N/A API"
+                : "--"}
             </div>
           </div>
           <div className="product-desc">
-            {clicked ? prices.saleDescription : (prices?.[0]?.saleDescription ?? "")}
+            {clicked
+              ? prices.saleDescription
+              : prices?.[0]?.saleDescription ?? ""}
           </div>
         </div>
 
         <div className="color-description">
           <div className="color-desc-title">
-            Please Select Color Description
+            {clicked ? "Color Description" : "Please Select Color Description"}
           </div>
           {uniqueColors.map((variant, id) => (
             <button
@@ -200,9 +210,12 @@ const updateQuantity = () => {
               // }`}
               className={`color-btn ${
                 // variant.colorDescription === (clicked ? aData.colorDescription : selectedColor)
-                variant.colorDescription === (clicked ? aData.colorDescription : selectedColor)
+                variant.colorDescription ===
+                (clicked ? aData.colorDescription : selectedColor)
                   ? "selected"
-                  : (clicked ? 'disabled-selected' : 'not-selected')
+                  : clicked
+                  ? "disabled-selected"
+                  : "not-selected"
               }`}
               onClick={() => handleColorClick(variant.colorDescription)}
             >
@@ -213,15 +226,20 @@ const updateQuantity = () => {
 
         <div className="color-description">
           <div className="color-desc-title">
-            Please Select Packaging Description
+            {clicked
+              ? "Packaging Description"
+              : "Please Select Packaging Description"}
           </div>
           {availableQuantities.map((variant, id) => (
             <button
               key={id}
               className={`quantity-btn ${
-                variant.packingDescription === (clicked ? aData.packingDescription : selectedQuantity)
+                variant.packingDescription ===
+                (clicked ? aData.packingDescription : selectedQuantity)
                   ? "selected"
-                  : (clicked ? 'disabled-selected' : 'not-selected')
+                  : clicked
+                  ? "disabled-selected"
+                  : "not-selected"
               }`}
               onClick={() => handleQuantityClick(variant.packingDescription)}
             >
@@ -252,10 +270,10 @@ const updateQuantity = () => {
         <div className="add-div-btn">
           <Button
             className="add-product-button"
-            onClick={clicked? updateQuantity : testConsole}
+            onClick={clicked ? updateQuantity : testConsole}
             disabled={isValid || exceedQuantity}
           >
-            {clicked? 'Update' : 'Add'}
+            {clicked ? "Update" : "Add"}
           </Button>
         </div>
       </div>

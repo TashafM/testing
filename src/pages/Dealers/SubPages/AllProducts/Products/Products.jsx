@@ -116,7 +116,7 @@ const Products = () => {
             </>
           )}
         </Row>
-        {showPanel && <SidePanel />}
+        {showPanel && <SidePanel noHover/>}
 
         {/* <Category/> */}
       </div>
