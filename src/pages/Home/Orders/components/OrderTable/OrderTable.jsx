@@ -28,6 +28,7 @@ const OrderTable = ({ columns, data, row }) => {
                   col.value.split(",").map((item) => {
                     value = value[item];
                   });
+
                   if (col.title === "Item Description") {
                     console.log(col?.title);
                     return (
@@ -37,13 +38,14 @@ const OrderTable = ({ columns, data, row }) => {
                       </td>
                     );
                   }
+
                   if (id) {
                     return (
                       <td>
                         {(col?.title?.includes("Amount") ||
                           col?.title?.includes("Price")) &&
                         value
-                          ? `${row?.currency?.symbol}`
+                          ? `${row?.currency?.symbol} `
                           : ""}
                         {value}
                         {col?.title?.includes("Rate") && value ? " %" : ""}

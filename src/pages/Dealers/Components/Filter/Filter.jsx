@@ -4,10 +4,10 @@ import downArrow from "../../../../assets/images/downArrow.svg";
 
 import "./Filter.scss";
 
-const Filter = () => {
+const Filter = ({ onClick = () => {} }) => {
   return (
     <>
-      <div className="filter-dealer">
+      <div className="filter-dealer" onClick={onClick}>
         <span className="left-icon">
           <img src={filter} alt="" />
         </span>

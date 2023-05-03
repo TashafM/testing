@@ -83,15 +83,16 @@
   }
 
   .table-status-chip {
-    background: #fdf2e7;
+    // background: #fdf2e7;
     border-radius: 30px;
     font-family: "Work Sans";
     font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: 500;
     line-height: 19px;
-    color: #ee8d31;
+    // color: #ee8d31;
     text-align: center;
+    white-space: nowrap;
     padding: 6px 20px;
   }
   .status-circel {
@@ -105,6 +106,10 @@
   .arrow-right-image {
     height: 35px;
     width: 30px;
+  }
+
+  .arrow-right-icon {
+    margin-left: 20px;
   }
 
   .navigator {

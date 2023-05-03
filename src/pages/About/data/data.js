@@ -83,7 +83,7 @@ export const AboutTabs = [
 ];
 
 export const delalersCurrentOrderColumn = [
-  { title: "#", value: "#" },
+  { value: "#", title: "#" },
   { value: "Order No.", title: "orderNumber" },
   { value: "PO number", title: "purchaseOrderNumber" },
   { value: "Partner", title: "companyName" },

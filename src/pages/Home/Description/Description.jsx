@@ -7,6 +7,7 @@ import AddPartners from "../Partners/AddPartners/AddPartners";
 import SearchBar from "../../../components/SearchBar/SearchBar";
 import FilterBtn from "../../../components/FilterButton/FilterButton";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Description = ({
   icon,
@@ -25,11 +26,11 @@ const Description = ({
   const navigate = useNavigate();
   const location = useLocation();
   const gotoAddMember = () => {
-    if(location.pathname !== `/home/team-members/current-members`){
-      navigate(`/home/team-members/current-members`)
+    if (location.pathname !== `/home/team-members/current-members`) {
+      navigate(`/home/team-members/current-members`);
     }
     return false;
-  }
+  };
   return (
     <>
       <div className="row row-desc">
@@ -54,7 +55,11 @@ const Description = ({
                 <SearchBar />
               </div>
               <div>
-                <FilterBtn />
+                <FilterBtn
+                  onClick={() => {
+                    toast.success("Feature Coming Soon");
+                  }}
+                />
               </div>
             </div>
           </>
@@ -68,20 +73,20 @@ const Description = ({
                 <span>Upload a csv file</span>
               </div>
               <div onClick={addMember ? gotoAddMember : null}>
-              {addMember && (
-                <AddMember
-                  onUser
-                  Added={onUserAdded}
-                  api={api}
-                  getCurrMembers={getCurrMembers}
-                  getDataFunc={getDataFunc}
-                  data={data}
-                  setData={setData}
-                />
-              )}
-              {addPartners && (
-                <AddPartners api={api} getDataFunc={getDataFunc} />
-              )}
+                {addMember && (
+                  <AddMember
+                    onUser
+                    Added={onUserAdded}
+                    api={api}
+                    getCurrMembers={getCurrMembers}
+                    getDataFunc={getDataFunc}
+                    data={data}
+                    setData={setData}
+                  />
+                )}
+                {addPartners && (
+                  <AddPartners api={api} getDataFunc={getDataFunc} />
+                )}
               </div>
             </div>
           </div>

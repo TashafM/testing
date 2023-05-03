@@ -17,8 +17,7 @@ const RestoreDeleteBtn = ({
   setSelectedIds,
   currPartnerData,
 }) => {
-
-  const location = useLocation()
+  const location = useLocation();
   // console.log(location)
   return (
     <>
@@ -28,7 +27,7 @@ const RestoreDeleteBtn = ({
           ""
         ) : (
           <>
-            {location.pathname == '/home/partners/past-partners' ? (
+            {location.pathname == "/home/partners/past-partners" ? (
               <RestoreBtn
                 selectedIds={selectedIds}
                 data={pastMemberData}

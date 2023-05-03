@@ -5,12 +5,12 @@ const re =
 
 const schema = {
   address: Yup.object({
-    fullName: Yup.string().required("full name is required"),
+    fullName: Yup.string().max(30).required("full name is required"),
     floorNumber: Yup.string().required(
       "House No.  / Building No. / Floor is required"
     ),
     // nearestLandmark: Yup.string().required("nearest landmark is required"),
-    street: Yup.string().required("street is  required"),
+    street: Yup.string().max(30).required("street is  required"),
     state: Yup.string().required("state is  required"),
 
     city: Yup.string().required("city is required"),

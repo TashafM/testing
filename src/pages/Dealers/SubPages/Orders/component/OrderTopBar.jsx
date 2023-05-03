@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import Filter from "../../../Components/Filter/Filter";
 import "../dealerorders.scss";
 import { getDesireDateFormate } from "../../../../../components/Utils/Utils";
+import Arrow from "../../../../../assets/images/arrow-right.png";
+import { toast } from "react-toastify";
 
 const OrderTopBar = ({ title, goback, orderDetail }) => {
   const navigate = useNavigate();
@@ -34,7 +36,17 @@ const OrderTopBar = ({ title, goback, orderDetail }) => {
         {Object.keys(order).length ? (
           <>
             <div className="d-flex align-items-center">
-              <span className="order-status-title-text">Ordered on </span>
+              <span className="order-status-title-text">
+                <img
+                  src={Arrow}
+                  alt="arrow-back"
+                  className="icon-back-order"
+                  onClick={() => {
+                    navigate(-1);
+                  }}
+                />
+                Ordered on{" "}
+              </span>
               <span className="order-status-title-text text-span-date">
                 {order?.orderDate ? getDesireDateFormate(order.orderDate) : ""}
               </span>
@@ -51,7 +63,11 @@ const OrderTopBar = ({ title, goback, orderDetail }) => {
       </div>
       <div className="search-filter-btn">
         <SearchBarDealers />
-        <Filter />
+        <Filter
+          onClick={() => {
+            toast.success("Feature Coming Soon");
+          }}
+        />
       </div>
     </div>
   );

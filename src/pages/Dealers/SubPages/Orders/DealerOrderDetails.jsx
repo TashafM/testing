@@ -15,6 +15,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 import arrow from "../../../../assets/images/arrow-right-red.png";
 import OrderSummary from "./component/OrderSummary";
+import ScrollBtn from "../../../../components/ScrollBtn/ScrollBtn";
+import { useRef } from "react";
 
 function DealerOrderDetails() {
   const [showAddress, setShowAddress] = useState(false);
@@ -22,7 +24,8 @@ function DealerOrderDetails() {
   const location = useLocation();
   const orderId = location.state.data;
   const [orderDetail, setOrderDetail] = useOutletContext();
-
+  const myRef = useRef(null);
+  const [scrollX, setScrollX] = useState(0);
   const [page, setPage] = useState(0);
 
   const { data, loading, setData, getData } = usePaginatedData();
@@ -120,6 +123,7 @@ function DealerOrderDetails() {
           columns={orderDetailColumn}
           data={data?.length ? data[0]?.order ?? [] : []}
         />
+        <ScrollBtn myRef={myRef} setScrollX={setScrollX} scrollX={scrollX} />
       </InfiniteScroll>
     </div>
   );
