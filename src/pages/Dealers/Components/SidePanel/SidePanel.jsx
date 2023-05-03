@@ -34,9 +34,23 @@ const SidePanel = ({ noHover }) => {
 
       const products = JSON.parse(productDataStr);
       setData(products);
+      console.log('it is calling on rerender.................')
       // console.log(products,'products changes')
     }
-  }, [localStorage.getItem("initialProductData")]);
+  }, []);
+
+  const [customVariant, setCustomVariant] = useState([])
+  useEffect(() => {
+    if (localStorage.getItem("variant")) {
+      const variation = localStorage.getItem("variant");
+
+      const myVariant = JSON.parse(variation);
+      setCustomVariant(myVariant);
+      console.log('CUSTOM VARIANT.................')
+      // console.log(products,'products changes')
+    }
+  }, [localStorage.getItem("variant")]);
+
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -134,6 +148,7 @@ const SidePanel = ({ noHover }) => {
                 cartProducts={cartProducts}
                 clicked={clicked}
                 aData={aData}
+                customVariant={customVariant}
               />
             </div>
             <div className="vertical-line"></div>

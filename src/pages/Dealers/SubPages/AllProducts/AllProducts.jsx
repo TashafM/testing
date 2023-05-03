@@ -64,7 +64,6 @@ const AllProducts = () => {
       }).then((res)=>{
         const cart = res.result[0].cart.cartItems
         const popupItems = res.result[0].popUpDisplayItems
-        console.log(res.result[0].cart.cartItems,'viewCart from all products')
         if(res.totalCartItemCount==0){
           setIsEmpty(true)
           setLoading(false)
@@ -74,6 +73,10 @@ const AllProducts = () => {
           localStorage.setItem('cart',parseData)
           const popupData = JSON.stringify(popupItems)
           localStorage.setItem('popupItems',popupData)
+          const product = res.result[0].cart.cartItems[0]
+          const nicy = res.result[0].popUpDisplayItems.filter((item)=>item.itemNumber == product.itemNumber)
+          const productData = JSON.stringify(nicy);
+          localStorage.setItem("initialProductData", productData);
           setLoading(false)
         }
       }).catch((err)=>setLoading(false))
@@ -105,7 +108,6 @@ const AllProducts = () => {
   return (
     <>
       <div className="allproducts">
-        {console.log(isEmpty,'------------')}
         <TopBar title={!noData ? "Print Heads" : null} />
         {noData ? (
           <div className="nodata">No categories added yet</div>

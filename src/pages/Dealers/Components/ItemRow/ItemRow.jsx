@@ -8,26 +8,42 @@ import { useContext } from "react";
 const ItemRow = ({ disableDelete, pr20, popupScreen, data, removeItem,editProducts, getFromPop, setSelectedId, id, selectedId, nohover }) => {
   const currency = localStorage.getItem('currencySymbol')
   const {notEditable} = useContext(EditItems);
-  console.log(nohover,'8888888888888888888')
-  console.log(notEditable,'99999999999')
+  
 
-  // const getFromPop = (product) => {
-  //   const data = JSON.parse(localStorage.getItem('cart'))
-  //   const flt = data.filter((itm)=>itm.itemNumber == product.itemNumber)
-  //   console.log(flt,'filtered product')
-  // }
+  const selectedItem = ()=>{
+    const localData = JSON.parse(localStorage.getItem('popupItems'))
+    // console.log(localData,'localData')
+    // console.log(data,'data')
+
+    const filtered = localData.filter((item)=>item.itemNumber==data.itemNumber)
+
+    const initialData = JSON.stringify(filtered[0])
+    localStorage.setItem('initialProductData',initialData)
+    console.log('its selected item')
+    console.log(filtered[0],'initialDAta')
+    console.log(data.variantId,'data itemNumber')
+
+    const filteredVariant = filtered[0].variants.filter((item)=>item.variantId == data.variantId)
+    console.log(filteredVariant[0],'filteredvariant')
+
+    const localVariant = JSON.stringify(filteredVariant[0])
+    localStorage.setItem('variant', localVariant)
+  }
   
   return (
-    <tr className={selectedId==id && id!=undefined ?"right-side-tr selected-tr": (nohover || notEditable?'right-side-tr no-hover':'right-side-tr')} onClick={!notEditable?()=>setSelectedId(id):null}>
+    // <tr className={selectedId==id && id!=undefined ?"right-side-tr selected-tr": (nohover || notEditable?'right-side-tr no-hover':'right-side-tr')} onClick={!notEditable?()=>setSelectedId(id):null}>
+    <tr className="right-side-tr" onClick={selectedItem}>
       <td
         className={
           popupScreen ? "single-product-item pl40" : "single-product-item"
         }
         onClick={() => {
-          if (!notEditable) {
-            editProducts(data);
-            getFromPop(data);
-          }
+          // if (!notEditable) {
+          //   editProducts(data);
+          //   getFromPop(data);
+          // }
+          editProducts(data);
+          getFromPop(data)
         }}
       >
         <div className="img-div">

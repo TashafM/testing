@@ -9,24 +9,44 @@ import { Button, Form, FormControl, InputGroup } from "react-bootstrap";
 import { useEffect } from "react";
 
 // ---------THIS IS TESTING CODE ----------------------------
-function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover }) {
+function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover, customVariant }) {
+  console.log(customVariant,'customVariant')
+  // const [customVariant, setCustomVariant] = useState([])
+
+  // useEffect(() => {
+  //   if (localStorage.getItem("variant")) {
+  //     const variation = localStorage.getItem("variant");
+
+  //     const myVariant = JSON.parse(variation);
+  //     setCustomVariant(myVariant);
+  //     console.log('it is calling on rerender.................')
+  //     // console.log(products,'products changes')
+  //   }
+  // }, []);
+
+  console.log(data,'left side data')
   const [variants, setVariants] = useState(data.variants);
   const uniqueColors = uniqBy(data.variants, "colorDescription");
   const firstColor = clicked
-    ? aData.colorDescription
+    ? customVariant.colorDescription
     : uniqueColors[0].colorDescription;
+
+    console.log(firstColor,'firstColor')
   const uniqueQuantities = uniqBy(
     data.variants.filter((variant) => variant.colorDescription === firstColor),
     "packingDescription"
   );
 
+
   const firstQuantity = clicked
-    ? aData.packingDescription
+    ? customVariant.packingDescription
     : uniqueQuantities[0].packingDescription;
-  // console.log(firstColor, firstQuantity,'object')
+  console.log(firstColor, firstQuantity,'object')
 
   // const [selectedColor, setSelectedColor] = useState(clicked ? aData.colorDescription : uniqueColors[0].colorDescription);
   const [selectedColor, setSelectedColor] = useState(firstColor);
+
+  console.log(selectedColor,'this is selected color')
 
   // console.log(selectedColor,'66666666666')
   const [selectedQuantity, setSelectedQuantity] = useState(firstQuantity);
@@ -42,7 +62,6 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
     setSelectedQuantity(quantity);
   };
 
-  console.log(aData.quantity, "qqqqqqqqqqqq");
   const [productQuantity, setProductQuantity] = useState(
     clicked ? aData.quantity : 1
   );
@@ -104,6 +123,8 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
       const itemIndex = storedCartProducts.findIndex(
         (item) => item.variantId === prices[0].variantId
       );
+      const popupData = JSON.parse(localStorage.getItem('popupItems'));
+      const newPopupData = JSON.parse(localStorage.getItem('initialProductData'))
 
       if (itemIndex === -1) {
         // Item not found in cart, add it as a new item
@@ -120,12 +141,21 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
           grossPrice: Number(prices[0].grossPrice),
           productId: data.productId,
           name: data.itemDescription,
+          itemNumber: data.itemNumber,
+          productId: data.productId,
         };
         const updatedCartProducts = [...storedCartProducts, newItem];
+        console.log(newItem,'new Item adding')
+        const test = popupData.filter((item)=>item.itemNumber==newItem.itemNumber)
+        if(test.length==0){
+          localStorage.setItem('popupItems',JSON.stringify([...popupData, newPopupData]));
+        }
         setCartProducts(updatedCartProducts); // push the new item to the cart array
 
         // Store updated cartProducts in localStorage
         localStorage.setItem("cart", JSON.stringify(updatedCartProducts));
+        console.log(updatedCartProducts,'updated cart')
+
       } else {
         // Item found in cart, update its quantity
         const updatedCart = [...storedCartProducts];
@@ -138,6 +168,8 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
 
         // Store updated cartProducts in localStorage
         localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+        console.log(updatedCart,'updated cart')
       }
     }
   };
@@ -205,20 +237,19 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
           {uniqueColors.map((variant, id) => (
             <button
               key={id}
-              // className={`color-btn ${
-              //   variant.colorDescription === selectedColor
-              //     ? "selected"
-              //     : "not-selected"
-              // }`}
               className={`color-btn ${
-                // variant.colorDescription === (clicked ? aData.colorDescription : selectedColor)
-                variant.colorDescription ===
-                (clicked ? aData.colorDescription : selectedColor)
+                variant.colorDescription === selectedColor
                   ? "selected"
-                  : clicked
-                  ? "disabled-selected"
                   : "not-selected"
               }`}
+              // className={`color-btn ${
+              //   variant.colorDescription ===
+              //   (clicked ? aData.colorDescription : selectedColor)
+              //     ? "selected"
+              //     : clicked
+              //     ? "disabled-selected"
+              //     : "not-selected"
+              // }`}
               onClick={() => handleColorClick(variant.colorDescription)}
             >
               {variant.colorDescription}
@@ -235,17 +266,24 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
           {availableQuantities.map((variant, id) => (
             <button
               key={id}
-              className={`quantity-btn ${
-                variant.packingDescription ===
-                (clicked ? aData.packingDescription : selectedQuantity)
+              // className={`quantity-btn ${
+              //   variant.packingDescription ===
+              //   (clicked ? aData.packingDescription : selectedQuantity)
+              //     ? "selected"
+              //     : clicked
+              //     ? "disabled-selected"
+              //     : "not-selected"
+              // }`}
+
+              className={`color-btn ${
+                variant.packingDescription === selectedQuantity
                   ? "selected"
-                  : clicked
-                  ? "disabled-selected"
                   : "not-selected"
               }`}
               onClick={() => handleQuantityClick(variant.packingDescription)}
             >
               {variant.packingDescription}
+              {console.log(variant.packingDescription,'')}
             </button>
           ))}
         </div>
