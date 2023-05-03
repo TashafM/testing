@@ -45,7 +45,7 @@ const OrderTable = ({ columns, data, row }) => {
                         {(col?.title?.includes("Amount") ||
                           col?.title?.includes("Price")) &&
                         value
-                          ? `${row?.currency?.symbol}`
+                          ? `${row?.currency?.symbol} `
                           : ""}
                         {value}
                         {col?.title?.includes("Rate") && value ? " %" : ""}

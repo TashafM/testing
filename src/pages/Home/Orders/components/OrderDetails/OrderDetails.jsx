@@ -4,7 +4,7 @@ import FilterBtn from "../../../../../components/FilterButton/FilterButton";
 import SearchBar from "../../../../../components/SearchBar/SearchBar";
 import "./OrderDetails.scss";
 import OrderTable from "../OrderTable/OrderTable";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { usePaginatedCompanyData } from "../../../../../hooks/pagination/usePaginatedData";
 import { useState, useEffect } from "react";
 import { orderDetailColumn } from "../../../../About/data/data";
@@ -13,6 +13,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import ViewAddress from "../../../../Dealers/SubPages/Orders/component/drawer/ViewAddress";
 import ViewOtherInfo from "../../../../Dealers/SubPages/Orders/component/drawer/ViewOtherInfo";
 import OrderSummary from "../../../../Dealers/SubPages/Orders/component/OrderSummary";
+import Arrow from "../../../../../assets/images/arrow-right.png";
+import { toast } from "react-toastify";
 
 const OrderDetails = () => {
   const location = useLocation();
@@ -61,6 +63,8 @@ const OrderDetails = () => {
     );
   };
 
+  const navigation = useNavigate();
+
   const order = data && data.length ? data[0] : {};
 
   return (
@@ -68,10 +72,20 @@ const OrderDetails = () => {
       <Row>
         <div className="order-details-div">
           <div className="order-company">
-            <div className="order-date">
-              Order Received on{" "}
+            <div className="order-date d-flex align-items-center">
+              <img
+                src={Arrow}
+                alt="arrow-back"
+                className="icon-back-order"
+                onClick={() => {
+                  navigation(-1);
+                }}
+              />
+              <spa>Order Received on </spa>
               <span>
-                {order?.orderDate ? getDesireDateFormate(order.orderDate) : ""}
+                {order?.orderDate
+                  ? ` ${getDesireDateFormate(order.orderDate)}`
+                  : ""}
               </span>
             </div>
             <div className="company-name">{order?.labelInstruction}</div>
@@ -79,7 +93,11 @@ const OrderDetails = () => {
           <div className="search-filter-div">
             <SearchBar />
             <div>
-              <FilterBtn />
+              <FilterBtn
+                onClick={() => {
+                  toast.success("Feature Coming Soon");
+                }}
+              />
             </div>
           </div>
         </div>

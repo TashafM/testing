@@ -85,11 +85,21 @@ const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
                         </td>
                       );
                     }
-                    if (col.value.includes("Total")) {
+                    console.log(col.value);
+                    if (
+                      col?.value?.includes("Price") ||
+                      col?.value?.includes("Total")
+                    ) {
                       return (
                         <td>
                           <div className="d-flex align-items-center justify-content-center">
-                            <p className="m-0">{value}</p>
+                            <p className="m-0">
+                              {col?.value?.includes("Price") ||
+                              col?.value?.includes("Total")
+                                ? `${row?.currency?.symbol} `
+                                : ""}
+                              {value}
+                            </p>
                             <img
                               src={arrow}
                               alt="arrow right-action"
@@ -102,13 +112,7 @@ const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
                     return (
                       <>
                         <td key={id}>
-                          <div className="table-over-flow-text">
-                            {col?.value?.includes("Price") ||
-                            col?.value?.includes("Total")
-                              ? `${row?.currency?.symbol}`
-                              : ""}
-                            {value}
-                          </div>
+                          <div className="table-over-flow-text">{value}</div>
                         </td>
                       </>
                     );

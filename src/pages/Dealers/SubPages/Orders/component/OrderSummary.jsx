@@ -75,9 +75,9 @@ const OrderSummary = ({ order, onClick, onClickOther }) => {
               </div>
               {order.labelInstruction ? (
                 <div className="address-field address-contact-card">
-                  <p className="instuction-title-other">Other Instruction</p>
+                  <p className="instuction-title-other">Label instruction</p>
                   <p className="m-0 d-flex justify-content-between align-items-center over-flow-text over-flow-text-other">
-                    {order.otherInstruction}
+                    {order.labelInstruction}
                     {order.otherInstruction || order.labelInstruction ? (
                       <BtnTitleCenter
                         title={"See all"}
