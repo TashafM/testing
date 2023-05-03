@@ -13,7 +13,7 @@ import {
 import "./productcart.scss";
 import ItemRow from "../ItemRow/ItemRow";
 import { useContext } from "react";
-import { AddProducts, GlobalSidePanel } from "../../Dealers";
+import { AddProducts, EditItems, GlobalSidePanel } from "../../Dealers";
 import ArrowLink from "../ArrowLink/ArrowLink";
 import { useState } from "react";
 import SeeAllProducts from "../SeeAllProducts/SeeAllProducts";
@@ -30,6 +30,7 @@ const ProductCart = () => {
   const { showPanel, setShowPanel } = useContext(GlobalSidePanel);
 
   const { isEmpty, setIsEmpty } = useContext(AddProducts);
+  const {setNotEditable} = useContext(EditItems)
 
   const [purchaseOrderNumber, setPurchaseOrderNumber] = useState("");
   const [noPurchaseNumber, setNoPurchaseNumber] = useState(false);
@@ -275,7 +276,7 @@ const ProductCart = () => {
           {!isEmpty && (
            <tbody className="right-side-body">
             {tas.slice(0, 5).map((item, id) => (
-              <ItemRow disableDelete pr20 data={item} />
+              <ItemRow disableDelete pr20 data={item} nohover/>
             ))}
           </tbody> 
            )} 
@@ -289,6 +290,7 @@ const ProductCart = () => {
                 className="edit"
                 onClick={() => {
                   setShowPanel(true);
+                  setNotEditable(false);
                 }}
               >
                 <img src={editIcon} alt="" />

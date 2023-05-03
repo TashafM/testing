@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "./rightside.scss";
 import OrderListTable from "../OrderListTable/OrderListTable";
 import { Button } from "react-bootstrap";
-import { AddProducts } from "../../Dealers";
+import { AddProducts, EditItems } from "../../Dealers";
 import { useContext } from "react";
 import closeX from "../../../../assets/images/closeX.svg";
 import noItem from "../../../../assets/images/item-not-added.png";
@@ -16,8 +16,15 @@ function RightSide({
   setCartProducts,
   addItemToCart,
   isLoading,
-  editProducts
+  editProducts,
+  getFromPop,
+  noHover,
 }) {
+
+  const {setNotEditable} = useContext(EditItems)
+  const [selectedId, setSelectedId] = useState(-1)
+
+
   return (
     <div className="rightside">
       <div className="title-close">
@@ -29,11 +36,13 @@ function RightSide({
             // addItemToCart()
             {cartProducts.length==0 && setShowPanel(false)}
             {cartProducts.length != 0 && addItemToCart()}
+            setNotEditable(true)
+            setSelectedId(-1)
           }}
           className="close-button"
         />
       </div>
-      <OrderListTable data={cartProducts} setData={setCartProducts} editProducts={editProducts}/>
+      <OrderListTable data={cartProducts} setData={setCartProducts} editProducts={editProducts} getFromPop={getFromPop} setSelectedId={setSelectedId} selectedId={selectedId} noHover={noHover}/>
 
       {cartProducts.length == 0 ? (
         <div className="no-item empty-cart">

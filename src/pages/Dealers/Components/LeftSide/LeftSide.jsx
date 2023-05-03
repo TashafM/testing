@@ -9,18 +9,26 @@ import { Button, Form, FormControl, InputGroup } from "react-bootstrap";
 import { useEffect } from "react";
 
 // ---------THIS IS TESTING CODE ----------------------------
-function LeftSide({ data, setCartProducts, cartProducts }) {
-  console.log(data.variants,'----------leftside----------------')
+function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover }) {
   const [variants, setVariants] = useState(data.variants);
-  const uniqueColors = uniqBy(variants, "colorDescription");
-  const firstColor = uniqueColors[0].colorDescription;
+  const uniqueColors = uniqBy(data.variants, "colorDescription");
+  const firstColor = clicked
+    ? aData.colorDescription
+    : uniqueColors[0].colorDescription;
   const uniqueQuantities = uniqBy(
-    variants.filter((variant) => variant.colorDescription === firstColor),
+    data.variants.filter((variant) => variant.colorDescription === firstColor),
     "packingDescription"
   );
-  const firstQuantity = uniqueQuantities[0].packingDescription;
 
+  const firstQuantity = clicked
+    ? aData.packingDescription
+    : uniqueQuantities[0].packingDescription;
+  // console.log(firstColor, firstQuantity,'object')
+
+  // const [selectedColor, setSelectedColor] = useState(clicked ? aData.colorDescription : uniqueColors[0].colorDescription);
   const [selectedColor, setSelectedColor] = useState(firstColor);
+
+  // console.log(selectedColor,'66666666666')
   const [selectedQuantity, setSelectedQuantity] = useState(firstQuantity);
 
   const [isValid, setIsValid] = useState(false); // validation for options
@@ -34,33 +42,59 @@ function LeftSide({ data, setCartProducts, cartProducts }) {
     setSelectedQuantity(quantity);
   };
 
-  const [productQuantity, setProductQuantity] = useState(1);
- 
+  console.log(aData.quantity, "qqqqqqqqqqqq");
+  const [productQuantity, setProductQuantity] = useState(
+    clicked ? aData.quantity : 1
+  );
 
   const [exceedQuantity, setExceedQuantity] = useState(false);
-  
+
   const handleQuantity = (e) => {
     const value = e.target.value;
     if (Number(value) > 100) {
       setExceedQuantity(true);
-    }else{
-      setExceedQuantity(false)
+    } else {
+      setExceedQuantity(false);
     }
     if (!isNaN(value)) {
       setProductQuantity(value);
     }
   };
 
-  const availableQuantities = variants.filter(
-    (variant) => variant.colorDescription === selectedColor
+  const availableQuantities = data.variants.filter(
+    (variant) =>
+      variant.colorDescription ===
+      (clicked ? aData.colorDescription : selectedColor)
   );
-  const prices = availableQuantities.filter(
-    (variant) => variant.packingDescription === selectedQuantity
-  );
+  const prices = clicked
+    ? aData
+    : availableQuantities.filter(
+        (variant) => variant.packingDescription === selectedQuantity
+      );
 
+  const updateQuantity = () => {
+    // console.log(aData.cartId,'cart id')
+    // const filtered = cartProducts.filter((item)=>item.cartId==aData.cartId)
+    // console.log(filtered,'**************')
+
+    // console.log(cartProducts,'cartPRoducts--------------------------')
+    const products = JSON.parse(localStorage.getItem('cart') || '[]')
+
+    const updatedArray = products.map((obj) => {
+      if (obj.cartId === aData.cartId) {
+        obj.quantity = productQuantity;
+        obj.totalPrice = Number(productQuantity) * Number(prices.grossPrice);
+        obj.grossPrice = Number(prices.grossPrice);
+      }
+      return obj;
+    });
+    setCartProducts(updatedArray);
+    localStorage.setItem("cart", JSON.stringify(updatedArray));
+  };
+
+  // rest of your code...
 
   const testConsole = () => {
-    console.log(exceedQuantity,'exceed quantity')
     if (exceedQuantity) {
       console.log("quantity exceeding");
     } else {
@@ -70,7 +104,7 @@ function LeftSide({ data, setCartProducts, cartProducts }) {
       const itemIndex = storedCartProducts.findIndex(
         (item) => item.variantId === prices[0].variantId
       );
-  
+
       if (itemIndex === -1) {
         // Item not found in cart, add it as a new item
         const newItem = {
@@ -89,25 +123,25 @@ function LeftSide({ data, setCartProducts, cartProducts }) {
         };
         const updatedCartProducts = [...storedCartProducts, newItem];
         setCartProducts(updatedCartProducts); // push the new item to the cart array
-  
+
         // Store updated cartProducts in localStorage
-        localStorage.setItem(
-          "cart",
-          JSON.stringify(updatedCartProducts)
-        );
+        localStorage.setItem("cart", JSON.stringify(updatedCartProducts));
       } else {
         // Item found in cart, update its quantity
         const updatedCart = [...storedCartProducts];
-        updatedCart[itemIndex].quantity = Number(updatedCart[itemIndex].quantity) + Number(productQuantity);
-        updatedCart[itemIndex].totalPrice = Number(updatedCart[itemIndex].totalPrice) + Number(productQuantity) * Number(prices[0].grossPrice);
+        updatedCart[itemIndex].quantity =
+          Number(updatedCart[itemIndex].quantity) + Number(productQuantity);
+        updatedCart[itemIndex].totalPrice =
+          Number(updatedCart[itemIndex].totalPrice) +
+          Number(productQuantity) * Number(prices[0].grossPrice);
         setCartProducts(updatedCart);
-  
+
         // Store updated cartProducts in localStorage
         localStorage.setItem("cart", JSON.stringify(updatedCart));
       }
     }
   };
-  
+
   //***************************VALIDATION */
 
   useEffect(() => {
@@ -142,56 +176,76 @@ function LeftSide({ data, setCartProducts, cartProducts }) {
         <div className="about-product">
           <div className="product-code">
             {" "}
-            {prices?.[0]?.bpCatalogNumber ?? "----"}
+            {clicked
+              ? prices.bpCatalogNumber
+              : prices?.[0]?.bpCatalogNumber ?? "----"}
           </div>
           <div className="product-price">
             <div className="product-name"> {data.itemDescription}</div>
             <div>
               {data.currency.symbol}
-              {prices.length > 0 ? prices[0].grossPrice || "N/A API" : "--"}
+              {clicked
+                ? prices.grossPrice
+                : prices.length > 0
+                ? prices[0].grossPrice || "N/A API"
+                : "--"}
             </div>
           </div>
           <div className="product-desc">
-            {prices?.[0]?.saleDescription ?? ""}
+            {clicked
+              ? prices.saleDescription
+              : prices?.[0]?.saleDescription ?? ""}
           </div>
         </div>
 
         <div className="color-description">
           <div className="color-desc-title">
-            Please Select Color Description
+            {clicked ? "Color Description" : "Please Select Color Description"}
           </div>
           {uniqueColors.map((variant, id) => (
             <button
               key={id}
+              // className={`color-btn ${
+              //   variant.colorDescription === selectedColor
+              //     ? "selected"
+              //     : "not-selected"
+              // }`}
               className={`color-btn ${
-                variant.colorDescription === selectedColor
+                // variant.colorDescription === (clicked ? aData.colorDescription : selectedColor)
+                variant.colorDescription ===
+                (clicked ? aData.colorDescription : selectedColor)
                   ? "selected"
+                  : clicked
+                  ? "disabled-selected"
                   : "not-selected"
               }`}
               onClick={() => handleColorClick(variant.colorDescription)}
             >
               {variant.colorDescription}
-              {console.log(variant.colorDescription,'-----variants')}
             </button>
           ))}
         </div>
 
         <div className="color-description">
           <div className="color-desc-title">
-            Please Select Packaging Description
+            {clicked
+              ? "Packaging Description"
+              : "Please Select Packaging Description"}
           </div>
           {availableQuantities.map((variant, id) => (
             <button
               key={id}
               className={`quantity-btn ${
-                variant.packingDescription === selectedQuantity
+                variant.packingDescription ===
+                (clicked ? aData.packingDescription : selectedQuantity)
                   ? "selected"
+                  : clicked
+                  ? "disabled-selected"
                   : "not-selected"
               }`}
               onClick={() => handleQuantityClick(variant.packingDescription)}
             >
               {variant.packingDescription}
-              {console.log(variant.packingDescription,'----------variant packaging')}
             </button>
           ))}
         </div>
@@ -218,10 +272,10 @@ function LeftSide({ data, setCartProducts, cartProducts }) {
         <div className="add-div-btn">
           <Button
             className="add-product-button"
-            onClick={testConsole}
+            onClick={clicked ? updateQuantity : testConsole}
             disabled={isValid || exceedQuantity}
           >
-            Add
+            {clicked ? "Update" : "Add"}
           </Button>
         </div>
       </div>

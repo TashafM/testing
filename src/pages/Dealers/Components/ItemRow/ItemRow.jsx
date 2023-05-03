@@ -2,18 +2,33 @@ import React, { useEffect } from "react";
 import "./itemrow.scss";
 import listproduct from "../../../../assets/images/listproduct.png";
 import x from "../../../../assets/images/x.svg";
+import { EditItems } from "../../Dealers";
+import { useContext } from "react";
 
-const ItemRow = ({ disableDelete, pr20, popupScreen, data, removeItem,editProducts }) => {
+const ItemRow = ({ disableDelete, pr20, popupScreen, data, removeItem,editProducts, getFromPop, setSelectedId, id, selectedId, nohover }) => {
   const currency = localStorage.getItem('currencySymbol')
-  
+  const {notEditable} = useContext(EditItems);
+  console.log(nohover,'8888888888888888888')
+  console.log(notEditable,'99999999999')
+
+  // const getFromPop = (product) => {
+  //   const data = JSON.parse(localStorage.getItem('cart'))
+  //   const flt = data.filter((itm)=>itm.itemNumber == product.itemNumber)
+  //   console.log(flt,'filtered product')
+  // }
   
   return (
-    <tr className="right-side-tr">
+    <tr className={selectedId==id && id!=undefined ?"right-side-tr selected-tr": (nohover || notEditable?'right-side-tr no-hover':'right-side-tr')} onClick={!notEditable?()=>setSelectedId(id):null}>
       <td
         className={
           popupScreen ? "single-product-item pl40" : "single-product-item"
         }
-        onClick={()=>editProducts(data.itemNumber)}
+        onClick={() => {
+          if (!notEditable) {
+            editProducts(data);
+            getFromPop(data);
+          }
+        }}
       >
         <div className="img-div">
           <img src={listproduct} alt="" />
