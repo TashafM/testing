@@ -83,15 +83,16 @@
   }
 
   .table-status-chip {
-    background: #fdf2e7;
+    // background: #fdf2e7;
     border-radius: 30px;
     font-family: "Work Sans";
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
-    color: #ee8d31;
+    // color: #ee8d31;
     text-align: center;
+    white-space: nowrap;
     padding: 6px 20px;
   }
   .status-circel {
