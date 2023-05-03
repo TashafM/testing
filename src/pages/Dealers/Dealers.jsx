@@ -14,6 +14,7 @@ import { useState } from "react";
 
 export const AddProducts = createContext();
 export const GlobalSidePanel = createContext();
+export const EditItems = createContext();
 
 const Dealers = () => {
   // const {testData} = useContext(TestData);
@@ -22,12 +23,14 @@ const Dealers = () => {
   const dealersDashboard = `/dealers/dashboard`;
   const orderPath = "/dealers/orders";
   const [isEmpty, setIsEmpty] = useState(true);
+  const [notEditable, setNotEditable] = useState(true)
 
   //--------------FOR SIDE PANEL OPENING----------------
   const [showPanel, setShowPanel] = useState(false);
 
   return (
     <>
+    <EditItems.Provider value={{notEditable, setNotEditable}}>
       <GlobalSidePanel.Provider value={{ showPanel, setShowPanel }}>
         <AddProducts.Provider value={{ isEmpty, setIsEmpty }}>
           <div className="homepage dealers-homepage">
@@ -70,6 +73,7 @@ const Dealers = () => {
           </div>
         </AddProducts.Provider>
       </GlobalSidePanel.Provider>
+      </EditItems.Provider>
       <div className="mobile-not-supported">
         <MobileNotSupported />
       </div>

@@ -38,7 +38,7 @@ const SidePanel = () => {
 
       const products = JSON.parse(productDataStr);
       setData(products);
-      console.log(products,'products changes')
+      // console.log(products,'products changes')
     }
   },[localStorage.getItem('initialProductData')])
 
@@ -54,11 +54,10 @@ const SidePanel = () => {
 
   const editProducts =(id)=>{
     const pop = JSON.parse(localStorage.getItem('popupItems'))
-    console.log(pop,'pop')
     // console.log(id)
     const filtered = pop.filter((item)=>item.itemNumber == id.itemNumber)
     const result = filtered[0]
-    console.log(result,'data fileererer')
+    // console.log(result,'data fileererer')
     const final = JSON.stringify(result)
     // console.log(final,'final result')
     setData(result)

@@ -10,7 +10,6 @@ import { useEffect } from "react";
 
 // ---------THIS IS TESTING CODE ----------------------------
 function LeftSide({ data, setCartProducts, cartProducts, clicked, aData }) {
-  console.log(aData,'aData')
   const [variants, setVariants] = useState(data.variants);
   const uniqueColors = uniqBy(data.variants, "colorDescription");
   const firstColor = clicked ? aData.colorDescription : uniqueColors[0].colorDescription ;
@@ -20,12 +19,12 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData }) {
   );
 
   const firstQuantity = clicked? aData.packingDescription : uniqueQuantities[0].packingDescription;
-  console.log(firstColor, firstQuantity,'object')
+  // console.log(firstColor, firstQuantity,'object')
 
   // const [selectedColor, setSelectedColor] = useState(clicked ? aData.colorDescription : uniqueColors[0].colorDescription);
     const [selectedColor, setSelectedColor] = useState(firstColor);
 
-  console.log(selectedColor,'66666666666')
+  // console.log(selectedColor,'66666666666')
   const [selectedQuantity, setSelectedQuantity] = useState(firstQuantity);
 
   const [isValid, setIsValid] = useState(false); // validation for options
@@ -33,7 +32,6 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData }) {
 
 
   const handleColorClick = (color) => {
-    console.log(color, 'handle color click')
     setSelectedColor(color);
     setSelectedQuantity(null); // clear selected quantity --------------------- *IMPORTANT FOR CLEARING THE VALUE FROM BUTTON*
   };
@@ -42,6 +40,7 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData }) {
     setSelectedQuantity(quantity);
   };
 
+  console.log(aData.quantity,'qqqqqqqqqqqq')
   const [productQuantity, setProductQuantity] = useState(clicked? aData.quantity: 1);
  
 
@@ -80,6 +79,8 @@ const updateQuantity = () => {
   const updatedArray = cartProducts.map(obj => {
     if (obj.cartId === aData.cartId) {
       obj.quantity = productQuantity;
+      obj.totalPrice = Number(productQuantity) * Number(prices.grossPrice);
+      obj.grossPrice = Number(prices.grossPrice);
     }
     return obj;
   });
