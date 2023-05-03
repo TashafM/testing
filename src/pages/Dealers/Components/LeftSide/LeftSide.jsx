@@ -78,8 +78,9 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
     // console.log(filtered,'**************')
 
     // console.log(cartProducts,'cartPRoducts--------------------------')
+    const products = JSON.parse(localStorage.getItem('cart') || '[]')
 
-    const updatedArray = cartProducts.map((obj) => {
+    const updatedArray = products.map((obj) => {
       if (obj.cartId === aData.cartId) {
         obj.quantity = productQuantity;
         obj.totalPrice = Number(productQuantity) * Number(prices.grossPrice);
@@ -88,6 +89,7 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
       return obj;
     });
     setCartProducts(updatedArray);
+    localStorage.setItem("cart", JSON.stringify(updatedArray));
   };
 
   // rest of your code...
