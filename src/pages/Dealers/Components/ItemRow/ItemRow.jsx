@@ -7,7 +7,7 @@ import { useContext } from "react";
 
 const ItemRow = ({ disableDelete, pr20, popupScreen, data, removeItem,editProducts, getFromPop, setSelectedId, id, selectedId, nohover }) => {
   const currency = localStorage.getItem('currencySymbol')
-  const {notEditable} = useContext(EditItems);
+  const {notEditable, setIndexNo, indexNo} = useContext(EditItems);
   
 
   const selectedItem = ()=>{
@@ -47,8 +47,9 @@ const ItemRow = ({ disableDelete, pr20, popupScreen, data, removeItem,editProduc
           //   editProducts(data);
           //   getFromPop(data);
           // }
-          editProducts(data);
+          editProducts(data,id);
           getFromPop(data)
+          setIndexNo(id)
         }}
       >
         <div className="img-div">

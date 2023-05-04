@@ -29,7 +29,6 @@ const Products = () => {
   // const [currentId, setCurrentId] = useState(location.state.id);
 
   const switchSubCategory = (value) => {
-    console.log(value, "switchCate");
     const dataStringify = JSON.stringify(value);
     localStorage.setItem("subCategory", dataStringify);
     const parseData = localStorage.getItem("subCategory");
@@ -78,7 +77,7 @@ const Products = () => {
     console.log(val,'setttttttttttttttttttttttttttttttttt')
     // setData(val)
     const popup = JSON.parse(localStorage.getItem('popupItems'))
-    console.log(popup,'popup')
+    // console.log(popup,'popup')
     setShowPanel(true);
     const productData = JSON.stringify(val);
     localStorage.setItem("initialProductData", productData);

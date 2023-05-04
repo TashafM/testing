@@ -19,11 +19,10 @@ function RightSide({
   editProducts,
   getFromPop,
   noHover,
+  setIndexNo,
 }) {
-
-  const {setNotEditable} = useContext(EditItems)
-  const [selectedId, setSelectedId] = useState(-1)
-
+  const { setNotEditable, setEditMode } = useContext(EditItems);
+  const [selectedId, setSelectedId] = useState(-1);
 
   return (
     <div className="rightside">
@@ -34,16 +33,29 @@ function RightSide({
           alt=""
           onClick={() => {
             // addItemToCart()
-            {cartProducts.length==0 && setShowPanel(false)}
-            {cartProducts.length != 0 && addItemToCart()}
-            setNotEditable(true)
-            setSelectedId(-1)
-            localStorage.removeItem('variant')
+            {
+              cartProducts.length == 0 && setShowPanel(false);
+            }
+            {
+              cartProducts.length != 0 && addItemToCart();
+            }
+            setNotEditable(true);
+            setSelectedId(-1);
+            localStorage.removeItem("variant");
+            setEditMode(false);
           }}
           className="close-button"
         />
       </div>
-      <OrderListTable data={cartProducts} setData={setCartProducts} editProducts={editProducts} getFromPop={getFromPop} setSelectedId={setSelectedId} selectedId={selectedId} noHover={noHover}/>
+      <OrderListTable
+        data={cartProducts}
+        setData={setCartProducts}
+        editProducts={editProducts}
+        getFromPop={getFromPop}
+        setSelectedId={setSelectedId}
+        selectedId={selectedId}
+        noHover={noHover}
+      />
 
       {cartProducts.length == 0 ? (
         <div className="no-item empty-cart">
@@ -52,8 +64,12 @@ function RightSide({
         </div>
       ) : (
         <div className="add-to-cart">
-          <Button onClick={addItemToCart} disabled={isLoading} >
-            {isLoading ? <Spinner animation="border" variant="light" /> : 'Add to cart'}
+          <Button onClick={addItemToCart} disabled={isLoading}>
+            {isLoading ? (
+              <Spinner animation="border" variant="light" />
+            ) : (
+              "Add to cart"
+            )}
           </Button>
         </div>
       )}

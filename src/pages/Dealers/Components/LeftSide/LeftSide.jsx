@@ -22,6 +22,7 @@ function LeftSide({
 }) {
   // const [customVariant, setCustomVariant] = useState([])
 
+  console.log(data,'data')
   // useEffect(() => {
   //   if (localStorage.getItem("variant")) {
   //     const variation = localStorage.getItem("variant");
@@ -32,9 +33,10 @@ function LeftSide({
   //     // console.log(products,'products changes')
   //   }
   // }, []);
-  const {notEditable, setNotEditable} = useContext(EditItems)
+  const {editMode, setEditMode, indexNo} = useContext(EditItems)
+  console.log(indexNo,'index no from global')
 
-  console.log(notEditable,'value of notEditable')
+  console.log(editMode,'value of editMode')
 
   const [variants, setVariants] = useState(data.variants);
   const uniqueColors = uniqBy(data.variants, "colorDescription");
@@ -61,13 +63,13 @@ function LeftSide({
 
   const [exceedQuantity, setExceedQuantity] = useState(false);
 
+  console.log(productQuantity,'productQuantity')
 
   useEffect(() => {
     if (localStorage.getItem("variant")) {
       const data = JSON.parse(localStorage.getItem("variant"));
       setSelectedColor(data.colorDescription);
       setSelectedQuantity(data.packingDescription);
-      console.log(data, "&&&&&&&&&&&&&&&&&&");
     }
   }, [localStorage.getItem("variant")]);
 
@@ -75,7 +77,6 @@ function LeftSide({
     if (localStorage.getItem("variant")) {
       const data = JSON.parse(localStorage.getItem("quantity"));
       setProductQuantity(data)
-      console.log(data,'tttttttttttttttttttttttttttttttttttttttttttttttt')
     }
   }, [localStorage.getItem("variant")]);
 
@@ -125,27 +126,41 @@ function LeftSide({
     (variant) => variant.packingDescription === selectedQuantity
   );
 
+  console.log(prices[0],'prices')
+
+  // const updateQuantity = () => {
+  //   console.log('update Quantity reun')
+  //   const products = JSON.parse(localStorage.getItem("cart") || "[]");
+
+  //   const updatedArray = products.map((obj) => {
+  //     if (obj.cartId === aData.cartId) {
+  //       obj.quantity = productQuantity;
+  //       obj.totalPrice = Number(productQuantity) * Number(prices.grossPrice);
+  //       obj.grossPrice = Number(prices.grossPrice);
+  //     }
+  //     return obj;
+  //   });
+  //   setCartProducts(updatedArray);
+  //   localStorage.setItem("cart", JSON.stringify(updatedArray));
+  // };
 
   const updateQuantity = () => {
-    // console.log(aData.cartId,'cart id')
-    // const filtered = cartProducts.filter((item)=>item.cartId==aData.cartId)
-    // console.log(filtered,'**************')
-
-    // console.log(cartProducts,'cartPRoducts--------------------------')
+    
     const products = JSON.parse(localStorage.getItem("cart") || "[]");
-
-    const updatedArray = products.map((obj) => {
-      if (obj.cartId === aData.cartId) {
-        obj.quantity = productQuantity;
-        obj.totalPrice = Number(productQuantity) * Number(prices.grossPrice);
-        obj.grossPrice = Number(prices.grossPrice);
-      }
-      return obj;
-    });
+    const data = prices[0]
+  
+    const updatedArray = [...products];
+    const obj = updatedArray[indexNo];
+    
+    obj.bpCatalogNumber = data.bpCatalogNumber
+    obj.quantity = productQuantity;
+    // obj.totalPrice = Number(productQuantity) * Number(prices[0].grossPrice);
+    // obj.grossPrice = Number(prices[0].grossPrice);
+    
     setCartProducts(updatedArray);
     localStorage.setItem("cart", JSON.stringify(updatedArray));
   };
-
+  
   // rest of your code...
 
   const testConsole = () => {
@@ -182,7 +197,6 @@ function LeftSide({
           productId: data.productId,
         };
         const updatedCartProducts = [...storedCartProducts, newItem];
-        console.log(newItem, "new Item adding");
         const test = popupData.filter(
           (item) => item.itemNumber == newItem.itemNumber
         );
@@ -197,19 +211,6 @@ function LeftSide({
         localStorage.setItem("cart", JSON.stringify(updatedCartProducts));
         // console.log(updatedCartProducts,'updated cart')
       } else {
-        // Item found in cart, update its quantity
-        // const updatedCart = [...storedCartProducts];
-        // updatedCart[itemIndex].quantity =
-        //   Number(updatedCart[itemIndex].quantity) + Number(productQuantity);
-        // updatedCart[itemIndex].totalPrice =
-        //   Number(updatedCart[itemIndex].totalPrice) +
-        //   Number(productQuantity) * Number(prices[0].grossPrice);
-        // setCartProducts(updatedCart);
-
-        // // Store updated cartProducts in localStorage
-        // localStorage.setItem("cart", JSON.stringify(updatedCart));
-
-        // If item is found, replace its quantity with the new input
         const updatedCart = [...storedCartProducts];
         updatedCart[itemIndex].quantity = Number(productQuantity);
         updatedCart[itemIndex].totalPrice =
@@ -222,6 +223,10 @@ function LeftSide({
       }
     }
   };
+
+
+ 
+  
 
   //***************************VALIDATION */
 
@@ -365,12 +370,11 @@ function LeftSide({
         <div className="add-div-btn">
           <Button
             className="add-product-button"
-            // onClick={clicked ? updateQuantity : testConsole}
-            onClick={testConsole}
+            onClick={editMode ? updateQuantity : testConsole}
+            // onClick={testConsole}
             disabled={isValid || exceedQuantity}
           >
-            {/* {clicked ? "Update" : "Add"} */}
-            Add
+            {editMode? 'Update': 'Add'}
           </Button>
         </div>
       </div>
