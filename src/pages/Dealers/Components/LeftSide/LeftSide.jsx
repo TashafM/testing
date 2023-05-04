@@ -9,10 +9,17 @@ import { Button, Form, FormControl, InputGroup } from "react-bootstrap";
 import { useEffect } from "react";
 
 // ---------THIS IS TESTING CODE ----------------------------
-function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover, customVariant }) {
+function LeftSide({
+  data,
+  setCartProducts,
+  cartProducts,
+  clicked,
+  aData,
+  noHover,
+  customVariant,
+}) {
   // const [customVariant, setCustomVariant] = useState([])
 
-  
   // useEffect(() => {
   //   if (localStorage.getItem("variant")) {
   //     const variation = localStorage.getItem("variant");
@@ -24,18 +31,20 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
   //   }
   // }, []);
 
+  console.log(cartProducts,'^^^^^^^^^^^^^^^^^^^^^^')
+  console.log(data,'--------------------------')
+
   const [variants, setVariants] = useState(data.variants);
   const uniqueColors = uniqBy(data.variants, "colorDescription");
   const firstColor = clicked
     ? customVariant.colorDescription
     : uniqueColors[0].colorDescription;
 
-    // console.log(firstColor,'firstColor')
+  // console.log(firstColor,'firstColor')
   const uniqueQuantities = uniqBy(
     data.variants.filter((variant) => variant.colorDescription === firstColor),
     "packingDescription"
   );
-
 
   const firstQuantity = clicked
     ? customVariant.packingDescription
@@ -46,18 +55,15 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
   const [selectedColor, setSelectedColor] = useState(firstColor);
   const [selectedQuantity, setSelectedQuantity] = useState(firstQuantity);
 
-
-  console.log(selectedColor,'jjjjjjjjjjjjjjjjjj')
-  useEffect(()=>{
-    if(localStorage.getItem('variant')){
-      const data = JSON.parse(localStorage.getItem('variant'))
-      setSelectedColor(data.colorDescription)
-      setSelectedQuantity(data.packingDescription)
-      
+  console.log(selectedColor, "jjjjjjjjjjjjjjjjjj");
+  useEffect(() => {
+    if (localStorage.getItem("variant")) {
+      const data = JSON.parse(localStorage.getItem("variant"));
+      setSelectedColor(data.colorDescription);
+      setSelectedQuantity(data.packingDescription);
+      console.log(data,'&&&&&&&&&&&&&&&&&&')
     }
-
-  },[localStorage.getItem('variant')])
-
+  }, [localStorage.getItem("variant")]);
 
   // console.log(selectedColor,'this is selected color')
 
@@ -74,9 +80,7 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
     setSelectedQuantity(quantity);
   };
 
-  const [productQuantity, setProductQuantity] = useState(
-    clicked ? aData.quantity : 1
-  );
+  const [productQuantity, setProductQuantity] = useState(1);
 
   const [exceedQuantity, setExceedQuantity] = useState(false);
 
@@ -99,7 +103,6 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
       selectedColor
   );
 
-  console.log(aData.colorDescription,'yyyyyyyyyyyyyy')
   const prices = clicked
     ? aData
     : availableQuantities.filter(
@@ -112,7 +115,7 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
     // console.log(filtered,'**************')
 
     // console.log(cartProducts,'cartPRoducts--------------------------')
-    const products = JSON.parse(localStorage.getItem('cart') || '[]')
+    const products = JSON.parse(localStorage.getItem("cart") || "[]");
 
     const updatedArray = products.map((obj) => {
       if (obj.cartId === aData.cartId) {
@@ -138,8 +141,10 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
       const itemIndex = storedCartProducts.findIndex(
         (item) => item.variantId === prices[0].variantId
       );
-      const popupData = JSON.parse(localStorage.getItem('popupItems'));
-      const newPopupData = JSON.parse(localStorage.getItem('initialProductData'))
+      const popupData = JSON.parse(localStorage.getItem("popupItems"));
+      const newPopupData = JSON.parse(
+        localStorage.getItem("initialProductData")
+      );
 
       if (itemIndex === -1) {
         // Item not found in cart, add it as a new item
@@ -160,17 +165,21 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
           productId: data.productId,
         };
         const updatedCartProducts = [...storedCartProducts, newItem];
-        // console.log(newItem,'new Item adding')
-        const test = popupData.filter((item)=>item.itemNumber==newItem.itemNumber)
-        if(test.length==0){
-          localStorage.setItem('popupItems',JSON.stringify([...popupData, newPopupData]));
+        console.log(newItem,'new Item adding')
+        const test = popupData.filter(
+          (item) => item.itemNumber == newItem.itemNumber
+        );
+        if (test.length == 0) {
+          localStorage.setItem(
+            "popupItems",
+            JSON.stringify([...popupData, newPopupData])
+          );
         }
         setCartProducts(updatedCartProducts); // push the new item to the cart array
 
         // Store updated cartProducts in localStorage
         localStorage.setItem("cart", JSON.stringify(updatedCartProducts));
         // console.log(updatedCartProducts,'updated cart')
-
       } else {
         // Item found in cart, update its quantity
         const updatedCart = [...storedCartProducts];
