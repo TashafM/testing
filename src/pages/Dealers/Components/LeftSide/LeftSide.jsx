@@ -10,9 +10,9 @@ import { useEffect } from "react";
 
 // ---------THIS IS TESTING CODE ----------------------------
 function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover, customVariant }) {
-  console.log(customVariant,'customVariant')
   // const [customVariant, setCustomVariant] = useState([])
 
+  
   // useEffect(() => {
   //   if (localStorage.getItem("variant")) {
   //     const variation = localStorage.getItem("variant");
@@ -45,11 +45,23 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
 
   // const [selectedColor, setSelectedColor] = useState(clicked ? aData.colorDescription : uniqueColors[0].colorDescription);
   const [selectedColor, setSelectedColor] = useState(firstColor);
+  const [selectedQuantity, setSelectedQuantity] = useState(firstQuantity);
+
+
+  useEffect(()=>{
+    if(localStorage.getItem('variant')){
+      const data = JSON.parse(localStorage.getItem('variant'))
+      setSelectedColor(data.colorDescription)
+      setSelectedQuantity(data.packingDescription)
+      
+    }
+
+  },[localStorage.getItem('variant')])
+
 
   console.log(selectedColor,'this is selected color')
 
   // console.log(selectedColor,'66666666666')
-  const [selectedQuantity, setSelectedQuantity] = useState(firstQuantity);
 
   const [isValid, setIsValid] = useState(false); // validation for options
 
