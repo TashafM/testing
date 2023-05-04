@@ -28,6 +28,11 @@ const ItemRow = ({ disableDelete, pr20, popupScreen, data, removeItem,editProduc
 
     const localVariant = JSON.stringify(filteredVariant[0])
     localStorage.setItem('variant', localVariant)
+
+    const test = JSON.parse(localStorage.getItem('cart'))
+    const qty = test.filter((item)=>item.variantId==filteredVariant[0].variantId)
+    localStorage.setItem('quantity', qty[0].quantity)
+    // console.log(currentQty,'currentQty')
   }
   
   return (
