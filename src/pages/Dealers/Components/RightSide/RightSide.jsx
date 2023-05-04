@@ -38,6 +38,7 @@ function RightSide({
             {cartProducts.length != 0 && addItemToCart()}
             setNotEditable(true)
             setSelectedId(-1)
+            localStorage.removeItem('variant')
           }}
           className="close-button"
         />

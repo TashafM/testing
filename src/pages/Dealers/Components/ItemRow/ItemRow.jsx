@@ -19,9 +19,9 @@ const ItemRow = ({ disableDelete, pr20, popupScreen, data, removeItem,editProduc
 
     const initialData = JSON.stringify(filtered[0])
     localStorage.setItem('initialProductData',initialData)
-    console.log('its selected item')
+    // console.log('its selected item')
     console.log(filtered[0],'initialDAta')
-    console.log(data.variantId,'data itemNumber')
+    // console.log(data.variantId,'data itemNumber')
 
     const filteredVariant = filtered[0].variants.filter((item)=>item.variantId == data.variantId)
     console.log(filteredVariant[0],'filteredvariant')

@@ -24,14 +24,13 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
   //   }
   // }, []);
 
-  console.log(data,'left side data')
   const [variants, setVariants] = useState(data.variants);
   const uniqueColors = uniqBy(data.variants, "colorDescription");
   const firstColor = clicked
     ? customVariant.colorDescription
     : uniqueColors[0].colorDescription;
 
-    console.log(firstColor,'firstColor')
+    // console.log(firstColor,'firstColor')
   const uniqueQuantities = uniqBy(
     data.variants.filter((variant) => variant.colorDescription === firstColor),
     "packingDescription"
@@ -41,13 +40,14 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
   const firstQuantity = clicked
     ? customVariant.packingDescription
     : uniqueQuantities[0].packingDescription;
-  console.log(firstColor, firstQuantity,'object')
+  // console.log(firstColor, firstQuantity,'object')
 
   // const [selectedColor, setSelectedColor] = useState(clicked ? aData.colorDescription : uniqueColors[0].colorDescription);
   const [selectedColor, setSelectedColor] = useState(firstColor);
   const [selectedQuantity, setSelectedQuantity] = useState(firstQuantity);
 
 
+  console.log(selectedColor,'jjjjjjjjjjjjjjjjjj')
   useEffect(()=>{
     if(localStorage.getItem('variant')){
       const data = JSON.parse(localStorage.getItem('variant'))
@@ -59,7 +59,7 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
   },[localStorage.getItem('variant')])
 
 
-  console.log(selectedColor,'this is selected color')
+  // console.log(selectedColor,'this is selected color')
 
   // console.log(selectedColor,'66666666666')
 
@@ -95,8 +95,11 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
   const availableQuantities = data.variants.filter(
     (variant) =>
       variant.colorDescription ===
-      (clicked ? aData.colorDescription : selectedColor)
+      // (clicked ? aData.colorDescription : selectedColor)
+      selectedColor
   );
+
+  console.log(aData.colorDescription,'yyyyyyyyyyyyyy')
   const prices = clicked
     ? aData
     : availableQuantities.filter(
@@ -157,7 +160,7 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
           productId: data.productId,
         };
         const updatedCartProducts = [...storedCartProducts, newItem];
-        console.log(newItem,'new Item adding')
+        // console.log(newItem,'new Item adding')
         const test = popupData.filter((item)=>item.itemNumber==newItem.itemNumber)
         if(test.length==0){
           localStorage.setItem('popupItems',JSON.stringify([...popupData, newPopupData]));
@@ -166,7 +169,7 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
 
         // Store updated cartProducts in localStorage
         localStorage.setItem("cart", JSON.stringify(updatedCartProducts));
-        console.log(updatedCartProducts,'updated cart')
+        // console.log(updatedCartProducts,'updated cart')
 
       } else {
         // Item found in cart, update its quantity
@@ -181,7 +184,7 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
         // Store updated cartProducts in localStorage
         localStorage.setItem("cart", JSON.stringify(updatedCart));
 
-        console.log(updatedCart,'updated cart')
+        // console.log(updatedCart,'updated cart')
       }
     }
   };
@@ -286,7 +289,6 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
               //     ? "disabled-selected"
               //     : "not-selected"
               // }`}
-
               className={`color-btn ${
                 variant.packingDescription === selectedQuantity
                   ? "selected"
@@ -295,7 +297,6 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
               onClick={() => handleQuantityClick(variant.packingDescription)}
             >
               {variant.packingDescription}
-              {console.log(variant.packingDescription,'')}
             </button>
           ))}
         </div>
@@ -322,10 +323,12 @@ function LeftSide({ data, setCartProducts, cartProducts, clicked, aData, noHover
         <div className="add-div-btn">
           <Button
             className="add-product-button"
-            onClick={clicked ? updateQuantity : testConsole}
+            // onClick={clicked ? updateQuantity : testConsole}
+            onClick={testConsole}
             disabled={isValid || exceedQuantity}
           >
-            {clicked ? "Update" : "Add"}
+            {/* {clicked ? "Update" : "Add"} */}
+            Add
           </Button>
         </div>
       </div>

@@ -46,7 +46,6 @@ const SidePanel = ({ noHover }) => {
 
       const myVariant = JSON.parse(variation);
       setCustomVariant(myVariant);
-      console.log('CUSTOM VARIANT.................')
       // console.log(products,'products changes')
     }
   }, [localStorage.getItem("variant")]);
@@ -131,9 +130,11 @@ const SidePanel = ({ noHover }) => {
         onHide={() => {
           if (cartProducts.length > 0) {
             addItemToCart();
+            localStorage.removeItem('variant')
           } else {
             setShowPanel(false);
             setNotEditable(true);
+            localStorage.removeItem('variant')
           }
         }}
         placement="end"
