@@ -103,11 +103,17 @@ function LeftSide({
       selectedColor
   );
 
-  const prices = clicked
-    ? aData
-    : availableQuantities.filter(
+  // const prices = clicked
+  //   ? aData
+  //   : availableQuantities.filter(
+  //       (variant) => variant.packingDescription === selectedQuantity
+  //     );
+
+    const prices = availableQuantities.filter(
         (variant) => variant.packingDescription === selectedQuantity
       );
+
+    console.log(prices,'@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222')
 
   const updateQuantity = () => {
     // console.log(aData.cartId,'cart id')
@@ -240,11 +246,14 @@ function LeftSide({
             <div className="product-name"> {data.itemDescription}</div>
             <div>
               {data.currency.symbol}
-              {clicked
+              {/* {clicked
                 ? prices.grossPrice
                 : prices.length > 0
                 ? prices[0].grossPrice || "N/A API"
-                : "--"}
+                : "--"} */}
+              {console.log(prices[0],'price')}
+              {prices?.[0]?.grossPrice ?? ""}
+                {/* {prices[0].grossPrice} */}
             </div>
           </div>
           <div className="product-desc">

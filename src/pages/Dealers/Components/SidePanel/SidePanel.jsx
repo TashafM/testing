@@ -119,6 +119,7 @@ const SidePanel = ({ noHover }) => {
         if (res.success) {
           setShowPanel(false);
           console.log(res.result[0].cartItems, "cart items");
+          localStorage.removeItem('variant')
         }
       });
   };
