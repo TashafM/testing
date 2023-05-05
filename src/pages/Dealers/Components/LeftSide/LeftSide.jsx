@@ -318,7 +318,7 @@ function LeftSide({
 
         <div className="color-description">
           <div className="color-desc-title">
-            {clicked ? "Color Description" : "Please Select Color Description"}
+          Please Select Color Description
           </div>
           {uniqueColors.map((variant, id) => (
             <button
@@ -345,9 +345,7 @@ function LeftSide({
 
         <div className="color-description">
           <div className="color-desc-title">
-            {clicked
-              ? "Packaging Description"
-              : "Please Select Packaging Description"}
+          Please Select Packaging Description
           </div>
           {availableQuantities.map((variant, id) => (
             <button

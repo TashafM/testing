@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./otherinstructions.scss";
 import { Button, Form, Offcanvas, Spinner } from "react-bootstrap";
 import { axiosInstance } from "../../../../helper/axios";
@@ -9,8 +9,18 @@ const OtherInstructions = ({ show, handleClose }) => {
   const [otherInstruction, setOtherInstruction] = useState("");
   const [loading, setLoading] = useState(false)
 
+  useEffect(()=>{
+    if(localStorage.getItem('labelInstruction') || localStorage.getItem('otherInstruction')){
+      setLabelInstruction(localStorage.getItem('labelInstruction'))
+      setOtherInstruction(localStorage.getItem('otherInstruction'))
+    }
+  },[localStorage.getItem('labelInstruction')])
+
   const handleSubmit = (event) => {
-    setLoading(true)
+    if(labelInstruction=='' && otherInstruction==''){
+     console.log('kuch nahi')
+    }else{
+      setLoading(true)
     event.preventDefault();
     // setLabelInstruction('');
     // setOtherInstruction('');
@@ -37,6 +47,7 @@ const OtherInstructions = ({ show, handleClose }) => {
         setLoading(false)
         handleClose()
       }).catch((error)=>setLoading(false))
+    }
     // you can do something with the data here, such as send it to a server
   };
 
