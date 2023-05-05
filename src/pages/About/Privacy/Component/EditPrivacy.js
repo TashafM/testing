@@ -31,18 +31,28 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
   };
 
   const onSaveData = () => {
-    const body = {
-      privacyPolicy: [...privacyData],
-    };
-
-    if (makeApiCall) {
-      postData(body, () => {
-        editSaveCallback([...privacyData]);
-        close();
-        toast.success(SUCCESS_MESSAGES.EDIT_PRIVACY);
-      });
+    let flag = false;
+    privacyData.map((item) => {
+      if (!item.content || !item.title || flag) {
+        flag = true;
+      }
+    });
+    if (flag) {
+      toast.error("All fields are mandatory");
     } else {
-      close();
+      const body = {
+        privacyPolicy: [...privacyData],
+      };
+
+      if (makeApiCall) {
+        postData(body, () => {
+          editSaveCallback([...privacyData]);
+          close();
+          toast.success(SUCCESS_MESSAGES.EDIT_PRIVACY);
+        });
+      } else {
+        close();
+      }
     }
   };
 
@@ -90,7 +100,7 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
             >
               <div className="privay-title-container d-flex align-items-center">
                 <TextInput
-                  placeholder={"type here..."}
+                  placeholder={"Type here..."}
                   value={item.title}
                   onChange={(e) => {
                     !makeApiCall && setMakeApiCall(true);
@@ -100,6 +110,8 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
                 <BtnIconOnly
                   icon={deleteIcon}
                   onClick={() => {
+                    !makeApiCall && setMakeApiCall(true);
+
                     onDelete(index);
                   }}
                 />
@@ -108,7 +120,7 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
               <div className="privacy-value-description">
                 <TextArea
                   value={item.content}
-                  placeholder={"type here..."}
+                  placeholder={"Type here..."}
                   rows={6}
                   onChange={(e) => {
                     !makeApiCall && setMakeApiCall(true);

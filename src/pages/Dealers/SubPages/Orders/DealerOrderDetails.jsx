@@ -123,7 +123,7 @@ function DealerOrderDetails() {
           columns={orderDetailColumn}
           data={data?.length ? data[0]?.order ?? [] : []}
         />
-        <ScrollBtn myRef={myRef} setScrollX={setScrollX} scrollX={scrollX} />
+        {/* <ScrollBtn myRef={myRef} setScrollX={setScrollX} scrollX={scrollX} /> */}
       </InfiniteScroll>
     </div>
   );

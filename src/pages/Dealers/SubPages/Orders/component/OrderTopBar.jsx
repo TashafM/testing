@@ -58,7 +58,7 @@ const OrderTopBar = ({ title, goback, orderDetail }) => {
             </div>
           </>
         ) : (
-          title
+          <span className="title">{title}</span>
         )}
       </div>
       <div className="search-filter-btn">

@@ -92,7 +92,7 @@ const NavbarTop = ({ dealers }) => {
           data={allDealerData}
         />
         <div className="user-profile">
-          <img src={user} alt="" />
+          <img src={userData?.dpURL ? userData?.dpURL : compIcon} alt="" />
           <span className="username">{"Username"}</span>
           <span
             className="btn-dropdown"
