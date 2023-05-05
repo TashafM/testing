@@ -82,7 +82,7 @@ function LeftSide({
 
   useEffect(()=>{
     if(editMode){
-      
+      console.log('hello it is edit mode')
     }
   },[])
 
