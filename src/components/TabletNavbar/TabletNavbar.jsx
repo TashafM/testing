@@ -5,12 +5,15 @@ import atinks from "../../assets/images/atinks.png";
 import searchBg from "../../assets/images/searchBg.svg";
 import cartBg from "../../assets/images/cartBg.svg";
 import user from "../../assets/images/user.jpg";
+import compIcon from "../../assets/images/company-default-icon.png";
 
-const TabletNavbar = ({dealers}) => {
+const TabletNavbar = ({ dealers }) => {
+  const userData = JSON.parse(localStorage.getItem("userData") ?? "");
+
   return (
     <Row className="tabletNavbar">
       <Col className="company-logo">
-        <img src={atinks} alt="" />
+        <img src={userData?.dpURL ? userData?.dpURL : compIcon} alt="" />
       </Col>
       <Col className="right-items">
         <div className="search-img">

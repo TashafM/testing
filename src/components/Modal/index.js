@@ -9,6 +9,7 @@ import TextInput from "../Input/TextInput";
 import TextArea from "../Input/TextArea";
 import BtnTitleIcon from "../Button/BtnTitleIcon";
 import BtnIconOnly from "../Button/BtnIconOnly";
+import { toast } from "react-toastify";
 
 function ModalComponent({
   data = [],
@@ -32,10 +33,24 @@ function ModalComponent({
   };
 
   const onSaveData = () => {
-    if (makeApiCall) {
-      editSaveCallback([...Data]);
+    let flag = false;
+    Data.map((item) => {
+      console.log(item);
+      const title = type === "FAQ" ? item.question : item.title;
+      const content = type === "FAQ" ? item.answer : item.content;
+      if (!content || !title || flag) {
+        flag = true;
+      }
+    });
+
+    if (flag) {
+      toast.error("All fields are mandatory");
     } else {
-      close();
+      if (makeApiCall) {
+        editSaveCallback([...Data]);
+      } else {
+        // close();
+      }
     }
   };
 
@@ -84,7 +99,7 @@ function ModalComponent({
               >
                 <div className="privacy-title-container d-flex align-items-center">
                   <TextInput
-                    placeholder={"type here..."}
+                    placeholder={"Type here..."}
                     value={type === "FAQ" ? item.question : item.title}
                     onChange={(e) => {
                       !makeApiCall && setMakeApiCall(true);
@@ -95,6 +110,8 @@ function ModalComponent({
                   <BtnIconOnly
                     icon={deleteIcon}
                     onClick={() => {
+                      !makeApiCall && setMakeApiCall(true);
+
                       onDelete(index);
                     }}
                   />
@@ -103,7 +120,7 @@ function ModalComponent({
                 <div className="privacy-description-container">
                   <TextArea
                     rows={6}
-                    placeholder={"type here..."}
+                    placeholder={"Type here..."}
                     value={type === "FAQ" ? item.answer : item.content}
                     onChange={(e) => {
                       !makeApiCall && setMakeApiCall(true);

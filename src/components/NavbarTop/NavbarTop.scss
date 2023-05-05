@@ -10,7 +10,6 @@
     img {
       height: 77px;
       width: 77px;
-      background-color: #eaeaea;
       padding: 13px;
       cursor: pointer;
       border-radius: 50%;
@@ -84,6 +83,39 @@
           height: 45px;
           border-radius: 50%;
         }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1600px) {
+  .navbar-top {
+    .logo {
+      img {
+        height: 65px;
+        width: 65px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .navbar-top {
+    .logo {
+      img {
+        height: 60px;
+        width: 60px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1199) {
+  .navbar-top {
+    .logo {
+      img {
+        height: 50px;
+        width: 50px;
       }
     }
   }

@@ -52,7 +52,7 @@ const OrderSummary = ({ order, onClick, onClickOther }) => {
                   <p className="m-0">
                     {order?.shippingAddress?.contactNumber ?? ""}
                   </p>
-                  <div className="d-flex align-items-center ">
+                  <div className="d-flex align-items-center seeall-btn-container ">
                     <BtnTitleCenter title="View all" onClick={onClick} />
                     <img
                       className="imge-icon-red"
@@ -74,7 +74,7 @@ const OrderSummary = ({ order, onClick, onClickOther }) => {
                 <p className="order-summary-text">Other information :</p>
               </div>
               {order.labelInstruction ? (
-                <div className="address-field address-contact-card">
+                <div className="address-field address-contact-card seeall-btn-container">
                   <p className="instuction-title-other">Label instruction</p>
                   <p className="m-0 d-flex justify-content-between align-items-center over-flow-text over-flow-text-other">
                     {order.labelInstruction}
@@ -87,9 +87,9 @@ const OrderSummary = ({ order, onClick, onClickOther }) => {
                   </p>
                 </div>
               ) : order.otherInstruction ? (
-                <div className="address-field address-contact-card">
+                <div className="address-field address-contact-card seeall-btn-container">
                   <p className="instuction-title-other">Other Instruction</p>
-                  <p className="m-0 d-flex justify-content-between align-items-center over-flow-text over-flow-text-other">
+                  <p className="m-0 d-flex justify-content-between align-items-center over-flow-text over-flow-text-other  ">
                     {order.otherInstruction}
                     {order.otherInstruction || order.otherInstruction ? (
                       <BtnTitleCenter
