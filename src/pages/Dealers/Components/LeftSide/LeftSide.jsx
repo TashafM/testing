@@ -147,13 +147,33 @@ function LeftSide({
   const updateQuantity = () => {
     
     const products = JSON.parse(localStorage.getItem("cart") || "[]");
-    const data = prices[0]
+    const productInfo = prices[0]
   
     const updatedArray = [...products];
     const obj = updatedArray[indexNo];
     
-    obj.bpCatalogNumber = data.bpCatalogNumber
-    obj.quantity = productQuantity;
+    obj.bpCatalogNumber = productInfo.bpCatalogNumber
+    obj.cartId = obj.cartId
+    obj.colorCode = productInfo.colorCode
+    obj.colorDescription = productInfo.colorDescription
+    obj.currency = { 
+      type: data.currency.type, 
+      symbol: data.currency.symbol 
+    };
+    obj.expiryPeriod = data.expiryPeriod
+    obj.grossPrice = productInfo.grossPrice
+    obj.itemDescription = data.itemDescription
+    obj.itemNumber = data.itemNumber
+    obj.packingCode = productInfo.packingCode
+    obj.packingDescription = productInfo.packingDescription
+    obj.priceTerms = data.priceTerms
+    obj.productId = data.productId
+    obj.productImages = [] // not available , ask to jasmeen , for now sending empty array
+    obj.quantity = productQuantity
+    obj.saleDescription = productInfo.saleDescription
+    obj.totalPrice = JSON.stringify(Number(productQuantity) * Number(productInfo.grossPrice))
+    obj.variantId = productInfo.variantId
+    obj._id= productInfo._id
     // obj.totalPrice = Number(productQuantity) * Number(prices[0].grossPrice);
     // obj.grossPrice = Number(prices[0].grossPrice);
     
