@@ -74,7 +74,7 @@ const Products = () => {
 
 
   const callFunc = (val) => {
-    console.log(val,'setttttttttttttttttttttttttttttttttt')
+    console.log(val,'setttttttttttttttttttttttttttttttttt') 
     // setData(val)
     const popup = JSON.parse(localStorage.getItem('popupItems'))
     // console.log(popup,'popup')
