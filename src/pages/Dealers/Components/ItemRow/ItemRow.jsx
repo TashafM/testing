@@ -5,29 +5,78 @@ import x from "../../../../assets/images/x.svg";
 import { EditItems } from "../../Dealers";
 import { useContext } from "react";
 
-const ItemRow = ({ disableDelete, pr20, popupScreen, data, removeItem,editProducts, getFromPop, setSelectedId, id, selectedId, nohover }) => {
-  const currency = localStorage.getItem('currencySymbol')
-  const {notEditable, setIndexNo, indexNo, editMode} = useContext(EditItems);  
+const ItemRow = ({
+  disableDelete,
+  pr20,
+  popupScreen,
+  data,
+  removeItem,
+  editProducts,
+  getFromPop,
+  setSelectedId,
+  id,
+  selectedId,
+  nohover,
+  unique,
+}) => {
+  const currency = localStorage.getItem("currencySymbol");
+  const { notEditable, setIndexNo, indexNo, editMode } = useContext(EditItems);
 
+  useEffect(() => {
+    if (editMode) {
+      const firstData = JSON.parse(localStorage.getItem("cart"));
+      console.log(firstData[0], "first data");
+      const {
+        bpCatalogNumber,
+        colorCode,
+        colorDescription,
+        grossPrice,
+        packingCode,
+        packingDescription,
+        saleDescription,
+        variantId,
+        _id,
+        ...rest
+      } = firstData[0];
+      const data = {
+        bpCatalogNumber,
+        colorCode,
+        colorDescription,
+        grossPrice,
+        packingCode,
+        packingDescription,
+        saleDescription,
+        variantId,
+        _id,
+      };
+      localStorage.setItem('variant', JSON.stringify(data))
+    }
+  }, []);
 
-  const selectedItem = ()=>{
-    const localData = JSON.parse(localStorage.getItem('popupItems'))
-    const filtered = localData.filter((item)=>item.itemNumber==data.itemNumber)
+  const selectedItem = () => {
+    const localData = JSON.parse(localStorage.getItem("popupItems"));
+    const filtered = localData.filter(
+      (item) => item.itemNumber == data.itemNumber
+    );
 
-    const initialData = JSON.stringify(filtered[0])
-    localStorage.setItem('initialProductData',initialData)
+    const initialData = JSON.stringify(filtered[0]);
+    localStorage.setItem("initialProductData", initialData);
 
-    const filteredVariant = filtered[0].variants.filter((item)=>item.variantId == data.variantId)
-    console.log(filteredVariant[0],'filteredvariant')
+    const filteredVariant = filtered[0].variants.filter(
+      (item) => item.variantId == data.variantId
+    );
+    console.log(filteredVariant[0], "filteredvariant");
 
-    const localVariant = JSON.stringify(filteredVariant[0])
-    localStorage.setItem('variant', localVariant)
+    const localVariant = JSON.stringify(filteredVariant[0]);
+    localStorage.setItem("variant", localVariant);
 
-    const test = JSON.parse(localStorage.getItem('cart'))
-    const qty = test.filter((item)=>item.variantId==filteredVariant[0].variantId)
-    localStorage.setItem('quantity', qty[0].quantity)
-  }
-  
+    const test = JSON.parse(localStorage.getItem("cart"));
+    const qty = test.filter(
+      (item) => item.variantId == filteredVariant[0].variantId
+    );
+    localStorage.setItem("quantity", qty[0].quantity);
+  };
+
   return (
     // <tr className={selectedId==id && id!=undefined ?"right-side-tr selected-tr": (nohover || notEditable?'right-side-tr no-hover':'right-side-tr')} onClick={!notEditable?()=>setSelectedId(id):null}>
     <tr className="right-side-tr" onClick={selectedItem}>
@@ -36,25 +85,29 @@ const ItemRow = ({ disableDelete, pr20, popupScreen, data, removeItem,editProduc
           popupScreen ? "single-product-item pl40" : "single-product-item"
         }
         onClick={() => {
-          editProducts(data,id);
-          getFromPop(data)
-          setIndexNo(id)
+          editProducts(data, id);
+          getFromPop(data);
+          setIndexNo(id);
         }}
       >
         <div className="img-div">
           <img src={listproduct} alt="" />
           <div className="text-desc">
-            <div className="product-name">{data.name || data.itemDescription}</div>
+            <div className="product-name">
+              {data.name || data.itemDescription}
+            </div>
             <div className="description">
-              {data.selectedColor || data.colorDescription} | {data.saleDescription}
+              {data.selectedColor || data.colorDescription} |{" "}
+              {data.saleDescription}
             </div>
           </div>
         </div>
       </td>
-      <td className="quantity">
-        {data.quantity}
+      <td className="quantity">{data.quantity}</td>
+      <td className={pr20 ? "price-padding" : "price"}>
+        {currency}
+        {data.totalPrice}
       </td>
-      <td className={pr20 ? "price-padding" : "price"}>{currency}{data.totalPrice}</td>
       {!disableDelete && (
         <td className="remove-btn" onClick={() => removeItem(data.variantId)}>
           <img src={x} alt="" />
