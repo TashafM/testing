@@ -24,13 +24,15 @@ const Dealers = () => {
   const orderPath = "/dealers/orders";
   const [isEmpty, setIsEmpty] = useState(true);
   const [notEditable, setNotEditable] = useState(true)
+  const [editMode, setEditMode] = useState(false)
+  const [indexNo, setIndexNo] = useState(0)
 
   //--------------FOR SIDE PANEL OPENING----------------
   const [showPanel, setShowPanel] = useState(false);
 
   return (
     <>
-    <EditItems.Provider value={{notEditable, setNotEditable}}>
+    <EditItems.Provider value={{notEditable, setNotEditable, editMode, setEditMode, setIndexNo, indexNo}}>
       <GlobalSidePanel.Provider value={{ showPanel, setShowPanel }}>
         <AddProducts.Provider value={{ isEmpty, setIsEmpty }}>
           <div className="homepage dealers-homepage">

@@ -54,6 +54,8 @@ const SelectPage = () => {
           localStorage.getItem("igstPercentage") ??
             Number(res.result[0].igstPercentage)
         );
+        localStorage.setItem("currencySymbol", res.result[0].currency.symbol);
+        localStorage.setItem("currencyType", res.result[0].currency.type);
       });
   };
 

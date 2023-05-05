@@ -9,7 +9,7 @@ import { axiosInstance } from "../../../../helper/axios";
 
 const SidePanel = ({ noHover }) => {
   const { setShowPanel, showPanel } = useContext(GlobalSidePanel);
-  const { notEditable, setNotEditable } = useContext(EditItems);
+  const { notEditable, setNotEditable, setEditMode } = useContext(EditItems);
 
   const { setIsEmpty, isEmpty } = useContext(AddProducts);
   const [cartProducts, setCartProducts] = useState([]);
@@ -36,7 +36,21 @@ const SidePanel = ({ noHover }) => {
       setData(products);
       // console.log(products,'products changes')
     }
-  }, [localStorage.getItem("initialProductData")]);
+  }, []);
+
+  const [customVariant, setCustomVariant] = useState([])
+  useEffect(() => {
+    if (localStorage.getItem("variant")) {
+      const variation = localStorage.getItem("variant");
+
+      const myVariant = JSON.parse(variation);
+      setCustomVariant(myVariant);
+      // console.log(products,'products changes')
+    }
+  }, [localStorage.getItem("variant")]);
+
+  // const [indexNo, setIndexNo] = useState(null)
+
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -48,7 +62,8 @@ const SidePanel = ({ noHover }) => {
     });
   };
 
-  const editProducts = (id) => {
+  const editProducts = (id, idx) => {
+    console.log(idx,'index number')
     const pop = JSON.parse(localStorage.getItem("popupItems"));
     // console.log(id)
     const filtered = pop.filter((item) => item.itemNumber == id.itemNumber);
@@ -81,7 +96,7 @@ const SidePanel = ({ noHover }) => {
       (acc, item) => acc + Number(item.totalPrice),
       0
     );
-    console.log(sumOfTotal, "sumtotal");
+    // console.log(sumOfTotal, "sumtotal");
     const sumOfTaxes = Number(cgst) + Number(sgst) + Number(igst);
     const taxAmount = (sumOfTotal * sumOfTaxes) / 100; // this is final taxAmount
     const totalAmt = taxAmount + sumOfTotal; // this is totalAmount
@@ -105,7 +120,8 @@ const SidePanel = ({ noHover }) => {
       .then((res) => {
         if (res.success) {
           setShowPanel(false);
-          console.log(res.result[0].cartItems, "cart items");
+          // console.log(res.result[0].cartItems, "cart items");
+          localStorage.removeItem('variant')
         }
       });
   };
@@ -117,9 +133,13 @@ const SidePanel = ({ noHover }) => {
         onHide={() => {
           if (cartProducts.length > 0) {
             addItemToCart();
+            localStorage.removeItem('variant')  
+            setEditMode(false)
           } else {
             setShowPanel(false);
             setNotEditable(true);
+            localStorage.removeItem('variant')
+            setEditMode(false)
           }
         }}
         placement="end"
@@ -134,6 +154,7 @@ const SidePanel = ({ noHover }) => {
                 cartProducts={cartProducts}
                 clicked={clicked}
                 aData={aData}
+                customVariant={customVariant}
               />
             </div>
             <div className="vertical-line"></div>
@@ -147,6 +168,7 @@ const SidePanel = ({ noHover }) => {
                 editProducts={editProducts}
                 getFromPop={getFromPop}
                 noHover={noHover}
+                // setIndexNo={setIndexNo}
               />
             </div>
           </div>

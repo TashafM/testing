@@ -30,7 +30,27 @@ const ProductCart = () => {
   const { showPanel, setShowPanel } = useContext(GlobalSidePanel);
 
   const { isEmpty, setIsEmpty } = useContext(AddProducts);
-  const {setNotEditable} = useContext(EditItems)
+  const {setEditMode} = useContext(EditItems)
+
+  const setFirstItem = () => {
+    const data = JSON.parse(localStorage.getItem('cart'));
+    const popup =JSON.parse(localStorage.getItem('popupItems')) 
+    console.log(data[0],'set first item')
+    console.log(popup, 'pop up item fro filter')
+
+    const itemNumber = popup.filter((item)=>item.itemNumber==data[0].itemNumber)
+    console.log(itemNumber,'***********')
+
+    const setInitial = JSON.stringify(itemNumber[0]);
+    localStorage.setItem('initialProductData', setInitial)
+    // console.log(JSON.parse(setInitial[0]),'setinitial .............')
+
+    const filteredVariant = itemNumber[0].variants.filter((item)=>item.variantId==data[0].variantId)
+    console.log(filteredVariant[0],'#####################')
+
+    // const setInitial = JSON.stringify(filteredVariant[0]);
+    // localStorage.setItem('initialProductData', setInitial)
+  }
 
   const [purchaseOrderNumber, setPurchaseOrderNumber] = useState("");
   const [noPurchaseNumber, setNoPurchaseNumber] = useState(false);
@@ -123,7 +143,7 @@ const ProductCart = () => {
       axiosInstance
         .post(API.VIEW_DEALER_CART, { principalCompanyUserCode })
         .then((res) => {
-          console.log(res.result[0].cart.cartItems, "from product cart");
+          // console.log(res.result[0].cart.cartItems, "from product cart");
           setCartItem(res.result[0].cart.cartItems);
           setCart(res.result[0].cart);
           setBillingAddress(res.result[0].cart.billingAddress);
@@ -280,7 +300,6 @@ const ProductCart = () => {
             ))}
           </tbody> 
            )} 
-          {console.log(tas,'final product')}
         </Table>
         {!isEmpty && (
           <>
@@ -290,7 +309,9 @@ const ProductCart = () => {
                 className="edit"
                 onClick={() => {
                   setShowPanel(true);
-                  setNotEditable(false);
+                  // setNotEditable(false);
+                  setEditMode(true)
+                  setFirstItem()
                 }}
               >
                 <img src={editIcon} alt="" />

@@ -29,7 +29,6 @@ const Products = () => {
   // const [currentId, setCurrentId] = useState(location.state.id);
 
   const switchSubCategory = (value) => {
-    console.log(value, "switchCate");
     const dataStringify = JSON.stringify(value);
     localStorage.setItem("subCategory", dataStringify);
     const parseData = localStorage.getItem("subCategory");
@@ -67,17 +66,18 @@ const Products = () => {
       if (api1.result.length == 0) {
         setNoProducts(true);
       }
-      localStorage.setItem("currencySymbol", api1.result[0].currency.symbol);
-      localStorage.setItem("currencyType", api1.result[0].currency.type);
+      // localStorage.setItem("currencySymbol", api1.result[0].currency.symbol);
+      // localStorage.setItem("currencyType", api1.result[0].currency.type);
     };
     fetchProducts();
   }, []);
 
 
   const callFunc = (val) => {
+    console.log(val,'setttttttttttttttttttttttttttttttttt')
     // setData(val)
     const popup = JSON.parse(localStorage.getItem('popupItems'))
-    console.log(popup,'popup')
+    // console.log(popup,'popup')
     setShowPanel(true);
     const productData = JSON.stringify(val);
     localStorage.setItem("initialProductData", productData);
