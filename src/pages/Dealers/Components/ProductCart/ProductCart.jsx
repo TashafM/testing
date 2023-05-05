@@ -35,8 +35,6 @@ const ProductCart = () => {
   const setFirstItem = () => {
     const data = JSON.parse(localStorage.getItem('cart'));
     const popup =JSON.parse(localStorage.getItem('popupItems')) 
-    console.log(data[0],'set first item')
-    console.log(popup, 'pop up item fro filter')
 
     const itemNumber = popup.filter((item)=>item.itemNumber==data[0].itemNumber)
     console.log(itemNumber,'***********')
@@ -150,6 +148,7 @@ const ProductCart = () => {
           setShippingAddress(res.result[0].cart.shippingAddress);
           setDefaultBilling(res.result[0].cart.billingAddress);
           setDefaultShipping(res.result[0].cart.shippingAddress);
+
           // setIsEmpty(false);
           const toString = JSON.stringify(res.result[0]);
           localStorage.setItem("placeOrderData", toString);
@@ -175,6 +174,7 @@ const ProductCart = () => {
 
   //==============================================SET ADDRESS API
   const dummy = () => {
+    console.log('dummy clicked')
     axiosInstance
       .post(API.EDIT_CART_ADDRESS, {
         principalCompanyUserCode: localStorage.getItem(
@@ -184,12 +184,16 @@ const ProductCart = () => {
         shippingAddress: shippingAddress,
       })
       .then((res) => {
-        const selectedAddress = res.result[0].cart.shippingAddress.filter(
+        // console.log(res.result[0].shippingAddress,'9999999999999999999')
+        const selectedAddress = res.result[0].shippingAddress.filter(
           (address) => address.selected === true
         );
+
         setDisplayAddress(...selectedAddress);
         setShowAddress(false);
       });
+
+
   };
 
   //===========PLACE ORDER API====================================
@@ -202,6 +206,7 @@ const ProductCart = () => {
       setIsLoading(true);
       const data = localStorage.getItem("placeOrderData");
       const parsedData = JSON.parse(data);
+      console.log(parsedData,'parsedDAta................')
       setOrder(parsedData);
       // console.log(parsedData, "parseddata");
       const principalCompanyUserCode = localStorage.getItem(
@@ -216,6 +221,8 @@ const ProductCart = () => {
         selected: shippingSelected,
         ...shippingFinal
       } = selectedShipping;
+
+
 
       const selectedBilling = billingAddress.find(
         (item) => item.selected === true
@@ -233,7 +240,7 @@ const ProductCart = () => {
           labelInstruction: localStorage.getItem("labelInstruction") ?? "",
           otherInstruction: localStorage.getItem("otherInstruction") ?? "",
           purchaseOrderNumber: purchaseOrderNumber,
-          cartItems: parsedData.cartItems.map((item) => {
+          cartItems: parsedData.cart.cartItems.map((item) => {
             return {
               variantId: item.variantId,
               grossPrice: item.grossPrice,
@@ -245,11 +252,11 @@ const ProductCart = () => {
           }),
           shippingAddress: shippingFinal,
           billingAddress: billingFinal,
-          cgstPercentage: parsedData.cgstPercentage,
-          igstPercentage: parsedData.igstPercentage,
-          sgstPercentage: parsedData.sgstPercentage,
-          totalAmount: parsedData.totalAmount,
-          taxAmount: parsedData.taxAmount,
+          cgstPercentage: parsedData.cart.cgstPercentage,
+          igstPercentage: parsedData.cart.igstPercentage,
+          sgstPercentage: parsedData.cart.sgstPercentage,
+          totalAmount: parsedData.cart.totalAmount,
+          taxAmount: parsedData.cart.taxAmount,
         })
         .then((res) => {
           if (res.success) {

@@ -7,21 +7,15 @@ import { useContext } from "react";
 
 const ItemRow = ({ disableDelete, pr20, popupScreen, data, removeItem,editProducts, getFromPop, setSelectedId, id, selectedId, nohover }) => {
   const currency = localStorage.getItem('currencySymbol')
-  const {notEditable, setIndexNo, indexNo} = useContext(EditItems);
-  
+  const {notEditable, setIndexNo, indexNo, editMode} = useContext(EditItems);  
+
 
   const selectedItem = ()=>{
     const localData = JSON.parse(localStorage.getItem('popupItems'))
-    // console.log(localData,'localData')
-    // console.log(data,'data')
-
     const filtered = localData.filter((item)=>item.itemNumber==data.itemNumber)
 
     const initialData = JSON.stringify(filtered[0])
     localStorage.setItem('initialProductData',initialData)
-    // console.log('its selected item')
-    console.log(filtered[0],'initialDAta')
-    // console.log(data.variantId,'data itemNumber')
 
     const filteredVariant = filtered[0].variants.filter((item)=>item.variantId == data.variantId)
     console.log(filteredVariant[0],'filteredvariant')
@@ -32,7 +26,6 @@ const ItemRow = ({ disableDelete, pr20, popupScreen, data, removeItem,editProduc
     const test = JSON.parse(localStorage.getItem('cart'))
     const qty = test.filter((item)=>item.variantId==filteredVariant[0].variantId)
     localStorage.setItem('quantity', qty[0].quantity)
-    // console.log(currentQty,'currentQty')
   }
   
   return (
@@ -43,10 +36,6 @@ const ItemRow = ({ disableDelete, pr20, popupScreen, data, removeItem,editProduc
           popupScreen ? "single-product-item pl40" : "single-product-item"
         }
         onClick={() => {
-          // if (!notEditable) {
-          //   editProducts(data);
-          //   getFromPop(data);
-          // }
           editProducts(data,id);
           getFromPop(data)
           setIndexNo(id)

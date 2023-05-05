@@ -80,6 +80,12 @@ function LeftSide({
     }
   }, [localStorage.getItem("variant")]);
 
+  useEffect(()=>{
+    if(editMode){
+      
+    }
+  },[])
+
 
   // console.log(selectedColor,'this is selected color')
 
@@ -125,8 +131,6 @@ function LeftSide({
   const prices = availableQuantities.filter(
     (variant) => variant.packingDescription === selectedQuantity
   );
-
-  console.log(prices[0],'prices')
 
   // const updateQuantity = () => {
   //   console.log('update Quantity reun')
