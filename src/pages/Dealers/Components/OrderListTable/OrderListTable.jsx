@@ -7,9 +7,10 @@ const OrderListTable = ({ disableDelete, data, setData, editProducts, getFromPop
 
 
 
-  const del = (val) => {
+  const removeItem = (val) => {
     const filtered = data.filter((item) => item.variantId !== val);
     setData(filtered);
+    localStorage.setItem("cart", JSON.stringify(filtered));
     localStorage.setItem("cartProducts", JSON.stringify(filtered)); // Add this line to update local storage
   };
 
@@ -30,7 +31,7 @@ const OrderListTable = ({ disableDelete, data, setData, editProducts, getFromPop
               id={id}
               disableDelete={disableDelete}
               data={item}
-              removeItem={del}
+              removeItem={removeItem}
               editProducts={editProducts}
               getFromPop={getFromPop}
               setSelectedId={setSelectedId}

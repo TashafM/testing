@@ -67,6 +67,10 @@ const AllProducts = () => {
         if(res.totalCartItemCount==0){
           setIsEmpty(true)
           setLoading(false)
+          const parseData = JSON.stringify(cart)
+          localStorage.setItem('cart',parseData)
+          const popupData = JSON.stringify(popupItems)
+          localStorage.setItem('popupItems',popupData)
         }else{
           setIsEmpty(false)
           const parseData = JSON.stringify(cart)
