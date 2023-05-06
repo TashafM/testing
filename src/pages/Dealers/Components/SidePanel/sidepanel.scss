@@ -1,24 +1,23 @@
 .offcanvas.show.dm {
-  width: 70% !important;
+  width: 65% !important;
 }
 
 .divided-div {
   display: flex;
 
   .div-1 {
-    width: 58%;
+    width: 50%;
     overflow-y: scroll;
-    // background: #e8ffe8;
     max-height: 97vh;
-    // background: yellow;
+    /* margin: 1% 0; */
+    margin-right: 1%;
+    margin-left: 1%;
   }
   .div-2 {
-    width: 42%;
+    width: 45%;
     margin-left: 2%;
-    // background: yellow;
     max-height: 90vh;
     overflow-y: scroll;
-    // background: rgb(255, 136, 0);
   }
 
   .div-1::-webkit-scrollbar,.div-2::-webkit-scrollbar {

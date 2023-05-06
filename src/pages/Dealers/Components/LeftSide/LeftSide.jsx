@@ -22,7 +22,7 @@ function LeftSide({
 }) {
   // const [customVariant, setCustomVariant] = useState([])
 
-  console.log(data,'data')
+  console.log(data, "data");
   // useEffect(() => {
   //   if (localStorage.getItem("variant")) {
   //     const variation = localStorage.getItem("variant");
@@ -33,10 +33,10 @@ function LeftSide({
   //     // console.log(products,'products changes')
   //   }
   // }, []);
-  const {editMode, setEditMode, indexNo} = useContext(EditItems)
-  console.log(indexNo,'index no from global')
+  const { editMode, setEditMode, indexNo } = useContext(EditItems);
+  console.log(indexNo, "index no from global");
 
-  console.log(editMode,'value of editMode')
+  console.log(editMode, "value of editMode");
 
   const [variants, setVariants] = useState(data.variants);
   const uniqueColors = uniqBy(data.variants, "colorDescription");
@@ -63,7 +63,7 @@ function LeftSide({
 
   const [exceedQuantity, setExceedQuantity] = useState(false);
 
-  console.log(productQuantity,'productQuantity')
+  console.log(productQuantity, "productQuantity");
 
   useEffect(() => {
     if (localStorage.getItem("variant")) {
@@ -76,16 +76,15 @@ function LeftSide({
   useEffect(() => {
     if (localStorage.getItem("variant")) {
       const data = JSON.parse(localStorage.getItem("quantity"));
-      setProductQuantity(data)
+      setProductQuantity(data);
     }
   }, [localStorage.getItem("variant")]);
 
-  useEffect(()=>{
-    if(editMode){
-      console.log('hello it is edit mode')
+  useEffect(() => {
+    if (editMode) {
+      console.log("hello it is edit mode");
     }
-  },[])
-
+  }, []);
 
   // console.log(selectedColor,'this is selected color')
 
@@ -102,7 +101,6 @@ function LeftSide({
     setSelectedQuantity(quantity);
   };
 
-
   const handleQuantity = (e) => {
     const value = e.target.value;
     if (Number(value) > 100) {
@@ -115,6 +113,7 @@ function LeftSide({
     }
   };
 
+ 
   const availableQuantities = data.variants.filter(
     (variant) =>
       variant.colorDescription ===
@@ -149,42 +148,43 @@ function LeftSide({
   // };
 
   const updateQuantity = () => {
-    
     const products = JSON.parse(localStorage.getItem("cart") || "[]");
-    const productInfo = prices[0]
-  
+    const productInfo = prices[0];
+
     const updatedArray = [...products];
     const obj = updatedArray[indexNo];
-    
-    obj.bpCatalogNumber = productInfo.bpCatalogNumber
-    obj.cartId = obj.cartId
-    obj.colorCode = productInfo.colorCode
-    obj.colorDescription = productInfo.colorDescription
-    obj.currency = { 
-      type: data.currency.type, 
-      symbol: data.currency.symbol 
+
+    obj.bpCatalogNumber = productInfo.bpCatalogNumber;
+    obj.cartId = obj.cartId;
+    obj.colorCode = productInfo.colorCode;
+    obj.colorDescription = productInfo.colorDescription;
+    obj.currency = {
+      type: data.currency.type,
+      symbol: data.currency.symbol,
     };
-    obj.expiryPeriod = data.expiryPeriod
-    obj.grossPrice = productInfo.grossPrice
-    obj.itemDescription = data.itemDescription
-    obj.itemNumber = data.itemNumber
-    obj.packingCode = productInfo.packingCode
-    obj.packingDescription = productInfo.packingDescription
-    obj.priceTerms = data.priceTerms
-    obj.productId = data.productId
-    obj.productImages = [] // not available , ask to jasmeen , for now sending empty array
-    obj.quantity = productQuantity
-    obj.saleDescription = productInfo.saleDescription
-    obj.totalPrice = JSON.stringify(Number(productQuantity) * Number(productInfo.grossPrice))
-    obj.variantId = productInfo.variantId
-    obj._id= productInfo._id
+    obj.expiryPeriod = data.expiryPeriod;
+    obj.grossPrice = productInfo.grossPrice;
+    obj.itemDescription = data.itemDescription;
+    obj.itemNumber = data.itemNumber;
+    obj.packingCode = productInfo.packingCode;
+    obj.packingDescription = productInfo.packingDescription;
+    obj.priceTerms = data.priceTerms;
+    obj.productId = data.productId;
+    obj.productImages = []; // not available , ask to jasmeen , for now sending empty array
+    obj.quantity = productQuantity;
+    obj.saleDescription = productInfo.saleDescription;
+    obj.totalPrice = JSON.stringify(
+      Number(productQuantity) * Number(productInfo.grossPrice)
+    );
+    obj.variantId = productInfo.variantId;
+    obj._id = productInfo._id;
     // obj.totalPrice = Number(productQuantity) * Number(prices[0].grossPrice);
     // obj.grossPrice = Number(prices[0].grossPrice);
-    
+
     setCartProducts(updatedArray);
     localStorage.setItem("cart", JSON.stringify(updatedArray));
   };
-  
+
   // rest of your code...
 
   const testConsole = () => {
@@ -243,14 +243,9 @@ function LeftSide({
 
         // Store updated cartProducts in localStorage
         localStorage.setItem("cart", JSON.stringify(updatedCart));
-
       }
     }
   };
-
-
- 
-  
 
   //***************************VALIDATION */
 
@@ -289,10 +284,7 @@ function LeftSide({
             {/* {clicked
               ? prices.bpCatalogNumber
               : prices?.[0]?.bpCatalogNumber ?? "----"} */}
-            
             {prices?.[0]?.bpCatalogNumber ?? "----"}
-
-              
           </div>
           <div className="product-price">
             <div className="product-name"> {data.itemDescription}</div>
@@ -318,7 +310,7 @@ function LeftSide({
 
         <div className="color-description">
           <div className="color-desc-title">
-          Please Select Color Description
+            Please Select Color Description
           </div>
           {uniqueColors.map((variant, id) => (
             <button
@@ -345,7 +337,7 @@ function LeftSide({
 
         <div className="color-description">
           <div className="color-desc-title">
-          Please Select Packaging Description
+            Please Select Packaging Description
           </div>
           {availableQuantities.map((variant, id) => (
             <button
@@ -373,10 +365,11 @@ function LeftSide({
         <div className="quantity-input">
           <div className="quantity-desc-title">Enter Quantity</div>
           <FormControl
-            type="text"
+            type="number"
             onChange={handleQuantity}
             value={productQuantity}
           />
+          
           <div className="max-orders">Maximum orders 100 *</div>
         </div>
 
@@ -396,7 +389,7 @@ function LeftSide({
             // onClick={testConsole}
             disabled={isValid || exceedQuantity}
           >
-            {editMode? 'Update': 'Add'}
+            {editMode ? "Update" : "Add"}
           </Button>
         </div>
       </div>

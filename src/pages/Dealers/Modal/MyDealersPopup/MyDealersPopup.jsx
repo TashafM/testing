@@ -12,6 +12,7 @@ const MyDealersPopup = ({ show, setDealerPopup, data, setChange }) => {
   const navigate = useNavigate();
 
   const activateDealer = (dealer) => {
+    console.log(dealer, "dealer changes");
     localStorage.setItem(
       "principalCompanyUserCode",
       dealer.principalCompanyUserCode
@@ -21,7 +22,9 @@ const MyDealersPopup = ({ show, setDealerPopup, data, setChange }) => {
     localStorage.setItem("cgstPercentage", dealer.cgstPercentage);
     localStorage.setItem("sgstPercentage", dealer.sgstPercentage);
     localStorage.setItem("igstPercentage", dealer.igstPercentage);
-    localStorage.removeItem('cartProducts');
+    localStorage.setItem("currencySymbol", dealer.currency.symbol);
+    localStorage.setItem("currencyType", dealer.currency.type);
+    // localStorage.removeItem('cartProducts');
     navigate(`/dealers/dashboard`);
     setDealerPopup(false);
   };

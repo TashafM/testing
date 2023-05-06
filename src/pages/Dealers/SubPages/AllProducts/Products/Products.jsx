@@ -56,6 +56,8 @@ const Products = () => {
     // console.log(categoryId, subCategoryId, principalCompanyUserCode, 'tashaf')
 
     const fetchProducts = async () => {
+      setLoading(true)
+      setMsg('All Products Loading...')
       // setLoading(true)
       const api1 = await axiosInstance.post(API.VIEW_DEALER_PRODUCTS, {
         principalCompanyUserCode,
@@ -66,6 +68,7 @@ const Products = () => {
       if (api1.result.length == 0) {
         setNoProducts(true);
       }
+      setLoading(false)
       // localStorage.setItem("currencySymbol", api1.result[0].currency.symbol);
       // localStorage.setItem("currencyType", api1.result[0].currency.type);
     };

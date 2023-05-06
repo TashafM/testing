@@ -30,7 +30,7 @@ const ProductCart = () => {
   const { showPanel, setShowPanel } = useContext(GlobalSidePanel);
 
   const { isEmpty, setIsEmpty } = useContext(AddProducts);
-  const {setEditMode} = useContext(EditItems)
+  const {setEditMode, editMode} = useContext(EditItems)
 
   const setFirstItem = () => {
     const data = JSON.parse(localStorage.getItem('cart'));
@@ -322,6 +322,7 @@ const ProductCart = () => {
                 }}
               >
                 <img src={editIcon} alt="" />
+                {console.log(editMode,'edit mode')}
                 <span className="text">Edit</span>
               </div>
               <ArrowLink title={"See all"} onClick={handleSetProduct} />
