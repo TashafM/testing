@@ -10,4 +10,5 @@ export const companyCurrentOrder = [
   { title: "purchaseOrderNumber", value: "Purchase Order No." },
   { title: "numberOfItems", value: "No. of Item" },
   { title: "totalAmount", value: "Total" },
+  { title: "", value: "" },
 ];

@@ -13,6 +13,7 @@ import MyDealersPopup from "../../pages/Dealers/Modal/MyDealersPopup/MyDealersPo
 import { API } from "../../helper/API";
 import { AddProducts } from "../../pages/Dealers/Dealers";
 import compIcon from "../../assets/images/company-default-icon.png";
+import { getLocalStorageData } from "../Utils/Utils";
 
 const NavbarTop = ({ dealers }) => {
   // const {setIsEmpty} = useContext(AddProducts)
@@ -22,7 +23,7 @@ const NavbarTop = ({ dealers }) => {
   const [dealerPopup, showDealerPopup] = useState(false);
   const [allDealerData, setAllDealerData] = useState([]);
   // const [dpURL, setDpURL] = useState("")
-  const userData = JSON.parse(localStorage.getItem("userData") ?? "");
+  let userData = getLocalStorageData("userData");
 
   const fetchDealers = () => {
     const accessToken = localStorage.getItem("accessToken");

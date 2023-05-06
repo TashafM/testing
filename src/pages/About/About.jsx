@@ -4,6 +4,7 @@ import { useResponse } from "../../hooks/useResponse";
 import "./About.scss";
 import { AboutTabs } from "./data/data";
 import Description from "./Description/Description";
+import { getLocalStorageData } from "../../components/Utils/Utils";
 
 function About() {
   const {
@@ -13,7 +14,7 @@ function About() {
     error,
   } = useResponse("/portalViewCompanyAboutUsInfo");
 
-  const userData = JSON.parse(localStorage.getItem("userData") ?? "");
+  const userData = getLocalStorageData("userData");
 
   if (error.error) {
     return (

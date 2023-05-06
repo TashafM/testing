@@ -22,7 +22,7 @@ function DealerOrderDetails() {
   const [showAddress, setShowAddress] = useState(false);
   const [showOther, setShowOther] = useState(false);
   const location = useLocation();
-  const orderId = location.state.data;
+  const orderId = location?.state?.data;
   const [orderDetail, setOrderDetail] = useOutletContext();
   const myRef = useRef(null);
   const [scrollX, setScrollX] = useState(0);
@@ -31,7 +31,9 @@ function DealerOrderDetails() {
   const { data, loading, setData, getData } = usePaginatedData();
 
   useEffect(() => {
-    getCurrentOrders();
+    if (orderId) {
+      getCurrentOrders();
+    }
 
     return () => {
       setOrderDetail({});
