@@ -9,12 +9,26 @@
     font-family: "Inter";
     font-style: normal;
     font-weight: 500;
-    font-size: 17px;
+    font-size: 15px;
     /* identical to box height */
 
     /* elred-text/t1 */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
 
     color: #313030;
+  }
+
+  .location-overfow-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .location {
     font-style: normal;

@@ -23,6 +23,8 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
     "/portalPatchCompanyOtherInfo"
   );
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   const { data: Interested, error } = useGetResponse("/getProductOrServices");
 
   const [makeApiCall, setMakeApiCall] = useState(false);

@@ -57,7 +57,7 @@ function EditPrivacy({ data = [], show, close, editSaveCallback }) {
   };
 
   const onDelete = (index) => {
-    const privacy = JSON.parse(JSON.stringify(data)) ?? [];
+    const privacy = JSON.parse(JSON.stringify(privacyData)) ?? [];
     privacy.splice(index, 1);
 
     setPrivacyData(privacy);

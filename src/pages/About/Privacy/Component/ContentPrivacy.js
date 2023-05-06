@@ -9,7 +9,7 @@ function ContentPrivacy({ data }) {
         <div className="col-10 col-lg-9 col-md-12 col-sm-12 p-0">
           {data.map((item, index) => {
             return (
-              <div>
+              <div id={`${item.title}-${index}`}>
                 <p className="privacy-title">
                   {index + 1}
                   {". "}
@@ -26,7 +26,7 @@ function ContentPrivacy({ data }) {
             {data.map((item, index) => {
               return (
                 <div className="content content-table-of-content" key={index}>
-                  <a href="#">{item.title}</a>
+                  <a href={`#${item.title}-${index}`}>{item.title}</a>
                 </div>
               );
             })}

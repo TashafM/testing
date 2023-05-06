@@ -6,7 +6,6 @@ import { prepareAddressString } from "../../../../components/Utils/Utils";
 import CardHead from "./CardHead";
 
 function CardAddress({ registeredAddress, onClick }) {
-  console.log(prepareAddressString(registeredAddress));
   return (
     <Col className="card-wrapper" md={6} xl={4}>
       <div className="card-cont">
@@ -16,7 +15,7 @@ function CardAddress({ registeredAddress, onClick }) {
           icon={location}
           onClick={onClick}
         />
-        {Object.keys(registeredAddress.address).length ? (
+        {Object.keys(registeredAddress?.address ?? {}).length ? (
           <div className="address-container">
             <span className="email margin-text">
               {prepareAddressString(registeredAddress)}

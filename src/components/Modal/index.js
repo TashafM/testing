@@ -49,15 +49,15 @@ function ModalComponent({
       if (makeApiCall) {
         editSaveCallback([...Data]);
       } else {
-        // close();
+        close();
       }
     }
   };
 
   const onDelete = (index) => {
-    const data = JSON.parse(JSON.stringify(Data));
-    data.splice(index, 1);
-    setData(data);
+    const d = JSON.parse(JSON.stringify(Data));
+    d.splice(index, 1);
+    setData([...d]);
   };
 
   console.log("faqData", Data);
@@ -93,8 +93,7 @@ function ModalComponent({
           {Data.map((item, index) => {
             return (
               <div
-                key={`privacy-item-${index}`}
-                style={{}}
+                key={`${type}-privacy-item-${index}`}
                 className="text-input-faq"
               >
                 <div className="privacy-title-container d-flex align-items-center">

@@ -5,11 +5,6 @@ import quote from "../../../../assets/images/other-info.png";
 import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
 
 function CardOtherInfo({ otherInfo, onClick, onViewAllClick }) {
-  console.log(
-    otherInfo.salesReachAt.length ||
-      otherInfo.interestedToPurchase.length ||
-      otherInfo.servicesAndSupport.details !== ""
-  );
   return (
     <Col className="card-wrapper" md={6} xl={4}>
       <div className="card-cont card-other-cont">

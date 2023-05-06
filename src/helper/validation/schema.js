@@ -34,7 +34,7 @@ const schema = {
     contact: Yup.number()
       .required("contact is required")
       .typeError("contact must be a number"),
-    address: Yup.string().required("address is required"),
+    // address: Yup.string().required("address is required"),
   }),
 
   createBrand: Yup.object({

@@ -33,9 +33,6 @@ function Information() {
   const onUpdate = (cache) => {
     setData(cache);
   };
-  if (!data.length) {
-    return <div>Company not availvable</div>;
-  }
 
   return (
     <Container fluid>
@@ -49,8 +46,8 @@ function Information() {
             {/* {data[0]?.contactUs?.length ? ( */}
             <CardContacts
               type={"Contact"}
-              contactUs={data[0]?.contactUs ?? {}}
-              length={data[0]?.contactUs?.length ?? 0}
+              contactUs={data?.[0]?.contactUs ?? {}}
+              length={data?.[0]?.contactUs?.length ?? 0}
               title="Contact"
               onClick={() => {
                 setOpenDrawer({
@@ -68,7 +65,7 @@ function Information() {
             onClick={() => {
               setopenAddress(true);
             }}
-            registeredAddress={data[0]?.registeredAddress ?? {}}
+            registeredAddress={data?.[0]?.registeredAddress ?? {}}
           />
           {openAddress && (
             <EditAddress
@@ -76,7 +73,7 @@ function Information() {
               handleClose={() => {
                 setopenAddress(false);
               }}
-              data={data[0]?.registeredAddress ?? {}}
+              data={data?.[0]?.registeredAddress ?? {}}
               completeData={data}
               onUpdate={(data) => {
                 setData(data);
@@ -85,7 +82,7 @@ function Information() {
           )}
 
           <CardHOpration
-            hoursOfOperation={data[0].hoursOfOperation}
+            hoursOfOperation={data?.[0]?.hoursOfOperation}
             onClick={() => {
               setOpenOperation(true);
             }}
@@ -97,7 +94,7 @@ function Information() {
               handleClose={() => {
                 setOpenOperation(false);
               }}
-              data={data[0]?.hoursOfOperation ?? {}}
+              data={data?.[0]?.hoursOfOperation ?? {}}
               completeData={data}
               onUpdate={(data) => {
                 setData(data);
@@ -105,7 +102,7 @@ function Information() {
             />
           )}
           <CardSocial
-            socialMediaDetails={data[0].socialMediaDetails ?? []}
+            socialMediaDetails={data?.[0]?.socialMediaDetails ?? []}
             onClick={() => {
               setOpenSocial(true);
             }}
@@ -117,7 +114,7 @@ function Information() {
               handleClose={() => {
                 setOpenSocial(false);
               }}
-              data={data[0]?.socialMediaDetails ?? []}
+              data={data?.[0]?.socialMediaDetails ?? []}
               completeData={data}
               onUpdate={(data) => {
                 setData(data);
@@ -126,7 +123,7 @@ function Information() {
           )}
 
           <CardCompStatement
-            companyStatement={data[0]?.companyStatement ?? ""}
+            companyStatement={data?.[0]?.companyStatement ?? ""}
             onClick={() => {
               setOpenStatement(true);
             }}
@@ -138,7 +135,7 @@ function Information() {
               handleClose={() => {
                 setOpenStatement(false);
               }}
-              data={data[0]?.companyStatement ?? []}
+              data={data?.[0]?.companyStatement ?? []}
               completeData={data}
               onUpdate={(data) => {
                 setData(data);
@@ -146,7 +143,7 @@ function Information() {
             />
           )}
           <CardOtherInfo
-            otherInfo={data[0]?.otherInfo}
+            otherInfo={data?.[0]?.otherInfo}
             onClick={() => {
               setEditOtherInfo(true);
             }}
@@ -161,7 +158,7 @@ function Information() {
               handleClose={() => {
                 setEditOtherInfo(false);
               }}
-              data={data[0]?.otherInfo ?? []}
+              data={data?.[0]?.otherInfo ?? []}
               completeData={data}
               onUpdate={onUpdate}
             />
@@ -173,7 +170,7 @@ function Information() {
               handleClose={() => {
                 setOpenOtherInfor(false);
               }}
-              data={data[0]?.otherInfo ?? []}
+              data={data?.[0]?.otherInfo ?? []}
               completeData={data}
               onUpdate={(res) => {
                 setData(res);

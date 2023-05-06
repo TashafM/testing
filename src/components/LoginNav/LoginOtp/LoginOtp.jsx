@@ -97,7 +97,9 @@ const LoginOtp = () => {
 
       <div className="text-login">Login</div>
       <div className="email-enter-msg">
-        Please enter registered email id to get OTP
+        {reqOtp
+          ? "Please enter OTP received on the registered email id"
+          : "Please enter registered email id to get OTP"}
       </div>
 
       {reqOtp ? (
