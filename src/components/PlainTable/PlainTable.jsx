@@ -6,7 +6,7 @@ import arrow from "../../assets/images/greater-then.png";
 import { getDesireDateFormate } from "../Utils/Utils";
 import { useLocation } from "react-router-dom";
 
-const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
+const PlainTable = ({ columns, data, onClick }) => {
   const loaction = useLocation();
   //   const data = datum.sort((a, b) => b.id - a.id);  -----------> for sorting we can use this
 
@@ -17,7 +17,9 @@ const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
           <thead className="table-head">
             <tr className="tr-head">
               {columns.map((col, idx) => (
-                <th key={idx}>{col.value}</th>
+                <th className="table-head-overflow" key={idx}>
+                  {col.value}
+                </th>
               ))}
             </tr>
           </thead>
@@ -48,7 +50,7 @@ const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
                     if (col.value.includes("Status")) {
                       return (
                         <td>
-                          <div className="d-flex align-items-center justify-content-center">
+                          <div className="d-flex align-items-center justify-content-center table-over-flow-text">
                             <p
                               style={{
                                 backgroundColor: location.pathname.includes(
@@ -89,7 +91,7 @@ const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
                     if (col?.value?.includes("Total")) {
                       return (
                         <td>
-                          <div className="d-flex align-items-center justify-content-center">
+                          <div className="d-flex align-items-center justify-content-center table-over-flow-text">
                             <p className="m-0">
                               {col?.value?.includes("Price") ||
                               col?.value?.includes("Total")

@@ -46,18 +46,20 @@ function DealerCurrentOrder() {
 
   console.log({ data });
   return (
-    <InfiniteScroll
-      dataLength={data.length}
-      next={getCurrentOrders}
-      hasMore={true}
-      scrollableTarget="order-table-container"
-    >
-      <PlainTable
-        columns={delalersCurrentOrderColumn}
-        data={data}
-        onClick={onDetailClicked}
-      />
-    </InfiniteScroll>
+    <div className="dealers-past-order-wrapper">
+      <InfiniteScroll
+        dataLength={data.length}
+        next={getCurrentOrders}
+        hasMore={true}
+        scrollableTarget="order-table-container"
+      >
+        <PlainTable
+          columns={delalersCurrentOrderColumn}
+          data={data}
+          onClick={onDetailClicked}
+        />
+      </InfiniteScroll>
+    </div>
   );
 }
 

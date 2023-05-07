@@ -7,6 +7,7 @@ import { companyCurrentOrder } from "../../../constant/tablesTitle";
 import { CircularProgress } from "@mui/material";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useNavigate } from "react-router-dom";
+import "./order.scss";
 
 function CompanyPastOrder() {
   const [page, setPage] = useState(0);
@@ -44,19 +45,21 @@ function CompanyPastOrder() {
     navigate(`/home/order/details`, { state: { data: item } });
   };
   return (
-    <InfiniteScroll
-      dataLength={data.length}
-      next={getCurrentOrders}
-      hasMore={true}
-      scrollableTarget="order-table-container"
-    >
-      <PlainTable
-        columns={companyCurrentOrder}
-        data={data}
-        onClick={onDetailClicked}
-        type={"company"}
-      />
-    </InfiniteScroll>
+    <div className="company-current-order-container">
+      <InfiniteScroll
+        dataLength={data.length}
+        next={getCurrentOrders}
+        hasMore={true}
+        scrollableTarget="order-table-container"
+      >
+        <PlainTable
+          columns={companyCurrentOrder}
+          data={data}
+          onClick={onDetailClicked}
+          type={"company"}
+        />
+      </InfiniteScroll>
+    </div>
   );
 }
 

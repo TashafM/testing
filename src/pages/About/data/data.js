@@ -95,20 +95,20 @@ export const delalersCurrentOrderColumn = [
 ];
 
 export const orderDetailColumn = [
-  { title: "SI No", value: "SI No" },
-  { title: "BP Catalog Code", value: "bpCatalogNumber" },
-  { title: "Item Description", value: "itemDescription" },
-  { title: "Qty", value: "quantity" },
-  { title: "Price per unit", value: "grossPrice" },
-  { title: "Amount", value: "totalPrice" },
-  { title: "Rate (CGST)", value: "cgstPercentage" },
-  { title: "Amount (CGST)", value: "cgstAmount" },
-  { title: "Rate (SGST)", value: "sgstPercentage" },
-  { title: "Amount (SGST)", value: "sgstAmount" },
-  { title: "Rate (IGST)", value: "igstPercentage" },
-  { title: "Amount (IGST)", value: "igstAmount" },
-  { title: "Taxable Amount", value: "taxableAmount" },
-  { title: "Total Amount", value: "totalAmount" },
+  { value: "SI No", title: "SI No" },
+  { value: "BP Catalog Code", title: "bpCatalogNumber" },
+  { value: "Item Description", title: "itemDescription" },
+  { value: "Qty", title: "quantity" },
+  { value: "Price per unit", title: "grossPrice" },
+  { value: "Amount", title: "totalPrice" },
+  { value: "Rate (CGST)", title: "cgstPercentage" },
+  { value: "Amount (CGST)", title: "cgstAmount" },
+  { value: "Rate (SGST)", title: "sgstPercentage" },
+  { value: "Amount (SGST)", title: "sgstAmount" },
+  { value: "Rate (IGST)", title: "igstPercentage" },
+  { value: "Amount (IGST)", title: "igstAmount" },
+  { value: "Taxable Amount", title: "taxableAmount" },
+  { value: "Total Amount", title: "totalAmount" },
 ];
 
 export const CreateJobsTabs = [

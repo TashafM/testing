@@ -46,19 +46,21 @@ function CompanyCurrentOrder() {
 
   console.log({ data });
   return (
-    <InfiniteScroll
-      dataLength={data.length}
-      next={getCurrentOrders}
-      hasMore={true}
-      scrollableTarget="order-table-container"
-    >
-      <PlainTable
-        columns={companyCurrentOrder}
-        data={data}
-        onClick={onDetailClicked}
-        type={"company"}
-      />
-    </InfiniteScroll>
+    <div className="company-current-order-container">
+      <InfiniteScroll
+        dataLength={data.length}
+        next={getCurrentOrders}
+        hasMore={true}
+        scrollableTarget="order-table-container"
+      >
+        <PlainTable
+          columns={companyCurrentOrder}
+          data={data}
+          onClick={onDetailClicked}
+          type={"company"}
+        />
+      </InfiniteScroll>
+    </div>
   );
 }
 

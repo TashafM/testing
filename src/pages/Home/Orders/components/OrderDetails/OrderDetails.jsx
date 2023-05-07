@@ -15,6 +15,7 @@ import ViewOtherInfo from "../../../../Dealers/SubPages/Orders/component/drawer/
 import OrderSummary from "../../../../Dealers/SubPages/Orders/component/OrderSummary";
 import Arrow from "../../../../../assets/images/arrow-right.png";
 import { toast } from "react-toastify";
+import PlainTable from "../../../../../components/PlainTable/PlainTable";
 
 const OrderDetails = () => {
   const location = useLocation();
@@ -90,7 +91,7 @@ const OrderDetails = () => {
                   : ""}
               </span>
             </div>
-            <div className="company-name">{order?.labelInstruction}</div>
+            <div className="company-name">{}</div>
           </div>
           <div className="search-filter-div">
             <SearchBar />
@@ -146,7 +147,7 @@ const OrderDetails = () => {
           hasMore={true}
           scrollableTarget="company-order-table-container"
         >
-          <OrderTable
+          <PlainTable
             data={data?.length ? data[0]?.order ?? [] : []}
             columns={orderDetailColumn}
           />
