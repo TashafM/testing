@@ -1,22 +1,17 @@
 import React from "react";
 import { orderDetailColumn } from "../../../About/data/data";
-import billing from "../../../../assets/images/billing.png";
-import shipping from "../../../../assets/images/shipping.png";
 import ViewAddress from "./component/drawer/ViewAddress";
 import { useState } from "react";
 import ViewOtherInfo from "./component/drawer/ViewOtherInfo";
 import { useEffect } from "react";
 import { usePaginatedData } from "../../../../hooks/pagination/usePaginatedData";
 import { useLocation, useOutletContext } from "react-router-dom";
-import OrderTable from "../../../Home/Orders/components/OrderTable/OrderTable";
 import { CircularProgress } from "@mui/material";
-import { prepareAddressString } from "../../../../components/Utils/Utils";
 import InfiniteScroll from "react-infinite-scroll-component";
-import BtnTitleCenter from "../../../../components/Button/BtnTitleCenter";
-import arrow from "../../../../assets/images/arrow-right-red.png";
 import OrderSummary from "./component/OrderSummary";
-import ScrollBtn from "../../../../components/ScrollBtn/ScrollBtn";
 import { useRef } from "react";
+import PlainTable from "../../../../components/PlainTable/PlainTable";
+import "./dealerorders.scss";
 
 function DealerOrderDetails() {
   const [showAddress, setShowAddress] = useState(false);
@@ -115,18 +110,21 @@ function DealerOrderDetails() {
           }}
         />
       )}
-      <InfiniteScroll
-        dataLength={data?.length ? data[0]?.order ?? [] : 0}
-        next={getCurrentOrders}
-        hasMore={true}
-        scrollableTarget="company-order-table-container"
-      >
-        <OrderTable
-          columns={orderDetailColumn}
-          data={data?.length ? data[0]?.order ?? [] : []}
-        />
-        {/* <ScrollBtn myRef={myRef} setScrollX={setScrollX} scrollX={scrollX} /> */}
-      </InfiniteScroll>
+
+      <div className="table-dealers-order-details">
+        <InfiniteScroll
+          dataLength={data?.length ? data[0]?.order ?? [] : 0}
+          next={getCurrentOrders}
+          hasMore={true}
+          scrollableTarget="company-order-table-container"
+        >
+          <PlainTable
+            columns={orderDetailColumn}
+            data={data?.length ? data[0]?.order ?? [] : []}
+          />
+          {/* <ScrollBtn myRef={myRef} setScrollX={setScrollX} scrollX={scrollX} /> */}
+        </InfiniteScroll>
+      </div>
     </div>
   );
 }

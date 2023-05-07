@@ -1,6 +1,6 @@
 .plainTable {
   position: relative;
-  height: 60vh;
+  height: 40vh;
   overflow: auto;
   &::-webkit-scrollbar {
     width: 0.2em;
@@ -16,13 +16,17 @@
   }
 
   .table-over-flow-text {
-    max-width: 250px;
+    max-width: 160px;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+  .table-head-overflow {
+    // min-width: 130px;
+    padding-inline: 30px !important;
   }
   .table-container {
     position: relative;

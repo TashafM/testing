@@ -1,5 +1,16 @@
 .dealers-order-main-container {
-  margin-top: 56px;
+  margin-top: 40px;
+}
+
+.dealers-past-order-wrapper {
+  .plainTable {
+    height: 60vh !important;
+  }
+}
+.table-dealers-order-details {
+  .plainTable {
+    height: 45vh !important;
+  }
 }
 
 .seeall-btn-container {
@@ -76,7 +87,7 @@
   margin-right: 20px;
 }
 .address-card-main {
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   .cont-title {
     font-size: 18px;
   }
@@ -191,7 +202,7 @@
 
 @media only screen and (max-width: 1600px) {
   .dealers-order-main-container {
-    margin-top: 45px;
+    margin-top: 32px;
   }
   .address-card-main {
     margin-bottom: 24px;
@@ -208,10 +219,10 @@
 
 @media only screen and (max-width: 1440px) {
   .dealers-order-main-container {
-    margin-top: 40px;
+    margin-top: 30px;
   }
   .address-card-main {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     .cont-title {
       font-size: 16px;
     }
@@ -223,7 +234,7 @@
     margin-top: 35px;
   }
   .address-card-main {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     .cont-title {
       font-size: 14px;
     }
