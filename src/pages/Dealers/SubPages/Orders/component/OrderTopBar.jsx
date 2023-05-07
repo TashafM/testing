@@ -64,6 +64,7 @@ const OrderTopBar = ({ title, goback, orderDetail }) => {
       <div className="search-filter-btn">
         <SearchBarDealers />
         <Filter
+          className="p-0"
           onClick={() => {
             toast.success("Feature Coming Soon");
           }}

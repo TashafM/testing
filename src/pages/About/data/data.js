@@ -92,6 +92,7 @@ export const delalersCurrentOrderColumn = [
   { value: "No. of Item", title: "numberOfItems" },
   { value: "Price", title: "totalAmount" },
   { value: "Status", title: "orderStatus" },
+  { value: "", title: "" },
 ];
 
 export const orderDetailColumn = [

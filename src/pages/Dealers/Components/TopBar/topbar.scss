@@ -24,6 +24,15 @@
 
   .search-filter-btn {
     display: flex;
+    .search-div-dealers {
+      input {
+        padding-top: 11px;
+        padding-bottom: 11px;
+      }
+    }
+    .filter-dealer {
+      padding: 7px 10px !important;
+    }
   }
 }
 
