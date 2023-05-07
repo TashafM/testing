@@ -1,5 +1,5 @@
 .rightside {
-  padding-top: 20px;
+  padding-top: 15px;
   // margin-right: 30px;
   // position: fixed;
   width: 100%;
@@ -10,9 +10,9 @@
     justify-content: space-between;
 
     .title {
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 600;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
 
     img {
@@ -112,7 +112,7 @@
       border: transparent;
       padding: 18px;
       border-radius: 12px;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 600;
       width: 80%;
       line-height: 30px;
@@ -305,7 +305,7 @@
 @media (min-width: 1440px) and (max-width: 1749px) {
   .rightside {
     padding-top: 20px;
-    width: 90%;
+    width: 95%;
 
     .title-close {
       .title {
