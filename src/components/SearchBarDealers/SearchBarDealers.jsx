@@ -11,6 +11,7 @@ const SearchBarDealers = ({ handleSearch }) => {
         </span>
         <input
           type="text"
+          contentEditable={false}
           placeholder="Search..."
           onChange={handleSearch}
         ></input>

@@ -5,6 +5,7 @@ import "./PlainTable.scss";
 import arrow from "../../assets/images/greater-then.png";
 import { getDesireDateFormate } from "../Utils/Utils";
 import { useLocation } from "react-router-dom";
+import defaultProduct from "../../assets/images/default-product-image.png";
 
 const PlainTable = ({ columns, data, onClick }) => {
   const loaction = useLocation();
@@ -29,9 +30,29 @@ const PlainTable = ({ columns, data, onClick }) => {
                 <tr
                   key={row.id}
                   className="tr-body"
-                  onClick={() => onClick(row)}
+                  onClick={() => {
+                    if (!loaction?.pathname.includes("detail")) onClick(row);
+                  }}
                 >
                   {columns.map((col, id) => {
+                    let value = row;
+                    col.title.split(",").map((item, index) => {
+                      value = value[item];
+                    });
+
+                    const isPrice =
+                      col?.value?.includes("Total") ||
+                      col?.value?.includes("Price") ||
+                      col?.value?.includes("Amount");
+
+                    const isPastOrder = location.pathname.includes(
+                      "dealers/orders/past-order"
+                    );
+
+                    const isLastIndex = id === columns.length - 1;
+                    if (col.title.includes("Date")) {
+                      value = getDesireDateFormate(value ?? "");
+                    }
                     if (!id) {
                       return (
                         <td>
@@ -39,13 +60,28 @@ const PlainTable = ({ columns, data, onClick }) => {
                         </td>
                       );
                     }
-                    let value = row;
-                    col.title.split(",").map((item, index) => {
-                      value = value[item];
-                    });
 
-                    if (col.title.includes("Date")) {
-                      value = getDesireDateFormate(value ?? "");
+                    if (isLastIndex && !col.value) {
+                      return (
+                        <td id="arrow-div-table">
+                          <img
+                            src={arrow}
+                            alt="arrow right-action"
+                            className="arrow-right-image"
+                          />
+                        </td>
+                      );
+                    }
+
+                    if (col.value === "Item Description") {
+                      return (
+                        <td className="detail-div-img">
+                          <img
+                            src={row?.productImages?.[0] ?? defaultProduct}
+                          />
+                          <span className="orderTable-name">{value}</span>
+                        </td>
+                      );
                     }
                     if (col.value.includes("Status")) {
                       return (
@@ -53,16 +89,10 @@ const PlainTable = ({ columns, data, onClick }) => {
                           <div className="d-flex align-items-center justify-content-center table-over-flow-text">
                             <p
                               style={{
-                                backgroundColor: location.pathname.includes(
-                                  "dealers/orders/past-order"
-                                )
+                                backgroundColor: isPastOrder
                                   ? "#E1F4EB"
                                   : "#fdf2e7",
-                                color: location.pathname.includes(
-                                  "dealers/orders/past-order"
-                                )
-                                  ? "#03A55A"
-                                  : "#ee8d31",
+                                color: isPastOrder ? "#03A55A" : "#ee8d31",
                               }}
                               className="table-status-chip m-0"
                             >
@@ -78,23 +108,18 @@ const PlainTable = ({ columns, data, onClick }) => {
                               />
                               {value}
                             </p>
-                            <img
-                              src={arrow}
-                              alt="arrow right-action"
-                              className="arrow-right-image"
-                            />
                           </div>
                         </td>
                       );
                     }
-                    console.log(col.value);
-                    if (col?.value?.includes("Total")) {
+                    if (isPrice) {
                       return (
                         <td>
                           <div className="d-flex align-items-center justify-content-center table-over-flow-text">
                             <p className="m-0">
                               {col?.value?.includes("Price") ||
-                              col?.value?.includes("Total")
+                              col?.value?.includes("Total") ||
+                              col?.value?.includes("Amount")
                                 ? `${row?.currency?.symbol} `
                                 : ""}
                               {value}
@@ -106,7 +131,10 @@ const PlainTable = ({ columns, data, onClick }) => {
                     return (
                       <>
                         <td key={id}>
-                          <div className="table-over-flow-text">{value}</div>
+                          <div className="table-over-flow-text">
+                            {value}{" "}
+                            {col?.value?.includes("Rate") && value ? " %" : ""}
+                          </div>
                         </td>
                       </>
                     );
