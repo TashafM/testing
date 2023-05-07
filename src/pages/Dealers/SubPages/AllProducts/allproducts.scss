@@ -125,6 +125,18 @@
   }
 }
 
+.loader-div-subcategory {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+
+  .spinner-border{
+    --bs-spinner-width: 4rem !important;
+    --bs-spinner-height: 4rem !important;
+  }
+}
+
 @media only screen and (max-width: 1728px) {
   .allproducts {
     .catItems {
@@ -188,8 +200,8 @@
       width: 200px;
       height: 200px;
 
-      .image-div{
-        img{
+      .image-div {
+        img {
           max-width: 140px;
           width: 100%;
         }
