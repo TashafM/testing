@@ -74,7 +74,21 @@
   background-color: #be212a;
   border: none;
   color: white;
+  width: 250px;
   padding: 20px 45px;
+  border-radius: 8px;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 18px;
+  margin-top: 3%;
+}
+
+.get-otp-btn-loading{
+  background-color: #be212a;
+  border: none;
+  color: white;
+  padding: 12px 75px;
+  width: 250px;
   border-radius: 8px;
   font-size: 24px;
   font-weight: 600;

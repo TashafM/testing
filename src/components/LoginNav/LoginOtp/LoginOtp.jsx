@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Form, InputGroup, FormControl, Button } from "react-bootstrap";
+import {
+  Form,
+  InputGroup,
+  FormControl,
+  Button,
+  Spinner,
+} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../Login.scss";
 import axios from "axios";
@@ -13,6 +19,7 @@ const LoginOtp = () => {
   const [email, setEmail] = useState("");
   const [userCode, setUserCode] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -44,7 +51,39 @@ const LoginOtp = () => {
     }
   };
 
+  // const getOtp = () => {
+
+  //   setEmail("");
+  //   axios
+  //     .post(API.LOGIN_API, emailData)
+  //     .then((res) => {
+  //       console.log(res, "00000000000");
+  //       if (res.status == 200) {
+  //         setReqOtp(true);
+  //         setUserCode(res.data.result[0].userCode);
+  //         toast.success("OTP sent to your email address!");
+  //         setIsDisabled(false);
+  //       }
+  //       // console.log(res.data.result[0].userCode,'jjjjjjj')
+  //     })
+  //     .catch((err) => {
+  //       if (err.response.status !== 200) {
+  //         toast.error("Email id is not registered with us!");
+  //         setIsDisabled(false);
+  //       }
+  //       console.log(err.response.status, "erorro");
+  //     });
+  // };
+
   const getOtp = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address!");
+      return;
+    }
+
+    setIsLoading(true);
     setEmail("");
     axios
       .post(API.LOGIN_API, emailData)
@@ -55,15 +94,15 @@ const LoginOtp = () => {
           setUserCode(res.data.result[0].userCode);
           toast.success("OTP sent to your email address!");
           setIsDisabled(false);
+          setIsLoading(false);
         }
-        // console.log(res.data.result[0].userCode,'jjjjjjj')
       })
       .catch((err) => {
         if (err.response.status !== 200) {
           toast.error("Email id is not registered with us!");
           setIsDisabled(false);
+          setIsLoading(false);
         }
-        console.log(err.response.status, "erorro");
       });
   };
 
@@ -72,9 +111,9 @@ const LoginOtp = () => {
     if (otpValue.length !== 6) {
       setError("OTP must have 6 characters");
       return false;
-    }
-
-    axios
+    }else{
+      setIsLoading(true);
+      axios
       .post(API.VERIFY_OTP, {
         userCode: userCode,
         otp: otpValue,
@@ -87,8 +126,20 @@ const LoginOtp = () => {
           delete res?.data?.result;
           localStorage.setItem("userData", JSON.stringify(res?.data));
           navigate("/select-account-type");
+          toast.success("Login Successfully");
+
+          setIsLoading(false)
         }
-      });
+      }).catch((err)=>{
+        setIsLoading(false)
+        setOtp(["","","","","",""])
+        toast.error("Incorrect OTP entered");
+
+      })
+    }
+
+
+    
   };
 
   return (
@@ -132,7 +183,7 @@ const LoginOtp = () => {
         </div>
       )}
 
-      <button className="get-otp-btn" onClick={getOtp} disabled={isDisabled}>
+      {/* <button className="get-otp-btn" onClick={getOtp} disabled={isDisabled}>
         {isDisabled ? (
           "Getting Otp..."
         ) : reqOtp ? (
@@ -149,7 +200,33 @@ const LoginOtp = () => {
         ) : (
           "Get OTP"
         )}
-      </button>
+      </button> */}
+
+      {reqOtp ? (
+        <button
+          className={isLoading ? "get-otp-btn-loading" : "get-otp-btn"}
+          onClick={validateOtp}
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <Spinner animation="border" variant="light" />
+          ) : (
+            "Login"
+          )}
+        </button>
+      ) : (
+        <button
+          className={isLoading ? "get-otp-btn-loading" : "get-otp-btn"}
+          onClick={getOtp}
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <Spinner animation="border" variant="light" />
+          ) : (
+            "Get Otp"
+          )}
+        </button>
+      )}
     </>
   );
 };
