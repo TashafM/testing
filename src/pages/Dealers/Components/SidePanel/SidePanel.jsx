@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./sidepanel.scss";
-import { Button, Offcanvas } from "react-bootstrap";
+import { Button, Offcanvas, Spinner } from "react-bootstrap";
 import LeftSide from "../LeftSide/LeftSide";
 import RightSide from "../RightSide/RightSide";
 import { AddProducts, EditItems, GlobalSidePanel } from "../../Dealers";
@@ -120,6 +120,8 @@ const SidePanel = ({ noHover }) => {
       .then((res) => {
         if (res.success) {
           setShowPanel(false);
+          setEditMode(false);
+
           // console.log(res.result[0].cartItems, "cart items");
           localStorage.removeItem('variant')
         }
@@ -148,6 +150,7 @@ const SidePanel = ({ noHover }) => {
         <Offcanvas.Body>
           <div className="divided-div">
             <div className="div-1">
+
               <LeftSide
                 data={data}
                 setCartProducts={setCartProducts}

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./allproducts.scss";
 import TopBar from "../../Components/TopBar/TopBar";
-import { Button, Col, Row } from "react-bootstrap";
+import { Button, Col, Row, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { superItems } from "../../data";
 import { API } from "../../../../helper/API";
@@ -16,8 +16,8 @@ import { GlobalSidePanel } from "../../Dealers";
 import { AddProducts } from "../../Dealers";
 
 const AllProducts = () => {
-  const {isEmpty, setIsEmpty} = useContext(AddProducts)
-  const {setLoading, setMsg} = useContext(GlobalContext)
+  const { isEmpty, setIsEmpty } = useContext(AddProducts);
+  const { setLoading, setMsg } = useContext(GlobalContext);
   const principalCompanyUserCode = localStorage.getItem(
     "principalCompanyUserCode"
   );
@@ -26,7 +26,7 @@ const AllProducts = () => {
   const [noData, setNoData] = useState(false);
   const [categoryData, setcategoryData] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const [active, setActive] = useState(0);
 
@@ -55,51 +55,57 @@ const AllProducts = () => {
       }
     };
 
-    
-
-    const viewCart =() =>{
-      setLoading(true)
-      axiosInstance.post(API.VIEW_DEALER_CART,{
-        principalCompanyUserCode
-      }).then((res)=>{
-        const cart = res.result[0].cart.cartItems
-        const popupItems = res.result[0].popUpDisplayItems
-        if(res.totalCartItemCount==0){
-          setIsEmpty(true)
-          setLoading(false)
-          const parseData = JSON.stringify(cart)
-          localStorage.setItem('cart',parseData)
-          const popupData = JSON.stringify(popupItems)
-          localStorage.setItem('popupItems',popupData)
-        }else{
-          setIsEmpty(false)
-          const parseData = JSON.stringify(cart)
-          localStorage.setItem('cart',parseData)
-          const popupData = JSON.stringify(popupItems)
-          localStorage.setItem('popupItems',popupData)
-          const product = res.result[0].cart.cartItems[0]
-          const nicy = res.result[0].popUpDisplayItems.filter((item)=>item.itemNumber == product.itemNumber)
-          const productData = JSON.stringify(nicy);
-          localStorage.setItem("initialProductData", productData);
-          setLoading(false)
-        }
-      }).catch((err)=>setLoading(false))
-    }
+    const viewCart = () => {
+      setLoading(true);
+      axiosInstance
+        .post(API.VIEW_DEALER_CART, {
+          principalCompanyUserCode,
+        })
+        .then((res) => {
+          const cart = res.result[0].cart.cartItems;
+          const popupItems = res.result[0].popUpDisplayItems;
+          if (res.totalCartItemCount == 0) {
+            setIsEmpty(true);
+            setLoading(false);
+            const parseData = JSON.stringify(cart);
+            localStorage.setItem("cart", parseData);
+            const popupData = JSON.stringify(popupItems);
+            localStorage.setItem("popupItems", popupData);
+          } else {
+            setIsEmpty(false);
+            const parseData = JSON.stringify(cart);
+            localStorage.setItem("cart", parseData);
+            const popupData = JSON.stringify(popupItems);
+            localStorage.setItem("popupItems", popupData);
+            const product = res.result[0].cart.cartItems[0];
+            const nicy = res.result[0].popUpDisplayItems.filter(
+              (item) => item.itemNumber == product.itemNumber
+            );
+            const productData = JSON.stringify(nicy);
+            localStorage.setItem("initialProductData", productData);
+            setLoading(false);
+          }
+        })
+        .catch((err) => setLoading(false));
+    };
 
     fetchData();
-    viewCart()
+    viewCart();
   }, []);
 
   const chng = async (id, idx) => {
+    setIsLoading(true);
     setActive(idx);
     const api2 = await axiosInstance.post(API.VIEW_DEALER_PRODUCT_SUBCATEGORY, {
       principalCompanyUserCode,
       categoryId: id,
     });
     setSubCategory(api2.result);
+    setIsLoading(false);
   };
 
   const seeProducts = (itm) => {
+    console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
     const parseItm = JSON.stringify(itm);
     localStorage.setItem("subCategory", parseItm);
     const { categoryId, subCategoryId } = itm;
@@ -148,47 +154,34 @@ const AllProducts = () => {
                   </div>
                 ) : (
                   <>
-                    {/* {subCategory.map((item, id) => (
-                      <div
-                        className="sub-category-div"
-                        onClick={() => seeProducts(item)}
-                        key={id}
-                      >
-                        <div className="image-div">
-                          <img
-                            src={
-                              item.subCategoryImageURL
-                                ? item.subCategoryImageURL
-                                : noImage
-                            }
-                            alt=""
-                          />
-                        </div>
-                        <div className="name">{item.subCategoryName}</div>
+                    {isLoading ? (
+                      <div className="loader-div-subcategory">
+                        <Spinner animation="border" variant="danger" />
                       </div>
-                    ))} */}
-                    <Row  xs={1} sm={2} md={4} xxl={4}>
-                      {subCategory.map((item, id) => (
-                        <Col xs={12} sm={6} md={4} xxl={3} key={id}>
-                          <div
-                            className="sub-category-div"
-                            onClick={() => seeProducts(item)}
-                          >
-                            <div className="image-div">
-                              <img
-                                src={
-                                  item.subCategoryImageURL
-                                    ? item.subCategoryImageURL
-                                    : noImage
-                                }
-                                alt=""
-                              />
+                    ) : (
+                      <Row xs={1} sm={2} md={4} xxl={4}>
+                        {subCategory.map((item, id) => (
+                          <Col xs={12} sm={6} md={4} xxl={3} key={id}>
+                            <div
+                              className="sub-category-div"
+                              onClick={() => seeProducts(item)}
+                            >
+                              <div className="image-div">
+                                <img
+                                  src={
+                                    item.subCategoryImageURL
+                                      ? item.subCategoryImageURL
+                                      : noImage
+                                  }
+                                  alt=""
+                                />
+                              </div>
+                              <div className="name">{item.subCategoryName}</div>
                             </div>
-                            <div className="name">{item.subCategoryName}</div>
-                          </div>
-                        </Col>
-                      ))}
-                    </Row>
+                          </Col>
+                        ))}
+                      </Row>
+                    )}
                   </>
                 )}
               </div>

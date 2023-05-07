@@ -7,46 +7,50 @@ import { API } from "../../../../helper/API";
 const OtherInstructions = ({ show, handleClose }) => {
   const [labelInstruction, setLabelInstruction] = useState("");
   const [otherInstruction, setOtherInstruction] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
-  useEffect(()=>{
-    if(localStorage.getItem('labelInstruction') || localStorage.getItem('otherInstruction')){
-      setLabelInstruction(localStorage.getItem('labelInstruction'))
-      setOtherInstruction(localStorage.getItem('otherInstruction'))
+  useEffect(() => {
+    if (
+      localStorage.getItem("labelInstruction") ||
+      localStorage.getItem("otherInstruction")
+    ) {
+      setLabelInstruction(localStorage.getItem("labelInstruction"));
+      setOtherInstruction(localStorage.getItem("otherInstruction"));
     }
-  },[localStorage.getItem('labelInstruction')])
+  }, [localStorage.getItem("labelInstruction")]);
 
   const handleSubmit = (event) => {
-    if(labelInstruction=='' && otherInstruction==''){
-     console.log('kuch nahi')
-    }else{
-      setLoading(true)
-    event.preventDefault();
-    // setLabelInstruction('');
-    // setOtherInstruction('');
+    if (labelInstruction == "" && otherInstruction == "") {
+      console.log("kuch nahi");
+    } else {
+      setLoading(true);
+      event.preventDefault();
+      // setLabelInstruction('');
+      // setOtherInstruction('');
 
-    const principalCompanyUserCode = localStorage.getItem(
-      "principalCompanyUserCode"
-    );
-    axiosInstance
-      .post(API.EDIT_OTHER_INSTRUCTIONS, {
-        principalCompanyUserCode,
-        labelInstruction,
-        otherInstruction,
-      })
-      .then((res) => {
-        console.log(res.result, "res.result");
-        localStorage.setItem(
-          "labelInstruction",
-          res.result[0].labelInstruction
-        );
-        localStorage.setItem(
-          "otherInstruction",
-          res.result[0].otherInstruction
-        );
-        setLoading(false)
-        handleClose()
-      }).catch((error)=>setLoading(false))
+      const principalCompanyUserCode = localStorage.getItem(
+        "principalCompanyUserCode"
+      );
+      axiosInstance
+        .post(API.EDIT_OTHER_INSTRUCTIONS, {
+          principalCompanyUserCode,
+          labelInstruction,
+          otherInstruction,
+        })
+        .then((res) => {
+          console.log(res.result, "res.result");
+          localStorage.setItem(
+            "labelInstruction",
+            res.result[0].labelInstruction
+          );
+          localStorage.setItem(
+            "otherInstruction",
+            res.result[0].otherInstruction
+          );
+          setLoading(false);
+          handleClose();
+        })
+        .catch((error) => setLoading(false));
     }
     // you can do something with the data here, such as send it to a server
   };
@@ -94,16 +98,27 @@ const OtherInstructions = ({ show, handleClose }) => {
                   onChange={(event) => setOtherInstruction(event.target.value)}
                 />
               </Form.Group>
-              {/* <Button type="submit" className="save-btn some-margin">
-                Save
-              </Button> */}
-              <Button type="submit" className="save-btn some-margin" disabled={loading}>
+              <Button
+                type="submit"
+                className="save-btn some-margin"
+                disabled={
+                  loading ||
+                  (labelInstruction === "" && otherInstruction === "")
+                }
+              >
                 {loading ? (
                   <Spinner animation="border" variant="light" />
                 ) : (
                   "Save"
                 )}
               </Button>
+              {/* <Button type="submit" className="save-btn some-margin" disabled={loading}>
+                {loading ? (
+                  <Spinner animation="border" variant="light" />
+                ) : (
+                  "Save"
+                )}
+              </Button> */}
             </Form>
           </div>
         </Offcanvas.Body>

@@ -1,10 +1,10 @@
 import React from "react";
 import "./simpleinput.scss";
 
-const SimpleInput = ({ title, placeholder, name, value, onChange, error }) => {
+const SimpleInput = ({ title, placeholder, name, value, onChange, error, isMandatory }) => {
   return (
     <div className="simple-input">
-      <div className="label-text">{title}</div>
+      <div className="label-text">{title} {isMandatory?<span style={{color: 'red'}}>*</span>: null}</div>
       <input
         type="text"
         placeholder={placeholder}

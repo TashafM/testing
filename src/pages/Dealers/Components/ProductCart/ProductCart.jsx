@@ -148,6 +148,7 @@ const ProductCart = () => {
           setShippingAddress(res.result[0].cart.shippingAddress);
           setDefaultBilling(res.result[0].cart.billingAddress);
           setDefaultShipping(res.result[0].cart.shippingAddress);
+          localStorage.setItem('cart', JSON.stringify(res.result[0].cart.cartItems));
 
           // setIsEmpty(false);
           const toString = JSON.stringify(res.result[0]);
@@ -345,7 +346,7 @@ const ProductCart = () => {
             />
             {/**PURCHASE ORDER */}
             <div className="purchase-order">
-              <div className="title">Purchase Order Number :</div>
+              <div className="title">Purchase Order Number: <span style={{color:'red'}}>*</span></div>
               <FormControl
                 type="text"
                 value={purchaseOrderNumber}

@@ -130,6 +130,17 @@
   margin-top: 60px;
 }
 
+.loader-products-bottom{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 50vh;
+  .spinner-border{
+    --bs-spinner-width: 4rem !important;
+    --bs-spinner-height: 4rem !important;
+  }
+}
+
 @media only screen and (max-width: 1600px) {
   .products {
     margin-left: 6%;

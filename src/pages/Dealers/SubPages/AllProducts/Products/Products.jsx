@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Col, Row } from "react-bootstrap";
+import { Button, Col, Row, Spinner } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router";
 import TopBar from "../../../Components/TopBar/TopBar";
 import "./products.scss";
@@ -20,15 +20,17 @@ import { GlobalContext } from "../../../../../App";
 
 const Products = () => {
   const { showPanel, setShowPanel } = useContext(GlobalSidePanel);
-  const {setLoading, setMsg} = useContext(GlobalContext)
+  const { setLoading, setMsg } = useContext(GlobalContext);
   const location = useLocation();
   const [products, setProducts] = useState([]);
   const [noProducts, setNoProducts] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   // console.log(location,'location')
   // const [data, setData] = useState([])
   // const [currentId, setCurrentId] = useState(location.state.id);
 
   const switchSubCategory = (value) => {
+    setIsLoading(true);
     const dataStringify = JSON.stringify(value);
     localStorage.setItem("subCategory", dataStringify);
     const parseData = localStorage.getItem("subCategory");
@@ -43,7 +45,11 @@ const Products = () => {
         categoryId: data.categoryId,
         subCategoryId: data.subCategoryId,
       })
-      .then((res) => setProducts(res.result));
+      .then((res) => {
+        setIsLoading(false);
+        setProducts(res.result);
+      })
+      .catch((err) => setIsLoading(false));
   };
 
   useEffect(() => {
@@ -56,70 +62,76 @@ const Products = () => {
     // console.log(categoryId, subCategoryId, principalCompanyUserCode, 'tashaf')
 
     const fetchProducts = async () => {
-      setLoading(true)
-      setMsg('All Products Loading...')
+      setLoading(true);
+      setMsg("All Products Loading...");
       // setLoading(true)
       const api1 = await axiosInstance.post(API.VIEW_DEALER_PRODUCTS, {
         principalCompanyUserCode,
         categoryId: parseData.categoryId,
         subCategoryId: parseData.subCategoryId,
-      })
+      });
       setProducts(api1.result);
       if (api1.result.length == 0) {
         setNoProducts(true);
       }
-      setLoading(false)
+      setLoading(false);
       // localStorage.setItem("currencySymbol", api1.result[0].currency.symbol);
       // localStorage.setItem("currencyType", api1.result[0].currency.type);
     };
     fetchProducts();
   }, []);
 
-
   const callFunc = (val) => {
-    console.log(val,'setttttttttttttttttttttttttttttttttt') 
+    console.log(val, "setttttttttttttttttttttttttttttttttt");
     // setData(val)
-    const popup = JSON.parse(localStorage.getItem('popupItems'))
+    const popup = JSON.parse(localStorage.getItem("popupItems"));
     // console.log(popup,'popup')
     setShowPanel(true);
     const productData = JSON.stringify(val);
     localStorage.setItem("initialProductData", productData);
   };
 
-
-
   return (
     <>
       <div className="products">
         <TopBar title={"All Products"} goback={true} />
+        {console.log(isLoading, "loader")}
 
         <Row className="products-row">
           {noProducts ? (
             <div className="noProductsmsg">No products added yet</div>
           ) : (
             <>
-              {products.map((itm, id) => (
-                <Col className="products-container col-lg-4">
-                  <div
-                    className="img-category-main"
-                    onClick={() => callFunc(itm)}
-                  >
-                    <div className="wish-list-icon">
-                      <img src={wishList} alt="" />
-                    </div>
-                    <div className="product-img">
-                      {/* <img src={itm.productImages[0]} alt="" /> */}
-                      <img src={img600} alt="" />
-                    </div>
-                    <div className="title">{itm.itemDescription}</div>
-                    <div className="description">{itm.itemDescription}</div>
-                  </div>
-                </Col>
-              ))}
+              {isLoading ? (
+                <div className="loader-products-bottom">
+                <Spinner animation="border" variant="danger" />
+                </div>
+              ) : (
+                <>
+                  {products.map((itm, id) => (
+                    <Col className="products-container col-lg-4">
+                      <div
+                        className="img-category-main"
+                        onClick={() => callFunc(itm)}
+                      >
+                        <div className="wish-list-icon">
+                          <img src={wishList} alt="" />
+                        </div>
+                        <div className="product-img">
+                          {/* <img src={itm.productImages[0]} alt="" /> */}
+                          <img src={img600} alt="" />
+                        </div>
+                        <div className="title">{itm.itemDescription}</div>
+                        <div className="description">{itm.itemDescription}</div>
+                      </div>
+                    </Col>
+                  ))}
+                </>
+              )}
             </>
           )}
         </Row>
-        {showPanel && <SidePanel noHover/>}
+        {showPanel && <SidePanel noHover />}
 
         {/* <Category/> */}
       </div>

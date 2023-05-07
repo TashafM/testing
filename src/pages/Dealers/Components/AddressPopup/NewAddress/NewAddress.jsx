@@ -156,6 +156,7 @@ const NewAddress = ({
           )}
           {newAddressField.map((item,id) => (
             <SimpleInput
+              isMandatory={item.mandatory}
               key={id}
               title={item.title}
               placeholder={item.placeholderText}
