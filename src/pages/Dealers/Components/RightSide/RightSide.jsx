@@ -22,6 +22,7 @@ function RightSide({
   setIndexNo,
 }) {
   const { setNotEditable, setEditMode } = useContext(EditItems);
+  const { setCartOpen} = useContext(AddProducts)
   const [selectedId, setSelectedId] = useState(-1);
 
   return (
@@ -40,6 +41,7 @@ function RightSide({
               cartProducts.length != 0 && addItemToCart();
             }
             setNotEditable(true);
+            setCartOpen(false)
             setSelectedId(-1);
             localStorage.removeItem("variant");
             setEditMode(false);

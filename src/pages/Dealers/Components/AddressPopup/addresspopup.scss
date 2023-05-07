@@ -37,10 +37,7 @@
   position: relative;
   overflow-y: scroll;
 
-  
-
-
-  .save-address-div{
+  .save-address-div {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -54,7 +51,6 @@
       margin-right: 0 !important;
     }
   }
-  
 }
 
 .popup-container::-webkit-scrollbar,
@@ -66,13 +62,13 @@
   display: none;
 }
 
-.save-address-div{
+.save-address-div {
   position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 4% 17%;
-    box-shadow: 0px -4px 12px 3px rgba(0, 0, 0, 0.1);
-    background-color: white;
+  bottom: 0;
+  width: 100%;
+  padding: 4% 17%;
+  box-shadow: 0px -4px 12px 3px rgba(0, 0, 0, 0.1);
+  background-color: white;
 }
 
 .newAddress-back {
@@ -85,8 +81,6 @@
     }
   }
 }
-
-
 
 @media (min-width: 1200px) and (max-width: 1439px) {
   .offcanvas.show.address-popup {
@@ -102,13 +96,23 @@
   }
 }
 
-@media (min-width: 1440px) and (max-width: 1559px) {
+@media (min-width: 1440px) and (max-width: 1599px) {
   .offcanvas.show.address-popup {
     width: 35% !important;
 
     .offcanvas-title {
+      padding-top: 10px;
       padding-left: 30px;
-      font-size: 24px;
+      font-size: 22px;
+      line-height: 28px;
+    }
+
+    .save-address-div{
+      padding: 2% 15%;
+    }
+
+    button{
+      padding: 12px;
     }
   }
   .popup-container {

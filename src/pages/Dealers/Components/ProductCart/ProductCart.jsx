@@ -29,7 +29,7 @@ const ProductCart = () => {
 
   const { showPanel, setShowPanel } = useContext(GlobalSidePanel);
 
-  const { isEmpty, setIsEmpty } = useContext(AddProducts);
+  const { isEmpty, setIsEmpty, cartOpen, setCartOpen } = useContext(AddProducts);
   const {setEditMode, editMode} = useContext(EditItems)
 
   const setFirstItem = () => {
@@ -320,6 +320,7 @@ const ProductCart = () => {
                   // setNotEditable(false);
                   setEditMode(true)
                   setFirstItem()
+                  setCartOpen(true)
                 }}
               >
                 <img src={editIcon} alt="" />
