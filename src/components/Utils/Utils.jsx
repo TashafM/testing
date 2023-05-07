@@ -44,3 +44,12 @@ export const getDesireDateFormate = (date) => {
     return moment(date).format("DD/MM/YYYY");
   }
 };
+
+export const getLocalStorageData = (key) => {
+  const userData = localStorage.getItem(key);
+  if (userData) {
+    return JSON.parse(userData);
+  }
+
+  return null;
+};

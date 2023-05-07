@@ -7,12 +7,13 @@ import compIcon from "../../assets/images/company-default-icon.png";
 // import NeedHelp from "../NeedHelp/NeedHelp";
 
 import { useLocation, useNavigate } from "react-router-dom";
+import { getLocalStorageData } from "../Utils/Utils";
 
 const Menus = ({ tabs, marginTop }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const userData = JSON.parse(localStorage.getItem("userData") ?? "");
+  const userData = getLocalStorageData("useData");
   // const [data, setData] = useState(localStorage.getItem("data") || null);
 
   const goto = (url) => {

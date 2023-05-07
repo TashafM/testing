@@ -6,9 +6,10 @@ import searchBg from "../../assets/images/searchBg.svg";
 import cartBg from "../../assets/images/cartBg.svg";
 import user from "../../assets/images/user.jpg";
 import compIcon from "../../assets/images/company-default-icon.png";
+import { getLocalStorageData } from "../Utils/Utils";
 
 const TabletNavbar = ({ dealers }) => {
-  const userData = JSON.parse(localStorage.getItem("userData") ?? "");
+  const userData = getLocalStorageData("userData");
 
   return (
     <Row className="tabletNavbar">

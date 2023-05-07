@@ -73,7 +73,7 @@ const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
                                     : "#EE8D31",
                                 }}
                                 className="status-circel "
-                              />{" "}
+                              />
                               {value}
                             </p>
                             <img
@@ -86,10 +86,7 @@ const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
                       );
                     }
                     console.log(col.value);
-                    if (
-                      col?.value?.includes("Price") ||
-                      col?.value?.includes("Total")
-                    ) {
+                    if (col?.value?.includes("Total")) {
                       return (
                         <td>
                           <div className="d-flex align-items-center justify-content-center">
@@ -100,11 +97,6 @@ const PlainTable = ({ columns, data, onClick, type = "dealers" }) => {
                                 : ""}
                               {value}
                             </p>
-                            <img
-                              src={arrow}
-                              alt="arrow right-action"
-                              className="arrow-right-image arrow-right-icon"
-                            />
                           </div>
                         </td>
                       );

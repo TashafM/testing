@@ -18,7 +18,7 @@ import { toast } from "react-toastify";
 
 const OrderDetails = () => {
   const location = useLocation();
-  const orderId = location.state.data;
+  const orderId = location?.state?.data;
   const [page, setPage] = useState(0);
   const [showAddress, setShowAddress] = useState(false);
   const [showOther, setShowOther] = useState(false);
@@ -26,7 +26,9 @@ const OrderDetails = () => {
   const { data, loading, setData, getData } = usePaginatedCompanyData();
 
   useEffect(() => {
-    getCurrentOrders();
+    if (data) {
+      getCurrentOrders();
+    }
   }, []);
 
   const getCurrentOrders = () => {
