@@ -105,6 +105,7 @@ const AllProducts = () => {
   };
 
   const seeProducts = (itm) => {
+    console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
     const parseItm = JSON.stringify(itm);
     localStorage.setItem("subCategory", parseItm);
     const { categoryId, subCategoryId } = itm;

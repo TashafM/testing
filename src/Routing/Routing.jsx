@@ -101,7 +101,7 @@ const Routing = () => (
       <Route path="dealers" element={<ProtectedRoutes Component={Dealers} />}>
         <Route path="dashboard" element={<DealerDashboard />} />
         <Route path="all-products" element={<AllProducts />}>
-          <Route path="products" element={<Products />} />
+          {/* <Route path="products" element={<div>Hello</div>} /> */}
         </Route>
         <Route path="orders" element={<DealerOrders />}>
           <Route index element={<DealerCurrentOrder />} />
@@ -110,7 +110,8 @@ const Routing = () => (
         </Route>
         <Route path="favorites" element={<Favorites />} />
         <Route path="new-arrival" element={<NewArrival />} />
-        {/* <Route path="all-products/products" element={<ProtectedRoutes Component={Products}/>} /> */}
+        <Route path="all-products/products" element={<Products/>} />
+        
       </Route>
     </Routes>
   </BrowserRouter>
