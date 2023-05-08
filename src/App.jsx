@@ -5,7 +5,7 @@ import { createContext } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss";
 import RightDrawer from "./components/drawer";
-import { ContextProvider } from "./context";
+import { ContextProvider, useContextProvider } from "./context";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Routing from "./Routing/Routing";
@@ -20,29 +20,27 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  
 
+  const { openDrawer } = useContextProvider();
 
   // const [alert, setAlert] = useState(false);
   // const [testData, setTestData] = useState([]);
 
   return (
-    <ContextProvider>
-        <GlobalContext.Provider
-          value={{
-            loading,
-            setLoading,
-            msg,
-            setMsg,
-          }}
-        >
-          <FixedTableHead.Provider value={{ isOpen, setIsOpen }}>
-            <ToastContainer position="top-center" />
-            <RightDrawer />
-            <Routing />
-          </FixedTableHead.Provider>
-        </GlobalContext.Provider>
-    </ContextProvider>
+    <GlobalContext.Provider
+      value={{
+        loading,
+        setLoading,
+        msg,
+        setMsg,
+      }}
+    >
+      <FixedTableHead.Provider value={{ isOpen, setIsOpen }}>
+        <ToastContainer position="top-center" />
+        {openDrawer.open ? <RightDrawer /> : null}
+        <Routing />
+      </FixedTableHead.Provider>
+    </GlobalContext.Provider>
   );
 }
 

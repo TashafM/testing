@@ -84,11 +84,6 @@
   p {
     display: -webkit-box;
     padding-left: 10px;
-
-    // -webkit-line-clamp: 3;
-    // -webkit-box-orient: vertical;
-    // overflow: hidden;
-    // text-overflow: ellipsis;
   }
 }
 
@@ -332,6 +327,13 @@
   font-size: 18px !important;
   color: #899197;
   margin-bottom: 40px;
+}
+.edit-address-wrap {
+  overflow: auto !important;
+}
+
+.teamMember-add .content {
+  overflow: hidden;
 }
 
 @media only screen and (max-width: 1600px) {

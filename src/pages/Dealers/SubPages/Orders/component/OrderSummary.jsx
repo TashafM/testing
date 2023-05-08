@@ -9,7 +9,7 @@ import shipping from "../../../../../assets/images/shipping.png";
 const OrderSummary = ({ order, onClick, onClickOther }) => {
   return (
     <div className="row address-card-main">
-      <div className="col-6 ">
+      <div className="col-lg-6 col-12 mb-3 mb-lg-0 ">
         <div
           className="d-flex address-card-container "
           onClick={() => {
@@ -61,7 +61,7 @@ const OrderSummary = ({ order, onClick, onClickOther }) => {
           </div>
         </div>
       </div>
-      <div className="col-6 ">
+      <div className="col-lg-6 col-12">
         <div className="d-flex address-card-container ">
           <div className=" flex-grow-1 detail-top-card width-50 ">
             <div className=" flex-grow-1 ">

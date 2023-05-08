@@ -5,8 +5,8 @@ import { Formik, Form } from "formik";
 import schema from "../../../../helper/validation/schema";
 import { usePatchAsyncReponse } from "../../../../hooks/usePatchAsyncReponse";
 import { Offcanvas } from "react-bootstrap";
+import "./styles.scss";
 import DrawerHead from "./DrawerHead";
-import PlaceAutoComplete from "../../../../components/Input/PlaceAutoComplete";
 import { toast } from "react-toastify";
 import { SUCCESS_MESSAGES } from "../../../../helper/messages";
 
@@ -63,7 +63,7 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
       placement="end"
       className="teamMember-add"
     >
-      <div className="content">
+      <div className="content edit-address-wrap">
         <DrawerHead title="Edit Address" handleClose={handleClose} />
         <div>
           <Formik
