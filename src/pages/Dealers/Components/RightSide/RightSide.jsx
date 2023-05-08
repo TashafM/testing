@@ -19,9 +19,8 @@ function RightSide({
   editProducts,
   getFromPop,
   noHover,
-  setIndexNo,
 }) {
-  const { setNotEditable, setEditMode } = useContext(EditItems);
+  const { setNotEditable, setEditMode,setIndexNo,indexNo } = useContext(EditItems);
   const { setCartOpen} = useContext(AddProducts)
   const [selectedId, setSelectedId] = useState(-1);
 
@@ -45,10 +44,12 @@ function RightSide({
             setSelectedId(-1);
             localStorage.removeItem("variant");
             setEditMode(false);
+            setIndexNo(0)
           }}
           className="close-button"
         />
       </div>
+      {console.log(indexNo, 'index number')}
       <OrderListTable
         data={cartProducts}
         setData={setCartProducts}

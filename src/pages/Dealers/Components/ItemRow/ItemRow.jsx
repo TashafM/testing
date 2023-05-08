@@ -85,6 +85,8 @@ const ItemRow = ({
     // localStorage.setItem("quantity", qty[0].quantity);
   };
 
+
+
   return (
     // <tr className={selectedId==id && id!=undefined ?"right-side-tr selected-tr": (nohover || notEditable?'right-side-tr no-hover':'right-side-tr')} onClick={!notEditable?()=>setSelectedId(id):null}>
     // <tr className="right-side-tr" onClick={selectedItem}>
@@ -122,7 +124,7 @@ const ItemRow = ({
     //     </td>
     //   )}
     // </tr>
-    <tr className="right-side-tr" onClick={selectedItem}>
+    <tr className={cartOpen && indexNo==id? "right-side-tr selected-tr": "right-side-tr " } onClick={selectedItem}>
       <td
         className={
           popupScreen ? "single-product-item pl40" : "single-product-item"

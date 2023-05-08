@@ -2,6 +2,8 @@ import React from "react";
 import "./mydealerspopup.scss";
 import { Button, Col, Modal, Offcanvas, Row } from "react-bootstrap";
 import closeX from "../../../../assets/images/closeX.svg";
+import defaultCompany from "../../../../assets/images/company-default-icon.png";
+
 import SearchBar from "../../../../components/SearchBar/SearchBar";
 import DealerPopSearch from "../../Components/DealerPopSearch/DealerPopSearch";
 import { dealersLogo } from "../data";
@@ -52,7 +54,7 @@ const MyDealersPopup = ({ show, setDealerPopup, data, setChange }) => {
               onClick={() => activateDealer(item)}
             >
               <div className="logo-company">
-                <img src={item.dpURL} alt="" />
+                <img src={item.dpURL?item.dpURL:defaultCompany} alt="" />
               </div>
               <div className="name-company">{item.firstname}</div>
             </Col>

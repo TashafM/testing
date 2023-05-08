@@ -44,7 +44,6 @@ const ProductCart = () => {
     // console.log(JSON.parse(setInitial[0]),'setinitial .............')
 
     const filteredVariant = itemNumber[0].variants.filter((item)=>item.variantId==data[0].variantId)
-    console.log(filteredVariant[0],'#####################')
 
     // const setInitial = JSON.stringify(filteredVariant[0]);
     // localStorage.setItem('initialProductData', setInitial)
@@ -294,6 +293,7 @@ const ProductCart = () => {
     <>
       <>
         <Table>
+          {console.log(isEmpty,'000000000000000000')}
           <thead className="productcart-header">
             <tr>
               <th>Products</th>

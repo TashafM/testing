@@ -8,6 +8,21 @@
       display: flex;
       align-items: center;
 
+      .img-container {
+        width: 45px;
+        height: 45px;
+        // border: 1px solid;
+        border: 1px solid #EFEFEF;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img{
+          height: 40px;
+        }
+      }
+
       .text-desc {
         margin-left: 12px;
         .product-name {
@@ -54,17 +69,11 @@
   }
 
   &.no-hover {
-    &:hover{
+    &:hover {
       background-color: white;
       cursor: default;
     }
   }
-}
-
-/* Only apply hover effect when "no-hover" class is not present */
-.right-side-tr:not(.no-hover):hover {
-  background-color: #F3F5F6;
-  cursor: pointer;
 }
 
 .right-side-tr-no-hover {
@@ -122,17 +131,83 @@
     cursor: pointer;
   }
 
+  // &.no-hover {
+  //   &:hover{
+  //     background-color: white;
+  //     cursor: default;
+  //   }
+  // }
 }
 
+/* Only apply hover effect when "no-hover" class is not present */
+.right-side-tr:not(.no-hover):hover {
+  background-color: #f3f5f6;
+  cursor: pointer;
+}
 
-.selected-tr{
-  background-color: #E2E6EA !important;
+.right-side-tr-no-hover {
+  border: transparent;
+  background-color: white;
+  .single-product-item {
+    padding-top: 25px;
+    padding-left: 30px;
+    .img-div {
+      display: flex;
+      align-items: center;
+
+      .text-desc {
+        margin-left: 12px;
+        .product-name {
+          font-size: 16px;
+          font-weight: 600;
+          line-height: 19px;
+          color: #000;
+          margin-bottom: 10px;
+        }
+        .description {
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 14px;
+          color: #909090;
+        }
+      }
+    }
+  }
+  td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  .quantity {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #000;
+  }
+  .price {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    color: #000;
+  }
+  .price-padding {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    color: #000;
+    padding-right: 20px;
+  }
+  .remove-btn {
+    cursor: pointer;
+  }
+}
+
+.selected-tr {
+  background-color: #e2e6ea !important;
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
   .right-side-tr {
-
-    .price{
+    .price {
       font-size: 14px;
     }
     .single-product-item {
@@ -243,7 +318,7 @@
       width: 50px;
 
       .img-div {
-        img{
+        img {
           width: 48px;
         }
         .text-desc {

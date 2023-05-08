@@ -60,7 +60,9 @@
         text-align: center;
 
         img {
-          width: 150px;
+          max-height: 140px;
+          width: auto;
+          height: 100%;
         }
       }
 
@@ -86,6 +88,64 @@
 
 .bottom-logos {
   margin-right: 2%;
+  text-align: center;
+  padding: 4px 16px;
+  // border-radius: 8px;
+  cursor: pointer;
+  border-radius: 12px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 1.43%,
+    rgba(0, 0, 0, 0.78) 100%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
+  border: 2px solid #959ec3;
+  color: #fff;
+
+  img {
+    max-height: 40px;
+    height: 100%;
+    width: 100%;
+  }
+
+  .titleName {
+    font-size: 14px;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.bottom-logos-active {
+  margin-right: 2%;
+  text-align: center;
+  border: 2px solid #e72d38;
+  padding: 4px 16px;
+  // border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  border-radius: 12px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 1.43%,
+    rgba(0, 0, 0, 0.78) 100%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
+
+  img {
+    max-height: 40px;
+    height: 100%;
+    width: 100%;
+  }
+
+  .titleName {
+    font-size: 14px;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 .bottom-strip {
@@ -95,7 +155,7 @@
   margin-top: 22px;
   margin-right: 40px;
   border-radius: 12px;
-  padding: 20px 35px;
+  padding: 15px 25px;
 
   .bottom-brands {
     display: flex;
