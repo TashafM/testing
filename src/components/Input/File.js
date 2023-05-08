@@ -3,16 +3,27 @@ import Files from "react-files";
 import "./Input.scss";
 import icon from "../../assets/images/default-image.png";
 import cross from "../../assets/images/cross-icon.png";
-const FileDropzone = ({ file, onChange, handleError, label, setFile }) => {
+const FileDropzone = ({
+  file,
+  onChange,
+  handleError,
+  label,
+  setFile,
+  required = false,
+}) => {
   return (
     <div className="files">
-      {label ? <p className="input-lable">{label}</p> : null}
+      {label ? (
+        <p className={`input-lable ${required ? " required-field" : ""}`}>
+          {label}
+        </p>
+      ) : null}
       <Files
-        className={
+        className={`${
           file.length
             ? "files-dropzone without-border-dropzone"
             : "files-dropzone"
-        }
+        }`}
         onChange={(e) => {
           onChange(e);
         }}

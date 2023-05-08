@@ -65,7 +65,7 @@ function EditContacts() {
         const body = {
           ...values,
           address: {
-            city: values.address,
+            city: values?.address ?? "",
             state: "Karnataka",
             latitude: "12.123",
             longitude: "12.123",
@@ -128,18 +128,19 @@ function EditContacts() {
         onSubmit={submitHandler}
         validationSchema={schema.contacts}
         render={({ handleSubmit, errors, values, setFieldValue, touched }) => (
-          <Form className="">
-            <div className="input-wrapper">
+          <Form>
+            <div className="input-wrapper ">
               <TextInput
                 name="title"
                 value={values.title}
+                required={true}
                 onChange={(e) => {
                   !makeApiCall && setMakeApiCall(true);
                   setFieldValue("title", e.target.value);
                 }}
                 error={touched.title && errors.title}
                 placeholder="eg. Sales Team"
-                label="Title *"
+                label={`Title`}
               />
             </div>
 
@@ -147,6 +148,7 @@ function EditContacts() {
               <TextInput
                 name="contact"
                 value={values.contact}
+                required={true}
                 onChange={(e) => {
                   // const reg = new RegExp("^[0-9]*$");
                   !makeApiCall && setMakeApiCall(true);
@@ -156,7 +158,7 @@ function EditContacts() {
                   // }
                 }}
                 error={touched.contact && errors.contact}
-                label="Contact Number *"
+                label="Contact Number"
                 placeholder="eg. 8511591740"
               />
             </div>
@@ -164,12 +166,13 @@ function EditContacts() {
               <TextInput
                 name="email"
                 value={values.email}
+                required={true}
                 onChange={(e) => {
                   !makeApiCall && setMakeApiCall(true);
                   setFieldValue("email", e.target.value);
                 }}
                 error={touched.email && errors.email}
-                label="Email ID *"
+                label="Email ID"
                 placeholder="eg. salesteam@br.in"
               />
             </div>
@@ -190,10 +193,9 @@ function EditContacts() {
                 city, pin code."
               />
             </div>
-            {errors?.address ||
-            errors?.email ||
-            errors?.contact ||
-            errors?.title ? (
+            {(touched.email && errors?.email) ||
+            (touched.contact && errors?.contact) ||
+            (touched.title && errors?.title) ? (
               <p className="validation-error">
                 Error: Invalid input parameters. Please check your input and try
                 again.

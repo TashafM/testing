@@ -84,7 +84,7 @@ const OrderDetails = () => {
                   navigation(-1);
                 }}
               />
-              <spa>Order Received on </spa>
+              <span>Order Received on{"  "} </span>
               <span>
                 {order?.orderDate
                   ? ` ${getDesireDateFormate(order.orderDate)}`

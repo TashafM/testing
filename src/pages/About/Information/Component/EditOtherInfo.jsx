@@ -38,25 +38,31 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
   }, [data]);
 
   const onUpdateData = () => {
-    if (makeApiCall) {
-      const body = {
-        interestedToPurchase: [...intrestedIn],
-        salesReachAt: [...salesReachAt],
-        servicesAndSupport: {
-          provided: ischecked ? "yes" : "no",
-          details: ischecked ? value : "",
-        },
-      };
-
-      postData(body, (res) => {
-        const data = JSON.parse(JSON.stringify(completeData));
-        data[0].otherInfo = res[0];
-        onUpdate(data);
-        handleClose();
-        toast.success(SUCCESS_MESSAGES.OTHER_INFO);
-      });
+    const error = errorMessage;
+    if (ischecked && !value) {
+      setErrorMessage("this is a required field");
     } else {
-      handleClose();
+      if (makeApiCall) {
+        setErrorMessage("");
+        const body = {
+          interestedToPurchase: [...intrestedIn],
+          salesReachAt: [...salesReachAt],
+          servicesAndSupport: {
+            provided: ischecked ? "yes" : "no",
+            details: ischecked ? value : "",
+          },
+        };
+
+        postData(body, (res) => {
+          const data = JSON.parse(JSON.stringify(completeData));
+          data[0].otherInfo = res[0];
+          onUpdate(data);
+          handleClose();
+          toast.success(SUCCESS_MESSAGES.OTHER_INFO);
+        });
+      } else {
+        handleClose();
+      }
     }
   };
 
@@ -98,6 +104,7 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
                   checked={ischecked}
                   onChange={() => {
                     !makeApiCall && setMakeApiCall(true);
+                    setValue("");
                     setIschecked(!ischecked);
                     setIsCheckedNo(false);
                   }}
@@ -109,6 +116,7 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
                   checked={isCheckedNo}
                   onChange={() => {
                     !makeApiCall && setMakeApiCall(true);
+                    setValue("");
                     setIsCheckedNo(!isCheckedNo);
                     setIschecked(false);
                   }}
@@ -117,12 +125,6 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
               </div>
             </div>
 
-            {/* <CheckBox
-                type={"radio"}
-                nameLabel={nameLabel}
-                value={ischecked}
-                onChange={onchange}
-              /> */}
             {ischecked && (
               <div className="mt-3">
                 <TextArea
@@ -130,11 +132,17 @@ function EditOtherInfo({ show, handleClose, data, onUpdate, completeData }) {
                   value={value}
                   onChange={(e) => {
                     !makeApiCall && setMakeApiCall(true);
+                    errorMessage && setErrorMessage("");
                     setValue(e.target.value);
                   }}
                   rows={5}
                   placeholder="Please mention here"
                 />
+                {errorMessage && (
+                  <span style={{ color: "red", fontSize: "13px" }}>
+                    {errorMessage}
+                  </span>
+                )}
               </div>
             )}
           </div>

@@ -88,8 +88,9 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                       !makeApiCall && setMakeApiCall(true);
                       setFieldValue("fullName", e.target.value);
                     }}
+                    required={true}
                     placeholder="Enter your full name"
-                    label={"Full Name*"}
+                    label={"Full Name"}
                     error={touched.fullName && errors.fullName}
                   />
                 </div>
@@ -101,8 +102,9 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                       !makeApiCall && setMakeApiCall(true);
                       setFieldValue("floorNumber", e.target.value);
                     }}
-                    placeholder="House No.  / Building No. / Floor*"
-                    label={"House No.  / Building No. / Floor*"}
+                    required={true}
+                    placeholder="House No.  / Building No. / Floor"
+                    label={"House No.  / Building No. / Floor"}
                     error={touched.floorNumber && errors.floorNumber}
                   />
                 </div>
@@ -128,7 +130,8 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                       setFieldValue("street", e.target.value);
                     }}
                     placeholder="Enter your street"
-                    label={"Street*"}
+                    required={true}
+                    label={"Street"}
                     error={touched.street && errors.street}
                   />
                 </div>
@@ -142,7 +145,8 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                     }}
                     error={touched.city && errors.city}
                     placeholder="Enter your City"
-                    label={"City*"}
+                    required={true}
+                    label={"City"}
                   />
                 </div>
                 <div className="input-wrapper">
@@ -155,7 +159,8 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                     }}
                     error={touched.state && errors.state}
                     placeholder="Enter your state"
-                    label={"State*"}
+                    required={true}
+                    label={"State"}
                   />
                 </div>
                 <div className="input-wrapper">
@@ -168,7 +173,8 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                     }}
                     error={touched.country && errors.country}
                     placeholder="Enter your country"
-                    label={"Country*"}
+                    required={true}
+                    label={"Country"}
                   />
                 </div>
                 <div className="input-wrapper">
@@ -180,17 +186,18 @@ function EditAddress({ show, handleClose, data, onUpdate, completeData }) {
                       setFieldValue("zipCode", e.target.value);
                     }}
                     error={touched.zipCode && errors.zipCode}
-                    placeholder="Enter your Zip Code*"
-                    label={"Zip Code*"}
+                    placeholder="Enter your Zip Code"
+                    required={true}
+                    label={"Zip Code"}
                   />
                 </div>
-                {errors?.fullName ||
-                errors?.floorNumber ||
-                errors?.street ||
-                errors?.city ||
-                errors?.state ||
-                errors?.zipCode ||
-                errors?.country ? (
+                {(touched.fullName && errors?.fullName) ||
+                (touched.floorNumber && errors?.floorNumber) ||
+                (touched.street && errors?.street) ||
+                (touched.city && errors?.city) ||
+                (touched.state && errors?.state) ||
+                (touched.zipCode && errors?.zipCode) ||
+                (touched.country && errors?.country) ? (
                   <p className="validation-error">
                     Error: Invalid input parameters. Please check your input and
                     try again.

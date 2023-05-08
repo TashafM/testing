@@ -8,13 +8,18 @@ function TextInput({
   placeholder,
   error = "",
   name,
+  required = false,
   ...props
 }) {
   // const [ meta] = useField(props);
 
   return (
     <div className="input-main-container-common">
-      {label ? <p className="input-lable">{label}</p> : null}
+      {label ? (
+        <p className={`input-lable ${required ? "required-field" : ""}`}>
+          {label}
+        </p>
+      ) : null}
       <input
         name={name}
         className="input-container"

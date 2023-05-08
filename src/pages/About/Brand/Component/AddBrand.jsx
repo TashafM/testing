@@ -125,7 +125,8 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                     file={file}
                     onChange={handleChange}
                     handleError={handleError}
-                    label="Add Image*"
+                    label="Add Image"
+                    required={true}
                     setFile={setFile}
                     // error={touched.file && errors.file}
                   />
@@ -139,8 +140,9 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                       !makeApiCall && setMakeApiCall(true);
                       setFieldValue("brandName", e.target.value);
                     }}
+                    required={true}
                     error={touched.brandName && errors.brandName}
-                    label="Brand Name*"
+                    label="Brand Name"
                   />
                 </div>
                 <div className="input-wrapper">
@@ -152,7 +154,8 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                       setFieldValue("location", e.target.value);
                     }}
                     error={touched.location && errors.location}
-                    label="Location*"
+                    required={true}
+                    label="Location"
                   />
                 </div>
                 <div className="input-wrapper">
@@ -182,7 +185,8 @@ function AddBrand({ show, handleClose, title, data, onUpdate, completeData }) {
                   <p className="tagging-text m-0">For tagging purpose</p>
                 </div>
 
-                {errors?.brandName || errors?.location ? (
+                {(touched.brandName && errors?.brandName) ||
+                (touched.location && errors?.location) ? (
                   <p className="validation-error">
                     Error: Invalid input parameters. Please check your input and
                     try again.
