@@ -1,11 +1,49 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./orderlisttable.scss";
 import { Table } from "react-bootstrap";
 import ItemRow from "../ItemRow/ItemRow";
+import { AddProducts, EditItems } from "../../Dealers";
+import { axiosInstance } from "../../../../helper/axios";
+import { API } from "../../../../helper/API";
+import { GlobalSidePanel } from "../../Dealers";
 
-const OrderListTable = ({ disableDelete, data, setData, editProducts, getFromPop, setSelectedId, selectedId, noHover }) => {
+const OrderListTable = ({
+  disableDelete,
+  data,
+  setData,
+  editProducts,
+  getFromPop,
+  setSelectedId,
+  selectedId,
+  noHover,
+}) => {
+  const { editMode, setEditMode } = useContext(EditItems);
+  const { setShowPanel } = useContext(GlobalSidePanel);
+  const {setIsEmpty} = useContext(AddProducts)
 
+  useEffect(() => {
+    if (data.length == 0 && editMode) {
+      const emptyCart = () => {
+        const principalCompanyUserCode = localStorage.getItem(
+          "principalCompanyUserCode"
+        );
+        axiosInstance
+          .post(API.DEALER_CLEAR_CART, { principalCompanyUserCode })
+          .then((res) => {
+            if (res.success) {
+              setIsEmpty(true);
+              localStorage.removeItem("cartProducts");
+              setShowPanel(false)
+              setEditMode(false)
+            }
+          })
 
+          console.log(editMode , 'causing problem..............')
+          
+      };
+      emptyCart();
+    }
+  }, [data]);
 
   const removeItem = (val) => {
     const filtered = data.filter((item) => item.variantId !== val);
@@ -25,8 +63,8 @@ const OrderListTable = ({ disableDelete, data, setData, editProducts, getFromPop
         </tr>
       </thead>
       <tbody className="right-side-body">
-          {data.map((item, id) => (
-            <>
+        {data.map((item, id) => (
+          <>
             <ItemRow
               id={id}
               disableDelete={disableDelete}
@@ -36,8 +74,9 @@ const OrderListTable = ({ disableDelete, data, setData, editProducts, getFromPop
               getFromPop={getFromPop}
               setSelectedId={setSelectedId}
               selectedId={selectedId}
-            /></>
-          ))}
+            />
+          </>
+        ))}
       </tbody>
     </Table>
   );

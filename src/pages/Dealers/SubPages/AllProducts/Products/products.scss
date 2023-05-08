@@ -89,13 +89,22 @@
 .bottom-logos {
   margin-right: 2%;
   text-align: center;
-  border: 2px solid black;
   padding: 4px 16px;
-  border-radius: 8px;
+  // border-radius: 8px;
   cursor: pointer;
+  border-radius: 12px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 1.43%,
+    rgba(0, 0, 0, 0.78) 100%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
+  border: 2px solid #959ec3;
+  color: #fff;
 
   img {
-    max-width: 40px;
+    max-height: 40px;
+    height: 100%;
     width: 100%;
   }
 
@@ -113,11 +122,20 @@
   text-align: center;
   border: 2px solid #e72d38;
   padding: 4px 16px;
-  border-radius: 8px;
+  // border-radius: 8px;
   cursor: pointer;
+  color: #fff;
+  border-radius: 12px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 1.43%,
+    rgba(0, 0, 0, 0.78) 100%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
 
   img {
-    max-width: 40px;
+    max-height: 40px;
+    height: 100%;
     width: 100%;
   }
 
