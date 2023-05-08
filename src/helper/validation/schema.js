@@ -3,18 +3,32 @@ import * as Yup from "yup";
 const re =
   /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
 
+const atlestOneChar = /^(?=.*[a-zA-Z])/;
+
 const schema = {
   address: Yup.object({
-    fullName: Yup.string().max(30).required("full name is required"),
+    fullName: Yup.string()
+      .matches(atlestOneChar, "atlead one character is required")
+      .max(30)
+      .required("full name is required"),
     floorNumber: Yup.string().required(
       "House No.  / Building No. / Floor is required"
     ),
     // nearestLandmark: Yup.string().required("nearest landmark is required"),
-    street: Yup.string().max(30).required("street is  required"),
-    state: Yup.string().required("state is  required"),
+    street: Yup.string()
+      .matches(atlestOneChar, "atlead one character is required")
+      .max(30)
+      .required("street is  required"),
+    state: Yup.string()
+      .matches(atlestOneChar, "atlead one character is required")
+      .required("state is  required"),
 
-    city: Yup.string().required("city is required"),
-    country: Yup.string().required("country is required"),
+    city: Yup.string()
+      .matches(atlestOneChar, "atlead one character is required")
+      .required("city is required"),
+    country: Yup.string()
+      .matches(atlestOneChar, "atlead one character is required")
+      .required("country is required"),
 
     zipCode: Yup.number()
       .required("zip code is required")
