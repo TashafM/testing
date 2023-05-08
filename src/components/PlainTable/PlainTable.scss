@@ -1,7 +1,7 @@
 .plainTable {
   position: relative;
-  height: 40vh;
-  overflow: auto;
+  // height: 40vh;
+  // overflow: auto;
   &::-webkit-scrollbar {
     width: 0.2em;
     height: 0.2em;
@@ -231,7 +231,7 @@
 @media (min-height: 900px) {
   .plainTable {
     .table-container {
-      height: 65vh !important;
+      // height: 65vh !important;
     }
   }
 }
