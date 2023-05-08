@@ -79,7 +79,8 @@ const NavbarTop = ({ dealers }) => {
           {dealers ? (
             <div className="my-dealers" onClick={() => showDealerPopup(true)}>
               <div className="dealer-logo">
-                <img src={dealers ? dealersLogo : atlogo} alt="" />
+                {console.log(dealers, dealersLogo,'dealers.............')}
+                <img src={dealersLogo=='' ? compIcon: dealersLogo } alt="" />
               </div>
               <BsChevronDown />
             </div>

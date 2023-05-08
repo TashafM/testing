@@ -21,7 +21,7 @@ import { GlobalContext } from "../../../../../App";
 const Products = () => {
   const { showPanel, setShowPanel } = useContext(GlobalSidePanel);
   const { setLoading, setMsg } = useContext(GlobalContext);
-  const {setCartOpen} = useContext(AddProducts)
+  const {setCartOpen, bottomId, setBottomId} = useContext(AddProducts)
   const location = useLocation();
   const [products, setProducts] = useState([]);
   const [noProducts, setNoProducts] = useState(false);
@@ -30,7 +30,8 @@ const Products = () => {
   // const [data, setData] = useState([])
   // const [currentId, setCurrentId] = useState(location.state.id);
 
-  const switchSubCategory = (value) => {
+  const switchSubCategory = (value,idx) => {
+    setBottomId(idx)
     setIsLoading(true);
     const dataStringify = JSON.stringify(value);
     localStorage.setItem("subCategory", dataStringify);
@@ -53,6 +54,7 @@ const Products = () => {
       .catch((err) => setIsLoading(false));
   };
 
+  console.log(bottomId,'bottom id')
   useEffect(() => {
     // const { categoryId, subCategoryId } = location.state;
     const principalCompanyUserCode = localStorage.getItem(
@@ -82,7 +84,8 @@ const Products = () => {
     fetchProducts();
   }, []);
 
-  const callFunc = (val) => {
+  const callFunc = (val,idx) => {
+    console.log(idx,'call func')
     // setData(val)
     const popup = JSON.parse(localStorage.getItem("popupItems"));
     // console.log(popup,'popup')
@@ -113,7 +116,7 @@ const Products = () => {
                     <Col className="products-container col-lg-4">
                       <div
                         className="img-category-main"
-                        onClick={() => callFunc(itm)}
+                        onClick={() => callFunc(itm,id)}
                       >
                         <div className="wish-list-icon">
                           <img src={wishList} alt="" />
@@ -141,8 +144,8 @@ const Products = () => {
           {location.state.subCategory.map((item, id) => (
             <div
               key={id}
-              className="bottom-logos"
-              onClick={() => switchSubCategory(item)}
+              className={bottomId==id? "bottom-logos-active":"bottom-logos"}
+              onClick={() => switchSubCategory(item,id)}
             >
               <img
                 src={

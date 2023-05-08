@@ -16,7 +16,7 @@ import { GlobalSidePanel } from "../../Dealers";
 import { AddProducts } from "../../Dealers";
 
 const AllProducts = () => {
-  const { isEmpty, setIsEmpty } = useContext(AddProducts);
+  const { isEmpty, setIsEmpty,setBottomId } = useContext(AddProducts);
   const { setLoading, setMsg } = useContext(GlobalContext);
   const principalCompanyUserCode = localStorage.getItem(
     "principalCompanyUserCode"
@@ -104,8 +104,8 @@ const AllProducts = () => {
     setIsLoading(false);
   };
 
-  const seeProducts = (itm) => {
-    console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
+  const seeProducts = (itm,idx) => {
+    setBottomId(idx)
     const parseItm = JSON.stringify(itm);
     localStorage.setItem("subCategory", parseItm);
     const { categoryId, subCategoryId } = itm;
@@ -164,7 +164,7 @@ const AllProducts = () => {
                           <Col xs={12} sm={6} md={4} xxl={3} key={id}>
                             <div
                               className="sub-category-div"
-                              onClick={() => seeProducts(item)}
+                              onClick={() => seeProducts(item,id)}
                             >
                               <div className="image-div">
                                 <img

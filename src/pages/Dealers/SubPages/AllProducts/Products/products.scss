@@ -86,6 +86,46 @@
 
 .bottom-logos {
   margin-right: 2%;
+  text-align: center;
+  border: 2px solid black;
+  padding: 4px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  img {
+    max-width: 45px;
+    width: 100%;
+  }
+
+  .titleName {
+    font-size: 14px;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.bottom-logos-active {
+  margin-right: 2%;
+  text-align: center;
+  border: 2px solid #e72d38;
+  padding: 4px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  img {
+    max-width: 45px;
+    width: 100%;
+  }
+
+  .titleName {
+    font-size: 14px;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 .bottom-strip {
@@ -95,7 +135,7 @@
   margin-top: 22px;
   margin-right: 40px;
   border-radius: 12px;
-  padding: 20px 35px;
+  padding: 15px 25px;
 
   .bottom-brands {
     display: flex;
