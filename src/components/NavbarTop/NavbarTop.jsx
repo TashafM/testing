@@ -14,6 +14,9 @@ import { API } from "../../helper/API";
 import { AddProducts } from "../../pages/Dealers/Dealers";
 import compIcon from "../../assets/images/company-default-icon.png";
 import { getLocalStorageData } from "../Utils/Utils";
+import { ToastContainer, toast } from "react-toastify";
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 const NavbarTop = ({ dealers }) => {
   // const {setIsEmpty} = useContext(AddProducts)
@@ -63,6 +66,8 @@ const NavbarTop = ({ dealers }) => {
 
   return (
     <div className="row navbar-top">
+      <ToastContainer position="top-center" />
+
       <div className="col-md-2 col-sm-4">
         <span className="logo">
           <img src={userData?.dpURL ? userData?.dpURL : compIcon} alt="" />
@@ -72,15 +77,16 @@ const NavbarTop = ({ dealers }) => {
         <span className="icon-search">
           <BS.BsSearch />
         </span>
-        <input type="text" placeholder="Search..."></input>
+        <span onClick={() => toast.success("coming soon")}>
+          <input type="text" placeholder="Search..." disabled></input>
+        </span>
       </div>
       <div className="col-md-3 right-div">
         <div>
           {dealers ? (
             <div className="my-dealers" onClick={() => showDealerPopup(true)}>
               <div className="dealer-logo">
-                {console.log(dealers, dealersLogo,'dealers.............')}
-                <img src={dealersLogo=='' ? compIcon: dealersLogo } alt="" />
+                <img src={dealersLogo == "" ? compIcon : dealersLogo} alt="" />
               </div>
               <BsChevronDown />
             </div>
@@ -94,8 +100,14 @@ const NavbarTop = ({ dealers }) => {
           data={allDealerData}
         />
         <div className="user-profile">
-          <img src={userData?.dpURL ? userData?.dpURL : compIcon} alt="" />
-          <span className="username">{"Username"}</span>
+          <img
+            src={userData?.dpURL ? userData?.dpURL : compIcon}
+            alt=""
+            onClick={() => setShowPopup(!showPopup)}
+          />
+          <span className="username" onClick={() => setShowPopup(!showPopup)}>
+            {"Username"}
+          </span>
           <span
             className="btn-dropdown"
             onClick={() => setShowPopup(!showPopup)}

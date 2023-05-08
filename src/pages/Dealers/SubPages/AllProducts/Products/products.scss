@@ -60,7 +60,9 @@
         text-align: center;
 
         img {
-          width: 150px;
+          max-height: 140px;
+          width: auto;
+          height: 100%;
         }
       }
 
@@ -93,7 +95,7 @@
   cursor: pointer;
 
   img {
-    max-width: 45px;
+    max-width: 40px;
     width: 100%;
   }
 
@@ -115,7 +117,7 @@
   cursor: pointer;
 
   img {
-    max-width: 45px;
+    max-width: 40px;
     width: 100%;
   }
 
