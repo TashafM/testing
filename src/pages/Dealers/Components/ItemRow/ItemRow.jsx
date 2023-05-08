@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./itemrow.scss";
 import listproduct from "../../../../assets/images/listproduct.png";
 import x from "../../../../assets/images/x.svg";
-import { EditItems } from "../../Dealers";
+import { AddProducts, EditItems } from "../../Dealers";
 import { useContext } from "react";
 
 const ItemRow = ({
@@ -21,10 +21,14 @@ const ItemRow = ({
 }) => {
   const currency = localStorage.getItem("currencySymbol");
   const { notEditable, setIndexNo, indexNo, editMode } = useContext(EditItems);
+  const { cartOpen, setCartOpen} = useContext(AddProducts)
+
+
+  console.log(cartOpen, 'cart status')
 
   useEffect(() => {
     if (editMode) {
-      fetchOnEdit()
+      fetchOnEdit();
     }
   }, []);
 
@@ -77,7 +81,7 @@ const ItemRow = ({
     const qty = test.filter(
       (item) => item.variantId == filteredVariant[0].variantId
     );
-    console.log(qty[0].quantity,'77777777777777777')
+    console.log(qty[0].quantity, "77777777777777777");
     // localStorage.setItem("quantity", qty[0].quantity);
   };
 
@@ -119,46 +123,48 @@ const ItemRow = ({
     //   )}
     // </tr>
     <tr className="right-side-tr" onClick={selectedItem}>
-  <td
-    className={
-      popupScreen ? "single-product-item pl40" : "single-product-item"
-    }
-    onClick={() => {
-      if(editMode){
-        editProducts(data, id);
-      getFromPop(data);
-      setIndexNo(id);
-      }
-    }}
-  >
-    <div className="img-div">
-      <img src={listproduct} alt="" />
-      <div className="text-desc">
-        <div className="product-name">
-          {data.name || data.itemDescription}
+      <td
+        className={
+          popupScreen ? "single-product-item pl40" : "single-product-item"
+        }
+        onClick={() => {
+          if(cartOpen){
+          editProducts(data, id);
+          getFromPop(data);
+          setIndexNo(id);
+          }
+        }}
+      >
+        <div className="img-div">
+          <img src={listproduct} alt="" />
+          <div className="text-desc">
+            <div className="product-name">
+              {data.name || data.itemDescription}
+            </div>
+            <div className="description">
+              {data.selectedColor || data.colorDescription} |{" "}
+              {data.saleDescription}
+            </div>
+          </div>
         </div>
-        <div className="description">
-          {data.selectedColor || data.colorDescription} |{" "}
-          {data.saleDescription}
-        </div>
-      </div>
-    </div>
-  </td>
-  <td className="quantity">{data.quantity}</td>
-  <td className={pr20 ? "price-padding" : "price"}>
-    {currency}
-    {data.totalPrice}
-  </td>
-  {!disableDelete && (
-    <td className="remove-btn" onClick={(event) => {
-        event.stopPropagation();
-        removeItem(data.variantId);
-    }}>
-      <img src={x} alt="" />
-    </td>
-  )}
-</tr>
-
+      </td>
+      <td className="quantity">{data.quantity}</td>
+      <td className={pr20 ? "price-padding" : "price"}>
+        {currency}
+        {data.totalPrice}
+      </td>
+      {!disableDelete && (
+        <td
+          className="remove-btn"
+          onClick={(event) => {
+            event.stopPropagation();
+            removeItem(data.variantId);
+          }}
+        >
+          <img src={x} alt="" />
+        </td>
+      )}
+    </tr>
   );
 };
 

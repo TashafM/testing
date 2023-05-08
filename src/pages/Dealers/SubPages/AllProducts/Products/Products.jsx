@@ -5,7 +5,7 @@ import TopBar from "../../../Components/TopBar/TopBar";
 import "./products.scss";
 import { superItems } from "../../../data";
 import SidePanel from "../../../Components/SidePanel/SidePanel";
-import { GlobalSidePanel } from "../../../Dealers";
+import { AddProducts, GlobalSidePanel } from "../../../Dealers";
 import wishList from "../../../../../assets/images/wishlist.svg";
 import img300 from "../../../../../assets/images/300x300pix(300dpi).png";
 import img500 from "../../../../../assets/images/500x500pix(300dpi).png";
@@ -21,6 +21,7 @@ import { GlobalContext } from "../../../../../App";
 const Products = () => {
   const { showPanel, setShowPanel } = useContext(GlobalSidePanel);
   const { setLoading, setMsg } = useContext(GlobalContext);
+  const {setCartOpen} = useContext(AddProducts)
   const location = useLocation();
   const [products, setProducts] = useState([]);
   const [noProducts, setNoProducts] = useState(false);
@@ -82,11 +83,11 @@ const Products = () => {
   }, []);
 
   const callFunc = (val) => {
-    console.log(val, "setttttttttttttttttttttttttttttttttt");
     // setData(val)
     const popup = JSON.parse(localStorage.getItem("popupItems"));
     // console.log(popup,'popup')
     setShowPanel(true);
+    setCartOpen(true)
     const productData = JSON.stringify(val);
     localStorage.setItem("initialProductData", productData);
   };
@@ -152,6 +153,7 @@ const Products = () => {
                 alt=""
                 width={70}
               />
+              <div className="titleName">{item.subCategoryName}</div>
             </div>
           ))}
         </div>

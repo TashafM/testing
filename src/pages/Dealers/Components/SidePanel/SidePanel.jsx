@@ -10,6 +10,7 @@ import { axiosInstance } from "../../../../helper/axios";
 const SidePanel = ({ noHover }) => {
   const { setShowPanel, showPanel } = useContext(GlobalSidePanel);
   const { notEditable, setNotEditable, setEditMode } = useContext(EditItems);
+  const {setCartOpen} = useContext(AddProducts)
 
   const { setIsEmpty, isEmpty } = useContext(AddProducts);
   const [cartProducts, setCartProducts] = useState([]);
@@ -121,6 +122,7 @@ const SidePanel = ({ noHover }) => {
         if (res.success) {
           setShowPanel(false);
           setEditMode(false);
+          setCartOpen(false)
 
           // console.log(res.result[0].cartItems, "cart items");
           localStorage.removeItem('variant')
@@ -137,11 +139,13 @@ const SidePanel = ({ noHover }) => {
             addItemToCart();
             localStorage.removeItem('variant')  
             setEditMode(false)
+            setCartOpen(false)
           } else {
             setShowPanel(false);
             setNotEditable(true);
             localStorage.removeItem('variant')
             setEditMode(false)
+            setCartOpen(false)
           }
         }}
         placement="end"

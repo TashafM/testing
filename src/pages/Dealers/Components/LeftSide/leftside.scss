@@ -423,24 +423,33 @@
   }
 }
 
-@media (min-width: 1440px) and (max-width: 1750px) {
+@media (min-width: 1440px) and (max-width: 1600px) {
   .scrollable-left {
     .leftside {
-      padding-left: 30px;
+      padding-left: 20px;
       .title {
-        font-size: 24px;
-        line-height: 28px;
+        font-size: 20px;
+        line-height: 24px;
         margin-top: 0;
+      }
+
+      .color-btn,
+      .quantity-btn {
+        margin-right: 20px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        border-radius: 8px;
       }
 
       .about-product {
         .product-code {
-          font-size: 16px;
-          line-height: 34px;
+          font-size: 14px;
+          line-height: 30px;
         }
         .product-desc {
           font-size: 14px;
           line-height: 24px;
+          margin-top: 5px;
         }
         .product-price {
           font-size: 20px;
@@ -450,8 +459,9 @@
 
       .color-description {
         .color-desc-title {
-          font-size: 20px;
-          line-height: 24px;
+          font-size: 18px;
+          line-height: 20px;
+          margin-bottom: 15px;
         }
         .select-color-btn {
           font-size: 14px;
@@ -467,9 +477,15 @@
         line-height: 25px;
 
         input {
-          font-size: 20px;
-          line-height: 24px;
+          font-size: 18px;
+          line-height: 22px;
           font-weight: 400;
+          height: 50px;
+        }
+
+        .quantity-desc-title{
+          font-size: 18px;
+          margin-bottom: 15px;
         }
       }
 
@@ -484,6 +500,10 @@
       }
       .image-div {
         height: 270px !important;
+
+        .main-img{
+          width: 220px;
+        }
         img {
           width: 100px;
         }
