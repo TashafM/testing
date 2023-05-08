@@ -52,13 +52,8 @@ const OrderSummary = ({ order, onClick, onClickOther }) => {
                   <p className="m-0">
                     {order?.shippingAddress?.contactNumber ?? ""}
                   </p>
-                  <div className="d-flex align-items-center seeall-btn-container ">
+                  <div className="d-flex align-items-center btn-see-all-view-all ">
                     <BtnTitleCenter title="View all" onClick={onClick} />
-                    <img
-                      className="imge-icon-red"
-                      src={arrow}
-                      alt="arrow-right"
-                    />
                   </div>
                 </div>
               </div>
@@ -78,12 +73,6 @@ const OrderSummary = ({ order, onClick, onClickOther }) => {
                   <p className="instuction-title-other">Label instruction</p>
                   <p className="m-0 d-flex justify-content-between align-items-center over-flow-text over-flow-text-other">
                     {order.labelInstruction}
-                    {order.otherInstruction || order.labelInstruction ? (
-                      <BtnTitleCenter
-                        title={"See all"}
-                        onClick={onClickOther}
-                      />
-                    ) : null}
                   </p>
                 </div>
               ) : order.otherInstruction ? (
@@ -91,15 +80,14 @@ const OrderSummary = ({ order, onClick, onClickOther }) => {
                   <p className="instuction-title-other">Other Instruction</p>
                   <p className="m-0 d-flex justify-content-between align-items-center over-flow-text over-flow-text-other  ">
                     {order.otherInstruction}
-                    {order.otherInstruction || order.otherInstruction ? (
-                      <BtnTitleCenter
-                        title={"See all"}
-                        onClick={onClickOther}
-                      />
-                    ) : null}
                   </p>
                 </div>
               ) : null}
+              <div className="btn-see-all-view-all">
+                {order.otherInstruction || order.labelInstruction ? (
+                  <BtnTitleCenter title={"See all"} onClick={onClickOther} />
+                ) : null}
+              </div>
             </div>
           </div>
           <div className=" flex-grow-1  detail-top-card width-50 ">

@@ -22,7 +22,10 @@
   overflow-y: hidden !important;
 }
 
-.address-contact-card {
+.btn-see-all-view-all {
+  position: absolute;
+  bottom: 21px;
+  right: 21px;
   button {
     font-family: "Inter";
     font-style: normal;
@@ -195,6 +198,7 @@
 .detail-top-card {
   padding: 21px;
   max-height: 300px;
+  position: relative;
 }
 .width-50 {
   width: 50%;
