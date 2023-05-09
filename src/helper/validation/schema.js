@@ -4,6 +4,7 @@ const re =
   /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
 
 const atlestOneChar = /^(?=.*[a-zA-Z])/;
+const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 const schema = {
   address: Yup.object({
@@ -43,7 +44,10 @@ const schema = {
   }),
 
   contacts: Yup.object({
-    email: Yup.string().email("invalid email id").required("email is required"),
+    email: Yup.string()
+      .email("invalid email id")
+      .matches(emailRegex, "invalid email id")
+      .required("email is required"),
     title: Yup.string().required("title is required"),
     contact: Yup.number()
       .required("contact is required")
@@ -54,7 +58,9 @@ const schema = {
   createBrand: Yup.object({
     brandName: Yup.string().required("brand name is required"),
     location: Yup.string().required("location is required"),
-    email: Yup.string().email("invalid email id"),
+    email: Yup.string()
+      .email("invalid email id")
+      .matches(emailRegex, "invalid email id"),
   }),
 };
 
