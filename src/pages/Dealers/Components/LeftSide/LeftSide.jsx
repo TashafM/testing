@@ -182,6 +182,7 @@ function LeftSide({
     // obj.grossPrice = Number(prices[0].grossPrice);
 
     setCartProducts(updatedArray);
+    setProductQuantity('')
     localStorage.setItem("cart", JSON.stringify(updatedArray));
   };
 
@@ -224,6 +225,7 @@ function LeftSide({
         const test = popupData.filter(
           (item) => item.itemNumber == newItem.itemNumber
         );
+        setProductQuantity('')
         if (test.length == 0) {
           localStorage.setItem(
             "popupItems",
@@ -233,6 +235,8 @@ function LeftSide({
         setCartProducts(updatedCartProducts); // push the new item to the cart array
         // Store updated cartProducts in localStorage
         localStorage.setItem("cart", JSON.stringify(updatedCartProducts));
+        setProductQuantity('')
+
         // console.log(updatedCartProducts,'updated cart')
       } else {
         const updatedCart = [...storedCartProducts];
@@ -240,6 +244,7 @@ function LeftSide({
         updatedCart[itemIndex].totalPrice =
           Number(productQuantity) * Number(prices[0].grossPrice);
         setCartProducts(updatedCart);
+        setProductQuantity('')
 
         // Store updated cartProducts in localStorage
         localStorage.setItem("cart", JSON.stringify(updatedCart));
