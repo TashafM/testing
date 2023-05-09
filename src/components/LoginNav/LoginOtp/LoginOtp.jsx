@@ -111,41 +111,36 @@ const LoginOtp = () => {
     if (otpValue.length !== 6) {
       setError("OTP must have 6 characters");
       return false;
-    }else{
+    } else {
       setIsLoading(true);
       axios
-      .post(API.VERIFY_OTP, {
-        userCode: userCode,
-        otp: otpValue,
-      })
-      .then((res) => {
-        if (res.status == 200) {
-          localStorage.setItem("usercode", res.data.userCode);
-          localStorage.setItem("accessToken", res.data.result[0].accessToken);
-          localStorage.setItem("username", res.data.userName);
-          delete res?.data?.result;
-          localStorage.setItem("userData", JSON.stringify(res?.data));
-          navigate("/select-account-type");
-          toast.success("Login Successfully");
+        .post(API.VERIFY_OTP, {
+          userCode: userCode,
+          otp: otpValue,
+        })
+        .then((res) => {
+          if (res.status == 200) {
+            localStorage.setItem("usercode", res.data.userCode);
+            localStorage.setItem("accessToken", res.data.result[0].accessToken);
+            localStorage.setItem("username", res.data.userName);
+            delete res?.data?.result;
+            localStorage.setItem("userData", JSON.stringify(res?.data));
+            navigate("/select-account-type");
+            toast.success("Login Successfully");
 
-          setIsLoading(false)
-        }
-      }).catch((err)=>{
-        setIsLoading(false)
-        setOtp(["","","","","",""])
-        toast.error("Incorrect OTP entered");
-
-      })
+            setIsLoading(false);
+          }
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          setOtp(["", "", "", "", "", ""]);
+          toast.error("Incorrect OTP entered");
+        });
     }
-
-
-    
   };
 
   return (
     <>
-      <ToastContainer position="top-center" />
-
       <div className="text-login">Login</div>
       <div className="email-enter-msg">
         {reqOtp
@@ -208,11 +203,7 @@ const LoginOtp = () => {
           onClick={validateOtp}
           disabled={isLoading}
         >
-          {isLoading ? (
-            <Spinner animation="border" variant="light" />
-          ) : (
-            "Login"
-          )}
+          {isLoading ? <Spinner animation="border" variant="light" /> : "Login"}
         </button>
       ) : (
         <button

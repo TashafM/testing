@@ -10,7 +10,6 @@
     img {
       height: 77px;
       width: 77px;
-      cursor: pointer;
       padding: 13px;
       // cursor: pointer;
       border-radius: 50%;
@@ -51,6 +50,7 @@
       position: relative;
       img {
         width: 42px;
+        cursor: pointer;
         height: 42px;
         border-radius: 50%;
       }

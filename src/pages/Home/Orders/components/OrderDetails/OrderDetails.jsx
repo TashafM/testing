@@ -16,6 +16,7 @@ import OrderSummary from "../../../../Dealers/SubPages/Orders/component/OrderSum
 import Arrow from "../../../../../assets/images/arrow-right.png";
 import { toast } from "react-toastify";
 import PlainTable from "../../../../../components/PlainTable/PlainTable";
+import { CircularProgress } from "@mui/material";
 
 const OrderDetails = () => {
   const location = useLocation();
@@ -69,6 +70,16 @@ const OrderDetails = () => {
   const navigation = useNavigate();
 
   const order = data && data.length ? data[0] : {};
+
+  if (loading) {
+    return (
+      <div className="upper-content order-detail-upper-content">
+        <div className="default-height loading-screen d-flex align-items-center justify-content-center">
+          <CircularProgress size={24} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="upper-content order-detail-upper-content">

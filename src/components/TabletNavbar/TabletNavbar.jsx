@@ -1,34 +1,101 @@
-import React from "react";
-import { Col, Row } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
 import "./TabletNavbar.scss";
-import atinks from "../../assets/images/atinks.png";
-import searchBg from "../../assets/images/searchBg.svg";
-import cartBg from "../../assets/images/cartBg.svg";
-import user from "../../assets/images/user.jpg";
+import * as BS from "react-icons/bs";
+import BlackBtn from "../BlackBtn/BlackBtn";
+import { BsChevronDown } from "react-icons/bs";
+import axios, { axiosInstance } from "../../helper/axios";
+
+import LogoutPopup from "../LogoutPopup/LogoutPopup";
+import MyDealersPopup from "../../pages/Dealers/Modal/MyDealersPopup/MyDealersPopup";
+import { API } from "../../helper/API";
 import compIcon from "../../assets/images/company-default-icon.png";
 import { getLocalStorageData } from "../Utils/Utils";
+import { ToastContainer, toast } from "react-toastify";
 
-const TabletNavbar = ({ dealers }) => {
-  const userData = getLocalStorageData("userData");
+const NavbarTop = ({ dealers }) => {
+  // const {setIsEmpty} = useContext(AddProducts)
+  const idCode = localStorage.getItem("principalCompanyUserCode");
+  const dealersLogo = localStorage.getItem("dpURL");
+  const [showPopup, setShowPopup] = useState(false);
+  const [dealerPopup, showDealerPopup] = useState(false);
+  const [allDealerData, setAllDealerData] = useState([]);
+  // const [dpURL, setDpURL] = useState("")
+  let userData = getLocalStorageData("userData");
+
+  const fetchDealers = () => {
+    const accessToken = localStorage.getItem("accessToken");
+    axios
+      .post(
+        API.VIEW_COMPANY_DEALERS,
+        {},
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      )
+      .then((res) => {
+        setAllDealerData(res.result);
+        localStorage.removeItem("cart");
+      });
+  };
+
+  useEffect(() => {
+    fetchDealers();
+
+    // emptyCart();
+  }, [idCode]);
+
+  const emptyCart = () => {
+    const principalCompanyUserCode = localStorage.getItem(
+      "principalCompanyUserCode"
+    );
+    axiosInstance
+      .post(API.DEALER_CLEAR_CART, { principalCompanyUserCode })
+      .then((res) => {
+        if (res.success) {
+          // setIsEmpty(false);
+          localStorage.removeItem("cartProducts");
+        }
+      });
+  };
 
   return (
-    <Row className="tabletNavbar">
-      <Col className="company-logo">
-        <img src={userData?.dpURL ? userData?.dpURL : compIcon} alt="" />
-      </Col>
-      <Col className="right-items">
-        <div className="search-img">
-          <img src={searchBg} alt="" />
+    <div className=" navbar-top d-flex justify-content-between align-items-center">
+      <img
+        className="logo"
+        src={userData?.dpURL ? userData?.dpURL : compIcon}
+        alt=""
+      />
+      <div className=" search-div-top">
+        {/* <span className="icon-search">
+          <BS.BsSearch />
+        </span> */}
+      </div>
+      <div className="right-div">
+        <MyDealersPopup
+          show={dealerPopup}
+          setDealerPopup={showDealerPopup}
+          data={allDealerData}
+        />
+        <div className="user-profile">
+          <img
+            src={userData?.dpURL ? userData?.dpURL : compIcon}
+            alt=""
+            onClick={() => setShowPopup(!showPopup)}
+          />
+          <span className="username" onClick={() => setShowPopup(!showPopup)}>
+            {userData?.firstname ?? ""}
+          </span>
+          <span
+            className="btn-dropdown"
+            onClick={() => setShowPopup(!showPopup)}
+          >
+            <BsChevronDown />
+          </span>
+          {showPopup && <LogoutPopup setShowPopup={setShowPopup} />}
         </div>
-        <div className="cart-img">
-          <img src={cartBg} alt="" />
-        </div>
-        <div className="user-img">
-          <img src={user} alt="" />
-        </div>
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };
 
-export default TabletNavbar;
+export default NavbarTop;

@@ -24,6 +24,7 @@ const CurrentPartners = ({
         setSelectedIds={setSelectedIds}
         partners={true}
         ratings={true}
+        dataLength={0}
         delActive={true}
       />
     </div>

@@ -69,7 +69,7 @@ function DealerOrderDetails() {
 
   if (loading) {
     return (
-      <div className="default-height">
+      <div className="default-height loading-screen d-flex align-items-center justify-content-center">
         <CircularProgress size={24} />
       </div>
     );

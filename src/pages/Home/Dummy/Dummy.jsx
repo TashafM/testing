@@ -86,9 +86,7 @@ const Dummy = () => {
 
   return (
     <div>
-      <div>
-        <ToastContainer position="top-center" />
-      </div>
+      <div></div>
       <h1>Tashaf Mahmood</h1>
       <Button onClick={tashaf}>Hllo</Button>
 

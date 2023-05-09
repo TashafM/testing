@@ -47,6 +47,7 @@ import DealerPastOrder from "../pages/Dealers/SubPages/Orders/DealerPastOrder";
 import DealerOrderDetails from "../pages/Dealers/SubPages/Orders/DealerOrderDetails";
 import CompanyPastOrder from "../pages/Home/Orders/CompanyPastOrder";
 import CompanyCurrentOrder from "../pages/Home/Orders/CompanyCurrentOrder";
+import PaymentInfo from "../pages/Home/Payment/PaymentInfo";
 
 // import About from "../pages/About/";
 // import Contact from "./Contact";
@@ -59,6 +60,7 @@ const Routing = () => (
         element={<ProtectedRoutes Component={SelectPage} />}
       />
       <Route path="/home/" element={<ProtectedRoutes Component={Home} />}>
+        <Route path="payment-info" element={<PaymentInfo />} />
         <Route path="team-members" element={<TeamMembers />}>
           <Route path="current-members" element={<CurrentMembers />} />
           <Route path="past-members" element={<PastMembers />} />
@@ -110,8 +112,7 @@ const Routing = () => (
         </Route>
         <Route path="favorites" element={<Favorites />} />
         <Route path="new-arrival" element={<NewArrival />} />
-        <Route path="all-products/products" element={<Products/>} />
-        
+        <Route path="all-products/products" element={<Products />} />
       </Route>
     </Routes>
   </BrowserRouter>
