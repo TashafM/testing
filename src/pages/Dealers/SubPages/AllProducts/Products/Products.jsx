@@ -125,7 +125,7 @@ const Products = () => {
                           {/* <img src={itm.productImages[0]} alt="" /> */}
                           <img src={itm.productImages.length > 0 ? itm.productImages[0] : img600} alt="" />
                         </div>
-                        {console.log(itm,'from products fro image')}
+                        {/* {console.log(itm,'from products fro image')} */}
                         <div className="title">{itm.itemDescription}</div>
                         <div className="description">{itm.itemDescription}</div>
                       </div>

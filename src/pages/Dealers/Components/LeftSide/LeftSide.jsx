@@ -34,7 +34,7 @@ function LeftSide({
   //   }
   // }, []);
   const { editMode, setEditMode, indexNo } = useContext(EditItems);
-  const {productQty, setProductQty} = useContext(AddProducts) 
+  const { productQty, setProductQty } = useContext(AddProducts);
   console.log(indexNo, "index no from global");
 
   console.log(editMode, "value of editMode");
@@ -66,12 +66,14 @@ function LeftSide({
 
   console.log(productQuantity, "productQuantity");
 
+  const [productImage, setProductImage] = useState(data.productImages[0]);
   useEffect(() => {
     if (localStorage.getItem("variant")) {
       const data = JSON.parse(localStorage.getItem("variant"));
       setSelectedColor(data.colorDescription);
       setSelectedQuantity(data.packingDescription);
-      setProductQuantity(data.quantity)
+      setProductQuantity(data.quantity);
+      setProductImage(data.productImages?.[0]);
     }
   }, [localStorage.getItem("variant")]);
 
@@ -105,7 +107,7 @@ function LeftSide({
 
   const handleQuantity = (e) => {
     const value = e.target.value;
-    if (Number(value) > 100) {
+    if (Number(value) < 1 || Number(value) > 100) {
       setExceedQuantity(true);
     } else {
       setExceedQuantity(false);
@@ -115,7 +117,6 @@ function LeftSide({
     }
   };
 
- 
   const availableQuantities = data.variants.filter(
     (variant) =>
       variant.colorDescription ===
@@ -184,7 +185,7 @@ function LeftSide({
     // obj.grossPrice = Number(prices[0].grossPrice);
 
     setCartProducts(updatedArray);
-    setProductQuantity('')
+    setProductQuantity("");
     localStorage.setItem("cart", JSON.stringify(updatedArray));
   };
 
@@ -206,6 +207,29 @@ function LeftSide({
       );
 
       if (itemIndex === -1) {
+        const popupDataFetch = JSON.parse(localStorage.getItem("popupItems"));
+        const initialData = JSON.parse(
+          localStorage.getItem("initialProductData")
+        );
+        console.log(popupDataFetch, "uuuuuuuuuuuuuuu");
+        const newPopup = popupDataFetch.filter(
+          (item) => item.itemNumber == data.itemNumber
+        );
+        if (newPopup.length == 0) {
+          const finalPopupData = [...popupDataFetch, initialData];
+          localStorage.setItem("popupItems", finalPopupData);
+        }
+
+        // const qwerty = popupData.filter((item)=>item.itemNumber == data.itemNumber)
+        // console.log(qwerty[0],'filtered popup data')
+        // const filteredData= qwerty[0].variants.filter((item)=>item.variantId == prices[0].variantId)
+        // console.log(filteredData[0],'variants data')
+
+        console.log(prices[0], "pppppppppppppppppppp");
+
+        // const {categoryId, principalCompanyUserCode, companyUserCode, subCategoryId, variants, ...rest} = qwerty[0]
+        // const {}
+
         // Item not found in cart, add it as a new item
         const newItem = {
           principalCompanyUserCode: localStorage.getItem(
@@ -219,15 +243,19 @@ function LeftSide({
           totalPrice: Number(productQuantity) * Number(prices[0].grossPrice),
           grossPrice: Number(prices[0].grossPrice),
           productId: data.productId,
-          name: data.itemDescription,
+          itemDescription: data.itemDescription,
           itemNumber: data.itemNumber,
           productId: data.productId,
+          // ...rest,
+          // quantity: Number(productQuantity),
+          // ...filteredData[0],
+          // totalPrice: Number(productQuantity) * Number(filteredData[0].grossPrice)
         };
         const updatedCartProducts = [...storedCartProducts, newItem];
         const test = popupData.filter(
           (item) => item.itemNumber == newItem.itemNumber
         );
-        setProductQuantity('')
+        setProductQuantity("");
         if (test.length == 0) {
           localStorage.setItem(
             "popupItems",
@@ -237,7 +265,13 @@ function LeftSide({
         setCartProducts(updatedCartProducts); // push the new item to the cart array
         // Store updated cartProducts in localStorage
         localStorage.setItem("cart", JSON.stringify(updatedCartProducts));
-        setProductQuantity('')
+        setProductQuantity("");
+
+        console.log(newItem, "adding new item");
+        // console.log(data.itemNumber,'@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+
+        // const qwerty = popupData.filter((item)=>item.itemNumber == data.itemNumber)
+        // console.log(qwerty,'-------------------')
 
         // console.log(updatedCartProducts,'updated cart')
       } else {
@@ -246,10 +280,12 @@ function LeftSide({
         updatedCart[itemIndex].totalPrice =
           Number(productQuantity) * Number(prices[0].grossPrice);
         setCartProducts(updatedCart);
-        setProductQuantity('')
+
+        setProductQuantity("");
 
         // Store updated cartProducts in localStorage
         localStorage.setItem("cart", JSON.stringify(updatedCart));
+        console.log(updatedCart, "&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
       }
     }
   };
@@ -280,7 +316,7 @@ function LeftSide({
               <img src={mainproduct} alt="" />
             </div>
           </div> */}
-          <img src={img600} alt="" className="main-img" />
+          <img src={productImage} alt="" className="main-img" />
           <div className="wish-list">
             <img src={wishlist} alt="" />
           </div>
@@ -376,7 +412,7 @@ function LeftSide({
             onChange={handleQuantity}
             value={productQuantity}
           />
-          
+
           <div className="max-orders">Maximum orders 100 *</div>
         </div>
 

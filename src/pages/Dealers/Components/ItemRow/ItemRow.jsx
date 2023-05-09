@@ -45,6 +45,7 @@ const ItemRow = ({
       variantId,
       _id,
       quantity,
+      productImages,
       ...rest
     } = firstData[0];
     const data = {
@@ -58,6 +59,7 @@ const ItemRow = ({
       variantId,
       _id,
       quantity,
+      productImages
     };
     localStorage.setItem("variant", JSON.stringify(data));
   };
@@ -74,30 +76,48 @@ const ItemRow = ({
     const filteredVariant = filtered[0].variants.filter(
       (item) => item.variantId == data.variantId
     );
-    console.log(filteredVariant[0], "filteredvariant");
-
-    const localVariant = JSON.stringify(filteredVariant[0]);
-
+    // console.log(filteredVariant[0], "filteredvariant");
     const test = JSON.parse(localStorage.getItem("cart"));
     const qty = test.filter(
       (item) => item.variantId == filteredVariant[0].variantId
     );
-    console.log(qty[0], '&&&&&&&&&&&&&&&&')
-    const getVariant = JSON.parse(localStorage.getItem('variant'))
-    console.log(getVariant,'from local storage')
-    const settingItem = {
-      bpCatalogNumber: qty[0].bpCatalogNumber,
-      colorCode: qty[0].colorCode,
-      colorDescription: qty[0].colorDescription,
-      grossPrice: qty[0].grossPrice,
-      packingCode: qty[0].packingCode,
-      packingDescription: qty[0].packingDescription,
-      saleDescription: qty[0].saleDescription,
-      variantId: qty[0].variantId,
-      _id: qty[0]._id,
-      quantity: qty[0].quantity,
+
+    const variantWithQuantity = {
+      ...filteredVariant[0], // spread the properties of filteredVariant[0]
+      quantity: qty[0].quantity, // add the quantity key with the data.qty value
     };
-    localStorage.setItem('variant', JSON.stringify(settingItem))
+
+    const localVariant = JSON.stringify(variantWithQuantity);
+    console.log(JSON.parse(localVariant),'localVAriant')
+    localStorage.setItem('variant', localVariant)
+
+
+    
+    // console.log(qty[0], '&&&&&&&&&&&&&&&&')
+
+    // console.log(qty[0],'data to pass')
+    // const getVariant = JSON.parse(localStorage.getItem('variant'))
+    // console.log(getVariant,'from local storage')
+    // const settingItem = {
+    //   bpCatalogNumber: qty[0].bpCatalogNumber,
+    //   colorCode: qty[0].colorCode,
+    //   colorDescription: qty[0].colorDescription,
+    //   grossPrice: qty[0].grossPrice,
+    //   packingCode: qty[0].packingCode,
+    //   packingDescription: qty[0].packingDescription,
+    //   saleDescription: qty[0].saleDescription,
+    //   variantId: qty[0].variantId,
+    //   _id: qty[0]._id,
+    //   quantity: qty[0].quantity,
+    //   productImages: qty[0].productImages,
+    // };
+
+    
+
+    // console.log(settingItem,'setting item')
+    // localStorage.setItem('variant', JSON.stringify(settingItem))
+
+    // console.log(settingItem,'0000000000000')
     // localStorage.setItem("quantity", qty[0].quantity);
   };
 
@@ -140,7 +160,7 @@ const ItemRow = ({
     //     </td>
     //   )}
     // </tr>
-    <tr className={cartOpen && indexNo==id? "right-side-tr selected-tr": "right-side-tr" } onClick={selectedItem}>
+    <tr className={cartOpen && (indexNo==id && editMode)? "right-side-tr selected-tr": "right-side-tr" } onClick={selectedItem}>
       <td
         className={
           popupScreen ? "single-product-item pl40" : "single-product-item"
