@@ -29,12 +29,14 @@ const ProductCart = () => {
 
   const { showPanel, setShowPanel } = useContext(GlobalSidePanel);
 
-  const { isEmpty, setIsEmpty, cartOpen, setCartOpen } = useContext(AddProducts);
+  const { isEmpty, setIsEmpty, cartOpen, setCartOpen, productQty, setProductQty } = useContext(AddProducts);
   const {setEditMode, editMode} = useContext(EditItems)
 
   const setFirstItem = () => {
     const data = JSON.parse(localStorage.getItem('cart'));
     const popup =JSON.parse(localStorage.getItem('popupItems')) 
+
+    setProductQty(data[0].quantity)
 
     const itemNumber = popup.filter((item)=>item.itemNumber==data[0].itemNumber)
     console.log(itemNumber,'***********')
@@ -109,6 +111,8 @@ const ProductCart = () => {
     emptyCart();
   };
 
+  console.log(productQty,'TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT')
+
   //------------------------------------------
   const [cart, setCart] = useState([]);
   const [cartItem, setCartItem] = useState([]);
@@ -173,8 +177,9 @@ const ProductCart = () => {
   }, [showPanel]);
 
   //==============================================SET ADDRESS API
+  const [loading, setLoading] = useState(false)
   const dummy = () => {
-    console.log('dummy clicked')
+    setLoading(true)
     axiosInstance
       .post(API.EDIT_CART_ADDRESS, {
         principalCompanyUserCode: localStorage.getItem(
@@ -191,7 +196,8 @@ const ProductCart = () => {
 
         setDisplayAddress(...selectedAddress);
         setShowAddress(false);
-      });
+        setLoading(false)
+      }).catch((error)=>setLoading(false))
 
 
   };
@@ -263,6 +269,8 @@ const ProductCart = () => {
             setIsLoading(false);
             setModalShow(true);
             setPurchaseOrderNumber("");
+            localStorage.removeItem('labelInstruction')
+            localStorage.removeItem('otherInstruction')
           }
         })
         .catch((err) => setIsLoading(false));
@@ -381,6 +389,8 @@ const ProductCart = () => {
               callApi={dummy}
               defaultShipping={defaultShipping}
               setDisplayAddress={setDisplayAddress}
+              loading={loading}
+              setLoading={setLoading}
               // data={cart}
             />
 
@@ -411,7 +421,7 @@ const ProductCart = () => {
 
             {/**PLACE ORDER - CLEAR CART */}
             <div className="cart-btns">
-              <Button className="clear" onClick={emptyCart}>
+              <Button className="clear" onClick={emptyCart} disabled>
                 Clear Cart
               </Button>
               <Button
@@ -420,10 +430,11 @@ const ProductCart = () => {
                   // setModalShow(true);
                   placeOrder();
                 }}
+                disabled={isLoading}
               >
                 {isLoading ? (
                   <div className="place-order-spinner">
-                    <Spinner animation="border" variant="light" />
+                    <Spinner animation="border" variant="danger" />
                   </div>
                 ) : (
                   "Place Order"

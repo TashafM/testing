@@ -8,7 +8,7 @@ import { uniqBy } from "lodash";
 import { Button, Form, FormControl, InputGroup } from "react-bootstrap";
 import { useEffect } from "react";
 import { useContext } from "react";
-import { EditItems } from "../../Dealers";
+import { AddProducts, EditItems } from "../../Dealers";
 
 // ---------THIS IS TESTING CODE ----------------------------
 function LeftSide({
@@ -34,6 +34,7 @@ function LeftSide({
   //   }
   // }, []);
   const { editMode, setEditMode, indexNo } = useContext(EditItems);
+  const {productQty, setProductQty} = useContext(AddProducts) 
   console.log(indexNo, "index no from global");
 
   console.log(editMode, "value of editMode");
@@ -59,7 +60,7 @@ function LeftSide({
   const [selectedColor, setSelectedColor] = useState(firstColor);
   const [selectedQuantity, setSelectedQuantity] = useState(firstQuantity);
 
-  const [productQuantity, setProductQuantity] = useState(null);
+  const [productQuantity, setProductQuantity] = useState(editMode? productQty : null);
 
   const [exceedQuantity, setExceedQuantity] = useState(false);
 

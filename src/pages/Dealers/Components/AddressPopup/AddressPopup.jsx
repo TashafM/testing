@@ -1,7 +1,7 @@
 import React from "react";
 import "./addresspopup.scss";
 import { useState } from "react";
-import { Button, Offcanvas, Table } from "react-bootstrap";
+import { Button, Offcanvas, Spinner, Table } from "react-bootstrap";
 import SelectAddress from "./SelectAddress/SelectAddress";
 import AddButton from "./AddButton/AddButton";
 import TextInput from "../../../../components/Input/TextInput";
@@ -22,6 +22,8 @@ const AddressPopup = ({
   setBillingAddress,
   callApi,
   setDisplayAddress,
+  loading,
+  setLoading,
 }) => {
   const [isEdit, setIsEdit] = useState(false);
 
@@ -104,8 +106,16 @@ const AddressPopup = ({
                 />
               </div>
               <div className="save-address-div">
-                <Button className="save-address save-btn" onClick={callApi}>
-                  Save
+                <Button
+                  className="save-address save-btn"
+                  onClick={callApi}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <Spinner animation="border" variant="danger" />
+                  ) : (
+                    "Save"
+                  )}
                 </Button>
               </div>
             </>

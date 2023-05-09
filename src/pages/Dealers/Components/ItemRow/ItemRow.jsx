@@ -75,13 +75,12 @@ const ItemRow = ({
     console.log(filteredVariant[0], "filteredvariant");
 
     const localVariant = JSON.stringify(filteredVariant[0]);
-    localStorage.setItem("variant", localVariant);
 
     const test = JSON.parse(localStorage.getItem("cart"));
     const qty = test.filter(
       (item) => item.variantId == filteredVariant[0].variantId
     );
-    console.log(qty[0].quantity, "77777777777777777");
+    console.log(qty[0].quantity,'&&&&&&&&&&&&&&&&')
     // localStorage.setItem("quantity", qty[0].quantity);
   };
 
@@ -124,7 +123,7 @@ const ItemRow = ({
     //     </td>
     //   )}
     // </tr>
-    <tr className={cartOpen && indexNo==id? "right-side-tr selected-tr": "right-side-tr " } onClick={selectedItem}>
+    <tr className={cartOpen && indexNo==id? "right-side-tr selected-tr": "right-side-tr no-hover" } onClick={selectedItem}>
       <td
         className={
           popupScreen ? "single-product-item pl40" : "single-product-item"

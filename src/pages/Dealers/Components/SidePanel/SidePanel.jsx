@@ -12,7 +12,7 @@ const SidePanel = ({ noHover }) => {
   const { notEditable, setNotEditable, setEditMode, setIndexNo } = useContext(EditItems);
   const {setCartOpen} = useContext(AddProducts)
 
-  const { setIsEmpty, isEmpty } = useContext(AddProducts);
+  const { setIsEmpty, isEmpty, productQty, setProductQty } = useContext(AddProducts);
   const [cartProducts, setCartProducts] = useState([]);
   const [data, setData] = useState([]);
 
@@ -64,8 +64,12 @@ const SidePanel = ({ noHover }) => {
   };
 
   const editProducts = (id, idx) => {
-    console.log(idx,'index number')
     const pop = JSON.parse(localStorage.getItem("popupItems"));
+    console.log(id.quantity, idx, 'edit products')
+    setProductQty(id.quantity)
+
+    {console.log(productQty,'88888888888888888888888')}
+    
     // console.log(id)
     const filtered = pop.filter((item) => item.itemNumber == id.itemNumber);
     const result = filtered[0];
