@@ -8,7 +8,7 @@ import { uniqBy } from "lodash";
 import { Button, Form, FormControl, InputGroup } from "react-bootstrap";
 import { useEffect } from "react";
 import { useContext } from "react";
-import { EditItems } from "../../Dealers";
+import { AddProducts, EditItems } from "../../Dealers";
 
 // ---------THIS IS TESTING CODE ----------------------------
 function LeftSide({
@@ -34,6 +34,7 @@ function LeftSide({
   //   }
   // }, []);
   const { editMode, setEditMode, indexNo } = useContext(EditItems);
+  const {productQty, setProductQty} = useContext(AddProducts) 
   console.log(indexNo, "index no from global");
 
   console.log(editMode, "value of editMode");
@@ -70,13 +71,14 @@ function LeftSide({
       const data = JSON.parse(localStorage.getItem("variant"));
       setSelectedColor(data.colorDescription);
       setSelectedQuantity(data.packingDescription);
+      setProductQuantity(data.quantity)
     }
   }, [localStorage.getItem("variant")]);
 
   useEffect(() => {
     if (localStorage.getItem("variant")) {
       const data = JSON.parse(localStorage.getItem("quantity"));
-      setProductQuantity(data);
+      // setProductQuantity(data);
     }
   }, [localStorage.getItem("variant")]);
 

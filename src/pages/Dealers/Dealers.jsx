@@ -36,7 +36,7 @@ const Dealers = () => {
     <>
     <EditItems.Provider value={{notEditable, setNotEditable, editMode, setEditMode, setIndexNo, indexNo}}>
       <GlobalSidePanel.Provider value={{ showPanel, setShowPanel }}>
-        <AddProducts.Provider value={{ isEmpty, setIsEmpty, cartOpen, setCartOpen, bottomId, setBottomId }}>
+        <AddProducts.Provider value={{ isEmpty, setIsEmpty, cartOpen, setCartOpen, bottomId, setBottomId}}>
           <div className="homepage dealers-homepage">
             <div className="forDesktop">
               <NavbarTop dealers={true} />

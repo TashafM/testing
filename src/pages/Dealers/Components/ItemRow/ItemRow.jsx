@@ -44,6 +44,7 @@ const ItemRow = ({
       saleDescription,
       variantId,
       _id,
+      quantity,
       ...rest
     } = firstData[0];
     const data = {
@@ -56,6 +57,7 @@ const ItemRow = ({
       saleDescription,
       variantId,
       _id,
+      quantity,
     };
     localStorage.setItem("variant", JSON.stringify(data));
   };
@@ -75,13 +77,27 @@ const ItemRow = ({
     console.log(filteredVariant[0], "filteredvariant");
 
     const localVariant = JSON.stringify(filteredVariant[0]);
-    localStorage.setItem("variant", localVariant);
 
     const test = JSON.parse(localStorage.getItem("cart"));
     const qty = test.filter(
       (item) => item.variantId == filteredVariant[0].variantId
     );
-    console.log(qty[0].quantity, "77777777777777777");
+    console.log(qty[0], '&&&&&&&&&&&&&&&&')
+    const getVariant = JSON.parse(localStorage.getItem('variant'))
+    console.log(getVariant,'from local storage')
+    const settingItem = {
+      bpCatalogNumber: qty[0].bpCatalogNumber,
+      colorCode: qty[0].colorCode,
+      colorDescription: qty[0].colorDescription,
+      grossPrice: qty[0].grossPrice,
+      packingCode: qty[0].packingCode,
+      packingDescription: qty[0].packingDescription,
+      saleDescription: qty[0].saleDescription,
+      variantId: qty[0].variantId,
+      _id: qty[0]._id,
+      quantity: qty[0].quantity,
+    };
+    localStorage.setItem('variant', JSON.stringify(settingItem))
     // localStorage.setItem("quantity", qty[0].quantity);
   };
 
@@ -124,7 +140,7 @@ const ItemRow = ({
     //     </td>
     //   )}
     // </tr>
-    <tr className={cartOpen && indexNo==id? "right-side-tr selected-tr": "right-side-tr " } onClick={selectedItem}>
+    <tr className={cartOpen && indexNo==id? "right-side-tr selected-tr": "right-side-tr" } onClick={selectedItem}>
       <td
         className={
           popupScreen ? "single-product-item pl40" : "single-product-item"

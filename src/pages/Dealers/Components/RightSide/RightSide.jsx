@@ -20,7 +20,7 @@ function RightSide({
   getFromPop,
   noHover,
 }) {
-  const { setNotEditable, setEditMode,setIndexNo,indexNo } = useContext(EditItems);
+  const { setNotEditable, setEditMode,setIndexNo,indexNo, editMode } = useContext(EditItems);
   const { setCartOpen} = useContext(AddProducts)
   const [selectedId, setSelectedId] = useState(-1);
 
@@ -71,7 +71,7 @@ function RightSide({
             {isLoading ? (
               <Spinner animation="border" variant="light" />
             ) : (
-              "Add to cart"
+              editMode ? 'Update Cart' : "Add to cart"
             )}
           </Button>
         </div>

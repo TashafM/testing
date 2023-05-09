@@ -12,7 +12,7 @@ const SidePanel = ({ noHover }) => {
   const { notEditable, setNotEditable, setEditMode, setIndexNo } = useContext(EditItems);
   const {setCartOpen} = useContext(AddProducts)
 
-  const { setIsEmpty, isEmpty } = useContext(AddProducts);
+  const { setIsEmpty, isEmpty, productQty, setProductQty } = useContext(AddProducts);
   const [cartProducts, setCartProducts] = useState([]);
   const [data, setData] = useState([]);
 
@@ -47,6 +47,7 @@ const SidePanel = ({ noHover }) => {
       const myVariant = JSON.parse(variation);
       setCustomVariant(myVariant);
       // console.log(products,'products changes')
+      console.log('variant changign...............s')
     }
   }, [localStorage.getItem("variant")]);
 
@@ -64,8 +65,8 @@ const SidePanel = ({ noHover }) => {
   };
 
   const editProducts = (id, idx) => {
-    console.log(idx,'index number')
     const pop = JSON.parse(localStorage.getItem("popupItems"));
+
     // console.log(id)
     const filtered = pop.filter((item) => item.itemNumber == id.itemNumber);
     const result = filtered[0];
