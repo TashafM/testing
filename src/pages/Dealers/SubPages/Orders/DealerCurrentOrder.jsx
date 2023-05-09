@@ -34,7 +34,7 @@ function DealerCurrentOrder() {
 
   if (loading) {
     return (
-      <div className="default-height">
+      <div className="default-height loading-screen d-flex align-items-center justify-content-center">
         <CircularProgress size={24} />
       </div>
     );
@@ -44,7 +44,6 @@ function DealerCurrentOrder() {
     navigate(`/dealers/orders/detail`, { state: { data: item } });
   };
 
-  console.log({ data });
   return (
     <div className="dealers-past-order-wrapper">
       <InfiniteScroll

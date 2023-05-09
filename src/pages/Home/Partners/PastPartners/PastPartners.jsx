@@ -1,6 +1,6 @@
-import React from 'react'
-import DataTable from '../../../../components/DataTable/DataTable'
-import { colPastPartners } from '../data'
+import React from "react";
+import DataTable from "../../../../components/DataTable/DataTable";
+import { colPastPartners } from "../data";
 
 const PastPartners = ({
   selectedIds,
@@ -9,7 +9,7 @@ const PastPartners = ({
   pastPartnerApi,
   currPartnersApi,
   getPastPartners,
-  getCurrPartners
+  getCurrPartners,
 }) => {
   return (
     <div>
@@ -24,9 +24,10 @@ const PastPartners = ({
         setSelectedIds={setSelectedIds}
         partners={true}
         resActive={true}
+        dataLength={0}
       />
     </div>
-  )
-}
+  );
+};
 
-export default PastPartners
+export default PastPartners;

@@ -56,7 +56,7 @@ const schema = {
   }),
 
   createBrand: Yup.object({
-    brandName: Yup.string().required("brand name is required"),
+    brandName: Yup.string().max(30).required("brand name is required"),
     location: Yup.string().required("location is required"),
     email: Yup.string()
       .email("invalid email id")

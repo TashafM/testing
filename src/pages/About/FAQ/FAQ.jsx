@@ -41,7 +41,7 @@ function FAQ() {
     });
   };
 
-  if (loading) {
+  if (true) {
     return (
       <div className=" loading-screen default-height d-flex align-items-center justify-content-center">
         <CircularProgress size={24} />

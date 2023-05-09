@@ -15,8 +15,8 @@ import { AddProducts } from "../../pages/Dealers/Dealers";
 import compIcon from "../../assets/images/company-default-icon.png";
 import { getLocalStorageData } from "../Utils/Utils";
 import { ToastContainer, toast } from "react-toastify";
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const NavbarTop = ({ dealers }) => {
   // const {setIsEmpty} = useContext(AddProducts)
@@ -106,7 +106,7 @@ const NavbarTop = ({ dealers }) => {
             onClick={() => setShowPopup(!showPopup)}
           />
           <span className="username" onClick={() => setShowPopup(!showPopup)}>
-            {"Username"}
+            {userData?.firstname ?? ""}
           </span>
           <span
             className="btn-dropdown"
