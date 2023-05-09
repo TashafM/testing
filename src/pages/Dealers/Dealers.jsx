@@ -28,7 +28,6 @@ const Dealers = () => {
   const [indexNo, setIndexNo] = useState(0)
   const [cartOpen, setCartOpen] = useState(false)
   const [bottomId, setBottomId] = useState(0)
-  const [productQty, setProductQty] = useState('')
 
   //--------------FOR SIDE PANEL OPENING----------------
   const [showPanel, setShowPanel] = useState(false);
@@ -37,7 +36,7 @@ const Dealers = () => {
     <>
     <EditItems.Provider value={{notEditable, setNotEditable, editMode, setEditMode, setIndexNo, indexNo}}>
       <GlobalSidePanel.Provider value={{ showPanel, setShowPanel }}>
-        <AddProducts.Provider value={{ isEmpty, setIsEmpty, cartOpen, setCartOpen, bottomId, setBottomId, productQty, setProductQty }}>
+        <AddProducts.Provider value={{ isEmpty, setIsEmpty, cartOpen, setCartOpen, bottomId, setBottomId}}>
           <div className="homepage dealers-homepage">
             <div className="forDesktop">
               <NavbarTop dealers={true} />

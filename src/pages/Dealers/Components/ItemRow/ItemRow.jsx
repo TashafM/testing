@@ -80,7 +80,21 @@ const ItemRow = ({
     const qty = test.filter(
       (item) => item.variantId == filteredVariant[0].variantId
     );
-    console.log(qty[0].quantity,'&&&&&&&&&&&&&&&&')
+    console.log(qty[0], '&&&&&&&&&&&&&&&&')
+    const getVariant = JSON.parse(localStorage.getItem('variant'))
+    console.log(getVariant,'from local storage')
+    const settingItem = {
+      bpCatalogNumber: qty[0].bpCatalogNumber,
+      colorCode: qty[0].colorCode,
+      colorDescription: qty[0].colorDescription,
+      grossPrice: qty[0].grossPrice,
+      packingCode: qty[0].packingCode,
+      packingDescription: qty[0].packingDescription,
+      saleDescription: qty[0].saleDescription,
+      variantId: qty[0].variantId,
+      _id: qty[0]._id,
+    };
+    localStorage.setItem('variant', JSON.stringify(settingItem))
     // localStorage.setItem("quantity", qty[0].quantity);
   };
 

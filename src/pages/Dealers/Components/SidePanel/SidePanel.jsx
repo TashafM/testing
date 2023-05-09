@@ -47,6 +47,7 @@ const SidePanel = ({ noHover }) => {
       const myVariant = JSON.parse(variation);
       setCustomVariant(myVariant);
       // console.log(products,'products changes')
+      console.log('variant changign...............s')
     }
   }, [localStorage.getItem("variant")]);
 
@@ -65,11 +66,7 @@ const SidePanel = ({ noHover }) => {
 
   const editProducts = (id, idx) => {
     const pop = JSON.parse(localStorage.getItem("popupItems"));
-    console.log(id.quantity, idx, 'edit products')
-    setProductQty(id.quantity)
 
-    {console.log(productQty,'88888888888888888888888')}
-    
     // console.log(id)
     const filtered = pop.filter((item) => item.itemNumber == id.itemNumber);
     const result = filtered[0];

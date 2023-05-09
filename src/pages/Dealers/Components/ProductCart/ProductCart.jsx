@@ -36,7 +36,7 @@ const ProductCart = () => {
     const data = JSON.parse(localStorage.getItem('cart'));
     const popup =JSON.parse(localStorage.getItem('popupItems')) 
 
-    setProductQty(data[0].quantity)
+    // setProductQty(data[0].quantity)
 
     const itemNumber = popup.filter((item)=>item.itemNumber==data[0].itemNumber)
     console.log(itemNumber,'***********')
@@ -111,7 +111,6 @@ const ProductCart = () => {
     emptyCart();
   };
 
-  console.log(productQty,'TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT')
 
   //------------------------------------------
   const [cart, setCart] = useState([]);
@@ -421,7 +420,7 @@ const ProductCart = () => {
 
             {/**PLACE ORDER - CLEAR CART */}
             <div className="cart-btns">
-              <Button className="clear" onClick={emptyCart} disabled>
+              <Button className="clear" onClick={emptyCart}>
                 Clear Cart
               </Button>
               <Button

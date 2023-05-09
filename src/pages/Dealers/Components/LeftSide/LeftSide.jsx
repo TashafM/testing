@@ -60,7 +60,7 @@ function LeftSide({
   const [selectedColor, setSelectedColor] = useState(firstColor);
   const [selectedQuantity, setSelectedQuantity] = useState(firstQuantity);
 
-  const [productQuantity, setProductQuantity] = useState(editMode? productQty : null);
+  const [productQuantity, setProductQuantity] = useState(null);
 
   const [exceedQuantity, setExceedQuantity] = useState(false);
 
