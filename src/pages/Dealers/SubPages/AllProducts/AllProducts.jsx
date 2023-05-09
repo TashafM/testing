@@ -17,7 +17,7 @@ import { AddProducts } from "../../Dealers";
 
 const AllProducts = () => {
   const { isEmpty, setIsEmpty,setBottomId } = useContext(AddProducts);
-  const { setLoading, setMsg } = useContext(GlobalContext);
+  const { setLoading, setMsg, loading } = useContext(GlobalContext);
   const principalCompanyUserCode = localStorage.getItem(
     "principalCompanyUserCode"
   );
@@ -33,6 +33,7 @@ const AllProducts = () => {
   const { showPanel } = useContext(GlobalSidePanel);
 
   useEffect(() => {
+    
     const principalCompanyUserCode = localStorage.getItem(
       "principalCompanyUserCode"
     );
@@ -83,7 +84,6 @@ const AllProducts = () => {
             );
             const productData = JSON.stringify(nicy);
             localStorage.setItem("initialProductData", productData);
-            setLoading(false);
           }
         })
         .catch((err) => setLoading(false));

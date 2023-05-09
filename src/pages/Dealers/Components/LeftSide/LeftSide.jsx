@@ -71,13 +71,14 @@ function LeftSide({
       const data = JSON.parse(localStorage.getItem("variant"));
       setSelectedColor(data.colorDescription);
       setSelectedQuantity(data.packingDescription);
+      setProductQuantity(data.quantity)
     }
   }, [localStorage.getItem("variant")]);
 
   useEffect(() => {
     if (localStorage.getItem("variant")) {
       const data = JSON.parse(localStorage.getItem("quantity"));
-      setProductQuantity(data);
+      // setProductQuantity(data);
     }
   }, [localStorage.getItem("variant")]);
 

@@ -44,6 +44,7 @@ const ItemRow = ({
       saleDescription,
       variantId,
       _id,
+      quantity,
       ...rest
     } = firstData[0];
     const data = {
@@ -56,6 +57,7 @@ const ItemRow = ({
       saleDescription,
       variantId,
       _id,
+      quantity,
     };
     localStorage.setItem("variant", JSON.stringify(data));
   };
@@ -93,6 +95,7 @@ const ItemRow = ({
       saleDescription: qty[0].saleDescription,
       variantId: qty[0].variantId,
       _id: qty[0]._id,
+      quantity: qty[0].quantity,
     };
     localStorage.setItem('variant', JSON.stringify(settingItem))
     // localStorage.setItem("quantity", qty[0].quantity);
@@ -137,7 +140,7 @@ const ItemRow = ({
     //     </td>
     //   )}
     // </tr>
-    <tr className={cartOpen && indexNo==id? "right-side-tr selected-tr": "right-side-tr no-hover" } onClick={selectedItem}>
+    <tr className={cartOpen && indexNo==id? "right-side-tr selected-tr": "right-side-tr" } onClick={selectedItem}>
       <td
         className={
           popupScreen ? "single-product-item pl40" : "single-product-item"
