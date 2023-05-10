@@ -26,6 +26,12 @@
     -moz-osx-font-smoothing: grayscale;
   }
   
+  .icon-favorites:before {
+    content: "\e908";
+  }
+  .icon-stars:before {
+    content: "\e909";
+  }
   .icon-about:before {
     content: "\e900";
   }

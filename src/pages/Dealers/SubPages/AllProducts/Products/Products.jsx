@@ -17,11 +17,13 @@ import { API } from "../../../../../helper/API";
 import { axiosInstance } from "../../../../../helper/axios";
 import Category from "../Category/Category";
 import { GlobalContext } from "../../../../../App";
+import TriggerExample from "../../../../../components/ToolTip/ToolTip";
+import Tippy from "@tippyjs/react";
 
 const Products = () => {
   const { showPanel, setShowPanel } = useContext(GlobalSidePanel);
-  const { setLoading, setMsg } = useContext(GlobalContext);
-  const {setCartOpen, bottomId, setBottomId} = useContext(AddProducts)
+  const { setLoading, setMsg, loading } = useContext(GlobalContext);
+  const { setCartOpen, bottomId, setBottomId } = useContext(AddProducts);
   const location = useLocation();
   const [products, setProducts] = useState([]);
   const [noProducts, setNoProducts] = useState(false);
@@ -30,8 +32,8 @@ const Products = () => {
   // const [data, setData] = useState([])
   // const [currentId, setCurrentId] = useState(location.state.id);
 
-  const switchSubCategory = (value,idx) => {
-    setBottomId(idx)
+  const switchSubCategory = (value, idx) => {
+    setBottomId(idx);
     setIsLoading(true);
     const dataStringify = JSON.stringify(value);
     localStorage.setItem("subCategory", dataStringify);
@@ -54,7 +56,7 @@ const Products = () => {
       .catch((err) => setIsLoading(false));
   };
 
-  console.log(bottomId,'bottom id')
+  console.log(bottomId, "bottom id");
   useEffect(() => {
     // const { categoryId, subCategoryId } = location.state;
     const principalCompanyUserCode = localStorage.getItem(
@@ -84,13 +86,15 @@ const Products = () => {
     fetchProducts();
   }, []);
 
-  const callFunc = (val,idx) => {
-    console.log(idx,'call func')
+  console.log(loading,'loader status')
+
+  const callFunc = (val, idx) => {
+    console.log(idx, "call func");
     // setData(val)
     const popup = JSON.parse(localStorage.getItem("popupItems"));
     // console.log(popup,'popup')
     setShowPanel(true);
-    setCartOpen(true)
+    setCartOpen(true);
     const productData = JSON.stringify(val);
     localStorage.setItem("initialProductData", productData);
   };
@@ -99,7 +103,6 @@ const Products = () => {
     <>
       <div className="products">
         <TopBar title={"All Products"} goback={true} />
-        {console.log(isLoading, "loader")}
 
         <Row className="products-row">
           {noProducts ? (
@@ -108,22 +111,41 @@ const Products = () => {
             <>
               {isLoading ? (
                 <div className="loader-products-bottom">
-                <Spinner animation="border" variant="danger" />
+                  <Spinner animation="border" variant="danger" />
                 </div>
               ) : (
                 <>
                   {products.map((itm, id) => (
                     <Col className="products-container col-lg-4">
+                      {/* <div
+                        className="img-category-main"
+                        onClick={() => callFunc(itm, id)}
+                      > */}
                       <div
                         className="img-category-main"
-                        onClick={() => callFunc(itm,id)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          callFunc(itm, id);
+                        }}
                       >
-                        <div className="wish-list-icon">
-                          <img src={wishList} alt="" />
-                        </div>
+                        <Tippy content="Feature Coming Soon" trigger="click">
+                          <div
+                            className="wish-list-icon"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <img src={wishList} alt="" />
+                          </div>
+                        </Tippy>
                         <div className="product-img">
                           {/* <img src={itm.productImages[0]} alt="" /> */}
-                          <img src={itm.productImages.length > 0 ? itm.productImages[0] : img600} alt="" />
+                          <img
+                            src={
+                              itm.productImages.length > 0
+                                ? itm.productImages[0]
+                                : noImage
+                            }
+                            alt=""
+                          />
                         </div>
                         {/* {console.log(itm,'from products fro image')} */}
                         <div className="title">{itm.itemDescription}</div>
@@ -145,8 +167,10 @@ const Products = () => {
           {location.state.subCategory.map((item, id) => (
             <div
               key={id}
-              className={bottomId==id? "bottom-logos-active":"bottom-logos"}
-              onClick={() => switchSubCategory(item,id)}
+              className={
+                bottomId == id ? "bottom-logos-active" : "bottom-logos"
+              }
+              onClick={() => switchSubCategory(item, id)}
             >
               <img
                 src={

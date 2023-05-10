@@ -17,6 +17,7 @@ import { getLocalStorageData } from "../Utils/Utils";
 import { ToastContainer, toast } from "react-toastify";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import Tippy from "@tippyjs/react";
 
 const NavbarTop = ({ dealers }) => {
   // const {setIsEmpty} = useContext(AddProducts)
@@ -77,9 +78,13 @@ const NavbarTop = ({ dealers }) => {
         <span className="icon-search">
           <BS.BsSearch />
         </span>
-        <span onClick={() => toast.success("coming soon")}>
-          <input type="text" placeholder="Search..." disabled></input>
-        </span>
+        {/* <span onClick={() => toast.success("coming soon")}> */}
+        <Tippy content="Feature Coming Soon" trigger="click">
+          {/* <button>My button</button> */}
+          <input type="text" placeholder="Search..." readOnly></input>
+        </Tippy>
+
+        {/* </span> */}
       </div>
       <div className="col-md-3 right-div">
         <div>
@@ -106,7 +111,8 @@ const NavbarTop = ({ dealers }) => {
             onClick={() => setShowPopup(!showPopup)}
           />
           <span className="username" onClick={() => setShowPopup(!showPopup)}>
-            {userData?.firstname ?? ""}
+            <div>{userData?.firstname ?? ""}</div>
+            <div className="email-txt"> {userData?.email ?? ""}</div>
           </span>
           <span
             className="btn-dropdown"

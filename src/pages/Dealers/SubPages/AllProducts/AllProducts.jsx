@@ -84,6 +84,7 @@ const AllProducts = () => {
             );
             const productData = JSON.stringify(nicy);
             localStorage.setItem("initialProductData", productData);
+            setLoading(false)
           }
         })
         .catch((err) => setLoading(false));
@@ -118,7 +119,7 @@ const AllProducts = () => {
   return (
     <>
       <div className="allproducts">
-        <TopBar title={!noData ? "Print Heads" : null} />
+        <TopBar title={!noData ? "All Products" : null} />
         {noData ? (
           <div className="nodata">No categories added yet</div>
         ) : (

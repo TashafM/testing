@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./leftside.scss";
 import mainproduct from "../../../../assets/images/mainproduct.png";
 import wishlist from "../../../../assets/images/wishlist.svg";
+import noImage from "../../../../assets/images/noImage.png";
 import img600 from "../../../../assets/images/600x600pix(300dpi).png";
 import { uniqBy } from "lodash";
 
@@ -67,6 +68,8 @@ function LeftSide({
   console.log(productQuantity, "productQuantity");
 
   const [productImage, setProductImage] = useState(data.productImages[0]);
+
+  console.log(data,'1234567890')
   useEffect(() => {
     if (localStorage.getItem("variant")) {
       const data = JSON.parse(localStorage.getItem("variant"));
@@ -303,7 +306,7 @@ function LeftSide({
   return (
     <div className="scrollable-left">
       <div className="leftside">
-        <div className="title">Konica Chrome</div>
+        <div className="title">Item No. {data.itemNumber}</div>
         <div className="image-div">
           {/* <div className="sub-images">
             <div className="toggle-img">
@@ -316,7 +319,7 @@ function LeftSide({
               <img src={mainproduct} alt="" />
             </div>
           </div> */}
-          <img src={productImage} alt="" className="main-img" />
+          <img src={productImage??noImage} alt="" className="main-img" />
           <div className="wish-list">
             <img src={wishlist} alt="" />
           </div>

@@ -27,20 +27,40 @@ function App() {
   // const [testData, setTestData] = useState([]);
 
   return (
-    <GlobalContext.Provider
-      value={{
-        loading,
-        setLoading,
-        msg,
-        setMsg,
-      }}
-    >
-      <FixedTableHead.Provider value={{ isOpen, setIsOpen }}>
-        <ToastContainer position="top-center" />
-        {openDrawer.open ? <RightDrawer /> : null}
-        <Routing />
-      </FixedTableHead.Provider>
-    </GlobalContext.Provider>
+
+
+    // -------------------UMESH CODE------------------------------
+    // <GlobalContext.Provider
+    //   value={{
+    //     loading,
+    //     setLoading,
+    //     msg,
+    //     setMsg,
+    //   }}
+    // >
+    //   <FixedTableHead.Provider value={{ isOpen, setIsOpen }}>
+    //     <ToastContainer position="top-center" />
+    //     {openDrawer.open ? <RightDrawer /> : null}
+    //     <Routing />
+    //   </FixedTableHead.Provider>
+    // </GlobalContext.Provider>
+
+    <ContextProvider>
+      <GlobalContext.Provider
+        value={{
+          loading,
+          setLoading,
+          msg,
+          setMsg,
+        }}
+      >
+        <FixedTableHead.Provider value={{ isOpen, setIsOpen }}>
+          <ToastContainer position="top-center" />
+          <RightDrawer />
+          <Routing />
+        </FixedTableHead.Provider>
+      </GlobalContext.Provider>
+    </ContextProvider>
   );
 }
 

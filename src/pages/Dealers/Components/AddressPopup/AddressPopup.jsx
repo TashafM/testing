@@ -41,7 +41,7 @@ const AddressPopup = ({
         placement="end"
         className="address-popup"
       >
-        <Offcanvas.Header closeButton={addAddress && true}>
+        <Offcanvas.Header closeButton={addAddress && true} onHide={callApi}>
           <Offcanvas.Title>
             {addAddress ? (
               "Addresses"
