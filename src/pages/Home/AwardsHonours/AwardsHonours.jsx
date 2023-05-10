@@ -1,5 +1,5 @@
 import React from "react";
-import './awardsandhonours.scss'
+import "./awardsandhonours.scss";
 
 const AwardsHonours = () => {
   return (

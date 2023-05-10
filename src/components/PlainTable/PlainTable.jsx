@@ -23,7 +23,7 @@ const PlainTable = ({ columns, data, onClick }) => {
   return (
     <div className="plainTable" id="order-table-container">
       <div className="table-container">
-        <Table hover>
+        <Table hover={loaction.pathname.includes("details") ? false : true}>
           <thead className="table-head">
             <tr className="tr-head">
               {columns.map((col, idx) => (
@@ -39,6 +39,11 @@ const PlainTable = ({ columns, data, onClick }) => {
                 <tr
                   key={row.id}
                   className="tr-body"
+                  style={{
+                    cursor: !loaction.pathname.includes("details")
+                      ? "pointer"
+                      : "auto",
+                  }}
                   onClick={() => {
                     if (!loaction?.pathname.includes("detail")) onClick(row);
                   }}
