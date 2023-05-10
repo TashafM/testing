@@ -84,6 +84,7 @@ const AllProducts = () => {
             );
             const productData = JSON.stringify(nicy);
             localStorage.setItem("initialProductData", productData);
+            setLoading(false)
           }
         })
         .catch((err) => setLoading(false));
