@@ -54,7 +54,7 @@ function DealerCurrentOrder() {
       >
         <PlainTable
           columns={delalersCurrentOrderColumn}
-          data={data}
+          data={data ?? []}
           onClick={onDetailClicked}
         />
       </InfiniteScroll>
