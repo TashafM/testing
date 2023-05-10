@@ -35,7 +35,7 @@ function App() {
       >
         <FixedTableHead.Provider value={{ isOpen, setIsOpen }}>
           <ToastContainer position="top-center" />
-          <RightDrawer />
+          {(openDrawer.open || loading) && <RightDrawer />}
           <Routing />
         </FixedTableHead.Provider>
       </GlobalContext.Provider>
