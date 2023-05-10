@@ -86,7 +86,7 @@ const OrderDetails = () => {
       <Row>
         <div className="order-details-div">
           <div className="order-company">
-            <div className="order-date d-flex align-items-center">
+            <div className="order-date d-flex align-items-center justify-content-center">
               <img
                 src={Arrow}
                 alt="arrow-back"
@@ -95,7 +95,7 @@ const OrderDetails = () => {
                   navigation(-1);
                 }}
               />
-              <span>Order Received on{"  "} </span>
+              <p className="m-0 px-2">Order Received on </p>
               <span>
                 {order?.orderDate
                   ? ` ${getDesireDateFormate(order.orderDate)}`

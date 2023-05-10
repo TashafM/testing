@@ -6,10 +6,19 @@ import arrow from "../../assets/images/greater-then.png";
 import { getDesireDateFormate } from "../Utils/Utils";
 import { useLocation } from "react-router-dom";
 import defaultProduct from "../../assets/images/default-product-image.png";
+import { CircularProgress } from "@mui/material";
 
 const PlainTable = ({ columns, data, onClick }) => {
   const loaction = useLocation();
   //   const data = datum.sort((a, b) => b.id - a.id);  -----------> for sorting we can use this
+
+  if (!data.length) {
+    return (
+      <div className="default-height loading-screen d-flex align-items-center justify-content-center">
+        <div className="txt">No order placed yet...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="plainTable" id="order-table-container">
@@ -86,7 +95,7 @@ const PlainTable = ({ columns, data, onClick }) => {
                     if (col.value.includes("Status")) {
                       return (
                         <td>
-                          <div className="d-flex align-items-center justify-content-center table-over-flow-text">
+                          <div className="d-flex align-items-center justify-content-center  table-over-flow-text">
                             <p
                               style={{
                                 backgroundColor: isPastOrder
@@ -115,7 +124,7 @@ const PlainTable = ({ columns, data, onClick }) => {
                     if (isPrice) {
                       return (
                         <td>
-                          <div className="d-flex align-items-center justify-content-center table-over-flow-text">
+                          <div className="d-flex align-items-center justify-content-center col-price-overflow  table-over-flow-text">
                             <p className="m-0">
                               {col?.value?.includes("Price") ||
                               col?.value?.includes("Total") ||

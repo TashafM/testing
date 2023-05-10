@@ -55,7 +55,7 @@ function CompanyCurrentOrder() {
       >
         <PlainTable
           columns={companyCurrentOrder}
-          data={data}
+          data={data ?? []}
           onClick={onDetailClicked}
           type={"company"}
         />

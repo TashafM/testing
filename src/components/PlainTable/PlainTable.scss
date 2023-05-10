@@ -24,6 +24,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  .col-price-overflow {
+    white-space: nowrap !important;
+  }
   .table-head-overflow {
     // min-width: 130px;
     padding-inline: 30px !important;
