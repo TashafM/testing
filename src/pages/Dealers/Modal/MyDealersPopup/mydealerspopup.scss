@@ -63,6 +63,25 @@
           }
         }
 
+        .logo-company-active {
+          cursor: pointer;
+
+          width: 90px;
+          height: 90px;
+          //   background: yellow;
+          border: 3px solid #be212a;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+          }
+        }
+
         .name-company {
           cursor: pointer;
           font-size: 14px;

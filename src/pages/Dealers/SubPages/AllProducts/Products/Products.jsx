@@ -17,6 +17,7 @@ import { API } from "../../../../../helper/API";
 import { axiosInstance } from "../../../../../helper/axios";
 import Category from "../Category/Category";
 import { GlobalContext } from "../../../../../App";
+import TriggerExample from "../../../../../components/ToolTip/ToolTip";
 
 const Products = () => {
   const { showPanel, setShowPanel } = useContext(GlobalSidePanel);
@@ -99,7 +100,6 @@ const Products = () => {
     <>
       <div className="products">
         <TopBar title={"All Products"} goback={true} />
-        {console.log(isLoading, "loader")}
 
         <Row className="products-row">
           {noProducts ? (

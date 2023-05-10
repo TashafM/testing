@@ -67,6 +67,8 @@ function LeftSide({
   console.log(productQuantity, "productQuantity");
 
   const [productImage, setProductImage] = useState(data.productImages[0]);
+
+  console.log(data,'1234567890')
   useEffect(() => {
     if (localStorage.getItem("variant")) {
       const data = JSON.parse(localStorage.getItem("variant"));

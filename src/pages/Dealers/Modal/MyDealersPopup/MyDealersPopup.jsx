@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 const MyDealersPopup = ({ show, setDealerPopup, data, setChange }) => {
   const navigate = useNavigate();
 
+  const code = localStorage.getItem('principalCompanyUserCode')
+
   const activateDealer = (dealer) => {
     console.log(dealer, "dealer changes");
     localStorage.setItem(
@@ -53,7 +55,7 @@ const MyDealersPopup = ({ show, setDealerPopup, data, setChange }) => {
               className="col-xl-2 custom-column"
               onClick={() => activateDealer(item)}
             >
-              <div className="logo-company">
+              <div className={item.principalCompanyUserCode==code?"logo-company-active":"logo-company"}>
                 <img src={item.dpURL?item.dpURL:defaultCompany} alt="" />
               </div>
               <div className="name-company">{item.firstname}</div>
