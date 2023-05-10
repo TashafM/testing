@@ -22,7 +22,7 @@ import Tippy from "@tippyjs/react";
 
 const Products = () => {
   const { showPanel, setShowPanel } = useContext(GlobalSidePanel);
-  const { setLoading, setMsg } = useContext(GlobalContext);
+  const { setLoading, setMsg, loading } = useContext(GlobalContext);
   const { setCartOpen, bottomId, setBottomId } = useContext(AddProducts);
   const location = useLocation();
   const [products, setProducts] = useState([]);
@@ -86,6 +86,8 @@ const Products = () => {
     fetchProducts();
   }, []);
 
+  console.log(loading,'loader status')
+
   const callFunc = (val, idx) => {
     console.log(idx, "call func");
     // setData(val)
@@ -140,7 +142,7 @@ const Products = () => {
                             src={
                               itm.productImages.length > 0
                                 ? itm.productImages[0]
-                                : img600
+                                : noImage
                             }
                             alt=""
                           />

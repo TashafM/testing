@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./leftside.scss";
 import mainproduct from "../../../../assets/images/mainproduct.png";
 import wishlist from "../../../../assets/images/wishlist.svg";
+import noImage from "../../../../assets/images/noImage.png";
 import img600 from "../../../../assets/images/600x600pix(300dpi).png";
 import { uniqBy } from "lodash";
 
@@ -318,7 +319,7 @@ function LeftSide({
               <img src={mainproduct} alt="" />
             </div>
           </div> */}
-          <img src={productImage} alt="" className="main-img" />
+          <img src={productImage??noImage} alt="" className="main-img" />
           <div className="wish-list">
             <img src={wishlist} alt="" />
           </div>
