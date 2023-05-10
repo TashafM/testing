@@ -35,6 +35,7 @@ export default function RightDrawer() {
 
   return (
     <div className={loading ? "overlay-div" : ""}>
+      {loading ? console.log('true') : console.log('false')}
       {loading ? (
         <div className="msg-div">
           <span className="spinner"></span>

@@ -13,7 +13,7 @@ const Menus = ({ tabs, marginTop }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const userData = getLocalStorageData("useData");
+  const userData = getLocalStorageData("userData");
   // const [data, setData] = useState(localStorage.getItem("data") || null);
 
   const goto = (url) => {
@@ -33,7 +33,7 @@ const Menus = ({ tabs, marginTop }) => {
         <img src={userData?.dpURL ? userData.dpURL : compIcon} alt="" />
         <div className="title-cont">
           <p className="comp-title mb-0">
-            {userData?.firstname} {userData?.lastname}
+            {userData?.firstname} {userData?.lastname} {console.log(userData)}
           </p>
           {/* <p className="comp-subtitle  mb-0">{userData?.userName}</p> */}
         </div>

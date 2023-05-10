@@ -73,13 +73,13 @@ export const dealerMenu = [
   },
   {
     id: 4,
-    icon: "partners",
+    icon: "favorites",
     title: "Favorites",
     path: "/dealers/favorites",
   },
   {
     id: 5,
-    icon: "products",
+    icon: "stars",
     title: "New Arrival",
     path: "/dealers/new-arrival",
   },

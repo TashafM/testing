@@ -111,7 +111,8 @@ const NavbarTop = ({ dealers }) => {
             onClick={() => setShowPopup(!showPopup)}
           />
           <span className="username" onClick={() => setShowPopup(!showPopup)}>
-            {userData?.firstname ?? ""}
+            <div>{userData?.firstname ?? ""}</div>
+            <div className="email-txt"> {userData?.email ?? ""}</div>
           </span>
           <span
             className="btn-dropdown"

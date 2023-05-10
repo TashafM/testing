@@ -98,3 +98,16 @@
 .dealers-order .modal-dialog {
   max-width: 800px !important;
 }
+
+
+@media (min-width: 1440px) and (max-width: 1750px){
+  .dealers-order{
+    .all-dealers{
+      height: 475px;
+    }
+
+    .modal-dialog{
+      max-width: 750px !important;
+    }
+  }
+}

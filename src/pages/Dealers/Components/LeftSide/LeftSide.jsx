@@ -306,7 +306,7 @@ function LeftSide({
   return (
     <div className="scrollable-left">
       <div className="leftside">
-        <div className="title">Konica Chrome</div>
+        <div className="title">Item No. {data.itemNumber}</div>
         <div className="image-div">
           {/* <div className="sub-images">
             <div className="toggle-img">

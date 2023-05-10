@@ -65,6 +65,8 @@ const ProductCart = () => {
 
   const [purchaseOrderNumber, setPurchaseOrderNumber] = useState("");
   const [noPurchaseNumber, setNoPurchaseNumber] = useState(false);
+  const [purchaseOrderError, setPurchaseOrderError] = useState(false)
+
 
   const handlePurchaseOrderNumberChange = (event) => {
     setPurchaseOrderNumber(event.target.value);
@@ -72,6 +74,7 @@ const ProductCart = () => {
       setNoPurchaseNumber(false);
     }
   };
+  
 
   const isPurchaseOrderNumberEmpty = purchaseOrderNumber.trim() === "";
 
@@ -129,10 +132,12 @@ const ProductCart = () => {
   const [itemTotal, setItemTotal] = useState(0);
   const currencySymbol = localStorage.getItem("currencySymbol");
 
+  const [cartClear, setCartClear] = useState(false)
   const emptyCart = () => {
     const principalCompanyUserCode = localStorage.getItem(
       "principalCompanyUserCode"
     );
+    setCartClear(true)
     axiosInstance
       .post(API.DEALER_CLEAR_CART, { principalCompanyUserCode })
       .then((res) => {
@@ -140,8 +145,9 @@ const ProductCart = () => {
           setIsEmpty(true);
           // localStorage.removeItem("cartProducts");
           localStorage.removeItem("cart");
+          setCartClear(false)
         }
-      });
+      }).catch((error)=>setCartClear(false))
   };
 
   const [load, setLoad] = useState(false);
@@ -220,7 +226,11 @@ const ProductCart = () => {
   const placeOrder = () => {
     if (purchaseOrderNumber == "") {
       setNoPurchaseNumber(true);
-    } else {
+      setPurchaseOrderError(false)
+    } else if(purchaseOrderNumber.length > 25){
+      setPurchaseOrderError(true)
+      setNoPurchaseNumber(false)
+    }else {
       setIsLoading(true);
       const data = localStorage.getItem("placeOrderData");
       const parsedData = JSON.parse(data);
@@ -366,7 +376,7 @@ const ProductCart = () => {
             {/**PURCHASE ORDER */}
             <div className="purchase-order">
               <div className="title">
-                Purchase Order Number: <span style={{ color: "red" }}>*</span>
+                Purchase Order Number: <span style={{ color: "red", fontSize: '20px' }}>*</span>
               </div>
               <FormControl
                 type="text"
@@ -377,6 +387,12 @@ const ProductCart = () => {
                 <div className="error-order">
                   Please enter the purchase order number
                 </div>
+              )}
+
+              {purchaseOrderError && (
+                <div className="error-order">
+                Purchase order no. should be less than 25 characters
+              </div>
               )}
             </div>
 
@@ -406,7 +422,6 @@ const ProductCart = () => {
               // data={cart}
             />
 
-            
             {/**ITEMS TOTAL */}
             <div className="item-rate-div">
               <div>Items total</div>
@@ -429,13 +444,21 @@ const ProductCart = () => {
               <div>
                 {currencySymbol}
                 {cart.totalAmount}
+                {/* {typeof cart.totalAmount === 'number' ? (cart.totalAmount % 1 === 0 ? cart.totalAmount.toFixed(0) : cart.totalAmount.toFixed(2)) : ''} */}
+
               </div>
             </div>
 
             {/**PLACE ORDER - CLEAR CART */}
             <div className="cart-btns">
-              <Button className="clear" onClick={emptyCart}>
-                Clear Cart
+              <Button className="clear" onClick={emptyCart} disabled={cartClear}>
+              {cartClear ? (
+                  <div className="place-order-spinner">
+                    <Spinner animation="border" variant="danger" />
+                  </div>
+                ) : (
+                  "Clear Cart"
+                )}
               </Button>
               <Button
                 className="place-order"
