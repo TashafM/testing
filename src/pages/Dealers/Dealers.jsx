@@ -23,60 +23,81 @@ const Dealers = () => {
   const dealersDashboard = `/dealers/dashboard`;
   const orderPath = "/dealers/orders";
   const [isEmpty, setIsEmpty] = useState(true);
-  const [notEditable, setNotEditable] = useState(true)
-  const [editMode, setEditMode] = useState(false)
-  const [indexNo, setIndexNo] = useState(0)
-  const [cartOpen, setCartOpen] = useState(false)
-  const [bottomId, setBottomId] = useState(0)
+  const [notEditable, setNotEditable] = useState(true);
+  const [editMode, setEditMode] = useState(false);
+  const [indexNo, setIndexNo] = useState(0);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [bottomId, setBottomId] = useState(0);
 
   //--------------FOR SIDE PANEL OPENING----------------
   const [showPanel, setShowPanel] = useState(false);
 
   return (
     <>
-    <EditItems.Provider value={{notEditable, setNotEditable, editMode, setEditMode, setIndexNo, indexNo}}>
-      <GlobalSidePanel.Provider value={{ showPanel, setShowPanel }}>
-        <AddProducts.Provider value={{ isEmpty, setIsEmpty, cartOpen, setCartOpen, bottomId, setBottomId}}>
-          <div className="homepage dealers-homepage">
-            <div className="forDesktop">
-              <NavbarTop dealers={true} />
-            </div>
-            <div className="forTablets">
-              <TabletNavbar dealers={true} />
-            </div>
-            <div className="tablet-menu">
-              <TabMenus tabs={tabletMenuDealers} />
-            </div>
-            <div className="row">
-              <div className="col-xl-2 menu-list">
-                <div className="sub-menu-list">
-                  <Menus tabs={dealerMenu} marginTop={true} />
+      <EditItems.Provider
+        value={{
+          notEditable,
+          setNotEditable,
+          editMode,
+          setEditMode,
+          setIndexNo,
+          indexNo,
+        }}
+      >
+        <GlobalSidePanel.Provider value={{ showPanel, setShowPanel }}>
+          <AddProducts.Provider
+            value={{
+              isEmpty,
+              setIsEmpty,
+              cartOpen,
+              setCartOpen,
+              bottomId,
+              setBottomId,
+            }}
+          >
+            <div className="homepage dealers-homepage">
+              <div className="forDesktop">
+                <NavbarTop dealers={true} />
+              </div>
+              <div className="forTablets">
+                <TabletNavbar dealers={true} />
+              </div>
+              <div className="tablet-menu">
+                <TabMenus tabs={tabletMenuDealers} />
+              </div>
+              <div className="row">
+                <div className="col-xl-2 menu-list">
+                  <div className="sub-menu-list">
+                    <Menus tabs={dealerMenu} marginTop={true} />
+                  </div>
+                </div>
+                <div
+                  className={
+                    location.pathname == dealersDashboard ||
+                    location.pathname.includes(orderPath)
+                      ? `col-xl-10 col-lg-12 content-area`
+                      : `col-xl-7 col-lg-8 content-area`
+                  }
+                >
+                  <Outlet name="alkjaljfsa" />
+                </div>
+                <div
+                  className={
+                    location.pathname == dealersDashboard ||
+                    location.pathname.includes(orderPath)
+                      ? "dontShow"
+                      : "col-xl-3 col-lg-4 newnew"
+                  }
+                >
+                  <ProductCart
+                    showPanel={showPanel}
+                    setShowPanel={setShowPanel}
+                  />
                 </div>
               </div>
-              <div
-                className={
-                  location.pathname == dealersDashboard ||
-                  location.pathname.includes(orderPath)
-                    ? `col-xl-10 col-lg-12 content-area`
-                    : `col-xl-7 col-lg-8 content-area`
-                }
-              >
-                <Outlet name="alkjaljfsa" />
-              </div>
-              <div
-                className={
-                  location.pathname == dealersDashboard ||
-                  location.pathname.includes(orderPath)
-                    ? "dontShow"
-                    : "col-xl-3 col-lg-4 newnew"
-                }
-              >
-                <ProductCart showPanel={showPanel} setShowPanel={setShowPanel}/>
-              </div>
             </div>
-          </div>
-        </AddProducts.Provider>
-      </GlobalSidePanel.Provider>
+          </AddProducts.Provider>
+        </GlobalSidePanel.Provider>
       </EditItems.Provider>
       <div className="mobile-not-supported">
         <MobileNotSupported />
