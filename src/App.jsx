@@ -23,28 +23,7 @@ function App() {
 
   const { openDrawer } = useContextProvider();
 
-  // const [alert, setAlert] = useState(false);
-  // const [testData, setTestData] = useState([]);
-
   return (
-
-
-    // -------------------UMESH CODE------------------------------
-    // <GlobalContext.Provider
-    //   value={{
-    //     loading,
-    //     setLoading,
-    //     msg,
-    //     setMsg,
-    //   }}
-    // >
-    //   <FixedTableHead.Provider value={{ isOpen, setIsOpen }}>
-    //     <ToastContainer position="top-center" />
-    //     {openDrawer.open ? <RightDrawer /> : null}
-    //     <Routing />
-    //   </FixedTableHead.Provider>
-    // </GlobalContext.Provider>
-
     <ContextProvider>
       <GlobalContext.Provider
         value={{
