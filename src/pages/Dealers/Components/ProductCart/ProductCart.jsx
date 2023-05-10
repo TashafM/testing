@@ -227,7 +227,7 @@ const ProductCart = () => {
     if (purchaseOrderNumber == "") {
       setNoPurchaseNumber(true);
       setPurchaseOrderError(false)
-    } else if(purchaseOrderNumber.length > 25){
+    } else if(purchaseOrderNumber.length > 20){
       setPurchaseOrderError(true)
       setNoPurchaseNumber(false)
     }else {
@@ -306,6 +306,7 @@ const ProductCart = () => {
     }
   }, [localStorage.getItem("cart")]);
 
+
   const {
     fullName,
     floorNumber,
@@ -355,7 +356,7 @@ const ProductCart = () => {
                 {console.log(editMode, "edit mode")}
                 <span className="text">Edit</span>
               </div>
-              <ArrowLink title={"See all"} onClick={handleSetProduct} />
+              <ArrowLink title={"See all"} count={tas.length} onClick={handleSetProduct} />
             </div>
             <SeeAllProducts
               show={showAllProducts}

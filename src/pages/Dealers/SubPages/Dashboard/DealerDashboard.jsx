@@ -12,16 +12,17 @@ const DealerDashboard = () => {
           <Row>
             <Col
               className="column announcement"
-              style={{
-                backgroundImage: `url(${announcements})`,
-                backgroundSize: "cover",
-              }}
+              // style={{
+              //   backgroundImage: `url(${announcements})`,
+              //   backgroundSize: "cover",
+              // }}
             >
-              Announcements
+              {/* Announcements */}
+            Coming Soon
             </Col>
-            <Col className="column orders-col"></Col>
-            <Col className="column third-col"></Col>
-            <Col className="column fourth-col"></Col>
+            <Col className="column orders-col">Coming Soon</Col>
+            <Col className="column third-col">Coming Soon</Col>
+            <Col className="column fourth-col">Coming Soon</Col>
           </Row>
           <Row>
             <Col className="bottom-column">
@@ -35,8 +36,9 @@ const DealerDashboard = () => {
           </Row>
         </Col>
         <Col className="col-xl-3 notification-sidebar">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Reprehenderit, earum!
+          {/* Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Reprehenderit, earum! */}
+          Feature Coming Soon
         </Col>
       </Row>
     </div>

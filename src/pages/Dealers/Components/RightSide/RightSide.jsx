@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./rightside.scss";
 import OrderListTable from "../OrderListTable/OrderListTable";
 import { Button } from "react-bootstrap";
@@ -23,11 +23,19 @@ function RightSide({
   const { setNotEditable, setEditMode,setIndexNo,indexNo, editMode } = useContext(EditItems);
   const { setCartOpen} = useContext(AddProducts)
   const [selectedId, setSelectedId] = useState(-1);
+  const [count, setCount] = useState(0)
+
+  useEffect(()=>{
+    if(localStorage.getItem('cart')){
+      const data = JSON.parse(localStorage.getItem('cart'))
+      setCount(data.length)
+    }
+  },[localStorage.getItem('cart')])
 
   return (
     <div className="rightside">
       <div className="title-close">
-        <div className="title">Order List</div>
+        <div className="title">Order List <span className="count-rightside">({count})</span></div>
         <img
           src={closeX}
           alt=""

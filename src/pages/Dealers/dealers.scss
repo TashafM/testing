@@ -103,7 +103,16 @@
   // }
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+input[type="radio"]{
+  min-width: 18px !important;
+  min-height: 18px !important;
+}
 
 @media only screen and (max-width: 655px) {
   .dealers-homepage {
