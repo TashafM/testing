@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./itemrow.scss";
 import listproduct from "../../../../assets/images/listproduct.png";
 import x from "../../../../assets/images/x.svg";
-import { AddProducts, EditItems } from "../../Dealers";
+import { EditItems } from "../../Dealers";
 import { useContext } from "react";
 
 const ItemRow = ({
@@ -21,14 +21,10 @@ const ItemRow = ({
 }) => {
   const currency = localStorage.getItem("currencySymbol");
   const { notEditable, setIndexNo, indexNo, editMode } = useContext(EditItems);
-  const { cartOpen, setCartOpen} = useContext(AddProducts)
-
-
-  console.log(cartOpen, 'cart status')
 
   useEffect(() => {
     if (editMode) {
-      fetchOnEdit();
+      fetchOnEdit()
     }
   }, []);
 
@@ -44,8 +40,6 @@ const ItemRow = ({
       saleDescription,
       variantId,
       _id,
-      quantity,
-      productImages,
       ...rest
     } = firstData[0];
     const data = {
@@ -58,8 +52,6 @@ const ItemRow = ({
       saleDescription,
       variantId,
       _id,
-      quantity,
-      productImages
     };
     localStorage.setItem("variant", JSON.stringify(data));
   };
@@ -76,52 +68,18 @@ const ItemRow = ({
     const filteredVariant = filtered[0].variants.filter(
       (item) => item.variantId == data.variantId
     );
-    // console.log(filteredVariant[0], "filteredvariant");
+    console.log(filteredVariant[0], "filteredvariant");
+
+    const localVariant = JSON.stringify(filteredVariant[0]);
+    localStorage.setItem("variant", localVariant);
+
     const test = JSON.parse(localStorage.getItem("cart"));
     const qty = test.filter(
       (item) => item.variantId == filteredVariant[0].variantId
     );
-
-    const variantWithQuantity = {
-      ...filteredVariant[0], // spread the properties of filteredVariant[0]
-      quantity: qty[0].quantity, // add the quantity key with the data.qty value
-    };
-
-    const localVariant = JSON.stringify(variantWithQuantity);
-    console.log(JSON.parse(localVariant),'localVAriant')
-    localStorage.setItem('variant', localVariant)
-
-
-    
-    // console.log(qty[0], '&&&&&&&&&&&&&&&&')
-
-    // console.log(qty[0],'data to pass')
-    // const getVariant = JSON.parse(localStorage.getItem('variant'))
-    // console.log(getVariant,'from local storage')
-    // const settingItem = {
-    //   bpCatalogNumber: qty[0].bpCatalogNumber,
-    //   colorCode: qty[0].colorCode,
-    //   colorDescription: qty[0].colorDescription,
-    //   grossPrice: qty[0].grossPrice,
-    //   packingCode: qty[0].packingCode,
-    //   packingDescription: qty[0].packingDescription,
-    //   saleDescription: qty[0].saleDescription,
-    //   variantId: qty[0].variantId,
-    //   _id: qty[0]._id,
-    //   quantity: qty[0].quantity,
-    //   productImages: qty[0].productImages,
-    // };
-
-    
-
-    // console.log(settingItem,'setting item')
-    // localStorage.setItem('variant', JSON.stringify(settingItem))
-
-    // console.log(settingItem,'0000000000000')
+    console.log(qty[0].quantity,'77777777777777777')
     // localStorage.setItem("quantity", qty[0].quantity);
   };
-
-
 
   return (
     // <tr className={selectedId==id && id!=undefined ?"right-side-tr selected-tr": (nohover || notEditable?'right-side-tr no-hover':'right-side-tr')} onClick={!notEditable?()=>setSelectedId(id):null}>
@@ -160,49 +118,47 @@ const ItemRow = ({
     //     </td>
     //   )}
     // </tr>
-    <tr className={cartOpen && (indexNo==id && editMode)? "right-side-tr selected-tr": "right-side-tr" } onClick={selectedItem}>
-      <td
-        className={
-          popupScreen ? "single-product-item pl40" : "single-product-item"
-        }
-        onClick={() => {
-          if(cartOpen){
-          editProducts(data, id);
-          getFromPop(data);
-          setIndexNo(id);
-          }
-        }}
-      >
-        <div className="img-div">
-          <img src={listproduct} alt="" />
-          <div className="text-desc">
-            <div className="product-name">
-              {data.name || data.itemDescription}
-            </div>
-            <div className="description">
-              {data.selectedColor || data.colorDescription} |{" "}
-              {data.saleDescription}
-            </div>
-          </div>
+    <tr className="right-side-tr" onClick={selectedItem}>
+  <td
+    className={
+      popupScreen ? "single-product-item pl40" : "single-product-item"
+    }
+    onClick={() => {
+      if(editMode){
+        editProducts(data, id);
+      getFromPop(data);
+      setIndexNo(id);
+      }
+    }}
+  >
+    <div className="img-div">
+      <img src={listproduct} alt="" />
+      <div className="text-desc">
+        <div className="product-name">
+          {data.name || data.itemDescription}
         </div>
-      </td>
-      <td className="quantity">{data.quantity}</td>
-      <td className={pr20 ? "price-padding" : "price"}>
-        {currency}
-        {data.totalPrice}
-      </td>
-      {!disableDelete && (
-        <td
-          className="remove-btn"
-          onClick={(event) => {
-            event.stopPropagation();
-            removeItem(data.variantId);
-          }}
-        >
-          <img src={x} alt="" />
-        </td>
-      )}
-    </tr>
+        <div className="description">
+          {data.selectedColor || data.colorDescription} |{" "}
+          {data.saleDescription}
+        </div>
+      </div>
+    </div>
+  </td>
+  <td className="quantity">{data.quantity}</td>
+  <td className={pr20 ? "price-padding" : "price"}>
+    {currency}
+    {data.totalPrice}
+  </td>
+  {!disableDelete && (
+    <td className="remove-btn" onClick={(event) => {
+        event.stopPropagation();
+        removeItem(data.variantId);
+    }}>
+      <img src={x} alt="" />
+    </td>
+  )}
+</tr>
+
   );
 };
 

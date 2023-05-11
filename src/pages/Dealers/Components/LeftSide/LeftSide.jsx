@@ -69,7 +69,7 @@ function LeftSide({
 
   const [productImage, setProductImage] = useState(data.productImages[0]);
 
-  console.log(data,'1234567890')
+  console.log(data, "1234567890");
   useEffect(() => {
     if (localStorage.getItem("variant")) {
       const data = JSON.parse(localStorage.getItem("variant"));
@@ -319,7 +319,7 @@ function LeftSide({
               <img src={mainproduct} alt="" />
             </div>
           </div> */}
-          <img src={productImage??noImage} alt="" className="main-img" />
+          <img src={productImage ?? noImage} alt="" className="main-img" />
           <div className="wish-list">
             <img src={wishlist} alt="" />
           </div>
@@ -438,6 +438,8 @@ function LeftSide({
             {editMode ? "Update" : "Add"}
           </Button>
         </div>
+
+       
       </div>
     </div>
   );

@@ -23,7 +23,7 @@ import OrderPlaced from "../../Modal/OrderPlaced/OrderPlaced";
 import { axiosInstance } from "../../../../helper/axios";
 import { API } from "../../../../helper/API";
 import { useLocation, useNavigate } from "react-router-dom";
-import Tippy from "@tippyjs/react";
+// import Tippy from "@tippyjs/react";
 
 const ProductCart = () => {
   const navigate = useNavigate();
@@ -432,8 +432,14 @@ const ProductCart = () => {
               </div>
             </div>
             <div className="item-rate-div">
+              <div>SGST()</div>
+              <div>
+                {currencySymbol}
+                {cart.taxAmount}
+              </div>
+            </div>
+            <div className="item-rate-div">
               <div>Taxes</div>
-
               <div>
                 {currencySymbol}
                 {cart.taxAmount}
